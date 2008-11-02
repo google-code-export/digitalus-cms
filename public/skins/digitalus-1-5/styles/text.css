@@ -1,0 +1,75 @@
+/* CSS Document */
+body{
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+}
+
+h1{}
+
+h2{}
+
+#main h2, .column h2{
+color:#15428B;
+font-size:16px;
+padding:0 10px;
+}
+
+h3{
+clear:both;
+background:url(../images/column-subheader.png) repeat-x;
+height:14px;
+color:#15428B;
+font-size:14px;
+padding:10px;
+margin:10px 0 5px 0;
+border-bottom:#BCD4F6 1px solid;
+}
+
+fieldset h3{
+background:none;
+font-style:italic;
+color:#000;
+}
+
+h2.top{
+text-transform:uppercase;
+}
+
+.column p{
+padding:5px;
+}
+
+h3{}
+
+h4{}
+
+p{}
+
+ul, ol{
+ padding:5px 0 5px 25px;
+}
+
+ul ul{
+ padding:5px 0 0 15px;
+}
+
+#form li, .column li{
+margin-bottom:5px;
+}
+
+ol{}
+
+ol li{}
+
+#form p{
+margin:5px;
+}
+
+#toolbar a{
+text-decoration:none;
+}
+
+#toolbar a:hover{
+text-decoration:underline;
+}
+
