@@ -393,3 +393,8 @@ margin:5px;
 padding:5px;
 text-align:center;
 }
+
+a.rightLink{
+float:right;
+margin-left:10px;
+}
