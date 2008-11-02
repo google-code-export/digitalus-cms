@@ -2,7 +2,7 @@
 class DSF_Content_Template_Loader
 {
     
-    const TEMPLATE_PATH = './application/contentTemplates';
+    const TEMPLATE_PATH = '../application/contentTemplates';
     const SYSTEM_FOLDER = "system";
     protected $_templates = null;
     

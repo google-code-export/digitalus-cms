@@ -66,8 +66,8 @@ class DSF_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Abstract
 		    
 		    //setup layout
 		    $options = array(
-                'layout'     => 'index',
-                'layoutPath' => 'templates/admin/' . $config->design->adminTemplate,
+                'layout'     => $config->design->adminLayout,
+                'layoutPath' => $config->design->adminLayoutFolder,
                 'contentKey' => 'form',           // ignored when MVC not used
             );
 		    $this->layout = Zend_Layout::startMvc($options);

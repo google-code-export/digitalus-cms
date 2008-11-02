@@ -12,9 +12,11 @@
             <dbname></dbname>
         </database>
         <design>
-        	<pathToSkins>public/skins</pathToSkins>
-        	<pathToLayouts>application/public/views/scripts/layouts</pathToLayouts>
+        	<pathToSkins>skins</pathToSkins>
+        	<pathToLayouts>../application/public/views/scripts/layouts</pathToLayouts>
         	<defaultLayout>default</defaultLayout>
+        	<adminLayoutFolder>../application/admin/views/layouts</adminLayoutFolder>
+        	<adminLayout>index</adminLayout>
         	<adminTemplate>digitalus-1-5</adminTemplate>
     	</design>
 		<filepath>
@@ -25,7 +27,7 @@
 			<adminViews>application/admin/views/scripts</adminViews>
 		</filepath>	
 	<language>
-	  <path>application/data/language</path>
+	  <path>../application/data/language</path>
 	  <defaultLocale>en</defaultLocale>
 	  <translations>
 	      <en>english</en>

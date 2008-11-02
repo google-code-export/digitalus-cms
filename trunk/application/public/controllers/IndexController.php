@@ -5,6 +5,7 @@
  */
 class IndexController extends Zend_Controller_Action
 {
+	public $page;
 	
 	public function init()
 	{
@@ -13,27 +14,11 @@ class IndexController extends Zend_Controller_Action
 	}
 	
 	public function indexAction()
-	{		
+	{	
 		DSF_Builder::loadPage();
+		$this->page = DSF_Builder::getPage();
+		$this->view->layout()->page = $this->view->render('layouts/' . $this->page->getLayout());
 		
-		/*$this->_helper->actionStack('render','index');
-		
-		$config = Zend_Registry::get('config');
-		$stack = $config->pageBuild;
-		foreach ($stack->request as $request){
-			if($request->params){
-				$params = $request->params->toArray();
-			}else{
-				$params = array();
-			}
-			
-			$this->_helper->actionStack($request->action,$request->controller, 'cmsFront', $params);
-		}*/	
-	}
-	
-	public function renderAction()
-	{
-		die();
 	}
 }
 

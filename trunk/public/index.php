@@ -1,9 +1,9 @@
 <?php
 date_default_timezone_set('America/New_York');
 set_include_path('.' . PATH_SEPARATOR . get_include_path() 
-. PATH_SEPARATOR . './library'
-. PATH_SEPARATOR . './application/modules'
-. PATH_SEPARATOR . './application/models');
+. PATH_SEPARATOR . '../library'
+. PATH_SEPARATOR . '../application/modules'
+. PATH_SEPARATOR . '../application/models');
 
 require_once 'Zend/Loader.php';
 Zend_Loader::registerAutoload(); 
@@ -14,7 +14,7 @@ Zend_Session::start();
 
 // load configuration
 //testing
-$config = new Zend_Config_Xml('./application/data/config.xml', 'testing');
+$config = new Zend_Config_Xml('../application/data/config.xml', 'testing');
 
 //production
 //$config = new Zend_Config_Xml('./application/data/config.xml', 'DSF');
@@ -54,7 +54,7 @@ $frontendOptions = array(
 );
 
 $backendOptions = array(
-    'cache_dir' => './cache/' // Directory where to put the cache files
+    'cache_dir' => '../cache/' // Directory where to put the cache files
 );
 
 // getting a Zend_Cache_Core object
@@ -67,17 +67,17 @@ $frontController = Zend_Controller_Front::getInstance();
 $frontController->throwExceptions(true);
 
 //setup core cms modules
-$frontController->addControllerDirectory('./application/admin/controllers', 'admin');
-$frontController->addControllerDirectory('./application/front/controllers', 'cmsFront');
-$frontController->addControllerDirectory('./application/public/controllers', 'public');
+$frontController->addControllerDirectory('../application/admin/controllers', 'admin');
+$frontController->addControllerDirectory('../application/front/controllers', 'cmsFront');
+$frontController->addControllerDirectory('../application/public/controllers', 'public');
 
 //setup extension modules
-$extensions = DSF_Filesystem_Dir::getDirectories('./application/modules');
+$extensions = DSF_Filesystem_Dir::getDirectories('../application/modules');
 if(is_array($extensions))
 {
 	foreach ($extensions as $extension)
 	{
-		$frontController->addControllerDirectory('./application/modules/' . $extension . '/controllers', 'mod_' . $extension);
+		$frontController->addControllerDirectory('../application/modules/' . $extension . '/controllers', 'mod_' . $extension);
 	}
 }
 

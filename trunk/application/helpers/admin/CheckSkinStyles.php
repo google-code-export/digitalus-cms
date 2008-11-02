@@ -40,7 +40,7 @@ class DSF_View_Helper_Admin_CheckSkinStyles {
 						foreach ($styles  as $style) {
 							//add each style sheet to the hash
 							// key = path / value = filename
-							$hashStyles[$folder . '/' . $style] = $style;
+							$hashStyles[$style] = $style;
 						}
 						$this->view->styles = $hashStyles;
 						$xhtml[] = $this->view->render($this->partialFile);

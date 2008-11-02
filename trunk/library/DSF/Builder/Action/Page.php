@@ -21,6 +21,12 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 		}
 	}
 	
+	public function setBaseUrl()
+	{
+		$baseUrl = zend_controller_front::getBaseUrl();
+		$this->_page->setBaseUrl($baseUrl);
+	}
+	
 	public function setPointer()
 	{
 		$mdlPage = new Page();
@@ -101,11 +107,5 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 		}
 		
 		$view->headTitle()->setSeparator($separator);
-	}
-	
-	public function test()
-	{
-		$view = $this->_page->getView();
-		echo $view->headTitle();
 	}
 }

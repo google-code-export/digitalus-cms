@@ -3,6 +3,7 @@ class DSF_Page
 {
 	protected $_id = 0;
 	protected $_uri = null;
+	protected $_baseUrl = null;
 	protected $_params = array();
 	protected $_data;
 	protected $_meta = array();
@@ -10,6 +11,7 @@ class DSF_Page
 	protected $_content = array();
 	protected $_contentTemplate = null;
 	protected $_design;
+	protected $_layout;
 	public $view;
 	
 	public function __construct()
@@ -35,6 +37,16 @@ class DSF_Page
 	public function getUri()
 	{
 		return $this->_uri;
+	}
+	
+	public function setBaseUrl($url)
+	{
+		$this->_baseUrl = $url;
+	}
+	
+	public function getBaseUrl()
+	{
+		return $this->_baseUrl;
 	}
 	
 	public function setData($data)
@@ -115,6 +127,16 @@ class DSF_Page
 	public function getDesign()
 	{
 		return $this->_design;
+	}
+	
+	public function setLayout($layout)
+	{
+		$this->_layout = $layout;
+	}
+	
+	public function getLayout()
+	{
+		return $this->_layout;
 	}
 	
 	public function getView()
