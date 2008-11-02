@@ -16,7 +16,7 @@
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Namespace.php 11004 2008-08-24 14:44:07Z matthew $
+ * @version    $Id: Namespace.php 8064 2008-02-16 10:58:39Z thomas $
  * @since      Preview Release 0.2
  */
 
@@ -244,7 +244,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      * @param string $name - programmatic name of a key, in a <key,value> pair in the current namespace
      * @return mixed
      */
-    public function & __get($name)
+    protected function & __get($name)
     {
         if ($name === '') {
             /**
@@ -266,7 +266,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      * @throws Zend_Session_Exception
      * @return true
      */
-    public function __set($name, $value)
+    protected function __set($name, $value)
     {
         if (isset(self::$_namespaceLocks[$this->_namespace])) {
             /**
@@ -351,7 +351,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      * @param string $name - programmatic name of a key, in a <key,value> pair in the current namespace
      * @return bool
      */
-    public function __isset($name)
+    protected function __isset($name)
     {
         if ($name === '') {
             /**
@@ -371,7 +371,7 @@ class Zend_Session_Namespace extends Zend_Session_Abstract implements IteratorAg
      * @param string $name - programmatic name of a key, in a <key,value> pair in the current namespace
      * @return true
      */
-    public function __unset($name)
+    protected function __unset($name)
     {
         if ($name === '') {
             /**

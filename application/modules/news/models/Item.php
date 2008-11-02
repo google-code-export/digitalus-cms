@@ -12,32 +12,6 @@ class NewsItem extends Content
         return $this->fetchAll($where, 'create_date', $limit);
     }
     
-    function getItems($limit, $page, $includeArchives = true)
-    {
-        if($includeArchives === false){
-            $where[] = "(archive_date >= " . time() . " OR archive_date IS NULL or archive_date = 0)";
-        }
-        $order = 'publish_date DESC';
-        
-        //the first page has an offset of 0
-        $page--;
-        
-        return $this->fetchAll($where, $order, $limit, $page * $limit);
-    }
-    
-    /**
-     * returns the total count of the news items
-     *
-     */
-    function countItems()
-    {
-        $sql = "SELECT COUNT(*) as total_items
-        FROM content
-        WHERE content_type = '{$this->_type}'";
-        $result = $this->_db->fetchRow($sql);
-        return $result->total_items;
-    }
-    
     function search($keywords, $searchAll = 0, $order = "publish_date DESC", $limit = 20)
     {
         if($searchAll === 0 || empty($searchAll))
@@ -55,11 +29,7 @@ class NewsItem extends Content
         }else{
     	    $where[] = "(publish_date <= " . time() . " OR publish_date IS NULL or publish_date = 0)";
     	    $where[] = "(archive_date >= " . time() . " OR archive_date IS NULL or archive_date = 0)";
-    	    
-    	    //the news module uses this field to determine if you should include the news item in the main index
-    	    $where[] = "show_on_menu = 1";
-    	    $order = 'publish_date DESC';
-    	    return $this->fetchAll($where, $order);
+    	    return $this->fetchAll($where);
         }
     }
     
@@ -102,15 +72,5 @@ class NewsItem extends Content
 	    $where[] = "(" . $this->_db->quoteInto("archive_date >= ?", time()) . ") OR (archive_date IS NULL) OR (archive_date = 0)";
 
 	    return $r->fetchRelated($cat, $where, 'publish_date');
-	}
-	
-	function getItemsByYear($year)
-	{
-	    $yearStart = strtotime("1/1/" . $year);
-	    $yearEnd = strtotime("1/1/" . ($year + 1));
-	    $where[] = "publish_date > " . $yearStart;
-	    $where[] = "publish_date < " . $yearEnd;
-	    $order = "publish_date DESC";
-	    return $this->fetchAll($where, $order);
 	}
 }

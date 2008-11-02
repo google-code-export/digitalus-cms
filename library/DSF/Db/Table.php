@@ -30,6 +30,7 @@ class DSF_Db_Table extends Zend_Db_Table
     function insertFromPost()
     {
         $this->loadPost();
+            
 	    //try to run the before method
 	    if(method_exists($this,'before')){
 	        $this->before();
@@ -73,7 +74,7 @@ class DSF_Db_Table extends Zend_Db_Table
             
             //try to run the after method
             if(method_exists($this,'after')){
-                $this->after($id);
+                $this->after();
             }
         }
         return $this->find($id)->current(); //i like to return the whole data object
@@ -181,9 +182,7 @@ class DSF_Db_Table extends Zend_Db_Table
             {
                 //you must strip slashes first, as the HTML editors add them
                 //by doing this you are able to process both raw HTML and WYSIWYG HTML
-                if(isset($this->data[$f])) {
-                	$this->data[$f] = addslashes(stripslashes($this->data[$f]));
-                }
+                $this->data[$f] = addslashes(stripslashes($this->data[$f]));
             }
         } 
     }
@@ -221,9 +220,7 @@ class DSF_Db_Table extends Zend_Db_Table
         if($this->Text){
             foreach ($this->Text as $t)
             {
-            	if(isset($this->data[$t])) {
-                	$this->data[$t] = $filter->filter($this->data[$t]);
-            	}
+                $this->data[$t] = $filter->filter($this->data[$t]);
             }
         }
     }

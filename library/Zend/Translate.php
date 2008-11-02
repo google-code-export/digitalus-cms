@@ -38,7 +38,6 @@ class Zend_Translate {
     const AN_ARRAY   = 'array';
     const AN_CSV     = 'csv';
     const AN_GETTEXT = 'gettext';
-    const AN_INI     = 'ini';
     const AN_QT      = 'qt';
     const AN_TBX     = 'tbx';
     const AN_TMX     = 'tmx';
@@ -94,9 +93,6 @@ class Zend_Translate {
             case 'gettext':
                 $adapter = 'Zend_Translate_Adapter_Gettext';
                 break;
-            case 'ini':
-                $adapter = 'Zend_Translate_Adapter_Ini';
-                break;
             case 'qt':
                 $adapter = 'Zend_Translate_Adapter_Qt';
                 break;
@@ -114,7 +110,7 @@ class Zend_Translate {
                 break;
         }
 
-        Zend_Loader::loadClass($adapter);
+        @Zend_Loader::loadClass($adapter);
         if (self::$_cache !== null) {
             call_user_func(array($adapter, 'setCache'), self::$_cache);
         }
@@ -136,26 +132,17 @@ class Zend_Translate {
         return $this->_adapter;
     }
 
+
     /**
      * Sets a cache for all instances of Zend_Translate
      *
-     * @param  Zend_Cache_Core $cache Cache to store to
-     * @return void
+     * @param Zend_Cache_Core $cache Cache to store to
      */
     public static function setCache(Zend_Cache_Core $cache)
     {
         self::$_cache = $cache;
     }
 
-    /**
-     * Returns the set cache
-     *
-     * @return Zend_Cache_Core The set cache
-     */
-    public static function getCache()
-    {
-        return self::$_cache;
-    }
 
     /**
      * Calls all methods from the adapter

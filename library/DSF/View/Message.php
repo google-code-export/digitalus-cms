@@ -11,9 +11,7 @@ class DSF_View_Message
             $this->message = Zend_Registry::get('message');
         }else{
             $m = new Zend_Session_Namespace('message');
-            if(isset($m->message)){
-                $this->message = $m->message;
-            }
+            $this->message = $m->message;
         }
     }
     
@@ -43,12 +41,8 @@ class DSF_View_Message
     
     private function updateNs()
     {
+        Zend_Registry::set('message',$this->message);
         $m = new Zend_Session_Namespace('message');
-        if(isset($this->message)){
-            Zend_Registry::set('message',$this->message);
-            $m->message = $this->message;
-        }else{
-            unset($m->message);
-        }
+        $m->message = $this->message;
     }
 }

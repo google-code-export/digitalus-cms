@@ -49,7 +49,6 @@ class DSF_Filter_Post
 	/**
 	 * returns the whole post array as an object
 	 *
-	 * @todo make this method handle array data
 	 * @return stdClass object
 	 */
 	static function toObject()
@@ -57,11 +56,7 @@ class DSF_Filter_Post
 		$post = new stdClass();
 		foreach ($_POST as $k => $v)
 		{
-			if(is_array($v)) {
-				$post->$k = $v;
-			}else{
-				$post->$k = stripslashes($v);
-			}
+			$post->$k = stripslashes($v);
 		}
 		return $post;
 	}

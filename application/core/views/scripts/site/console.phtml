@@ -1,0 +1,37 @@
+<script>
+$(document).ready(function() {
+	$('.loadCommand').click(function(){
+	    var cmd = $(this).attr('title');
+	    $("#command").val(cmd);
+	    return false;
+	});
+	  
+ });
+</script>
+
+<form action="/core/site/console" method="POST" class="formBox">
+<h2 id="settings">Execute Command</h2>
+<?php 
+echo $this->formHidden('consoleSession', $this->consoleSession);
+echo $this->formText('command', $this->lastCommand, array('class' => 'med'));
+echo $this->formSubmit('getInfo', 'Get Information');
+echo $this->formSubmit('runCommand', 'Run Command');
+?>
+<p class="note">Note that these commands are case sensitive.  Use the <b>List</b> command to list all of the available commands.</p>
+</form>
+
+<div class="formBox">
+<h2>Results</h2>
+<div id="results">
+<p class="dateTime"><?php echo $this->date;?></p>
+<h3><?php echo $this->command;?></h3>
+<?php 
+if($this->results){
+foreach ($this->results as $result){ ?>
+<p><?php echo $result;?></p>
+<?php 
+}
+}
+?>
+</div>
+</div>

@@ -37,30 +37,10 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * @subpackage Decorator
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: FormElements.php 10277 2008-07-22 15:24:18Z matthew $
+ * @version    $Id: FormElements.php 8064 2008-02-16 10:58:39Z thomas $
  */
 class Zend_Form_Decorator_FormElements extends Zend_Form_Decorator_Abstract
 {
-    /**
-     * Merges given two belongsTo (array notation) strings
-     *
-     * @param  string $baseBelongsTo
-     * @param  string $belongsTo
-     * @return string
-     */
-    protected function _mergeBelongsTo($baseBelongsTo, $belongsTo)
-    {
-        $endOfArrayName = strpos($belongsTo, '[');
-
-        if ($endOfArrayName === false) {
-            return $baseBelongsTo . '[' . $belongsTo . ']';
-        }
-
-        $arrayName = substr($belongsTo, 0, $endOfArrayName);
-
-        return $baseBelongsTo . '[' . $arrayName . ']' . substr($belongsTo, $endOfArrayName);
-    }
-
     /**
      * Render form elements
      *
@@ -87,14 +67,10 @@ class Zend_Form_Decorator_FormElements extends Zend_Form_Decorator_Abstract
                 $item->setBelongsTo($belongsTo);
             } elseif (!empty($belongsTo) && ($item instanceof Zend_Form)) {
                 if ($item->isArray()) {
-                    $name = $this->_mergeBelongsTo($belongsTo, $item->getElementsBelongTo());
+                    $name = $belongsTo . '[' . $item->getName() . ']';
                     $item->setElementsBelongTo($name, true);
                 } else {
                     $item->setElementsBelongTo($belongsTo, true);
-                }
-            } elseif (!empty($belongsTo) && ($item instanceof Zend_Form_DisplayGroup)) {
-                foreach ($item as $element) {
-                    $element->setBelongsTo($belongsTo);
                 }
             }
             $items[] = $item->render();

@@ -57,20 +57,11 @@ class Zend_View_Helper_FormPassword extends Zend_View_Helper_FormElement
         $info = $this->_getInfo($name, $value, $attribs);
         extract($info); // name, value, attribs, options, listsep, disable
 
-        // is it disabled?
+        // build the element
         $disabled = '';
         if ($disable) {
             // disabled
             $disabled = ' disabled="disabled"';
-        }
-
-        // determine the XHTML value
-        $valueString = ' value=""';
-        if (array_key_exists('renderPassword', $attribs)) {
-            if ($attribs['renderPassword']) {
-                $valueString = ' value="' . $this->view->escape($value) . '"';
-            }
-            unset($attribs['renderPassword']);
         }
         
         // XHTML or HTML end tag?
@@ -79,11 +70,10 @@ class Zend_View_Helper_FormPassword extends Zend_View_Helper_FormElement
             $endTag= '>';
         }
 
-        // render the element
         $xhtml = '<input type="password"'
                 . ' name="' . $this->view->escape($name) . '"'
                 . ' id="' . $this->view->escape($id) . '"'
-                . $valueString
+                . ' value=""'                             // don't render value of password!
                 . $disabled
                 . $this->_htmlAttribs($attribs)
                 . $endTag;

@@ -149,21 +149,26 @@ abstract class Zend_Controller_Router_Abstract implements Zend_Controller_Router
             return $this->_frontController;
         }
 
-        require_once 'Zend/Controller/Front.php';
-        $this->_frontController = Zend_Controller_Front::getInstance();
-        return $this->_frontController;
+        if (class_exists('Zend_Controller_Front', false)) {
+            require_once 'Zend/Controller/Front.php';
+            $this->_frontController = Zend_Controller_Front::getInstance();
+            return $this->_frontController;
+        }
+
+        // Throw exception in all other cases
+        require_once 'Zend/Controller/Router/Exception.php';
+        throw new Zend_Controller_Router_Exception('Front controller class has not been loaded');
     }
 
     /**
      * Set Front Controller
      *
      * @param Zend_Controller_Front $controller
-     * @return Zend_Controller_Router_Interface
+     * @return Zend_Controller_Router_Abstract
      */
     public function setFrontController(Zend_Controller_Front $controller)
     {
         $this->_frontController = $controller;
         return $this;
     }
-
 }

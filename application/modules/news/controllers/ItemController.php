@@ -4,7 +4,6 @@ require('./application/modules/news/models/Item.php');
 
 class Mod_News_ItemController extends Zend_Controller_Action 
 {
-    public $pageLength = 10;
 	
 	public function init()
 	{
@@ -14,12 +13,7 @@ class Mod_News_ItemController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		$item = new NewsItem();
-		$this->view->recentItems = $item->getRecent();
-		$count = $item->countItems();
-		$this->view->pages = ceil($count / $this->pageLength);
-		$currentPage = $this->_request->getParam('page', 1);
-		$this->view->items = $item->getItems($this->pageLength, $currentPage);
-		$this->view->currentPage = $currentPage;
+		$this->view->items = $item->fetchAll(null, 'title');
 	}
 	/**
 	 * add a new item
@@ -51,8 +45,6 @@ class Mod_News_ItemController extends Zend_Controller_Action
         $p = new NewsItem();
 		if($this->_request->isPost())
 	    {
-			//hack for mna
-			$_POST['publish_date'] = str_replace('.','/',$_POST['publish_date']);
 	        $item = $p->updateFromPost();
 			$id = $item->id;
 			

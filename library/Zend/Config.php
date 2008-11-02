@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -16,7 +17,7 @@
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Config.php 11181 2008-09-01 09:41:44Z alexander $
+ * @version    $Id: Config.php 8064 2008-02-16 10:58:39Z thomas $
  */
 
 
@@ -75,15 +76,6 @@ class Zend_Config implements Countable, Iterator
     protected $_extends = array();
 
     /**
-     * Load file error string.
-     * 
-     * Is null if there was no error while file loading
-     *
-     * @var string
-     */
-    protected $_loadFileErrorStr = null;
-
-    /**
      * Zend_Config provides a property based interface to
      * an array. The data are read-only unless $allowModifications
      * is set to true on construction.
@@ -95,7 +87,7 @@ class Zend_Config implements Countable, Iterator
      * @param  boolean $allowModifications
      * @return void
      */
-    public function __construct(array $array, $allowModifications = false)
+    public function __construct($array, $allowModifications = false)
     {
         $this->_allowModifications = (boolean) $allowModifications;
         $this->_loadedSection = null;
@@ -164,25 +156,6 @@ class Zend_Config implements Countable, Iterator
     }
 
     /**
-     * Deep clone of this instance to ensure that nested Zend_Configs
-     * are also cloned.
-     * 
-     * @return void
-     */
-    public function __clone()
-    {
-      $array = array();
-      foreach ($this->_data as $key => $value) {
-          if ($value instanceof Zend_Config) {
-              $array[$key] = clone $value;
-          } else {
-              $array[$key] = $value;
-          }
-      }
-      $this->_data = $array;
-    }
-
-    /**
      * Return an associative array of the stored data.
      *
      * @return array
@@ -206,7 +179,7 @@ class Zend_Config implements Countable, Iterator
      * @param string $name
      * @return boolean
      */
-    public function __isset($name)
+    protected function __isset($name)
     {
         return isset($this->_data[$name]);
     }
@@ -218,11 +191,10 @@ class Zend_Config implements Countable, Iterator
      * @throws Zend_Config_Exception
      * @return void
      */
-    public function __unset($name)
+    protected function __unset($name)
     {
         if ($this->_allowModifications) {
             unset($this->_data[$name]);
-            $this->_count = count($this->_data);
         } else {
             /** @see Zend_Config_Exception */
             require_once 'Zend/Config/Exception.php';
@@ -371,19 +343,6 @@ class Zend_Config implements Countable, Iterator
         }
         // remember that this section extends another section
         $this->_extends[$extendingSection] = $extendedSection;
-    }
-
-    /**
-     * Handle any errors from simplexml_load_file or parse_ini_file
-     *
-     * @param integer $errno
-     * @param string $errstr
-     * @param string $errfile
-     * @param integer $errline
-     */
-    protected function _loadFileErrorHandler($errno, $errstr, $errfile, $errline)
-    { 
-        $this->_loadFileErrorStr = $errstr;
     }
 
 }

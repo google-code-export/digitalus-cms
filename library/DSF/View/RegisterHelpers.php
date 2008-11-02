@@ -28,11 +28,11 @@ class DSF_View_RegisterHelpers
      */
     static function register($view)
     {
-    	$helperDirs = DSF_Filesystem_Dir::getDirectories('../application/helpers');
+    	$helperDirs = DSF_Filesystem_Dir::getDirectories('./application/helpers');
     	if(is_array($helperDirs))
     	{
     		foreach ($helperDirs as $dir) {
-    			$view->addHelperPath('../application/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
+    			$view->addHelperPath('./application/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
     		}
     	}
     }

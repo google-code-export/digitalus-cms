@@ -25,10 +25,6 @@
  */
 require_once 'Zend/Cache/Backend/Interface.php';
 
-/**
- * @see Zend_Cache_Backend
- */
-require_once 'Zend/Cache/Backend.php';
 
 /**
  * @package    Zend_Cache
@@ -36,21 +32,21 @@ require_once 'Zend/Cache/Backend.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Cache_Backend_Test extends Zend_Cache_Backend implements Zend_Cache_Backend_Interface
+class Zend_Cache_Backend_Test implements Zend_Cache_Backend_Interface
 {
     /**
      * Available options
      *
      * @var array available options
      */
-    protected $_options = array();
+    private $_options = array();
 
     /**
      * Frontend or Core directives
      *
      * @var array directives
      */
-    protected $_directives = array();
+    private $_directives = array();
 
     /**
      * Array to log actions
@@ -109,7 +105,7 @@ class Zend_Cache_Backend_Test extends Zend_Cache_Backend implements Zend_Cache_B
             return serialize(array('foo'));
         }
         if ($id=='serialized2') {
-            return serialize(array('headers' => array(), 'data' => 'foo'));
+            return serialize(array('contentType' => null, 'data' => 'foo'));
         }
         if (($id=='71769f39054f75894288e397df04e445') or ($id=='615d222619fb20b527168340cebd0578')) {
             return serialize(array('foo', 'bar'));

@@ -16,21 +16,20 @@
  * @package    Zend_Session
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 9133 2008-04-04 13:06:09Z darby $
+ * @version    $Id: Abstract.php 8064 2008-02-16 10:58:39Z thomas $
  * @since      Preview Release 0.2
  */
 
 /**
- * @see Zend_Session_Validator_Interface
+ * Zend_Session_Validator_Interface
  */
 require_once 'Zend/Session/Validator/Interface.php';
 
 /**
  * Zend_Session_Validator_Abstract
  *
- * @category   Zend
- * @package    Zend_Session
- * @subpackage Validator
+ * @category Zend
+ * @package Zend_Session
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
@@ -42,14 +41,13 @@ abstract class Zend_Session_Validator_Abstract implements Zend_Session_Validator
      * will be needed in order to validate the session later in the validate() method.
      * These values are stored in the session in the __ZF namespace, in an array named VALID
      *
-     * @param  mixed $data
-     * @return void
+     * @param mixed $data
      */
     protected function setValidData($data)
     {
-        $validatorName = get_class($this);
+        $validator_name = get_class($this);
 
-        $_SESSION['__ZF']['VALID'][$validatorName] = $data;
+        $_SESSION['__ZF']['VALID'][$validator_name] = $data;
     }
 
 
@@ -61,9 +59,9 @@ abstract class Zend_Session_Validator_Abstract implements Zend_Session_Validator
      */
     protected function getValidData()
     {
-        $validatorName = get_class($this);
+        $validator_name = get_class($this);
 
-        return $_SESSION['__ZF']['VALID'][$validatorName];
+        return $_SESSION['__ZF']['VALID'][$validator_name];
     }
 
 }

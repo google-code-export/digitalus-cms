@@ -55,14 +55,8 @@ class Zend_Rest_Server extends Zend_Server_Abstract implements Zend_Server_Inter
 
     /**
      * Class Constructor Args
-     * @var array
      */
     protected $_args = array();
-
-    /**
-     * @var string Encoding
-     */
-    protected $_encoding = 'UTF-8';
 
     /**
      * @var array An array of Zend_Server_Reflect_Method
@@ -92,28 +86,6 @@ class Zend_Rest_Server extends Zend_Server_Abstract implements Zend_Server_Inter
     {
         set_exception_handler(array($this, "fault"));
         $this->_reflection = new Zend_Server_Reflection();
-    }
-
-    /**
-     * Set XML encoding
-     * 
-     * @param  string $encoding 
-     * @return Zend_Rest_Server
-     */
-    public function setEncoding($encoding)
-    {
-        $this->_encoding = (string) $encoding;
-        return $this;
-    }
-
-    /**
-     * Get XML encoding
-     * 
-     * @return string
-     */
-    public function getEncoding()
-    {
-        return $this->_encoding;
     }
 
     /**
@@ -163,27 +135,21 @@ class Zend_Rest_Server extends Zend_Server_Abstract implements Zend_Server_Inter
                     foreach ($func_args as $arg) {
                         if (isset($request[strtolower($arg->getName())])) {
                             $calling_args[] = $request[strtolower($arg->getName())];
-                        } elseif ($arg->isOptional()) {
-                            $calling_args[] = $arg->getDefaultValue();
                         }
                     }
 
                     foreach ($request as $key => $value) {
                         if (substr($key, 0, 3) == 'arg') {
                             $key = str_replace('arg', '', $key);
-                            $calling_args[$key] = $value;
+                            $calling_args[$key]= $value;
                         }
                     }
 
-                    // Sort arguments by key -- @see ZF-2279
-                    ksort($calling_args);
-
-                    $result = false;
                     if (count($calling_args) < count($func_args)) {
-                        $result = $this->fault(new Zend_Rest_Server_Exception('Invalid Method Call to ' . $this->_method . '. Requires ' . count($func_args) . ', ' . count($calling_args) . ' given.'), 400);
+                        throw new Zend_Rest_Server_Exception('Invalid Method Call to ' . $this->_method . '. Requires ' . count($func_args) . ', ' . count($calling_args) . ' given.', 400);
                     }
 
-                    if (!$result && $this->_functions[$this->_method] instanceof Zend_Server_Reflection_Method) {
+                    if ($this->_functions[$this->_method] instanceof Zend_Server_Reflection_Method) {
                         // Get class
                         $class = $this->_functions[$this->_method]->getDeclaringClass()->getName();
 
@@ -191,18 +157,34 @@ class Zend_Rest_Server extends Zend_Server_Abstract implements Zend_Server_Inter
                             // for some reason, invokeArgs() does not work the same as
                             // invoke(), and expects the first argument to be an object.
                             // So, using a callback if the method is static.
-                            $result = $this->_callStaticMethod($class, $calling_args);
-                        } else {
-                            // Object method
-                            $result = $this->_callObjectMethod($class, $calling_args);
+                            $result = call_user_func_array(array($class, $this->_functions[$this->_method]->getName()), $calling_args);
                         }
-                    } elseif (!$result) {
+
+                        // Object methods
+                        try {
+                            if ($this->_functions[$this->_method]->getDeclaringClass()->getConstructor()) {
+                                $object = $this->_functions[$this->_method]->getDeclaringClass()->newInstanceArgs($this->_args);
+                            } else {
+                                $object = $this->_functions[$this->_method]->getDeclaringClass()->newInstance();
+                            }
+                        } catch (Exception $e) {
+                            echo $e->getMessage();
+                            throw new Zend_Rest_Server_Exception('Error instantiating class ' . $class . ' to invoke method ' . $this->_functions[$this->_method]->getName(), 500);
+                        }
+
+                        try {
+                            $result = $this->_functions[$this->_method]->invokeArgs($object, $calling_args);
+                        } catch (Exception $e) {
+                            $result = $this->fault($e);
+                        }
+                    } else {
                         try {
                             $result = call_user_func_array($this->_functions[$this->_method]->getName(), $calling_args); //$this->_functions[$this->_method]->invokeArgs($calling_args);
                         } catch (Exception $e) {
                             $result = $this->fault($e);
                         }
                     }
+
                 } else {
                     $result = $this->fault("Unknown Method '$this->_method'.", 404);
                 }
@@ -271,7 +253,7 @@ class Zend_Rest_Server extends Zend_Server_Abstract implements Zend_Server_Inter
 
         $method = $function->getName();
 
-        $dom    = new DOMDocument('1.0', $this->getEncoding());
+        $dom    = new DOMDocument('1.0', 'UTF-8');
         if ($class) {
             $root   = $dom->createElement($class);
             $method = $dom->createElement($method);
@@ -350,7 +332,7 @@ class Zend_Rest_Server extends Zend_Server_Abstract implements Zend_Server_Inter
 
         $method = $function->getName();
 
-        $dom = new DOMDocument('1.0', $this->getEncoding());
+        $dom = new DOMDocument('1.0', 'UTF-8');
         if ($class) {
             $xml = $dom->createElement($class);
             $methodNode = $dom->createElement($method);
@@ -413,7 +395,7 @@ class Zend_Rest_Server extends Zend_Server_Abstract implements Zend_Server_Inter
             $method = $function;
         }
 
-        $dom = new DOMDocument('1.0', $this->getEncoding());
+        $dom = new DOMDocument('1.0', 'UTF-8');
         if ($class) {
             $xml       = $dom->createElement($class);
             $xmlMethod = $dom->createElement($method);
@@ -513,52 +495,5 @@ class Zend_Rest_Server extends Zend_Server_Abstract implements Zend_Server_Inter
      */
     public function setPersistence($mode)
     {
-    }
-
-    /**
-     * Call a static class method and return the result
-     * 
-     * @param  string $class 
-     * @param  array $args 
-     * @return mixed
-     */
-    protected function _callStaticMethod($class, array $args)
-    {
-        try {
-            $result = call_user_func_array(array($class, $this->_functions[$this->_method]->getName()), $args);
-        } catch (Exception $e) {
-            $result = $this->fault($e);
-        }
-        return $result;
-    }
-
-    /**
-     * Call an instance method of an object
-     * 
-     * @param  string $class
-     * @param  array $args
-     * @return mixed
-     * @throws Zend_Rest_Server_Exception For invalid class name
-     */
-    protected function _callObjectMethod($class, array $args)
-    {
-        try {
-            if ($this->_functions[$this->_method]->getDeclaringClass()->getConstructor()) {
-                $object = $this->_functions[$this->_method]->getDeclaringClass()->newInstanceArgs($this->_args);
-            } else {
-                $object = $this->_functions[$this->_method]->getDeclaringClass()->newInstance();
-            }
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            throw new Zend_Rest_Server_Exception('Error instantiating class ' . $class . ' to invoke method ' . $this->_functions[$this->_method]->getName(), 500);
-        }
-
-        try {
-            $result = $this->_functions[$this->_method]->invokeArgs($object, $args);
-        } catch (Exception $e) {
-            $result = $this->fault($e);
-        }
-
-        return $result;
     }
 }

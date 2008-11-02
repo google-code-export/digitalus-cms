@@ -37,11 +37,9 @@ class DSF_Uri
 	 * load the uri
 	 *
 	 */
-	public function __construct($uri = null)
+	public function __construct()
 	{
-		if($uri == null) {
-			$uri = $_SERVER['REQUEST_URI'];
-		}
+		$uri = $_SERVER['REQUEST_URI'];
 		$this->_uri = $this->cleanUri($uri);
 	}
 	
@@ -96,17 +94,6 @@ class DSF_Uri
 	{
 		$uri = DSF_Toolbox_Regex::stripFileExtension($uri); 
 		$uri = DSF_Toolbox_Regex::stripTrailingSlash($uri);
-		$uri = urldecode($uri);
 		return DSF_Toolbox_String::stripHyphens($uri);
-	}
-	
-	public function getParams()
-	{
-		$splitPaths = DSF_Toolbox_Array::splitOnValue($this->toArray(), 'p');
-		if($splitPaths)
-		{
-		     return DSF_Toolbox_Array::makeHashFromArray($splitPaths[1]);
-		}
-		return false;
 	}
 }

@@ -34,14 +34,11 @@ class DSF_Command
     {
         //get params if they exist
         $parts = explode('?', $command);
-        $params = null;
-        
         if(is_array($parts) && count($parts) == 2)
         {
             $command = $parts[0];
             $params = DSF_Toolbox_Array::arrayFromGet($parts[1]);
         }
-        
         $cmd = self::loadCommand($command);
         if(is_object($cmd))
         {

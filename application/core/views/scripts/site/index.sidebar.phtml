@@ -1,0 +1,36 @@
+<div class="formBox">
+<h2>About Site Settings</h2>
+<p>This is where you manage your site users, update root site settings, and generate site reports</p>
+</div>
+
+<?php 
+$u = new User();
+$users = $u->fetchAll(null, 'first_name');
+foreach ($users as $user)
+{
+	$userArray[] = "<a href='/admin/user/open/id/{$user->id}' class='user'>{$user->first_name} {$user->last_name}</a>";
+}
+?>
+<div class="formBox">
+<h2 class="userGroup">Site Users</h2>
+<?php 
+echo $this->HtmlList($userArray, null, null, false);
+?>
+<p><a href="/admin/user/create">Create a new user</a></p>
+</div>
+
+<div class="formBox">
+<h2 class="report">Site Reports</h2>
+<ul>
+	<li><a href="/admin/site/traffic" class='report'>Site traffic</a></li>
+	<li><a href="/admin/site/admin-access" class='report'>Admin Access</a></li>
+</ul>
+</div>
+
+<div class="formBox">
+<h2 id="settings">Console</h2>
+<p>The console allows you to manage the cms core directly.  This is for experienced administrators only!</p>
+<p><a href="/admin/site/console">Open Console</a></p>
+</div>
+
+

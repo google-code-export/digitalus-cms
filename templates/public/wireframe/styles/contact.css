@@ -1,0 +1,17 @@
+
+#contactForm #name{
+ width:200px;
+}
+
+#contactForm #email{
+ width:200px;
+}
+
+#contactForm #subject{
+ width:300px;
+}
+
+#contactForm textarea{
+width:500px;
+height:200px;
+}

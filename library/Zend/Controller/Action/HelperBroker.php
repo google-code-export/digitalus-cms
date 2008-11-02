@@ -14,30 +14,19 @@
  *
  * @category   Zend
  * @package    Zend_Controller
- * @subpackage Zend_Controller_Action
+ * @subpackage Action
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
 
-/**
- * @see Zend_Controller_Action_Exception
- */
+/** Zend_Controller_Action_Exception */
 require_once 'Zend/Controller/Action/Exception.php';
 
-/**
- * @see Zend_Controller_Action_Helper_Abstract
- */
+/** Zend_Controller_Action_Helper_Abstract */
 require_once 'Zend/Controller/Action/Helper/Abstract.php';
 
-/**
- * @see Zend_Controller_Action_HelperBroker_PriorityStack
- */
-require_once 'Zend/Controller/Action/HelperBroker/PriorityStack.php';
-
-/**
- * @see Zend_Loader
- */
+/** Zend_Loader **/
 require_once 'Zend/Loader.php';
 
 /**
@@ -52,9 +41,9 @@ class Zend_Controller_Action_HelperBroker
     /**
      * $_helpers - Helper array
      *
-     * @var Zend_Controller_Action_HelperBroker_PriorityStack
+     * @var Zend_Controller_Action_Helper_Abstract[]
      */
-    static protected $_stack = null;
+    static protected $_helpers = array();
 
     /**
      * $_paths - paths to Action_Helpers
@@ -81,7 +70,8 @@ class Zend_Controller_Action_HelperBroker
      */
     static public function addHelper(Zend_Controller_Action_Helper_Abstract $helper)
     {
-        self::getStack()->push($helper);
+        $helper_name = $helper->getName();
+        self::$_helpers[$helper_name] = $helper;
         return;
     }
 
@@ -105,7 +95,7 @@ class Zend_Controller_Action_HelperBroker
      */
     static public function resetHelpers()
     {
-        self::$_stack = null;
+        self::$_helpers = array();
         return;
     }
 
@@ -142,7 +132,7 @@ class Zend_Controller_Action_HelperBroker
     public function __construct(Zend_Controller_Action $actionController)
     {
         $this->_actionController = $actionController;
-        foreach (self::getStack() as $helper) {
+        foreach (self::$_helpers as $helper) {
             $helper->setActionController($actionController);
             $helper->init();
         }
@@ -155,7 +145,7 @@ class Zend_Controller_Action_HelperBroker
      */
     public function notifyPreDispatch()
     {
-        foreach (self::getStack() as $helper) {
+        foreach (self::$_helpers as $helper) {
             $helper->preDispatch();
         }
     }
@@ -167,7 +157,7 @@ class Zend_Controller_Action_HelperBroker
      */
     public function notifyPostDispatch()
     {
-        foreach (self::getStack() as $helper) {
+        foreach (self::$_helpers as $helper) {
             $helper->postDispatch();
         }
     }
@@ -197,13 +187,11 @@ class Zend_Controller_Action_HelperBroker
     {
         $name = self::_normalizeHelperName($name);
 
-        $stack = self::getStack();
-        
-        if (!isset($stack->{$name})) {
+        if (!array_key_exists($name, self::$_helpers)) {
             self::_loadHelper($name);
         }
 
-        $helper = $stack->{$name};
+        $helper = self::$_helpers[$name];
 
         $initialize = false;
         if (null === ($actionController = $helper->getActionController())) {
@@ -234,13 +222,11 @@ class Zend_Controller_Action_HelperBroker
     {
         $name = self::_normalizeHelperName($name);
 
-        $stack = self::getStack();
-        
-        if (!isset($stack->{$name})) {
+        if (!array_key_exists($name, self::$_helpers)) {
             self::_loadHelper($name);
         }
 
-        $helper = $stack->{$name};
+        $helper = self::$_helpers[$name];
 
         return $helper;
     }
@@ -264,10 +250,8 @@ class Zend_Controller_Action_HelperBroker
     {
         $name = self::_normalizeHelperName($name);
 
-        $stack = self::getStack();
-        
-        if (isset($stack->{$name})) {
-            return $stack->{$name};
+        if (array_key_exists($name, self::$_helpers)) {
+            return self::$_helpers[$name];
         }
 
         throw new Zend_Controller_Action_Exception('Action helper "' . $name . '" has not been registered with the helper broker');
@@ -280,7 +264,7 @@ class Zend_Controller_Action_HelperBroker
      */
     public static function getExistingHelpers()
     {
-        return self::getStack()->getHelpersByName();
+        return self::$_helpers;
     }
 
     /**
@@ -292,7 +276,7 @@ class Zend_Controller_Action_HelperBroker
     public static function hasHelper($name)
     {
         $name = self::_normalizeHelperName($name);
-        return isset(self::getStack()->{$name});
+        return array_key_exists($name, self::$_helpers);
     }
 
     /**
@@ -304,28 +288,14 @@ class Zend_Controller_Action_HelperBroker
     public static function removeHelper($name)
     {
         $name = self::_normalizeHelperName($name);
-        $stack = self::getStack();
-        if (isset($stack->{$name})) {
-            unset($stack->{$name});
+        if (array_key_exists($name, self::$_helpers)) {
+            unset(self::$_helpers[$name]);
+            return true;
         }
 
         return false;
     }
 
-    /**
-     * Lazy load the priority stack and return it
-     *
-     * @return Zend_Controller_Action_HelperBroker_PriorityStack
-     */
-    public static function getStack()
-    {
-        if (self::$_stack == null) {
-            self::$_stack = new Zend_Controller_Action_HelperBroker_PriorityStack();
-        }
-        
-        return self::$_stack;
-    }
-    
     /**
      * _loadHelper()
      *
@@ -350,7 +320,7 @@ class Zend_Controller_Action_HelperBroker
                     throw new Zend_Controller_Action_Exception('Helper name ' . $name . ' -> class ' . $class . ' is not of type Zend_Controller_Action_Helper_Abstract');
                 }
 
-                self::getStack()->push($helper);
+                self::$_helpers[$helper->getName()] = $helper;
                 return;
 
             } elseif (Zend_Loader::isReadable($dir . $file)) {
@@ -362,7 +332,7 @@ class Zend_Controller_Action_HelperBroker
                         throw new Zend_Controller_Action_Exception('Helper name ' . $name . ' -> class ' . $class . ' is not of type Zend_Controller_Action_Helper_Abstract');
                     }
 
-                    self::getStack()->push($helper);
+                    self::$_helpers[$helper->getName()] = $helper;
                     return;
                 }
             }

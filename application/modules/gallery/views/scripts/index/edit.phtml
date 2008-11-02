@@ -32,7 +32,7 @@
                     <?php echo $this->formHidden('imageId[]', $id);?>
                     <img src="/<?php echo $image->thumbPath; ?>" alt="<?php echo $image->thumbPath; ?>" />
                     <?php echo $this->formText("caption[{$id}]", $image->caption, array('class' => 'med'));?>
-                    <p><?php echo $this->formCheckbox("removeImage[{$id}]");?> Check here to remove this image</p>
+                    <p><?php echo $this->formCheckbox("removeImage[{$id}]");?> Check here to remove this image</a></p>
                     <br class="clear" />
                 </div>  
             <?php }

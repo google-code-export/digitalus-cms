@@ -1,13 +1,11 @@
 <?php
- class DSF_View_Helper_General_FormatPercentage
- {
+class DSF_View_Helper_General_FormatPercentage
+{
 
 	/**
-	 * this helper formats a percentage
+	 * comments
 	 */
 	public function FormatPercentage($num){
 		return number_format($num,2) . " %";
 	}
- }
- ?>
- 
+}

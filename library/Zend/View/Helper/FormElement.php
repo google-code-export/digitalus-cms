@@ -19,10 +19,6 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
- * @see Zend_View_Helper_HtmlElement
- */
-require_once 'Zend/View/Helper/HtmlElement.php';
 
 /**
  * Base helper for form elements.  Extend this, don't use it on its own.
@@ -33,8 +29,37 @@ require_once 'Zend/View/Helper/HtmlElement.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
+abstract class Zend_View_Helper_FormElement
 {
+    /**
+     * @var Zend_View_Interface
+     */
+    public $view;
+
+    /**
+     * Converts an associative array to a string of tag attributes.
+     *
+     * @access public
+     *
+     * @param array $attribs From this array, each key-value pair is
+     * converted to an attribute name and value.
+     *
+     * @return string The XHTML for the attributes.
+     */
+    protected function _htmlAttribs($attribs)
+    {
+        $xhtml = '';
+        foreach ((array) $attribs as $key => $val) {
+            $key = $this->view->escape($key);
+            if (is_array($val)) {
+                $val = implode(' ', $val);
+            }
+            $val = $this->view->escape($val);
+            $xhtml .= " $key=\"$val\"";
+        }
+        return $xhtml;
+    }
+
     /**
      * Converts parameter arguments to an element info array.
      *
@@ -50,8 +75,8 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
      * attribs, options, listsep, disable, and escape.
      */
     protected function _getInfo($name, $value = null, $attribs = null,
-        $options = null, $listsep = null
-    ) {
+        $options = null, $listsep = null)
+    {
         // the baseline info.  note that $name serves a dual purpose;
         // if an array, it's an element info array that will override
         // these baseline values.  as such, ignore it for the 'name'
@@ -160,6 +185,17 @@ abstract class Zend_View_Helper_FormElement extends Zend_View_Helper_HtmlElement
         return '<input type="hidden"'
              . ' name="' . $this->view->escape($name) . '"'
              . ' value="' . $this->view->escape($value) . '"'
-             . $this->_htmlAttribs($attribs) . $this->getClosingBracket();
+             . $this->_htmlAttribs($attribs) . ' />';
+    }
+
+    /**
+     * Set the view object
+     *
+     * @param Zend_View_Interface $view
+     * @return void
+     */
+    public function setView(Zend_View_Interface $view)
+    {
+        $this->view = $view;
     }
 }

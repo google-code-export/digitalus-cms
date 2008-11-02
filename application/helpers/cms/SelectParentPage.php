@@ -3,15 +3,9 @@ class Zend_View_Helper_SelectParentPage
 {	
 	public function SelectParentPage($name, $value=null, $attribs = null)
 	{
-        $mdlIndex = new Page();
-        $index = $mdlIndex->getIndex();
+		$page = new Page();
+		$index = $page->getIndex();
 
-        //add the site root
-        if(is_array($index)) {
-        	array_unshift($index, 'Site Root');        	
-        }else{
-        	$index[0] = 'Site Root';        	
-        }
 		return $this->view->formSelect($name, $value, $attribs, $index);
 	}
 	

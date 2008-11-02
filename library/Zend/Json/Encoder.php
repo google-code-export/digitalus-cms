@@ -41,13 +41,6 @@ class Zend_Json_Encoder
      * @var boolean
      */
     protected $_cycleCheck;
-    
-    /**
-     * Additional options used during encoding
-     * 
-     * @var array
-     */
-    protected $_options = array();
 
     /**
      * Array of visited objects; used to prevent cycling.
@@ -60,13 +53,11 @@ class Zend_Json_Encoder
      * Constructor
      *
      * @param boolean $cycleCheck Whether or not to check for recursion when encoding
-     * @param array $options Additional options used during encoding
      * @return void
      */
-    protected function __construct($cycleCheck = false, $options = array())
+    protected function __construct($cycleCheck = false)
     {
         $this->_cycleCheck = $cycleCheck;
-        $this->_options = $options;
     }
 
     /**
@@ -74,12 +65,11 @@ class Zend_Json_Encoder
      *
      * @param mixed $value The value to be encoded
      * @param boolean $cycleCheck Whether or not to check for possible object recursion when encoding
-     * @param array $options Additional options used during encoding
      * @return string  The encoded value
      */
-    public static function encode($value, $cycleCheck = false, $options = array())
+    public static function encode($value, $cycleCheck = false)
     {
-        $encoder = new self(($cycleCheck) ? true : false, $options);
+        $encoder = new self(($cycleCheck) ? true : false);
 
         return $encoder->_encodeValue($value);
     }
@@ -122,18 +112,10 @@ class Zend_Json_Encoder
     {
         if ($this->_cycleCheck) {
             if ($this->_wasVisited($value)) {
-                
-                if (isset($this->_options['silenceCyclicalExceptions'])
-                    && $this->_options['silenceCyclicalExceptions']===true) {
-                    
-                    return '"* RECURSION (' . get_class($value) . ') *"';
-                    
-                } else {
-                    throw new Zend_Json_Exception(
-                        'Cycles not supported in JSON encoding, cycle introduced by '
-                        . 'class "' . get_class($value) . '"'
-                    );
-                }
+                throw new Zend_Json_Exception(
+                    'Cycles not supported in JSON encoding, cycle introduced by '
+                    . 'class "' . get_class($value) . '"'
+                );
             }
 
             $this->_visited[] = $value;

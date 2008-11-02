@@ -29,7 +29,7 @@ class DSF_Controller_Plugin_SetPagePath extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch($request)
     {
-		if($request->module == 'public' && $request->controller != 'plugin')
+		if($request->module == 'public')
 		{
             $request->setControllerName('index');
             $request->setActionName('index');

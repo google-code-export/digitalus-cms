@@ -61,20 +61,16 @@ class DSF_Toolbox_Array
      */
     static function makeHashFromArray($array)
     {
-    	$hash = null;
-    	
         if(is_array($array) && count($array) > 1)
         {
             for ($i = 0; $i <= count($array); $i+= 2)
             {
-            	if(isset($array[$i])) {
-	                $key = $array[$i];
-	                $value = $array[$i + 1];
-	                if(!empty($key) && !empty($value))
-	                {
-	                   $hash[$key] = $value;  
-	                }
-            	}
+                $key = $array[$i];
+                $value = $array[$i + 1];
+                if(!empty($key) && !empty($value))
+                {
+                   $hash[$key] = $value;  
+                }
             }
         }
         

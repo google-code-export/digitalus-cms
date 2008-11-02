@@ -1,0 +1,17 @@
+<div id='contentBrowser' class="formBox">
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$("#fileTree").treeview({			
+		persist: "cookie",
+		collapsed: true,
+		unique: true
+	});
+}
+);
+</script>
+<div id='siteRoot'>Website</div>
+<?php echo $this->RenderFileBrowser(0,3);?>
+<p class='note'>Note: The filenames are displayed as: <br />
+(menu label / page title)</p>
+</div>

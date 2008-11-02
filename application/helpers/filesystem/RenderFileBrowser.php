@@ -1,40 +1,45 @@
 <?php
 class DSF_View_Helper_Filesystem_RenderFileBrowser
 {	
-	public function RenderFileBrowser($parentId, $basePath = null, $level = 0, $id = 'fileTree')
+	public function RenderFileBrowser($parentId, $basePath = null, $id = 'fileTree')
 	{
-		$cache = Zend_Registry::get('cache');
-		if($filetree = $cache->load('filetree')) {
-			return $filetree;
-		}else{
+		// @todo: deal with selected menu items
+		if($level <= $depth - 1)
+		{
 			$links = array();
-			$tree = new Page();
+			$menu = new Menu();
 	
-			$children = $tree->getChildren($parentId);
+			$children = $menu->getMenuItems($parentId);
 			
 			foreach ($children as $child)
-			{			
-				if($tree->hasChildren($child))
+			{
+				$label = $child->title;
+
+				if(!empty($child->label))
 				{
-					$newLevel = $level + 1;
-					$submenu = $this->view->RenderFileBrowser($child->id, $basePath, $newLevel);
+					$label =  $child->label . ' / ' . $label;
+				}
+				
+				$children = $menu->getMenuItems($child->id);
+				if($children->count() > 0)
+				{
+					$class = 'dir';
+					$submenu = $this->view->RenderFileBrowser($child->id, $link);
 				}else{
+					$class = 'page';
 					$submenu = false;
 				}
-				$links[] ="<li class='menuItem'><a href='/admin/page/edit/id/{$child->id}' class='{$child->content_template}' id='page-{$child->id}'>{$child->name}</a>" . $submenu . '</li>';
+				$linkId = DSF_Toolbox_String::addUnderscores($menu->path, true);
+				$links[] ="<li class='menuItem'><a href='/admin/page/open/id/{$child->id}' class='{$class}' id='page-{$child->id}'>{$label}</a>" . $submenu . '</li>';
 			}
-			
-			if(is_array($links))
-			{
-				if($level == 0){
-					$strId = "id='{$id}'";
-				}else{
-				    $strId = null;
-				}
-				$filetree = "<ul {$strId}>" . implode(null, $links) . "</ul>";
-				$cache->save($filetree, "filetree", array('tree'));
-				return  $filetree;
+		}
+		
+		if(is_array($links))
+		{
+			if($level == 0){
+				$strId = "id='{$id}'";
 			}
+			return  "<ul {$strId}>" . implode(null, $links) . "</ul>";
 		}
 	}
 	

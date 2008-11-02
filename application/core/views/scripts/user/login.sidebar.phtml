@@ -1,0 +1,11 @@
+<div class="formBox">
+<h2>Trouble logging in?</h2>
+
+<p>If you forgot your password please enter your email address below, and click <em>Send Reminder</em>.</p>
+<form action="/admin/user/passwordReminder" method="POST">
+<?php 
+	echo $this->FormRow('Email', $this->FormText('email',$this->email));
+	echo $this->FormRow('&nbsp;', $this->FormSubmit('reminder','Send Reminder'));
+?>
+</form>	
+</div>

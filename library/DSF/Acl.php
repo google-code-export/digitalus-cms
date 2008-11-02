@@ -22,8 +22,6 @@
 
 class DSF_Acl extends Zend_Acl
 {
-    
-    protected $resourceList; //the resources list is the public array and is not used internally
 	/**
 	 * load the acl resources and set up permissions
 	 *
@@ -31,92 +29,51 @@ class DSF_Acl extends Zend_Acl
     public function __construct()
     {
         $this->addRole(new Zend_Acl_Role('admin'));
-        $this->addRole(new Zend_Acl_Role('superadmin'));
-       
-        $this->loadResources();
-        $this->loadCurrentUsersPermissions();
+        $this->addRole(new Zend_Acl_Role('superadmin'),'admin');
         
-        //load common resources
-        $this->add(new Zend_Acl_Resource('admin_auth'));
+        $this->add(new Zend_Acl_Resource('index'));
+        $this->add(new Zend_Acl_Resource('error'));
+        $this->add(new Zend_Acl_Resource('user'));
+        $this->add(new Zend_Acl_Resource('auth'));
+        $this->add(new Zend_Acl_Resource('site'));
+        $this->add(new Zend_Acl_Resource('support'));
+        
+        //load modules
+
+        //user specific permissions
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $resources = $db->fetchAll("SELECT controller FROM acl_resources");
+	    foreach ($resources as $resource)
+	    {
+	    	$this->add(new Zend_Acl_Resource($this->getResourceFromRow($resource)));
+	    }
         
         //everybody
-        $this->allow(null, 'admin_auth');
+        $this->allow(null, "auth", "login");
+        $this->allow(null, "auth", "logout");
+        $this->allow(null, "auth", "resetPassword");
+        $this->allow(null, "error");
         
-        //everyone can run the page builders
-        $this->allow(null, 'cmsFront');
+        //site administrators
+        $this->allow('admin','index');
+        $this->allow('admin','support');
+
+        //user specific permissions
+        $user = DSF_Auth::getIdentity();
+        if($user)
+        {
+	        $roles = $db->fetchAll("SELECT controller FROM acl_resources WHERE id IN (" . $user->acl_roles . ")");
+		    foreach ($roles as $role)
+		    {
+		    	$this->allow('admin',$this->getResourceFromRow($role));
+		    }
+        }
+        
+        $this->allow('admin','support');
         
         //grant the super admin access to everything
        	$this->allow('superadmin');
 
-    }
-    
-    public function loadResources()
-    {
-        $front = Zend_Controller_Front::getInstance();
-        $ctlPaths = $front->getControllerDirectory();
-        
-        //set the path to all of the modules
-        foreach ($ctlPaths as $module => $path)  {
-            if($module != 'public' && $module != 'front') {
-                //clear the resource list items
-                $resourceListItems = null;
-                
-                $path = str_replace('controllers', 'acl.xml',$path);
-                
-                //load the module resource
-                $this->add(new Zend_Acl_Resource($module));
-                
-                //attempt to load each acl file
-                if(file_exists($path)){
-                    $xml = simplexml_load_file($path);
-                    $controllers = $xml->children();
-                    foreach ($controllers as $controller) {
-                        $controllerName = (string)$controller->attributes()->name;
-                        $controllerActions = $controller->children();
-                        if(count($controllerActions) > 0){
-                            foreach ($controllerActions as $action) {
-                                //load each action separately
-                                $actionName = (string)$action;
-                                $key = $module . '_' . $controllerName . '_' . $actionName;
-                                $this->add(new Zend_Acl_Resource($key), $module);
-                                
-                                //add the action to the public resource list
-                                $resourceListItems[$controllerName][] = $actionName;
-                            }
-                        }else{
-                            //set the resource at the controller level
-                            $key = $module . '_' . $controllerName;
-                            $this->add(new Zend_Acl_Resource($key), $module);
-                            
-                            //add the controller to the public resource list
-                            $resourceListItems[$controllerName] = null;
-                        }
-                    }
-                }
-                
-                $this->resourceList[$module] = $resourceListItems;
-            } 
-        }       
-    }
-    
-    public function getResourceList()
-    {
-        return $this->resourceList;
-    }
-    
-    public function loadCurrentUsersPermissions(){
-        $user = new User();
-        $permissions = $user->getCurrentUsersAclResources();
-
-        if($permissions) {
-            foreach ($permissions as $key => $value) {
-                if($value == 1){
-                    $this->allow('admin',$key);
-                }else{
-                    $this->deny('admin',$key);
-                }
-            }
-        }
     }
     
     private function getResourceFromRow($row)

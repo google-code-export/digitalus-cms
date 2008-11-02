@@ -17,14 +17,11 @@
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Simple.php 10726 2008-08-06 16:38:09Z cadorn $
+ * @version    $Id: Simple.php 8064 2008-02-16 10:58:39Z thomas $
  */
 
 /** Zend_Log_Formatter_Interface */
 require_once 'Zend/Log/Formatter/Interface.php';
-
-/** Zend_Log_Exception */
-require_once 'Zend/Log/Exception.php';
 
 /**
  * @category   Zend
@@ -32,7 +29,7 @@ require_once 'Zend/Log/Exception.php';
  * @subpackage Formatter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Simple.php 10726 2008-08-06 16:38:09Z cadorn $
+ * @version    $Id: Simple.php 8064 2008-02-16 10:58:39Z thomas $
  */
 class Zend_Log_Formatter_Simple implements Zend_Log_Formatter_Interface
 {
@@ -40,8 +37,6 @@ class Zend_Log_Formatter_Simple implements Zend_Log_Formatter_Interface
      * @var string
      */
     protected $_format;
-
-    const DEFAULT_FORMAT = '%timestamp% %priorityName% (%priority%): %message%';
 
     /**
      * Class constructor
@@ -52,7 +47,7 @@ class Zend_Log_Formatter_Simple implements Zend_Log_Formatter_Interface
     public function __construct($format = null)
     {
         if ($format === null) {
-            $format = self::DEFAULT_FORMAT . PHP_EOL;
+            $format = '%timestamp% %priorityName% (%priority%): %message%' . PHP_EOL;
         }
 
         if (! is_string($format)) {
@@ -72,13 +67,6 @@ class Zend_Log_Formatter_Simple implements Zend_Log_Formatter_Interface
     {
         $output = $this->_format;
         foreach ($event as $name => $value) {
-
-            if ((is_object($value) && !method_exists($value,'__toString'))
-                || is_array($value)) {
-
-                $value = gettype($value);  
-            }
-
             $output = str_replace("%$name%", $value, $output);
         }
         return $output;

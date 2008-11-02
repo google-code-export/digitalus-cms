@@ -4,20 +4,18 @@
  *
  * LICENSE
  *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
+ * This source file is subject to version 1.0 of the Zend Framework
+ * license, that is bundled with this package in the file LICENSE.txt, and
+ * is available through the world-wide-web at the following URL:
+ * http://framework.zend.com/license/new-bsd. If you did not receive
+ * a copy of the Zend Framework license and are unable to obtain it
+ * through the world-wide-web, please send a note to license@zend.com
+ * so we can mail you a copy immediately.
  *
- * @category   Zend
  * @package    Zend_XmlRpc
  * @subpackage Server
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Server.php 10684 2008-08-05 16:05:15Z matthew $
  */
 
 /**
@@ -114,7 +112,7 @@ require_once 'Zend/Server/Reflection/Method.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_XmlRpc_Server implements Zend_Server_Interface
+class Zend_XmlRpc_Server
 {
     /**
      * Character encoding
@@ -336,17 +334,17 @@ class Zend_XmlRpc_Server implements Zend_Server_Interface
      * Typically, you will not use this method; it will be called using the
      * results pulled from {@link Zend_XmlRpc_Server_Cache::get()}.
      *
-     * @param  array $definition
+     * @param array $array
      * @return void
      * @throws Zend_XmlRpc_Server_Exception on invalid input
      */
-    public function loadFunctions($definition)
+    public function loadFunctions($array)
     {
-        if (!is_array($definition)) {
+        if (!is_array($array)) {
             throw new Zend_XmlRpc_Server_Exception('Unable to load array; not an array', 612);
         }
 
-        foreach ($definition as $key => $value) {
+        foreach ($array as $key => $value) {
             if (!$value instanceof Zend_Server_Reflection_Function_Abstract
                 && !$value instanceof Zend_Server_Reflection_Class)
             {
@@ -354,11 +352,11 @@ class Zend_XmlRpc_Server implements Zend_Server_Interface
             }
 
             if ($value->system) {
-                unset($definition[$key]);
+                unset($array[$key]);
             }
         }
 
-        foreach ($definition as $dispatchable) {
+        foreach ($array as $dispatchable) {
             $this->_methods[] = $dispatchable;
         }
 
@@ -368,10 +366,10 @@ class Zend_XmlRpc_Server implements Zend_Server_Interface
     /**
      * Do nothing; persistence is handled via {@link Zend_XmlRpc_Server_Cache}
      *
-     * @param  mixed $mode
+     * @param mixed $class
      * @return void
      */
-    public function setPersistence($mode)
+    public function setPersistence($class = null)
     {
     }
 
@@ -450,13 +448,10 @@ class Zend_XmlRpc_Server implements Zend_Server_Interface
      * @param int $code
      * @return Zend_XmlRpc_Server_Fault
      */
-    public function fault($fault = null, $code = 404)
+    public function fault($fault, $code = 404)
     {
         if (!$fault instanceof Exception) {
             $fault = (string) $fault;
-            if (empty($fault)) {
-                $fault = 'Unknown error';
-            }
             $fault = new Zend_XmlRpc_Server_Exception($fault, $code);
         }
 
@@ -556,12 +551,10 @@ class Zend_XmlRpc_Server implements Zend_Server_Interface
      * @param Zend_XmlRpc_Request $request Optional
      * @return Zend_XmlRpc_Response|Zend_XmlRpc_Fault
      */
-    public function handle($request = false)
+    public function handle(Zend_XmlRpc_Request $request = null)
     {
         // Get request
-        if ((!$request || !$request instanceof Zend_XmlRpc_Request)
-            && (null === ($request = $this->getRequest()))
-        ) {
+        if ((null === $request) && (null === ($request = $this->getRequest()))) {
             require_once 'Zend/XmlRpc/Request/Http.php';
             $request = new Zend_XmlRpc_Request_Http();
             $request->setEncoding($this->getEncoding());

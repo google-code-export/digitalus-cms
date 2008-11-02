@@ -15,12 +15,12 @@
  * @package    Zend_Controller
  * @subpackage Router
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Regex.php 10744 2008-08-07 02:32:44Z matthew $
+ * @version    $Id: Regex.php 8935 2008-03-20 20:57:49Z darby $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Controller_Router_Route_Abstract */
-require_once 'Zend/Controller/Router/Route/Abstract.php';
+/** Zend_Controller_Router_Route_Interface */
+require_once 'Zend/Controller/Router/Route/Interface.php';
 
 /**
  * Regex Route
@@ -30,7 +30,7 @@ require_once 'Zend/Controller/Router/Route/Abstract.php';
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Abstract
+class Zend_Controller_Router_Route_Regex implements Zend_Controller_Router_Route_Interface
 {
     protected $_regex = null;
     protected $_defaults = array();
@@ -59,10 +59,6 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
         $this->_reverse = $reverse;
     }
 
-    public function getVersion() {
-        return 1;
-    }
-    
     /**
      * Matches a user submitted path with a previously defined route.
      * Assigns and returns an array of defaults on a successful match.
@@ -143,7 +139,7 @@ class Zend_Controller_Router_Route_Regex extends Zend_Controller_Router_Route_Ab
      * @param array $data An array of name (or index) and value pairs used as parameters
      * @return string Route path with user submitted parameters
      */
-    public function assemble($data = array(), $reset = false, $encode = false)
+    public function assemble($data = array())
     {
         if ($this->_reverse === null) {
             require_once 'Zend/Controller/Router/Exception.php';

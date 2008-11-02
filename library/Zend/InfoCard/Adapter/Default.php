@@ -17,7 +17,8 @@
  * @subpackage Zend_InfoCard_Adapter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Default.php 9094 2008-03-30 18:36:55Z thomas $
+ * @version    $Id: Default.php 8064 2008-02-16 10:58:39Z thomas $
+ * @author     John Coggeshall <john@zend.com>
  */
 
 /**
@@ -41,6 +42,7 @@ require_once 'Zend/InfoCard/Adapter/Exception.php';
  * @subpackage Zend_InfoCard_Adapter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @author     John Coggeshall <john@zend.com>
  */
 class Zend_InfoCard_Adapter_Default implements Zend_InfoCard_Adapter_Interface
 {

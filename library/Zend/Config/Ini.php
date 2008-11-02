@@ -16,7 +16,7 @@
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Ini.php 11181 2008-09-01 09:41:44Z alexander $
+ * @version    $Id: Ini.php 8988 2008-03-21 22:55:57Z rob $
  */
 
 
@@ -105,14 +105,7 @@ class Zend_Config_Ini extends Zend_Config
             }
         }
 
-        set_error_handler(array($this, '_loadFileErrorHandler'));
-        $iniArray = parse_ini_file($filename, true); // Warnings and errors are suppressed
-        restore_error_handler();
-        // Check if there was a error while loading file
-        if ($this->_loadFileErrorStr !== null) {
-            throw new Zend_Config_Exception($this->_loadFileErrorStr);
-        }
-        
+        $iniArray = parse_ini_file($filename, true);
         $preProcessedArray = array();
         foreach ($iniArray as $key => $data)
         {
@@ -174,7 +167,7 @@ class Zend_Config_Ini extends Zend_Config
 
         $this->_loadedSection = $section;
     }
-    
+
     /**
      * Helper function to process each element in the section and handle
      * the "extends" inheritance keyword. Passes control to _processKey()
@@ -247,4 +240,5 @@ class Zend_Config_Ini extends Zend_Config
         }
         return $config;
     }
+
 }

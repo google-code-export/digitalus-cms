@@ -13,7 +13,7 @@ class Mod_News_IndexController extends Zend_Controller_Action
 	public function indexAction()
 	{
 		$item = new NewsItem();
-		$this->view->recentItems = $item->getRecent();
+		$this->view->items = $item->fetchAll(null, 'title');
 	}
 
 }

@@ -168,8 +168,8 @@ class DSF_Controller_Module_Abstract extends Zend_Controller_Action
 	    {
 	        $this->triggerEvent('onEdit');
 	        $this->_currentRecord = $this->_model->updateFromPost();
-			$this->_recordId = $this->_currentRecord->id;
 	        $this->triggerEvent('afterEdit');
+			$this->_recordId = $this->_currentRecord->id;
 		    $e = new DSF_View_Error();
 		    if(!$e->hasErrors()){
                 $m = new DSF_View_Message();

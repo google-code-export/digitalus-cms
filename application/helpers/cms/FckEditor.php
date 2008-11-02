@@ -20,7 +20,7 @@ class DSF_View_Helper_Cms_FckEditor
         
         $oFCKeditor = new FCKeditor($instance) ;
         $oFCKeditor->BasePath = $sBasePath ;
-        $oFCKeditor->Config['SkinPath'] = $sBasePath . 'editor/skins/office2003/' ;
+        $oFCKeditor->Config['SkinPath'] = $sBasePath . 'editor/skins/DSF/' ;
         $oFCKeditor->Width		= $width ;
         $oFCKeditor->Height		= $height ;
         if($fullToolbar){

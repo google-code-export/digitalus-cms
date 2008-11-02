@@ -43,9 +43,7 @@ class DSF_View_Error
     function __construct()
     {
         $this->ns = new Zend_Session_Namespace('errors'); 
-        if(isset($this->ns->errors)){
-            $this->errors = $this->ns->errors;   
-        }
+        $this->errors = $this->ns->errors;   
     }
     
     /**
@@ -97,10 +95,6 @@ class DSF_View_Error
      */
     private function updateNs()
     {
-        if(isset($this->errors)){
-            $this->ns->errors = $this->errors;
-        }else{
-            unset($this->ns->errors);
-        }
+        $this->ns->errors = $this->errors;
     }
 }

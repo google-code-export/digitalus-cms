@@ -23,15 +23,15 @@
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: SiteSettings.php Mon Dec 24 20:30:38 EST 2007 20:30:38 forrest lyman $
  */
- 
-class SiteSettings extends Xml 
+
+class SiteSettings
 {
 	/**
-	 * the filepath key
+	 * the filepath to the site settings xml file
 	 *
 	 * @var string
 	 */
-	protected $_settingsKey = 'site_settings';
+	protected $_pathToSettings = './application/data/siteSettings.xml';
 	
 	/**
 	 * the parsed site setting file
@@ -47,19 +47,17 @@ class SiteSettings extends Xml
 	 *
 	 * @param string $pathToSettingsFile
 	 */
-	public function __construct($settingsKey = null)
+	public function __construct($pathToSettingsFile = null)
 	{
-	    parent::__construct();
-	    if($settingsKey !== null){
-	        $this->_settingsKey = $settingsKey;
+	    if($pathToSettingsFile !== null){
+	        $this->_pathToSettings = $pathToSettingsFile;
 	    }
 	    
-	    if(!$this->fileExists($this->_settingsKey)) {
-	        //create file
-	        $xml = new SimpleXMLElement('<settings/>');
-	        $this->saveXml($this->_settingsKey, $xml);
-	    }
-	    $this->_xml = $this->open($this->_settingsKey);
+		try{
+			$this->_xml = simplexml_load_file($this->_pathToSettings);
+		}catch(Zend_Exception $e) {
+			echo "Sorry, there was an error loading the site settings";
+		}
 	}
 	
 	/**
@@ -79,7 +77,8 @@ class SiteSettings extends Xml
 	 */
 	public function save()
 	{
-		$this->saveXml($this->_settingsKey, $this->_xml);
+		$xml = $this->_xml->asXml();
+		file_put_contents($this->_pathToSettings, $xml);
 	}
 	
 	/**

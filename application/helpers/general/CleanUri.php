@@ -4,16 +4,10 @@ class DSF_View_Helper_General_CleanUri
 	/**
 	 * removes any params from the uri
 	 */
-	public function CleanUri($uri = null, $absolute = false, $stripUnderscores = false){
-        if($uri == null) {
-	       $uri = $this->view->pageObj->getCleanUri();
-        }
+	public function CleanUri($absolute = false){
+	    $uri = $this->view->pageObj->getCleanUri();
 	    if($absolute && !empty($uri)){
 	        $uri = '/' . $uri;
-	    }
-	    
-	    if($stripUnderscores){
-	        $uri = DSF_Toolbox_String::stripUnderscores($uri, true);
 	    }
         return  DSF_Toolbox_String::addHyphens($uri);
 	}

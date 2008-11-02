@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -16,29 +17,24 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @version    $Id: Translate.php 8420 2008-02-26 16:53:53Z darby $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Translate.php 10665 2008-08-05 10:57:18Z matthew $
  */
 
 /** Zend_Locale */
 require_once 'Zend/Locale.php';
 
-/** Zend_View_Helper_Abstract.php */
-require_once 'Zend/View/Helper/Abstract.php';
-
 /**
  * Translation view helper
  *
- * @category  Zend
- * @package   Zend_View
- * @copyright Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
+ * @category   Zend
+ * @package    Zend_View
+ * @subpackage Helper
  */
-class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
+class Zend_View_Helper_Translate
 {
     /**
      * Translation object
-     *
      * @var Zend_Translate_Adapter
      */
     protected $_translator;
@@ -46,11 +42,11 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
     /**
      * Constructor for manually handling
      *
-     * @param Zend_Translate|Zend_Translate_Adapter $translate Instance of Zend_Translate
+     * @param Zend_Translate|Zend_Translate_Adapter $translate
      */
     public function __construct($translate = null)
     {
-        if (empty($translate) === false) {
+        if (!empty($translate)) {
             $this->setTranslator($translate);
         }
     }
@@ -62,61 +58,52 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
      * Example 1: translate('%1\$s + %2\$s', $value1, $value2, $locale);
      * Example 2: translate('%1\$s + %2\$s', array($value1, $value2), $locale);
      *
-     * @param  string $messageid Id of the message to be translated
-     * @return string Translated message
+     * @param string           $messageid
+     * @return string  Translated message
      */
     public function translate($messageid = null)
     {
-        if ($messageid === null) {
+        if (null === $messageid) {
             return $this;
         }
 
-        $translate = $this->getTranslator();
-        if ($translate === null) {
+        if (null === ($translate = $this->getTranslator())) {
             return $messageid;
         }
 
         $options = func_get_args();
         array_shift($options);
 
-        $count  = count($options);
-        $locale = null;
+        $count   = count($options);
+        $locale  = null;
         if ($count > 0) {
-            if (Zend_Locale::isLocale($options[($count - 1)]) !== false) {
+            if (Zend_Locale::isLocale($options[$count - 1])) {
                 $locale = array_pop($options);
             }
         }
-
-        if ((count($options) === 1) and (is_array($options[0]) === true)) {
+        if ((count($options) == 1) and (is_array($options[0]))) {
             $options = $options[0];
         }
-
         $message = $translate->translate($messageid, $locale);
-        if ($count === 0) {
-            return $message;
-        }
-
         return vsprintf($message, $options);
     }
 
     /**
      * Sets a translation Adapter for translation
      *
-     * @param  Zend_Translate|Zend_Translate_Adapter $translate Instance of Zend_Translate
-     * @throws Zend_View_Exception When no or a false instance was set
+     * @param  Zend_Translate|Zend_Translate_Adapter $translate
      * @return Zend_View_Helper_Translate
      */
     public function setTranslator($translate)
     {
         if ($translate instanceof Zend_Translate_Adapter) {
             $this->_translator = $translate;
-        } else if ($translate instanceof Zend_Translate) {
+        } elseif ($translate instanceof Zend_Translate) {
             $this->_translator = $translate->getAdapter();
         } else {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('You must set an instance of Zend_Translate or Zend_Translate_Adapter');
+            throw new Zend_View_Exception("You must set an instance of Zend_Translate or Zend_Translate_Adapter");
         }
-
         return $this;
     }
 
@@ -130,31 +117,27 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
      */
     public function getTranslator()
     {
-        if ($this->_translator === null) {
+        if (null === $this->_translator) {
             require_once 'Zend/Registry.php';
-            if (Zend_Registry::isRegistered('Zend_Translate') === true) {
+            if (Zend_Registry::isRegistered('Zend_Translate')) {
                 $this->setTranslator(Zend_Registry::get('Zend_Translate'));
             }
         }
-
         return $this->_translator;
     }
 
     /**
      * Set's an new locale for all further translations
      *
-     * @param  string|Zend_Locale $locale New locale to set
-     * @throws Zend_View_Exception When no Zend_Translate instance was set
+     * @param  string|Zend_Locale $locale
      * @return Zend_View_Helper_Translate
      */
     public function setLocale($locale = null)
     {
-        $translate = $this->getTranslator();
-        if ($translate === null) {
+        if (null === ($translate = $this->getTranslator())) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('You must set an instance of Zend_Translate or Zend_Translate_Adapter');
+            throw new Zend_View_Exception("You must set an instance of Zend_Translate or Zend_Translate_Adapter");
         }
-
         $translate->setLocale($locale);
         return $this;
     }
@@ -162,17 +145,14 @@ class Zend_View_Helper_Translate extends Zend_View_Helper_Abstract
     /**
      * Returns the set locale for translations
      *
-     * @throws Zend_View_Exception When no Zend_Translate instance was set
      * @return string|Zend_Locale
      */
     public function getLocale()
     {
-        $translate = $this->getTranslator();
-        if ($translate === null) {
+        if (null === ($translate = $this->getTranslator())) {
             require_once 'Zend/View/Exception.php';
-            throw new Zend_View_Exception('You must set an instance of Zend_Translate or Zend_Translate_Adapter');
+            throw new Zend_View_Exception("You must set an instance of Zend_Translate or Zend_Translate_Adapter");
         }
-
         return $translate->getLocale();
     }
 }

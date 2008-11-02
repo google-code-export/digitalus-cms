@@ -34,19 +34,15 @@ require_once 'Zend/Cache/Core.php';
  */
 class Zend_Cache_Frontend_Output extends Zend_Cache_Core
 {
-
-    private $_idStack = array();
-
     /**
      * Constructor
      *
      * @param  array $options Associative array of options
      * @return void
      */
-    public function __construct(array $options = array())
+    public function __construct($options = array())
     {
         parent::__construct($options);
-        $this->_idStack = array();
     }
 
     /**
@@ -54,51 +50,33 @@ class Zend_Cache_Frontend_Output extends Zend_Cache_Core
      *
      * @param  string  $id                     Cache id
      * @param  boolean $doNotTestCacheValidity If set to true, the cache validity won't be tested
-     * @param  boolean $echoData               If set to true, datas are sent to the browser if the cache is hit (simpy returned else)
-     * @return mixed True if the cache is hit (false else) with $echoData=true (default) ; string else (datas)
+     * @return boolean True if the cache is hit (false else)
      */
-    public function start($id, $doNotTestCacheValidity = false, $echoData = true)
+    public function start($id, $doNotTestCacheValidity = false)
     {
         $data = $this->load($id, $doNotTestCacheValidity);
         if ($data !== false) {
-            if ( $echoData ) {
-                echo($data);
-                return true;
-            } else {
-                return $data;
-            }
+            echo($data);
+            return true;
         }
         ob_start();
         ob_implicit_flush(false);
-        $this->_idStack[] = $id;
         return false;
     }
 
     /**
      * Stop the cache
      *
-     * @param  array   $tags             Tags array
-     * @param  int     $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
-     * @param  string  $forcedDatas      If not null, force written datas with this
-     * @param  boolean $echoData         If set to true, datas are sent to the browser
+     * @param  array $tags             Tags array
+     * @param  int   $specificLifetime If != false, set a specific lifetime for this cache record (null => infinite lifetime)
      * @return void
      */
-    public function end($tags = array(), $specificLifetime = false, $forcedDatas = null, $echoData = true)
+    public function end($tags = array(), $specificLifetime = false)
     {
-        if (is_null($forcedDatas)) {
-            $data = ob_get_contents();
-            ob_end_clean();
-        } else {
-            $data =& $forcedDatas;
-        }
-        $id = array_pop($this->_idStack);
-        if (is_null($id)) {
-            Zend_Cache::throwException('use of end() without a start()');
-        }
-        $this->save($data, $id, $tags, $specificLifetime);
-        if ($echoData) {
-            echo($data);
-        }
+        $data = ob_get_contents();
+        ob_end_clean();
+        $this->save($data, null, $tags, $specificLifetime);
+        echo($data);
     }
 
 }

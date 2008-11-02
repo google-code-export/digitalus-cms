@@ -1,0 +1,35 @@
+<div class="formBox">
+<h2 id="settings">Site Settings</h2>
+<form action="/admin/site/edit" method="post">
+<h3>Site</h3>
+<?php 
+	echo $this->FormRow('Site Name', $this->FormText('setting[name]',$this->settings->name));
+	echo $this->FormRow('Status', $this->formCheckbox('setting[online]', $this->settings->online) . ' site is online');
+?>
+
+<h3>Menus</h3>
+<?php 
+	echo $this->FormRow('Menu links', $this->formCheckbox('setting[addMenuLinks]', $this->settings->addMenuLinks) 
+		. ' automatically add menu links for new pages');
+?>
+<h3>Email</h3>
+<?php
+	echo $this->FormRow('Default Email Address', $this->FormText('setting[default_email]',$this->settings->default_email));
+	echo $this->FormRow('Default Email Sender', $this->FormText('setting[default_email_sender]',$this->settings->default_email_sender));
+	echo $this->FormRow('SMTP Host', $this->FormText('setting[smtp_host]',$this->settings->smtp_host));
+	echo $this->FormRow('SMTP Username', $this->FormText('setting[smtp_username]',$this->settings->smtp_username));
+	echo $this->FormRow('SMTP Password', $this->FormPassword('setting[smtp_password]',$this->settings->smtp_password));
+?>
+
+<h3>Google Integration</h3>
+<?php
+	echo $this->FormRow('Analytics Tracking Code', $this->FormTextarea('setting[google_tracking]',$this->settings->google_tracking, array('class' => 'med')));
+	echo $this->FormRow('Webmaster Verification Meta Tag', $this->FormTextarea('setting[google_verify]',$this->settings->google_verify, array('class' => 'med')));
+	echo $this->FormRow('&nbsp;', $this->FormSubmit('submit','Update Settings'));
+?>
+</form>
+
+</div>
+
+	
+	

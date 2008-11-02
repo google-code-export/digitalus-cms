@@ -199,19 +199,6 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
             $this->_setOptions($options);
         }
     }
-    
-    /**
-     * Clone - also make sure the view is cloned.
-     *
-     * @return void
-     */
-    public function __clone()
-    {
-        if (isset($this->view) && $this->view instanceof Zend_View_Interface) {
-            $this->view = clone $this->view;
-            
-        }
-    }
 
     /**
      * Set the view object
@@ -269,7 +256,6 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
             /**
              * @see Zend_Controller_Action_Exception
              */
-            require_once 'Zend/Controller/Action/Exception.php';
             throw new Zend_Controller_Action_Exception('ViewRenderer cannot locate module directory');
         }
         $this->_moduleDir = dirname($moduleDir);
@@ -370,23 +356,12 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
      */
     protected function _generateDefaultPrefix()
     {
-        $default = 'Zend_View';
-        if (null === $this->_actionController) {
-            return $default;
+        if ((null === $this->_actionController) || !strstr(get_class($this->_actionController), '_')) {
+            $prefix = 'Zend_View';
+        } else {
+            $class = get_class($this->_actionController);
+            $prefix = substr($class, 0, strpos($class, '_')) . '_View';
         }
-
-        $class = get_class($this->_actionController);
-
-        if (!strstr($class, '_')) {
-            return $default;
-        }
-
-        $module = $this->getModule();
-        if ('default' == $module) {
-            return $default;
-        }
-
-        $prefix = substr($class, 0, strpos($class, '_')) . '_View';
 
         return $prefix;
     }
@@ -495,7 +470,6 @@ class Zend_Controller_Action_Helper_ViewRenderer extends Zend_Controller_Action_
                 /**
                  * @see Zend_Controller_Action_Exception
                  */
-                require_once 'Zend/Controller/Action/Exception.php';
                 throw new Zend_Controller_Action_Exception('ViewRenderer initialization failed: retrieved view base path is empty');
             }
         }

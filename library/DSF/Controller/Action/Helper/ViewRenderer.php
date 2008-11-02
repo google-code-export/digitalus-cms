@@ -96,7 +96,6 @@ class DSF_Controller_Action_Helper_ViewRenderer
             $this->loadAdminMenu();
             $this->loadSidebar();
             $this->loadMainForm();
-            $this->loadOptions();
             
             // render layout script and append to Response's body
             $layoutScript = $this->getLayoutScript();        
@@ -107,11 +106,6 @@ class DSF_Controller_Action_Helper_ViewRenderer
         $this->getResponse()->appendBody($layoutContent, $name);
         
         $this->setNoRender();
-    }
-    
-    private function buildAdminInterface($request)
-    {
-        
     }
     
     private function loadAdminUser()
@@ -135,15 +129,7 @@ class DSF_Controller_Action_Helper_ViewRenderer
     
     private function loadSidebar()
     {
-        $request = $this->getRequest();
 		$path = str_replace('.phtml', '.sidebar.phtml', $this->_actionScript);
-        $sidebarContent = $this->view->render($path);
-        $this->view->placeholder('sidebar')->set($sidebarContent);
-    }
-    
-    private function loadOptions()
-    {
-		$path = str_replace('.phtml', '.options.phtml', $this->_actionScript);
         $sidebarContent = $this->view->render($path);
         $this->view->placeholder('sidebar')->set($sidebarContent);
     }

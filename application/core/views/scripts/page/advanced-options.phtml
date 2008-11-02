@@ -1,0 +1,103 @@
+<div class="formBox" id='advancedOptions'>
+<h2>Advanced Options</h2>
+<p>The advanced options editor allows you to fine tune your pages. You can update this page's design and menu options. You can also add a module to the page or move it here.</p>
+</div>
+
+<div class="formBox" id="designOptions">
+<h2 class='menu'>Design</h2>
+<form action="/admin/page/update-design" method="POST">
+<p>The page template and layout is optional.  If you do not set one the system will utilize its override system to determine which template / layout to use.  This system looks at each of the page's parents (in order up to the site root).  If it does not find one specified in any of the parents then it will use the files specified in the site configuration file.</p>
+<?php
+    echo $this->formHidden('id',$this->Page->id);
+    echo $this->FormRow('Page template', $this->formText('template_path', $this->Page->template_path));
+    echo $this->FormRow('Page layout', $this->formText('layout_path', $this->Page->layout_path));
+?>
+<p>You can add page specific CSS styles here.  These will override any styles which are set in your style sheets.</p>
+<?php
+    echo $this->formTextarea('user_styles', $this->properties->get('user_styles', 'design'), array('class' => 'large'));
+echo $this->formSubmit('Page ', 'Save Changes');
+?>
+</form>
+</div>
+
+<div class="formBox" id="modules">
+<h2 class="settings">Add a Module Page</h2>
+<script>
+$(document).ready(function() {
+	$('#moduleName').change(function(){
+	    $("#moduleFormWrapper").html('');
+	    $("#moduleActionWrapper").html('');
+	    $('#moduleActionWrapper').load('/admin/module/select-module-page/moduleName/' + $(this).val(), null, function(){
+	    });
+	});
+	
+	$('#clearModule').click(function(){
+	    var answer = confirm('Are you sure you want to remove this module?  Note that you must save the page to make the change final');
+	    if(answer)
+	    {
+	        $('#moduleName').val(0);
+	        $('#moduleName').attr("disabled",false);
+    	    $('#moduleActionWrapper').empty();
+    	    $('#moduleFormWrapper').empty();
+	    }
+	    return false;
+    });
+ 
+ });
+</script>
+<form action="/admin/page/add-module" method="POST">
+<?php
+$module = $this->properties->getGroup('modules')->items;
+    echo $this->formHidden('id',$this->Page->id);
+    echo $this->FormRow('Please select a module', $this->SelectModule('moduleName', $module->module, array('id' => 'moduleName')));
+?>
+    <div id="moduleActionWrapper">
+<?php if(!empty($module->action)) {
+echo $this->FormRow('Select the module page', 
+    $this->SelectModulePage('moduleAction', $module->module, $module->action, array('id' => 'modulePage')));
+}
+?>
+
+    
+    </div>
+    <div id="moduleFormWrapper">
+<?php
+if(!empty($module->params)){
+    echo $this->RenderModuleForm($module->module, $module->action, $module->params);
+}
+?>
+    
+    </div>
+    <?php echo $this->formSubmit('updateMenu', 'Save Changes');?>
+</form>
+<p><a href="#" id="clearModule">Clear Module</a></p>
+</div>
+
+<div class="formBox" id="menuOptions">
+<h2 class='menu'>Menu Link</h2>
+<form action="/admin/page/update-menu-link" method="POST">
+<p class="rightLink"><a href='/admin/menu/open/id/<?php echo $this->Page->parent_id;?>'>Open this menu</a></p>
+<?php
+    echo $this->formHidden('id',$this->Page->id);
+    echo $this->FormRow('Menu Label (optional)', $this->formText('menu', $this->Page->label));
+    echo $this->FormRow('&nbsp;', $this->formCheckbox('show_on_menu', $this->Page->show_on_menu) . ' show on menu');
+	echo $this->formSubmit('updateMenu', 'Save Changes');
+?>
+</form>
+</div>
+
+<div class="formBox" id="movePage">
+<h2 class="export">Move Page</h2>
+<p>Please select a new location for your page...</p>
+<form action="/admin/page/move-page" method="POST">
+<?php
+    echo $this->formHidden('id',$this->Page->id);
+    echo $this->FormRow('', $this->SelectParentPage('parent_id', $this->Page->parent_id));
+	echo $this->formSubmit('move', 'Move Page');
+?>
+</form>
+</div>
+
+
+	  
+

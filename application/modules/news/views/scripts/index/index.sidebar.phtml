@@ -3,9 +3,9 @@
 <div class="formBox">
 <h2 class="folder">Recent items</h2>
 <?php 
-if($this->recentItems)
+if($this->items)
 {
-	foreach ($this->recentItems as $item)
+	foreach ($this->items as $item)
 	{
 		$links[] = "<a href='/mod_news/item/edit/id/{$item->id}'>{$item->title}</a>";
 	}

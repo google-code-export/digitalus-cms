@@ -1,0 +1,9 @@
+
+<form id='askQuestion' action="<?php echo $this->ModuleAction();?>" method="POST">
+    <h2>Want to learn more?</h2>
+    <?php if($this->questionResponse){echo "<p class='sidebarMessage'>" . $this->questionResponse . "</p>";}?>
+    <?php echo $this->formTextarea('question', 'Enter your question...');?>
+    <?php echo $this->formText('name', "Enter your name...");?>
+    <?php echo $this->formText('email', "Enter your email address or phone #...");?>
+    <?php echo $this->formSubmit('sendQuestion','Ask a Question');?>
+</form>

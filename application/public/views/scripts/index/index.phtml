@@ -1,18 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<?php echo $this->placeholder('google_verify');?>
+<title><?php echo $this->pageObj->getTitle();?></title>
 <?php 
-echo '<?xml version="1.0" encoding="UTF-8" ?>';
-echo $this->doctype() 
+    echo $this->headMeta();
+    echo $this->headLink();
+    echo $this->headStyle();
+    echo $this->headScript();
 ?>
-<html>
-	<head>
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	    <?php     	
-			echo $this->headTitle();
-			echo $this->headScript();	    	
-			echo $this->headLink();
-	    ?>
-	</head>
+
 	
-	<body>
-		<?php echo $this->layout()->page;?>
-	</body>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	  <?php echo $this->placeholder('jquery');?>
+});
+</script>
+</head>
+
+<body>
+<?php 
+    echo $this->placeholder('template');
+    echo $this->placeholder('google_tracking');
+?>
+</body>
 </html>

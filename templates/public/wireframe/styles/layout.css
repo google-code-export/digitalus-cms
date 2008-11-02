@@ -1,0 +1,125 @@
+/* CSS Document */
+*{
+margin:0;
+padding:0;
+}
+
+body{
+padding-top:10px;
+}
+
+#pageWrapper, #footer{
+width:960px;
+margin:0 auto 0 auto;
+}
+
+#header{
+height:80px;
+padding:10px 15px 10px 15px;
+}
+
+#header a#logo{
+float:left;
+display:block;
+height:80px;
+width:220px;
+}
+
+#headerLinks, #headerSearch{
+float:left;
+width:710px;
+}
+#headerLinks{
+height:30px;
+}
+
+#headerSearch{
+margin-top:25px;
+height:20px;
+}
+
+#leftPane, #rightPane{
+width:180px;
+padding:10px;
+float:left;
+}
+
+#centerPane{
+width:538px;
+min-height:400px;
+padding:10px;
+float:left;
+}
+
+#footer{
+padding-top:10px;
+}
+
+#home{
+margin:10px;
+min-height:400px;
+}
+
+#home #centerPane{
+float:left;
+width:690px;
+padding:0;
+margin-right:5px;
+}
+
+#home #centerPane #left, #home #centerPane #right{
+float:left;
+width:340px;
+}
+
+#home #centerPane #left{
+margin-right:5px;
+}
+
+#home #centerPane #bottom{
+clear:both;
+}
+
+#home #rightPane{
+float:left;
+width:245px;
+padding:0;
+}
+
+#homePhoto{
+height:260px;
+margin-bottom:5px;
+}
+
+#homeIntro{
+height:130px;
+padding:5px;
+}
+
+#homeNews{
+padding:5px;
+height:397px;
+}
+
+#home #centerPane .box{
+float:left;
+width:223px;
+height:240px;
+margin-right:5px;
+}
+
+#home #rightPane .box{
+margin-bottom:5px;
+padding:5px;
+}
+
+.spacer{
+clear:both;
+height:5px;
+width:5px;
+}
+
+.clear{
+clear:both;
+}
+

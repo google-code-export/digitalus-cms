@@ -1,7 +1,0 @@
-<h3>Step 3: Enter the name for your page</h3>
-<?php 
-
-        //load the common helpers
-        DSF_View_RegisterHelpers::register($this);
-echo $this->FormRow('Page Name',$this->formText('page_name'));
-echo $this->FormRow('&nbsp;',$this->formSubmit('create', "Create Page"));

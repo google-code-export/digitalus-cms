@@ -114,7 +114,7 @@ class DSF_Auth
 		if($result->isValid())
 		{
 			//save the user and return the result
-			$row = $this->_authAdapter->getResultRowObject(array('id', 'user_group_id', 'first_name', 'last_name', 'email', 'role', 'acl_resources'));
+			$row = $this->_authAdapter->getResultRowObject(array('id', 'user_group_id', 'first_name', 'last_name', 'email', 'role', 'acl_roles'));
 			$this->_storage->user = $row;
 			return $result;
 		}

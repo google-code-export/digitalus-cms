@@ -110,9 +110,13 @@ FCKConfig.ToolbarSets["Default"] = [
 ] ;
 
 FCKConfig.ToolbarSets["DSF"] = [
-        ['Source','-','Save','NewPage','Preview','-', 'Cut','Copy','Paste','PasteText','PasteWord', '-', 'Undo','Redo'],
-        ['Table','Image','Rule','SpecialChar', '-', 'Link','Unlink','Anchor'],
-        ['Bold','Italic','Underline','StrikeThrough', '-', 'OrderedList','UnorderedList','Outdent','Indent'],
+        ['Source','-','Save','NewPage','Preview','-', 'Cut','Copy','Paste','PasteText','PasteWord'],
+        ['Table','Image','Rule','SpecialChar'],
+        ['Link','Unlink','Anchor'],
+        ['About'],
+        '/',
+        ['Undo','Redo','-','Bold','Italic','Underline','StrikeThrough'],
+        ['OrderedList','UnorderedList','-','Outdent','Indent'],
         ['Style','FontFormat']
 ] ;
 

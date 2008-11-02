@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -17,14 +18,9 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Mysqli.php 9577 2008-05-31 01:50:27Z peptolab $
+ * @version    $Id: Mysqli.php 8943 2008-03-20 21:43:37Z thomas $
  */
 
-
-/**
- * @see Zend_Loader
- */
-require_once 'Zend/Loader.php';
 
 /**
  * @see Zend_Db_Adapter_Abstract
@@ -91,13 +87,6 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
      * @var Zend_Db_Statement_Mysqli
      */
     protected $_stmt = null;
-
-    /**
-     * Default class name for a DB statement.
-     *
-     * @var string
-     */
-    protected $_defaultStmtClass = 'Zend_Db_Statement_Mysqli';
 
     /**
      * Quote a raw string.
@@ -338,9 +327,7 @@ class Zend_Db_Adapter_Mysqli extends Zend_Db_Adapter_Abstract
         if ($this->_stmt) {
             $this->_stmt->close();
         }
-        $stmtClass = $this->_defaultStmtClass;
-        Zend_Loader::loadClass($stmtClass);
-        $stmt = new $stmtClass($this, $sql);
+        $stmt = new Zend_Db_Statement_Mysqli($this, $sql);
         if ($stmt === false) {
             return false;
         }

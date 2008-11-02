@@ -1,0 +1,13 @@
+<div class="formBox">
+<h2 id="add">Add a new page</h2>
+<form action='/admin/page/new' method="POST">
+<?php	
+	echo $this->FormRow('Page title', $this->formText('title'));
+	echo $this->FormRow('Parent page', $this->SelectParentPage('parent_id', $this->pageParentId));
+	echo $this->FormRow('&nbsp;', $this->formCheckbox('add_more', 1, null) . " continue adding pages");
+	echo $this->FormRow('&nbsp;', $this->formSubmit('add', "Create Page"));
+?>
+</form>
+
+</div>
+<?php echo $this->render('./page/my-pages.phtml');?>

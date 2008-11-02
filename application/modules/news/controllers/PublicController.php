@@ -62,7 +62,7 @@ class Mod_News_PublicController extends DSF_Controller_Module_Public
     public function listAllAction()
     {
 	    $i = new NewsItem();
-		$item = $this->_request->getParam('openItem', 0);
+		$item = $this->_request->getParam('item', 0);
 		if($item > 0){
 		    $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
 		    $viewRenderer->setNoRender(); 
@@ -72,50 +72,5 @@ class Mod_News_PublicController extends DSF_Controller_Module_Public
 		}else{
 		    $this->view->items = $i->getCurrent();
 		}
-    }
-    
-    public function listNewsByCategoryAction()
-    {
-        //this action reuses the views from the news center action
-	    $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-	    $viewRenderer->setNoRender(); 
-		    
-	    $c = new NewsCategory();
-	    $i = new NewsItem();
-	    
-	    //get the news category
-        $id = $this->_request->getParam('news_category');
-        $this->view->center = $c->find($id)->current();
-        
-        //get the items by category
-	    $this->view->items = $i->getItemsByCategory($id); 
-	    
-	    //get the selected item if it is set
-		$item = $this->_request->getParam('openItem', 0);
-		if($item > 0){
-		    //open the news item
-		    $this->view->item = $i->find($item)->current();
-		    echo $this->view->render('public/newscenter/openitem.phtml'); 
-		}else{
-		    //open the news center
-		    echo $this->view->render('public/newscenter/opencenter.phtml');
-		}
-    }
-    
-    public function listNewsByYearAction()
-    {
-	    $i = new NewsItem();
-	    $year = $this->_request->getParam('year');
-		$item = $this->_request->getParam('openItem', 0);
-		if($item > 0){
-		    $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-		    $viewRenderer->setNoRender(); 
-		    //open the news item
-		    $this->view->item = $i->find($item)->current();
-		    echo $this->view->render('public/newscenter/openitem.phtml'); 
-		}else{
-		    $this->view->items = $i->getItemsByYear($year);
-		}
-		$this->view->year = $year;
     }
 }

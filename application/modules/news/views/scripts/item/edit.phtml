@@ -14,9 +14,6 @@
     echo $this->Note("If you would like to set this item to be archived on a specific date enter it here");
     echo $this->formRow('Archive date', $this->DatePicker('archive_date', $this->data->archive_date));
     
-    echo $this->Note("Check here if you would like to include this item in the main index");
-    echo $this->FormRow('&nbsp;', $this->formCheckbox('show_on_menu', $this->data->show_on_menu) . ' include in index');
-    
 	echo $this->Note('Enter the body of the content here');
 	$this->FckEditor('content', stripslashes($this->data->content), 400, 600);
 ?>

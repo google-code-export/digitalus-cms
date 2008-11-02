@@ -12,12 +12,13 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_Measure
- * @copyright Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Volume.php 9508 2008-05-23 10:56:41Z thomas $
+ * @category   Zend
+ * @package    Zend_Measure
+ * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @version    $Id: Volume.php 8064 2008-02-16 10:58:39Z thomas $
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 
 /**
  * Implement needed classes
@@ -26,9 +27,8 @@ require_once 'Zend/Measure/Exception.php';
 require_once 'Zend/Measure/Abstract.php';
 require_once 'Zend/Locale.php';
 
+
 /**
- * Class for handling cooking volume conversions
- *
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage Zend_Measure_Cooking_Volume
@@ -37,6 +37,7 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Cooking_Volume extends Zend_Measure_Abstract
 {
+    // Cooking_Volume definitions
     const STANDARD = 'CUBIC_METER';
 
     const CAN_2POINT5       = 'CAN_2POINT5';
@@ -110,12 +111,7 @@ class Zend_Measure_Cooking_Volume extends Zend_Measure_Abstract
     const TEASPOON_UK       = 'TEASPOON_UK';
     const TEASPOON_US       = 'TEASPOON_US';
 
-    /**
-     * Calculations for all cooking volume units
-     *
-     * @var array
-     */
-    protected $_units = array(
+    protected $_UNITS = array(
         'CAN_2POINT5'       => array(array('' => '0.0037854118', '/' => '16', '' => '3.5'), '2.5th can'),
         'CAN_10'            => array(array('' => '0.0037854118', '*' => '0.75'),          '10th can'),
         'BARREL_WINE'       => array('0.143201835',   'bbl'),

@@ -43,16 +43,16 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      *
      * @var array
      */
-    private $_noacl = array('module' => 'admin',
+    private $_noacl = array('module' => 'core',
                              'controller' => 'error',
-                             'action' => 'no-auth');
+                             'action' => 'noauth');
 
     /**
      * the page to direct to if there is not current user
      *
      * @var unknown_type
      */
-    private $_noauth = array('module' => 'admin',
+    private $_noauth = array('module' => 'core',
                              'controller' => 'auth',
                              'action' => 'login');
    
@@ -82,26 +82,18 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
         }
 		$controller = $request->controller;
  		$module = $request->module;
-		$controller = $controller;
+		$resource = $controller;
 		$action = $request->action;
 		
-		//go from more specific to less specific
-		$moduleLevel = $module;
-		$controllerLevel = $moduleLevel . '_' . $controller;
-		$actionLevel = $controllerLevel . '_' . $action;
-		
-		if ($this->_acl->has($actionLevel)) {
-			$resource = $actionLevel;
-		}elseif ($this->_acl->has($controllerLevel)){
-		    $resource = $controllerLevel;
-		}else{
-		    $resource = $moduleLevel;
+		if (!$this->_acl->has($resource)) {
+			$resource = null;
 		}
+		
 		/**
 		 * @todo make sure this works
 		 */
 		if($module != 'public'){
-	        if (!$this->_acl->isAllowed($role, $resource)) {
+	        if (!$this->_acl->isAllowed($role, $resource, $action)) {
 	            if (!$this->_identity) {
 	            	$request->setModuleName($this->_noauth['module']);
 	                $request->setControllerName($this->_noauth['controller']);

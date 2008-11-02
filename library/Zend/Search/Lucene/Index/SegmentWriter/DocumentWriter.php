@@ -208,7 +208,6 @@ class Zend_Search_Lucene_Index_SegmentWriter_DocumentWriter extends Zend_Search_
                                                         $this->_name,
                                                         $this->_docCount,
                                                         -1,
-                                                        null,
                                                         true,
                                                         true);
     }

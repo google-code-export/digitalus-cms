@@ -12,12 +12,13 @@
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
  *
- * @category  Zend
- * @package   Zend_Measure
- * @copyright Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd     New BSD License
- * @version   $Id: Temperature.php 9508 2008-05-23 10:56:41Z thomas $
+ * @category   Zend
+ * @package    Zend_Measure
+ * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @version    $Id: Temperature.php 8064 2008-02-16 10:58:39Z thomas $
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
+
 
 /**
  * Implement needed classes
@@ -26,9 +27,8 @@ require_once 'Zend/Measure/Exception.php';
 require_once 'Zend/Measure/Abstract.php';
 require_once 'Zend/Locale.php';
 
+
 /**
- * Class for handling temperature conversions
- *
  * @category   Zend
  * @package    Zend_Measure
  * @subpackage Zend_Measure_Temperature
@@ -37,6 +37,7 @@ require_once 'Zend/Locale.php';
  */
 class Zend_Measure_Temperature extends Zend_Measure_Abstract
 {
+    // Temperature definitions
     const STANDARD = 'KELVIN';
 
     const CELSIUS    = 'CELSIUS';
@@ -45,12 +46,7 @@ class Zend_Measure_Temperature extends Zend_Measure_Abstract
     const REAUMUR    = 'REAUMUR';
     const KELVIN     = 'KELVIN';
 
-    /**
-     * Calculations for all temperature units
-     *
-     * @var array
-     */
-    protected $_units = array(
+    protected $_UNITS = array(
         'CELSIUS'    => array(array('' => '1', '+' => '273.15'),'°C'),
         'FAHRENHEIT' => array(array('' => '1', '-' => '32', '/' => '1.8', '+' => '273.15'),'°F'),
         'RANKINE'    => array(array('' => '1', '/' => '1.8'),'°R'),

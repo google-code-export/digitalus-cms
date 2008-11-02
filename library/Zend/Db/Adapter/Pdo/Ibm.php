@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework
  *
@@ -17,7 +18,7 @@
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Ibm.php 9577 2008-05-31 01:50:27Z peptolab $
+ * @version    $Id: Ibm.php 8082 2008-02-16 22:57:11Z thomas $
  */
 
 
@@ -40,6 +41,9 @@ require_once 'Zend/Db/Statement/Pdo/Ibm.php';
  * @subpackage Adapter
  * @copyright  Copyright (c) 2005-2008 Zend Technologies Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @author     Manas Dadarkar <manas@us.ibm.com>
+ * @author     Kellen Bombardier <kfbombar@us.ibm.com>
+ * @author     Salvador Ledezma <ledezma@us.ibm.com>
  */
 class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
 {
@@ -193,8 +197,7 @@ class Zend_Db_Adapter_Pdo_Ibm extends Zend_Db_Adapter_Pdo_Abstract
     public function prepare($sql)
     {
         $this->_connect();
-        $stmtClass = $this->_defaultStmtClass;
-        $stmt = new $stmtClass($this, $sql);
+        $stmt = new Zend_Db_Statement_Pdo_Ibm($this, $sql);
         $stmt->setFetchMode($this->_fetchMode);
         return $stmt;
     }
