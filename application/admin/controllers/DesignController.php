@@ -55,7 +55,9 @@ class Admin_DesignController extends Zend_Controller_Action
 		}
 		
 		$mdlDesign->setDesign($id);
-		
+		$mdlPage = new Page();
+		$this->view->pages = $mdlPage->getPagesByDesign($id);
+				
 	    $this->view->breadcrumbs["Open: " . $mdlDesign->getValue('name')] = '/admin/design/edit/id/' . $id;
 	    $this->view->toolbarLinks = array();
 	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '#';
