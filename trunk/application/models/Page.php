@@ -159,13 +159,17 @@ class Page extends DSF_Db_Table
     {
     	$page = $this->find($pageId)->current();
     	$designId = $page->design;
-    	if($designId > 0) {
-    		$mdlDesign = new Design();
-    		$mdlDesign->setDesign($designId);
-    		return $mdlDesign;
-    	}else{
-    		return null;
-    	}
+  		$mdlDesign = new Design();
+  		$mdlDesign->setDesign($designId);
+  		return $mdlDesign;
+    }
+    
+    public function getPagesByDesign($designId)
+    {
+    	$select = $this->select();
+    	$select->where("design = ?", $designId);
+    	$select->order("name");
+    	return $this->fetchAll($select);
     }
     
     /**

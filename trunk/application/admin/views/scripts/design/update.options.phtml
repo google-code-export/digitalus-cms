@@ -1,3 +1,13 @@
 <?php $this->placeholder("optionsHeadline")->set('Who Uses This?')?>
 <p>These are the pages that use this design:</p>
-<p class='dev'>List pages...</p>
+<?php 
+if(is_object($this->pages)) {
+	$links = array();
+	foreach ($this->pages as $page) {
+		$links[] = "<a href='/admin/page/edit/id/{$page->id}'>{$page->name}</a>";
+	}
+	echo $this->htmlList($links, null, null, false);
+}else{
+?>
+<p>No pages use this design currently.</p>
+<?php }?>
