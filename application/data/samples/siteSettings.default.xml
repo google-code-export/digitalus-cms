@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<siteSettings>
+    <name>Digitalus CMS</name>
+    <online>1</online>
+    <smtp_host></smtp_host>
+    <smtp_username></smtp_username>
+    <smtp_password></smtp_password>
+    <addMenuLinks>1</addMenuLinks>
+    <default_email></default_email>
+    <default_email_sender></default_email_sender>
+</siteSettings>

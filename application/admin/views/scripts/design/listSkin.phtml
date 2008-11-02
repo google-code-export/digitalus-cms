@@ -1,0 +1,7 @@
+<fieldset class='skin'>
+	<legend><?php echo $this->skin; ?></legend>
+	<?php if(is_array($this->styles)){
+		echo $this->formMultiCheckbox($this->name . "[" . $this->skin . "]",$this->selectedStyles[$this->skin],null,$this->styles,false);
+	}?>
+</fieldset>
+	

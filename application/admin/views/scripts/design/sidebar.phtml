@@ -1,0 +1,15 @@
+<?php $this->placeholder("sidebarHeadline")->set('Design')?>
+<p>The design section is where you build your page designs.</p>
+
+<h3>Current Designs</h3>
+<?php 
+if(is_object($this->designs)) {
+	$links = array();
+	foreach ($this->designs as $design) {
+		$links[] = "<a href='/admin/design/update/id/{$design->id}'>{$design->name}</a>";
+	}
+	echo $this->htmlList($links, null, null, false);
+}
+?>
+<p><a href="/admin/design">Create a new design</a></p>
+

@@ -1,0 +1,66 @@
+<?php $this->placeholder("formHeadline")->set($this->GetTranslation("Update Site Settings"));?>
+<form action="/admin/site/edit" method="post" id='site'>
+<fieldset>
+    <legend><?php echo $this->GetTranslation('General settings');?></legend>
+    <?php 
+    	echo $this->FormRow($this->GetTranslation('Site name'), $this->FormText('setting[name]',$this->settings->name));
+    	echo $this->FormRow($this->GetTranslation('Status'), $this->formCheckbox('setting[online]', $this->settings->online) . ' ' . $this->GetTranslation('Site is online'));
+    	echo $this->FormRow('&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update General Site Settings')));
+    ?>
+</fieldset>
+</form>
+
+<form action="/admin/site/edit" method="post" id='content'>
+<fieldset>
+    <legend><?php echo $this->GetTranslation('Managing Content');?></legend>
+<?php 
+	echo $this->FormRow($this->GetTranslation('Managing Content'), $this->formCheckbox('setting[addMenuLinks]', $this->settings->addMenuLinks) 
+		. ' ' . $this->GetTranslation('Managing Content'));
+	echo $this->FormRow('&nbsp;', $this->FormSubmit('content',$this->GetTranslation('Update Content Settings')));
+?>
+</fieldset>
+</form>
+
+<form action="/admin/site/edit" method="post" id='international'>
+<fieldset>
+    <legend><?php echo $this->GetTranslation('Internationalization');?></legend>
+<?php
+	echo $this->FormRow($this->GetTranslation('Default locale'), $this->FormText('setting[default_locale]',$this->settings->default_locale));
+	echo $this->FormRow($this->GetTranslation('Default locale'), $this->FormText('setting[default_language]',$this->settings->default_language));
+	echo $this->FormRow($this->GetTranslation('Default charset'), $this->FormText('setting[default_charset]',$this->settings->default_charset));
+	echo $this->FormRow($this->GetTranslation('Date format'), $this->FormText('setting[default_date_format]',$this->settings->default_date_format));
+	echo $this->FormRow($this->GetTranslation('Date format'), $this->FormText('setting[default_currency_format]',$this->settings->default_currency_format));
+	echo $this->FormRow('&nbsp;', $this->FormSubmit('language',$this->GetTranslation('Update Internationalization Settings')));
+?>
+</fieldset>
+</form>
+
+<form action="/admin/site/edit" method="post" id='mail'>
+<fieldset>
+    <legend><?php echo $this->GetTranslation('Mail Settings');?></legend>
+<?php
+	echo $this->FormRow($this->GetTranslation('Default email address'), $this->FormText('setting[default_email]',$this->settings->default_email));
+	echo $this->FormRow($this->GetTranslation('Default sender'), $this->FormText('setting[default_email_sender]',$this->settings->default_email_sender));
+	echo $this->FormRow($this->GetTranslation('Transport'), $this->formCheckbox('setting[use_smtp_mail]', $this->settings->use_smtp_mail) 
+		. ' ' . $this->GetTranslation('Use SMTP transport '));
+	echo $this->FormRow($this->GetTranslation('SMTP host'), $this->FormText('setting[smtp_host]',$this->settings->smtp_host));
+	echo $this->FormRow($this->GetTranslation('SMTP username'), $this->FormText('setting[smtp_username]',$this->settings->smtp_username));
+	echo $this->FormRow($this->GetTranslation('SMTP password'), $this->FormPassword('setting[smtp_password]',$this->settings->smtp_password));
+	echo $this->FormRow('&nbsp;', $this->FormSubmit('mail',$this->GetTranslation('Update Mail Settings')));
+?>
+</fieldset>
+</form>
+
+<form action="/admin/site/edit" method="post" id='google'>
+<fieldset>
+    <legend><?php echo $this->GetTranslation('Google Integration');?></legend>
+<?php
+	echo $this->FormRow($this->GetTranslation('Tracking code'), $this->FormTextarea('setting[google_tracking]',$this->settings->google_tracking, array('class' => 'med')));
+	echo $this->FormRow($this->GetTranslation('Tracking code'), $this->FormTextarea('setting[google_verify]',$this->settings->google_verify, array('class' => 'med')));
+	echo $this->FormRow('&nbsp;', $this->FormSubmit('google',$this->GetTranslation('Update Google Settings')));
+?>
+</fieldset>
+</form>
+
+	
+	

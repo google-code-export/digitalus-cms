@@ -1,0 +1,35 @@
+<script>
+$(document).ready(function() {
+	$('.loadCommand').click(function(){
+	    var cmd = $(this).attr('title');
+	    $("#command").val(cmd);
+	    return false;
+	});
+	  
+ });
+</script>
+
+<form action="/admin/site/console" method="POST" id='consoleCommand'>
+
+<?php 
+echo $this->formHidden('consoleSession', $this->consoleSession);
+echo $this->formText('command', $this->lastCommand, array('class' => 'med'));
+echo $this->formSubmit('getInfo', $this->GetTranslation('Info'));
+echo $this->formSubmit('runCommand', $this->GetTranslation('Run Command'));
+?>
+</form>
+
+<div class="formBox">
+<div id="results">
+<p class="dateTime"><?php echo $this->date;?></p>
+<h3><?php echo $this->command;?></h3>
+<?php 
+if($this->results){
+foreach ($this->results as $result){ ?>
+<p><?php echo $result;?></p>
+<?php 
+}
+}
+?>
+</div>
+</div>

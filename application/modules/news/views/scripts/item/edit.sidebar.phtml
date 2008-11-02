@@ -1,0 +1,21 @@
+<?php echo $this->render('./assets/menu.phtml');?>
+
+<div class="formBox">
+<h2>Currently Editing</h2>
+<p><b>Item:</b> <?php echo $this->data->title;?></p>
+</div>
+
+<div class="formBox">
+<h2 class="folder">View</h2>
+<ul class="idTabs">
+    <li><a href="#mainContent">Main Content</a></li>
+    <li><a href="#optionalContent">Optional Content</a></li>
+</ul>
+</div>
+
+<div class="formBox">
+<h2 class="trash">Delete item</h2>
+<p>Would you like to permanently this news item?</p>
+<p><a href="/mod_news/item/delete/id/<?php echo $this->data->id;?>" class='deleteConfirm' title='item'>Delete item</a></p>
+<p class="note">  Note that this will remove the item only, and will not delete the items in the item...</p>
+</div>

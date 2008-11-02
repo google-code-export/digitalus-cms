@@ -1,0 +1,17 @@
+<div id="leftPane" class="contentPane">
+	<?php echo $this->renderSubmenu();?>
+</div>
+<div id="centerPane" class="contentPane">
+	<p id='breadcrumbs'><?php echo $this->RenderBreadcrumbs();?></p>
+	<h1><?php echo $this->pageObj->getHeadline();?></h1>
+	<?php 
+		echo $this->RenderContent('content');
+		echo $this->RenderModule();
+	?>
+</div>
+<div id="rightPane" class="contentPane">
+	<?php 
+		echo $this->RenderContent('additional_content');
+	?>
+</div>
+<br class="clear" />

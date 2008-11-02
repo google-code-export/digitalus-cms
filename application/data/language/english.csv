@@ -1,0 +1,174 @@
+# ----- layout -----
+page_title;Digitalus CMS
+current_user;Current User
+current_user_role;Role
+current_user_logout;Log Out
+tab_login;Log In
+tab_home;Home
+tab_site;Site
+tab_page;Pages
+tab_navigation;Navigation
+tab_design;Design
+tab_module;Modules
+tab_public_site;Public Site
+
+Test;value
+
+# ----- toolbar -----
+toolbar_you_are_here;You are here:
+toolbar_bookmark_link;Add to Bookmarks
+toolbar_delete_link;Delete
+
+# ----- admin_auth -----
+admin_auth_login_form_headline; Admin User Login
+admin_auth_login_options_headline; Reset Password
+admin_login_breadcrumb_label; Admin Login
+admin_auth_login_intro; Please enter your username (this is your email address) and password to get started.
+admin_auth_login_username; Username
+admin_auth_login_password; Password
+admin_auth_login_submit; Log In
+admin_auth_reset-password_info; If you are having trouble logging in please enter your email address below and we will send you your login credentials.
+admin_auth_reset-password_submit; Send Reminder
+
+
+
+# ----- admin_user -----
+admin_index_user_first_name; First Name
+admin_index_user_last_name; Last Name
+admin_index_user_email; Email
+admin_index_user_password; Password
+admin_index_user_password_confirm; Confirm
+admin_index_user_update_password_prompt; Update password?
+admin_index_user_update_my_account_submit; Update My Account
+
+# ----- admin_site -----
+admin_site_sidebar_about; The site sections is where you manage your site.
+admin_site_sidebar_users_label; Admin Users
+admin_site_sidebar_create_user_link; Create new user
+admin_site_sidebar_reports_label; Site Reports
+admin_site_sidebar_reports_traffic_link; Traffic report
+admin_site_sidebar_reports_access_link; Admin access report
+admin_site_sidebar_console_label; Site Console
+admin_site_sidebar_console_intro; The site console enables you to interact directly with the CMS core.  It is for experienced administrators only.
+admin_site_sidebar_console_link; Open console
+admin_site_settings_breadcrumb_label; Site Settings
+admin_site_index_form_headline; Site Settings
+admin_site_settings_main_legend; General settings
+admin_site_settings_label_admin_site_name; Site name
+admin_site_settings_label_status; Status:
+admin_site_settings_admin_site_is_online;Site is online
+admin_site_settings_content_legend; Managing Content
+admin_site_settings_label_content_menu_links; Menu links
+admin_site_settings_add_menu_links; Automatically add menu links.
+admin_site_settings_international_legend; Internationalization
+admin_site_settings_label_international_default_locale; Default locale
+admin_site_settings_label_international_default_language; Default language
+admin_site_settings_label_international_default_charset; Default charset
+admin_site_settings_label_international_default_date_format; Date format
+admin_site_settings_label_international_default_currency_format; Currency format
+admin_site_settings_mail_legend; Mail Settings
+admin_site_settings_label_mail_email; Default email address
+admin_site_settings_label_mail_sender; Default sender
+admin_site_settings_label_mail_use_smtp; Transport
+admin_site_settings_use_smtp; Use SMTP transport
+admin_site_settings_label_mail_smtp_host; SMTP host
+admin_site_settings_label_mail_smtp_username; SMTP username
+admin_site_settings_label_mail_smtp_password; SMTP password
+admin_site_settings_google_legend; Google Integration
+admin_site_settings_label_google_tracking; Tracking code
+admin_site_settings_label_google_verify; Verification code
+admin_site_index_options_headline; Options
+admin_site_settings_general_label; General settings
+admin_site_settings_content_label; Content settings
+admin_site_settings_international_label; Internationalization
+admin_site_settings_mail_label; Mail settings
+admin_site_settings_google_label; Google integration
+admin_site_settings_submit_label_site; Update General Site Settings
+admin_site_settings_submit_label_content; Update Content Settings
+admin_site_settings_submit_label_international; Update Internationalization Settings
+admin_site_settings_submit_label_mail; Update Mail Settings
+admin_site_settings_submit_label_google; Update Google Settings
+admin_site_console_breadcrumb_label; System Console
+admin_site_console_form_headline; System Console
+admin_site_console_options_headline; About the Console
+admin_site_console_info_label; Info
+admin_site_console_run_label; Run
+admin_site_console_info; The console...
+
+# ----- admin_user -----
+admin_user_open_form_headline; Update User
+admin_user_create_form_headline; Create User
+admin_user_update_submit_label; Update User
+admin_user_create_options_headline;Options
+admin_user_general_legend; User
+admin_user_first_name_label; First Name
+admin_user_last_name_label; Last Name
+admin_user_email_label; Email Address
+admin_user_admin_role_label; Admin Role
+admin_user_create_submit_label; Create User
+admin_user_open_options_headline;Options
+admin_user_general_label;General
+admin_user_password_label;Credentials
+admin_user_permissions_label;Permissions
+admin_user_copy_permissions_submit_label; Copy User
+admin_user_copy_permissions_info; If you have another user who already has the same permissions as this user you can copy that user's role.
+select_user_default_label; Select a User
+admin_user_copy_permissions_submit_label; Copy Users Permissions
+
+# ----- admin_report -----
+admin_report_admin-access_breadcrumb_label; Report: Admin Access Log
+admin_report_admin-access_form_headline; Admin Access Log
+admin_report_admin-access_options_headline; More Reports
+admin_report_admin-access_date_label; Date
+admin_report_admin-access_name_label; User
+admin_report_admin-access_page_label; Page
+admin_report_traffic_breadcrumb_label; Report: Site traffic
+admin_report_traffic_form_headline; Traffic Report
+admin_report_traffic_weekly_summary; Weekly Summary
+admin_report_traffic_day; Day
+admin_report_traffic_history; Traffic History
+admin_report_traffic_week; Week
+admin_report_traffic_hits; Hits
+admin_report_traffic_options_headline; More Reports
+admin_report_traffic_admin_access; Admin access log
+admin_report_traffic_label; Traffic report
+admin_report_admin_access_label; Admin access log
+
+# ----- admin_page -----
+admin_page_index_form_headline; Create a Page
+admin_page_index_create_page_legend; Create Page
+admin_page_index_options_headline; My Pages
+admin_page_sidebar_filetree_headline; Website
+admin_page_sidebar_filetree_info; Note: The filenames are displayed as: (menu label/page title)
+admin_page_index_my_content_info;The following pages are the pages that you have recently created.
+admin_page_index_create_page_headline;Create New Page
+admin_page_index_create_page_info;To create a new page enter the title and select the section below.
+admin_page_index_create_page_title;Enter the title
+admin_page_index_create_page_parent_label;Select a parent section
+admin_page_index_create_page_submit;Create Page
+admin_page_open_breadcrumb_label; Open Page
+admin_page_delete_link_label; Delete Page
+admin_page_open_form_headline; Open Page
+admin_page_open_options_headline; Edit Options
+admin_page_open_options_page_details; Page Details
+admin_page_open_options_tags; Search and Meta Tags
+admin_page_open_options_content; Main Content
+admin_page_open_options_intro_content; Intro Content
+admin_page_open_options_additional_content; Additional Content
+admin_page_open_options_image; Image
+admin_page_open_options_advanced; Advanced Options
+admin_page_open_title; Page Title
+admin_page_open_url; Page URL
+admin_page_open_headline_note; Note that you can optionally add a page headline.  If you do not the CMS will use your page title as the headline.
+admin_page_open_headline; Headline (optional)
+admin_page_open_intro_headline; Intro Text
+admin_page_open_additional_content_headline; Additional Content
+admin_page_open_image_headline; Attached Image
+admin_page_open_current_image; Current Image
+admin_page_open_remove_image; Remove Image
+admin_page_open_select_image; Select an Image
+
+
+# ----- admin_design -----
+admin_design_index_form_headline; Design
+admin_design_index_options_headline; Design Options

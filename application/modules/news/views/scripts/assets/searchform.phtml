@@ -1,0 +1,10 @@
+<fieldset>
+<legend>Search All News Items</legend>
+<form action="<?php echo $this->CleanUri(true);?>" method="POST">
+<?php
+echo $this->FormRow('Search keywords', $this->formText('keywords', $this->keywords, array('class' => 'med')));
+echo $this->FormRow('&nbsp;', $this->formCheckbox('searchAll', $this->searchAll) . ' check here to include the archives in your search');
+echo $this->FormRow('&nbsp;', $this->formSubmit('search', 'Search News'));
+?>
+</form>
+</fieldset>

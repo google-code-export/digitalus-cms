@@ -1,0 +1,6 @@
+<?php if($this->item){ ?>
+<h2><?php echo $this->item->title;?></h2>
+<?php echo $this->RenderContent('content', $this->item);?>
+<?php }else{ ?>
+<p>Sorry, there was an error loading your news item</p>
+<?php } ?>

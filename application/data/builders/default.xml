@@ -1,0 +1,21 @@
+<pageBuilder>
+	<request class='Page' method='setUri' />
+	<request class='Page' method='setPointer' />
+	<request class='Page' method='appendUriParams' />
+	<request class='Page' method='loadData' />
+	<request class='Page' method='loadContent' />
+	<request class='Page' method='loadContentTemplate' />
+	<request class='Page' method='loadMetaData' />
+	<request class='Page' method='loadProperties' />
+	<request class='Page' method='loadAttachments' />
+	<request class='Page' method='loadRelatedPages' />
+	<request class='Page' method='setTitle' />
+	<request class='template' method='loadContentTemplate' />
+	<request class='template' method='loadDesign' />
+	<request class='template' method='setStyles' />
+	<request class='template' method='setScripts' />
+	<request class='template' method='setTemplatePath' />
+	<request class='template' method='renderLayout' />
+	<request class='template' method='renderTemplate' />
+	<request class='Page' method='getPage' />
+</pageBuilder>

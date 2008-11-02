@@ -1,0 +1,26 @@
+<?php $this->placeholder("formHeadline")->set($this->GetTranslation("Update Page"))?>
+
+<fieldset id="content">
+<legend><?php echo $this->GetTranslation("Edit Content");?></legend>
+<?php echo $this->render('page/edit/content.phtml');?>
+</fieldset>
+
+<fieldset id="meta">
+	<legend><?php echo $this->GetTranslation("Edit Meta Data");?></legend>
+	<?php echo $this->render('page/edit/meta.phtml');?>
+</fieldset>
+
+<fieldset id="properties">
+	<legend><?php echo $this->GetTranslation("Edit Page Properties");?></legend>
+	<?php echo $this->render('page/edit/properties.phtml');?>
+</fieldset>
+
+<fieldset id="relatedContent">
+	<legend><?php echo $this->GetTranslation("Related Content");?></legend>
+	<?php echo $this->render('page/edit/relatedContent.phtml');?>
+</fieldset>
+
+<fieldset id="attachments">
+	<legend><?php echo $this->GetTranslation("Attachments");?></legend>
+	<?php echo $this->render('page/edit/attachments.phtml');?>
+</fieldset>

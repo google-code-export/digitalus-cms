@@ -1,0 +1,13 @@
+<div class="formBox">
+<h2 class="class">News Categories</h2>
+<p>The news module allows you to categorize your news items. This makes it easier for your visitors to find topics they are interested in.  Additionally it allows
+you to filter news items so you can only display topics that are relevant to the current page.</p>
+</div>
+
+<form class="formBox" action="/mod_news/category/add" method="POST">
+<h2 class="news">Add a News Category</h2>
+<?php 
+    echo $this->FormRow('Enter the category name', $this->formText('title', null, array('class' => 'med')));
+    echo $this->FormRow('&nbsp', $this->formSubmit('create', "Create News Category"));
+?>
+</form>		

@@ -1,0 +1,13 @@
+<div class="formBox">
+<h2><?php echo $this->filter;?> Events List</h2>
+<?php
+if($this->events){
+    foreach ($this->events as $event){
+    ?>
+    <h3><a href="/mod_event/index/edit/id/<?php echo $event->id;?>"><?php echo $event->title;?></a>:  <?php echo $this->RenderEventDate($event);?></h3>
+    <?php
+        }
+    }else{ ?>
+    <p>There are no events to view</p>
+<?php } ?>
+</div>
