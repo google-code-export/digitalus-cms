@@ -1,11 +1,11 @@
 <?php
-class DSF_Builder_Action_Template extends DSF_Builder_Abstract 
+class DSF_Builder_Action_Design extends DSF_Builder_Abstract 
 {
 	public function loadContentTemplate()
 	{
 		//get the view instance
 		$view = $this->_page->getView();
-		$view->addScriptPath('./application/contentTemplates');
+		$view->addScriptPath('../application/contentTemplates');
 		
 		//get the page object and template
 		$template = $this->_page->getContentTemplate();
@@ -33,11 +33,16 @@ class DSF_Builder_Action_Template extends DSF_Builder_Abstract
 	public function setStyles()
 	{
 		$design = $this->_page->getDesign();
-		$styles = $design->getStylesheets();
-		if(is_array($styles)) {
+		//the design model returns the stylesheets organized by skin
+		$skins = $design->getStylesheets();
+		if(is_array($skins)) {
 			$view = $this->_page->getView();
-			foreach ($styles as $style) {
-				$view->headLink()->appendStylesheet($style);			
+			foreach ($skins as $skin => $styles) {
+				if(is_array($styles)) {
+					foreach ($styles as $style) {
+						$view->headLink()->appendStylesheet($this->_page->getBaseUrl() . '/skins/' . $skin . '/styles/' . $style);	
+					}
+				}		
 			}
 		}
 	}
@@ -49,32 +54,19 @@ class DSF_Builder_Action_Template extends DSF_Builder_Abstract
 		if(is_array($scripts)) {
 			$view = $this->_page->getView();
 			foreach ($scripts as $script) {
-				$view->headScript()->appendFile($script);			
+				$view->headScript()->appendFile($this->_page->getBaseUrl() . '/' . $script);			
 			}
 		}
 	}
 	
-	public function setTemplatePath()
+	public function setLayout()
 	{
-		$config = Zend_Registry::get('config');
-		$template = $this->_page->getDesign()->getTemplate();
-		$view = $this->_page->getView();		
-		$view->addScriptPath('./' . $config->design->publicTemplates . '/' . $template);
-		
+		$design = $this->_page->getDesign();
+		$layout = $design->getLayout();
+		$this->_page->setLayout($layout);
 	}
 	
-	public function renderLayout()
-	{
-		$layout = $this->_page->getDesign()->getLayout();
-		$view = $this->_page->getView();
-		$view->placeholder('layout')->set($view->render('layouts/' . $layout . '.phtml'));
-	}
 	
-	public function renderTemplate()
-	{
-		$template = $this->_page->getDesign()->getTemplate();
-		$view = $this->_page->getView();
-		$view->placeholder('template')->set($view->render('index.phtml'));
-	}
+	
 	
 }
