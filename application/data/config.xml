@@ -13,7 +13,7 @@
         </database>
         <design>
         	<pathToSkins>public/skins</pathToSkins>
-        	<pathToLayouts>application/layouts</pathToLayouts>
+        	<pathToLayouts>application/public/views/scripts/layouts</pathToLayouts>
         	<defaultLayout>default</defaultLayout>
         	<adminTemplate>digitalus-1-5</adminTemplate>
     	</design>
