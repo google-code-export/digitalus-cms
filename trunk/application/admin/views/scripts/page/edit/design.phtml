@@ -1,0 +1,22 @@
+<h3>Current design</h3>
+<a class='rightLink' href="/admin/design/update/id/<?php echo $this->design->getValue('id');?>">Open design</a>
+<h4><?php echo $this->design->getValue('name');?></h4>
+<p><?php echo $this->design->getValue('notes');?></p>
+
+<h3>Other designs</h3>
+<?php 
+$designs = $this->design->listDesigns();
+if($designs){
+	foreach ($designs as $design) {
+		if($design->id != $this->design->getValue('id')){
+?>
+
+<a class='rightLink' href="/admin/design/update/id/<?php echo $design->id;?>">Open design</a>
+<a class='rightLink' href="/admin/page/update-design/id/<?php echo $this->page->page->id;?>/design/<?php echo $design->id;?>">Make Current</a>
+<h4><?php echo $design->name;?></h4>
+<p><?php echo $design->notes;?></p>
+
+<?php 	}
+	}
+}
+?>

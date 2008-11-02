@@ -143,6 +143,31 @@ class Page extends DSF_Db_Table
     	$this->delete($where);
     }
     
+    public function setDesign($pageId, $designId)
+    {
+    	$page = $this->find($pageId)->current();
+    	if($page) {
+    		$page->design = $designId;
+    		$page->save();
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
+    
+    public function getDesign($pageId)
+    {
+    	$page = $this->find($pageId)->current();
+    	$designId = $page->design;
+    	if($designId > 0) {
+    		$mdlDesign = new Design();
+    		$mdlDesign->setDesign($designId);
+    		return $mdlDesign;
+    	}else{
+    		return null;
+    	}
+    }
+    
     /**
      * this function sets the related pages for a given page
      *

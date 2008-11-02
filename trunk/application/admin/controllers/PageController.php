@@ -126,11 +126,22 @@ class Admin_PageController extends Zend_Controller_Action
 		//related pages
 		$this->view->relatedPages = $page->getRelatedPages($pageId);
 		
+		$this->view->design = $page->getDesign($pageId);
+		
 	    $this->view->breadcrumbs["Open: " . $currentPage->page->name] = '/admin/page/edit/id/' . $pageId;
 	    $this->view->toolbarLinks = array();
 	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '/admin/index/bookmark/url/admin_page_edit_id_' . $pageId;
 	    $this->view->toolbarLinks[$this->view->GetTranslation("Delete")] = '/admin/page/delete/id/' . $pageId;
 		
+	}
+	
+	public function updateDesignAction()
+	{
+		$id = $this->_request->getParam('id');
+		$design = $this->_request->getParam('design');
+		$mdlPage = new Page();
+		$mdlPage->setDesign($id, $design);
+		$this->_forward('edit');
 	}
 	
 	public function updateMetaDataAction()
