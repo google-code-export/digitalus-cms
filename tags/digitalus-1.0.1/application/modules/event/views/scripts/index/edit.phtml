@@ -1,0 +1,27 @@
+<form action='/mod_event/index/edit' method="POST" id='editState' class="formBox">
+<h2>Update Event</h2>
+
+    <?php
+        echo $this->formHidden('id', $this->data->id);
+        echo $this->FormRow('Enter a title for your event', $this->formText('title', $this->data->title, array('class' => 'med')));
+        echo $this->Note("You can organize your events into separate events calendars by checking the calendars below");
+        echo $this->FormRow('Select calendars (optional)', $this->SelectCalendars($this->data->related_content));
+        echo $this->Note("You can enter a day of the month only (like '18') in the date field.  Then hit tab or click outside the input.  The rest of the date will be filled in for you.  This assumes that your event will take place during the next month.  If not you can enter the whole date in many common date formats, or just use the date picker.");
+        echo $this->formRow('Event date', $this->DatePicker('publish_date', $this->data->publish_date));
+        echo $this->Note("You can enter your time in either 12 hour (1:37 PM) or 24 hour time (13:37)");
+        echo $this->FormRow("Start Time (optional)", $this->formText('start_time', $this->start_time, array('class' => 'time')));
+        echo $this->Note("You can optionally specify an end time and date.");
+        echo $this->formRow('End date (optional)', $this->DatePicker('archive_date', $this->data->archive_date));
+        echo $this->FormRow("End Time (optional)", $this->formText('end_time', $this->end_time, array('class' => 'time')));
+        echo $this->Note('Enter the description of the event here');
+        $this->FckEditor('content', stripslashes($this->data->content), 400, 600);
+?>
+
+<p class="rightLink"><?php echo $this->formSubmit('edit', 'Update item');?></p>
+
+
+</form>
+
+
+
+

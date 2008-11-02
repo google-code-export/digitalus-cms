@@ -1,0 +1,33 @@
+<div class="formBox">
+<h2 class="info">General Information</h2>
+<?php 
+$data = new DSF_Data_Storage();
+$user = $data->get();
+	echo $this->FormRow('First Name', $this->FormText('first_name',$this->user->first_name));
+	echo $this->FormRow('Last Name', $this->FormText('last_name',$this->user->last_name));
+	echo $this->FormRow('Administrator Role', $this->SelectAdminRole('role', $this->user->role));
+?>
+
+</div>
+
+<div class="formBox">
+<h2 class="settings">User Permissions</h2>
+<?php 
+$r = new AclResource();
+$resources = $r->fetchAll();
+$userPermissions = $this->user->acl_roles;
+$permArray = explode(',', $userPermissions);
+
+foreach ($resources as $resource){
+	if(in_array($resource->id, $permArray))
+	{
+		$val = 1;
+	}else{
+		$val = 0;
+	}
+	echo $this->FormRow('&nbsp;', $this->formCheckbox("resource[{$resource->id}]", $val) . ' ' . $resource->label);
+}
+?>
+
+</div>
+

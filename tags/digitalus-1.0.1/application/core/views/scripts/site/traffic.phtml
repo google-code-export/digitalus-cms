@@ -1,0 +1,17 @@
+<div class="formBox">
+	<h2 class="report">Traffic this week</h2>
+	<?php foreach ($this->hitsThisWeek as $day){ ?>
+	<p><b>Day:</b> <?php echo $day->day;?> - <b>Hits:</b> <?php echo $day->unique_hits;?></p>
+	<?php $total += $day->unique_hits;} ?>
+	<p><b>Total:</b> <?php echo $total; $total = 0;?></p>
+	
+</div>
+
+<div class="formBox">
+	<h2 class="report">Traffic History</h2>
+	<?php foreach ($this->hitsByWeek as $week){ ?>
+	<p><b>Week:</b> <?php echo $week->week;?> - <b>Hits:</b> <?php echo $week->unique_hits;?></p>
+	<?php $total += $day->unique_hits;} ?>
+	<p><b>Total:</b> <?php echo $total;?></p>
+	
+</div>

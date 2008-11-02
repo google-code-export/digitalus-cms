@@ -1,0 +1,42 @@
+<form action='/mod_news/item/edit' method="POST" id='editState' class="formBox">
+<div id='mainContent'>
+<h2>Main Content</h2>
+<?php
+    echo $this->formHidden('id', $this->data->id);
+    echo $this->formRow('Item Title', $this->formText('title', $this->data->title, array('class' => 'med')));
+    
+    echo $this->Note("Select the categories this item should be associated with.");
+    echo $this->formRow('Categories', $this->SelectCategories($this->data->related_content));
+    
+    echo $this->Note("If you would like to set this item to be published on a specific date enter it here");
+    echo $this->formRow('Publish date', $this->DatePicker('publish_date', $this->data->publish_date));
+    
+    echo $this->Note("If you would like to set this item to be archived on a specific date enter it here");
+    echo $this->formRow('Archive date', $this->DatePicker('archive_date', $this->data->archive_date));
+    
+	echo $this->Note('Enter the body of the content here');
+	$this->FckEditor('content', stripslashes($this->data->content), 400, 600);
+?>
+</div>
+
+<div id="optionalContent">
+<h2>Optional Content</h2>
+<?php
+  
+    echo $this->Note('Enter keyword tags for this resource.  These tags are used for quick searches.');
+    echo $this->formRow('Tags', $this->formTextarea('tags', $this->data->tags, array('class' => 'med')));
+
+	echo $this->Note('Enter the introduction here');
+	$this->FckEditor('intro', stripslashes($this->data->intro), 300, 600, false);
+	echo $this->note('Enter additional content here');
+	$this->FckEditor('additional_content', stripslashes($this->data->additional_content), 300, 600, false);
+?>
+</div>
+
+<p class="rightLink"><?php echo $this->formSubmit('edit', 'Update item');?></p>
+
+
+</form>
+
+
+

@@ -1,0 +1,15 @@
+<div class="formBox">
+<h2>Admin User Login</h2>
+<p>You must log in to edit the site.</p>
+<form action="/core/auth/login" method="post">
+<?php 
+	echo $this->formHidden('uri', $_SERVER['REQUEST_URI']);
+	echo $this->FormRow('Username (email address)', $this->FormText('adminUsername',$this->username));
+	echo $this->FormRow('Password', $this->FormPassword('adminPassword'));
+	echo $this->FormRow('&nbsp;', $this->FormSubmit('submit','Log In'));
+?>
+</form>
+</div>
+
+
+

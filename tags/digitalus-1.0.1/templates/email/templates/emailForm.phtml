@@ -1,0 +1,31 @@
+<p>You have recieved a new form submission from:</p>
+<ul>
+	<li>Name: <?php echo $this->data['name'] ?></li>
+	<li>Email Address: <?php echo $this->data['sender'] ?></li>
+	<li>Telephone #: <?php echo $this->data['phone'] ?></li>
+</ul>
+	
+<p>Here is the data that was submitted:</p>
+<?php
+$formData = $this->data['formData'];
+if(is_array($formData)){
+	foreach ($formData as $label => $value){
+		//support for arrays as values
+		if(is_array($value)){
+			$value = "<em>(list)</em> " . implode(', ', $value);
+		}
+		
+		$valueLength = strlen($value);
+		//if the value is a short string (under 100 characters) display short format
+		//otherwise display in long format
+		if($valueLength < 100){?>
+			<p><strong><?php echo $label ?>: </strong> <?php echo $value ?></p>
+		<?php }else{ ?>
+			<h3><?php echo $label ?></h3>
+			<p><?php echo $value ?></p>
+		<?php }
+		
+	}
+	
+}
+?>

@@ -1,0 +1,53 @@
+<div class="formBox" id='details'>
+<h2 class='settings'>Page Details</h2>
+<?php
+    echo $this->FormRow('Title', $this->formText('title', $this->Page->title, array('class' => 'med')));
+    echo $this->Note("Note that you can optionally add a page headline.  If you do not the CMS will use your page title as the headline.");
+    echo $this->FormRow('Headline (optional)', $this->formText('headline', $this->Page->headline, array('class' => 'med')));
+    
+?>
+
+<h2>Main Page Content</h2>
+<?php
+    echo $this->formHidden('id',$this->Page->id);
+	$this->FckEditor('content', stripslashes($this->Page->content));
+?>
+
+</div>
+
+<div class="formBox" id='additional'>
+    <h2>Introduction</h2>
+    <?php
+    	$this->FckEditor('intro', stripslashes($this->Page->intro), 200, 600, false);
+    ?>
+    
+    <h2>Additional Content</h2>
+    <?php
+    	$this->FckEditor('additional_content', stripslashes($this->Page->additional_content), 200, 600, false);
+    ?>
+
+    <div class="formBox" id="image">
+        <h2>Attach an Image</h2>
+        
+        <?php 
+        echo $this->FormRow('Current image', "<img src='/{$this->Page->filepath}' />");
+        echo $this->FormRow('&nbsp', $this->formCheckbox('removeImage') . " check here to remove.");
+        
+        echo $this->FormRow('Select an image', $this->formFile('image'));
+        ?>
+    </div>
+</div>
+
+<div class="formBox" id='meta'>
+    <h2>Search Tags</h2>
+    <p>These tags are used to weight a particular term for the internal search engine</p>
+    <?php
+    	echo $this->FormRow('Search Tags', $this->FormTextarea('tags',$this->Page->tags, array('class' => 'med')));
+    ?>
+    <h2>Meta Tags</h2>
+    <?php
+    	echo $this->FormRow('Meta Keywords', $this->FormTextarea('meta_keywords',$this->Page->meta_keywords, array('class' => 'med')));
+    	echo $this->FormRow('Meta Description', $this->FormTextarea('meta_description',$this->Page->meta_description, array('class' => 'med')));
+    ?>
+</div>
+

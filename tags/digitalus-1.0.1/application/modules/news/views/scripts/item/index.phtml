@@ -1,0 +1,12 @@
+<div class="formBox">
+<h2 class="class">News Module</h2>
+<p>The news module enables you to publish and manage news on your website.</p>
+</div>
+
+<form class="formBox" action="/mod_news/item/add" method="POST">
+    <h2>Add a News Item</h2>
+    <?php
+        echo $this->FormRow('Enter a title for your item', $this->formText('title', null, array('class' => 'med')));
+        echo $this->FormRow('&nbsp', $this->formSubmit('create', "Create News Item"));
+    ?>
+</form>

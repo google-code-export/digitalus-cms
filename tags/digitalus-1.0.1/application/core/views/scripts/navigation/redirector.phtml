@@ -1,0 +1,49 @@
+<form action="/admin/navigation/redirector" method="POST" class="formBox" id='redirectorForm'>
+    <h2 class="export">Redirectors</h2>
+    <p id='redirectLabels'><span>From</span><span>To</span><span>Response Code<br />(optional)</span></p>
+    <div id='redirectorList'>
+        <?php 
+            foreach ($this->redirectors as $redirect){
+        ?>
+        <p class="redirectRow">
+            <?php 
+                echo $this->formText('request[]', $redirect->request);
+                echo $this->formText('response[]', $redirect->response);
+                echo $this->formText('response_code[]', $redirect->response_code, array('class' => 'responseCode'));
+            ?>
+            <a href="#" class="remove">Remove this redirector</a>
+        </p>
+        <?php
+            }
+        ?>
+        <p class="redirectRow">
+            <?php 
+                echo $this->formText('request[]');
+                echo $this->formText('response[]');
+                echo $this->formText('response_code[]', null, array('class' => 'responseCode'));
+            ?>
+        </p>
+    </div>
+    
+    <br class="clearBoth" />
+    <p><a href="#" id="addRedirect">Add a new redirector</a></p>
+    <p><?php echo $this->formSubmit('save', 'Update Redirectors');?></p>
+    <br class="clearBoth" />
+</form>
+
+<script>
+$(document).ready(function() {
+	$("a.remove").click(function(){
+	    $(this).parent().remove();
+	    return false;
+	});
+	$("a#addRedirect").click(function(){
+	    $("#redirectorList").append("<p class='redirectRow'><input type='text' name='request[]' /><input type='text' name='response[]' /><a href='#' class='remove'>Remove this redirector</a></p>");
+    	$("a.remove").click(function(){
+    	    $(this).parent().remove();
+    	});
+	    return false;
+	});
+	  
+ });
+</script>

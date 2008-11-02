@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<pages>
+	<page>
+		<name>Home</name>
+	</page>
+	<page>
+		<name>About Us</name>
+		<subPages>
+			<page>
+				<name>Staff Bios</name>
+			</page>
+			<page>
+				<name>Mission</name>
+			</page>
+			<page>
+				<name>Funding</name>
+			</page>
+			<page>
+				<name>Employment</name>
+			</page>
+		</subPages>
+	</page>
+</pages>

@@ -1,0 +1,22 @@
+<div class="formBox">
+<h2 class="class">Events Calendar</h2>
+<p>The events calendar enables you to post upcoming events on your site.  You can organize these events into separate events calendars so you can post different 
+categories of events in different areas of the site.</p>
+</div>	
+
+<form class="formBox" action="/mod_event/calendar/add" method="POST">
+    <h2>Add a New Calendar</h2>
+    <?php
+        echo $this->FormRow('Enter a name for your calendar', $this->formText('title', null, array('class' => 'med')));
+        echo $this->FormRow('&nbsp', $this->formSubmit('create', "Create Calendar"));
+    ?>
+</form>
+
+<form class="formBox" action="/mod_event/index/add" method="POST">
+    <h2>Add a New Event</h2>
+    <?php
+        echo $this->FormRow('Enter a title for your event', $this->formText('title', null, array('class' => 'med')));
+        echo $this->formRow('Event date', $this->DatePicker('publish_date', null));
+        echo $this->FormRow('&nbsp', $this->formSubmit('create', "Create Event"));
+    ?>
+</form>

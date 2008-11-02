@@ -1,0 +1,13 @@
+<form action='/mod_news/category/edit' method="POST" id='editState' class="formBox">
+
+<h2>Open News Category</h2>
+<?php
+    echo $this->formHidden('id', $this->data->id);
+    echo $this->formRow('Category Title', $this->formText('title', $this->data->title, array('class' => 'med')));
+	echo $this->Note('Enter a description of the category here');
+	$this->FckEditor('content', stripslashes($this->data->content), 200, 600, false);
+	echo $this->formSubmit('edit', 'Update Category');
+?>
+</form>
+
+

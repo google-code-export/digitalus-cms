@@ -1,0 +1,26 @@
+<div class="formBox">
+<h2 class='save' >Save Changes</h2>
+<?php 
+	echo $this->FormRow('', $this->formCheckbox('done', 0) . ' i am done working on this page');
+	echo $this->formSubmit('submit', 'Save Changes');
+?>
+</div>
+
+<div class="formBox">
+<h2 class="folder">View</h2>
+<ul class="idTabs">
+    <li><a href="#details" title='Headline and Main Content'>Main Content</a></li>
+    <li><a href="#additional" title='Page introduction and additional content'>Additional Content</a></li>
+    <li><a href="#meta" title='Search and Meta Tags'>Search and Meta Tags</a></li>
+    <li><a href="/admin/page/advanced-options/id/<?php echo $this->Page->id;?>" title="This is where you update menu links, add modules, or move the page to a new location">Advanced Options</a></li>
+</ul>
+</div>
+
+<div class="formBox">
+<h2 class="trash">Delete Page</h2>
+<p>Would you like to permanently delete this page?...</p>
+<p><a href="/admin/page/delete/id/<?php echo $this->Page->id;?>" class='deleteConfirm' title='page'>Delete Page</a></p>
+</div>
+
+
+

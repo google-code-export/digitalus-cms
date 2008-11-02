@@ -1,0 +1,32 @@
+#accordion{
+	width: 400px;
+	border: 1px solid #6CAF00;
+	position: absolute;
+	left: 10px;
+	top: 10px;
+}
+#accordion dt{
+	line-height: 20px;
+	background-color: #80df20;
+	border-top: 2px solid #DAFF9F;
+	border-bottom: 2px solid #6CAF00;
+	padding: 0 10px;
+	font-weight: bold;
+	color: #fff;
+}
+#accordion dd{
+	overflow: auto;
+}
+#accordion p{
+	margin: 16px 10px;
+}
+#accordion dt.myAccordionHover
+{
+	background-color: #90ef30;
+}
+#accordion dt.myAccordionActive
+{
+	background-color: #6CAF00;
+	border-top: 2px solid #80df20;
+	border-bottom: 2px solid #000;
+}

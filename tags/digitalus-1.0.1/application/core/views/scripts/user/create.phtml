@@ -1,0 +1,17 @@
+<div class="formBox">
+<h2 id='add'>Create a new user</h2>
+<form action="/admin/user/create" method="post">
+<?php 
+$data = new DSF_Data_Storage();
+$user = $data->get();
+	echo $this->FormRow('Username (email address)', $this->FormText('email',$user->email));
+	echo $this->FormRow('First Name', $this->FormText('first_name',$user->first_name));
+	echo $this->FormRow('Last Name', $this->FormText('last_name',$user->last_name));
+	echo $this->FormRow('Administrator Role', $this->SelectAdminRole('role', $user->role));
+	echo $this->FormRow('Password', $this->FormPassword('newPassword'));
+	echo $this->FormRow('Confirm Password', $this->FormPassword('newConfirmPassword'));
+	echo $this->FormRow('&nbsp;', $this->FormSubmit('submit','Create User'));
+?>
+</form>
+
+</div>

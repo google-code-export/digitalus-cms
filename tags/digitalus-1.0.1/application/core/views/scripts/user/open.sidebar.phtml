@@ -1,0 +1,27 @@
+<div class="formBox">
+<h2 class="save">Save Changes</h2>
+<?php 
+	echo $this->formHidden('id', $this->user->id);
+	echo $this->FormRow('', $this->formCheckbox('done', 1) . ' i am done working with this user');
+	echo $this->formSubmit('submit', 'Save Changes');
+?>
+</div>
+
+<div class="formBox">
+<h2 class="contact">User Credentials</h2>
+<?php 
+$data = new DSF_Data_Storage();
+$user = $data->get();
+	echo $this->FormRow('Username (email address)', $this->FormText('email',$this->user->email));
+	echo $this->FormRow('', $this->formCheckbox('update_password', 0) . ' update password');
+	echo $this->FormRow('Password', $this->FormPassword('newPassword'));
+	echo $this->FormRow('Confirm Password', $this->FormPassword('newConfirmPassword'));
+?>
+
+</div>
+
+<div class="formBox">
+<h2 class="trash">Delete this user</h2>
+<p>If you truly want to permanently delete this user click:</p>
+<p><a href="/admin/user/delete/id/<?php echo $this->user->id;?>" class="deleteConfirm" title='user'>Delete User Account</a></p>
+</div>

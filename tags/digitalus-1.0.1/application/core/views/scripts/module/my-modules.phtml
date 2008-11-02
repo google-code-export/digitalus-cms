@@ -1,0 +1,19 @@
+<div class="formBox">
+<h2 class="settings">Current Modules</h2>
+<p>Here are all of the modules you can manage in this site manager:</p>
+<?php 
+$u = new User();
+$roles = $u->getCurrentUsersAclRoles();
+$hiddenRoles = array('page', 'navigation');
+foreach ($roles as $role) {
+	if(!in_array($role->controller, $hiddenRoles)){
+		$arrRoles[] = "<a href='/mod_{$role->controller}/index' class='{$role->controller}'>{$role->label}</a>";	
+	}
+}
+if(is_array($arrRoles))
+{
+	echo $this->HtmlList($arrRoles, null, null, false);
+}
+?>
+
+</div>

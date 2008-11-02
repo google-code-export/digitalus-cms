@@ -1,0 +1,17 @@
+<?php 
+if($this->showDetail){?>
+    <h3><?php echo $this->event->title;?></h3>
+    <p class="date"><?php echo $this->RenderEventDate($this->event);?></p>
+    <p><?php echo $this->RenderContent('content', $this->event);?></p>
+<?php }else{
+    if($this->events && !$this->showDetail){
+    foreach ($this->events as $event){
+    ?>
+    <h3><a href="<?php echo $this->CleanUri(true);?>/p/event/<?php echo $event->id;?>"><?php echo $event->title;?></a></h3>
+    <p class="date"><?php echo $this->RenderEventDate($event);?></p>
+    <p><?php echo $this->RenderContent('content', $event, 50);?></p>
+    <?php
+        }
+    }else{ ?>
+    <p>There are no events to view</p>
+<?php }} ?>

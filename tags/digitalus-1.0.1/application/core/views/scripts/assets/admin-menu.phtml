@@ -1,0 +1,33 @@
+<?php
+$acl = new DSF_Acl();
+$identity = DSF_Auth::getIdentity();
+
+//everyone sees home
+$items[] = "<a href='/admin' id='homeLink'>Home</a>";
+
+//validate these fields
+if($acl->isAllowed($identity->role, 'site'))
+{
+	$items[] = "<a href='/admin/site' id='siteLink'>Site</a>";
+}
+
+if($acl->isAllowed($identity->role, 'page'))
+{
+	$items[] = "<a href='/admin/page' id='pageLink'>Pages</a>";
+}
+
+//everyone sees the main modules page
+$items[] = "<a href='/admin/module' id='moduleLink'>Modules</a>";
+
+//support too
+//$items[] = "<a href='/admin/support' id='supportLink'>Support Center</a>";
+
+echo $this->HtmlList($items, null, array('id' => 'adminMenu'));
+?>
+<br class="clear"/>
+
+<script>
+ $(document).ready(function() {
+		$('a#<?php echo $this->adminSection;?>Link').addClass('selected');
+	});
+</script>

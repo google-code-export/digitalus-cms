@@ -1,0 +1,12 @@
+<div class="formBox">
+<h2 class="class">Image Galleries</h2>
+<p>The image gallery module enables you to insert image galleries into your content pages.</p>
+</div>
+
+<form class="formBox" action="/mod_gallery/index/add" method="POST">
+    <h2>Add an Image Gallery</h2>
+    <?php
+        echo $this->FormRow('Enter a title for your gallery', $this->formText('title', null, array('class' => 'med')));
+        echo $this->FormRow('&nbsp', $this->formSubmit('create', "Create Gallery"));
+    ?>
+</form>	

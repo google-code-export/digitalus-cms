@@ -1,0 +1,71 @@
+<?php
+$eyeIconSource = "/public/images/icons/small/";
+?>
+
+<div class="formBox">
+<script type="text/javascript">
+$(document).ready(
+	function () {
+		<?php echo $this->JquerySortable('ul.sortable');?>
+		$(".visibility").click(function(){
+		    var rowId = $(this).attr('id');
+		    var val = $("#" + rowId + "_val").val();
+		    if(val == 1){
+		        $(this).attr('src', "<?php echo $eyeIconSource;?>eye-closed.gif");
+		        $("#" + rowId + "_val").val(0);
+		    }else{
+		        $(this).attr('src', "<?php echo $eyeIconSource;?>eye.gif");
+		        $("#" + rowId + "_val").val(1);
+		    }
+		});
+	}
+);
+</script>
+
+<h2 class="menu" id="menuItemsList">Update Menu</h2>
+
+<?php
+if(empty($this->menu->title))
+{
+	$title = "Main Menu";
+}else{
+	$title = $this->menu->title;
+}
+?>
+
+<h3>You are working with: <?php echo $title;?></h3>
+<form action='/admin/navigation/edit' method="POST">
+<?php echo $this->formHidden('menuId', $this->menu->id);?>
+	<ul class="sortable">
+	<?php 
+	$m = new Menu();
+	foreach ($this->menuItems as $item){
+		$row = $this->formHidden('id[]', $item->id);
+		$row .= $this->formText('label[]',$item->label) . ' ';
+		
+		//visibility
+		if($item->show_on_menu == 1){
+		    $eyeSource = "eye.gif";
+		}else{
+		    $eyeSource = "eye-closed.gif";
+		}
+		
+		$row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . "_val"));
+		$row .= " <img src='{$eyeIconSource}{$eyeSource}' title='click to toggle visibility' class='visibility' id='visibility_{$item->id}' />";
+		$row .= " <a href='/admin/page/open/id/{$item->id}' class='page rightLink'></a>";
+		if($m->hasMenu($item->id))
+		{
+			$row .= " <a href='/admin/navigation/open/id/{$item->id}' class='menu rightLink'></a>";
+		}
+		$row .= "<em><b>Default Label:</b> " . $item->title . "</em> ";
+		$rows[] = $row;
+		echo "<li class='sortableItem'><a href='#' class='handle'></a>" . $row . "</li>";
+		unset($row);
+	} 
+	?>
+	</ul>
+	<p><?php echo $this->formSubmit('save','Save Changes');?></p>
+</form>
+</div>
+
+

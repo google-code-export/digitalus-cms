@@ -1,0 +1,18 @@
+<div class="formBox">
+<h2 id='myPages'>My Pages</h2>
+<p>These are all of the pages that you have worked with recently</p>
+<script>
+ $(document).ready(function() {
+		$('h3:even').addClass('leftCol');
+		$('h3.page:odd').addClass('rightCol');
+	});
+</script>
+<?php
+$content = new Page();
+$pages = $content->getCurrentUsersPages();
+
+foreach ($pages as $page){ ?>
+<h3 class="page"><a href="/admin/page/open/id/<?php echo $page->id;?>"><?php echo $page->title;?></a></h3>
+<?php } ?>
+<br class="clear" />
+</div>

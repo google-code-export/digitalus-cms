@@ -1,0 +1,66 @@
+<form action='/mod_gallery/index/edit' method="POST" id='editGallery' class="formBox" enctype="multipart/form-data">
+<h2>Gallery Details</h2>
+<?php
+    echo $this->formHidden('id', $this->data->id);
+    echo $this->formRow('Gallery Title', $this->formText('title', $this->data->title, array('class' => 'med')));
+    
+	echo $this->Note('Enter the introduction here');
+	$this->FckEditor('content', stripslashes($this->data->content), 200, 600, false);
+?>
+<p class="rightLink"><?php echo $this->formSubmit('edit', 'Save Changes');?></p>
+</form>
+
+<form action='/mod_gallery/index/update-images' method="POST" id='currentImages' class="formBox" enctype="multipart/form-data">
+    <h2>Current Images</h2>
+    
+    
+    <script>
+    $(document).ready(function() {
+        <?php echo $this->JquerySortable("#galleryWrapper", "imageWrapper");?>
+     });
+    </script>
+
+    <?php
+        echo $this->formHidden('id', $this->data->id);
+    ?>
+    <div id='galleryWrapper'>
+    <?php 
+        if($this->images){
+            foreach ($this->images as $id => $image){?>
+                <div class="imageWrapper">
+                    <a href='#' class='handle'></a>
+                    <?php echo $this->formHidden('imageId[]', $id);?>
+                    <img src="/<?php echo $image->thumbPath; ?>" alt="<?php echo $image->thumbPath; ?>" />
+                    <?php echo $this->formText("caption[{$id}]", $image->caption, array('class' => 'med'));?>
+                    <p><?php echo $this->formCheckbox("removeImage[{$id}]");?> Check here to remove this image</a></p>
+                    <br class="clear" />
+                </div>  
+            <?php }
+        }else{
+    ?>
+    <p>There are no images in this gallery</p>
+    <?php } ?>
+    </div>
+
+<p class="rightLink"><?php echo $this->formSubmit('edit', 'Save Changes');?></p>
+</form>
+
+<form action='/mod_gallery/index/add-image' method="POST" id='newImage' class="formBox" enctype="multipart/form-data">
+<h2>Add a New Image</h2>
+<?php 
+    echo $this->formHidden('id', $this->data->id);
+    echo $this->Note("Select the image file you would like to add.  Note that the image must either be a jpeg or gif file.");
+    echo $this->FormRow("Image:", $this->formFile('image'));
+    echo $this->Note("Enter a caption for the image");
+    echo $this->FormRow("Caption:", $this->formText('caption', null, array('class' => 'med')));
+?>
+
+<p class="rightLink"><?php echo $this->formSubmit('upload', 'Upload Image');?></p>
+</form>
+
+
+
+
+
+
+
