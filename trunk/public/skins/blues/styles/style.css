@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+body{background:#CAE0FF;}
+
+#pageWrapper{background:#fff;border:#ccc 1px solid;}
+
+#header{padding:1em .5em;height:4em;background:#fff;}
+
+#nav{background:#AED1FF;margin-bottom:0;}
+
+#main{background:#fff;padding:1em .5em;}
+
+#sidebar{background:#fff;}
+
+#subNav, #adminMenu, #userForm{background:#fff;}
+
+#footer{background:#fff;border-top:#AED1FF 1px solid;}
