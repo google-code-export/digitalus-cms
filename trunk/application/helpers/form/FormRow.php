@@ -1,0 +1,30 @@
+<?php
+class DSF_View_Helper_Form_FormRow
+{
+
+	/**
+	 * comments
+	 */
+	public function FormRow($label, $control, $required = false){
+	    $class = null;
+		if($required){$class = "required";}
+		$xhtml = "
+			<label class='formRow " . $class . "'>
+				<span>" . $label . "</span>
+				" . $control . "
+			</label>";
+	return $xhtml;
+	}
+	
+    /**
+     * Set this->view object
+     *
+     * @param  Zend_this->view_Interface $this->view
+     * @return Zend_this->view_Helper_DeclareVars
+     */
+    public function setview(Zend_view_Interface $view)
+    {
+        $this->view = $view;
+        return $this;
+    }
+}

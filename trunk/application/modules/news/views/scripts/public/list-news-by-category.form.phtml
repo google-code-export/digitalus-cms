@@ -1,0 +1,13 @@
+<p>The <b>list news by category</b> module displays a certain category of news</p>
+
+<fieldset>
+    <label>Select a category to display</label>
+    <?php
+    $cat = $this->SelectCategory('param[news_category]', $this->formParams['news_category']);
+    if(!empty($cat)){
+        echo $this->FormRow('Select the category:', $cat);
+    }else{
+        echo "<p>There are no categories to view</p>";
+    }
+    ?>
+</fieldset>

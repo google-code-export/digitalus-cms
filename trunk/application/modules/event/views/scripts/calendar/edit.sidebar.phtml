@@ -1,0 +1,12 @@
+<div class="formBox">
+<h2 class="settings">Currently Editing</h2>
+<p><b>Calendar:</b> <?php echo $this->data->title;?></p>
+<p><a href="/mod_event">Back to events home page...</a></p>
+</div>
+
+<div class="formBox">
+<h2 class="trash">Delete Calendar</h2>
+<p>Would you like to permanently this calendar?</p>
+<p><a href="/mod_event/calendar/delete/id/<?php echo $this->data->id;?>" class='deleteConfirm' title='calendar'>Delete calendar</a></p>
+<p class="note">  Note that this will remove the calendar only, and will not delete the events in the calendar...</p>
+</div>

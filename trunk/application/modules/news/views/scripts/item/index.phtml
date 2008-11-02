@@ -1,0 +1,28 @@
+<form class="formBox" action="/mod_news/item/add" method="POST">
+    <h2>Add a News Item</h2>
+    <?php
+        echo $this->FormRow('Enter a title for your item', $this->formText('title', null, array('class' => 'med')));
+        echo $this->FormRow('&nbsp', $this->formSubmit('create', "Create News Item"));
+    ?>
+</form>
+
+<div class="formBox">
+<h2 class="class">News Items</h2>
+<p class="pageLinks"><?php echo $this->Pagination('/mod_news/item/index',$this->currentPage, $this->pages);?></p>
+<?php if(count($this->items) > 0){?>
+    <ul>
+        <?php
+        foreach ($this->items as $item){
+        ?>
+        <li>
+            <span class="date"><?php echo date('m.d.y',$item->publish_date);?></span> | 
+            <a href="http://local.mna/mod_news/item/edit/id/<?php echo $item->id;?>">
+                <?php echo $this->TruncateText($item->title, 12);?>
+            </a>
+        </li>
+        <?php } ?>
+    </ul>
+<?php }else{ ?>
+<p>There are no articles currently</p>
+<?php } ?>
+</div>

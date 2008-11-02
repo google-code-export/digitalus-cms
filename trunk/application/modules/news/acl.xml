@@ -1,0 +1,16 @@
+<controllers>
+    <controller name='index' />
+    <controller name='category'>
+        <action>index</action>
+        <action>add</action>
+		<action>edit</action>
+		<action>delete</action>
+    </controller>
+	<controller name="item">
+        <action>index</action>
+        <action>add</action>
+		<action>edit</action>
+		<action>delete</action>
+	</controller>
+</controllers>
+

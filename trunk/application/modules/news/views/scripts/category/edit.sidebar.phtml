@@ -1,0 +1,27 @@
+<?php echo $this->render('./assets/menu.phtml');?>
+
+<div class="formBox">
+<h2 class="folder">Current Categories</h2>
+<?php 
+if($this->categories)
+{
+	foreach ($this->categories as $category)
+	{
+		$links[] = "<a href='/mod_news/category/edit/id/{$category->id}'>{$category->title}</a>";
+	}
+	if(is_array($links))
+	{
+		echo $this->htmlList($links, null, null, false);
+	}
+}else{
+    echo "<p>There are no news categories to view</p>";
+}
+?>
+</div>
+
+<div class="formBox">
+<h2 class="trash">Delete Category</h2>
+<p>Would you like to permanently this news category?</p>
+<p><a href="/mod_news/category/delete/id/<?php echo $this->data->id;?>" class='deleteConfirm' title='category'>Delete category</a></p>
+<p class="note">  Note that this will remove the category only, and will not delete the items in the category...</p>
+</div>

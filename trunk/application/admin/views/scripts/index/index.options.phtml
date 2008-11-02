@@ -1,0 +1,15 @@
+<?php 
+$this->placeholder('optionsHeadline')->Set($this->translate('My Content'));
+echo $this->RenderText('The following pages are the pages that you have recently created.', 'p');
+if($this->pages) {
+    ?>
+    <ul>
+    <?php foreach ($this->pages as $page){ ?>
+        <li class="page"><a href="/admin/page/open/id/<?php echo $page->id;?>" title="<?php echo $this->RenderDate($page->create_date);?>"><?php echo $page->title;?></a></li>
+    <?php } ?> 
+    </ul>
+<?php } ?>
+
+<h3>Modules</h3>
+
+<?php echo $this->UsersModuleLinks();

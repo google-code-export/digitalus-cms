@@ -1,0 +1,18 @@
+<div class="formBox">
+<h2 class="folder">Current Galleries</h2>
+<?php 
+if($this->galleries && count($this->galleries) > 0)
+{
+	foreach ($this->galleries as $gallery)
+	{
+		$links[] = "<a href='/mod_gallery/index/edit/id/{$gallery->id}'>{$gallery->title}</a>";
+	}
+	if(is_array($links))
+	{
+		echo $this->htmlList($links, null, null, false);
+	}
+}else{
+    echo "<p>There are no galleries to view</p>";
+}
+?>
+</div>

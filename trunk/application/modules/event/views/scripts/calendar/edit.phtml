@@ -1,0 +1,18 @@
+<form action='/mod_event/calendar/edit' method="POST" id='editCalendar' class="formBox">
+<h2>Update Calendar</h2>
+
+    <?php
+        echo $this->formHidden('id', $this->data->id);
+        echo $this->FormRow('Enter the name for your calendar', $this->formText('title', $this->data->title, array('class' => 'med')));
+        echo $this->Note('Enter the description of the calendar here');
+        $this->FckEditor('content', stripslashes($this->data->content), 200, 600, false);
+?>
+
+<p class="rightLink"><?php echo $this->formSubmit('edit', 'Update item');?></p>
+
+
+</form>
+
+
+
+

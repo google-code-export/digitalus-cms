@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<pages>
+	<page>
+		<name>Home</name>
+		<subPages>
+			<page>
+				<name>Features</name>
+			</page>
+			<page>
+				<name>Tour</name>
+			</page>
+			<page>
+				<name>Roadmap</name>
+			</page>
+			<page>
+				<name>Learning Center</name>
+				<subPages>
+					<page>
+						<name>PDF Manuals</name>
+					</page>
+					<page>
+						<name>Tutorials</name>
+					</page>
+					<page>
+						<name>Training</name>
+					</page>
+				</subPages>
+			</page>
+			<page>
+				<name>Contact</name>
+			</page>
+		</subPages>
+	</page>
+	<page>
+		<name>Community Edition</name>
+		<subPages>
+			<page>
+				<name>Open Source Matters</name>
+			</page>
+			<page>
+				<name>Forum</name>
+			</page>
+			<page>
+				<name>Wiki</name>
+			</page>
+			<page>
+				<name>Downloads</name>
+			</page>
+		</subPages>
+	</page>
+	<page>
+		<name>Commercial Solutions</name>
+		<subPages>
+			<page>
+				<name>Packages</name>
+			</page>
+			<page>
+				<name>Design</name>
+			</page>
+			<page>
+				<name>Installation</name>
+			</page>
+			<page>
+				<name>Custom Development</name>
+			</page>
+			<page>
+				<name>Pricing</name>
+			</page>
+		</subPages>
+	</page>
+</pages>

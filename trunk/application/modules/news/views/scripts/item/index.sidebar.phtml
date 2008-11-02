@@ -1,0 +1,22 @@
+<?php echo $this->render('./assets/menu.phtml');?>
+
+
+
+<div class="formBox">
+<h2 class="folder">Recent items</h2>
+<?php 
+if($this->recentItems)
+{
+	foreach ($this->recentItems as $item)
+	{
+		$links[] = "<a href='/mod_news/item/edit/id/{$item->id}'>{$item->title}</a>";
+	}
+	if(is_array($links))
+	{
+		echo $this->htmlList($links, null, null, false);
+	}
+}else{
+    echo "<p>There are no news items to view</p>";
+}
+?>
+</div>

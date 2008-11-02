@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<siteSettings>
+    <name>Digitalus CMS</name>
+    <online>1</online>
+    <smtp_host>mail.digitalus-projects.com</smtp_host>
+    <smtp_username>dsf@digitalus-projects.com</smtp_username>
+    <smtp_password></smtp_password>
+    <addMenuLinks>1</addMenuLinks>
+    <default_email>me@forrestlyman.com</default_email>
+    <default_email_sender>Forrest Lyman</default_email_sender>
+    <google_tracking></google_tracking>
+    <google_verify></google_verify>
+</siteSettings>

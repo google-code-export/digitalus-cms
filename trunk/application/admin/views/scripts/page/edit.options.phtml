@@ -1,0 +1,29 @@
+<?php $this->placeholder("optionsHeadline")->set($this->GetTranslation("Page Options"))?>
+
+<ul class="idTabs">
+    <li><a href="#content" class='selected' title='Main Content'>
+    	<?php echo $this->GetTranslation("Content")?>
+    </a></li>
+    <li><a href="#meta" title='Page meta data'>
+    	<?php echo $this->GetTranslation("Page Head and Meta Data")?>
+    </a></li>
+    <li><a href="#properties" title='Page Properties'>
+    	<?php echo $this->GetTranslation("Properties")?>
+    </a></li>
+    <li><a href="#attachments" title='Attached Files'>
+    	<?php echo $this->GetTranslation("Attachments")?>
+    </a></li>
+    <li><a href="#relatedContent" title='Related content items'>
+    	<?php echo $this->GetTranslation("Related Content");?>
+    </a></li>
+	<li><a href="/admin/page/make-home-page/id/<?php echo $this->pageId;?>">Make Home Page</a></li>
+    <li><a href="#design" title='Headline and Main Content'>
+    	<?php echo $this->GetTranslation("Design");?>
+    </a></li>
+    <li><a href="#movePage" title='Headline and Main Content'>
+    	<?php echo $this->GetTranslation("Move Page");?>
+    </a></li>
+</ul>
+
+
+

@@ -1,0 +1,34 @@
+<?php $this->placeholder("formHeadline")->set('Update Design')?>
+<form action="/admin/design/update" method="post">
+<?php echo $this->formHidden('id', $this->design->getValue('id'))?>
+<fieldset>
+    <legend><?php echo $this->GetTranslation('Design details');?></legend>
+    <?php 
+    	echo $this->FormRow(
+    		$this->GetTranslation('Design Name'), $this->FormText('name',$this->design->getValue('name'))
+   		);
+		echo $this->FormRow(
+			$this->GetTranslation('Design Notes'), $this->FormTextarea('notes',$this->design->getValue('notes'), array('class' => 'med'))
+		);
+	echo $this->FormRow(
+		'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update Design')));
+    ?>
+</fieldset>
+
+<fieldset>
+	<legend>Assets</legend>
+	<h3>Step 1: Select Layout</h3>
+	<?php echo $this->FormRow('Layout', $this->selectLayout('layout', $this->design->getLayout()))?>
+	
+<h3>Step 2: Select Style Sheets</h3>
+<?php echo $this->checkSkinStyles('styles', $this->design->getStylesheets());?>
+
+<h3>Step 3: Design specific styles</h3>
+<?php 
+echo $this->FormRow(
+	$this->GetTranslation('Inline Styles'), $this->FormTextarea('inline_styles',$this->design->getValue('inline_styles'), array('class' => 'med_tall'))
+);
+echo $this->FormRow(
+	'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update Design')));?>
+</fieldset>
+</form>
