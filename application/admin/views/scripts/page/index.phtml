@@ -10,7 +10,7 @@ $this->placeholder("formHeadline")->set($this->GetTranslation("Create a Page"));
 	echo $this->FormRow(
 		$this->GetTranslation('Parent Page'), 
 		$this->SelectParentPage('parent_id', 
-		$this->pageParentId) . 	$this->formButton("step1",$this->GetTranslation("Next >>"), array('class' => 'inlineButton')));
+		$this->pageParentId) . 	$this->formButton("step1button",$this->GetTranslation("Next >>"), array('class' => 'inlineButton')));
 	?>
 	<div id="step2"></div>
 	<div id="step3"></div>
@@ -18,7 +18,7 @@ $this->placeholder("formHeadline")->set($this->GetTranslation("Create a Page"));
 </fieldset>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#step1").click(function(){
+	$("#step1button").click(function(){
 		var parentId = $("#parent_id").val();
 		$("#step2").load('/admin/page/select-content-template/parent_id/' + parentId);
 		$("#step3").html('');
