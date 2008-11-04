@@ -51,7 +51,7 @@ class DSF_Content_Template
     protected function _loadProperties()
     {
         $path = $this->_templatePath . '/' . $this->_folder . '/' . $this->_template . '/' . self::PROPERTIES_FILENAME;
-        $this->_properties = new Zend_Config_Xml(strtolower($path));
+        $this->_properties = new Zend_Config_Xml($path);
     }
      
     
