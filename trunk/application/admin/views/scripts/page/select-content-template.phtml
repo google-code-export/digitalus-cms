@@ -11,14 +11,14 @@ if(is_array($this->allowedTemplates)){?>
 echo $this->FormRow(
 	$this->GetTranslation("Select a type", null, $this), 
 	$this->formSelect('contentType', null, null, $this->allowedTemplates) . 
-	$this->formButton("step2",$this->GetTranslation("Next >>", null, $this), array('class' => 'inlineButton')));
+	$this->formButton("step2button",$this->GetTranslation("Next >>", null, $this), array('class' => 'inlineButton')));
 }else{?>
 <p><?php echo $this->GetTranslation("You can not add any pages to this section.", null, $this)?></p>
 <?php } ?>
 
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#step2").click(function(){
+	$("#step2button").click(function(){
 		$("#step3").load('/admin/page/create-page-form');
 		return false;
 	});  
