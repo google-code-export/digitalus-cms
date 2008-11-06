@@ -1,9 +1,16 @@
 <?php $this->placeholder("formHeadline")->set($this->GetTranslation("Update Page"))?>
 
-<fieldset id="content">
+<div id="content">
+<fieldset>
 <legend><?php echo $this->GetTranslation("Edit Content");?></legend>
 <?php echo $this->render('page/edit/content.phtml');?>
 </fieldset>
+
+<fieldset>
+<legend><?php echo $this->GetTranslation("Page Version");?></legend>
+<?php echo $this->render('page/edit/version.phtml');?>
+</fieldset>
+</div>
 
 <fieldset id="meta">
 	<legend><?php echo $this->GetTranslation("Edit Meta Data");?></legend>

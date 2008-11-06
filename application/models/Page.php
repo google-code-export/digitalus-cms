@@ -50,9 +50,10 @@ class Page extends DSF_Db_Table
     	if($currentPage) {
     		$page = new stdClass();
     		$page->page = $currentPage;
+    		
+    		$node = new ContentNode();
 
     		//fetch the content nodes
-    		$node = new ContentNode();
     		$page->content = $node->fetchContentArray($pageId, null, null, null);
     		
     		return $page;   		
