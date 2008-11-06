@@ -23,8 +23,8 @@ abstract class DSF_Content_Form_Abstract
 	{
 		$name = $this->form->createElement('text','name');
 		$name->setRequired(true)
-			 ->setLabel('Page Name:');		
-		 
+			 ->setLabel('Page Name:');	
+
 		$page_id = $this->form->createElement('hidden','page_id');
 		$page_id->setRequired(true);
 			 
