@@ -53,8 +53,7 @@ class Page extends DSF_Db_Table
 
     		//fetch the content nodes
     		$node = new ContentNode();
-    		$page->content = $node->fetchContentArray($pageId);
-    		$page->meta = $node->fetchContentArray($pageId, null, 'meta_data');
+    		$page->content = $node->fetchContentArray($pageId, null, null, null);
     		
     		return $page;   		
     	}else{
@@ -81,11 +80,18 @@ class Page extends DSF_Db_Table
     			$currentPage->save();
     		}
     		
+    		//page version
+    		if(isset($pageArray['version']) && !empty($pageArray['version'])) {
+    		    $version = $pageArray['version'];
+    		}else{
+    		    $version = null;
+    		}
+    		
     		//update the content
     		$contentNode = new ContentNode();
     		if(count($pageArray) > 0) {
     			foreach ($pageArray as $node => $content) {
-    				$contentNode->set($pageId,$node, $content);
+    				$contentNode->set($pageId,$node, $content, $version);
     			}
     		}
     		

@@ -16,12 +16,16 @@ class ContentNode extends DSF_Db_Table
 	    $where[] = $this->_db->quoteInto("node = ?", $node);
 	    if($version != null)  {
 	        $where[] = $this->_db->quoteInto("version = ?", $version);
+	    }else{
+	        $where[] = "version IS NULL";
 	    }
 	    
 	    $row = $this->fetchRow($where);
 	    if($row && !empty($row->contet))  {
 	        return stripslashes($row->contet);
 	    }
+	    
+	    return false;
 	    
 	}
 	
@@ -34,13 +38,19 @@ class ContentNode extends DSF_Db_Table
 	 * @param array $nodes
 	 * @return object
 	 */
-	public function fetchContentObject($pageId, $nodes = null, $namespace = null) {
+	public function fetchContentObject($pageId, $nodes = null, $namespace = null, $version = null) {
 		if(null == $namespace) {
 			$namespace = $this->_namespace;
 		}
 	    $data = new stdClass();
 	    
 	    $where[] = $this->_db->quoteInto("parent_id = ?", $namespace . '_' . $pageId);
+	    if($version != null){
+	        $where[] = $this->_db->quoteInto("version = ?", $version);
+	    }else{
+	        $where[] = "version IS NULL";
+	    }
+	    
 	    $rowset = $this->fetchAll($where);
 	    
 	    if($rowset->count() > 0) {
@@ -64,10 +74,10 @@ class ContentNode extends DSF_Db_Table
         }	       
 	}
 	
-	public function fetchContentArray($pageId, $nodes = null, $namespace = null)
+	public function fetchContentArray($pageId, $nodes = null, $namespace = null, $version = null)
 	{
 		$dataArray = array();
-		$data = $this->fetchContentObject($pageId, $nodes, $namespace);
+		$data = $this->fetchContentObject($pageId, $nodes, $namespace, $version);
 		if($data) {
 			foreach ($data as $k => $v) {
 				$dataArray[$k] = $v;
@@ -88,7 +98,7 @@ class ContentNode extends DSF_Db_Table
 	 * @param string $content
 	 * @param string $version
 	 */
-	public function set($pageId, $node, $content, $type = 'content', $version = null) {
+	public function set($pageId, $node, $content, $version = null) {
 	    $node = strtolower($node);
 	    
 	    $where[] = $this->_db->quoteInto("parent_id = ?", $this->_namespace . '_' . $pageId);
