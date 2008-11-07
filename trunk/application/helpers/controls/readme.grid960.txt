@@ -1,4 +1,5 @@
 //start by building the grid
+$grid = $this->Grid960(16);
 
 //create the header wrapper
 $header = $grid->addUnit(16);
