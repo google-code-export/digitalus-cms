@@ -23,6 +23,11 @@ $config = new Zend_Config_Xml('../application/data/config.xml', 'testing');
 setlocale(LC_ALL, $config->language->defaultLocale);
 $locale = new Zend_Locale(); 
 
+//translations
+$languageFiles = $config->language->translations->toArray();
+$language =  $config->language->defaultLocale;
+$adapter = new Zend_Translate('csv',$config->language->path . '/' . $languageFiles[$language] . '.csv',$language);
+Zend_Registry::set('Zend_Translate', $adapter);
 
 //register constants
 if(isset($config->constants)){
