@@ -1,0 +1,172 @@
+# ----- layout -----
+Digitalus CMS;Digitalus CMS
+Current User;Aktueller Benutzer
+Role;Rolle
+Log Out;Abmelden
+Log In ;Anmelden
+Home;Home
+Site;Website
+Pages;Seiten
+Navigation;Navigation
+Design;Design
+Modules;Module
+Public Site;Öffentliche Seite
+
+value;value
+
+# ----- toolbar -----
+You are here:;Du bist hier:
+Add to Bookmarks;Zu Favoriten hinzufügen
+Delete;Entfernen
+
+# ----- admin_auth -----
+Admin User Login;Administrator anmelden
+Reset Password;Passwort zurücksetzen
+Admin Login;Administrator anmelden
+Please enter your username (this is your email address) and password to get
+started.;Bitte gib deinen Benutzernamen (deine Email-Adresse) und dein Passwort ein um zu beginnen.
+Username;Benutzername
+Password;Passwort
+Log In;Anmelden
+If you are having trouble logging in please enter your email address below and we will send you your login credentials.;Wenn Du Probleme beim Anmelden hast, gib bitte deine Email-Adresse unten ein und du bekommst ein neues Passwort zugeschickt.
+Send Reminder;Erinnerung absenden
+
+# ----- admin_user -----
+First Name;Vorname
+Last Name;Nachname
+Email;Email
+Password;Passwort
+Confirm;Bestätigen
+Update password?;Password aktualisieren?
+Update My Account;Benutzerkonto aktualisieren
+
+# ----- admin_site -----
+The site sections is where you manage your site.;Im Website Abschnitt wird deine Website verwaltet.
+Admin Users;Admin Benutzer
+Create new user;Neuen Benutzer erzeugen
+Site Reports;Website Reports
+Traffic report;Traffic Report
+Admin access report;Admin Zugriffsreport
+Site Console;Website-Konsole
+The site console enables you to interact directly with the CMS core.  It is for experienced administrators only.;Die Website-Konsole ermöglicht dir die direkte Interaktion mit dem CMS Kern.  Nur für erfahrene Administratoren.
+Open console;Öffne Konsole
+Site Settings;Website Einstellungen
+Site Settings;Website Einstellungen
+General settings;Allgemeine Einstellungen
+Site name;Website Name
+Status:;Status:
+Site is online;Website ist online
+Managing Content;Inhalte verwalten
+Menu links;Menü Links
+Automatically add menu links.;Automatisch Links ins Menü einfügen.
+Internationalization;Internationalisierung
+Default locale;Standard Lokalisierung
+Default language;Standard Sprache
+Default charset;Standard Zeichensatz
+Date format;Datumsformat
+Currency format;Währungsformat
+Mail Settings;Mail Einstellungen
+Default email address;Standard Email-Addresse
+Default sender;Standard Absender
+Transport;Transport
+Use SMTP transport;Benutze SMTP Transport
+SMTP host;SMTP Host
+SMTP username;SMTP Benutzername
+SMTP password;SMTP Passwort
+Google Integration;Google Integration
+Tracking code;Tracking Code
+Verification code;Verifikations Code
+Options;Optionen
+General settings;Allgemeine Einstellungen
+Content settings;Inhaltseinstellungen
+Internationalization;Internationalisierungs-Einstellungen
+Mail settings;Email Einstellungen
+Google integration;Google Integration
+Update General Site Settings;Allgemeine Website Einstellungen aktualisieren
+Update Content Settings;Inhaltseinstellungen aktualisieren
+Update Internationalization Settings;Internationalisierungs-Einstellungen aktualisieren
+Update Mail Settings;Email einstellungen aktualisieren
+Update Google Settings;Google Einstellungen aktualisieren
+System Console;System Konsole
+System Console;System Konsole
+About the Console;Über die Konsole
+Info;Info
+Run;Programmablauf
+The console...;Die Konsole ...
+
+# ----- admin_user -----
+Update User;Benutzer aktualisieren
+Create User;Benutzer erzeugen
+Update User;Benutzer aktualisieren
+Options;Optionen
+User;Benutzer
+First Name;Vorname
+Last Name;Nachame
+Email Address;Email-Addresse
+Admin Role;Administrator Rolle
+Create User;Benutzer erzeugen
+Options;Optionen
+General;Allgemein
+Credentials;Passwörter
+Permissions;Befugnisse
+Copy User;Benutzer kopieren
+If you have another user who already has the same permissions as this user you can copy that user's role.;Wenn ein anderer Benutzer mit den gleichen Befugnissen wie dieser existiert, kann seine Rolle einfach kopiert werden.
+Select a User;Benutzer auswählen
+Copy Users Permissions;Benutzerbefugnisse kopieren
+
+# ----- admin_report -----
+Report: Admin Access Log;Report: Administrator Zugriffs-Log
+Admin Access Log;Administrator Zugriffs-Log
+More Reports;Mehr Reports
+Date;Datum
+User;Benutzer
+Page;Seite
+Report: Site traffic;Report: Website Traffic
+Traffic Report;Traffic Report
+Weekly Summary;Wöchentliche Zusammenfassung
+Day;Tag
+Traffic History;Traffic Verlauf
+Week;Woche
+Hits;Treffer
+More Reports;Mehr Reports
+Admin access log;Administrator Zugriffs-Log
+Traffic report;Traffic Report
+Admin access log;Administrator Zugriffs-Log
+
+# ----- admin_page -----
+Create a Page;Seite erstellen
+Create Page;Seite erstellen
+My Pages;Meine Seiten
+Website;Website
+Note: The filenames are displayed as: (menu label/page title);Notiz: Die Dateinamen werden angezeigt als: (Menü Name/Seitentitel)
+The following pages are the pages that you have recently created.;Die folgenden Seiten wurden kürzlich von Dir erstellt.
+Create New Page;Neue Seite erzeugen
+To create a new page enter the title and select the section below.;Um eine neue Seite zu erzeugen, gib den Titel ein und wähle den Abschnitt unten.
+Enter the title;Gib den Titel ein.
+Select a parent section;Wähle einen übergeordneten Abschnitt
+Create Page;Seite erstellen
+Open Page;Seite öffnen
+Delete Page;Seite entfernen
+Open Page;Seite öffnen
+Edit Options;Optionen editieren
+Page Details;Seiten Details
+Search and Meta Tags;Such- und Meta-Tags
+Main Content;Haupt-Inhalt
+Intro Content;Intro-Inhalt
+Additional Content;Zusätzlicher Inhalt
+Image;Bild
+Advanced Options;Erweiterte Optionen
+Page Title;Seiten Titel
+Page URL;Seiten URL
+Note that you can optionally add a page headline.  If you do not the CMS will use your page title as the headline.;Notiz: Du kannst optional eine Titelzeile hinzufügen. Wenn nicht, wird der Seitentitel als Titelzeile eingefügt.
+Headline (optional);Titelzeile (optional)
+Intro Text;Intro Text
+Additional Content;Zusätzlicher Inhalt
+Attached Image;Angefügtes Bild
+Current Image;Aktuelles Bild
+Remove Image;Bild entfernen
+Select an Image;Bild auswählen
+
+# ----- admin_design -----
+Design;Design
+Design Options;Design Optionen
