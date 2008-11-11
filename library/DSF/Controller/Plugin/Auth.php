@@ -56,16 +56,6 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
                              'controller' => 'auth',
                              'action' => 'login');
    
-    /**
-     * load the current user and acl object
-     *
-     * @param  zend_acl $acl
-     */
-    public function __construct($acl)
-    {
-		$this->_identity = DSF_Auth::getIdentity();
-        $this->_acl = $acl;
-    }
 
     /**
      * validate the current user's request
@@ -74,6 +64,8 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch($request)
     {
+		$this->_identity = DSF_Auth::getIdentity();
+        $this->_acl = new DSF_Acl();
 
 		if(!empty($this->_identity)){
 	    	$role = $this->_identity->role;
