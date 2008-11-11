@@ -2,6 +2,7 @@
 class ContentNode extends DSF_Db_Table 
 {
     protected $_name = "content_nodes";    
+    const TEST = 'value';
     
     /**
      * returns the selected content block
