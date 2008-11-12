@@ -28,10 +28,11 @@
 		</filepath>	
 	<language>
 	  <path>../application/data/language</path>
-	  <defaultLocale>en</defaultLocale>
+	  <defaultLocale>fr</defaultLocale>
 	  <translations>
 	      <en>english</en>
 	      <de>german</de>
+	      <fr>french</fr>
 	  </translations>
 	</language>        		
 	</DSF>

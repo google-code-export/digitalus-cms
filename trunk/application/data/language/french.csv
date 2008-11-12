@@ -1,0 +1,171 @@
+# ----- layout -----
+Digitalus CMS;Digitalus CMS
+Current User;Utilisateur en Cours
+Role;Rôle
+Log Out;Déconnexion
+Log In ;Connexion
+Home;Accueil
+Site;Site
+Pages;Pages
+Navigation;Navigation
+Design;Design
+Modules;Modules
+Public Site;Site Publique
+
+value;valeur
+
+# ----- toolbar -----
+You are here:;Vous êtes ici:
+Add to Bookmarks;Ajouter aux Marque pages
+Delete;Supprimer
+
+# ----- admin_auth -----
+Admin User Login;Connexion de l'Administrateur
+Reset Password;Réinitialiser le Mot de passe
+Admin Login;Connexion de l'Administrateur
+Please enter your username (this is your email address) and password to get started.;Veuillez entrer votre nom d'utilisateur (c'est votre adresse email) et votre mot de passe pour commencer.
+Username;Nom d'utilisateur
+Password;Mot de passe
+Log In;Se Connecter
+If you are having trouble logging in please enter your email address below and we will send you your login credentials.;Si vous avez des problèmes pour vous connecter, veuillez entrer votre adresse email plus bas et nous vous enverrons votre identifiant et mot de passe.
+Send Reminder;Envoyer un Rappel
+
+# ----- admin_user -----
+First Name;Prénom
+Last Name;Nom
+Email;Email
+Password;Mot de passe
+Confirm;Confirmer
+Update password?;Mettre à jour le mot de passe?
+Update My Account;Mettre à jour mon compte
+
+# ----- admin_site -----
+The site sections is where you manage your site.;Les sections de site sont l'endroit où vous gérer votre site.
+Admin Users;Administrateurs
+Create new user;Créer un nouvel utilisateur
+Site Reports;Rapports de site
+Traffic report;Rapport de trafic
+Admin access report;Rapport de l'accès administrateur
+Site Console;Console du Site
+The site console enables you to interact directly with the CMS core.  It is for experienced administrators only.;La console du site vous permet d'intéragir directement avec le sytème interne du CMS.  Ceci s'adresse seulement aux utilisateurs avancés.
+Open console;Ouvrir la console
+Site Settings;Préférences du site
+Site Settings;Préférences du site
+General settings;Préférences générales
+Site name;Nom du site
+Status:;Status:
+Site is online;Le site est en ligne
+Managing Content;Gestion du Contenu
+Menu links;Liens du menu
+Automatically add menu links.;Ajout automatique de liens de menu.
+Internationalization;Internationalisation
+Default locale;Localisation par défaut
+Default language;Langue par défaut
+Default charset;Jeu de caractères par défaut
+Date format;Format de date
+Currency format;Format de la monnaie
+Mail Settings;Préférences de Mail
+Default email address;Adresse email par défaut
+Default sender;Expéditeur par défaut
+Transport;Transport
+Use SMTP transport;Utiliser le transport SMTP
+SMTP host;Hôte SMTP
+SMTP username;Nom d'utilisateur SMTP
+SMTP password;Mot de passe SMTP
+Google Integration;Intégration Google
+Tracking code;Code de suivi
+Verification code;Vérification du code
+Options;Options
+General settings;Préférences générales
+Content settings;Préférences de contenu
+Internationalization;Internationalisation
+Mail settings;Préférences de mail
+Google integration;Intégration Google
+Update General Site Settings;Mettre à jour les préférences générales du site
+Update Content Settings;Mettre à jour les préférences de contenu
+Update Internationalization Settings;Mettre à jour les préférences d'internationalisation
+Update Mail Settings;Mettre à jour les préférences de mail
+Update Google Settings;Mettre à jour les préférences Google
+System Console;Console Système
+System Console;Console Système
+About the Console;A propos de la console
+Info;Info
+Run;Lancer
+The console...;La console ...
+
+# ----- admin_user -----
+Update User;Mettre à jour l'utilisateur
+Create User;Créer l'utilisateur
+Update User;Mettre à jour l'utilisateur
+Options;Options
+User;Utilisateur
+First Name;Prénom
+Last Name;Nom
+Email Address;Adresse Email
+Admin Role;Rôle Administrateur
+Create User;Créer un Utilisateur
+Options;Options
+General;Général
+Credentials;Identifiant - Mot de passe
+Permissions;Permissions
+Copy User;Copier l'utilisateur
+If you have another user who already has the same permissions as this user you can copy that user's role.;Si vous avez un autre utilisateur qui a déjà les mêmes permissions que cet utilisateur, vous pouvez copier le rôle de celui-ci.
+Select a User;Sélectionner un utilisateur
+Copy Users Permissions;Copier les permissions de l'utilisateur
+
+# ----- admin_report -----
+Report: Admin Access Log;Rapport: Journalisation de l'accès administrateur
+Admin Access Log;Journalisation de l'accès administrateur
+More Reports;Plus de rapports
+Date;Date
+User;Utilisateur
+Page;Page
+Report: Site traffic;Rapport: Trafic du site
+Traffic Report;Rapport de trafic
+Weekly Summary;Résumé hebdomadaire
+Day;Jour
+Traffic History;Historique du trafic
+Week;Semaine
+Hits;Hits
+More Reports;Plus de rapports
+Admin access log;Journalisation de l'accès administrateur
+Traffic report;Rapport de trafic
+Admin access log;Journalisation de l'accès administrateur
+
+# ----- admin_page -----
+Create a Page;Créer une page
+Create Page;Créer une page
+My Pages;Mes Pages
+Website;Site
+Note: The filenames are displayed as: (menu label/page title);A Noter: Les noms de fichier sont affichés ainsi: (nom du menu/titre de la page)
+The following pages are the pages that you have recently created.;Les pages suivantes sont les pages que vous avez récemment créees.
+Create New Page;Créer une nouvelle page
+To create a new page enter the title and select the section below.;Pour créer une nouvelle page, entrez son titre et sélectionnez la section plus bas.
+Enter the title;Entrer un titre
+Select a parent section;Sélectionner une section parente
+Create Page;Créer la page
+Open Page;Ouvrir la page
+Delete Page;Supprimer la page
+Open Page;Ouvrir la page
+Edit Options;Editer les options
+Page Details;Détails de la page
+Search and Meta Tags;Recherche et Méta-données
+Main Content;Contenu Principal
+Intro Content;Introduction
+Additional Content;Contenu Supplémentaire
+Image;Image
+Advanced Options;Options Avancées
+Page Title;Titre de la page
+Page URL;URL de la page
+Note that you can optionally add a page headline.  If you do not the CMS will use your page title as the headline.;Notez que vous pouvez, de manière facultative, ajouter une entête de page. Si vous ne le faites pas, le CMS utilisera le titre de votre page comme entête.
+Headline (optional);Entête (facultatif)
+Intro Text;Texte d'introduction
+Additional Content;Contenu supplémentaire
+Attached Image;Image attachée
+Current Image;Image en cours
+Remove Image;Supprimer l'Image
+Select an Image;Sélectionner une Image
+
+# ----- admin_design -----
+Design;Design
+Design Options;Options de Design
