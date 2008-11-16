@@ -148,6 +148,20 @@ class Initializer extends Zend_Controller_Plugin_Abstract
 	
 	public function initView()
 	{
+        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        if (null === $viewRenderer->view) {
+            $viewRenderer->initView();
+        }
+        $view = $viewRenderer->view;
+        
+        // load digitalus helpers
+	    $helperDirs = DSF_Filesystem_Dir::getDirectories($this->_root .  '/application/helpers');
+    	if(is_array($helperDirs))
+    	{
+    		foreach ($helperDirs as $dir) {
+    			$view->addHelperPath($this->_root .  '/application/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
+    		}
+    	}
 	}	
 	
 	public function initControllers()

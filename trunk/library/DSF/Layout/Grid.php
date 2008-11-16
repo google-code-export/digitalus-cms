@@ -13,7 +13,7 @@ class DSF_Layout_Grid {
     public function __construct($columns, $before = 0, $after = 0)
     {
         
-        $this->_container = new SimpleXMLElement()
+        $this->_container = new SimpleXMLElement();
     }
     
     public function startRow()

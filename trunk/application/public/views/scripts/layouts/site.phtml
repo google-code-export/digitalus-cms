@@ -1,24 +1,31 @@
-<div id="pageWrapper">
-	<div id="header"><h2>My CMS Project</h2></div>
-	<div id="nav">
-		<?php echo $this->placeholder('nav') ?>&nbsp;
-	</div>
-	<div id="sidebar">
-		<div id="subNav">
-			<?php echo $this->placeholder('subNav') ?>&nbsp;
-		</div>
-		<div id="adminMenu">
-			<?php echo $this->placeholder('adminMenu') ?>&nbsp;
-		</div>
-		<div id="userForm">
-			<?php echo $this->placeholder('userForm') ?>&nbsp;
-		</div>
-	</div>
-	<div id="main">
-		<h1><?php echo $this->placeholder('headline') ?></h1>
-		<?php echo $this->layout()->content ?>
-	</div>
-	<div id="footer">
-		<?php echo $this->placeholder('footer') ?>&nbsp;
-	</div>
-</div>
+<?php 
+$this->placeholder('header_logo_content')->set(
+    "<a href='http://digitaluscms.com'><img src='/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
+);
+
+$this->placeholder('header_search_content')->set(
+    $this->partial('partials/header/search-form.phtml')
+);
+
+$this->placeholder('content_content')->set(
+    $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent())
+);
+
+$this->placeholder('nav_content')->set("nav");
+$this->placeholder('sidebar_content')->set("sidebar");
+
+$this->placeholder('footer_content')->set(
+    $this->partial('partials/footer.phtml')
+);
+
+$grid = $this->Grid960(16);
+$header = $grid->addUnit('header', 16);
+$logo = $grid->startRow('header_logo', 10, $header);
+$search = $grid->endRow('header_search',6,$header);
+$nav = $grid->addUnit('nav', 16);
+$body = $grid->addUnit('body', 16);
+$content = $grid->startRow('content', 12, $body);
+$sidebar = $grid->endRow('sidebar', 4, $body);
+$footer = $grid->addUnit('footer', 16, $body);
+echo $grid->render();
+?>

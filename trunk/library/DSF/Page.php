@@ -104,9 +104,14 @@ class DSF_Page
 		$this->_content = $content;
 	}
 	
-	public function getContent()
+	public function getContent($key = null)
 	{
-		return $this->_content;
+	    if($key !== null) {
+		    return $this->_content->$key;
+	    }else{
+		    return $this->_content;   
+	    }
+
 	}
 	
 	public function setContentTemplate($contentTemplate)

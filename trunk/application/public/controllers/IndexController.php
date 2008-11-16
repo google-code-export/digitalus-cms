@@ -17,6 +17,7 @@ class IndexController extends Zend_Controller_Action
 	{	
 		DSF_Builder::loadPage();
 		$this->page = DSF_Builder::getPage();
+		$this->view->page = $this->page;
 		$this->view->layout()->page = $this->view->render('layouts/' . $this->page->getLayout());
 		
 	}
