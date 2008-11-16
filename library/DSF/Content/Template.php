@@ -55,6 +55,20 @@ class DSF_Content_Template
     	return new $formClass();
     }
     
+    public function render($content, $viewInstance = null)
+    {
+        if($viewInstance == null) {
+            $view = new Zend_View();
+        }else{
+            $view = $viewInstance;
+        }
+        $view->content = $content;
+        $view->addScriptPath($this->_templatePath);
+        $templateScript = $this->_folder . '/' . $this->_template . '/template.phtml';
+        return $view->render($templateScript);
+        
+    }
+    
     protected function _loadProperties()
     {
         $path = $this->_templatePath . '/' . $this->_folder . '/' . $this->_template . '/' . self::PROPERTIES_FILENAME;
