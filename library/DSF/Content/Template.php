@@ -62,6 +62,8 @@ class DSF_Content_Template
         }else{
             $view = $viewInstance;
         }
+        //load helpers for this view instance
+        DSF_View_RegisterHelpers::register($view);
         $view->content = $content;
         $view->addScriptPath($this->_templatePath);
         $templateScript = $this->_folder . '/' . $this->_template . '/template.phtml';
