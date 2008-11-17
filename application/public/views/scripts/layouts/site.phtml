@@ -19,13 +19,17 @@ $this->placeholder('footer_content')->set(
 );
 
 $grid = $this->Grid960(16);
+
 $header = $grid->addUnit('header', 16);
-$logo = $grid->startRow('header_logo', 10, $header);
-$search = $grid->endRow('header_search',6,$header);
+    $logo = $grid->startRow('header_logo', 10, $header);
+    $search = $grid->endRow('header_search',6,$header);
+
 $nav = $grid->addUnit('nav', 16);
+
 $body = $grid->addUnit('body', 16);
-$content = $grid->startRow('content', 12, $body);
-$sidebar = $grid->endRow('sidebar', 4, $body);
+    $content = $grid->startRow('content', 12, $body);
+    $sidebar = $grid->endRow('sidebar', 4, $body);
+
 $footer = $grid->addUnit('footer', 16, $body);
 echo $grid->render();
 ?>

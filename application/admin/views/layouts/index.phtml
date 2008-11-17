@@ -16,18 +16,20 @@ $this->headLink()->appendStylesheet('/skins/digitalus-1-5/styles/layout.css')
                  ->appendStylesheet('/styles/filetree.css') 
                  ->appendStylesheet('/styles/menutree.css') 
                  ->appendStylesheet('/styles/jquery.treeview.css') 
-                 ->appendStylesheet('/styles/spreadsheet.css') 
+                 ->appendStylesheet('/styles/spreadsheet.css')
+                 ->appendStylesheet('/styles/jquery.wysiwyg.css') 
                  ->appendStylesheet('/styles/sortable.css'); 
 echo $this->headLink();
 
 //javascripts
-$this->headScript()->appendFile('/scripts/jquery-1.2.1.pack.js')
+$this->headScript()->prependFile('/scripts/jquery.pack.js')
                    ->appendFile('/scripts/interface.js')
                    ->appendFile('/scripts/jqueryTooltip.js')
                    ->appendFile('/scripts/jqueryDatePicker.js')
                    ->appendFile('/scripts/jquery.dateCompletion.js')
                    ->appendFile('/scripts/jquery.treeview.js')
                    ->appendFile('/scripts/idTabs.js')
+                   ->appendFile('/scripts/jquery.wysiwyg.js')
                    ->appendFile('/scripts/jquery.cookie.js');
 echo $this->headScript();
 
@@ -54,6 +56,8 @@ $('a.add_to_bookmarks').click(function(){
     }
     return false;
 });
+
+$('.wysiwyg').wysiwyg();
   
 $('.spreadsheet tr:odd').addClass('oddRow');
   
@@ -102,3 +106,4 @@ $(document).ready(function() {
 });
 </script>
 </html>
+
