@@ -1,4 +1,18 @@
-<?php $this->placeholder("formHeadline")->set($this->GetTranslation("Update Page"))?>
+<?php 
+$this->placeholder("formHeadline")->set($this->GetTranslation("Update Page"));
+
+$this->headScript()->appendFile('/markitup/jquery.markitup.js');
+$this->headScript()->appendFile('/markitup/sets/default/set.js');
+$this->headScript()->appendFile('/markitup/sets/markdown/set.js');
+
+$this->headLink()->appendStylesheet('/markitup/skins/markitup/style.css');
+$this->headLink()->appendStylesheet('/markitup/sets/markdown/style.css');
+//jquery block
+$this->placeholder('jquery')->captureStart();
+?>
+$(".html").markItUp(mySettings);
+$(".wiki").markItUp(myWikiSettings);
+<?php $this->placeholder('jquery')->captureEnd();?>	                 
 
 <div id="content">
 <fieldset>

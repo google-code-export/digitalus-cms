@@ -1,4 +1,18 @@
-<?php $this->placeholder("formHeadline")->set('Update Design')?>
+<?php $this->placeholder("formHeadline")->set('Update Design');
+
+$this->headScript()->appendFile('/markitup/jquery.markitup.js');
+$this->headScript()->appendFile('/markitup/sets/default/set.js');
+$this->headScript()->appendFile('/markitup/sets/css/set.js');
+
+$this->headLink()->appendStylesheet('/markitup/skins/markitup/style.css');
+$this->headLink()->appendStylesheet('/markitup/sets/css/style.css');
+//jquery block
+$this->placeholder('jquery')->captureStart();
+?>
+
+$(".css").markItUp(mySettings);
+<?php $this->placeholder('jquery')->captureEnd();?>	                 
+
 <form action="/admin/design/update" method="post">
 <?php echo $this->formHidden('id', $this->design->getValue('id'))?>
 <fieldset>
@@ -26,7 +40,7 @@
 <h3>Step 3: Design specific styles</h3>
 <?php 
 echo $this->FormRow(
-	$this->GetTranslation('Inline Styles'), $this->FormTextarea('inline_styles',$this->design->getValue('inline_styles'), array('class' => 'med_tall'))
+	$this->GetTranslation('Inline Styles'), $this->FormTextarea('inline_styles',$this->design->getValue('inline_styles'), array('class' => 'css'))
 );
 echo $this->FormRow(
 	'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update Design')));?>

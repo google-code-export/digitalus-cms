@@ -5,8 +5,9 @@ abstract class DSF_Content_Form_Abstract
 	public $form;
 	public $decorators = array(
 		'Errors',
-		array('HtmlTag', array('tag' => 'dd')),
-		array('Label', array('tag' => 'dt')),
+	    'Composite',
+		array('HtmlTag', array('tag' => 'div')),
+		array('Label', array('tag' => 'label')),
 	);
 	
 	public function __construct()
@@ -14,6 +15,7 @@ abstract class DSF_Content_Form_Abstract
 		$this->form = new Zend_Form();
 		$this->form->setAction(self::PAGE_ACTION )
 			->setMethod('post');
+		$this->form->addElementPrefixPath('DSF_Decorator', 'DSF/Form/Decorator', 'decorator');
 		$this->addBase();
 		$this->setup();
 		//$this->setDecorators();
@@ -34,7 +36,7 @@ abstract class DSF_Content_Form_Abstract
 	
 	public function setDecorators()
 	{
-		$this->form->addDecorators($this->decorators);
+		$this->form->setDecorators($this->decorators);
 	}
 	
 	public function getValues()

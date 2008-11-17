@@ -398,3 +398,15 @@ a.rightLink{
 float:right;
 margin-left:10px;
 }
+
+.wysiwyg{
+clear:both;
+width:510px;
+height:300px;
+}
+
+.html, .wiki, .css{
+	width:450px;
+}
+
+
