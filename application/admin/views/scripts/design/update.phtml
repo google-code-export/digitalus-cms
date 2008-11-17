@@ -39,9 +39,7 @@ $(".css").markItUp(mySettings);
 
 <h3>Step 3: Design specific styles</h3>
 <?php 
-echo $this->FormRow(
-	$this->GetTranslation('Inline Styles'), $this->FormTextarea('inline_styles',$this->design->getValue('inline_styles'), array('class' => 'css'))
-);
+echo  $this->FormTextarea('inline_styles',$this->design->getValue('inline_styles'), array('class' => 'css'));
 echo $this->FormRow(
 	'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update Design')));?>
 </fieldset>
