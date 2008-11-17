@@ -1,8 +1,8 @@
 Markup language: 
-Markdown
+Textile
 
 Description:
-A basic Markdown markup set with Headings, Bold, Italic, Picture, Link, List, Quotes, Code, Preview button.
+A basic Textile markup set with Headings, Bold, Italic, Stroke through, Picture, Link, List, Quotes, Code, Preview button.
 
 Install:
 - Download the zip file
