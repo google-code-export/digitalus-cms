@@ -9,8 +9,8 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
 		
 		//get the page object and template
 		$template = $this->_page->getContentTemplate();
-		$content = $this->_page->getContent();
 		
+		$content = $this->_page->getContent();
 		$view->content = $this->_page->getContent();
 		
 		//render the content template

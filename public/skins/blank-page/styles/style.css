@@ -1,6 +1,7 @@
 @CHARSET "ISO-8859-1";
 body{
 font-family:"Trebuchet MS", Arial;
+font-size:12px;
 background:url(../images/body.jpg) repeat-x #E0EDFF;
 }
 

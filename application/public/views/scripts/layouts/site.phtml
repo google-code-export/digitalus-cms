@@ -11,8 +11,13 @@ $this->placeholder('content_content')->set(
     $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent())
 );
 
-$this->placeholder('nav_content')->set("nav");
-$this->placeholder('sidebar_content')->set("sidebar");
+$this->placeholder('nav_content')->set(
+    $this->RenderMenu(0)
+);
+
+$this->placeholder('sidebar_content')->set(
+    $this->RenderMenu($this->page->getId(), 2)
+);
 
 $this->placeholder('footer_content')->set(
     $this->partial('partials/footer.phtml')
