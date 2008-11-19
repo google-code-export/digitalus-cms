@@ -548,20 +548,23 @@ class Page extends DSF_Db_Table
     
     private function _fetchPointer($uri, $parent = 0)
     {
-    	foreach ($uri as $uriPart) {
-    		//fetch the pointer to the current uri part
-    		$pointer = $this->_getPageByLabel($uriPart, $parent);
-    		
-    		//if the page was not found then return null
-    		if(null == $pointer) {
-    			return null;
-    		}
-    		
-    		//set the parent id to the current pointer to traverse down the tree
-    		$parent = $pointer;
-    	}
-    	
-    	return $pointer;
+        if(is_array($uri)) {
+        	foreach ($uri as $uriPart) {
+        		//fetch the pointer to the current uri part
+        		$pointer = $this->_getPageByLabel($uriPart, $parent);
+        		
+        		//if the page was not found then return null
+        		if(null == $pointer) {
+        			return null;
+        		}
+        		
+        		//set the parent id to the current pointer to traverse down the tree
+        		$parent = $pointer;
+        	}
+        	
+        	return $pointer;
+        }
+        return false;
     }
     
     private function _getPageByLabel($label, $parent = 0)
