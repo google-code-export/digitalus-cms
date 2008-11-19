@@ -48,7 +48,8 @@ class Admin_DesignController extends Zend_Controller_Action
 				DSF_Filter_Post::get('notes'),
 				DSF_Filter_Post::get('layout'),
 				DSF_Filter_Post::raw('styles'),				
-				DSF_Filter_Post::get('inline_styles')
+				DSF_Filter_Post::get('inline_styles'),
+				DSF_Filter_Post::int('is_default')
 			);
 		}else{
 			$id = $this->_request->getParam('id');

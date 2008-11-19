@@ -30,33 +30,43 @@ class DSF_Filesystem_File
 	 * @param mixed $type, the file extension to return 
 	 * @param string $appendPath, the path to append to the returned files
 	 */
-	static function getFilesByType($path, $type = false, $appendPath = false)
+	static function getFilesByType($path, $type = false, $appendPath = false, $includeExtension = false)
 	{
 		if(is_dir($path)){
 			$dir = scandir($path); //open directory and get contents
 			if(is_array($dir)){ //it found files
 				$returnFiles = false;
 				foreach ($dir as $file){
-					if($type){ //validate the type
-						$fileParts = explode('.', $file);
-						if(is_array($fileParts)){
-							$c = count($fileParts) - 1; //arrays always start with 0
-							$fileType = $fileParts[$c];
-							
-							//check whether the filetypes were passed as an array or string
-							if(is_array($type)){
-								if(in_array($fileType, $type)){
-									$returnFiles[] = $appendPath . $file;
-								}
-							}else{
-								if($fileType == $type){
-									$returnFiles[] = $appendPath . $file;
-								}
-							}
-						}
-					}else{ //the type was not set.  return all files and directories
-						$returnFiles[] = $file;	
-					}
+				    if(!is_dir($path . '/' . $file)){
+    					if($type){ //validate the type
+    						$fileParts = explode('.', $file);
+    						if(is_array($fileParts)){
+    							$c = count($fileParts) - 1; //arrays always start with 0
+    							$fileType = $fileParts[$c];
+    							
+    							//check whether the filetypes were passed as an array or string
+    							if(is_array($type)){
+    								if(in_array($fileType, $type)){
+    								    $filePath =  $appendPath . $file;
+    								    if($includeExtension == true) {
+    								        $filePath .= '.' . $fileType;
+    								    }
+    									$returnFiles[] = $filePath;
+    								}
+    							}else{
+    								if($fileType == $type){
+    								    $filePath =  $appendPath . $file;
+    								    if($includeExtension == true) {
+    								        $filePath .= '.' . $fileType;
+    								    }
+    									$returnFiles[] = $filePath;
+    								}
+    							}
+    						}
+    					}else{ //the type was not set.  return all files and directories
+    						$returnFiles[] = $file;	
+    					}
+				    }
 				}
 				
 				if($returnFiles){

@@ -24,7 +24,8 @@ $(".css").markItUp(mySettings);
 		echo $this->FormRow(
 			$this->GetTranslation('Design Notes'), $this->FormTextarea('notes',$this->design->getValue('notes'), array('class' => 'med'))
 		);
-	echo $this->FormRow(
+	    echo $this->FormRow("&nbsp", $this->formCheckbox('is_default', intval($this->design->getValue('is_default'))) . ' ' . $this->GetTranslation('This is the default site design'));
+    	echo $this->FormRow(
 		'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update Design')));
     ?>
 </fieldset>

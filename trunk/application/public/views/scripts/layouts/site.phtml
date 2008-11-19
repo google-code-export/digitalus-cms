@@ -7,16 +7,19 @@ $this->placeholder('header_search_content')->set(
     $this->partial('partials/header/search-form.phtml')
 );
 
-$this->placeholder('content_content')->set(
-    $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent())
-);
+if(is_object($this->page)) {
+    $this->content = $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent());
+    $this->submenu = $this->RenderMenu($this->page->getId(), 2);
+}
+
+$this->placeholder('content_content')->set($this->content);
 
 $this->placeholder('nav_content')->set(
     $this->RenderMenu(0)
 );
 
 $this->placeholder('sidebar_content')->set(
-    $this->RenderMenu($this->page->getId(), 2)
+    $this->submenu
 );
 
 $this->placeholder('footer_content')->set(

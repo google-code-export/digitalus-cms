@@ -7,6 +7,7 @@ class DSF_View_Helper_Admin_RenderSidebar
         'report'        =>  'site',
         'user'          =>  'site',
         'page'          =>  'page',
+        'media'          =>  'media',
         'design'		=>	'design',
         'module'        =>  'module' 
     );

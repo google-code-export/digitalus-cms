@@ -3,4 +3,11 @@
 <p>This cms uses a system of modules to add custom functionality to your website.</p>
 </div>
 
+<?php 
+    $media = new DSF_Media();
+    if($media->isAllowed('image/gdif')) {
+        Zend_Debug::dump('ok');
+    }
+?>
+
 
