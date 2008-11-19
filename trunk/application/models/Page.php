@@ -62,6 +62,15 @@ class Page extends DSF_Db_Table
     	}
     }
     
+    public function pageExists(DSF_Uri $uri)
+    {
+        if($this->_fetchPointer($uri->toArray(), 0)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     public function edit($pageArray)
     {
     	$pageId = $pageArray['page_id'];
@@ -224,7 +233,7 @@ class Page extends DSF_Db_Table
     
     // the following functions handle the site tree
     
-        public function fetchPointer($uri)
+    public function fetchPointer($uri)
     {
     	if(!is_array($uri)) {
     		//return home page
@@ -278,6 +287,12 @@ class Page extends DSF_Db_Table
         return $this->find($result->parent_id)->current();
     }
     
+    /**
+     * this function returns an array of the parents of the current page
+     *
+     * @param mixed $page
+     * @return unknown
+     */
     public function getParents($page)
     {
     	$parents = null;
@@ -551,7 +566,7 @@ class Page extends DSF_Db_Table
     
     private function _getPageByLabel($label, $parent = 0)
     {
-    	if($label == 'p') {
+    	if($label != 'p') {
 	    	$where[] = $this->_db->quoteInto("(label = ? OR name = ?)", $label);
 	    	$where[] = $this->_db->quoteInto("parent_id = ?", $parent);
 	    	$page = $this->fetchRow($where);

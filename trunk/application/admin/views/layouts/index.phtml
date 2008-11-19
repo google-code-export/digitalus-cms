@@ -57,7 +57,20 @@ $('a.add_to_bookmarks').click(function(){
     return false;
 });
 
-$('.wysiwyg').wysiwyg();
+$('.wysiwyg').wysiwyg({
+    controls : {
+        separator04 : { visible : true },
+
+        insertOrderedList : { visible : true },
+        insertUnorderedList : { visible : true },
+        alert : {
+            visible   : true,
+            exec      : function() { alert('Hello World'); },
+            className : 'alert'
+        }
+        
+    }
+});
   
 $('.spreadsheet tr:odd').addClass('oddRow');
   

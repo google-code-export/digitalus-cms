@@ -184,10 +184,6 @@
 
             separator01 : { visible : false, separator : true },
 
-            indent  : { visible : false },
-            outdent : { visible : false },
-
-            separator02 : { visible : false, separator : true },
 
             subscript   : { visible : false, tags : ['sub'] },
             superscript : { visible : false, tags : ['sup'] },
@@ -199,9 +195,11 @@
 
             separator04 : { visible : false, separator : true },
 
-            insertOrderedList    : { visible : false, tags : ['ol'] },
-            insertUnorderedList  : { visible : false, tags : ['ul'] },
+            insertOrderedList    : { visible : true, tags : ['ol'] },
+            insertUnorderedList  : { visible : true, tags : ['ul'] },
             insertHorizontalRule : { visible : false, tags : ['hr'] },
+            indent  : { visible : true },
+            outdent : { visible : true },
 
             separator05 : { separator : true },
 
@@ -260,6 +258,7 @@
             h1 : { visible : true && !( $.browser.mozilla ), className : 'h1', command : 'formatBlock', arguments : ['Heading 1'], tags : ['h1'] },
             h2 : { visible : true && !( $.browser.mozilla ), className : 'h2', command : 'formatBlock', arguments : ['Heading 2'], tags : ['h2'] },
             h3 : { visible : true && !( $.browser.mozilla ), className : 'h3', command : 'formatBlock', arguments : ['Heading 3'], tags : ['h3'] },
+            p: { visible : true && !( $.browser.mozilla ), className : 'p', command : 'formatBlock', arguments : ['p'], tags : ['p'] },
 
             separator07 : { visible : false, separator : true },
 
@@ -275,7 +274,7 @@
             separator09 : { separator : true },
 
             html : {
-                visible : false,
+                visible : true,
                 exec    : function()
                 {
                     if ( this.viewHTML )

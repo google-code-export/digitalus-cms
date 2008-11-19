@@ -28,7 +28,7 @@
 		</filepath>	
 	<language>
 	  <path>../application/data/language</path>
-	  <defaultLocale>fr</defaultLocale>
+	  <defaultLocale>en</defaultLocale>
 	  <translations>
 	      <en>english</en>
 	      <de>german</de>

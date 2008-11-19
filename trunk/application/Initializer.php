@@ -94,6 +94,12 @@ class Initializer extends Zend_Controller_Plugin_Abstract
     	$this->initView();
     	$this->initControllers();
    }
+   
+   public function preDispatch(Zend_Controller_Request_Abstract $request)
+    {
+        $this->initCmsRouter();       
+    }
+   
     
 	public function initConfig()
 	{
@@ -183,6 +189,22 @@ class Initializer extends Zend_Controller_Plugin_Abstract
         
         $this->_front->setDefaultModule('public');
 	}  
+	
+	/**
+	 * this function overrides the Zend Router if the page exists in the cms
+	 *
+	 */
+	public function initCmsRouter()
+	{
+	    $uri = new DSF_Uri();
+	    $page = new Page();
+	    if($page->pageExists($uri)) {
+	        $request = $this->_front->getRequest();
+	        $request->setModuleName('public');
+	        $request->setControllerName('index');
+	        $request->setActionName('index');
+	    }
+	}
 	
 
 }

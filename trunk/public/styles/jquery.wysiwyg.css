@@ -38,6 +38,7 @@ div.wysiwyg ul.panel li a.h3 { background-position: -32px -32px; }
 div.wysiwyg ul.panel li a.h4 { background-position: -48px -32px; }
 div.wysiwyg ul.panel li a.h5 { background-position: -64px -32px; }
 div.wysiwyg ul.panel li a.h6 { background-position: -80px -32px; }
+div.wysiwyg ul.panel li a.p { background-position: 0 -32px; }
 
 div.wysiwyg ul.panel li a.cut { background-position: -32px -64px; }
 div.wysiwyg ul.panel li a.copy { background-position: -48px -64px; }
