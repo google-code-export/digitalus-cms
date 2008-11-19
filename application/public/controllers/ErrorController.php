@@ -18,15 +18,21 @@ class ErrorController extends Zend_Controller_Action
 	            // 404 error -- controller or action not found                
 	            $this->getResponse()->setRawHeader('HTTP/1.1 404 Not Found');
 	            $this->view->title = 'HTTP/1.1 404 Not Found';
+	            $this->view->message = "Sorry, we could not find the page you requested";
 	            break;
 	        default:
 	            // application error; display error page, but don't change                
 	            // status code
 	            $this->view->title = 'Application Error';
+	            $this->view->message = $errors->exception;
 	            break;
 	    }
 	    
-	    $this->view->message = $errors->exception;
+	    $this->view->content = $this->view->render('error/error.phtml');
+	    $this->view->submenu = $this->view->render('error/help-menu.phtml');
+	    $this->view->LoadDefaultDesign();
+	    $this->view->layout()->page = $this->view->render('layouts/' . $this->view->layout);
+	    $this->_forward('index', 'index');
 	} 
 
 }

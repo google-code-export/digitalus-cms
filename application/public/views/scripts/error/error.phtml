@@ -1,8 +1,7 @@
 <?php
 $this->headTitle('Error Page');
-$this->placeholder('headline')->set($this->title);
 ?>
-
+<h1><?php echo $this->title?></h1>
 <?php if ($this->message): ?>
 	<p>The following error occurred:</p>
 	<?php echo $this->message ?>

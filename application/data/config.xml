@@ -20,21 +20,27 @@
         	<adminTemplate>digitalus-1-5</adminTemplate>
     	</design>
 		<filepath>
+			<media>media</media>
 			<template>templates</template>
 			<script>public/scripts</script>
 			<style>public/styles</style>
 			<image>public/images</image>
 			<adminViews>application/admin/views/scripts</adminViews>
 		</filepath>	
-	<language>
-	  <path>../application/data/language</path>
-	  <defaultLocale>en</defaultLocale>
-	  <translations>
-	      <en>english</en>
-	      <de>german</de>
-	      <fr>french</fr>
-	  </translations>
-	</language>        		
+		 <filetypes>
+		    <jpg type='image' mime='image/jpeg' />
+		    <gif type='image' mime='image/gif' />
+		    <png type='image' mime='image/png' />
+		</filetypes>
+		<language>
+		  <path>../application/data/language</path>
+		  <defaultLocale>en</defaultLocale>
+		  <translations>
+		      <en>english</en>
+		      <de>german</de>
+		      <fr>french</fr>
+		  </translations>
+		</language>        		
 	</DSF>
 	<testing extends='DSF'>
         <database>

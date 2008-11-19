@@ -9,17 +9,21 @@ class IndexController extends Zend_Controller_Action
 	
 	public function init()
 	{
-		$view = new Zend_View();
-		$this->_setParam('view',$view);
 	}
 	
 	public function indexAction()
-	{	
-		DSF_Builder::loadPage();
-		$this->page = DSF_Builder::getPage();
-		$this->view->page = $this->page;
-		$this->view->layout()->page = $this->view->render('layouts/' . $this->page->getLayout());
-		
+	{
+	    if(!$this->view->content) {	
+    		DSF_Builder::loadPage();
+    		$this->page = DSF_Builder::getPage();
+    		$this->view->page = $this->page;
+    		$this->view->layout()->page = $this->view->render('layouts/' . $this->page->getLayout());
+	    }
+	}
+	
+	public function renderPageAction()
+	{
+	    
 	}
 }
 

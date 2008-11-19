@@ -14,7 +14,7 @@ class Design extends Zend_Db_Table
 		return $this->_db->lastInsertId();
 	}
 	
-	public function updateDesign($id, $name, $notes, $layout, $stylesheets, $inlineStyles)
+	public function updateDesign($id, $name, $notes, $layout, $stylesheets, $inlineStyles, $isDefault)
 	{
 		$row = $this->find($id)->current();
 		$row->name = $name;
@@ -22,6 +22,10 @@ class Design extends Zend_Db_Table
 		$row->layout = $layout;
 		$row->styles =	serialize($stylesheets);
 		$row->inline_styles = $inlineStyles;
+		if($isDefault == 1) {
+		    $this->_resetDefault();
+		}
+		$row->is_default = $isDefault;
 		return $row->save();
 	}
 	
@@ -33,6 +37,20 @@ class Design extends Zend_Db_Table
 		}
 	}
 	
+	public function getDefaultDesign()
+	{
+	    $select = $this->select();
+	    $select->where("is_default = 1");
+	    return $this->fetchRow($select);
+	}
+		
+    protected  function _resetDefault()
+    {
+        //reset all to null
+        $data['is_default'] = 0;
+        $this->update($data, null);
+    }
+    
 	public function listDesigns()
 	{
 		$select = $this->select();
@@ -59,7 +77,13 @@ class Design extends Zend_Db_Table
 	
 	public function setDesign($designId)
 	{
-		$this->_design = $this->find($designId)->current();
+	    $design = $this->find($designId)->current();
+	    if($design != null) {
+		    $this->_design = $design;
+		    return true;
+	    }else{
+	        return false;
+	    }
 	}
 	
 	public function getStylesheets()

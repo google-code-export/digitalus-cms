@@ -8,6 +8,7 @@ class DSF_View_Helper_Admin_RenderAdminMenu
         'user'          =>  'site',
         'page'          =>  'page',
         'navigation'	=>	'navigation',
+        'media'	        =>	'media',
         'design'		=>	'design',
         'module'        =>  'module' 
     );
@@ -43,6 +44,10 @@ class DSF_View_Helper_Admin_RenderAdminMenu
 	        
 	        if($this->hasAccess('admin_navigation')) {
 	        	$menu .= "<li class='large'><a href='/admin/navigation' id='navigationLink'" . $this->isSelected('navigation') . ">" . $this->view->GetTranslation('Navigation') . "</a></li>";
+	        }
+	        
+	        if($this->hasAccess('admin_media')) {
+	        	$menu .= "<li class='med'><a href='/admin/media' id='mediaLink'" . $this->isSelected('media') . ">" . $this->view->GetTranslation('Media') . "</a></li>";
 	        }
 	        
 	        if($this->hasAccess('admin_design')) {

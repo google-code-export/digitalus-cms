@@ -1,0 +1,12 @@
+<data>
+    <cms>
+        <downloadPath>http://digitalus-site-manager.googlecode.com/files/digitalus%20cms%201.0.1.zip</downloadPath>
+    </cms>
+    <database>
+        <host>localhost</host>
+        <name>test_installer</name>
+        <username>root</username>
+        <password></password>
+    </database>
+</data>
+        

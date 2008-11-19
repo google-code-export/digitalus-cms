@@ -30,11 +30,12 @@ $this->headScript()->prependFile('/scripts/jquery.pack.js')
                    ->appendFile('/scripts/jquery.treeview.js')
                    ->appendFile('/scripts/idTabs.js')
                    ->appendFile('/scripts/jquery.wysiwyg.js')
+                   ->appendFile('/scripts/jquery.multifile.js')
                    ->appendFile('/scripts/jquery.cookie.js');
 echo $this->headScript();
 
 //jquery block
-$this->placeholder('jquery')->captureStart();
+$this->placeholder('baseJquery')->captureStart();
 ?>
 $(".message_box").bind("click",function(){
        $(this).fadeOut("slow");
@@ -74,7 +75,7 @@ $('.wysiwyg').wysiwyg({
   
 $('.spreadsheet tr:odd').addClass('oddRow');
   
-<?php $this->placeholder('jquery')->captureEnd();?>	
+<?php $this->placeholder('baseJquery')->captureEnd();?>	
 </head>
 
 <body>
@@ -115,7 +116,7 @@ $('.spreadsheet tr:odd').addClass('oddRow');
 </body>
 <script type="text/javascript">
 $(document).ready(function() {
-	  <?php echo $this->placeholder('jquery');?>
+	  <?php echo $this->placeholder('jquery');echo $this->placeholder('baseJquery');?>
 });
 </script>
 </html>
