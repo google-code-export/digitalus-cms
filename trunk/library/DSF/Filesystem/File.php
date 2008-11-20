@@ -159,5 +159,57 @@ class DSF_Filesystem_File
         return $fileName;
     }
     
+    static function getFileExtension($filename)
+    {
+        return end(explode(".", $filename));
+    }
+    
+	static function isUploaded($key)
+	{
+	    if($_FILES[$key] && !empty($_FILES[$key]['tmp_name']))
+	    {
+	        return true;
+	    }
+	}
+	
+	/**
+	 * you pass this function the key for the $_FILES[key] array 
+	 * and the new filepath to move the file to
+	 * then add the new filename
+	 * if $createPath is true then this will attempt to create the directories required for the path
+	 *
+	 * @param string $key
+	 * @param string $path
+	 * @param string $filename
+	 * @param bool $createPath
+	 */
+	static function upload($key, $path, $filename = false, $createPath = true, $base = './')
+	{
+		if(self::isUploaded($key))
+		{
+		    //default to the name on the client machine
+		    if(!$filename){$filename = $_FILES[$key]['name'];}
+		    
+		    $path = DSF_Toolbox_String::stripLeading('/', $path);
+		    if($createPath)
+		    {
+		        //attempt to create the new path
+		        DSF_Filesystem_Dir::makeRecursive($base, $path);
+		    }
+		    
+		    //clean the filename
+		    $filename = DSF_Filesystem_File::cleanFilename($filename);
+		    $filename = basename($filename);
+		    $fullPath .= "/" . $filename;
+		    if(move_uploaded_file($_FILES[$key]['tmp_name'], $fullPath))
+		    {
+		        //return the filepath if things worked out
+		        //this is relative to the site root as this is the format that will be required for links and what not
+		        $fullPath = DSF_Toolbox_String::stripLeading('./', $fullPath);
+		        return $fullPath;
+		    }
+		}
+	}
+    
     
 }

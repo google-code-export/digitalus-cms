@@ -19,8 +19,9 @@
         	<adminLayout>index</adminLayout>
         	<adminTemplate>digitalus-1-5</adminTemplate>
     	</design>
-		<filepath>
+		 <filepath>
 			<media>media</media>
+			<trash>trash</trash>
 			<template>templates</template>
 			<script>public/scripts</script>
 			<style>public/styles</style>
