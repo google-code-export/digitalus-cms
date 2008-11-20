@@ -20,13 +20,13 @@
  * @version    $Id: Resource.php Tue Dec 25 21:52:35 EST 2007 21:52:35 forrest lyman $
  */
 
-class DSF_Resource
+class DSF_File
 {
 	/**
-	 * the path to the resources dir
+	 * the path to the Files dir
 	 *
 	 */
-    const PATH_TO_RESOURCES = './public/resources';
+    const PATH_TO_FileS = './public/Files';
 
 	/**
 	 * you pass this function the key for the $_FILES[key] array 
@@ -50,10 +50,8 @@ class DSF_Resource
 		    if($createPath)
 		    {
 		        //attempt to create the new path
-		        DSF_Filesystem_Dir::makeRecursive(self::PATH_TO_RESOURCES, $path);
+		        DSF_Filesystem_Dir::makeRecursive(self::PATH_TO_FileS, $path);
 		    }
-		    //upload the file
-		    $fullPath = self::PATH_TO_RESOURCES . '/' . $path;
 		    
 		    //clean the filename
 		    $filename = DSF_Filesystem_File::cleanFilename($filename);

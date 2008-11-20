@@ -113,7 +113,7 @@ class DSF_Filesystem_Dir
 	{
     	if(is_dir($source))
     	{
-    		rename($source, $newName);
+    		return rename($source, $newName);
     	}
 	}
 	
