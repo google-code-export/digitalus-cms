@@ -23,15 +23,22 @@
 </fieldset>
 </form>
 
+<form action="/admin/site/edit" method="post" id='meta'>
+<fieldset>
+    <legend><?php echo $this->GetTranslation('Meta Data');?></legend>
+<?php
+	echo $this->FormRow($this->GetTranslation('Doc Type'), $this->selectDoctype('setting[doc_type]',$this->settings->doc_type));
+	echo $this->FormRow($this->GetTranslation('Default charset'), $this->FormText('setting[default_charset]',$this->settings->default_charset));
+	echo $this->FormRow('&nbsp;', $this->FormSubmit('meta',$this->GetTranslation('Update Page Meta Data')));
+?>
+</fieldset>
+</form>
+
 <form action="/admin/site/edit" method="post" id='international'>
 <fieldset>
     <legend><?php echo $this->GetTranslation('Internationalization');?></legend>
 <?php
-	echo $this->FormRow($this->GetTranslation('Default locale'), $this->FormText('setting[default_locale]',$this->settings->default_locale));
-	echo $this->FormRow($this->GetTranslation('Default locale'), $this->FormText('setting[default_language]',$this->settings->default_language));
-	echo $this->FormRow($this->GetTranslation('Default charset'), $this->FormText('setting[default_charset]',$this->settings->default_charset));
-	echo $this->FormRow($this->GetTranslation('Date format'), $this->FormText('setting[default_date_format]',$this->settings->default_date_format));
-	echo $this->FormRow($this->GetTranslation('Date format'), $this->FormText('setting[default_currency_format]',$this->settings->default_currency_format));
+	echo $this->FormRow($this->GetTranslation('Default language'), $this->selectLanguage('setting[default_language]',$this->settings->default_language));
 	echo $this->FormRow('&nbsp;', $this->FormSubmit('language',$this->GetTranslation('Update Internationalization Settings')));
 ?>
 </fieldset>
@@ -43,12 +50,13 @@
 <?php
 	echo $this->FormRow($this->GetTranslation('Default email address'), $this->FormText('setting[default_email]',$this->settings->default_email));
 	echo $this->FormRow($this->GetTranslation('Default sender'), $this->FormText('setting[default_email_sender]',$this->settings->default_email_sender));
-	echo $this->FormRow($this->GetTranslation('Transport'), $this->formCheckbox('setting[use_smtp_mail]', $this->settings->use_smtp_mail) 
+	echo $this->FormRow($this->GetTranslation('Transport'), $this->formCheckbox('setting[use_smtp_mail]', intval($this->settings->use_smtp_mail)) 
 		. ' ' . $this->GetTranslation('Use SMTP transport '));
 	echo $this->FormRow($this->GetTranslation('SMTP host'), $this->FormText('setting[smtp_host]',$this->settings->smtp_host));
 	echo $this->FormRow($this->GetTranslation('SMTP username'), $this->FormText('setting[smtp_username]',$this->settings->smtp_username));
 	echo $this->FormRow($this->GetTranslation('SMTP password'), $this->FormPassword('setting[smtp_password]',$this->settings->smtp_password));
 	echo $this->FormRow('&nbsp;', $this->FormSubmit('mail',$this->GetTranslation('Update Mail Settings')));
+	echo $this->FormRow('&nbsp;', $this->link('Send test message', '/admin/site/mail-test', 'email_go.png'));
 ?>
 </fieldset>
 </form>
