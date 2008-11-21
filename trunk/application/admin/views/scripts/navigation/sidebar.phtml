@@ -1,29 +1,20 @@
-<div class="formBox">
-<h2>About navigation</h2>
-<p>This is where you manage your site menus and any redirects you happen to need.</p>
-</div>
+<?php 
+    $this->placeholder("sidebarHeadline")->set($this->GetTranslation("Navigation"));
+    
+    $mdlMenu = new Menu();
+    $menus = $mdlMenu->getMenus();    
+?>
 
-<div class="formBox">
-<h2>Site menus</h2>
-<script type="text/javascript">
-$(document).ready(function()
-{
-	$("#menuTree").treeview({			
-		persist: "cookie",
-		collapsed: true,
-		unique: true
-	});
-}
-);
-</script>
-<div id='mainMenu'><a href="/admin/navigation/open">Main Menu</a></div>
-<?php echo $this->RenderMenuBrowser(0);?>
-
-
-</div>
-
-<div class="formBox">
-<h2>Redirectors</h2>
-<p>Redirectors enable you to redirect a visitor request to a  new page.</p>
-<p><a href="/admin/navigation/redirector">Update Redirectors</a></p>
-</div>
+<ul>
+	<li><?php echo $this->link('Main Menu', '/admin/navigation/open/id/0', 'text_list_bullets.png');?></li>
+<?php 
+    if($menus) {
+        foreach ($menus as $menu) {
+            $label = $mdlMenu->getLabel($menu);
+?>
+	<li><?php echo $this->link($label, '/admin/navigation/open/id/' . $menu->id, 'text_list_bullets.png');?></li>
+<?php 
+        }
+    }
+?>
+</ul>

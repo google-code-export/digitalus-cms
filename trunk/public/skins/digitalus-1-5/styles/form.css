@@ -469,6 +469,17 @@ a.link img.icon{
 .contentBrowser{
 }
 
+a.handle{
+	background: url('../../../images/icons/text_linespacing.png') no-repeat;
+}
+
+.default{
+	color:#999;
+	font-style:italic;
+	width:150px;
+	display:block;
+	float:left;
+}
 	
 
 

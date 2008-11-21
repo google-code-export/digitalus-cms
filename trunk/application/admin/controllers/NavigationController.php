@@ -26,6 +26,10 @@ class Admin_NavigationController extends Zend_Controller_Action
 	{
 		//the selected admin menu item
 		$this->view->adminSection = 'navigation';
+	    $this->view->breadcrumbs = array(
+	       'Navigation' =>   '/admin/navigation'
+	    );
+	    
 	}
 	
 	/**
@@ -47,9 +51,21 @@ class Admin_NavigationController extends Zend_Controller_Action
 	{
 		$mdlMenu = new Menu();
 		$menuId = $this->_request->getParam('id', 0);
+		
+		if($menuId > 0) {
+		    $label = $mdlMenu->getLabel($menuId); 
+		}else{
+		    $label = "Root";
+		}
+		
+		$this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '/admin/index/bookmark/url/admin_navigation_open_id_' . $menuId;
+	   
+		 
+	    $this->view->breadcrumbs['Open Menu: ' . $label] =   '/admin/navigation/open/id/' . $menuId;
+	    
 		//fetch the menu
 		$this->view->menuId = $menuId;
-		$this->view->menu = $mdlMenu->open($menuId);	
+		$this->view->menu = $mdlMenu->open($menuId, true);	
 	}
 	
 	/**
