@@ -51,11 +51,24 @@ class Admin_MediaController extends Zend_Controller_Action {
     {
         $baseFolder = DSF_Filter_Post::get('path');
         $newFolder = DSF_Filter_Post::get('folder_name');
+        
+        //dont allow access outside the media folder
+        if(strpos($baseFolder, './') || strpos($newFolder, './')) {
+            throw new Zend_Exception("Illegal file access attempt. Operation cancelled!");
+        }
+        
+        
         $forwardPath = $baseFolder;
         if(!empty($newFolder)) {
+            $fullPath = $this->pathToMedia;
+            
             $base = str_replace('media_', '', $baseFolder);
-            $base = DSF_Toolbox_String::stripUnderscores($base);
-            $fullPath = $this->pathToMedia . '/' . $base . '/' . $newFolder;
+            
+            if(!empty($base)) {
+                $base = DSF_Toolbox_String::stripUnderscores($base);
+                $fullPath .= '/' . $base;
+            }
+            $fullPath .= '/' . $newFolder;
             $result = mkdir($fullPath, 0777);
             if($result) {
                 $forwardPath .= '_' . $newFolder;

@@ -1,0 +1,17 @@
+<p><?php echo $this->GetTranslation("Click the new parent page for this page to move it.")?></p>
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$("#parentTree").treeview({			
+		persist: "cookie",
+		collapsed: true,
+		unique: true
+	});
+}
+);
+</script>
+
+
+<?php
+echo $this->RenderFileBrowser(0, '/admin/page/move/id/' . $this->pageId . '/parent/', null, 0, $id = 'parentTree');
+?>
