@@ -16,7 +16,7 @@
 <fieldset>
     <legend><?php echo $this->GetTranslation('Managing Content');?></legend>
 <?php 
-	echo $this->FormRow($this->GetTranslation('Menu links'), $this->formCheckbox('setting[addMenuLinks]', intval($this->settings->addMenuLinks)) 
+	echo $this->FormRow($this->GetTranslation('Menu links'), $this->formCheckbox('setting[add_menu_links]', intval($this->settings->add_menu_links)) 
 		. ' ' . $this->GetTranslation('Automatically add menu links'));
 	echo $this->FormRow('&nbsp;', $this->FormSubmit('content',$this->GetTranslation('Update Content Settings')));
 ?>

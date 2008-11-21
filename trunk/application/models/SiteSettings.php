@@ -129,3 +129,6 @@ class SiteSettings extends Xml
 		return $this->_xml;
 	}
 }
+
+
+ 
