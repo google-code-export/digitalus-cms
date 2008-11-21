@@ -20,11 +20,15 @@ class Page extends DSF_Db_Table
     		$contentTemplate = $this->_defaultTemplate;
     	}
     	
+    	$settings = new SiteSettings();
+    	$makeMenuLinks = $settings->get('add_menu_links');
+    	
     	//first create the new page
     	$data = array(
     		'name'  			=>	$pageName,
     		'content_template'	=>	$contentTemplate,
-			'parent_id'			=>	$parentId				
+			'parent_id'			=>	$parentId,
+    	    'show_on_menu'		=>  $makeMenuLinks				
     	);
     	$this->insert($data);
     	$id = $this->_db->lastInsertId();
