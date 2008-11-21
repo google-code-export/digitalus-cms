@@ -1,0 +1,18 @@
+ <?php $this->placeholder("sidebarHeadline")->set('Media')?>
+
+<div id='contentBrowser'>
+<script type="text/javascript">
+$(document).ready(function()
+{
+	$("#fileTree").treeview({			
+		persist: "cookie",
+		collapsed: true,
+		unique: true
+	});
+}
+);
+</script>
+<h2><?php echo $this->GetTranslation('Media Folders')?></h2>
+<?php echo $this->RenderMediaBrowser($this->pathToMedia,'admin/media/open-folder/folder',null);?>
+<p class='note'><?php echo $this->GetTranslation('Note: The filenames are displayed as: (menu label/page title)');?></p>
+</div>
