@@ -12,6 +12,7 @@ list-style:none;
 }
 
 #adminMenu li{
+	display:inline;
 }
 
 #adminMenu a{

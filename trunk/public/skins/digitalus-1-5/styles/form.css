@@ -42,7 +42,7 @@ width:600px;
 
 #form fieldset{
 padding:5px;
-border:#FEBC5E 1px solid;
+border:#ccc 1px solid;
 margin:0 5px 10px 5px;
 }
 
@@ -429,5 +429,43 @@ height:300px;
 .html, .wiki, .css{
 	width:450px;
 }
+
+a.link img.icon{
+	border:none;
+	margin:0 10px 0 0;
+}
+
+.column a, #form a{
+	text-decoration:none;
+	color:#000;
+	height:1.5em;
+	
+}
+.column a:hover{
+	color:#5D86BD;
+}
+
+.column ul, #form ul{
+	list-style:none;
+	padding:5px;
+}
+
+.column ul li a,#form ul li a{
+	text-decoration:none;
+	color:#000;
+}
+
+.column a:hover img, #form a:hover img{
+	opacity:.8;
+}
+
+.notice{
+	border:#ff0000 2px dashed;
+	padding:10px;
+	margin:10px;
+	color:#666;
+}
+
+	
 
 
