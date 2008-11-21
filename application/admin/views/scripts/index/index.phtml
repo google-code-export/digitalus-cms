@@ -1,11 +1,14 @@
 <?php
 $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
 ?>
+
 <fieldset class="formColumn">
     <legend><?php echo $this->GetTranslation('My Account');?></legend>
     <form action="/admin/user/update-my-account" method="POST">
 	<?php
-	    echo $this->formHidden('id',0);
+	    $u = new User();
+		$user = $u->getCurrentUser();
+	    echo $this->formHidden('id',$user->id);
 	    echo $this->FormRow($this->GetTranslation('First Name'), $this->formText('first_name' , $this->identity->first_name));
 	    echo $this->FormRow($this->GetTranslation('Last Name'), $this->formText('last_name', $this->identity->last_name));
 	    echo $this->FormRow($this->GetTranslation('Email'), $this->formText('email', $this->identity->email));
@@ -23,7 +26,10 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
     <?php if($this->bookmarks){?>
     <ul>
     <?php foreach ($this->bookmarks as $bookmark){?>
-        <li><a href="/admin/index/delete-bookmark/id/<?php echo $bookmark->id;?>">[x]</a> <a href="/<?php echo $this->CleanUri($bookmark->content, true, true);?>"><?php echo $bookmark->node;?></a></li>
+    	<li><?php 
+    	    echo $this->link(null, '/admin/index/delete-bookmark/id/' . $bookmark->id, 'link_delete.png');
+    	    echo $this->link($bookmark->node, '/' . DSF_Toolbox_String::stripUnderscores($bookmark->content));
+	    ?></li>
     <?php } ?>
     </ul>
     <?php }else{

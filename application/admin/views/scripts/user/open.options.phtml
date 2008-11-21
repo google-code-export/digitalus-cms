@@ -1,7 +1,9 @@
+<?php $this->placeholder("optionsHeadline")->set($this->GetTranslation('User Options'));?>
+
 <ul class="idTabs">
-    <li><a href="#general"><?php echo $this->GetTranslation('Account');?></a></li>
-    <li><a href="#password"><?php echo $this->GetTranslation('Credentials');?></a></li>
-    <li><a href="#permissions"><?php echo $this->GetTranslation('Permissions');?></a></li>
+<li><?php echo $this->link('Account', '#general', 'vcard_edit.png');?></li>
+<li><?php echo $this->link('Credentials', '#password', 'server_key.png');?></li>
+<li><?php echo $this->link('Permissions', '#permissions', 'application_cascade.png')?></li>
 </ul>
 
 <h3><?php echo $this->GetTranslation('Copy User Permissions');?></h3>
@@ -12,4 +14,5 @@
     <?php echo $this->SelectUser('user_id', null, null, $this->user->id);?>
     <?php echo $this->FormSubmit('update',$this->GetTranslation('Copy Users Permissions'));?>
 </form>
+
 

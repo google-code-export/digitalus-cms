@@ -56,7 +56,7 @@ class Admin_UserController extends Zend_Controller_Action
         $breadcrumbLabel = $this->view->GetTranslation('Open User') . ": " . $this->view->user->first_name . ' ' . $this->view->user->last_name;
 	    $this->view->breadcrumbs[$breadcrumbLabel] = '/admin/user/open/id/' . $id;
 	    $this->view->toolbarLinks = array();
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Delete User')] = '/admin/user/delete/id/' . $id;
+	    $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = '/admin/user/delete/id/' . $id;
 	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '/admin/index/bookmark/url/admin_user_open_id_' . $id;
 	}
 
@@ -87,12 +87,17 @@ class Admin_UserController extends Zend_Controller_Action
 	 */
 	function editAction()
 	{
-        $u = new User();
+	    $u = new User();
         if(DSF_Filter_Post::has('update_permissions')) {
             //update the users permissions
             $resources = DSF_Filter_Post::raw('acl_resources');
             $id = DSF_Filter_Post::int('id');
             $u->updateAclResources($id, $resources);
+        }elseif(DSF_Filter_Post::has('admin_user_password')) {
+            $id = DSF_Filter_Post::int('id');
+            $password = DSF_Filter_Post::get('newPassword');
+            $passwordConfirm = DSF_Filter_Post::get('newConfirmPassword');
+            $u->updatePassword($id, $password, true, $passwordConfirm);
         }else{
             $user = $u->updateFromPost();
             $id = $user->id;
@@ -106,7 +111,15 @@ class Admin_UserController extends Zend_Controller_Action
     public function updateMyAccountAction()
     {
     	$u = new User();
-    	$u->updateFromPost();
+        if(DSF_Filter_Post::int('update_password') === 1) {
+            $id = DSF_Filter_Post::int('id');
+            $password = DSF_Filter_Post::get('password');
+            $passwordConfirm = DSF_Filter_Post::get('confirmation');
+            $u->updatePassword($id, $password, true, $passwordConfirm);
+        }else{
+            $user = $u->updateFromPost();
+            $id = $user->id;
+        }
     	$url = '/admin/index';
     	$this->_redirect($url);
     }

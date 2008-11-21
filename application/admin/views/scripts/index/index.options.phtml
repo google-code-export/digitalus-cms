@@ -1,15 +1,19 @@
 <?php 
 $this->placeholder('optionsHeadline')->Set($this->translate('My Content'));
 echo $this->RenderText('The following pages are the pages that you have recently created.', 'p');
+?>
+
+<p class='notice'>This section needs to be done.  The page model needs to save the author, then return a rowset of the pages.</p>
+
+<?php
 if($this->pages) {
     ?>
     <ul>
     <?php foreach ($this->pages as $page){ ?>
-        <li class="page"><a href="/admin/page/open/id/<?php echo $page->id;?>" title="<?php echo $this->RenderDate($page->create_date);?>"><?php echo $page->title;?></a></li>
+        <li class="page">
+        	<?php echo $this->link($page->name, '/admin/page/edit/id/' . $page->id, 'page_white_text.png');?>
+    	</li>
     <?php } ?> 
     </ul>
 <?php } ?>
 
-<h3>Modules</h3>
-
-<?php echo $this->UsersModuleLinks();

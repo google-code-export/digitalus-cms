@@ -138,6 +138,23 @@ class User extends DSF_Db_Table
 		//Zend_Debug::dump($this->data);die();
 	}
 	
+	public function updatePassword($id, $password, $confirmationRequire = true, $confirmation = null) {
+	    $person = $this->find($id)->current();
+	    if($person) {
+	        if($confirmationRequire == true) {
+	            if($confirmation != $password) {
+	                return false;
+	            }
+	        }
+	        $person->password = md5($password);
+
+	        $result = $person->save();
+	        return $result;
+	    }else{
+	        return false;
+	    }
+	}
+	
 	public function updateAclResources($userId, $resourceArray) {
 	    $data['acl_resources'] = serialize($resourceArray);
 	    $where[] = $this->_db->quoteInto("id = ?", $userId);
@@ -265,6 +282,7 @@ class User extends DSF_Db_Table
 	public function copyPermissions($from, $to){
 	    $fromUser = $this->find($from)->current();
 	    $toUser = $this->find($to)->current();
+        Zend_Debug::dump($toUser->acl_resources);
 	    $toUser->acl_resources = $fromUser->acl_resources;
 	    return $toUser->save();
 	}
