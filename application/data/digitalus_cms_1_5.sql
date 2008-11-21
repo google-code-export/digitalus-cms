@@ -4,7 +4,7 @@ Source Host: localhost
 Source Database: digitalus_cms_1_5
 Target Host: localhost
 Target Database: digitalus_cms_1_5
-Date: 11/1/2008 7:15:00 PM
+Date: 11/21/2008 4:50:45 PM
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,7 +21,7 @@ CREATE TABLE `content_nodes` (
   PRIMARY KEY  (`id`),
   KEY `NODE_TO_PAGE` (`parent_id`),
   KEY `NODE_KEYS` (`node`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for data
@@ -31,7 +31,7 @@ CREATE TABLE `data` (
   `tags` varchar(500) default NULL,
   `data` text,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for designs
@@ -46,8 +46,9 @@ CREATE TABLE `designs` (
   `template` varchar(500) default NULL,
   `placeholders` text,
   `scripts` text,
+  `is_default` int(11) default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for error_log
@@ -154,21 +155,24 @@ CREATE TABLE `users` (
   `role` varchar(45) character set latin1 NOT NULL default 'staff',
   `acl_resources` text,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records 
 -- ----------------------------
-INSERT INTO `content_nodes` VALUES ('54', 'user_1', 'note', null, null, 'You have no notes to view');
-INSERT INTO `content_nodes` VALUES ('58', 'page_1', 'teaser', null, null, 'This is the home page');
-INSERT INTO `content_nodes` VALUES ('59', 'page_1', 'content', null, null, 'This is a little content.');
-INSERT INTO `content_nodes` VALUES ('60', 'page_1', 'update', null, null, 'Update Article');
-INSERT INTO `data` VALUES ('1', 'site_settings', '<?xml version=\"1.0\"?>\n<settings><name/><online>0</online><addMenuLinks>0</addMenuLinks><default_locale/><default_language/><default_charset/><default_date_format/><default_currency_format/><default_email/><default_email_sender/><use_smtp_mail>0</use_smtp_mail><smtp_host/><smtp_username/><smtp_password/><google_tracking></google_tracking><google_verify></google_verify></settings>\n');
+INSERT INTO `content_nodes` VALUES ('88', 'user_1', 'note', null, null, 'You have no notes to view');
+INSERT INTO `data` VALUES ('1', 'site_settings', '<?xml version=\"1.0\"?>\n<settings><name>Digitalus 1.5.0</name><online>0</online><addMenuLinks>0</addMenuLinks><default_locale/><default_language>en</default_language><default_charset>utf8</default_charset><default_date_format/><default_currency_format/><default_email>info@digitaluscms.com</default_email><default_email_sender>Digitalus CMS</default_email_sender><use_smtp_mail>0</use_smtp_mail><smtp_host></smtp_host><smtp_username></smtp_username><smtp_password></smtp_password><google_tracking/><google_verify/><title_separator> - </title_separator><add_menu_links>1</add_menu_links><doc_type>XHTML1_TRANSITIONAL</doc_type></settings>\n');
 INSERT INTO `data` VALUES ('2', 'meta_data_3', '<?xml version=\"1.0\"?>\n<meta_data><page_title>sdgdsf</page_title><filename></filename><meta_description>sdgsd</meta_description><keywords></keywords><search_tags></search_tags><update>Update Meta Data</update><page_id>3</page_id></meta_data>\n');
 INSERT INTO `data` VALUES ('3', 'properties_3', '<?xml version=\"1.0\"?>\n<properties><test>value</test><another>value</another></properties>\n');
-INSERT INTO `designs` VALUES ('14', 'Home', 'This is the home page design', 'home.phtml', 'a:1:{s:7:\"default\";a:2:{i:0;s:16:\"default/home.css\";i:1;s:17:\"default/style.css\";}}', '', null, null, null);
-INSERT INTO `designs` VALUES ('15', 'Inner', 'This is the standard inner page.', 'default.phtml', 'a:1:{s:7:\"default\";a:2:{i:0;s:17:\"default/3-col.css\";i:1;s:17:\"default/style.css\";}}', '', null, null, null);
-INSERT INTO `pages` VALUES ('1', 'home', 'homey', 'base_page', '', '0', '1', '0', null, '1');
-INSERT INTO `pages` VALUES ('9', 'test page', null, 'base_page', null, '0', null, '1', null, null);
-INSERT INTO `pages` VALUES ('10', 'Second page', null, 'base_page', null, '0', null, '0', null, null);
-INSERT INTO `users` VALUES ('1', 'test', 'admin', 'admin@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'superadmin', 'a:39:{s:11:\"admin_index\";s:1:\"1\";s:16:\"admin_site_index\";s:1:\"1\";s:15:\"admin_site_edit\";s:1:\"1\";s:18:\"admin_site_traffic\";s:1:\"0\";s:23:\"admin_site_admin-access\";s:1:\"0\";s:18:\"admin_site_console\";s:1:\"1\";s:16:\"admin_page_index\";s:1:\"1\";s:15:\"admin_page_open\";s:1:\"0\";s:15:\"admin_page_edit\";s:1:\"0\";s:14:\"admin_page_new\";s:1:\"0\";s:27:\"admin_page_advanced-options\";s:1:\"0\";s:22:\"admin_page_ajax-editor\";s:1:\"0\";s:17:\"admin_page_delete\";s:1:\"0\";s:21:\"admin_navigation_open\";s:1:\"1\";s:21:\"admin_navigation_edit\";s:1:\"0\";s:28:\"admin_navigation_redirectors\";s:1:\"1\";s:21:\"admin_user_my-account\";s:1:\"0\";s:17:\"admin_user_create\";s:1:\"1\";s:15:\"admin_user_open\";s:1:\"1\";s:15:\"admin_user_edit\";s:1:\"0\";s:17:\"admin_user_delete\";s:1:\"0\";s:11:\"mod_contact\";s:1:\"1\";s:8:\"mod_core\";s:1:\"0\";s:9:\"mod_event\";s:1:\"0\";s:23:\"mod_gallery_index_index\";s:1:\"0\";s:21:\"mod_gallery_index_add\";s:1:\"0\";s:22:\"mod_gallery_index_edit\";s:1:\"0\";s:27:\"mod_gallery_index_add-image\";s:1:\"0\";s:31:\"mod_gallery_index_update-images\";s:1:\"0\";s:24:\"mod_gallery_index_delete\";s:1:\"0\";s:14:\"mod_news_index\";s:1:\"1\";s:23:\"mod_news_category_index\";s:1:\"1\";s:21:\"mod_news_category_add\";s:1:\"0\";s:22:\"mod_news_category_edit\";s:1:\"0\";s:24:\"mod_news_category_delete\";s:1:\"0\";s:19:\"mod_news_item_index\";s:1:\"0\";s:17:\"mod_news_item_add\";s:1:\"0\";s:18:\"mod_news_item_edit\";s:1:\"0\";s:20:\"mod_news_item_delete\";s:1:\"0\";}');
+INSERT INTO `data` VALUES ('4', 'meta_data_1', '<?xml version=\"1.0\"?>\n<meta_data><page_title>sd</page_title><filename></filename><meta_description></meta_description><keywords></keywords><search_tags></search_tags><update>Update Meta Data</update><page_id>1</page_id></meta_data>\n');
+INSERT INTO `designs` VALUES ('15', 'Inner', 'This is the standard inner page.', 'site.phtml', 'a:2:{s:10:\"blank-page\";a:2:{i:0;s:7:\"nav.css\";i:1;s:9:\"style.css\";}s:8:\"grid-960\";a:1:{i:0;s:7:\"960.css\";}}', 'body{\r\nbackground:#333;\r\n}', null, null, null, '0');
+INSERT INTO `designs` VALUES ('16', 'Home', 'This is the', 'site.phtml', 'a:2:{s:10:\"blank-page\";a:1:{i:0;s:9:\"style.css\";}s:8:\"grid-960\";a:1:{i:0;s:7:\"960.css\";}}', '', null, null, null, '1');
+INSERT INTO `pages` VALUES ('3', 'Sub wiki page', '', 'base_wiki', null, '5', '0', '0', '1', '15');
+INSERT INTO `pages` VALUES ('4', 'Designing with Grid 960', '', 'base_wiki', null, '0', '5', '1', '1', '15');
+INSERT INTO `pages` VALUES ('5', 'Things to do', '', 'base_wiki', null, '0', '4', '0', '1', '15');
+INSERT INTO `pages` VALUES ('6', 'Testing Routine  ', '', 'base_wiki', null, '0', '1', '0', '1', '15');
+INSERT INTO `pages` VALUES ('7', 'Bug List', '', 'base_wiki', null, '0', '0', '0', '0', null);
+INSERT INTO `pages` VALUES ('8', 'test not on menu', null, 'base_wiki', null, '10', null, '0', null, null);
+INSERT INTO `pages` VALUES ('9', 'not on menu', '', 'base_wiki', null, '0', '2', '0', '1', null);
+INSERT INTO `pages` VALUES ('10', 'on menu', '', 'base_wiki', null, '0', '3', '0', '0', null);
+INSERT INTO `users` VALUES ('1', 'test', 'admin', 'admin@email.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'superadmin', 'a:45:{s:11:\"admin_index\";s:1:\"1\";s:16:\"admin_site_index\";s:1:\"1\";s:15:\"admin_site_edit\";s:1:\"0\";s:18:\"admin_site_traffic\";s:1:\"0\";s:23:\"admin_site_admin-access\";s:1:\"0\";s:18:\"admin_site_console\";s:1:\"1\";s:12:\"admin_report\";s:1:\"0\";s:16:\"admin_page_index\";s:1:\"0\";s:15:\"admin_page_open\";s:1:\"0\";s:15:\"admin_page_edit\";s:1:\"0\";s:14:\"admin_page_new\";s:1:\"0\";s:27:\"admin_page_advanced-options\";s:1:\"0\";s:22:\"admin_page_ajax-editor\";s:1:\"0\";s:17:\"admin_page_delete\";s:1:\"1\";s:21:\"admin_navigation_open\";s:1:\"1\";s:21:\"admin_navigation_edit\";s:1:\"1\";s:28:\"admin_navigation_redirectors\";s:1:\"1\";s:21:\"admin_user_my-account\";s:1:\"1\";s:17:\"admin_user_create\";s:1:\"1\";s:15:\"admin_user_open\";s:1:\"1\";s:15:\"admin_user_edit\";s:1:\"1\";s:17:\"admin_user_delete\";s:1:\"1\";s:11:\"admin_media\";s:1:\"0\";s:12:\"admin_design\";s:1:\"1\";s:12:\"admin_module\";s:1:\"0\";s:8:\"cmsFront\";s:1:\"0\";s:11:\"mod_contact\";s:1:\"0\";s:8:\"mod_core\";s:1:\"0\";s:9:\"mod_event\";s:1:\"0\";s:23:\"mod_gallery_index_index\";s:1:\"0\";s:21:\"mod_gallery_index_add\";s:1:\"0\";s:22:\"mod_gallery_index_edit\";s:1:\"0\";s:27:\"mod_gallery_index_add-image\";s:1:\"0\";s:31:\"mod_gallery_index_update-images\";s:1:\"0\";s:24:\"mod_gallery_index_delete\";s:1:\"0\";s:14:\"mod_news_index\";s:1:\"0\";s:23:\"mod_news_category_index\";s:1:\"0\";s:21:\"mod_news_category_add\";s:1:\"0\";s:22:\"mod_news_category_edit\";s:1:\"0\";s:24:\"mod_news_category_delete\";s:1:\"0\";s:19:\"mod_news_item_index\";s:1:\"0\";s:17:\"mod_news_item_add\";s:1:\"0\";s:18:\"mod_news_item_edit\";s:1:\"0\";s:20:\"mod_news_item_delete\";s:1:\"0\";s:12:\"mod_template\";s:1:\"0\";}');
