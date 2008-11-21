@@ -1,6 +1,4 @@
  <?php $this->placeholder("sidebarHeadline")->set('Pages')?>
-
-<div id='contentBrowser'>
 <script type="text/javascript">
 $(document).ready(function()
 {
@@ -12,6 +10,7 @@ $(document).ready(function()
 }
 );
 </script>
+
+<div class='contentBrowser'>
 <?php echo $this->RenderFileBrowser(0);?>
-<p class='note'><?php echo $this->GetTranslation('Note: The filenames are displayed as: (menu label/page title)');?></p>
 </div>
