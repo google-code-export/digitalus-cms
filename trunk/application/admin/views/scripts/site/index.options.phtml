@@ -1,8 +1,8 @@
 <?php $this->placeholder("optionsHeadline")->set($this->GetTranslation("Options"));?>
 <ul class="idTabs">
-    <li><a href="#site"><?php echo $this->GetTranslation('General');?></a></li>
-    <li><a href="#content"><?php echo $this->GetTranslation('Content');?></a></li>
-    <li><a href="#international"><?php echo $this->GetTranslation('Internationalization');?></a></li>
-    <li><a href="#mail"><?php echo $this->GetTranslation('Mail');?></a></li>
-    <li><a href="#google"><?php echo $this->GetTranslation('Google');?></a></li>
+	<li><?php echo $this->link('General', '#site', 'layout_content.png');?></li>
+    <li><?php echo $this->link('Content', '#content', 'page_white_stack.png');?></li>
+    <li><?php echo $this->link('Internationalization', '#international', 'world.png');?></li>
+    <li><?php echo $this->link('Mail', '#mail', 'email.png');?></li>
+    <li><?php echo $this->link('Google', '#google', 'google.png');?></li>
 </ul>
