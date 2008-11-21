@@ -25,6 +25,13 @@ class Initializer extends Zend_Controller_Plugin_Abstract
      * @var string Path to application root
      */
     protected $_root;
+    
+    /**
+     * this is the instance of site settings
+     *
+     * @var settings object
+     */
+    protected $_settings;
 
     /**
      * Constructor
@@ -56,6 +63,7 @@ class Initializer extends Zend_Controller_Plugin_Abstract
 
 			$this->_front->throwExceptions(true);  
         }
+        
     }
 
     /**
@@ -90,7 +98,8 @@ class Initializer extends Zend_Controller_Plugin_Abstract
     	$this->initConfig();
     	$this->initLocale();
     	$this->initCache();
-		$this->initDb();   	
+		$this->initDb(); 
+		$this->initSiteSettings(); 	
     	$this->initView();
     	$this->initControllers();
    }
@@ -135,6 +144,11 @@ class Initializer extends Zend_Controller_Plugin_Abstract
         Zend_Db_Table::setDefaultAdapter($db);
 	}
 	
+	public function initSiteSettings()
+	{
+        $this->_settings = new SiteSettings();	    
+	}
+	
 	public function initCache()
 	{
 	    //cache options
@@ -159,6 +173,9 @@ class Initializer extends Zend_Controller_Plugin_Abstract
             $viewRenderer->initView();
         }
         $view = $viewRenderer->view;
+        
+        $view->doctype($this->_settings->get('doc_type'));
+        $view->placeholder('charset')->set($this->_settings->get('default_charset'));
         
         // load digitalus helpers
 	    $helperDirs = DSF_Filesystem_Dir::getDirectories($this->_root .  '/application/helpers');

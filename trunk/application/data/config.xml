@@ -23,6 +23,7 @@
 			<media>media</media>
 			<trash>trash</trash>
 			<template>templates</template>
+			<emailTemplates>../application/public/views/scripts/email</emailTemplates>
 			<script>public/scripts</script>
 			<style>public/styles</style>
 			<image>public/images</image>

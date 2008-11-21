@@ -34,7 +34,7 @@ class DSF_Mail
 	 *
 	 * @var zend_mail_transport
 	 */
-    private $transport;
+    private $transport = null;
     
     /**
      * the zend mail object
@@ -51,11 +51,13 @@ class DSF_Mail
     {
         $this->view = new Zend_View();
         $settings = new SiteSettings();
-        $config = array('auth' => 'Login',
-                        'username' => $settings->get('smtp_username'),
-                        'password' => $settings->get('smtp_password'));
-        
-        $this->transport = new Zend_Mail_Transport_Smtp($settings->get('smtp_host'), $config);
+        if($settings->get('use_smtp_mail') == 1) {
+            $config = array('auth' => 'Login',
+                            'username' => $settings->get('smtp_username'),
+                            'password' => $settings->get('smtp_password'));
+            
+            $this->transport = new Zend_Mail_Transport_Smtp($settings->get('smtp_host'), $config);
+        }
         $this->mail = new Zend_Mail();
     }
     
@@ -72,8 +74,9 @@ class DSF_Mail
      */
     function send($recipient, $from=array(), $subject, $template, $data = false, $cc=false)
     {
+        $config = Zend_Registry::get('config');
 	    $this->view->data = $data;
-	    $this->view->addScriptPath('./templates/email');
+	    $this->view->addScriptPath($config->filepath->emailTemplates);
 		$this->view->emailBody = $this->view->render('templates/' . $template . '.phtml');
 		    
         $this->mail->setBodyHtml($this->view->render('template.phtml'));

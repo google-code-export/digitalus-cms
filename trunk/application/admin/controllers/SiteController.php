@@ -104,5 +104,18 @@ class Admin_SiteController extends Zend_Controller_Action
 	    
 	}
 	
+	public function mailTestAction()
+	{
+	    $settings = new SiteSettings();
+	    $message = new DSF_Mail();
+	    $message->send(
+	        $settings->get('default_email'), 
+	        array($settings->get('default_email'), $settings->get('default_email_sender')), 
+	        "Digitalus CMS Test Message", 
+	        'test'
+        );
+        $this->_forward('index');
+	}
+	
 	
 }
