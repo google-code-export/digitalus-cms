@@ -204,6 +204,15 @@ class Admin_PageController extends Zend_Controller_Action
 		$this->_redirect('/admin/page/edit/id/' . $pageId);
 	}
 	
+	public function moveAction()
+	{
+		$mdlPage = new Page();
+	    $id = $this->_request->getParam('id');
+	    $parentId = $this->_request->getParam('parent');
+	    $mdlPage->movePage($id, $parentId);
+	    $this->_redirect('/admin/page/edit/id/' . $id);
+	}
+	
 	public function deleteAction()
 	{
 		$id = $this->_request->getParam('id', 0);
