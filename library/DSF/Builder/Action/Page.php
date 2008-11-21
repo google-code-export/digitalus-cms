@@ -108,4 +108,12 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 		
 		$view->headTitle()->setSeparator($separator);
 	}
+	
+	public function googleIntegration()
+	{
+		$view = $this->_page->getView();
+		$settings = new SiteSettings();
+		$view->placeholder('google_verify')->set($settings->get('google_verify'));
+		$view->placeholder('google_tracking')->set($settings->get('google_tracking'));
+	}
 }

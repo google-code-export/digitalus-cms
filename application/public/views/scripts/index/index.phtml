@@ -5,7 +5,8 @@ echo $this->doctype()
 <html>
 	<head>
 	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	    <?php     	
+	    <?php     
+	        echo $this->placeholder('google_verify');	
 			echo $this->headTitle();
 			echo $this->headScript();	    	
 			echo $this->headLink();
@@ -16,6 +17,9 @@ echo $this->doctype()
 	</head>
 	
 	<body>
-		<?php echo $this->layout()->page;?>
+		<?php 
+		    echo $this->layout()->page;
+		    echo $this->placeholder('google_tracking');
+	    ?>
 	</body>
 </html>

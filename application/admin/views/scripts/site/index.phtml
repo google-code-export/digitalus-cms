@@ -65,8 +65,8 @@
 <fieldset>
     <legend><?php echo $this->GetTranslation('Google Integration');?></legend>
 <?php
+	echo $this->FormRow($this->GetTranslation('Verification code'), $this->FormTextarea('setting[google_verify]',$this->settings->google_verify, array('class' => 'med')));
 	echo $this->FormRow($this->GetTranslation('Tracking code'), $this->FormTextarea('setting[google_tracking]',$this->settings->google_tracking, array('class' => 'med')));
-	echo $this->FormRow($this->GetTranslation('Tracking code'), $this->FormTextarea('setting[google_verify]',$this->settings->google_verify, array('class' => 'med')));
 	echo $this->FormRow('&nbsp;', $this->FormSubmit('google',$this->GetTranslation('Update Google Settings')));
 ?>
 </fieldset>
