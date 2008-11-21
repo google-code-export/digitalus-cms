@@ -22,7 +22,7 @@
 
 class DSF_Command
 {
-    const PATH_TO_COMMANDS = './library/DSF/Command';
+    const PATH_TO_COMMANDS = '../library/DSF/Command';
     
     /**
      * load the command
