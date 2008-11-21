@@ -10,6 +10,7 @@
 	<request class='Page' method='loadAttachments' />
 	<request class='Page' method='loadRelatedPages' />
 	<request class='Page' method='setTitle' />
+	<request class='Page' method='googleIntegration' />
 	<request class='Design' method='loadContentTemplate' />
 	<request class='Design' method='loadDesign' />
 	<request class='Design' method='setStyles' />
