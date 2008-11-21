@@ -52,7 +52,7 @@ class Admin_MediaController extends Zend_Controller_Action {
         $baseFolder = DSF_Filter_Post::get('path');
         $newFolder = DSF_Filter_Post::get('folder_name');
         $forwardPath = $baseFolder;
-        if(!empty($baseFolder) && !empty($newFolder)) {
+        if(!empty($newFolder)) {
             $base = str_replace('media_', '', $baseFolder);
             $base = DSF_Toolbox_String::stripUnderscores($base);
             $fullPath = $this->pathToMedia . '/' . $base . '/' . $newFolder;

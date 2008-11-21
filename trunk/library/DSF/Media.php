@@ -34,6 +34,8 @@ class DSF_Media {
         if(self::isAllowed($file['type'])) {
     		//default to the name on the client machine
 		    if($filename == null){$filename = $file['name'];}
+		    $filename = str_replace('_','-',$filename);
+		    $filename = str_replace(' ','-',$filename);
 		    
 		    $path = str_replace(self::rootDirectory(), '', $path);
 		    $path = DSF_Toolbox_String::stripUnderscores($path);
@@ -54,7 +56,7 @@ class DSF_Media {
 		    {
 		        //return the filepath if things worked out
 		        //this is relative to the site root as this is the format that will be required for links and what not
-		        $fullPath = DSF_Toolbox_String::stripLeading($base . '/' . $path);
+		        $fullPath = DSF_Toolbox_String::stripLeading($base . '/', $path);
 		        return $fullPath;
 		    }
         }
