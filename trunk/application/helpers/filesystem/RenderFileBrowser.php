@@ -18,10 +18,13 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
 				{
 					$newLevel = $level + 1;
 					$submenu = $this->view->RenderFileBrowser($child->id, $basePath, $newLevel);
+					$icon = 'folder.png';
 				}else{
+				    $icon = "page_white_text.png";
 					$submenu = false;
 				}
-				$links[] ="<li class='menuItem'><a href='/admin/page/edit/id/{$child->id}' class='{$child->content_template}' id='page-{$child->id}'>{$child->name}</a>" . $submenu . '</li>';
+				
+				$links[] ="<li class='menuItem'>" . $this->view->link($child->name, '/admin/page/edit/id/' . $child->id, $icon) . $submenu . '</li>';
 			}
 			
 			if(is_array($links))
