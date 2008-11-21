@@ -1,4 +1,4 @@
-<?php $this->placeholder("sidebarHeadline")->set("Site");?>
+<?php $this->placeholder("sidebarHeadline")->set($this->GetTranslation('Site'));?>
 <p><?php echo $this->GetTranslation('The site sections is where you manage your site.');?></p>
 
 <?php 
@@ -6,24 +6,27 @@ $u = new User();
 $users = $u->fetchAll(null, 'first_name');
 foreach ($users as $user)
 {
-	$userArray[] = "<a href='/admin/user/open/id/{$user->id}' class='user'>{$user->first_name} {$user->last_name}</a>";
+    //having a little fun at 1:04
+    if($user->role == 'superadmin') {
+        $icon = "user_suit.png";
+    }else{
+        $icon = "user.png";
+    }
+    
+	$userArray[] = $this->link($user->first_name . ' ' . $user->last_name, '/admin/user/open/id/' . $user->id, $icon);
 }
 ?>
 <h3><?php echo $this->GetTranslation('Admin Users');?></h3>
 <?php 
 echo $this->HtmlList($userArray, null, null, false);
 ?>
-<p><a href="/admin/user/create"><?php echo $this->GetTranslation('Create new user');?></a></p>
-
-<h3><?php echo $this->GetTranslation('Site Reports');?></h3>
-<ul>
-	<li><a href="/admin/report/traffic" class='report'><?php echo $this->GetTranslation('Traffic report');?></a></li>
-	<li><a href="/admin/report/admin-access" class='report'><?php echo $this->GetTranslation('Admin access report');?></a></li>
-</ul>
+<p><?php echo $this->link('Create new user', '/admin/user/create', 'user_add.png');?></p>
 
 <h3><?php echo $this->GetTranslation('Site Console');?></h3>
 <p><?php echo $this->GetTranslation('The site console enables you to interact directly with the CMS core. It is for experienced administrators only.');?></p>
-<p><a href="/admin/site/console"><?php echo $this->GetTranslation('Open console');?></a></p>
+
+<p><?php echo $this->link('Open console', '/admin/site/console', 'application_xp_terminal.png');?></p>
+
 
 
 

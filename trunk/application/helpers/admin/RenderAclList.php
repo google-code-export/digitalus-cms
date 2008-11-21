@@ -12,8 +12,7 @@ class DSF_View_Helper_Admin_RenderAclList
         
         $xhtml = "<ul id='{$id}'>";
         
-        foreach ($resources as $module => $resources){
-                      
+        foreach ($resources as $module => $resources){       
             if(!is_array($resources)){
                 $key = $module;
                 $xhtml .= "<li class='module'>" . $this->view->formCheckbox("acl_resources[{$key}]", $this->hasPermision($key, $usersPermissions)) . $module;
@@ -54,7 +53,8 @@ class DSF_View_Helper_Admin_RenderAclList
 	
 	public function hasPermision($key, $userPermissions) {
 	    if(is_array($userPermissions) && isset($userPermissions[$key])) {
-	        return $userPermissions[$key];
+	        $result = $userPermissions[$key];
+	        return intval($result);
 	    }
 	}
 	

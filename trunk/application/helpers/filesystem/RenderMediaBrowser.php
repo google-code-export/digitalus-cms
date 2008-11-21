@@ -1,8 +1,14 @@
 <?php
 class DSF_View_Helper_Filesystem_RenderMediaBrowser
 {	
+    public $defaultIcon = 'page.png';
+    public $icons = array();
+    
 	public function RenderMediaBrowser($path, $folderLink, $fileLink)
 	{
+	    $config = Zend_Registry::get('config');
+	    $this->icons = $config->filetypes;    
+	    
 		$folders = DSF_Filesystem_Dir::getDirectories('./' . $path);
 		$files = DSF_Filesystem_File::getFilesByType('./' . $path,false,false,true);
 		
@@ -12,25 +18,38 @@ class DSF_View_Helper_Filesystem_RenderMediaBrowser
     		    $folderPath = $path . '/' . $folder;
     		    $link = DSF_Toolbox_String::addUnderscores($folderPath);
     		    $submenu = $this->view->RenderMediaBrowser($folderPath, $folderLink, $fileLink);
-    			$links[] ="<li class='menuItem'><a href='/{$folderLink}/{$link}' class='folder' id='folder-{$link}'>{$folder}</a>" . $submenu . '</li>';
+    		    $links[] = "<li class='menuItem'>" . $this->view->link($folder, '/' . $folderLink . '/' . $link, 'folder.png') . $submenu . '</li>';
     		}
 		}
 		
 		if(is_array($files) && count($files) > 0) {
     		foreach ($files as $file) {
     		    if(substr($file,0,1) != '.') {
+    		        $filetype = DSF_Media_Filetype::load($file);
     		        $filePath = $path . '/' . $file;
-    			    $links[] ="<li class='menuItem'><a href='{$fileLink}/{$filePath}' class='file' id='file-{$file}'>{$file}</a></li>";
+    			    $links[] ="<li class='menuItem'>" . 
+    			    $this->view->link($file , '/' . $fileLink . '/' . $filePath, $this->getIconByType($filetype->key)) . "</li>";
     		    }
 		    }
 		}
 		
 		if(is_array($links))
 		{
-			$filetree = "<ul id='fileTree'>" . implode(null, $links) . "</ul>";
+			$filetree = "<ul id='fileTree' class='treeview'>" . implode(null, $links) . "</ul>";
 			return  $filetree;
 		}
+		return null;
 	}
+	
+	public function getIconByType($type)
+	{
+	    if(isset($this->icons->$type)) {
+	        $filetype = $this->icons->$type;
+	        return $filetype->icon;
+	    }else{
+	        return $this->defaultIcon;
+	    }
+    }
 	
     /**
      * Set this->view object

@@ -29,9 +29,23 @@
 			<adminViews>application/admin/views/scripts</adminViews>
 		</filepath>	
 		 <filetypes>
-		    <jpg type='image' mime='image/jpeg' />
-		    <gif type='image' mime='image/gif' />
-		    <png type='image' mime='image/png' />
+		    <wav type='audio' icon="cd.png" mime='#' />
+		    <mp3 type='audio' icon="cd.png" mime='#' />
+		    <mp4 type='audio' icon="cd.png" mime='#' />
+		    <flv type='flash' icon="page_white_flash.png" mime='#' />
+		    <swf type='flash' icon="page_white_flash.png" mime='#' />
+		    <pdf type='pdf' icon="page_white_acrobat.png" mime='#' />
+		    <wmv type='movie' icon="film.png" mime='#' />
+		    <pptx type='movie' icon="page_white_powerpoint.png" mime='#' />
+		    <ppt type='powerpoint' icon="page_white_powerpoint.png" mime='#' />
+		    <xls type='excel' icon="page_white_excel.png" mime='#' />
+		    <xlsx type='excel' icon="page_white_excel.png" mime='#' />
+		    <docx type='document' icon="page_white_word.png" mime='#' />
+		    <doc type='document' icon="page_white_word.png" mime='application/msword' />
+		    <jpg type='image' icon="picture.png" mime='image/jpeg' />
+		    <gif type='image' icon="picture.png" mime='image/gif' />
+		    <png type='image' icon="picture.png" mime='image/png' />
+		    <zip type='archive' icon="compress.png" mime='image/zip' />
 		</filetypes>
 		<language>
 		  <path>../application/data/language</path>

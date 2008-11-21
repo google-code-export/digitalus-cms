@@ -1,10 +1,15 @@
-<p><?php echo $this->GetTranslation('Digitalus CMS is a community supported open source project. To learn more about the project check out:');?>:</p>
+<?php $this->placeholder('sidebarHeadline')->set($this->GetTranslation("Home"))?>
+
+<p><?php echo $this->GetTranslation('Digitalus CMS is a community supported open source project. To learn more about the project check out');?>:</p>
 <ul>
-    <li><a href="http://digitaluscms.com" target="_blank"><?php echo $this->GetTranslation('Site');?></a></li>
-    <li><a href="http://wiki.digitaluscms.com" target="_blank"><?php echo $this->GetTranslation('Wiki');?></a></li>
-    <li><a href="http://forum.digitaluscms.com" target="_blank"><?php echo $this->GetTranslation('Forum');?></a></li>
+    <li><?php echo $this->link('Digitalus Site', 'http://digitaluscms.com', 'house.png');?></li>
+    <li><?php echo $this->link('Wiki', 'http://wiki.digitaluscms.com', 'page_white_stack.png');?></li>
+    <li><?php echo $this->link('Forum', 'http://forum.digitaluscms.com', 'group.png');?></li>
 </ul>
 <p></p>
 
 <h3><?php echo $this->GetTranslation('Training and Support');?></h3>
-<p><?php echo $this->GetTranslation('If you need any help building or managing your site check out our');?> <a href="http://digitaluscms.com/support" target="_blank"><?php echo $this->GetTranslation('support options');?></a></p>
+<p><?php echo $this->GetTranslation('If you need any help building or managing your site check out our support options.');?></p>
+<ul>
+    <li><?php echo $this->link('Digitalus Support', 'http://digitaluscms.com/support', 'help.png');?></li>
+</ul>
