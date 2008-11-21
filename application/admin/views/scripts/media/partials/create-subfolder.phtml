@@ -1,0 +1,7 @@
+<form action='/admin/media/create-folder' method='post' >
+<?php 
+    echo $this->FormRow($this->GetTranslation('Folder Name'), $this->formText('folder_name'));
+    echo $this->formHidden('path', $this->path);
+    echo $this->FormRow('&nbsp;', $this->formSubmit('createFolder',$this->GetTranslation('Create Folder')));
+?>
+</form>

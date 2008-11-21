@@ -1,0 +1,11 @@
+<?php 
+$this->placeholder("formHeadline")->set($this->GetTranslation("Media Manager"));
+?>
+<fieldset id='subfolder'>
+	<legend>Create New Folder</legend>
+	<?php 
+	    $data = array(
+	        'path' => null
+	    );
+	echo $this->partial('media/partials/create-subfolder.phtml'); ?>
+</fieldset>

@@ -1,0 +1,7 @@
+<form action='/admin/media/<?php echo $this->action;?>' method='post' enctype='multipart/form-data' class='uploadForm'>
+<?php 
+echo $this->formHidden('path', $this->path);
+echo $this->FormRow($this->GetTranslation('Select the files to upload'), "<input type='file' id='multi_upload' name='uploads[]' />");
+echo $this->FormRow('&nbsp;', $this->formSubmit('uploadSubmit',$this->GetTranslation('Upload Files')));
+?>
+</form>

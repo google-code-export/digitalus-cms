@@ -1,0 +1,86 @@
+<?php $this->placeholder('formHeadline')->set($this->GetTranslation('Open Folder'))?>
+<fieldset>
+	<legend>Current Folder</legend>
+	<p>NOTE: we need to figure out the standard for the paths.  with or without media?</p>
+	<p>
+		<?php foreach ($this->folderPathParts as $path => $label) { ?>
+             / <a href="/admin/media/open-folder/folder/<?php echo $path;?>"><?php echo $label?></a>   
+		<?php } ?>
+	</p>
+</fieldset>
+
+<fieldset id='browse'>
+	<legend>Current folder contents</legend>
+
+<?php 
+if(is_array($this->folders) && count($this->folders) > 0) {
+	foreach ($this->folders as $folder)
+	{	
+	    $link = $this->basePath . '_' . $folder;
+	    $cleanPath = DSF_Toolbox_String::stripHyphens($link);
+	    $cleanPath = DSF_Toolbox_String::stripUnderscores($cleanPath);
+?>
+
+<div class='folderWrapper'>
+	<a class='rightLink delete' href="/admin/media/delete-folder/folder/<?php echo $link;?>">Delete</a>
+	<h4><a href='/admin/media/open-folder/folder/<?php echo $link;?>' class='folder' id='folder-<?php echo $link?>'><?php echo $folder?></a></h4>
+	<p>Full path: /<?php echo $cleanPath?></p>
+</div>
+
+<?php 
+	}
+}
+
+if(is_array($this->files) && count($this->files) > 0) {
+	foreach ($this->files as $file) {
+	    if(substr($file,0,1) != '.') {
+	        $filePath = DSF_Toolbox_String::stripUnderscores($this->basePath . '/' . $file);
+?>
+
+<div class='fileWrapper'>
+	<a class='rightLink delete' href="/admin/media/delete-file/file/<?php echo $filePath;?>">Delete</a>
+	<h4><a href='/<?php echo $filePath;?>' class='file thickbox' id='file-<?php echo $link?>'><?php echo $file?></a></h4>
+	<p>Full path: <?php echo $filePath?></p>
+</div>
+
+<?php 
+	    }
+    }
+}
+
+?>
+</fieldset>
+
+<fieldset id='upload'>
+	<legend>Upload Files</legend>
+    <?php 
+        $data = array(
+            'action' => "upload",
+            'path'	 =>   $this->basePath 
+        );
+        echo $this->partial('media/partials/upload-files.phtml', $data); 
+    ?>
+</fieldset>
+
+<fieldset id='subfolder'>
+	<legend>Create Subfolder</legend>
+	<?php echo $this->render('media/partials/create-subfolder.phtml'); ?>
+</fieldset>
+
+<fieldset id='rename'>
+	<legend>Rename folder</legend>
+    <form action='/admin/media/rename-folder' method='post' >
+    <?php 
+        echo $this->FormRow($this->GetTranslation('New Name'), $this->formText('folder_name', $label));
+        echo $this->formHidden('path', $this->basePath);
+        echo $this->FormRow('&nbsp;', $this->formSubmit('renameFolder',$this->GetTranslation('Rename Folder')));
+    ?>
+    </form>
+</fieldset>
+
+<?php 
+$this->placeholder('jquery')->captureStart();
+?>
+$('#multi_upload').MultiFile(); 
+  
+<?php $this->placeholder('jquery')->captureEnd();?>	
