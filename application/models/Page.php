@@ -259,9 +259,9 @@ class Page extends DSF_Db_Table
     public function getChildren($page, $where = array())
     {
         $id = $this->_getPageId($page);
-        
+                
         $where[] = $this->_db->quoteInto("parent_id = ?", $id);
-        $order = "position DESC";
+        $order = "position ASC";
         return $this->fetchAll($where, $order);
     }
     

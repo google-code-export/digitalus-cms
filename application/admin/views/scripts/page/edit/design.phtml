@@ -1,7 +1,13 @@
 <h3>Current design</h3>
-<a class='rightLink' href="/admin/design/update/id/<?php echo $this->design->getValue('id');?>">Open design</a>
+<?php if($this->design->getValue('id') > 0) {?>
+<p class="rightLinks">
+<?php echo $this->link("Open design", "/admin/design/update/id/" . $this->design->getValue('id'), 'layout_edit.png');?>
+</p>
 <h4><?php echo $this->design->getValue('name');?></h4>
 <p><?php echo $this->design->getValue('notes');?></p>
+<?php }else{ ?>
+<p><?php echo $this->GetTranslation("The design is not yet set for this page.")?></p>
+<?php }?>
 
 <h3>Other designs</h3>
 <?php 
@@ -11,10 +17,12 @@ if($designs){
 		if($design->id != $this->design->getValue('id')){
 ?>
 
-<a class='rightLink' href="/admin/design/update/id/<?php echo $design->id;?>">Open design</a>
-<a class='rightLink' href="/admin/page/update-design/id/<?php echo $this->page->page->id;?>/design/<?php echo $design->id;?>">Make Current</a>
 <h4><?php echo $design->name;?></h4>
 <p><?php echo $design->notes;?></p>
+<ul>
+	<li><?php echo $this->link("Open design", "/admin/design/update/id/" . $design->id, 'layout_edit.png');?></li>
+	<li><?php echo $this->link('Make current', '/admin/page/update-design/id/' . $this->page->page->id . '/design/' . $design->id, 'layout_link.png');?></li>
+</ul>
 
 <?php 	}
 	}
