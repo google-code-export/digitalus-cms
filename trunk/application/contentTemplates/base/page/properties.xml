@@ -1,3 +1,6 @@
 <contentProperties>
-	<name>base page</name>
+	<name>base page</name>	
+	<allowedChildren>
+		<template>block_html</template>
+	</allowedChildren>	
 </contentProperties>

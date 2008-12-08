@@ -1,11 +1,8 @@
 <?php 
 $this->placeholder('header_logo_content')->set(
-    "<a href='http://digitaluscms.com'><img src='/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
+    "<a href='/'><img src='/skins/digitalus_media/images/logo.jpg' alt='Digitalus Media' /></a>"
 );
-
-$this->placeholder('header_search_content')->set(
-    $this->partial('partials/header/search-form.phtml')
-);
+$this->placeholder('header_tagline_content')->set("<p>Intelligent Web Solutions</p>");
 
 if(is_object($this->page)) {
     $this->content = $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent());
@@ -22,23 +19,24 @@ $this->placeholder('sidebar_content')->set(
     $this->submenu
 );
 
-$this->placeholder('footer_content')->set(
-    $this->partial('partials/footer.phtml')
+$this->placeholder('footer_right')->set(''
 );
 
 $grid = $this->Grid960(16);
 
-$header = $grid->addUnit('header', 16);
-    $logo = $grid->startRow('header_logo', 10, $header);
-    $search = $grid->endRow('header_search',6,$header);
-
-$nav = $grid->addUnit('nav', 16);
+$header = $grid->addUnit('header', 12);
+    $logo = $grid->startRow('header_logo', 6, $header);
+    $search = $grid->endRow('header_tagline',6,$header);
 
 $body = $grid->addUnit('body', 16);
     $content = $grid->startRow('content', 12, $body);
     $sidebar = $grid->endRow('sidebar', 4, $body);
 
-$footer = $grid->addUnit('footer', 16, $body);
+$footer = $grid->addUnit('footer', 16);
+    $footerLeft = $grid->startRow('footer_left', 4, $footer);
+    $footerCenter = $grid->addUnit('footer_center', 4, $footer);
+    $footerRight = $grid->endRow('footer_right',4,$footer);
+
 echo $grid->render();
 ?>
 

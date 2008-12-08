@@ -4,6 +4,15 @@ class Page extends DSF_Db_Table
     protected $_name = "pages";
  	protected $_defaultTemplate = "base_page";
  	protected $_defaultPageName = "New Page";
+ 	
+ 	public function getContent($uri)
+ 	{
+ 		$uriObj = new DSF_Uri($uri);
+ 		$pointer = $this->fetchPointer($uriObj->toArray());
+ 		$node = new ContentNode();
+		//fetch the content nodes
+		return $node->fetchContentArray($pointer, null, null, null);
+ 	}
     
     public function getCurrentUsersPages()
     {
@@ -485,9 +494,19 @@ class Page extends DSF_Db_Table
     	$data['is_home_page'] = 0;
     	$this->update($data);
     	
+    	unset($data);
     	$data['is_home_page'] = 1;
         $where[] = $this->_db->quoteInto("id = ?", $pageId);
         $this->update($data, $where);    	
+    }
+    
+    static function isHomePage($page)
+    {
+        if(is_object($page) && $page->page->is_home_page == 1) {
+            return true;
+        }else{
+            return false;  
+        }
     }
     
     public function getHomePage()
