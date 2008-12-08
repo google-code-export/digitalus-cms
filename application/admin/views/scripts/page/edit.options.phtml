@@ -4,9 +4,18 @@
 	<li><?php echo $this->link('Content', '#content', 'page_white_edit.png');?></li>
 	<li><?php echo $this->link('Page Head and Meta Data', '#meta', 'page_white_code.png');?></li>
 	<li><?php echo $this->link('Properties', '#properties', 'textfield_add.png');?></li>
+
+<!--
+this is not going to make it in the beta version
 	<li><?php echo $this->link('Attachments', '#attachments', 'page_white_stack.png');?></li>
 	<li><?php echo $this->link('Related Content', '#relatedContent', 'page_white_link.png');?></li>
+-->
+
+	
+<?php if(!Page::isHomePage($this->page)) {?>
 	<li><?php echo $this->link('Make Home Page', '/admin/page/make-home-page/id/' . $this->pageId, 'house.png');?></li>
+<?php } ?>
+
 	<li><?php echo $this->link('Design', '#design', 'layout_content.png');?></li>
 	<li><?php echo $this->link('Move Page', '#move', 'arrow_turn_right.png');?></li>
 </ul>

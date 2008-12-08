@@ -36,6 +36,8 @@ $(".wiki").markItUp(myWikiSettings);
 	<?php echo $this->render('page/edit/properties.phtml');?>
 </fieldset>
 
+<!-- 
+this is not going to make it in the beta version
 <fieldset id="relatedContent">
 	<legend><?php echo $this->GetTranslation("Related Content");?></legend>
 	<?php echo $this->render('page/edit/relatedContent.phtml');?>
@@ -45,6 +47,7 @@ $(".wiki").markItUp(myWikiSettings);
 	<legend><?php echo $this->GetTranslation("Attachments");?></legend>
 	<?php echo $this->render('page/edit/attachments.phtml');?>
 </fieldset>
+ -->
 
 <fieldset id="design">
 	<legend><?php echo $this->GetTranslation("Page Design");?></legend>
@@ -55,3 +58,7 @@ $(".wiki").markItUp(myWikiSettings);
 	<legend><?php echo $this->GetTranslation("Move Page");?></legend>
 	<?php echo $this->render('page/edit/move.phtml');?>
 </fieldset>
+
+<?php 
+echo $this->renderNode('content-blocks/footer-right','content');
+?>
