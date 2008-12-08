@@ -19,12 +19,13 @@ $this->placeholder('sidebar_content')->set(
     $this->submenu
 );
 
-$this->placeholder('footer_right')->set(''
-);
+$this->placeholder('footer_left_content')->set($this->renderNode('content-blocks/footer-left','content'));
+$this->placeholder('footer_center_content')->set($this->renderNode('content-blocks/footer-center','content'));
+$this->placeholder('footer_right_content')->set($this->renderNode('content-blocks/footer-right','content'));
 
 $grid = $this->Grid960(16);
 
-$header = $grid->addUnit('header', 12);
+$header = $grid->addUnit('header', 16);
     $logo = $grid->startRow('header_logo', 6, $header);
     $search = $grid->endRow('header_tagline',6,$header);
 
@@ -34,7 +35,7 @@ $body = $grid->addUnit('body', 16);
 
 $footer = $grid->addUnit('footer', 16);
     $footerLeft = $grid->startRow('footer_left', 4, $footer);
-    $footerCenter = $grid->addUnit('footer_center', 4, $footer);
+    $footerCenter = $grid->addUnit('footer_center', 8, $footer);
     $footerRight = $grid->endRow('footer_right',4,$footer);
 
 echo $grid->render();
