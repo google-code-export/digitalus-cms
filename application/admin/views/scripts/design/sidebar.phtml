@@ -6,10 +6,10 @@
 if(is_object($this->designs)) {
 	$links = array();
 	foreach ($this->designs as $design) {
-		$links[] = "<a href='/admin/design/update/id/{$design->id}'>{$design->name}</a>";
+		$links[] = $this->link($design->name, '/admin/design/update/id/' . $design->id, 'layout_content.png');
 	}
 	echo $this->htmlList($links, null, null, false);
 }
 ?>
-<p><a href="/admin/design">Create a new design</a></p>
+<p><?php echo $this->link('Create a new design', '/admin/design', 'layout_add.png');?></p>
 

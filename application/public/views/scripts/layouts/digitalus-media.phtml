@@ -1,8 +1,10 @@
 <?php 
 $this->placeholder('header_logo_content')->set(
-    "<a href='/'><img src='/skins/digitalus_media/images/logo.jpg' alt='Digitalus Media' /></a>"
+    "<a href='/'><img src='/skins/digitalus_media/images/logo.png' alt='Digitalus Media' /></a>"
 );
-$this->placeholder('header_tagline_content')->set("<p>Intelligent Web Solutions</p>");
+$this->placeholder('header_tagline_content')->set(
+    "Select a language:" . $this->LanguageForm()
+ );
 
 if(is_object($this->page)) {
     $this->content = $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent());

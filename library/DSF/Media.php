@@ -41,6 +41,7 @@ class DSF_Media {
 		    $path = DSF_Toolbox_String::stripUnderscores($path);
 		    $path = DSF_Toolbox_String::stripLeading('/', $path);
 		    $path = $base . '/' . self::rootDirectory() . '/' . $path;
+
 		    if($createPath)
 		    {
 		        //attempt to create the new path

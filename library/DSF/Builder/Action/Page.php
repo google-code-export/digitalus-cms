@@ -51,6 +51,16 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
  		$this->_page->setContent($content);
 	}
 	
+	public function loadTranslation()
+	{
+ 		$mdlContentNode = new ContentNode();
+ 		$translation = DSF_Language::getLanguage();
+ 		if(!empty($translation)) {
+     		$content = $mdlContentNode->fetchContentObject($this->_page->getId(), null, null, $translation);
+     		$this->_page->setTranslation($content);  
+ 		}
+    }
+	
 	public function loadContentTemplate()
 	{
 		$pageData = $this->_page->getData();
