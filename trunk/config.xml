@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<configdata>
+    <DSF>
+        <constants>
+            <version>1.5</version>
+        </constants>
+        <database>
+            <adapter>PDO_MYSQL</adapter>
+            <host>localhost</host>
+            <username></username>
+            <password></password>
+            <dbname></dbname>
+        </database>
+        <design>
+        	<pathToSkins>skins</pathToSkins>
+        	<pathToLayouts>../application/public/views/scripts/layouts</pathToLayouts>
+        	<defaultLayout>default</defaultLayout>
+        	<adminLayoutFolder>../application/admin/views/layouts</adminLayoutFolder>
+        	<adminLayout>index</adminLayout>
+        	<adminTemplate>digitalus-1-5</adminTemplate>
+    	</design>
+		 <filepath>
+			<media>media</media>
+			<trash>trash</trash>
+			<template>templates</template>
+			<emailTemplates>../application/public/views/scripts/email</emailTemplates>
+			<script>public/scripts</script>
+			<style>public/styles</style>
+			<image>public/images</image>
+			<adminViews>application/admin/views/scripts</adminViews>
+		</filepath>	
+		 <filetypes>
+		    <wav type='audio' icon="cd.png" mime='#' />
+		    <mp3 type='audio' icon="cd.png" mime='#' />
+		    <mp4 type='audio' icon="cd.png" mime='#' />
+		    <flv type='flash' icon="page_white_flash.png" mime='#' />
+		    <swf type='flash' icon="page_white_flash.png" mime='#' />
+		    <pdf type='pdf' icon="page_white_acrobat.png" mime='#' />
+		    <wmv type='movie' icon="film.png" mime='#' />
+		    <pptx type='movie' icon="page_white_powerpoint.png" mime='#' />
+		    <ppt type='powerpoint' icon="page_white_powerpoint.png" mime='#' />
+		    <xls type='excel' icon="page_white_excel.png" mime='#' />
+		    <xlsx type='excel' icon="page_white_excel.png" mime='#' />
+		    <docx type='document' icon="page_white_word.png" mime='#' />
+		    <doc type='document' icon="page_white_word.png" mime='application/msword' />
+		    <jpg type='image' icon="picture.png" mime='image/jpeg' />
+		    <gif type='image' icon="picture.png" mime='image/gif' />
+		    <png type='image' icon="picture.png" mime='image/png' />
+		    <zip type='archive' icon="compress.png" mime='image/zip' />
+		</filetypes>
+		<language>
+		  <path>../application/data/language</path>
+		  <defaultLocale>en</defaultLocale>
+		  <translations>
+		      <en>english</en>
+		      <de>german</de>
+		      <fr>french</fr>
+		  </translations>
+		</language>        		
+	</DSF>
+	<testing extends='DSF'>
+        <database>
+            <adapter>PDO_MYSQL</adapter>
+            <host>localhost</host>
+            <username>root</username>
+            <password></password>
+            <dbname>digitalus_cms_1_5</dbname>
+        </database>	
+	</testing>
+</configdata>
