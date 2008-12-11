@@ -1,14 +1,14 @@
 <?php 
 $this->placeholder("formHeadline")->set($this->GetTranslation("Update Page"));
 
-$this->headScript()->appendFile('/markitup/jquery.markitup.js');
-$this->headScript()->appendFile('/markitup/sets/default/set.js');
-$this->headScript()->appendFile('/markitup/sets/textile/set.js');
-$this->headScript()->appendFile('/markitup/sets/html/set.js');
+$this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/jquery.markitup.js');
+$this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/sets/default/set.js');
+$this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/sets/textile/set.js');
+$this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/sets/html/set.js');
 
-$this->headLink()->appendStylesheet('/markitup/skins/markitup/style.css');
-$this->headLink()->appendStylesheet('/markitup/sets/textile/style.css');
-$this->headLink()->appendStylesheet('/markitup/sets/html/style.css');
+$this->headLink()->appendStylesheet($this->baseUrl . '/scripts/markitup/skins/markitup/style.css');
+$this->headLink()->appendStylesheet($this->baseUrl . '/scripts/markitup/sets/textile/style.css');
+$this->headLink()->appendStylesheet($this->baseUrl . '/scripts/markitup/sets/html/style.css');
 //jquery block
 $this->placeholder('jquery')->captureStart();
 ?>

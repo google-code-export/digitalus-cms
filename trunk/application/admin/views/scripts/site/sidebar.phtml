@@ -13,19 +13,19 @@ foreach ($users as $user)
         $icon = "user.png";
     }
     
-	$userArray[] = $this->link($user->first_name . ' ' . $user->last_name, '/admin/user/open/id/' . $user->id, $icon);
+	$userArray[] = $this->link($user->first_name . ' ' . $user->last_name, $this->baseUrl . '/admin/user/open/id/' . $user->id, $icon);
 }
 ?>
 <h3><?php echo $this->GetTranslation('Admin Users');?></h3>
 <?php 
 echo $this->HtmlList($userArray, null, null, false);
 ?>
-<p><?php echo $this->link('Create new user', '/admin/user/create', 'user_add.png');?></p>
+<p><?php echo $this->link('Create new user', $this->baseUrl . '/admin/user/create', 'user_add.png');?></p>
 
 <h3><?php echo $this->GetTranslation('Site Console');?></h3>
 <p><?php echo $this->GetTranslation('The site console enables you to interact directly with the CMS core. It is for experienced administrators only.');?></p>
 
-<p><?php echo $this->link('Open console', '/admin/site/console', 'application_xp_terminal.png');?></p>
+<p><?php echo $this->link('Open console', $this->baseUrl . '/admin/site/console', 'application_xp_terminal.png');?></p>
 
 
 

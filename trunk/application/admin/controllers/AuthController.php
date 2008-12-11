@@ -25,7 +25,7 @@ class Admin_AuthController extends Zend_Controller_Action
 	function init()
 	{
 	    $this->view->breadcrumbs = array(
-	       $this->view->GetTranslation('Login') =>   '/admin/auth/login'
+	       $this->view->GetTranslation('Login') =>   $this->getFrontController()->getBaseUrl() . '/admin/auth/login'
 	    );
 	}
 	
@@ -56,20 +56,19 @@ class Admin_AuthController extends Zend_Controller_Action
             if (!$e->hasErrors()) {        
                 $auth = new DSF_Auth($username, $password);
                 $result = $auth->authenticate();
-                Zend_Debug::dump($result);
                 if($result){    
                 	$url = DSF_Filter_Post::get('uri');
-                	if($url == '' || $url == '/admin/auth/login'){
-                    	$url = '/admin';
+                	if($url == '' || $url == 'admin/auth/login'){
+                    	$url = 'admin';
                 	}
                 }else{
 					$e = new DSF_View_Error();
 					$e->add($this->view->GetTranslation('The username or password you entered was not correct.'));
-					$url = "/admin/auth/login";
+					$url = "admin/auth/login";
                 }
              
             }else{
-					$url = "/admin/auth/login";                
+					$url = "admin/auth/login";           
             }
 			$this->_redirect($url);
         }
@@ -130,7 +129,7 @@ class Admin_AuthController extends Zend_Controller_Action
 	            	$this->view->GetTranslation("Sorry, we could not locate your account. Please contact us to resolve this issue.")
             	);
     		}
-  		$url =  "/admin/auth/login";
+  		$url =  "admin/auth/login";
 		$this->_redirect($url);
 			
 		 }

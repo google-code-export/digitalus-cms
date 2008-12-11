@@ -41,7 +41,6 @@ class DSF_Db_Table extends Zend_Db_Table
         if(!$this->errors->hasErrors()){ //there were no errors validating the data
             //since this is a insert lets set the id to null
             unset($this->data['id']);
-            //Zend_Debug::dump($this->data);
             $id = $this->insert($this->data);
             
             //try to run the after method
@@ -68,7 +67,6 @@ class DSF_Db_Table extends Zend_Db_Table
         unset($this->data['id']);
         if(!$this->errors->get()){ //there were no errors validating the data
         	
-            //Zend_Debug::dump($this->data);
             $this->update($this->data, "id=" . $id);
             
             //try to run the after method

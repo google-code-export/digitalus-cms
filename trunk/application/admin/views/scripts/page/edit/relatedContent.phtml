@@ -1,4 +1,4 @@
-<form action="/admin/page/related-content" method="POST">
+<form action="<?php echo $this->baseUrl;?>/admin/page/related-content" method="POST">
 <?php 
 echo $this->formHidden('page_id', $this->page->page->id);
 echo $this->RenderFileChecklist($this->relatedPages, 0);

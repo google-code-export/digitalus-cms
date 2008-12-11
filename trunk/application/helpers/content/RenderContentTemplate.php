@@ -22,7 +22,8 @@ class DSF_View_Helper_Content_RenderContentTemplate {
      *  
      */
     public function renderContentTemplate($template, $content) {
-        $template = DSF_Content_Template_Loader::load($template);
+        $loader = new DSF_Content_Template_Loader();
+        $template = $loader->load($template);
         return $template->render($content);
     }
     

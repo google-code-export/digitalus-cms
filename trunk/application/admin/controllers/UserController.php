@@ -26,7 +26,7 @@ class Admin_UserController extends Zend_Controller_Action
 	function init()
 	{
 	    $this->view->breadcrumbs = array(
-	       $this->view->GetTranslation('Site Settings') =>   '/admin/site'
+	       $this->view->GetTranslation('Site Settings') =>   $this->getFrontController()->getBaseUrl() . '/admin/site'
 	    );
 	}
 	
@@ -54,10 +54,10 @@ class Admin_UserController extends Zend_Controller_Action
        }
 
         $breadcrumbLabel = $this->view->GetTranslation('Open User') . ": " . $this->view->user->first_name . ' ' . $this->view->user->last_name;
-	    $this->view->breadcrumbs[$breadcrumbLabel] = '/admin/user/open/id/' . $id;
+	    $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/user/open/id/' . $id;
 	    $this->view->toolbarLinks = array();
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = '/admin/user/delete/id/' . $id;
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '/admin/index/bookmark/url/admin_user_open_id_' . $id;
+	    $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = $this->getFrontController()->getBaseUrl() . '/admin/user/delete/id/' . $id;
+	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_open_id_' . $id;
 	}
 
 	/**
@@ -71,14 +71,14 @@ class Admin_UserController extends Zend_Controller_Action
             $user = $u->insertFromPost();
             $e = new DSF_View_Error();
             if(!$e->hasErrors()){
-                $url = '/admin/user/open/id/' . $user->id;
+                $url = 'admin/user/open/id/' . $user->id;
                 $this->_redirect($url);
             }else{
             	$storage = new DSF_Data_Storage();
             	$storage->savePost();
             }
 	    }
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '/admin/index/bookmark/url/admin_user_create';
+	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_create';
 	}
 	
 	/**
@@ -102,7 +102,7 @@ class Admin_UserController extends Zend_Controller_Action
             $user = $u->updateFromPost();
             $id = $user->id;
         }
-   		$url = '/admin/user/open/id/' . $id;
+   		$url = 'admin/user/open/id/' . $id;
 
       $this->_redirect($url);
 
@@ -120,7 +120,7 @@ class Admin_UserController extends Zend_Controller_Action
             $user = $u->updateFromPost();
             $id = $user->id;
         }
-    	$url = '/admin/index';
+    	$url = 'admin/index';
     	$this->_redirect($url);
     }
     
@@ -133,7 +133,7 @@ class Admin_UserController extends Zend_Controller_Action
             $u = new User();
             $u->copyPermissions($copyFrom, $currentUser);
         }
-        $url = '/admin/user/open/id/' . $currentUser;
+        $url = 'admin/user/open/id/' . $currentUser;
         $this->_redirect($url);
     }
 	
@@ -146,7 +146,7 @@ class Admin_UserController extends Zend_Controller_Action
 	   $id = $this->_request->getParam('id');
 	   $u = new User();
 	   $u->delete("id = " . $id);
-	   $url = "/admin/site";
+	   $url = "admin/site";
        $this->_redirect($url);
 	}
 

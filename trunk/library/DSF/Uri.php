@@ -31,7 +31,9 @@ class DSF_Uri
 	 *
 	 * @var string
 	 */
+    const REGISTRY_KEY = "DSF_URI";
 	protected $_uri;
+	protected $_base;
 	
 	/**
 	 * load the uri
@@ -42,22 +44,28 @@ class DSF_Uri
 		if($uri == null) {
 			$uri = $_SERVER['REQUEST_URI'];
 		}
+	    $front = Zend_Controller_Front::getInstance();
+	    $this->_base = $front->getBaseUrl();
+	    
 		$this->_uri = $this->cleanUri($uri);
+		
+		Zend_Registry::set(self::REGISTRY_KEY, $this);
+			
 	}
-	
+		
 	/**
 	 * if uri is not set then it will return the uri that was set in the constructor 
 	 *
 	 * @param string $uri
 	 * @return array
 	 */
-	public function toArray($uri = false)
+	public function toArray($relative = true, $uri = null)
 	{
-		if($uri)
+		if($relative)
 		{
-			$uri = $this->cleanUri($uri);
+			$uri = $this->getRelative($uri);
 		}else{
-			$uri = $this->_uri;
+			$uri = $this->getAbsolute($uri);
 		}
 		$arr = explode('/', $uri);
 		if(is_array($arr))
@@ -108,5 +116,37 @@ class DSF_Uri
 		     return DSF_Toolbox_Array::makeHashFromArray($splitPaths[1]);
 		}
 		return false;
+	}
+	
+	
+	public function getRelative($uri = null)
+	{
+		if($uri != null)
+		{
+			$uri = $this->cleanUri($uri);
+		}else{
+			$uri = $this->_uri;
+		}
+	    return str_replace($this->_base, null, $uri);   
+	}
+	
+	public function getAbsolute($uri = null)
+	{
+	    //clean the uri first
+		$uri = $this->getRelative($uri);
+		
+		//then append the base
+		return $this->_base . $uri;
+	}
+	
+	static function get($relative = true)
+	{
+	    $uri = new DSF_Uri();
+	    if($relative) {
+	        return $uri->getRelative();
+	    }else{
+	        return $uri->getAbsolute();
+	    }
+	    
 	}
 }

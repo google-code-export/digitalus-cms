@@ -5,7 +5,7 @@ class Admin_DesignController extends Zend_Controller_Action
 	function init()
 	{
 	    $this->view->breadcrumbs = array(
-	       'Design' =>   '/admin/design'
+	       'Design' =>   $this->getFrontController()->getBaseUrl() . '/admin/design'
 	    );
 	}
 	
@@ -59,10 +59,10 @@ class Admin_DesignController extends Zend_Controller_Action
 		$mdlPage = new Page();
 		$this->view->pages = $mdlPage->getPagesByDesign($id);
 				
-	    $this->view->breadcrumbs["Open: " . $mdlDesign->getValue('name')] = '/admin/design/edit/id/' . $id;
+	    $this->view->breadcrumbs["Open: " . $mdlDesign->getValue('name')] = $this->getFrontController()->getBaseUrl() . '/admin/design/edit/id/' . $id;
 	    $this->view->toolbarLinks = array();
 	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '#';
-	    $this->view->toolbarLinks[$this->view->GetTranslation("Delete")] = '/admin/design/delete/id/' . $id;
+	    $this->view->toolbarLinks[$this->view->GetTranslation("Delete")] = $this->getFrontController()->getBaseUrl() . '/admin/design/delete/id/' . $id;
 	    
 		
 		$this->view->design = $mdlDesign;

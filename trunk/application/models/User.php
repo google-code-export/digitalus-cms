@@ -134,8 +134,6 @@ class User extends DSF_Db_Table
 		}else{
 			unset($this->data['password']);
 		}
-		
-		//Zend_Debug::dump($this->data);die();
 	}
 	
 	public function updatePassword($id, $password, $confirmationRequire = true, $confirmation = null) {
@@ -282,7 +280,6 @@ class User extends DSF_Db_Table
 	public function copyPermissions($from, $to){
 	    $fromUser = $this->find($from)->current();
 	    $toUser = $this->find($to)->current();
-        Zend_Debug::dump($toUser->acl_resources);
 	    $toUser->acl_resources = $fromUser->acl_resources;
 	    return $toUser->save();
 	}

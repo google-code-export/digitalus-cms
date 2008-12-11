@@ -4,7 +4,7 @@
 	<p>NOTE: we need to figure out the standard for the paths.  with or without media?</p>
 	<p>
 		<?php foreach ($this->folderPathParts as $path => $label) { ?>
-             / <a href="/admin/media/open-folder/folder/<?php echo $path;?>"><?php echo $label?></a>   
+             / <a href="<?php echo $this->baseUrl; ?>/admin/media/open-folder/folder/<?php echo $path;?>"><?php echo $label?></a>   
 		<?php } ?>
 	</p>
 </fieldset>
@@ -22,9 +22,9 @@ if(is_array($this->folders) && count($this->folders) > 0) {
 ?>
 
 <div class='folderWrapper'>
-	<a class='rightLink delete' href="/admin/media/delete-folder/folder/<?php echo $link;?>">Delete</a>
-	<h4><a href='/admin/media/open-folder/folder/<?php echo $link;?>' class='folder' id='folder-<?php echo $link?>'><?php echo $folder?></a></h4>
-	<p>Full path: /<?php echo $cleanPath?></p>
+	<a class='rightLink delete' href="<?php echo $this->baseUrl; ?>/admin/media/delete-folder/folder/<?php echo $link;?>">Delete</a>
+	<h4><a href='<?php echo $this->baseUrl; ?>/admin/media/open-folder/folder/<?php echo $link;?>' class='folder' id='folder-<?php echo $link?>'><?php echo $folder?></a></h4>
+	<p>Full path: <?php echo $this->baseUrl; ?>/<?php echo $cleanPath?></p>
 </div>
 
 <?php 
@@ -38,8 +38,8 @@ if(is_array($this->files) && count($this->files) > 0) {
 ?>
 
 <div class='fileWrapper'>
-	<a class='rightLink delete' href="/admin/media/delete-file/file/<?php echo $filePath;?>">Delete</a>
-	<h4><a href='/<?php echo $filePath;?>' class='file thickbox' id='file-<?php echo $link?>'><?php echo $file?></a></h4>
+	<a class='rightLink delete' href="<?php echo $this->baseUrl; ?>/admin/media/delete-file/file/<?php echo $filePath;?>">Delete</a>
+	<h4><a href='<?php echo $this->baseUrl; ?>/<?php echo $filePath;?>' class='file thickbox' id='file-<?php echo $link?>'><?php echo $file?></a></h4>
 	<p>Full path: <?php echo $filePath?></p>
 </div>
 

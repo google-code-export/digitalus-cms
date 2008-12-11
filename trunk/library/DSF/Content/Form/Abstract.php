@@ -13,7 +13,8 @@ abstract class DSF_Content_Form_Abstract
 	public function __construct()
 	{
 		$this->form = new Zend_Form();
-		$this->form->setAction(self::PAGE_ACTION )
+		$front = Zend_Controller_Front::getInstance();
+		$this->form->setAction($front->getBaseUrl() . self::PAGE_ACTION )
 			->setMethod('post');
 		$this->form->addElementPrefixPath('DSF_Decorator', 'DSF/Form/Decorator', 'decorator');
 		$this->addBase();

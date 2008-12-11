@@ -13,9 +13,9 @@
         </database>
         <design>
         	<pathToSkins>skins</pathToSkins>
-        	<pathToLayouts>../application/public/views/scripts/layouts</pathToLayouts>
+        	<pathToLayouts>./application/public/views/scripts/layouts</pathToLayouts>
         	<defaultLayout>default</defaultLayout>
-        	<adminLayoutFolder>../application/admin/views/layouts</adminLayoutFolder>
+        	<adminLayoutFolder>./application/admin/views/layouts</adminLayoutFolder>
         	<adminLayout>index</adminLayout>
         	<adminTemplate>digitalus-1-5</adminTemplate>
     	</design>
@@ -23,7 +23,8 @@
 			<media>media</media>
 			<trash>trash</trash>
 			<template>templates</template>
-			<emailTemplates>../application/public/views/scripts/email</emailTemplates>
+			<emailTemplates>./application/public/views/scripts/email</emailTemplates>
+			<contentTemplates>./application/contentTemplates</contentTemplates>
 			<script>public/scripts</script>
 			<style>public/styles</style>
 			<image>public/images</image>
@@ -49,7 +50,7 @@
 		    <zip type='archive' icon="compress.png" mime='image/zip' />
 		</filetypes>
 		<language>
-		  <path>../application/data/language</path>
+		  <path>./application/data/language</path>
 		  <defaultLocale>en</defaultLocale>
 		  <translations>
 		      <en>english</en>

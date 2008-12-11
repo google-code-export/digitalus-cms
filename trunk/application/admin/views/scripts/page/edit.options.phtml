@@ -13,7 +13,7 @@ this is not going to make it in the beta version
 
 	
 <?php if(!Page::isHomePage($this->page)) {?>
-	<li><?php echo $this->link('Make Home Page', '/admin/page/make-home-page/id/' . $this->pageId, 'house.png');?></li>
+	<li><?php echo $this->link('Make Home Page', $this->baseUrl . '/admin/page/make-home-page/id/' . $this->pageId, 'house.png');?></li>
 <?php } ?>
 
 	<li><?php echo $this->link('Design', '#design', 'layout_content.png');?></li>

@@ -1,7 +1,7 @@
 <?php
 class DSF_Builder
 {
-	const PATH_TO_BUILDERS = '../application/data/builders';
+	const PATH_TO_BUILDERS = './application/data/builders';
 	const DEFAULT_BUILDER = 'default.xml';
 	const BASE_CLASSNAME = 'DSF_Builder_Action_';
 	

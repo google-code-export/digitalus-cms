@@ -1,10 +1,10 @@
 <?php 
 $this->placeholder('header_logo_content')->set(
-    "<a href='http://digitaluscms.com'><img src='/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
+    "<a href='http://digitaluscms.com'><img src='" . $this->baseUrl . "/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
 );
 
 $this->placeholder('header_search_content')->set(
-    $this->partial('partials/header/search-form.phtml')
+    ''
 );
 
 if(is_object($this->page)) {

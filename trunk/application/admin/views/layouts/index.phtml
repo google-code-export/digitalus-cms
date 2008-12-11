@@ -6,32 +6,32 @@
     <?php echo $this->GetTranslation('Digitalus CMS') . $this->escape($this->title); ?></title>
 <?php 
 //style sheets
-$this->headLink()->appendStylesheet('/skins/digitalus-1-5/styles/layout.css')
-                 ->appendStylesheet('/skins/digitalus-1-5/styles/text.css') 
-                 ->appendStylesheet('/skins/digitalus-1-5/styles/nav.css')
-                 ->appendStylesheet('/skins/digitalus-1-5/styles/style.css')
-                 ->appendStylesheet('/skins/digitalus-1-5/styles/form.css')
-                 ->appendStylesheet('/styles/datePicker.css') 
-                 ->appendStylesheet('/styles/adminForms.css') 
-                 ->appendStylesheet('/styles/filetree.css') 
-                 ->appendStylesheet('/styles/menutree.css') 
-                 ->appendStylesheet('/styles/jquery.treeview.css') 
-                 ->appendStylesheet('/styles/spreadsheet.css')
-                 ->appendStylesheet('/styles/jquery.wysiwyg.css') 
-                 ->appendStylesheet('/styles/sortable.css'); 
+$this->headLink()->appendStylesheet($this->baseUrl . '/skins/digitalus-1-5/styles/layout.css')
+                 ->appendStylesheet($this->baseUrl . '/skins/digitalus-1-5/styles/text.css') 
+                 ->appendStylesheet($this->baseUrl . '/skins/digitalus-1-5/styles/nav.css')
+                 ->appendStylesheet($this->baseUrl . '/skins/digitalus-1-5/styles/style.css')
+                 ->appendStylesheet($this->baseUrl . '/skins/digitalus-1-5/styles/form.css')
+                 ->appendStylesheet($this->baseUrl . '/styles/datePicker.css') 
+                 ->appendStylesheet($this->baseUrl . '/styles/adminForms.css') 
+                 ->appendStylesheet($this->baseUrl . '/styles/filetree.css') 
+                 ->appendStylesheet($this->baseUrl . '/styles/menutree.css') 
+                 ->appendStylesheet($this->baseUrl . '/styles/jquery.treeview.css') 
+                 ->appendStylesheet($this->baseUrl . '/styles/spreadsheet.css')
+                 ->appendStylesheet($this->baseUrl . '/styles/jquery.wysiwyg.css') 
+                 ->appendStylesheet($this->baseUrl . '/styles/sortable.css'); 
 echo $this->headLink();
 
 //javascripts
-$this->headScript()->prependFile('/scripts/jquery.pack.js')
-                   ->appendFile('/scripts/interface.js')
-                   ->appendFile('/scripts/jqueryTooltip.js')
-                   ->appendFile('/scripts/jqueryDatePicker.js')
-                   ->appendFile('/scripts/jquery.dateCompletion.js')
-                   ->appendFile('/scripts/jquery.treeview.js')
-                   ->appendFile('/scripts/idTabs.js')
-                   ->appendFile('/scripts/jquery.wysiwyg.js')
-                   ->appendFile('/scripts/jquery.multifile.js')
-                   ->appendFile('/scripts/jquery.cookie.js');
+$this->headScript()->prependFile($this->baseUrl . '/scripts/jquery.pack.js')
+                   ->appendFile($this->baseUrl . '/scripts/interface.js')
+                   ->appendFile($this->baseUrl . '/scripts/jqueryTooltip.js')
+                   ->appendFile($this->baseUrl . '/scripts/jqueryDatePicker.js')
+                   ->appendFile($this->baseUrl . '/scripts/jquery.dateCompletion.js')
+                   ->appendFile($this->baseUrl . '/scripts/jquery.treeview.js')
+                   ->appendFile($this->baseUrl . '/scripts/idTabs.js')
+                   ->appendFile($this->baseUrl . '/scripts/jquery.wysiwyg.js')
+                   ->appendFile($this->baseUrl . '/scripts/jquery.multifile.js')
+                   ->appendFile($this->baseUrl . '/scripts/jquery.cookie.js');
 echo $this->headScript();
 
 //jquery block
