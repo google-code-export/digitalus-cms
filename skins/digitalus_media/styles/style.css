@@ -1,0 +1,52 @@
+@CHARSET "ISO-8859-1";
+body{
+font-family:Arial;
+font-size:12px;
+background:url(../images/body-bg.jpg) repeat-x #000;
+}
+
+#header{
+	background-color:#000;
+}
+
+#header a img{
+border:none;
+}
+
+#header_logo .innerContent{
+padding:5px 10px;
+}
+
+#header_tagline{
+	color:white;
+}
+
+#header_tagline p{
+	padding-top:15px;
+}
+
+#body{
+	background-color:#fff;
+	min-height:400px;
+}
+
+#body .innerContent{
+	padding:0 20px;
+}
+
+.contentWrapper{
+padding:10px;
+margin-top:20px;
+min-height:300px;
+}
+
+#sidebar{
+	background:url(../images/sidebar-bg.png) no-repeat;
+	min-height:200px;
+}
+#footer{
+	background-color:#222;
+	height:180px;
+padding-top:20px;
+color:#fff;
+}
