@@ -45,7 +45,7 @@ class DSF_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Abstract
      *
      * @param zend_controller_request $request
      */
-    public function preDispatch($request)
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
 	    //load the module, controller, and action for reference
 	    $this->module = $request->getModuleName();

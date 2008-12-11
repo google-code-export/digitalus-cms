@@ -1,10 +1,10 @@
 <?php
 class Environment
 {
-    private $_phpVersion = '5.2.3';
+    private $_phpVersion = '5.2.0';
     
-    private $_extensions = array('ctype', 'dom', 'gd', 'iconv', 'libxml', 'PDO', 
-    'pdo_mysql', 'Reflection', 'session', 'SimpleXML','SPL', 'xml','zip');
+    private $_extensions = array('ctype', 'dom', 'gd', 'iconv', 'libxml', 'mysqli', 'PDO', 
+    'pdo_mysql', 'Reflection', 'session', 'SimpleXML','SPL', 'xml');
     
     protected $_failure = false;
     protected $_errors = array();  

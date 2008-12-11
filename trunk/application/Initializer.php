@@ -55,7 +55,7 @@ class Initializer extends Zend_Controller_Plugin_Abstract
         $this->_front = Zend_Controller_Front::getInstance();
         
         // set the test environment parameters
-        if ($env == 'test') {
+        if ($env == 'testing') {
 			// Enable all errors so we'll know when something goes wrong. 
 			error_reporting(E_ALL | E_STRICT);  
 			ini_set('display_startup_errors', 1);  
@@ -113,6 +113,7 @@ class Initializer extends Zend_Controller_Plugin_Abstract
 	public function initConfig()
 	{
 		$this->_config = new Zend_Config_Xml($this->_root .  '/application/data/config.xml', $this->_env);
+
 		//add config to the registry so it is available sitewide
 		$registry = Zend_Registry::getInstance();
 		$registry->set('config', $this->_config);
@@ -146,7 +147,7 @@ class Initializer extends Zend_Controller_Plugin_Abstract
 	
 	public function initSiteSettings()
 	{
-        $this->_settings = new SiteSettings();	    
+        $this->_settings = new SiteSettings();	 
 	}
 	
 	public function initCache()
