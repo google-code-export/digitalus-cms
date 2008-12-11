@@ -62,7 +62,7 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      *
      * @param zend_controller_request $request
      */
-    public function preDispatch($request)
+    public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
 		$this->_identity = DSF_Auth::getIdentity();
         $this->_acl = new DSF_Acl();

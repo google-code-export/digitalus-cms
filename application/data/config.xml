@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <configdata>
-    <DSF>
+    <production>
         <constants>
             <version>1.5</version>
         </constants>
@@ -58,8 +58,8 @@
 		      <fr>french</fr>
 		  </translations>
 		</language>        		
-	</DSF>
-	<testing extends="DSF">
+	</production>
+	<testing extends="production">
         <database>
             <adapter>PDO_MYSQL</adapter>
             <host>localhost</host>

@@ -87,7 +87,7 @@ class Database
     
     public function connect()
     {
-        $this->_connection = @mysqli_connect($this->_dbHost, $this->_dbUsername, $this->_dbPassword);
+        $this->_connection = mysqli_connect($this->_dbHost, $this->_dbUsername, $this->_dbPassword);
         if (!$this->_connection) {
             $this->addError("Could not connect to the database");
             return false;
@@ -98,8 +98,7 @@ class Database
 
     public function create()
     {
-        $info['description'] = 'Check Database';
-
+        /*
         //check if database exists
         $query = "SHOW DATABASES";
         $result = mysqli_query($this->_connection, $query);
@@ -113,6 +112,7 @@ class Database
             $this->addError("Database does not exist");
             return false;
         }
+*/
 
         $this->execute("USE " . $this->_dbName);
         $this->execute("SET NAMES UTF8");
@@ -139,10 +139,10 @@ class Database
     {
         $config = simplexml_load_file($this->_configFile);
         if($config) {
-            $config->DSF->database->host = $this->_dbHost;
-            $config->DSF->database->dbname = $this->_dbName;
-            $config->DSF->database->username = $this->_dbUsername;
-            $config->DSF->database->password = $this->_dbPassword;
+            $config->production->database->host = $this->_dbHost;
+            $config->production->database->dbname = $this->_dbName;
+            $config->production->database->username = $this->_dbUsername;
+            $config->production->database->password = $this->_dbPassword;
             if($config->asXml($this->_configFile)) {
                 return true;
             }else{
