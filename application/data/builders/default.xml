@@ -1,5 +1,6 @@
 <pageBuilder>
 	<request class='Page' method='setUri' />
+	<request class='Page' method='setBaseUrl' />
 	<request class='Page' method='setPointer' />
 	<request class='Page' method='appendUriParams' />
 	<request class='Page' method='loadData' />

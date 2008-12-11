@@ -35,7 +35,9 @@ class DSF_Menu_Item {
     public function asHyperlink($id = null, $class = null)
     {
         $cleanLink = DSF_Toolbox_String::addHyphens($this->link);
-        return "<a href='/{$cleanLink}' id='{$id}' class='{$class}'>$this->label</a>";
+        $front = Zend_Controller_Front::getInstance();
+        $baseUrl = $front->getBaseUrl();
+        return "<a href='" . $baseUrl . "/{$cleanLink}' id='{$id}' class='{$class}'>$this->label</a>";
     }
 }
 

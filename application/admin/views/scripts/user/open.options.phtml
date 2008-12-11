@@ -9,7 +9,7 @@
 <h3><?php echo $this->GetTranslation('Copy User Permissions');?></h3>
 <p><?php echo $this->GetTranslation("If you have another user who already has the same permissions as this user you can copy that user's role.");?></p>
 
-<form action='/admin/user/copy-acl' method="POST">
+<form action='<?php echo $this->baseUrl;?>/admin/user/copy-acl' method="POST">
     <?php echo $this->formHidden('id',$this->user->id);?>
     <?php echo $this->SelectUser('user_id', null, null, $this->user->id);?>
     <?php echo $this->FormSubmit('update',$this->GetTranslation('Copy Users Permissions'));?>

@@ -2,22 +2,23 @@
 class DSF_Content_Template_Loader
 {
     
-    const TEMPLATE_PATH = '../application/contentTemplates';
+    protected $_templatePath;
     const SYSTEM_FOLDER = "system";
     protected $_templates = null;
     
     public function __construct()
     {
-        
+        $config = Zend_Registry::get('config');
+        $this->_templatePath = $config->filepath->contentTemplates;
     }
     
     public function getTemplates()
     {
-        $templates = DSF_Filesystem_Dir::getDirectories(self::TEMPLATE_PATH);
+        $templates = DSF_Filesystem_Dir::getDirectories($this->_templatePath);
         if(is_array($templates)) {
             foreach ($templates as $template) {
                 if($template != self::SYSTEM_FOLDER ) {
-                    $path = self::TEMPLATE_PATH  . '/' . $template;
+                    $path = $this->_templatePath  . '/' . $template;
                     $subtemplates = DSF_Filesystem_Dir::getDirectories($path);
                     if(is_array($subtemplates)) {
                         foreach ($subtemplates as $subtemplate) {
@@ -30,7 +31,7 @@ class DSF_Content_Template_Loader
         return $this->_templates;
     }
     
-    static function load($template)
+    public function load($template)
     {
         $arrTemplate = explode('_', $template);
         if(is_array($arrTemplate) && count($arrTemplate) == 2) {
@@ -40,6 +41,6 @@ class DSF_Content_Template_Loader
         	$folder = null;
         	$template = null;
         }
-        return new DSF_Content_Template($folder, $template, self::TEMPLATE_PATH );
+        return new DSF_Content_Template($folder, $template, $this->_templatePath );
     }
 }

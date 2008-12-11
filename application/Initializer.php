@@ -185,13 +185,14 @@ class Initializer extends Zend_Controller_Plugin_Abstract
     			$view->addHelperPath($this->_root .  '/application/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
     		}
     	}
+    	
+    	$view->baseUrl = $this->_front->getBaseUrl();
 	}	
 	
 	public function initControllers()
 	{
         //setup core cms modules
         $this->_front->addControllerDirectory($this->_root .  '/application/admin/controllers', 'admin');
-        $this->_front->addControllerDirectory($this->_root .  '/application/front/controllers', 'cmsFront');
         $this->_front->addControllerDirectory($this->_root .  '/application/public/controllers', 'public');
         
         //setup extension modules

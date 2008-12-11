@@ -5,7 +5,8 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
 	{
 		//get the view instance
 		$view = $this->_page->getView();
-		$view->addScriptPath('../application/contentTemplates');
+		$config = Zend_Registry::get('config');
+		$view->addScriptPath($config->filepath->contentTemplates);
 		
 		//get the page object and template
 		$template = $this->_page->getContentTemplate();
@@ -79,6 +80,7 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
 	
 	public function setLayout()
 	{
+	    
 		$design = $this->_page->getDesign();
 		$layout = $design->getLayout();
 		$this->_page->setLayout($layout);

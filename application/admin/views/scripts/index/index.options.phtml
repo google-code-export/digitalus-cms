@@ -11,7 +11,7 @@ if($this->pages) {
     <ul>
     <?php foreach ($this->pages as $page){ ?>
         <li class="page">
-        	<?php echo $this->link($page->name, '/admin/page/edit/id/' . $page->id, 'page_white_text.png');?>
+        	<?php echo $this->link($page->name, $this->baseUrl . '/admin/page/edit/id/' . $page->id, 'page_white_text.png');?>
     	</li>
     <?php } ?> 
     </ul>

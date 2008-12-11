@@ -29,7 +29,7 @@ class Admin_PageController extends Zend_Controller_Action
 	function init()
 	{
 	    $this->view->breadcrumbs = array(
-	       'Pages' =>   '/admin/page'
+	       'Pages' =>   $this->getFrontController()->getBaseUrl() . '/admin/page'
 	    );
 	}
 	
@@ -51,9 +51,9 @@ class Admin_PageController extends Zend_Controller_Action
 		$newPage = $page->createPage($name, $parentId, $contentType);
 		
 		if($newPage) {
-			$url = "/admin/page/edit/id/" . $newPage->id;
+			$url = "admin/page/edit/id/" . $newPage->id;
 		}else{
-			$url = "/admin/page";
+			$url = "admin/page";
 			$e = new DSF_View_Error();
 			$e->add(
 				$this->view->GetTranslation("Sorry, there was an error adding your page")
@@ -75,11 +75,12 @@ class Admin_PageController extends Zend_Controller_Action
 		$page = new Page();
 		$currentPage = $page->open($pageId);
 		$template = $page->getTemplate($pageId);
-		$pageTemplate = DSF_Content_Template_Loader::load($template);
+		$templateLoader = new DSF_Content_Template_Loader();
+		$pageTemplate = $templateLoader->load($template);
 		$form = $this->getContentForm($pageTemplate);
 		
 		if(!is_object($currentPage)) {
-			$url = "/admin/page";
+			$url = "admin/page";
 			$e = new DSF_View_Error();
 			$e->add(
 				$this->view->GetTranslation("Sorry, there was an error opening your page")
@@ -128,10 +129,10 @@ class Admin_PageController extends Zend_Controller_Action
 		
 		$this->view->design = $page->getDesign($pageId);
 		
-	    $this->view->breadcrumbs["Open: " . $currentPage->page->name] = '/admin/page/edit/id/' . $pageId;
+	    $this->view->breadcrumbs["Open: " . $currentPage->page->name] = $this->getFrontController()->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
 	    $this->view->toolbarLinks = array();
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '/admin/index/bookmark/url/admin_page_edit_id_' . $pageId;
-	    $this->view->toolbarLinks[$this->view->GetTranslation("Delete")] = '/admin/page/delete/id/' . $pageId;
+	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_page_edit_id_' . $pageId;
+	    $this->view->toolbarLinks[$this->view->GetTranslation("Delete")] = $this->getFrontController()->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
 		
 	}
 	
@@ -157,7 +158,7 @@ class Admin_PageController extends Zend_Controller_Action
 			}
 		}
 		
-		$this->_redirect('/admin/page/edit/id/' . $id);
+		$this->_redirect('admin/page/edit/id/' . $id);
 	}
 	
 	public function makeHomePageAction()
@@ -165,7 +166,7 @@ class Admin_PageController extends Zend_Controller_Action
 		$id = $this->_request->getParam('id');
 		$mdlPage = new Page();
 		$mdlPage->makeHomePage($id);
-		$this->_redirect('/admin/page/edit/id/' . $id);
+		$this->_redirect('admin/page/edit/id/' . $id);
 	}
 	
 	public function updatePropertiesAction()
@@ -186,7 +187,7 @@ class Admin_PageController extends Zend_Controller_Action
 				}
 			}
 		}
-		$this->_redirect('/admin/page/edit/id/' . $pageId);
+		$this->_redirect('admin/page/edit/id/' . $pageId);
 	}
 	
 	public function relatedContentAction()
@@ -201,7 +202,7 @@ class Admin_PageController extends Zend_Controller_Action
 			$page = new Page();
 			$page->setRelatedPages($pageId, $relatedFiles);
 		}
-		$this->_redirect('/admin/page/edit/id/' . $pageId);
+		$this->_redirect('admin/page/edit/id/' . $pageId);
 	}
 	
 	public function moveAction()
@@ -210,7 +211,7 @@ class Admin_PageController extends Zend_Controller_Action
 	    $id = $this->_request->getParam('id');
 	    $parentId = $this->_request->getParam('parent');
 	    $mdlPage->movePage($id, $parentId);
-	    $this->_redirect('/admin/page/edit/id/' . $id);
+	    $this->_redirect('admin/page/edit/id/' . $id);
 	}
 	
 	public function deleteAction()
@@ -220,7 +221,7 @@ class Admin_PageController extends Zend_Controller_Action
 			$page = new Page();
 			$page->deletePageById($id);
 		}
-		$this->_redirect("/admin/page");
+		$this->_redirect("admin/page");
 	}
 	
 // page interface builder
@@ -230,7 +231,8 @@ class Admin_PageController extends Zend_Controller_Action
 		$parentId = $this->_request->getParam('parent_id');		
 		$page = new Page();
 		$contentType = $page->getContentTemplate($parentId);
-		$template = DSF_Content_Template_Loader::load($contentType);
+		$templateLoader = new DSF_Content_Template_Loader();
+		$template = $templateLoader->load($contentType);
 		$this->view->allowedTemplates = $template->getAllowedChildTemplates();
 	}
 	
@@ -247,7 +249,7 @@ class Admin_PageController extends Zend_Controller_Action
 	public function getMetaForm($data)
 	{
 		$form = new Zend_Form();
-		$form->setAction(self::META_ACTION )
+		$form->setAction($this->getFrontController()->getBaseUrl() . self::META_ACTION )
 			->setMethod('post');
 		
 		$pageId = $form->createElement('hidden','page_id');

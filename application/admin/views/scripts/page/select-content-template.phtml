@@ -19,7 +19,7 @@ echo $this->FormRow(
 <script type="text/javascript">
 $(document).ready(function() {
 	$("#step2button").click(function(){
-		$("#step3").load('/admin/page/create-page-form');
+		$("#step3").load('<?php echo $this->baseUrl; ?>/admin/page/create-page-form');
 		return false;
 	});  
 });

@@ -1,5 +1,5 @@
 <?php
-set_include_path('.' . PATH_SEPARATOR . '../library' . PATH_SEPARATOR . '../application/models/' . PATH_SEPARATOR . get_include_path());
+set_include_path('.' . PATH_SEPARATOR . './library' . PATH_SEPARATOR . './application/models/' . PATH_SEPARATOR . get_include_path());
 
 require_once 'Initializer.php';
 require_once "Zend/Loader.php"; 

@@ -42,9 +42,6 @@ class DSF_Acl extends Zend_Acl
         //everybody
         $this->allow(null, 'admin_auth');
         
-        //everyone can run the page builders
-        $this->allow(null, 'cmsFront');
-        
         //grant the super admin access to everything
        	$this->allow('superadmin');
 

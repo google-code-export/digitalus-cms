@@ -7,7 +7,7 @@ if($pages) {
     ?>
     <ul>
     <?php foreach ($pages as $page){ ?>
-        <li class="page"><a href="/admin/page/open/id/<?php echo $page->id;?>" title="<?php echo $this->RenderDate($page->create_date);?>"><?php echo $page->title;?></a></li>
+        <li class="page"><a href="<?php echo $this->baseUrl;?>/admin/page/open/id/<?php echo $page->id;?>" title="<?php echo $this->RenderDate($page->create_date);?>"><?php echo $page->title;?></a></li>
     <?php } ?> 
     </ul>
 <?php } ?>

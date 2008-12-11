@@ -1,6 +1,6 @@
 <?php 
 $this->placeholder('header_logo_content')->set(
-    "<a href='/'><img src='/skins/digitalus_media/images/logo.png' alt='Digitalus Media' /></a>"
+    "<a href='/'><img src='{$this->baseUrl}/skins/digitalus_media/images/logo.png' alt='Digitalus Media' /></a>"
 );
 $this->placeholder('header_tagline_content')->set(
     "Select a language:" . $this->LanguageForm()

@@ -4,7 +4,7 @@
 if(is_object($this->pages)) {
 	$links = array();
 	foreach ($this->pages as $page) {
-		$links[] = $this->link($page->name, '/admin/page/edit/id/' . $page->id, 'page_white.png');
+		$links[] = $this->link($page->name, $this->baseUrl . '/admin/page/edit/id/' . $page->id, 'page_white.png');
 	}
 	echo $this->htmlList($links, null, null, false);
 }else{

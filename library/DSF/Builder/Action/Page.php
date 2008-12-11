@@ -23,7 +23,8 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 	
 	public function setBaseUrl()
 	{
-		$baseUrl = zend_controller_front::getBaseUrl();
+	    $front = Zend_Controller_Front::getInstance();
+	    $baseUrl = $front->getBaseUrl();
 		$this->_page->setBaseUrl($baseUrl);
 	}
 	
