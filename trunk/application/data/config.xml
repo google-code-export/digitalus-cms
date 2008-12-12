@@ -9,7 +9,7 @@
             <host>localhost</host>
             <username>root</username>
             <password></password>
-            <dbname>test_digitalus_installer</dbname>
+            <dbname>test_installer</dbname>
         </database>
         <design>
         	<pathToSkins>skins</pathToSkins>
@@ -68,4 +68,25 @@
             <dbname>digitalus_cms_1_5</dbname>
         </database>	
 	</testing>
+	<system>
+		<version>1.5</version>
+		<installDate>1229053518</installDate>
+		<requirements>
+			<php>5.2.0</php>
+			<extensions>
+				<ext>ctype</ext>
+				<ext>dom</ext>
+				<ext>gd</ext>
+				<ext>iconv</ext>
+				<ext>libxml</ext>
+				<ext>PDO</ext>
+				<ext>pdo_mysql</ext>
+				<ext>Reflection</ext>
+				<ext>session</ext>
+				<ext>SimpleXML</ext>
+				<ext>SPL</ext>
+				<ext>xml</ext>
+			</extensions>
+		</requirements>
+	</system>
 </configdata>
