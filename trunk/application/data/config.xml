@@ -70,7 +70,7 @@
 	</testing>
 	<system>
 		<version>1.5</version>
-		<installDate>1229053518</installDate>
+		<installDate></installDate>
 		<requirements>
 			<php>5.2.0</php>
 			<extensions>
