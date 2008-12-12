@@ -1,0 +1,14 @@
+<?php if($this->errors){ ?>
+	<h3>Errors</h3>
+    <p>The following errors have occurred, and will need to be fixed prior to installation:</p>
+    <ul><?php echo $this->partialLoop('partials/error.phtml', $this->errors); } ?></ul>
+
+<?php if($this->warnings){ ?>
+	<h3>Warnings</h3>
+    <p>The following items are not quite right, and should fixed at some point:</p>
+    <ul><?php echo $this->partialLoop('partials/warning.phtml', $this->warnings); } ?></ul>
+
+<?php if($this->messages){ ?>
+	<h3>Successfully completed tasks</h3>
+	<p>The following tasks were successfully completed:</p>
+	<ul><?php  echo $this->partialLoop('partials/message.phtml', $this->messages); } ?></ul>
