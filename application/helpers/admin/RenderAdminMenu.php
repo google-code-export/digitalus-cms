@@ -13,6 +13,7 @@ class DSF_View_Helper_Admin_RenderAdminMenu
         'module'        =>  'module' 
     );
     public $defaultSection = 'index';
+    public $moduleSection = 'module';
     public $selectedSection;
     
     public $userModel;
@@ -77,12 +78,17 @@ class DSF_View_Helper_Admin_RenderAdminMenu
 	{
 	    $front = Zend_Controller_Front::getInstance();
 	    $request = $front->getRequest();
-	    $controller = $request->getControllerName();
-
-	    if(isset($this->sections[$controller])){
-	        $this->selectedSection = $this->sections[$controller];
+	    
+	    $module = $request->getModuleName();
+	    if(substr($module, 0, 4) == 'mod_') {
+	        $this->selectedSection = $this->moduleSection;
 	    }else{
-	        $this->selectedSection = $this->defaultSection;
+	        $controller = $request->getControllerName();
+    	    if(isset($this->sections[$controller])){
+    	        $this->selectedSection = $this->sections[$controller];
+    	    }else{
+    	        $this->selectedSection = $this->defaultSection;
+    	    }
 	    }
 	}
 	

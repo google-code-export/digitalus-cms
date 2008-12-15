@@ -4,6 +4,7 @@ class Page extends DSF_Db_Table
     protected $_name = "pages";
  	protected $_defaultTemplate = "base_page";
  	protected $_defaultPageName = "New Page";
+ 	protected $_ignoredFields = array('update','version'); //these are the fields that are not saved as nodes
  	
  	public function getContent($uri)
  	{
@@ -57,8 +58,12 @@ class Page extends DSF_Db_Table
     	}    	
     }
     
-    public function open($pageId)
+    public function open($pageId, $version = null)
     {
+        if($version == null) {
+            $version = $this->getDefaultVersion();
+        }
+        
     	$currentPage = $this->find($pageId)->current();
     	if($currentPage) {
     		$page = new stdClass();
@@ -67,7 +72,7 @@ class Page extends DSF_Db_Table
     		$node = new ContentNode();
 
     		//fetch the content nodes
-    		$page->content = $node->fetchContentArray($pageId, null, null, null);
+    		$page->content = $node->fetchContentArray($pageId, null, null, $version);
     		
     		return $page;   		
     	}else{
@@ -107,20 +112,35 @@ class Page extends DSF_Db_Table
     		if(isset($pageArray['version']) && !empty($pageArray['version'])) {
     		    $version = $pageArray['version'];
     		}else{
-    		    $version = null;
-    		}
-    		
+    		    $siteSettings = new SiteSettings();
+    		    $version = $siteSettings->get('default_language');
+    		}    		
     		//update the content
     		$contentNode = new ContentNode();
+    		
     		if(count($pageArray) > 0) {
     			foreach ($pageArray as $node => $content) {
-    				$contentNode->set($pageId,$node, $content, $version);
+    			    if(!in_array($node, $this->_ignoredFields)) { 
+    				    $contentNode->set($pageId,$node, $content, $version);
+    			    }
     			}
     		}
     		
     		$this->_flushCache();
     		return $this->open($pageId);
     	}
+    }
+    
+    public function getVersions($pageId)
+    {
+        $node = new ContentNode();
+        return $node->getVersions("page_" . $pageId);
+    }
+    
+    public function getDefaultVersion()
+    {
+        $settings = new SiteSettings();
+        return $settings->get('default_language');
     }
     
     /**

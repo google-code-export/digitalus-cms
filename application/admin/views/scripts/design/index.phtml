@@ -1,10 +1,8 @@
-<?php $this->placeholder("formHeadline")->set('Design')?>
-<p>Info about design...</p>
+<?php $this->placeholder("formHeadline")->set($this->GetTranslation("Design"))?>
 
-<h3>Create a new design</h3>
 <form action="<?echo $this->baseUrl;?>/admin/design/create" method="post">
 <fieldset>
-    <legend><?php echo $this->GetTranslation('Design details');?></legend>
+    <legend><?php echo $this->GetTranslation('Create a new design');?></legend>
     <?php 
     	echo $this->FormRow(
     		$this->GetTranslation('Design Name'), $this->FormText('name')
@@ -13,6 +11,6 @@
 			$this->GetTranslation('Design Notes'), $this->FormTextarea('notes', null, array('class' => 'med'))
 		);
 	echo $this->FormRow(
-		'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update Design')));
+		'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Create Design')));
     ?>
 </fieldset>

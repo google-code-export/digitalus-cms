@@ -47,55 +47,58 @@ class DSF_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-	    //load the module, controller, and action for reference
-	    $this->module = $request->getModuleName();
-	    $this->controller = $request->getControllerName();
-	    $this->action = $request->getActionName();
-	    
-	    //load the section
-	    if(isset($this->sections[$this->controller])){
-	        $this->section = $this->sections[$this->controller];
-	    }else{
-	        $this->section = $this->defaultSection;
-	    }
-
-		if($this->isAdminPage($request))
-		{
-		    //load config
-		    $config = Zend_Registry::get('config');
-		    
-		    //setup layout
-		    $options = array(
-                'layout'     => $config->design->adminLayout,
-                'layoutPath' => $config->design->adminLayoutFolder,
-                'contentKey' => 'form',           // ignored when MVC not used
-            );
-		    $this->layout = Zend_Layout::startMvc($options);
-		    $this->view = $this->layout->getView();
-		    
-		    //load the common helpers
-            DSF_View_RegisterHelpers::register($this->view);
-            $this->view->setScriptPath($config->filepath->adminViews);
-            
-            //load language files
+        if(!$request->isXmlHttpRequest()) {
+    	    //load the module, controller, and action for reference
+    	    $this->module = $request->getModuleName();
+    	    $this->controller = $request->getControllerName();
+    	    $this->action = $request->getActionName();
+    	    
+    	    //load the section
+    	    if(isset($this->sections[$this->controller])){
+    	        $this->section = $this->sections[$this->controller];
+    	    }else{
+    	        $this->section = $this->defaultSection;
+    	    }
     
-            $translate = null;
-            foreach ($config->language->translations as $locale => $translation){
-                if(is_object($translate)) {
-                   $translate->addTranslation($config->language->path . '/' . $translation . '.csv', $locale); 
-                }else{
-                    $translate = new Zend_Translate('csv', $config->language->path . '/' . $translation . '.csv', $locale);
+    		if($this->isAdminPage($request))
+    		{
+    		    $this->view->isAdminPage = true;
+    		    //load config
+    		    $config = Zend_Registry::get('config');
+    		    
+    		    //setup layout
+    		    $options = array(
+                    'layout'     => $config->design->adminLayout,
+                    'layoutPath' => $config->design->adminLayoutFolder,
+                    'contentKey' => 'form',           // ignored when MVC not used
+                );
+    		    $this->layout = Zend_Layout::startMvc($options);
+    		    $this->view = $this->layout->getView();
+    		    
+    		    //load the common helpers
+                DSF_View_RegisterHelpers::register($this->view);
+                $this->view->setScriptPath($config->filepath->adminViews);
+                
+                //load language files
+        
+                $translate = null;
+                foreach ($config->language->translations as $locale => $translation){
+                    if(is_object($translate)) {
+                       $translate->addTranslation($config->language->path . '/' . $translation . '.csv', $locale); 
+                    }else{
+                        $translate = new Zend_Translate('csv', $config->language->path . '/' . $translation . '.csv', $locale);
+                    }
                 }
-            }
-            $locale = $config->language->defaultLocale;
-            $translate->setLocale($locale);
-            $translate->setCache(Zend_Registry::get('cache'));
-            $this->view->translate = $translate;
-            
-            //page links
-            $this->view->toolbarLinks = array();
-            
-		}    	
+                $locale = $config->language->defaultLocale;
+                $translate->setLocale($locale);
+                $translate->setCache(Zend_Registry::get('cache'));
+                $this->view->translate = $translate;
+                
+                //page links
+                $this->view->toolbarLinks = array();
+                
+    		}    
+        }	
     }
     
     private function isAdminPage($request) {

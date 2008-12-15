@@ -9,7 +9,7 @@
             <host>localhost</host>
             <username>root</username>
             <password></password>
-            <dbname>test_installer</dbname>
+            <dbname>newest_test</dbname>
         </database>
         <design>
         	<pathToSkins>skins</pathToSkins>
@@ -21,14 +21,14 @@
     	</design>
 		 <filepath>
 			<media>media</media>
-			<trash>trash</trash>
-			<template>templates</template>
+			<trash>./trash</trash>
 			<emailTemplates>./application/public/views/scripts/email</emailTemplates>
 			<contentTemplates>./application/contentTemplates</contentTemplates>
-			<script>public/scripts</script>
-			<style>public/styles</style>
-			<image>public/images</image>
-			<adminViews>application/admin/views/scripts</adminViews>
+			<script>./scripts</script>
+			<style>./styles</style>
+			<image>./images</image>
+			<icons>images/icons</icons>
+			<adminViews>./application/admin/views/scripts</adminViews>
 		</filepath>	
 		 <filetypes>
 		    <wav type="audio" icon="cd.png" mime="#"/>
@@ -70,7 +70,7 @@
 	</testing>
 	<system>
 		<version>1.5</version>
-		<installDate></installDate>
+		<installDate>1229120390</installDate>
 		<requirements>
 			<php>5.2.0</php>
 			<extensions>

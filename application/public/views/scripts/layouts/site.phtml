@@ -7,7 +7,7 @@ $this->placeholder('header_search_content')->set(
     ''
 );
 
-if(is_object($this->page)) {
+if(is_object($this->page) && $this->isError != true) {
     $this->content = $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent());
     $this->submenu = $this->RenderMenu($this->page->getId(), 2);
 }

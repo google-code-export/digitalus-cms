@@ -13,10 +13,10 @@ class Admin_DesignController extends Zend_Controller_Action
 	{
 		$mdlDesign = new Design();
 		$this->view->designs = $mdlDesign->listDesigns();
-		
-		$this->view->breadcrumbs['Open Design: News'] = '#';
-	    $this->view->toolbarLinks = array();
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '#';
+		        
+	    $this->view->breadcrumbs = array(
+	       'Design' =>   $this->getFrontController()->getBaseUrl() . '/admin/design'
+	    );
 	    $this->design = new stdClass();
 	}
 	
@@ -61,7 +61,7 @@ class Admin_DesignController extends Zend_Controller_Action
 				
 	    $this->view->breadcrumbs["Open: " . $mdlDesign->getValue('name')] = $this->getFrontController()->getBaseUrl() . '/admin/design/edit/id/' . $id;
 	    $this->view->toolbarLinks = array();
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = '#';
+	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_design_update_id_' . $id;
 	    $this->view->toolbarLinks[$this->view->GetTranslation("Delete")] = $this->getFrontController()->getBaseUrl() . '/admin/design/delete/id/' . $id;
 	    
 		

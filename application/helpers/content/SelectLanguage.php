@@ -25,8 +25,6 @@ class DSF_View_Helper_Content_SelectLanguage {
         //select version
 		$config = Zend_Registry::get('config');
 		$siteVersions = $config->language->translations;
-
-		$data[] = "Default Language";
 		
 		foreach ($siteVersions as $locale => $label) {
 		    $data[$locale] = $label;

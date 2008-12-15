@@ -18,16 +18,18 @@ class DSF_View_Helper_Interface_Link {
      */
     public $view;
     
-    public $iconPath = '/images/icons';
+    public $iconPath;
     
     /**
      *  
      */
     public function link($label, $link, $icon = null, $class='link') {
+        $config = Zend_Registry::get('config');
+        $this->iconPath = $config->filepath->icons;
         $linkParts[] = "<a href='{$link}' class='{$class}'>";
         $iconPath = $this->view->baseUrl . $this->iconPath;
         if(null !== $icon) {
-            $linkParts[] = "<img src='{$iconPath}/{$icon}' alt='({$label}) ' class='icon' />";
+            $linkParts[] = "<img src='{$this->view->baseUrl}/{$iconPath}/{$icon}' alt='({$label}) ' class='icon' />";
         }
         if(!empty($label)) {
             $linkParts[] = $this->view->GetTranslation((string)$label);

@@ -11,6 +11,7 @@ class ErrorController extends Zend_Controller_Action
 	 */
 	public function errorAction()
 	{
+	    $this->getHelper('layout')->disableLayout();
 	    $errors = $this->_getParam('error_handler');
 	    switch ($errors->type) {
 	        case Zend_Controller_Plugin_ErrorHandler::EXCEPTION_NO_CONTROLLER:
@@ -27,12 +28,7 @@ class ErrorController extends Zend_Controller_Action
 	            $this->view->message = $errors->exception;
 	            break;
 	    }
-	    
-	    $this->view->content = $this->view->render('error/error.phtml');
-	    $this->view->submenu = $this->view->render('error/help-menu.phtml');
-	    $this->view->LoadDefaultDesign();
-	    $this->view->layout()->page = $this->view->render('layouts/' . $this->view->layout);
-	    $this->_forward('index', 'index');
+
 	} 
 
 }

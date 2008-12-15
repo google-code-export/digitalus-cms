@@ -198,14 +198,19 @@ class Initializer extends Zend_Controller_Plugin_Abstract
         
         //setup extension modules
         $extensions = DSF_Filesystem_Dir::getDirectories($this->_root .  '/application/modules');
+        $this->_front->setParam("pathToModules", $this->_root .  '/application/modules');
         if(is_array($extensions))
         {
         	foreach ($extensions as $extension)
         	{
+        	    $cmsModules['mod_' . $extension] = $extension;
         		$this->_front->addControllerDirectory($this->_root .  '/application/modules/' . $extension . '/controllers', 'mod_' . $extension);
         	}
         }
         
+        if(is_array($cmsModules)) {
+            $this->_front->setParam('cmsModules', $cmsModules);
+        }
         $this->_front->setDefaultModule('public');
 	}  
 	

@@ -88,6 +88,7 @@ class DSF_Toolbox_String
 	 */
 	static function addUnderscores($string, $relative = false)
 	{
+	    $string = str_replace("_", "[UNDERSCORE]", $string);
 		return str_replace('/', '_', trim($string));
 	}
 	
@@ -106,6 +107,7 @@ class DSF_Toolbox_String
 		{
 			$string = DSF_Toolbox_String::stripLeading('/', $string);
 		}
+		$string = str_replace("[UNDERSCORE]", "_", $string);
 		return $string;
 	}
 	

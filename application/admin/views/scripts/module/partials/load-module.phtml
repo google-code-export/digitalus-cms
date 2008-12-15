@@ -1,0 +1,45 @@
+<dt>
+    <?php 
+    echo $this->formLabel(
+        $this->element->getName(),
+        $this->element->getLabel()
+    );
+    ?>
+</dt>
+<dd class="<?php echo $this->class;?>">
+
+<?php 
+$elementName = $this->element->getName();
+$values = $this->element->getXml();
+
+//load values as url parameters
+if($values) {
+ foreach ($values as $k => $v) {
+     $params[] = $k;
+     $params[] = $v;   
+ }
+ $paramsString = implode('/', $params) . '/';
+}
+echo $this->SelectModule($elementName . "[module]", $values->module, $this->element->getAttribs());
+?>
+<div id="moduleFormWrapper"></div>
+<script>
+$(document).ready(function() {
+	$('#<?php echo $elementName?>-module').change(function(){
+	    var module = $(this).val();
+	    $('#moduleFormWrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
+	});
+ 
+ });
+</script>
+
+
+<?php 
+///echo $this->formText($elementName . "[test1]", $values->test1, $this->element->getAttribs());
+//echo $this->formText($elementName . "[test2]", $values->test2, $this->element->getAttribs());
+//echo $this->formText($elementName . "[test3]", $values->test3, $this->element->getAttribs());
+
+echo $this->formErrors($this->element->getMessages());
+?>
+</dd>
+

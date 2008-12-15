@@ -2,7 +2,7 @@
 $this->placeholder("formHeadline")->set($this->GetTranslation("Media Manager"));
 ?>
 <fieldset id='subfolder'>
-	<legend>Create New Folder</legend>
+	<legend><?php echo $this->GetTranslation("Create New Folder");?></legend>
 	<?php 
 	    $data = array(
 	        'path' => null
