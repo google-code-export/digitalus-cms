@@ -441,7 +441,7 @@ a.link img.icon{
 	height:1.5em;
 	
 }
-.column a:hover{
+#form a:hover, .column a:hover{
 	color:#5D86BD;
 }
 
@@ -480,6 +480,26 @@ a.handle{
 	display:block;
 	float:left;
 }
+
+h4 img{
+	margin-right:10px;
+}
+
+#form a img{
+	border:none;
+	margin-right:10px;
+}
+
+.folderWrapper, .fileWrapper{
+	padding:5px;
+}
 	
+#errorWrapper{
+	width:	500px;
+	overflow:auto;
+	border:1px solid #ccc;
+	margin:10px;
+	padding:5px;
+}
 
 

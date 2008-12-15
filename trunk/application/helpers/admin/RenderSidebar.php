@@ -13,6 +13,7 @@ class DSF_View_Helper_Admin_RenderSidebar
         'module'        =>  'module' 
     );
     public $defaultSection = 'index';
+    public $moduleSection = 'module';
     public $selectedSection;
     public $sidebarPath;
     public $defaultHeadline = "Home";
@@ -69,12 +70,18 @@ class DSF_View_Helper_Admin_RenderSidebar
 	{
 	    $front = Zend_Controller_Front::getInstance();
 	    $request = $front->getRequest();
-	    $controller = $request->getControllerName();
-
-	    if(isset($this->sections[$controller])){
-	        $this->selectedSection = $this->sections[$controller];
+	    
+	    $module = $request->getModuleName();
+	    if(substr($module, 0, 4) == 'mod_') {
+	        $this->selectedSection = $this->moduleSection;
 	    }else{
-	        $this->selectedSection = $this->defaultSection;
+	        $controller = $request->getControllerName();
+
+    	    if(isset($this->sections[$controller])){
+    	        $this->selectedSection = $this->sections[$controller];
+    	    }else{
+    	        $this->selectedSection = $this->defaultSection;
+    	    }
 	    }
 	    
 	    

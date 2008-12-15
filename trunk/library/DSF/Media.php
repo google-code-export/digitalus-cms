@@ -32,6 +32,7 @@ class DSF_Media {
     {
         
         if(self::isAllowed($file['type'])) {
+            $path = self::getMediaPath($path);
     		//default to the name on the client machine
 		    if($filename == null){$filename = $file['name'];}
 		    $filename = str_replace('_','-',$filename);
@@ -92,36 +93,89 @@ class DSF_Media {
      /**
       * this function renames a folder
       *
-      * @param string $oldPath - the full old path
+      * @param string $path - the full path
       * @param string $newName - the new name
       */
-     static function renameFolder($oldPath, $newName, $base = '.')
+     static function renameFolder($path, $newName)
      {
-	    //build the path to the media folder
-         $path = str_replace(self::rootDirectory(), '', $oldPath);
-	    $path = DSF_Toolbox_String::stripUnderscores($path);
-	    $path = DSF_Toolbox_String::stripLeading('/', $path);
-	    $path = $base . '/' . self::rootDirectory() . '/' . $path;
-	    
+         $path = self::getMediaPath($path);
+         
 	    //get the new name
-	    $pathParts = explode('/', $path);
-	    array_pop($pathParts);
-	    $newPath = implode('/', $pathParts);
-	    $newPath .= '/' . $newName;
-	    
-	    if(DSF_Filesystem_Dir::rename($path, $newPath)) {
-	        $relativePath = str_replace($base . '/' . self::rootDirectory(). '/', '', $newPath);
-	        return $relativePath;
+        $parent = DSF_Toolbox_String::getParentFromPath($path);
+	    $newpath = $parent . '/' . $newName;
+
+	    if(DSF_Filesystem_Dir::rename($path, $newpath)) {
+	        return $newpath;
 	    }else{
 	        return false;
 	    }
-	    
+     }
+     
+     static function deleteFolder($folder)
+     {
+        if(self::testFilepath($folder)) {
+            $folder = DSF_Toolbox_String::stripUnderscores($folder);
+            $fullPath = self::rootDirectory() . '/' . $folder;
+            
+            //move the folder to the trash
+            DSF_Filesystem_Dir::copyRecursive($fullPath, $config->filepath->trash);
+            DSF_Filesystem_Dir::deleteRecursive($fullPath);
+        }
+     }
+     
+     static function deleteFile($file)
+     {
+         if(self::testFilepath($folder)) {
+             $filepath = DSF_Toolbox_String::stripUnderscores($file);
+             $fullpath = self::rootDirectory() . '/' . $filepath;
+             if(file_exists($fullpath)) {
+                 unlink($fullpath);
+             }
+         }
+     }
+     
+     static function testFilepath($filepath)
+     {
+         //dont allow access outside the media folder
+        if(strpos($filepath, './') || strpos($filepath, './')) {
+            throw new Zend_Exception("Illegal file access attempt. Operation cancelled!");
+            return false;
+        }else{
+            return true;
+        }
+     }
+     
+     static function getMediaPath($path, $relative = true)
+     {
+        $path = DSF_Toolbox_String::stripUnderscores($path);
+        
+        //make it impossible to get out of the media library
+        $path = str_replace('./','',$path);
+        $path = str_replace('../','',$path);
+        
+        //remove the reference to media if it exists
+        $pathParts = explode('/', $path);
+        if(is_array($pathParts)) {
+            if($pathParts[0] == 'media') {
+                unset($pathParts[0]);
+            }
+
+            //add the media root
+            $path = self::rootDirectory($relative) . '/' . implode('/', $pathParts);
+            return $path;
+        }
+	    return false;
      }
     
-    static function rootDirectory()
+    static function rootDirectory($relative = true)
     {
         $config = Zend_Registry::get('config');
-        return $config->filepath->media;
+        $front = Zend_Controller_Front::getInstance();
+        $baseUrl = $front->getBaseUrl();
+        if($relative) {
+            $prepend = '.';
+        }
+        return $prepend . $baseUrl . '/' . $config->filepath->media;
     }
 }
 

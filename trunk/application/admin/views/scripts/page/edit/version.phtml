@@ -1,4 +1,5 @@
-<form action='<?php echo $this->baseUrl;?>/admin/page/edit/id/<?php echo $this->pageId;?>' method="post">
+<form action='<?php echo $this->baseUrl;?>/admin/page/edit' method="post">
+	<?php echo $this->formHidden('page_id',$this->pageId)?>
     <dl class='zend_form'>
     <dt><label class="required" for="version">Version:</label></dt>
     <dd><?php echo $this->selectLanguage('language',$this->language)?></dd>

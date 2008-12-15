@@ -6,13 +6,16 @@ class DSF_View_Helper_Controls_SelectModule
 		$modules = DSF_Filesystem_Dir::getDirectories('./application/modules');
 		if(is_array($modules))
 		{
-		    $data[] = "No module selected";
+		    $data[] = $this->view->GetTranslation("Select a module");
     		foreach ($modules as $module)
     		{
-    		    //ignore the template folder
-    		    if($module != 'template'){
-    		      $data[$module] = $module;
-    		    }
+    		    $pages = DSF_Filesystem_File::getFilesByType('./application/modules/' . $module . '/views/scripts/public', 'phtml');
+		        if(is_array($pages)) {
+		            foreach ($pages as $page) {
+		                $page = DSF_Toolbox_Regex::stripFileExtension($page);
+		                $data[$module . '_' . $page] = $module . ' -> ' . $page;
+		            }
+		        }
     		}
     		return $this->view->formSelect($name, $value, $attribs, $data);
 		}else{

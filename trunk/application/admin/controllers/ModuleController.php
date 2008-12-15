@@ -23,9 +23,10 @@
 class Admin_ModuleController extends Zend_Controller_Action 
 {
 	public function init()
-	{
-		//set the admin
-		$this->view->adminSection = 'module';
+	{  
+	    $this->view->breadcrumbs = array(
+	       'Modules' =>   $this->getFrontController()->getBaseUrl() . '/admin/module'
+	    ); 
 	}
 	
 	/**
@@ -54,7 +55,31 @@ class Admin_ModuleController extends Zend_Controller_Action
 	 */
 	public function renderFormAction()
 	{
-	    $this->view->moduleName = $this->_request->getParam('modulename');
-	    $this->view->moduleAction= $this->_request->getParam('moduleaction');
+	    $module = $this->_request->getParam('moduleKey');
+	    $element = $this->_request->getParam('element');
+	    if($module != null) {
+	        $moduleParts = explode('_', $module);
+	        $action = $moduleParts[1];
+	        $name = $moduleParts[0];
+	        
+    	    $data = new stdClass();
+            $data->get = $this->_request->getParams();
+            $data->post = $_POST;
+            $this->view->data = $data;
+            
+            $this->view->element = $element;
+
+    	    $dir = './application/modules/' . $name . '/views/scripts';
+            $helpers = './application/modules/' . $name . '/views/helpers';
+            $path = "/public/" . $action . ".form.phtml";
+            $fullPath = $dir . $path;
+
+            if(file_exists($fullPath))
+            {
+                $this->view->addScriptPath($dir);
+                $this->view->addHelperPath($helpers);
+                $this->view->placeholder('moduleForm')->set($this->view->render($path));
+            }
+	    }
 	}
 }

@@ -64,16 +64,18 @@ class Admin_PageController extends Zend_Controller_Action
 	}
 	
 	public function editAction()
-	{	
+	{
+		$page = new Page();	
 		//load the current page
 		if($this->_request->isPost()) {	
 			$pageId = DSF_Filter_Post::int('page_id');
+			$version = DSF_Filter_Post::get('version');
 		}else{
-			$pageId = $this->_request->getParam('id',0);	
+			$pageId = $this->_request->getParam('id',0);
+			$version = $this->_request->getParam('version', $page->getDefaultVersion());	
 		}
 		
-		$page = new Page();
-		$currentPage = $page->open($pageId);
+		$currentPage = $page->open($pageId, $version);
 		$template = $page->getTemplate($pageId);
 		$templateLoader = new DSF_Content_Template_Loader();
 		$pageTemplate = $templateLoader->load($template);
@@ -105,8 +107,12 @@ class Admin_PageController extends Zend_Controller_Action
 			$data = array();
 		}
 		
+	    $this->view->currentVersion = $version;
+	    
 		$data['page_id'] = $pageId;
 		$data['name'] = $currentPage->page->name;
+		$data['version'] = $version;
+		
 		$this->view->pageId = $pageId;
 		
 		//main content form

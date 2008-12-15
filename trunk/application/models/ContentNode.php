@@ -88,6 +88,25 @@ class ContentNode extends DSF_Db_Table
 		}
 	}
 	
+	public function getVersions($parentId)
+	{
+	    $select = $this->select();
+	    $select->distinct(true);
+	    $select->where("parent_id = ?", $parentId);
+	    $result = $this->fetchAll($select);
+	    if($result) {
+            $config = Zend_Registry::get('config');
+            $siteVersions = $config->language->translations;
+	        $versions = array();
+	        foreach($result as $row) {
+	            $v = $row->version;
+	            $versions[$v] = $siteVersions->$v;
+	        }
+	        return $versions;
+	    }
+	    return null;
+	}
+	
 	/**
 	 * this function sets a content node
 	 * if the node already exists then it updates it

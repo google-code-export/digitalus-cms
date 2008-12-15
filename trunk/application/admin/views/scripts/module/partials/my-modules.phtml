@@ -1,0 +1,25 @@
+<?php 
+$user = new User();
+$modules = $user->getCurrentUsersModules();
+
+if(is_array($modules)) {
+    
+    echo "<ul>";
+    foreach ($modules as $module) {
+        $key = 'mod_' . $module;
+        $props = DSF_Module_Property::load($key);
+        if($props != null && !empty($props->icon)) {
+            $icon = $props->icon;
+        }else{
+            $icon = "application_form.png";
+        }
+        if($props != null && !empty($props->label)) {
+            $label = $props->label;
+        }else{
+            $label = $module;
+        }
+        
+        echo "<li>" . $this->link($label, $this->baseUrl . '/' . $key, $icon) . "</li>";    
+    }
+    echo "</ul>";
+}

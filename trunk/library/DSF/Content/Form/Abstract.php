@@ -17,6 +17,7 @@ abstract class DSF_Content_Form_Abstract
 		$this->form->setAction($front->getBaseUrl() . self::PAGE_ACTION )
 			->setMethod('post');
 		$this->form->addElementPrefixPath('DSF_Decorator', 'DSF/Form/Decorator', 'decorator');
+		$this->form->addPrefixPath('DSF_Form_Element', 'DSF/Form/Element/', 'element');
 		$this->addBase();
 		$this->setup();
 		//$this->setDecorators();
@@ -30,9 +31,12 @@ abstract class DSF_Content_Form_Abstract
 
 		$page_id = $this->form->createElement('hidden','page_id');
 		$page_id->setRequired(true);
+
+		$version = $this->form->createElement('hidden','version');
 			 
 		 $this->form->addElement($page_id)
-		 	->addElement($name);
+		 	->addElement($name)
+		 	->addElement($version);
 	}
 	
 	public function setDecorators()

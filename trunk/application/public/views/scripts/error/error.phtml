@@ -1,8 +1,25 @@
 <?php
 $this->headTitle('Error Page');
 ?>
-<h1><?php echo $this->title?></h1>
-<?php if ($this->message): ?>
-	<p>The following error occurred:</p>
-	<?php echo $this->message ?>
-<?php endif; ?> 
+
+
+<html>
+	<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	    <?php     
+			echo $this->headTitle();
+	    ?>
+	</head>
+	
+	<body>
+        <div id="errorWrapper">
+        <h1><?php echo $this->title?></h1>
+        <?php if ($this->message): ?>
+        	<p>The following error occurred:</p>
+        	<pre>
+        	<?php echo $this->message ?>
+        	</pre>
+        <?php endif; ?> 
+        </div>
+	</body>
+</html>

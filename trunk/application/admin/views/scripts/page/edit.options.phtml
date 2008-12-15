@@ -20,8 +20,8 @@ this is not going to make it in the beta version
 	<li><?php echo $this->link('Move Page', '#move', 'arrow_turn_right.png');?></li>
 </ul>
 
-<p class='notice'>The page attachments and related content are not implemented yet!</p>
-
+<h3>Page Versions</h3>
+<?php echo $this->partial('page/partials/page-versions.phtml', array('pageId' => $this->pageId, 'version' => $this->currentVersion))?>
 
 
 

@@ -55,7 +55,7 @@ class DSF_Filesystem_Dir
 			
 		}
 	}
-	
+		
 	/**
 	 * this is getting a little extreme i know
 	 * but it will help out later when we want to keep updated indexes
