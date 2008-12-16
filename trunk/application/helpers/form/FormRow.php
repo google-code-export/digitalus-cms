@@ -8,12 +8,9 @@ class DSF_View_Helper_Form_FormRow
 	public function FormRow($label, $control, $required = false){
 	    $class = null;
 		if($required){$class = "required";}
-		$xhtml = "
-			<label class='formRow " . $class . "'>
-				<span>" . $label . "</span>
-				" . $control . "
-			</label>";
-	return $xhtml;
+		$xhtml[] = "<dt><label class='formRow {$class}'>{$label}</label></dt>";
+		$xhtml[] = "<dd>{$control}</dd>";
+	return implode(null,$xhtml);
 	}
 	
     /**
