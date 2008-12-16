@@ -15,6 +15,7 @@ $values = $this->element->getXml();
 //load values as url parameters
 if($values) {
  foreach ($values as $k => $v) {
+     $params[$k] = $v;
      $params[] = $k;
      $params[] = $v;   
  }
@@ -23,7 +24,15 @@ if($values) {
 echo $this->SelectModule($elementName . "[module]", $values->module, $this->element->getAttribs());
 ?>
 </dd>
-<div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper"></div>
+<div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper">
+<?php 
+    if(isset($values->module)){
+         $params['element'] = $elementName;
+         $params['moduleKey'] = $values->module;
+        echo $this->action('render-form','module','admin',$params);
+    }
+?>
+</div>
 <script>
 $(document).ready(function() {
 	$('#<?php echo $elementName?>-module').change(function(){
@@ -36,10 +45,8 @@ $(document).ready(function() {
 
 
 <?php 
-///echo $this->formText($elementName . "[test1]", $values->test1, $this->element->getAttribs());
-//echo $this->formText($elementName . "[test2]", $values->test2, $this->element->getAttribs());
-//echo $this->formText($elementName . "[test3]", $values->test3, $this->element->getAttribs());
-
 echo $this->formErrors($this->element->getMessages());
 ?>
+
+
 
