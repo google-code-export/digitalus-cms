@@ -127,4 +127,10 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 		$view->placeholder('google_verify')->set($settings->get('google_verify'));
 		$view->placeholder('google_tracking')->set($settings->get('google_tracking'));
 	}
+	
+	public function registerViewHelpers()
+	{
+	    $view = $this->_page->getView();
+	    DSF_View_RegisterHelpers::register($view);
+	}
 }

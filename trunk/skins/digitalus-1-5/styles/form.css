@@ -62,6 +62,7 @@ font-weight:bold;
 }
 
 dt label.required{
+	color:#cc0000;
 }
 
 #main form dd{
