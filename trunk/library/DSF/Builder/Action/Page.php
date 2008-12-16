@@ -131,6 +131,12 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 	public function registerViewHelpers()
 	{
 	    $view = $this->_page->getView();
-	    DSF_View_RegisterHelpers::register($view);
+    	$helperDirs = DSF_Filesystem_Dir::getDirectories('./application/helpers');
+    	if(is_array($helperDirs))
+    	{
+    		foreach ($helperDirs as $dir) {
+    			$view->addHelperPath('./application/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
+    		}
+    	}
 	}
 }
