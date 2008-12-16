@@ -22,12 +22,13 @@ if($values) {
 }
 echo $this->SelectModule($elementName . "[module]", $values->module, $this->element->getAttribs());
 ?>
-<div id="moduleFormWrapper"></div>
+</dd>
+<div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper"></div>
 <script>
 $(document).ready(function() {
 	$('#<?php echo $elementName?>-module').change(function(){
 	    var module = $(this).val();
-	    $('#moduleFormWrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
+	    $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
 	});
  
  });
@@ -41,5 +42,4 @@ $(document).ready(function() {
 
 echo $this->formErrors($this->element->getMessages());
 ?>
-</dd>
 
