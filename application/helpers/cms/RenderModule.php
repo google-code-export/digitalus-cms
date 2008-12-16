@@ -1,12 +1,15 @@
 <?php
-class Zend_View_Helper_RenderModule
+class DSF_View_Cms_RenderModule
 {
 	/**
 	 * render a module page like news_showNewPosts
 	 */
-	public function RenderModule(){
-		$modulePage = $this->view->pageObj->getModule();
-		if($modulePage){
+	public function RenderModule($moduleData){
+		if($moduleData) {
+		    $xml = simplexml_load_string($moduleData);
+		    Zend_Debug::dump($xml);
+		}
+		/*if($modulePage){
     		$module = $modulePage->module;
     		$action = $modulePage->action;
     		
@@ -24,7 +27,7 @@ class Zend_View_Helper_RenderModule
     		}
     		
     		return $this->view->LoadModule($module, $action, $params);
-		}
+		}*/
 	}
 	
     /**
