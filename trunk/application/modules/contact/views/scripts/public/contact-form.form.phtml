@@ -1,5 +1,17 @@
 <?php
-echo $this->FormRow('Enter the recipient:', $this->formText($this->element . '[recipient]', $this->data->get['recipient']));
-echo $this->FormRow('Enter the recipients email:', $this->formText($this->element . '[email]', $this->data->get['email']));
+echo $this->FormRow(
+	'Enter the recipient:', 
+    $this->formText(
+        $this->element . '[recipient]', 
+        $this->getData('recipient', $this->data->get)
+    )
+);
+echo $this->FormRow(
+	'Enter the recipients email:',
+    $this->formText(
+        $this->element . '[email]', 
+        $this->getData('email', $this->data->get)
+    )
+    );
 ?>
 
