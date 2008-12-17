@@ -1,5 +1,5 @@
 <?php
-class Mod_Core_PublicController extends DSF_Controller_Module_Public
+class Mod_Core_PublicController extends Zend_Controller_Action 
 {
     /**
      * @since 0.8.7

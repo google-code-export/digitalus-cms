@@ -1,9 +1,9 @@
 <?php
-class Mod_Contact_PublicController extends DSF_Controller_Module_Public
+class Mod_Contact_PublicController extends Zend_Controller_Action 
 {
     public function contactFormAction()
     {
-        if($this->_request->isPost())
+        if($this->_request->isPost() && DSF_Filter_Post::has('submitContactForm'))
         {
             $pageId = $this->_request->getParam('pageId');
             $p = new Properties($pageId);

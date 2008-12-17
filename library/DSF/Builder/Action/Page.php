@@ -45,22 +45,17 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 		}
 	}
 	
-	public function loadContent()
+	public function setLanguage()
 	{
- 		$mdlContentNode = new ContentNode();
- 		$content = $mdlContentNode->fetchContentObject($this->_page->getId());
- 		$this->_page->setContent($content);
+	    $this->_page->setLanguage(DSF_Language::getLanguage());
 	}
 	
-	public function loadTranslation()
+	public function loadContent()
 	{
- 		$mdlContentNode = new ContentNode();
- 		$translation = DSF_Language::getLanguage();
- 		if(!empty($translation)) {
-     		$content = $mdlContentNode->fetchContentObject($this->_page->getId(), null, null, $translation);
-     		$this->_page->setTranslation($content);  
- 		}
-    }
+ 		$mdlPage = new Page();
+ 		$content = $mdlPage->open($this->_page->getId(), $this->_page->getLanguage());
+ 		$this->_page->setContent($content->content);
+	}
 	
 	public function loadContentTemplate()
 	{

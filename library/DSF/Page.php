@@ -9,7 +9,7 @@ class DSF_Page
 	protected $_meta = array();
 	protected $_properties = array();
 	protected $_content = array();
-	protected $_translation = array();
+	protected $_language = array();
 	protected $_contentTemplate = null;
 	protected $_design;
 	protected $_layout;
@@ -100,17 +100,17 @@ class DSF_Page
 		return $this->_properties;
 	}
 	
-	public function setTranslation($content)
+	public function setLanguage($language)
 	{
-		$this->_translation = $content;
+		$this->_language = $language;
 	}
 	
-	public function getTranslation($key = null)
+	public function getLanguage()
 	{
-	    if($key !== null) {
-		    return $this->_translation->$key;
+	    if($this->_language) {
+	        return $this->_language;
 	    }else{
-		    return $this->_translation;   
+	        return null;
 	    }
 
 	}
