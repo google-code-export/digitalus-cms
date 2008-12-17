@@ -40,6 +40,7 @@ class Admin_AuthController extends Zend_Controller_Action
 	function loginAction()
     {
         if ($this->_request->isPost()) {
+            $uri = DSF_Filter_Post::get('uri');
             $username = DSF_Filter_Post::get('adminUsername');
             $password = DSF_Filter_Post::raw('adminPassword');
 
@@ -57,20 +58,18 @@ class Admin_AuthController extends Zend_Controller_Action
                 $auth = new DSF_Auth($username, $password);
                 $result = $auth->authenticate();
                 if($result){    
-                	$url = DSF_Filter_Post::get('uri');
-                	if($url == '' || $url == 'admin/auth/login'){
-                    	$url = 'admin';
+                	if($uri == '' || $uri == 'admin/auth/login'){
+                    	$uri = 'admin';
                 	}
+                     $this->_redirect($uri);
                 }else{
 					$e = new DSF_View_Error();
 					$e->add($this->view->GetTranslation('The username or password you entered was not correct.'));
-					$url = "admin/auth/login";
                 }
-             
-            }else{
-					$url = "admin/auth/login";           
             }
-			$this->_redirect($url);
+			$this->view->uri = $uri;
+        }else{
+            $this->view->uri = DSF_Uri::get();
         }
                     
     }
@@ -136,3 +135,5 @@ class Admin_AuthController extends Zend_Controller_Action
 	}
 
 }
+ 
+  
