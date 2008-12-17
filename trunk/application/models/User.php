@@ -192,6 +192,7 @@ class User extends DSF_Db_Table
 	public function getUsersModules($userRowset) {
 		$user = $this->getCurrentUser();
 		$resources = $this->getAclResources($userRowset);
+		$modules = null;
 		if(is_array($resources)) {
 			foreach ($resources as $k => $v) {
 				if(1 == $v || self::SUPERUSER_ROLE == $user->role) {

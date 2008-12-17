@@ -13,7 +13,7 @@ $elementName = $this->element->getName();
 $values = $this->element->getXml();
 
 //load values as url parameters
-if($values && $values->module != 0) {
+if($values && (string)$values->module != '0') {
  foreach ($values as $k => $v) {
      $params[$k] = $v;
      $params[] = $k;

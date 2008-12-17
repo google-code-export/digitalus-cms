@@ -1,0 +1,45 @@
+<?php 
+$this->placeholder('header_logo_content')->set(
+    "<a href='http://digitaluscms.com'><img src='" . $this->baseUrl . "/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
+);
+
+$this->placeholder('header_search_content')->set(
+    ''
+);
+
+if(is_object($this->page) && $this->isError != true) {
+    $this->content = $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent());
+    $this->submenu = $this->RenderMenu($this->page->getId(), 2);
+}
+
+$this->placeholder('content_content')->set($this->content);
+
+$this->placeholder('nav_content')->set(
+    $this->RenderMenu(0)
+);
+
+$this->placeholder('sidebar_content')->set(
+    $this->submenu
+);
+
+$this->placeholder('language_content')->set('language' . $this->languageForm());
+
+$this->placeholder('footer_content')->set(
+    $this->partial('partials/footer.phtml')
+);
+
+$grid = new DSF_Interface_Grid(16);
+$header = $grid->addElement('header', 16);
+    $logo = $grid->addElement('header_logo', 10, $header, DSF_Interface_Grid::TYPE_START);
+    $search = $grid->addElement('header_search',6,$header, DSF_Interface_Grid::TYPE_END);
+
+$nav = $grid->addElement('nav', 16);
+
+$body = $grid->addElement('body', 16);
+    $content = $grid->addElement('content', 12, $body, DSF_Interface_Grid::TYPE_START);
+    $sidebar = $grid->addElement('sidebar', 4, $body, DSF_Interface_Grid::TYPE_END);
+    
+$language = $grid->addElement('language', 16, $body);
+
+$footer = $grid->addElement('footer', 16, $body);
+echo $grid->render();
