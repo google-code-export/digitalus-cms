@@ -73,6 +73,7 @@ class Page extends DSF_Db_Table
 
     		//fetch the content nodes
     		$page->content = $node->fetchContentArray($pageId, null, null, $version);
+    		$page->defaultContent = $node->fetchContentArray($pageId, null, null, $this->getDefaultVersion());
     		
     		return $page;   		
     	}else{

@@ -12,7 +12,7 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
 		$template = $this->_page->getContentTemplate();
 		
 		$content = $this->_page->getContent();
-		$view->content = $this->_page->getContent();
+		$view->content = $content;
 		
 		//render the content template
 		$templateParts = explode('_',$template);
