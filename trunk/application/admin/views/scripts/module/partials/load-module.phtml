@@ -20,8 +20,17 @@ if($values) {
      $params[] = $v;   
  }
  $paramsString = implode('/', $params) . '/';
+ $module = $values->module;
+}else{
+    $module = null;
+    $paramsString = null;
 }
-echo $this->SelectModule($elementName . "[module]", $values->module, $this->element->getAttribs());
+
+$attr = $this->element->getAttribs();
+if(!is_array($attr)) {
+    $attr = null;
+}
+echo $this->SelectModule($elementName . "[module]", $module, $attr);
 ?>
 </dd>
 <div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper">
