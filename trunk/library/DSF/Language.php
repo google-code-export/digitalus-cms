@@ -30,6 +30,19 @@ class DSF_Language {
         return $currentLang;        
     }
     
+    static function getLanguageKey()
+    {
+        $lang = self::getLanguage();
+        if(empty($lang)) {
+            $config = Zend_Registry::get('config');
+            $translations = $config->language->translations->toArray();
+            array_flip($translations);
+            return $translations[$lang];
+        }else{
+            return null;
+        }
+    }
+    
     static function getSession()
     {
         return new Zend_Session_Namespace('currentLanguage');

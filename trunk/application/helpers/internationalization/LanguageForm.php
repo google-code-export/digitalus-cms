@@ -26,8 +26,9 @@ class DSF_View_Helper_Internationalization_LanguageForm {
      */
     public function languageForm() {    
         //process form if this is a post back
-        if(isset($_POST['setLang'])) {
-            DSF_Language::setLanguage($_POST['language']);   
+        if(DSF_Filter_Post::has('setLang')) {
+            DSF_Language::setLanguage($_POST['language']);
+            // @todo: this needs to redirect so it loads the whole page in the new language
         }
         
         $currentLanguage = DSF_Language::getLanguage();

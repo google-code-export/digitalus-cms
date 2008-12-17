@@ -22,6 +22,8 @@ $this->placeholder('sidebar_content')->set(
     $this->submenu
 );
 
+$this->placeholder('language_content')->set('language' . $this->languageForm());
+
 $this->placeholder('footer_content')->set(
     $this->partial('partials/footer.phtml')
 );
@@ -37,6 +39,8 @@ $nav = $grid->addUnit('nav', 16);
 $body = $grid->addUnit('body', 16);
     $content = $grid->startRow('content', 12, $body);
     $sidebar = $grid->endRow('sidebar', 4, $body);
+    
+$language = $grid->addUnit('language', 16, $body);
 
 $footer = $grid->addUnit('footer', 16, $body);
 echo $grid->render();

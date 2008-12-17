@@ -11,7 +11,6 @@ class Zend_View_Helper_LoadModule
 		// @todo: validate the action as well
 		if(in_array($module, $modules))
 		{
-		    $paramsArray['pageId'] = $this->view->page->id;
 		    if(is_array($params))
 		    {
     		    foreach ($params as $k => $v)

@@ -17,17 +17,4 @@ class Base_Detail_Form extends DSF_Content_Form_Abstract
 			->addElement($content)
 			->addElement('submit', 'update', array('label' => 'Update Page'));
 	}
-	
-	public function setValues($values)
-	{
-		$values['name'] = "This actually works";
-	    $this->form->populate($values);
-	}
-	
-	public function getValues()
-	{
-	    $values = parent::getValues();
-	    Zend_Debug::dump($values);
-	    die();
-	}
 }

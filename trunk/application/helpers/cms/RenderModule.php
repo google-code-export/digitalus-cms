@@ -5,29 +5,25 @@ class DSF_View_Helper_Cms_RenderModule
 	 * render a module page like news_showNewPosts
 	 */
 	public function RenderModule($moduleData){
-		if($moduleData) {
+		if(!empty($moduleData)) {
 		    $xml = simplexml_load_string($moduleData);
-		    Zend_Debug::dump($xml);
-		}
-		/*if($modulePage){
-    		$module = $modulePage->module;
-    		$action = $modulePage->action;
-    		
-    		$params = array();
-    		
-    		$moduleParams = $modulePage->params;
-    		if(is_array($moduleParams))
-    		{
-    		    $params = array_merge($params, $moduleParams);
-    		}
-    		$pageParams = $this->view->pageObj->getParams();
-    		if(is_array($pageParams))
-    		{
-    		     $params = array_merge($params, $pageParams);
-    		}
-    		
-    		return $this->view->LoadModule($module, $action, $params);
-		}*/
+		    if(is_object($xml)) {
+		        //build params
+		        foreach ($xml as $k => $v) {
+		            $params[$k] = (string)$v;
+		        }
+		        $moduleParts = explode('_', $xml->module);
+		        
+		        if(is_array($moduleParts) && count($moduleParts) == 2) {
+        	        $name = $moduleParts[0];
+        	        $action = $moduleParts[1];
+        	        return $this->view->LoadModule($name, $action, $params);
+		        }
+		    }
+		    
+		}else{
+	        return null;
+	    }
 	}
 	
     /**
