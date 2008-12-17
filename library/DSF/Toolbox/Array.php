@@ -32,21 +32,22 @@ class DSF_Toolbox_Array
      */
     static function splitOnValue($array, $value)
     {
-		$paramPos = array_search($value, $array);
-		
-		if($paramPos)
-		{
-		    $arrays[] = array_slice($array, 0, $paramPos);
-		    $arrays[] = array_slice($array, $paramPos + 1);
-		}else{
-		    $arrays = null;
-		}
-		if(is_array($arrays))
-		{
-		    return $arrays;
-		}else{
-		    return false;
-		}
+        if(is_array($array)) {
+    		$paramPos = array_search($value, $array);
+    		
+    		if($paramPos)
+    		{
+    		    $arrays[] = array_slice($array, 0, $paramPos);
+    		    $arrays[] = array_slice($array, $paramPos + 1);
+    		}else{
+    		    $arrays = null;
+    		}
+    		if(is_array($arrays))
+    		{
+    		    return $arrays;
+    		}
+        }
+        return null;
     }
     
     /**

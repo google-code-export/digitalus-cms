@@ -1,6 +1,6 @@
 <div class="teaser">
-	<?php echo $this->content->teaser; ?>
+	<?php echo $this->getData('teaser', $this->content); ?>
 </div>
 <div class="contentWrapper">
-	<?php echo $this->content->content; ?>
+	<?php echo $this->getData('content', $this->content); ?>
 </div>

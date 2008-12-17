@@ -65,7 +65,7 @@ class Admin_NavigationController extends Zend_Controller_Action
 	    
 		//fetch the menu
 		$this->view->menuId = $menuId;
-		$this->view->menu = $mdlMenu->open($menuId, true);	
+		$this->view->menu = $mdlMenu->openMenu($menuId, true);	
 	}
 	
 	/**

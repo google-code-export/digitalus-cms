@@ -76,6 +76,7 @@ class Admin_PageController extends Zend_Controller_Action
 		}
 		
 		$currentPage = $page->open($pageId, $version);
+		
 		$template = $page->getTemplate($pageId);
 		$templateLoader = new DSF_Content_Template_Loader();
 		$pageTemplate = $templateLoader->load($template);
@@ -106,7 +107,7 @@ class Admin_PageController extends Zend_Controller_Action
 		}else{
 			$data = array();
 		}
-		
+				
 	    $this->view->currentVersion = $version;
 	    
 		$data['page_id'] = $pageId;

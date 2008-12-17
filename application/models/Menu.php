@@ -14,7 +14,7 @@ class Menu extends Page
         }
     }
     
-	public function open($menuId = 0, $asRowset = false)
+	public function openMenu($menuId = 0, $asRowset = false)
 	{
 		$menu = array();
 		$children = $this->getChildren($menuId);

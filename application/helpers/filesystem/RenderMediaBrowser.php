@@ -8,6 +8,7 @@ class DSF_View_Helper_Filesystem_RenderMediaBrowser
   
 		$folders = DSF_Filesystem_Dir::getDirectories('./' . $path);
 		$files = DSF_Filesystem_File::getFilesByType('./' . $path,false,false,true);
+		$links = null;
 		
 		if(is_array($folders) && count($folders) > 0) {
     		foreach ($folders as $folder)

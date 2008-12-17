@@ -9,15 +9,10 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 	
 	public function appendUriParams()
 	{
-		$uri = $this->_page->getUri();
-		if(is_array($uri)) {
-			$uriParts = DSF_Toolbox_Array::splitOnValue($uri, 'p');
-			if(is_array($uriParts)) {
-				$params = DSF_Toolbox_Array::makeHashFromArray($uriParts[1]);
-				foreach ($params as $k => $v) {
-					$this->_page->setParam($k, $v);
-				}
-			}
+		$uri = new DSF_Uri();
+		$params = $uri->getParams();
+		if(is_array($params)) {
+		    $this->_page->setParams($params);
 		}
 	}
 	
@@ -47,7 +42,14 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 	
 	public function setLanguage()
 	{
-	    $this->_page->setLanguage(DSF_Language::getLanguage());
+	    $lang = $this->_page->getParam('lang');
+	    if(!empty($lang)) {
+	        DSF_Language::setLanguage($lang);
+	        $this->_page->setLanguage($lang);
+	    }else{
+	        $this->_page->setLanguage(DSF_Language::getLanguage());
+	    }
+	    
 	}
 	
 	public function loadContent()
