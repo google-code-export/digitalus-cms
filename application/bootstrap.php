@@ -10,10 +10,10 @@ Zend_Loader::registerAutoload();
 $frontController = Zend_Controller_Front::getInstance();
 
 // Change to 'production' parameter under production environment
-$frontController->registerPlugin(new Initializer('production'));   
+$frontController->registerPlugin(new Initializer('testing'));   
 
 //this loads the admin interface
-$frontController->registerPlugin(new DSF_Controller_Plugin_LayoutLoader());
+//$frontController->registerPlugin(new DSF_Controller_Plugin_LayoutLoader());
  
 // secure the application
 //set up security

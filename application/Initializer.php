@@ -106,7 +106,8 @@ class Initializer extends Zend_Controller_Plugin_Abstract
    
    public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $this->initCmsRouter();       
+        $this->initCmsRouter();  
+        $this->buildInterface();     
     }
    
     
@@ -188,7 +189,40 @@ class Initializer extends Zend_Controller_Plugin_Abstract
     	}
     	
     	$view->baseUrl = $this->_front->getBaseUrl();
-	}	
+	}
+
+	public function buildInterface()
+	{
+	    $request = $this->_front->getRequest();
+	    if(!$request->isXmlHttpRequest()) {
+    	    //load the module, controller, and action for reference
+    	    $module = $request->getModuleName();
+    	    $controller = $request->getControllerName();
+    
+    		if($module != 'public' && $controller != 'public')
+    		{
+    		    //load config
+    		    $config = Zend_Registry::get('config');
+    		    
+    		    //setup layout
+    		    $options = array(
+                    'layout'     => $config->design->adminLayout,
+                    'layoutPath' => $config->design->adminLayoutFolder,
+                    'contentKey' => 'form',           // ignored when MVC not used
+                );
+    		    $this->layout = Zend_Layout::startMvc($options);
+    		    $this->view = $this->layout->getView();
+    		    
+    		    //load the common helpers
+                DSF_View_RegisterHelpers::register($this->view);
+                $this->view->setScriptPath($config->filepath->adminViews);
+                
+                //page links
+                $this->view->toolbarLinks = array();
+                
+    		}    
+        }
+	}
 	
 	public function initControllers()
 	{
