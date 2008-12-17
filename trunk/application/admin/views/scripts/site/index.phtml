@@ -5,10 +5,9 @@
     <?php 
     	echo $this->FormRow($this->GetTranslation('Site name'), $this->FormText('setting[name]',$this->settings->name));
     	echo $this->FormRow($this->GetTranslation('Title separator'), $this->FormText('setting[title_separator]',$this->settings->title_separator, array('class' => 'med')));
-    	echo $this->FormRow($this->GetTranslation('Status'), $this->formCheckbox('setting[online]', intval($this->settings->online), array('disabled' => 'disabled')) . ' ' . $this->GetTranslation('Site is online'));
+    	echo $this->FormRow($this->GetTranslation('Status'), $this->formCheckbox('setting[online]', intval($this->settings->online)) . ' ' . $this->GetTranslation('Site is online'));
     	echo $this->FormRow('&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update General Site Settings')));
     ?>
-<p class='notice'>The site status is not yet implemented.</p>
 </fieldset>
 </form>
 
