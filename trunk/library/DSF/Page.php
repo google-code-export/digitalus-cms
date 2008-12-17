@@ -9,6 +9,7 @@ class DSF_Page
 	protected $_meta = array();
 	protected $_properties = array();
 	protected $_content = array();
+	protected $_defaultContent = array();
 	protected $_language = array();
 	protected $_contentTemplate = null;
 	protected $_design;
@@ -123,16 +124,22 @@ class DSF_Page
 		$this->_content = $content;
 	}
 	
-	public function getContent($key = null, $translate = true)
+	public function setDefaultContent($content)
+	{
+	    $this->_defaultContent = $content;
+	}
+	
+	public function getContent($key = null, $useDefault = true)
 	{
 	    $content = $this->_content;
-	    if($translate) {
-	        foreach ($content as $k => $v) {
-	            if(!empty($translate->$k)) {
-	                $content->$k = $translate->$k;
+	    if($useDefault && is_array($this->_defaultContent)) {
+	        foreach ($this->_defaultContent as $k => $v) {
+	            if(!empty($v) && empty($content[$k])) {
+	                $content[$k] = $v;
 	            }
 	        }
 	    }
+        
 	    if($key !== null) {
 		    return $content->$key;
 	    }else{

@@ -57,6 +57,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
  		$mdlPage = new Page();
  		$content = $mdlPage->open($this->_page->getId(), $this->_page->getLanguage());
  		$this->_page->setContent($content->content);
+ 		$this->_page->setDefaultContent($content->defaultContent);
 	}
 	
 	public function loadContentTemplate()

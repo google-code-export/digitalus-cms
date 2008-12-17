@@ -30,19 +30,8 @@ $(document).ready(function() {
 <form id='contactForm' action="<?php echo $_SERVER['REQUEST_URI'];?>" method="POST">
 
 <?php 
-//if you pass this an array it will render the recipient as a select list
-//otherwise it renders it as a hidden field
-if(is_array($this->recipients))
-{
-?>
-<p>Please select a recipient:</p>
+echo $this->formHidden('recipient', $this->recipient);
 
-<p><?php echo $this->formSelect('recipient',$this->data->recipient, null, $this->recipient)?></p>
-
-<?php
-}else{
-   echo $this->formHidden('recipient', $this->recipient);
-}
 ?>
 <fieldset><legend>Your contact information</legend>
 <?php

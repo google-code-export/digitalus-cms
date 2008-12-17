@@ -10,8 +10,7 @@ class DSF_Form_Element_ModuleSelector extends DSF_Form_Element_Xml  {
             'viewScript'	=> 'module/partials/load-module.phtml',
             'class'	=>    'partial'
         ))));
-    }
-    
+    }    
 }
 
 ?>
