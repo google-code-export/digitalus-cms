@@ -100,6 +100,8 @@ class DSF_Installer_Database{
          $data = array(
              'email'	=> $username,
              'password'	=> md5($password),
+             'first_name' => 'admin',
+             'last_name'	=> 'user',
              'role'		=> "superadmin"
          );   
          return $this->_db->insert('users', $data);
