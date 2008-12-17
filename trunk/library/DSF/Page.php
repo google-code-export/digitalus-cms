@@ -67,7 +67,7 @@ class DSF_Page
 	
 	public function setParam($key, $value)
 	{
-		$this->_params[$key] = $value;
+        $this->_params[$key] = $value;
 	}
 	
 	public function getParams()
@@ -77,7 +77,9 @@ class DSF_Page
 	
 	public function getParam($key)
 	{
-		return $this->_params[$key];
+	    if(isset($this->_params[$key])) {
+		    return $this->_params[$key];
+	    }
 	}
 	
 	public function setMeta($metaData)

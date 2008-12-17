@@ -59,27 +59,29 @@ class Admin_ModuleController extends Zend_Controller_Action
 	    $element = $this->_request->getParam('element');
 	    if($module != null) {
 	        $moduleParts = explode('_', $module);
-	        $action = $moduleParts[1];
-	        $name = $moduleParts[0];
-	        
-    	    $data = new stdClass();
-            $data->get = $this->_request->getParams();
-            $data->post = $_POST;
-            $this->view->data = $data;
-            
-            $this->view->element = $element;
-
-    	    $dir = './application/modules/' . $name . '/views/scripts';
-            $helpers = './application/modules/' . $name . '/views/helpers';
-            $path = "/public/" . $action . ".form.phtml";
-            $fullPath = $dir . $path;
-
-            if(file_exists($fullPath))
-            {
-                $this->view->addScriptPath($dir);
-                $this->view->addHelperPath($helpers);
-                $this->view->placeholder('moduleForm')->set($this->view->render($path));
-            }
+	        if(is_array($moduleParts) && count($moduleParts) == 2) {
+    	        $action = $moduleParts[1];
+    	        $name = $moduleParts[0];
+    	        
+        	    $data = new stdClass();
+                $data->get = $this->_request->getParams();
+                $data->post = $_POST;
+                $this->view->data = $data;
+                
+                $this->view->element = $element;
+    
+        	    $dir = './application/modules/' . $name . '/views/scripts';
+                $helpers = './application/modules/' . $name . '/views/helpers';
+                $path = "/public/" . $action . ".form.phtml";
+                $fullPath = $dir . $path;
+    
+                if(file_exists($fullPath))
+                {
+                    $this->view->addScriptPath($dir);
+                    $this->view->addHelperPath($helpers);
+                    $this->view->placeholder('moduleForm')->set($this->view->render($path));
+                }
+	        }
 	    }
 	}
 }

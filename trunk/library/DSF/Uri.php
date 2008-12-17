@@ -33,6 +33,7 @@ class DSF_Uri
 	 */
     const REGISTRY_KEY = "DSF_URI";
 	protected $_uri;
+	protected $_params;
 	protected $_base;
 	
 	/**
@@ -105,15 +106,23 @@ class DSF_Uri
 		$uri = DSF_Toolbox_Regex::stripFileExtension($uri); 
 		$uri = DSF_Toolbox_Regex::stripTrailingSlash($uri);
 		$uri = urldecode($uri);
+		$array = explode('/', $uri);
+	    $splitPaths = DSF_Toolbox_Array::splitOnValue($array, 'p');
+		if(is_array($splitPaths))
+		{
+		     $uri = implode('/', $splitPaths[0]);
+		     if(is_array($splitPaths[1])) {
+		         $this->_params = DSF_Toolbox_Array::makeHashFromArray($splitPaths[1]);
+		     }
+		}
 		return DSF_Toolbox_String::stripHyphens($uri);
 	}
 	
 	public function getParams()
 	{
-		$splitPaths = DSF_Toolbox_Array::splitOnValue($this->toArray(), 'p');
-		if($splitPaths)
+		if(is_array($this->_params))
 		{
-		     return DSF_Toolbox_Array::makeHashFromArray($splitPaths[1]);
+		     return $this->_params;
 		}
 		return false;
 	}

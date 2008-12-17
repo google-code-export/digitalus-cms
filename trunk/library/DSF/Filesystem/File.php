@@ -161,7 +161,15 @@ class DSF_Filesystem_File
     
     static function getFileExtension($filename)
     {
-        return end(explode(".", $filename));
+        if(!empty($filename)) {
+            $fileparts = explode(".", $filename);
+            if(is_array($fileparts)) {
+                $index = count($fileparts) - 1;
+                $extension = $fileparts[$index];
+                return $extension;
+            }
+        }
+        return null;
     }
     
 	static function isUploaded($key)

@@ -21,7 +21,7 @@ class DSF_View_Helper_General_getData {
     /**
      *  
      */
-    public function getData($field, $dataSet) {
+    public function getData($field, $dataSet = null) {
         if(is_array($dataSet)) {
             if(isset($dataSet[$field])) {
                 return $dataSet[$field];
@@ -30,6 +30,8 @@ class DSF_View_Helper_General_getData {
             if(isset($dataSet->$field)) {
                 return $dataSet->$field;
             }
+        }else{
+            return $this->view->$field;
         }
     }
     

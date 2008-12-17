@@ -81,8 +81,8 @@ class Page extends DSF_Db_Table
     }
     
     public function pageExists(DSF_Uri $uri)
-    {
-        if($this->_fetchPointer($uri->toArray(), 0)) {
+    {     
+        if($this->_fetchPointer($uri->toArray(), 0) || $uri == null) {
             return true;
         }else{
             return false;
@@ -113,7 +113,7 @@ class Page extends DSF_Db_Table
     		    $version = $pageArray['version'];
     		}else{
     		    $siteSettings = new SiteSettings();
-    		    $version = $siteSettings->get('default_language');
+    		    $version = $this->getDefaultVersion();
     		}    		
     		//update the content
     		$contentNode = new ContentNode();
@@ -127,7 +127,7 @@ class Page extends DSF_Db_Table
     		}
     		
     		$this->_flushCache();
-    		return $this->open($pageId);
+    		return $this->open($pageId, $version);
     	}
     }
     
@@ -606,8 +606,9 @@ class Page extends DSF_Db_Table
         	}
         	
         	return $pointer;
+        }else{
+            return $this->getHomePage();
         }
-        return false;
     }
     
     private function _getPageByLabel($label, $parent = 0)
