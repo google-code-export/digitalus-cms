@@ -38,7 +38,7 @@ class DSF_View_Helper_Internationalization_ListLanguageLinks {
                 }
             }
             
-            if(is_array($languageLinks)) {
+            if(is_array($languageLinks) && count($languageLinks) > 0) {
                 $xhtml .= " This page is also translated into " . implode(", " , $languageLinks);
             }
         }
