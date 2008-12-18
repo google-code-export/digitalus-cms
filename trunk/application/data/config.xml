@@ -6,10 +6,10 @@
         </constants>
         <database>
             <adapter>PDO_MYSQL</adapter>
-            <host>localhost</host>
-            <username>root</username>
+            <host></host>
+            <username></username>
             <password></password>
-            <dbname>newest_test</dbname>
+            <dbname></dbname>
         </database>
         <design>
         	<pathToSkins>skins</pathToSkins>
@@ -70,7 +70,7 @@
 	</testing>
 	<system>
 		<version>1.5</version>
-		<installDate>1229120390</installDate>
+		<installDate></installDate>
 		<requirements>
 			<php>5.2.0</php>
 			<extensions>

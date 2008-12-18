@@ -95,13 +95,13 @@ class DSF_Installer_Database{
         return true;
     }
     
-    public function insertAdminUser($username, $password)
+    public function insertAdminUser($firstName, $lastName, $username, $password)
     {
          $data = array(
+             'first_name'	=>    $firstName,
+             'last_name'	=>    $lastName,
              'email'	=> $username,
              'password'	=> md5($password),
-             'first_name' => 'admin',
-             'last_name'	=> 'user',
              'role'		=> "superadmin"
          );   
          return $this->_db->insert('users', $data);
@@ -226,11 +226,10 @@ class DSF_Installer_Database{
     private function _populate()
     {
         $queries = array(
-            "INSERT INTO `pages` VALUES ('1', 'Home', null, 'base_page', null, '0', null, '1', '1', null)",
+            "INSERT INTO `pages` VALUES ('1', 'Home', null, 'base_page', null, '0', null, '1', '1', '1')",
             "INSERT INTO `content_nodes` VALUES ('1', 'page_1', 'content', null, null, 'Welcome to Digitalus CMS')",
             "INSERT INTO `data` VALUES ('1', 'site_settings', '<?xml version=\"1.0\"?>\n<settings><name>Digitalus 1.5.0 test</name><online>0</online><addMenuLinks>0</addMenuLinks><default_locale/><default_language>en</default_language><default_charset>utf8</default_charset><default_date_format/><default_currency_format/><default_email>info@digitaluscms.com</default_email><default_email_sender>Digitalus CMS</default_email_sender><use_smtp_mail>0</use_smtp_mail><smtp_host/><smtp_username/><smtp_password/><google_tracking/><google_verify/><title_separator> - </title_separator><add_menu_links>1</add_menu_links><doc_type>XHTML1_TRANSITIONAL</doc_type></settings>\n')",
-			"INSERT INTO `designs` VALUES ('2', 'Inner', 'This is the standard inner page.', 'site.phtml', 'a:2:{s:10:\"blank-page\";a:2:{i:0;s:7:\"nav.css\";i:1;s:9:\"style.css\";}s:8:\"grid-960\";a:1:{i:0;s:7:\"960.css\";}}', 'body{\r\nbackground:#333;\r\n}', null, null, null, '0')",
-            "INSERT INTO `designs` VALUES ('16', 'Home', 'This is the', 'site.phtml', 'a:2:{s:10:\"blank-page\";a:1:{i:0;s:9:\"style.css\";}s:8:\"grid-960\";a:1:{i:0;s:7:\"960.css\";}}', '', null, null, null, '1')"
+			"INSERT INTO `designs` VALUES ('1', 'Default', 'This is the standard page.', 'simple-page.phtml', 'a:2:{s:10:\"blank-page\";a:2:{i:0;s:7:\"nav.css\";i:1;s:9:\"style.css\";}s:8:\"grid-960\";a:1:{i:0;s:7:\"960.css\";}}', 'body{\r\nbackground:#333;\r\n}', null, null, null, '1')"
         );
         foreach($queries as $query) {
             $this->_db->query($query);

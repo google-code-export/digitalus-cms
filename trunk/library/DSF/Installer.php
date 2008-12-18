@@ -10,6 +10,8 @@ class DSF_Installer {
     protected $_config;
     protected $_db;
     protected $_env;
+    protected $_firstName;
+    protected $_lastName;
     protected $_username;
     protected $_password;
     
@@ -78,9 +80,23 @@ class DSF_Installer {
         }
     }
     
-    public function setAdminUser($email, $password)
+    public function setAdminUser($firstName, $lastName, $email, $password)
     {
         $userError = false;
+        if(!empty($firstName)) {
+            $this->_firstName = $firstName;
+        }else{
+            $this->addError("Your first name is required");
+            $userError = true;
+        }
+        
+        if(!empty($lastName)) {
+            $this->_lastName = $lastName;
+        }else{
+            $this->addError("Your last name is required");
+            $userError = true;
+        }
+        
         if(!empty($email) && Zend_Validate::is($email, 'EmailAddress')) {
             $this->_username = $email;
         }else{
@@ -170,7 +186,12 @@ class DSF_Installer {
     
     public function saveAdminUser()
     {
-        $userInserted = $this->_db->insertAdminUser($this->_username, $this->_password);
+        $userInserted = $this->_db->insertAdminUser(
+            $this->_firstName,
+            $this->_lastName,
+            $this->_username, 
+            $this->_password
+        );
         if($userInserted) {
             $this->addMessage("Your admin account was successfully created");
             return true;
