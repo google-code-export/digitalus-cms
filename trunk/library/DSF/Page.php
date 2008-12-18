@@ -11,6 +11,7 @@ class DSF_Page
 	protected $_content = array();
 	protected $_defaultContent = array();
 	protected $_language = array();
+	protected $_availableLanguages = array();
 	protected $_contentTemplate = null;
 	protected $_design;
 	protected $_layout;
@@ -112,6 +113,21 @@ class DSF_Page
 	{
 	    if($this->_language) {
 	        return $this->_language;
+	    }else{
+	        return null;
+	    }
+
+	}
+	
+	public function setAvailableLanguages($languages)
+	{
+		$this->_availableLanguages = $languages;
+	}
+	
+	public function getAvailableLanguages()
+	{
+	    if($this->_availableLanguages) {
+	        return $this->_availableLanguages;
 	    }else{
 	        return null;
 	    }

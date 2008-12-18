@@ -7,13 +7,8 @@ class DSF_View_Helper_Internationalization_GetCurrentLanguage
      *
      * @return unknown
      */
-	public function GetCurrentLanguage($locale = false)
+	public function GetCurrentLanguage()
 	{
-        $config = Zend_Registry::get('config');
-	    if(!$locale) {
-	        $locale = $config->language->defaultLocale;
-	    }
-	    return $config->language->translations->$locale;
-	    
+	    return DSF_Language::getLanguage();
 	}
 }

@@ -22,7 +22,7 @@ $this->placeholder('sidebar_content')->set(
     $this->submenu
 );
 
-$this->placeholder('language_content')->set('language' . $this->languageForm());
+$this->placeholder('language_content')->set('language' . $this->ListLanguageLinks());
 
 $this->placeholder('footer_content')->set(
     $this->partial('partials/footer.phtml')

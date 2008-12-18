@@ -4,6 +4,7 @@
 	<request class='Page' method='setBaseUrl' />
 	<request class='Page' method='setPointer' />
 	<request class='Page' method='setLanguage' />
+	<request class='Page' method='setAvailableLanguages' />
 	<request class='Page' method='loadData' />
 	<request class='Page' method='loadContent' />
 	<request class='Page' method='loadContentTemplate' />

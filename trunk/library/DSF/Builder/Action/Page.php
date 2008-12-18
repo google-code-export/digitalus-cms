@@ -52,6 +52,13 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 	    
 	}
 	
+	public function setAvailableLanguages()
+	{
+	    $page = new Page();
+	    $availableContent = $page->getVersions($this->_page->getId());
+	    $this->_page->setAvailableLanguages($availableContent);
+	}
+	
 	public function loadContent()
 	{
  		$mdlPage = new Page();
