@@ -25,22 +25,19 @@ class DSF_Language {
         if(empty($currentLang)) {
             $config = Zend_Registry::get('config');
             $locale = $config->language->defaultLocale;
-    	    $currentLang = $config->language->translations->$locale;
+    	    $currentLang = $locale;
         }
         return $currentLang;        
     }
     
-    static function getLanguageKey()
+    static function getFullName($locale)
     {
-        $lang = self::getLanguage();
-        if(empty($lang)) {
-            $config = Zend_Registry::get('config');
-            $translations = $config->language->translations->toArray();
-            array_flip($translations);
-            return $translations[$lang];
-        }else{
-            return null;
+        $config = Zend_Registry::get('config');
+        $translations = $config->language->translations->toArray();
+        if(isset($translations[$locale])) {
+            return $translations[$locale];
         }
+        return null;
     }
     
     static function getSession()
