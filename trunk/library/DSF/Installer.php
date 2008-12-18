@@ -145,21 +145,12 @@ class DSF_Installer {
     
     public function testDb()
     {
-        $exists = $this->_db->exists();
-        if(!$exists) {
-            $this->addError("The database you entered does not exist");
-        }else{
-            $this->addMessage("Database exists");
-        }
+        $empty = $this->_db->isEmpty();
+        if(!$empty) {
+            $this->addError("The target database is not empty");
+        } 
         
-        if($exists) {
-            $empty = $this->_db->isEmpty();
-            if(!$empty) {
-                $this->addError("The target database is not empty");
-            } 
-        }
-        
-        if($exists && $empty) {
+        if($empty) {
             $writable = $this->_db->isWritable();
             if(!$writable) {
                 $this->addError("Unable to write to target database");

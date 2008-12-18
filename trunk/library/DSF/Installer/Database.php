@@ -17,15 +17,6 @@ class DSF_Installer_Database{
         
     }
     
-    public function exists()
-    {
-        $sql = $this->_db->quoteInto('SELECT schema_name FROM information_schema.schemata WHERE schema_name = ?', $this->_config['dbname']);
-        $result = $this->_db->fetchRow($sql);
-        if($result) {
-            return true;
-        }
-    }
-    
     public function isEmpty()
     {
         $tables = $this->_db->listTables();
