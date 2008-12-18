@@ -1,5 +1,5 @@
 <?php
-class Base_Detail_Form extends DSF_Content_Form_Abstract 
+class Module_Page_Form extends DSF_Content_Form_Abstract 
 {
 	public function setup()
 	{		
@@ -7,14 +7,24 @@ class Base_Detail_Form extends DSF_Content_Form_Abstract
 		$teaser->setLabel('Teaser:')
 			->setAttrib('class',"med_short");
 		
-		$content = $this->form->createElement('textarea', 'content');
-		$content->setRequired(true)
-			->setLabel("Content:")
-			->setAttrib('class',"med_tall");
+		$contentAbove = $this->form->createElement('textarea', 'content_above');
+		$contentAbove->setRequired(false)
+			->setLabel("Content Above:")
+			->setAttrib('class',"med_short");
+			
+		$partial = $this->form->createElement("partial", "module", array("Partial" => "module/partials/load-module.phtml"));
+		$partial->setLabel("Select a module page");
+		
+		$contentBelow = $this->form->createElement('textarea', 'content_below');
+		$contentBelow->setRequired(false)
+			->setLabel("Content below:")
+			->setAttrib('class',"med_short");
 		
 		// Add elements to form:
 		$this->form->addElement($teaser)
-			->addElement($content)
+			->addElement($contentAbove)
+			->addElement($partial)
+			->addElement($contentBelow)
 			->addElement('submit', 'update', array('label' => 'Update Page'));
 	}
 }
