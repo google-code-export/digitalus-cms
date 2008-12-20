@@ -27,6 +27,24 @@ class DSF_Menu_Item {
         }
     }
     
+    public function isSelected()
+    {
+        $currentPage = DSF_Builder::getPage();
+        $currentPageId = $currentPage->getId();
+        if($this->_innerItem->id == $currentPageId) {
+            return true;
+        }else{
+            $page = new Page();
+            $parents = $page->getParents($currentPageId);
+            if(is_array($parents)) {
+                if(isset($parents[$this->_innerItem->id])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
     public function getSubmenu()
     {
         return new DSF_Menu($this->_innerItem->id);
