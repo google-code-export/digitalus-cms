@@ -166,6 +166,7 @@ class DSF_Installer_Database{
               `id` int(11) NOT NULL auto_increment,
               `name` varchar(250) default NULL,
               `label` varchar(250) default NULL,
+              `namespace` varchar(100) default NULL,
               `content_template` varchar(100) default NULL,
               `related_pages` text,
               `parent_id` int(11) default NULL,
