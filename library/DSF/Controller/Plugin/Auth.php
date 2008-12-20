@@ -89,11 +89,9 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 		}else{
 		    $resource = $moduleLevel;
 		}
-		/**
-		 * @todo make sure this works
-		 */
+		
 		if($module != 'public'){
-	        if (!$this->_acl->isAllowed($role, $resource)) {
+	        if ($this->_acl->has($resource) && !$this->_acl->isAllowed($role, $resource)) {
 	            if (!$this->_identity) {
 	            	$request->setModuleName($this->_noauth['module']);
 	                $request->setControllerName($this->_noauth['controller']);
