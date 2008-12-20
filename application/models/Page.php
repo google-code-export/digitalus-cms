@@ -2,6 +2,7 @@
 class Page extends DSF_Db_Table 
 {
     protected $_name = "pages";
+    protected $_namespace = "content";
  	protected $_defaultTemplate = "base_page";
  	protected $_defaultPageName = "New Page";
  	protected $_ignoredFields = array('update','version'); //these are the fields that are not saved as nodes
@@ -35,6 +36,7 @@ class Page extends DSF_Db_Table
     	
     	//first create the new page
     	$data = array(
+    	    'namespace'			=>  $this->_namespace,
     		'name'  			=>	$pageName,
     		'content_template'	=>	$contentTemplate,
 			'parent_id'			=>	$parentId,
@@ -519,6 +521,13 @@ class Page extends DSF_Db_Table
     	$data['is_home_page'] = 1;
         $where[] = $this->_db->quoteInto("id = ?", $pageId);
         $this->update($data, $where);    	
+    }
+    
+    public function select()
+    {
+        $select = parent::select();
+        $select->where("namespace = ?", $this->_namespace);
+        return $select;
     }
     
     static function isHomePage($page)
