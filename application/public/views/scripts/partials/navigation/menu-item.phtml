@@ -1,0 +1,8 @@
+<li id='menu_item_<?php echo $this->item->id;?>' class='menuItem'>
+<?php 
+    echo $this->item->asHyperlink();
+    if($this->submenu != null) {
+        echo $this->submenu;
+    }
+?>
+</li>
