@@ -32,6 +32,17 @@ class DSF_Menu_Item {
         return new DSF_Menu($this->_innerItem->id);
     }
     
+    public function getInnerPage()
+    {
+        $page = new Page();
+        return $page->open($this->_innerItem->id);
+    }
+    
+    public function getInnerItem()
+    {
+        return $this->_innerItem;
+    }
+    
     public function asHyperlink($id = null, $class = null)
     {
         $cleanLink = DSF_Toolbox_String::addHyphens($this->link);

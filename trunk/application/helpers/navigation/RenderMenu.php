@@ -1,11 +1,16 @@
 <?php
 class DSF_View_Helper_Navigation_RenderMenu
 {
+    public $partialScript = "partials/navigation/menu-item.phtml";
     public $levels = 1;
     public $currentLevel = 1;
     
-	public function RenderMenu($parentId = 0, $levels = null, $currentLevel = null, $id = "menu")
+	public function RenderMenu($parentId = 0, $levels = null, $currentLevel = null, $id = "menu", $partialScript = null)
 	{
+	    if(null === $partialScript) {
+	        $partialScript = $this->partialScript;
+	    }
+	    
 	    if(null !== $levels) {
 	        $this->levels = $levels;
 	    }
@@ -19,14 +24,18 @@ class DSF_View_Helper_Navigation_RenderMenu
 	    
 		if(count($menu->items) > 0) {
 		    foreach ($menu->items as $item) {
-		        $link = "<li id='menu_item_{$item->id}' class='menuItem'>" . $item->asHyperlink();
-                //check to see if we should render a submenu
-                if(($levels > $currentLevel) && ($item->hasSubmenu)) {
+		        $data = new stdClass();
+		        $data->item = $item;
+		        
+		        //check for a submenu
+		        if(($levels > $currentLevel) && ($item->hasSubmenu)) {
                     $newLevel = $currentLevel + 1;
-                    $link .= $this->view->RenderMenu($item->id, $levels, $newLevel, 'submenu_' . $item->id);
-                }
-                $link .=  "</li>";
-                $links[] = $link;
+                    $data->submenu = $this->view->RenderMenu($item->id, $levels, $newLevel, 'submenu_' . $item->id);
+                }else{
+                    $data->submenu = null;
+                }  
+
+                $links[] = $this->view->partial($partialScript, $data);
 		    }
 		}
 		
