@@ -164,6 +164,8 @@ class DSF_Installer_Database{
     {
         $sql = "CREATE TABLE `pages` (
               `id` int(11) NOT NULL auto_increment,
+              `author_id` int(11) default NULL,
+              `create_date` int(11) default NULL,
               `name` varchar(250) default NULL,
               `label` varchar(250) default NULL,
               `namespace` varchar(100) default NULL,
