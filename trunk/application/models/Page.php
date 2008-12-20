@@ -23,7 +23,7 @@ class Page extends DSF_Db_Table
         return null;
     }
     
-    public function createPage($pageName, $parentId = 0, $contentTemplate = null ) 
+    public function createPage($pageName, $parentId = 0, $contentTemplate = null, $showOnMenu = null ) 
     {
     	if(empty($pageName)) {
     		$pageName = $this->_defaultPageName;
@@ -33,8 +33,16 @@ class Page extends DSF_Db_Table
     		$contentTemplate = $this->_defaultTemplate;
     	}
     	
-    	$settings = new SiteSettings();
-    	$makeMenuLinks = $settings->get('add_menu_links');
+    	if($showOnMenu !== null) {
+    	    if($showOnMenu == true) {
+    	        $makeMenuLinks = 1;
+    	    }else{
+    	        $makeMenuLinks = 0;
+    	    }
+    	}else{
+        	$settings = new SiteSettings();
+        	$makeMenuLinks = $settings->get('add_menu_links');
+    	}
     	
     	//first create the new page
     	$data = array(
