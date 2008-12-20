@@ -10,7 +10,7 @@ $this->placeholder("formHeadline")->set($this->GetTranslation("Create a Page"));
 	echo $this->FormRow(
 		$this->GetTranslation('Parent Page'), 
 		$this->SelectParentPage('parent_id', 
-		$this->pageParentId) . 	$this->formButton("step1button",$this->GetTranslation("Next >>"), array('class' => 'inlineButton')));
+		$this->createPageOptions->parentId) . 	$this->formButton("step1button",$this->GetTranslation("Next >>"), array('class' => 'inlineButton')));
 	?>
 	<div id="step2"></div>
 	<div id="step3"></div>

@@ -10,7 +10,7 @@ if(is_array($this->allowedTemplates)){?>
         DSF_View_RegisterHelpers::register($this);
 echo $this->FormRow(
 	$this->GetTranslation("Select a type", null, $this), 
-	$this->formSelect('contentType', null, null, $this->allowedTemplates) . 
+	$this->formSelect('contentType', $this->createPageOptions->contentType, null, $this->allowedTemplates) . 
 	$this->formButton("step2button",$this->GetTranslation("Next >>", null, $this), array('class' => 'inlineButton')));
 }else{?>
 <p><?php echo $this->GetTranslation("You can not add any pages to this section.", null, $this)?></p>

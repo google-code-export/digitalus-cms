@@ -31,6 +31,15 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 		$this->_page->setId($pointer);
 	}
 	
+	public function setParents()
+	{
+	    $mdlPage = new Page();
+	    $parents = $mdlPage->getParent($this->_page->getId());
+	    if(is_array($parents)) {
+	        $this->_page->setParents($parents);
+	    }
+	}
+	
 	public function loadData()
 	{
 		$mdlPage = new Page();
