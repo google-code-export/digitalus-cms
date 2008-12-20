@@ -44,9 +44,14 @@ class Page extends DSF_Db_Table
         	$makeMenuLinks = $settings->get('add_menu_links');
     	}
     	
+        $u = new User();
+		$user = $u->getCurrentUser();
+
     	//first create the new page
     	$data = array(
     	    'namespace'			=>  $this->_namespace,
+    	    'create_date'		=>  time(),
+    	    'author_id'			=>  $user->id,
     		'name'  			=>	$pageName,
     		'content_template'	=>	$contentTemplate,
 			'parent_id'			=>	$parentId,
