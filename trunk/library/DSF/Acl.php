@@ -107,10 +107,12 @@ class DSF_Acl extends Zend_Acl
 
         if($permissions) {
             foreach ($permissions as $key => $value) {
-                if($value == 1){
-                    $this->allow('admin',$key);
-                }else{
-                    $this->deny('admin',$key);
+                if($this->has($key)) {
+                    if($value == 1){
+                        $this->allow('admin',$key);
+                    }else{
+                        $this->deny('admin',$key);
+                    }
                 }
             }
         }
