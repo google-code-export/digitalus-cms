@@ -331,7 +331,7 @@ class Page extends DSF_Db_Table
     {
     	$parents = null;
     	while($parent = $this->getParent($page)) {
-    		$parents[] = $parent;
+    		$parents[$parent->id] = $parent;
     		$page = $parent;
     	}
     	if(is_array($parents)) {
