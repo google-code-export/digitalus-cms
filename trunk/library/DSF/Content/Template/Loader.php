@@ -6,10 +6,14 @@ class DSF_Content_Template_Loader
     const SYSTEM_FOLDER = "system";
     protected $_templates = null;
     
-    public function __construct()
+    public function __construct($templatePath = null)
     {
-        $config = Zend_Registry::get('config');
-        $this->_templatePath = $config->filepath->contentTemplates;
+        if($templatePath != null) {
+            $this->_templatePath = $templatePath;
+        }else{
+            $config = Zend_Registry::get('config');
+            $this->_templatePath = $config->filepath->contentTemplates;
+        }
     }
     
     public function getTemplates()
