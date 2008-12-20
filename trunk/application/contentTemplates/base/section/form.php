@@ -1,8 +1,8 @@
 <?php
-class Base_Page_Form extends DSF_Content_Form_Abstract {
+class Base_Section_Form extends DSF_Content_Form_Abstract {
     public function setup() {
-        $teaser = $this->form->createElement('textarea','teaser');
-        $teaser->setLabel('Teaser:')
+        $tagline = $this->form->createElement('textarea','tagline');
+        $tagline->setLabel('tagline:')
             ->setAttrib('class', "med_short");
         
         $content = $this->form->createElement( 'textarea', 'content' );
@@ -13,7 +13,7 @@ class Base_Page_Form extends DSF_Content_Form_Abstract {
             ->setAttrib('class',"editor html");
         
         // Add elements to form:
-        $this->form->addElement($teaser)
+        $this->form->addElement($tagline)
             ->addElement($content)
             ->addElement('submit','update',array('label'=>'Update Page'));
     }
