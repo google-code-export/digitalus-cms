@@ -199,7 +199,7 @@ class DSF_Db_Table extends Zend_Db_Table
                 //if this is an update then confirm that the field has changed
                 if(($this->action == 'update' && $curr->$f != $this->data[$f])||$this->action != 'update'){
                     //note that this method is the last to run, so the data is already validated as secure
-                    $rows = $this->fetchAll($f . " COLLATE latin1_bin LIKE '{$this->data[$f]}'");
+                    $rows = $this->fetchAll($f . " LIKE '{$this->data[$f]}'");
                     if($rows->count() > 0)
                     {
                         $this->errors->add('The ' . $this->getNiceName($f) . ' ' . $this->data[$f] . ' already exists.');
