@@ -46,12 +46,17 @@ class Page extends DSF_Db_Table
     	
         $u = new User();
 		$user = $u->getCurrentUser();
+		if($user) {
+		    $userId = $user->id;
+		}else{
+		    $userId = 0;
+		}
 
     	//first create the new page
     	$data = array(
     	    'namespace'			=>  $this->_namespace,
     	    'create_date'		=>  time(),
-    	    'author_id'			=>  $user->id,
+    	    'author_id'			=>  $userId,
     		'name'  			=>	$pageName,
     		'content_template'	=>	$contentTemplate,
 			'parent_id'			=>	$parentId,
