@@ -3,7 +3,7 @@ class DSF_View_Helper_Navigation_RenderSubMenu
 {	
 	public function RenderSubMenu($levels = 2, $id = 'subnav')
 	{
-		$parents = $this->view->pageObj->getParents();
+		$parents = $this->view->page->getParents();
 		if(is_array($parents) && count($parents) > 0)
 		{
 			$parent = $parents[0];

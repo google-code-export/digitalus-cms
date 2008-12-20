@@ -1,5 +1,10 @@
+<?php 
+if($this->item->isSelected()){
+    $class="class='selected'";
+}
+?>
 <li id='menu_item_<?php echo $this->item->id;?>' class='tab'>
-<a href="<?php echo $this->baseUrl . '/' . DSF_Toolbox_String::addHyphens($this->item->link)?>">
+<a href="<?php echo $this->baseUrl . '/' . DSF_Toolbox_String::addHyphens($this->item->link)?>" <?php echo $class?>>
 	<span class='label'><?php echo $this->item->label; ?></span>
 	<span class='subtitle'>
 		<?php 
@@ -10,3 +15,4 @@
 	</span>
 </a>
 </li>
+

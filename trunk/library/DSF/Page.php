@@ -6,6 +6,7 @@ class DSF_Page
 	protected $_baseUrl = null;
 	protected $_params = array();
 	protected $_data;
+	protected $_parents = null;
 	protected $_meta = array();
 	protected $_properties = array();
 	protected $_content = array();
@@ -60,6 +61,16 @@ class DSF_Page
 	public function getData()
 	{
 		return $this->_data;
+	}
+	
+	public function getParents()
+	{
+	    return $this->parents;
+	}
+	
+	public function setParents($parents)
+	{
+	    $this->_parents = $parents;
 	}
 	
 	public function setParams($params)
