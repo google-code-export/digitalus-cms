@@ -57,6 +57,12 @@ if(!$installer->isInstalled()) {
             }
             break;
     }
+}else{
+   //the cms is already installed
+   	//remove the install directory 	
+ 	DSF_Filesystem_Dir::deleteRecursive('./install');
+ 	//return to the index file
+ 	header("location: ./");  	
 }
 $view->messages = $installer->getMessages();
 echo $view->render('page.phtml');
