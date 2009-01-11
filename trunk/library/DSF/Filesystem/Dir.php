@@ -190,14 +190,18 @@ class DSF_Filesystem_Dir
 		        }
 		    }
 		closedir($sourcedir);
-		if($result=@rmdir($target))
-		    {
-		    if ($verbose)
-		        echo "Target directory has been removed<br />\n";
-		    return true;
+		
+		            
+		if($result=@rmdir($target)) {
+		    if ($verbose) {
+		        echo "Target directory has been removed<br />\n";    
+		    	return true;
 		    }
-		if ($verbose)
-		    echo "<strong>Couldn&#146;t remove target directory</strong>";
-		return false;
+		}else{
+			if ($verbose) {
+				echo "<strong>Couldn&#146;t remove target directory</strong>";
+				return false;
+			}
+		}
 	}
 }
