@@ -9,9 +9,15 @@ class DSF_Interface_Grid {
     public $unitClass = 'grid';
     public $gridColumns = null;
     public $view;
+    private $_styleSheets = array(
+    	'styles/grid-960/styles/reset.css',
+    	'styles/grid-960/styles/text.css',
+    	'styles/grid-960/styles/960.css'
+    );    
     
     public function __construct($columns, $before = 0, $after = 0) {
         $this->loadView();
+        $this->_loadStyles();
         
         $this->gridColumns = $columns;
         $div = "<div />";
@@ -132,6 +138,14 @@ class DSF_Interface_Grid {
         }
         $view = $viewRenderer->view;
         $this->view = $view;
+    }
+    
+    private function _loadStyles() {
+    	$front = Zend_Controller_Front::getInstance();
+    	$baseUrl = $front->getBaseUrl();
+    	foreach ($this->_styleSheets as $styleSheet) {
+    		$this->view->headLink()->prependStylesheet($baseUrl . '/' . $styleSheet);
+    	}
     }
 }
     
