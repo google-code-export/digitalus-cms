@@ -38,12 +38,12 @@ class DSF_Installer {
         
         $configError = false;
         if(!$this->_config->isReadable()) {
-            $this->addError("Could not load config file");
+            $this->addError("Could not load config file (" . DSF_Installer_Config::PATH_TO_CONFIG . ")");
             $configError = true;
         }
         
         if(!$this->_config->isWritable()) {
-            $this->addError("Could not write to config file");
+            $this->addError("Could not write to config file (" . DSF_Installer_Config::PATH_TO_CONFIG . ")");
             $configError = true;
         }
         
@@ -62,6 +62,18 @@ class DSF_Installer {
             $this->addError("PHP Version: <b>" . $requiredPhpVersion . "</b> or greater is required for Digitalus CMS");
         }else{
             $this->addMessage("Checked PHP version...OK!");
+        }
+        
+        if(!$this->_env->cacheIsWritable()) {
+        	$this->addError("Could not write to cache directory  (" . DSF_Installer_Environment::PATH_TO_CACHE . ")");
+        }else{
+            $this->addMessage("Checked cache directory...OK!");
+        }
+        
+        if(!$this->_env->mediaIsWritable()) {
+        	$this->addError("Could not write to media directory  (" . DSF_Installer_Environment::PATH_TO_MEDIA . ")");
+        }else{
+            $this->addMessage("Checked media directory...OK!");
         }
         
         $requiredExtensions = $this->_config->getRequiredExtensions();

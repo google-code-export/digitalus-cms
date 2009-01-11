@@ -1,6 +1,8 @@
 <?php
 
 class DSF_Installer_Environment{
+	const PATH_TO_CACHE = './cache';
+	const PATH_TO_MEDIA = './media'; 
     
     function __construct() {
     
@@ -23,6 +25,24 @@ class DSF_Installer_Environment{
     	}else{
     	    return false;
     	}      
+    }
+    
+    public function cacheIsWritable()
+    {
+    	if(is_writable(self::PATH_TO_CACHE)) {
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
+    
+    public function mediaIsWritable()
+    {
+    	if(is_writable(self::PATH_TO_MEDIA)) {
+    		return true;
+    	}else{
+    		return false;
+    	}
     }
 }
 
