@@ -72,12 +72,11 @@ class DSF_Mail
      * @param string $cc
      * @return bool
      */
-    function send($recipient, $from=array(), $subject, $template, $data = false, $cc=false)
+    function send($recipient, $from=array(), $subject, $message, $cc=false)
     {
         $config = Zend_Registry::get('config');
-	    $this->view->data = $data;
 	    $this->view->addScriptPath($config->filepath->emailTemplates);
-		$this->view->emailBody = $this->view->render('templates/' . $template . '.phtml');
+		$this->view->emailBody = $message;
 		    
         $this->mail->setBodyHtml($this->view->render('template.phtml'));
         $this->mail->setFrom($from[0], $from[1]); 

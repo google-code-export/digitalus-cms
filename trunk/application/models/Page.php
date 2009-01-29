@@ -9,13 +9,17 @@ class Page extends DSF_Db_Table
  	protected $_defaultPageName = "New Page";
  	protected $_ignoredFields = array('update','version'); //these are the fields that are not saved as nodes
  	
- 	public function getContent($uri)
+ 	public function getContent($uri, $version = null)
  	{
+ 	    if($version == null) {
+            $version = $this->getDefaultVersion();
+        }
+        
  		$uriObj = new DSF_Uri($uri);
  		$pointer = $this->fetchPointer($uriObj->toArray());
  		$node = new ContentNode();
 		//fetch the content nodes
-		return $node->fetchContentArray($pointer, null, null, null);
+		return $node->fetchContentArray($pointer, null, null, $version);
  	}
     
     public function getCurrentUsersPages()
