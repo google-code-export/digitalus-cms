@@ -1,52 +1,8 @@
-<?php
-$scripts = array(
-    'JqueryValidate.js'
-);
-echo $this->Scripts($scripts);
-?>
-
-<script>
-$(document).ready(function() {
-		$("#contactForm").validate({
-		rules: {
-			name: "required",
-			subject: "required",
-			message: "required",
-			email: {
-				required: true,
-				email: true
-			}
-		},
-		messages: {
-			name: "Please enter your name",
-			email: "Please enter a valid email address",
-			subject: "Please enter a subject",
-			message: "Please enter a message"
-		}
-	});
-});
-</script>
-<?php echo $this->RenderAlert();?>
-<form id='contactForm' action="<?php echo $_SERVER['REQUEST_URI'];?>" method="POST">
-
 <?php 
-echo $this->formHidden('recipient', $this->recipient);
-
+if(!$this->isSent) {
+	echo $this->form;
+}else{
 ?>
-<fieldset><legend>Your contact information</legend>
-<?php
-	echo $this->FormRow('Name',$this->formText('name', $this->data->name), true);
-	echo $this->FormRow('Email Address',$this->formText('email', $this->currMember->email), true);
-?>
-</fieldset>
-<fieldset><legend>Message</legend>
-<?php
-	echo $this->FormRow('Subject',$this->formText('subject'), true);
-	echo $this->formTextarea('message');
-?>
-</fieldset>
-
-<p>Would you like for us to send you a copy of this message for your records?</p>
-<p><?php echo $this->formCheckbox('copyMe');?> Yes, send me a copy.</p>
-<p><?php echo $this->formSubmit('submitContactForm','Send Message');?></p>
-</form>
+<h2>Thanks for contacting us!</h2>
+<p>Your message was successfully sent and we will reply promptly.</p>
+<?php } ?>
