@@ -36,6 +36,7 @@ class DSF_Interface_Grid {
         	// Add Wrapper
             $parentObject = $this->container->addChild('div','');
             $parentObject->addAttribute('id', $id.'_wrapper');
+            $parentObject->addAttribute('class', 'clearfix');
         } else {
         	// No wrapper, already nested
         	$parentObject = $parent->children();
