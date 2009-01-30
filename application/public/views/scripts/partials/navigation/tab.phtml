@@ -1,6 +1,8 @@
 <?php 
 if($this->item->isSelected()){
     $class="class='selected'";
+}else{
+	$class = null;
 }
 ?>
 <li id='menu_item_<?php echo $this->item->id;?>' class='tab <?php echo $class;?>'>

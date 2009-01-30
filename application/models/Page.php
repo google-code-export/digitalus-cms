@@ -312,12 +312,16 @@ class Page extends DSF_Db_Table
      * @param array $where
      * @return zend_db_rowset
      */
-    public function getChildren($page, $where = array())
+    public function getChildren($page, $where = array(), $order = null)
     {
         $id = $this->_getPageId($page);
                 
         $where[] = $this->_db->quoteInto("parent_id = ?", $id);
-        $order = "position ASC";
+        
+        if($order == null) {
+            $order = "position ASC";
+        }
+        
         return $this->fetchAll($where, $order);
     }
     
@@ -454,10 +458,10 @@ class Page extends DSF_Db_Table
 	 *
 	 * @return array
 	 */
-	public function getIndex($rootId = 0)
+	public function getIndex($rootId = 0, $order = null)
 	{
 		if(empty($this->_index)) {
-		    $this->_indexPages($rootId);
+		    $this->_indexPages($rootId, null, '/', $order);
 		}
 		return $this->_index;
 	}
@@ -469,10 +473,10 @@ class Page extends DSF_Db_Table
 	 * 
 	 * @param integer $parentId
 	 */
-	private function _indexPages($parentId = 0, $path = null, $pathSeparator = '/')
+	private function _indexPages($parentId = 0, $path = null, $pathSeparator = '/', $order = null)
 	{
 		if($this->hasChildren($parentId)){
-		    $children = $this->getChildren($parentId);
+		    $children = $this->getChildren($parentId, null, $order);
 		    foreach ($children as $child) {
 		    	//check to see if the child has children
 		    	$tmpPath = $path . $child->name;

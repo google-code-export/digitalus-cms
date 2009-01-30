@@ -6,7 +6,7 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
 		$links = array();
 		$tree = new Page();
 
-		$children = $tree->getChildren($parentId);
+		$children = $tree->getChildren($parentId, null, 'name');
 		
 		foreach ($children as $child)
 		{			
