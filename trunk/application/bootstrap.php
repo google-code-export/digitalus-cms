@@ -10,7 +10,12 @@ Zend_Loader::registerAutoload();
 $frontController = Zend_Controller_Front::getInstance();
 
 // Change to 'production' parameter under production environment
-$frontController->registerPlugin(new Initializer('production'));   
+if($_SERVER['SERVER_NAME'] == 'local.digitalus-media') {
+	$env = "testing";
+}else{
+	$env = "production";
+}
+$frontController->registerPlugin(new Initializer($env));   
 
 //this loads the admin interface
 //$frontController->registerPlugin(new DSF_Controller_Plugin_LayoutLoader());

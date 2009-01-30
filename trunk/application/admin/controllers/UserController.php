@@ -116,11 +116,12 @@ class Admin_UserController extends Zend_Controller_Action
             $password = DSF_Filter_Post::get('password');
             $passwordConfirm = DSF_Filter_Post::get('confirmation');
             $u->updatePassword($id, $password, true, $passwordConfirm);
-        }else{
-            $user = $u->updateFromPost();
-            $id = $user->id;
         }
-    	$url = 'admin/index';
+        
+        $user = $u->updateFromPost();
+        $id = $user->id;
+        
+        $url = 'admin/index';
     	$this->_redirect($url);
     }
     

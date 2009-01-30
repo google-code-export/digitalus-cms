@@ -39,7 +39,7 @@ class Admin_PageController extends Zend_Controller_Action
 	 */
 	function indexAction()
 	{	 
-	    $this->view->createOptions = $this->getCreateOptions();   
+	    $this->view->createPageOptions = $this->_getCreateOptions();   
 	}
 	
 	public function newAction()
@@ -47,7 +47,7 @@ class Admin_PageController extends Zend_Controller_Action
 		$name = DSF_Filter_Post::get('page_name');
 		$contentType = DSF_Filter_Post::get('contentType');
 		$parentId = DSF_Filter_Post::int('parent_id');
-		$this->setCreateOptions($parentId, $contentType);
+		$this->_setCreateOptions($parentId, $contentType);
 		
 		$page = new Page();
 		$newPage = $page->createPage($name, $parentId, $contentType);
@@ -67,6 +67,7 @@ class Admin_PageController extends Zend_Controller_Action
 	
 	public function editAction()
 	{
+		
 		$page = new Page();	
 		//load the current page
 		if($this->_request->isPost()) {	
@@ -238,7 +239,7 @@ class Admin_PageController extends Zend_Controller_Action
 	public function selectContentTemplateAction()
 	{
 		$parentId = $this->_request->getParam('parent_id');	
-		$this->view->createOptions = $this->getCreateOptions();  	
+		$this->view->createPageOptions = $this->_getCreateOptions();  	
 		$page = new Page();
 		$contentType = $page->getContentTemplate($parentId);
 		$templateLoader = new DSF_Content_Template_Loader();
@@ -310,14 +311,14 @@ class Admin_PageController extends Zend_Controller_Action
 		
 	}
 	
-    protected function setCreateOptions($parentPage, $pageType)
+    protected function _setCreateOptions($parentId, $contentType)
     {
-		$session = $this->getCreateOptions();
+		$session = $this->_getCreateOptions();
 		$session->contentType = $contentType;
-		$session->parentId = $parentId;
+		$session->parentId = intval($parentId);
     }
     
-    protected function getCreateOptions()
+    protected function _getCreateOptions()
     {
 		return new Zend_Session_Namespace('createPageOptions');
     }
