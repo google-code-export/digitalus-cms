@@ -1,23 +1,22 @@
-<?php $this->placeholder("sidebarHeadline")->set($this->GetTranslation('Site'));?>
+<?php $this->placeholder('sidebarHeadline')->set($this->GetTranslation('Site'));?>
 <p><?php echo $this->GetTranslation('The site sections is where you manage your site.');?></p>
 
-<?php 
+<?php
 $u = new User();
 $users = $u->fetchAll(null, 'first_name');
-foreach ($users as $user)
-{
+foreach ($users as $user) {
     //having a little fun at 1:04
-    if($user->role == 'superadmin') {
-        $icon = "user_suit.png";
-    }else{
-        $icon = "user.png";
+    if ($user->role == 'superadmin') {
+        $icon = 'user_suit.png';
+    } else {
+        $icon = 'user.png';
     }
-    
-	$userArray[] = $this->link($user->first_name . ' ' . $user->last_name, $this->baseUrl . '/admin/user/open/id/' . $user->id, $icon);
+
+    $userArray[] = $this->link($user->first_name . ' ' . $user->last_name, $this->baseUrl . '/admin/user/open/id/' . $user->id, $icon);
 }
 ?>
 <h3><?php echo $this->GetTranslation('Admin Users');?></h3>
-<?php 
+<?php
 echo $this->HtmlList($userArray, null, null, false);
 ?>
 <p><?php echo $this->link('Create new user', $this->baseUrl . '/admin/user/create', 'user_add.png');?></p>
@@ -26,8 +25,3 @@ echo $this->HtmlList($userArray, null, null, false);
 <p><?php echo $this->GetTranslation('The site console enables you to interact directly with the CMS core. It is for experienced administrators only.');?></p>
 
 <p><?php echo $this->link('Open console', $this->baseUrl . '/admin/site/console', 'application_xp_terminal.png');?></p>
-
-
-
-
-
