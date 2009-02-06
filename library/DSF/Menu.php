@@ -3,10 +3,10 @@
 class DSF_Menu {
     public $items = null;
     protected  $_parentId;
-    
+
     /**
      * this function sets up then loads the menu
-     * 
+     *
      * @todo this needs to be cached
      *
      * @param int $parentId
@@ -16,7 +16,7 @@ class DSF_Menu {
         $this->_parentId = $parentId;
         $this->_load();
     }
-    
+
     /**
      * this function loads the current menu and is run automatically by the constructor
      *
@@ -25,9 +25,9 @@ class DSF_Menu {
     {
         $page = new Page();
         $children = $page->getChildren($this->_parentId);
-        if($children->count() > 0) {
-            foreach($children as $child) {
-                if($child->show_on_menu == 1) {
+        if ($children->count() > 0) {
+            foreach ($children as $child) {
+                if ($child->show_on_menu == 1) {
                     $this->items[] = new DSF_Menu_Item($child);
                 }
             }

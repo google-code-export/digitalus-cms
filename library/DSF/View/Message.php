@@ -1,53 +1,53 @@
 <?php
 class DSF_View_Message
 {
-    private $ns;
-    private $message;
-    
-    function __construct()
+    private $_ns;
+    private $_message;
+
+    public function __construct()
     {
-        
-        if(Zend_Registry::isRegistered('message')){
-            $this->message = Zend_Registry::get('message');
-        }else{
+
+        if (Zend_Registry::isRegistered('message')) {
+            $this->_message = Zend_Registry::get('message');
+        } else {
             $m = new Zend_Session_Namespace('message');
-            if(isset($m->message)){
-                $this->message = $m->message;
+            if (isset($m->message)) {
+                $this->_message = $m->message;
             }
         }
     }
-    
-    function clear()
+
+    public function clear()
     {
-        unset($this->message);
-        $this->updateNs();
+        unset($this->_message);
+        $this->_updateNs();
     }
-    
-    function add($message)
+
+    public function add($message)
     {
-        $this->message = $message;
-        $this->updateNs();
+        $this->_message = $message;
+        $this->_updateNs();
     }
-    
-    function hasMessage()
+
+    public function hasMessage()
     {
-        if($this->message){
+        if ($this->_message) {
             return true;
         }
     }
-    
-    function get()
+
+    public function get()
     {
-        return $this->message;
+        return $this->_message;
     }
-    
-    private function updateNs()
+
+    private function _updateNs()
     {
         $m = new Zend_Session_Namespace('message');
-        if(isset($this->message)){
-            Zend_Registry::set('message',$this->message);
-            $m->message = $this->message;
-        }else{
+        if (isset($this->_message)) {
+            Zend_Registry::set('message',$this->_message);
+            $m->message = $this->_message;
+        } else {
             unset($m->message);
         }
     }

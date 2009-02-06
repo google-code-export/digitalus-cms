@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -24,11 +24,11 @@ class DSF_Controller_Plugin_LogTraffic extends Zend_Controller_Plugin_Abstract
 {
     /**
      * log the current request in the traffic log
-     * 
+     *
      */
     public function preDispatch($request)
     {
-		$log = new TrafficLog();
-		$log->logHit();    	
+        $log = new TrafficLog();
+        $log->logHit();
     }
 }

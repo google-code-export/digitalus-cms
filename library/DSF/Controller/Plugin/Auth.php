@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -22,13 +22,13 @@
 
 class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 {
-	/**
-	 * the current user's identity
-	 *
-	 * @var zend_db_row
-	 */
+    /**
+     * the current user's identity
+     *
+     * @var zend_db_row
+     */
     private $_identity;
-    
+
     /**
      * the acl object
      *
@@ -37,7 +37,7 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     private $_acl;
 
     /**
-     * the page to direct to if there is a current 
+     * the page to direct to if there is a current
      * user but they do not have permission to access
      * the resource
      *
@@ -55,7 +55,7 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     private $_noauth = array('module' => 'admin',
                              'controller' => 'auth',
                              'action' => 'login');
-   
+
 
     /**
      * validate the current user's request
@@ -64,46 +64,46 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-		$this->_identity = DSF_Auth::getIdentity();
+        $this->_identity = DSF_Auth::getIdentity();
         $this->_acl = new DSF_Acl();
 
-		if(!empty($this->_identity)){
-	    	$role = $this->_identity->role;
-        }else{
+        if (!empty($this->_identity)) {
+            $role = $this->_identity->role;
+        } else {
             $role = null;
         }
-		$controller = $request->controller;
- 		$module = $request->module;
-		$controller = $controller;
-		$action = $request->action;
-		
-		//go from more specific to less specific
-		$moduleLevel = $module;
-		$controllerLevel = $moduleLevel . '_' . $controller;
-		$actionLevel = $controllerLevel . '_' . $action;
-		
-		if ($this->_acl->has($actionLevel)) {
-			$resource = $actionLevel;
-		}elseif ($this->_acl->has($controllerLevel)){
-		    $resource = $controllerLevel;
-		}else{
-		    $resource = $moduleLevel;
-		}
-		
-		if($module != 'public'){
-	        if ($this->_acl->has($resource) && !$this->_acl->isAllowed($role, $resource)) {
-	            if (!$this->_identity) {
-	            	$request->setModuleName($this->_noauth['module']);
-	                $request->setControllerName($this->_noauth['controller']);
-	                $request->setActionName($this->_noauth['action']);
-	                $request->setParam('authPage', 'login');
-	            }else{
-	               $request->setModuleName($this->_noacl['module']);
-	               $request->setControllerName($this->_noacl['controller']);
-	               $request->setActionName($this->_noacl['action']);
-	               $request->setParam('authPage', 'noauth');
-	           }
-	        }
-		}
+        $controller = $request->controller;
+         $module = $request->module;
+        $controller = $controller;
+        $action = $request->action;
+
+        //go from more specific to less specific
+        $moduleLevel = $module;
+        $controllerLevel = $moduleLevel . '_' . $controller;
+        $actionLevel = $controllerLevel . '_' . $action;
+
+        if ($this->_acl->has($actionLevel)) {
+            $resource = $actionLevel;
+        } elseif ($this->_acl->has($controllerLevel)) {
+            $resource = $controllerLevel;
+        } else {
+            $resource = $moduleLevel;
+        }
+
+        if ($module != 'public') {
+            if ($this->_acl->has($resource) && !$this->_acl->isAllowed($role, $resource)) {
+                if (!$this->_identity) {
+                    $request->setModuleName($this->_noauth['module']);
+                    $request->setControllerName($this->_noauth['controller']);
+                    $request->setActionName($this->_noauth['action']);
+                    $request->setParam('authPage', 'login');
+                } else {
+                   $request->setModuleName($this->_noacl['module']);
+                   $request->setControllerName($this->_noacl['controller']);
+                   $request->setActionName($this->_noacl['action']);
+                   $request->setParam('authPage', 'noauth');
+               }
+            }
+        }
     }
 }

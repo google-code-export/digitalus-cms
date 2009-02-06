@@ -10,37 +10,37 @@ class DSF_Language {
     const SESSION_KEY = 'currentLanguage';
     const LANGUAGE_KEY = 'current';
 
-    static function setLanguage($language)
+    public static function setLanguage($language)
     {
         $session = self::getSession();
         $key = self::LANGUAGE_KEY;
         return $session->$key = $language;
     }
-    
-    static function getLanguage()
+
+    public static function getLanguage()
     {
         $session = self::getSession();
         $key = self::LANGUAGE_KEY;
         $currentLang = $session->$key;
-        if(empty($currentLang)) {
+        if (empty($currentLang)) {
             $config = Zend_Registry::get('config');
             $locale = $config->language->defaultLocale;
-    	    $currentLang = $locale;
+            $currentLang = $locale;
         }
-        return $currentLang;        
+        return $currentLang;
     }
-    
-    static function getFullName($locale)
+
+    public static function getFullName($locale)
     {
         $config = Zend_Registry::get('config');
         $translations = $config->language->translations->toArray();
-        if(isset($translations[$locale])) {
+        if (isset($translations[$locale])) {
             return $translations[$locale];
         }
         return null;
     }
-    
-    static function getSession()
+
+    public static function getSession()
     {
         return new Zend_Session_Namespace('currentLanguage');
     }

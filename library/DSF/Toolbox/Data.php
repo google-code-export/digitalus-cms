@@ -1,11 +1,11 @@
 <?php
 
 class DSF_Toolbox_Data {
-    static function getValueOrNull($value)
+    public static function getValueOrNull($value)
     {
-        if(empty($value)) {
+        if (empty($value)) {
             return null;
-        }else{
+        } else {
             return $value;
         }
     }

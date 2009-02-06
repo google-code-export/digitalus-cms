@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -22,13 +22,13 @@
 
 class DSF_Data_List
 {
-	/**
-	 * the list of items
-	 *
-	 * @var std class
-	 */
+    /**
+     * the list of items
+     *
+     * @var std class
+     */
     public $items;
-    
+
     /**
      * you can pass this a serialized list (list->toString())
      * otherwise it will create an empty list
@@ -37,14 +37,13 @@ class DSF_Data_List
      */
     public function __construct($data = null)
     {
-        if($data)
-        {
+        if ($data) {
             $this->items = unserialize($data);
-        }else{
+        } else {
             $this->items = new stdClass();
         }
     }
-    
+
     /**
      * add a new item
      *
@@ -55,7 +54,7 @@ class DSF_Data_List
     {
         $this->items->$key = $value;
     }
-    
+
     /**
      * add a new group
      * the group is a new list
@@ -69,7 +68,7 @@ class DSF_Data_List
         $this->items->$key = $newList;
         return $newList;
     }
-    
+
     /**
      * remove a group
      *
@@ -79,7 +78,7 @@ class DSF_Data_List
     {
         unset($this->items->$key);
     }
-    
+
     /**
      * validates that a group exists
      *
@@ -88,12 +87,11 @@ class DSF_Data_List
      */
     public function hasGroup($key)
     {
-    	if(isset($this->items->$key))
-    	{
-    		return true;
-    	}
+        if (isset($this->items->$key)) {
+            return true;
+        }
     }
-    
+
     /**
      * serializes the lists items
      *
@@ -103,5 +101,5 @@ class DSF_Data_List
     {
         return serialize($this->items);
     }
-    
+
 }

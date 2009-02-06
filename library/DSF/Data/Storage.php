@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -22,67 +22,64 @@
 
 class DSF_Data_Storage
 {
-	/**
-	 * the storage object for the data
-	 *
-	 * @var zend_session_namespace
-	 */
-	protected $_storage;
-	
-	/**
-	 * set the storage
-	 *
-	 */
-	function __construct()
-	{
-		$this->_storage = new Zend_Session_Namespace('dataStorage');
-	}
-	
-	/**
-	 * set the data
-	 *
-	 * @param array $data
-	 */
-	function set($data)
-	{
-		if(is_array($data)){
-			foreach ($data as $k => $v){
-				$array[$k] = $v; //make sure we dont try to store an object in the session
-			}
-			$this->_storage->data = $array;
-		}
-	}
-	
-	/**
-	 * save the current post array
-	 *
-	 */
-	function savePost()
-	{
-		$this->set($_POST);
-	}
-	
-	/**
-	 * returns the saved data
-	 * if persist false this deletes the data from the storage
-	 * 
-	 * @param bool $persist
-	 * @return array
-	 */
-	function get($persist = false)
-	{
-		if(!empty($this->_storage->data))
-		{
-			$data = new stdClass();
-			foreach ($this->_storage->data as $k => $v)
-			{
-				$data->$k = $v;
-			}
-			if(!$persist)
-			{
-				Zend_Session::namespaceUnset('dataStorage');
-			}
-			return $data;
-		}
-	}
+    /**
+     * the storage object for the data
+     *
+     * @var zend_session_namespace
+     */
+    protected $_storage;
+
+    /**
+     * set the storage
+     *
+     */
+    public function __construct()
+    {
+        $this->_storage = new Zend_Session_Namespace('dataStorage');
+    }
+
+    /**
+     * set the data
+     *
+     * @param array $data
+     */
+    public function set($data)
+    {
+        if (is_array($data)) {
+            foreach ($data as $k => $v) {
+                $array[$k] = $v; //make sure we dont try to store an object in the session
+            }
+            $this->_storage->data = $array;
+        }
+    }
+
+    /**
+     * save the current post array
+     *
+     */
+    public function savePost()
+    {
+        $this->set($_POST);
+    }
+
+    /**
+     * returns the saved data
+     * if persist false this deletes the data from the storage
+     *
+     * @param bool $persist
+     * @return array
+     */
+    public function get($persist = false)
+    {
+        if (!empty($this->_storage->data)) {
+            $data = new stdClass();
+            foreach ($this->_storage->data as $k => $v) {
+                $data->$k = $v;
+            }
+            if (!$persist) {
+                Zend_Session::namespaceUnset('dataStorage');
+            }
+            return $data;
+        }
+    }
 }

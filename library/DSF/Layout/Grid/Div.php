@@ -9,19 +9,19 @@ abstract class DSF_Layout_Grid_Div {
     protected $_columns;
     protected $_before;
     protected $_after;
-    
+
     /**
-     * 
+     *
      */
-    function __construct() {
-    
+    public function __construct() {
+
     }
-    
+
     public function addUnit($cols, $before = 0, $after = 0)
     {
-        
+
     }
-    
+
 }
 
 ?>
