@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -23,57 +23,55 @@
 class Admin_IndexController extends Zend_Controller_Action
 {
 
-	function init()
-	{
-	    $this->view->breadcrumbs = array(
-	       'Home' =>   $this->getFrontController()->getBaseUrl() . '/admin'
-	    );
-	}
-	
-	/**
-	 * displays the admin dashboard
-	 *
-	 */
-	function indexAction()
-	{
-	    $notes = new Note();
-	    $this->view->notes = $notes->getUsersNotes();
-	    $bookmark = new Bookmark();
-	    $this->view->bookmarks = $bookmark->getUsersBookmarks();
-	    $content = new Page();
+    public function init()
+    {
+        $this->view->breadcrumbs = array(
+           'Home' =>   $this->getFrontController()->getBaseUrl() . '/admin'
+        );
+    }
+
+    /**
+     * displays the admin dashboard
+     *
+     */
+    public function indexAction()
+    {
+        $notes = new Note();
+        $this->view->notes = $notes->getUsersNotes();
+        $bookmark = new Bookmark();
+        $this->view->bookmarks = $bookmark->getUsersBookmarks();
+        $content = new Page();
         $this->view->pages = $content->getCurrentUsersPages();
         $user = new User();
         $this->view->identity = $user->getCurrentUser();
-	}
-	
-	function notesAction()
-	{
-	    $notes = new Note();
-	    $myNotes = DSF_Filter_Post::get('content');
-	    $notes->saveUsersNotes($myNotes);
-	    $this->_redirect('admin/index');
-	}
-	
-	function bookmarkAction()
-	{
-	    $url = $this->_request->getParam('url');
-	    $label = $this->_request->getParam('label');
-	    $bookmark = new Bookmark();
-	    $bookmark->addUsersBookmark($label, $url);
-	}
-	
-	function deleteBookmarkAction()
-	{
-	    $id = $this->_request->getParam('id');
-	    $bookmark = new Bookmark();
-	    $bookmark->deleteBookmark($id);
-	    $this->_redirect('admin/index');
-	}
-	
-	function testAction()
-	{
-	    
-	}
+    }
+
+    public function notesAction()
+    {
+        $notes = new Note();
+        $myNotes = DSF_Filter_Post::get('content');
+        $notes->saveUsersNotes($myNotes);
+        $this->_redirect('admin/index');
+    }
+
+    public function bookmarkAction()
+    {
+        $url = $this->_request->getParam('url');
+        $label = $this->_request->getParam('label');
+        $bookmark = new Bookmark();
+        $bookmark->addUsersBookmark($label, $url);
+    }
+
+    public function deleteBookmarkAction()
+    {
+        $id = $this->_request->getParam('id');
+        $bookmark = new Bookmark();
+        $bookmark->deleteBookmark($id);
+        $this->_redirect('admin/index');
+    }
+
+    public function testAction()
+    {
+
+    }
 }
-
-

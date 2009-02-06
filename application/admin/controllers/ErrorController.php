@@ -1,5 +1,4 @@
-<?php 
-
+<?php
 
 /**
  * DSF CMS
@@ -23,15 +22,15 @@
 
 class Admin_ErrorController extends Zend_Controller_Action
 {
-	
-	function indexAction()
-	{
-		$view = $this->view;
-		echo $view->render('admin.tpl.php');
-	}
-	
-	function noAuthAction()
-	{
-		
-	}
+
+    public function indexAction()
+    {
+        $view = $this->view;
+        echo $view->render('admin.tpl.php');
+    }
+
+    public function noAuthAction()
+    {
+
+    }
 }

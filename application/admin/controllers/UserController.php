@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -22,133 +22,133 @@
 
 class Admin_UserController extends Zend_Controller_Action
 {
-	
-	function init()
-	{
-	    $this->view->breadcrumbs = array(
-	       $this->view->GetTranslation('Site Settings') =>   $this->getFrontController()->getBaseUrl() . '/admin/site'
-	    );
-	}
-	
-	/**
-	 * render the user management interface
-	 *
-	 */
-	function indexAction()
-	{
-	}
 
-	/**
-	 * open a user for editing
-	 *
-	 */
-	function openAction()
-	{
-	   
+    public function init()
+    {
+        $this->view->breadcrumbs = array(
+           $this->view->GetTranslation('Site Settings') =>   $this->getFrontController()->getBaseUrl() . '/admin/site'
+        );
+    }
+
+    /**
+     * render the user management interface
+     *
+     */
+    public function indexAction()
+    {
+    }
+
+    /**
+     * open a user for editing
+     *
+     */
+    public function openAction()
+    {
+
        $id = $this->_request->getParam('id', 0);
-       if($id > 0){
+       if ($id > 0) {
            $u = new User();
-    	   $row = $u->find($id)->current();
-    	   $this->view->user = $row;
-    	   $this->view->userPermissions = $u->getAclResources($row);
+           $row = $u->find($id)->current();
+           $this->view->user = $row;
+           $this->view->userPermissions = $u->getAclResources($row);
        }
 
         $breadcrumbLabel = $this->view->GetTranslation('Open User') . ": " . $this->view->user->first_name . ' ' . $this->view->user->last_name;
-	    $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/user/open/id/' . $id;
-	    $this->view->toolbarLinks = array();
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = $this->getFrontController()->getBaseUrl() . '/admin/user/delete/id/' . $id;
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_open_id_' . $id;
-	}
+        $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/user/open/id/' . $id;
+        $this->view->toolbarLinks = array();
+        $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = $this->getFrontController()->getBaseUrl() . '/admin/user/delete/id/' . $id;
+        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_open_id_' . $id;
+    }
 
-	/**
-	 * add a new user
-	 *
-	 */
-	function createAction()
-	{
-	    if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-    		$u = new User();
+    /**
+     * add a new user
+     *
+     */
+    public function createAction()
+    {
+        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
+            $u = new User();
             $user = $u->insertFromPost();
             $e = new DSF_View_Error();
-            if(!$e->hasErrors()){
+            if (!$e->hasErrors()) {
                 $url = 'admin/user/open/id/' . $user->id;
                 $this->_redirect($url);
-            }else{
-            	$storage = new DSF_Data_Storage();
-            	$storage->savePost();
+            } else {
+                $storage = new DSF_Data_Storage();
+                $storage->savePost();
             }
-	    }
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_create';
-	}
-	
-	/**
-	 * edit an existing user
-	 *
-	 */
-	function editAction()
-	{
-	    $u = new User();
-        if(DSF_Filter_Post::has('update_permissions')) {
+        }
+        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_create';
+    }
+
+    /**
+     * edit an existing user
+     *
+     */
+    public function editAction()
+    {
+        $u = new User();
+        if (DSF_Filter_Post::has('update_permissions')) {
             //update the users permissions
             $resources = DSF_Filter_Post::raw('acl_resources');
             $id = DSF_Filter_Post::int('id');
             $u->updateAclResources($id, $resources);
-        }elseif(DSF_Filter_Post::has('admin_user_password')) {
+        } elseif (DSF_Filter_Post::has('admin_user_password')) {
             $id = DSF_Filter_Post::int('id');
             $password = DSF_Filter_Post::get('newPassword');
             $passwordConfirm = DSF_Filter_Post::get('newConfirmPassword');
             $u->updatePassword($id, $password, true, $passwordConfirm);
-        }else{
+        } else {
             $user = $u->updateFromPost();
             $id = $user->id;
         }
-   		$url = 'admin/user/open/id/' . $id;
+           $url = 'admin/user/open/id/' . $id;
 
       $this->_redirect($url);
 
     }
-    
+
     public function updateMyAccountAction()
     {
-    	$u = new User();
-        if(DSF_Filter_Post::int('update_password') === 1) {
+        $u = new User();
+        if (DSF_Filter_Post::int('update_password') === 1) {
             $id = DSF_Filter_Post::int('id');
             $password = DSF_Filter_Post::get('password');
             $passwordConfirm = DSF_Filter_Post::get('confirmation');
             $u->updatePassword($id, $password, true, $passwordConfirm);
         }
-        
+
         $user = $u->updateFromPost();
         $id = $user->id;
-        
+
         $url = 'admin/index';
-    	$this->_redirect($url);
+        $this->_redirect($url);
     }
-    
-    function copyAclAction()
+
+    public function copyAclAction()
     {
         $currentUser = DSF_Filter_Post::int('id');
         $copyFrom = DSF_Filter_Post::int('user_id');
-        
-        if($currentUser > 0 && $copyFrom > 0) {
+
+        if ($currentUser > 0 && $copyFrom > 0) {
             $u = new User();
             $u->copyPermissions($copyFrom, $currentUser);
         }
         $url = 'admin/user/open/id/' . $currentUser;
         $this->_redirect($url);
     }
-	
+
     /**
      * delete a user
      *
      */
-	function deleteAction()
-	{
-	   $id = $this->_request->getParam('id');
-	   $u = new User();
-	   $u->delete("id = " . $id);
-	   $url = "admin/site";
+    public function deleteAction()
+    {
+       $id = $this->_request->getParam('id');
+       $u = new User();
+       $u->delete("id = " . $id);
+       $url = "admin/site";
        $this->_redirect($url);
-	}
+    }
 
 }
