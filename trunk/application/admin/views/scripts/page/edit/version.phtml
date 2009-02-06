@@ -1,9 +1,9 @@
 <form action='<?php echo $this->baseUrl;?>/admin/page/edit' method="post">
-	<?php echo $this->formHidden('page_id',$this->pageId)?>
+    <?php echo $this->formHidden('page_id',$this->pageId)?>
     <dl class='zend_form'>
     <dt><label class="required" for="version">Version:</label></dt>
-    <dd><?php echo $this->selectLanguage('language',$this->language)?></dd>
+    <dd><?php echo $this->selectLanguage('language', $this->language)?></dd>
     <dt>&nbsp;</dt>
-    <dd><?php echo $this->formSubmit('setVersion','Switch Versions')?></dd>
+    <dd><?php echo $this->formSubmit('setVersion', 'Switch Versions')?></dd>
     </dl>
 </form>
