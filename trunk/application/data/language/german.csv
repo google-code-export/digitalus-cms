@@ -54,6 +54,7 @@ Send Reminder;Erinnerung absenden
 
 # ----- admin_user -----
 Update My Account;Benutzerkonto aktualisieren
+Update Account;Konto aktualisieren
 Account Information;Konto Informationen
 First Name;Vorname
 Last Name;Nachname
@@ -255,6 +256,7 @@ Save Changes;Änderungen speichern
 
 # ----- admin media -----
 Media;Medien
+Media Options;Medien Optionen
 Media Root;Medien Wurzelverzeichnis
 Media Manager;Medien Verwaltung
 Create New Folder;Neues Verzeichnis erstellen
@@ -273,6 +275,7 @@ Create Subfolder;Unterverzeichnis erstellen
 Rename folder;Verzeichnis umbenennen
 Rename Folder;Verzeichnis umbenennen
 New Name;Neuer Name
+You do not have any media files on the server;Sie haben noch keine Dateien auf dem Server
 
 # ----- admin_design -----
 Design;Design
