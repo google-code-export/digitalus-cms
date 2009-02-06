@@ -1,4 +1,4 @@
-<?php $this->placeholder("formHeadline")->set('Update Design');
+<?php $this->placeholder('formHeadline')->set('Update Design');
 $this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/jquery.markitup.js');
 $this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/sets/default/set.js');
 $this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/sets/css/set.js');
@@ -10,37 +10,35 @@ $this->placeholder('jquery')->captureStart();
 ?>
 
 $(".css").markItUp(mySettings);
-<?php $this->placeholder('jquery')->captureEnd();?>	                 
+<?php $this->placeholder('jquery')->captureEnd();?>
 
 <form action="<?php echo $this->baseUrl;?>/admin/design/update" method="post">
 <?php echo $this->formHidden('id', $this->design->getValue('id'))?>
 <fieldset>
     <legend><?php echo $this->GetTranslation('Design details');?></legend>
-    <?php 
-    	echo $this->FormRow(
-    		$this->GetTranslation('Design Name'), $this->FormText('name',$this->design->getValue('name'))
-   		);
-		echo $this->FormRow(
-			$this->GetTranslation('Design Notes'), $this->FormTextarea('notes',$this->design->getValue('notes'), array('class' => 'med'))
-		);
-	    echo $this->FormRow("&nbsp", $this->formCheckbox('is_default', intval($this->design->getValue('is_default'))) . ' ' . $this->GetTranslation('This is the default site design'));
-    	echo $this->FormRow(
-		'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update Design')));
+    <?php
+        echo $this->FormRow(
+            $this->GetTranslation('Design Name'), $this->FormText('name',$this->design->getValue('name'))
+           );
+        echo $this->FormRow(
+            $this->GetTranslation('Design Notes'), $this->FormTextarea('notes',$this->design->getValue('notes'), array('class' => 'med'))
+        );
+        echo $this->FormRow('&nbsp;', $this->formCheckbox('is_default', intval($this->design->getValue('is_default'))) . ' ' . $this->GetTranslation('This is the default site design'));
+        echo $this->FormRow('&nbsp;', $this->FormSubmit('site', $this->GetTranslation('Update Design')));
     ?>
 </fieldset>
 
 <fieldset>
-	<legend>Assets</legend>
-	<h3>Step 1: Select Layout</h3>
-	<?php echo $this->FormRow('Layout', $this->selectLayout('layout', $this->design->getLayout()))?>
-	
-<h3>Step 2: Select Style Sheets</h3>
-<?php echo $this->checkSkinStyles('styles', $this->design->getStylesheets());?>
+    <legend><?php echo $this->GetTranslation('Assets');?></legend>
+    <h3><?php echo $this->GetTranslation('Step 1: Select Layout');?></h3>
+    <?php echo $this->FormRow('Layout', $this->selectLayout('layout', $this->design->getLayout()))?>
 
-<h3>Step 3: Design specific styles</h3>
-<?php 
-echo  $this->FormTextarea('inline_styles',$this->design->getValue('inline_styles'), array('class' => 'css'));
-echo $this->FormRow(
-	'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Update Design')));?>
+    <h3><?php echo $this->GetTranslation('Step 2: Select Style Sheets');?></h3>
+    <?php echo $this->checkSkinStyles('styles', $this->design->getStylesheets());?>
+
+    <h3><?php echo $this->GetTranslation('Step 3: Design specific styles');?></h3>
+    <?php
+    echo $this->FormTextarea('inline_styles',$this->design->getValue('inline_styles'), array('class' => 'css'));
+    echo $this->FormRow('&nbsp;', $this->FormSubmit('site', $this->GetTranslation('Update Design')));?>
 </fieldset>
 </form>
