@@ -1,26 +1,26 @@
 <form action="<?php echo $this->baseUrl;?>/admin/user/create" method="post">
-<fieldset>
-    <legend>General Information</legend>
-    <?php 
-    $data = new DSF_Data_Storage();
-    $user = $data->get();
-    $tmpUser = new stdClass();
-    if($user) {
-        $tmpUser = $user;
-    }else{
-        $tmpUser->first_name = null;
-        $tmpUser->last_name = null;
-        $tmpUser->email = null;
-        $tmpUser->role = null;
-    }
-    
-    	echo $this->FormRow($this->GetTranslation('First Name'), $this->FormText('first_name',$tmpUser->first_name));
-    	echo $this->FormRow($this->GetTranslation('Last Name'), $this->FormText('last_name',$tmpUser->last_name));
-    	echo $this->FormRow($this->GetTranslation('Email Address'), $this->FormText('email',$tmpUser->email));
-    	echo $this->FormRow($this->GetTranslation('Admin Role'), $this->SelectAdminRole('role', $tmpUser->role));
-    	echo $this->FormRow($this->GetTranslation('Password'), $this->FormPassword('newPassword'));
-    	echo $this->FormRow($this->GetTranslation('Confirm Password'), $this->FormPassword('newConfirmPassword'));
-    	echo $this->FormRow('&nbsp;', $this->FormSubmit('update_password',$this->GetTranslation('Create User')));
-    ?>
-</fieldset>
+    <fieldset>
+        <legend>General Information</legend>
+        <?php
+        $data = new DSF_Data_Storage();
+        $user = $data->get();
+        $tmpUser = new stdClass();
+        if ($user) {
+            $tmpUser = $user;
+        } else {
+            $tmpUser->first_name = null;
+            $tmpUser->last_name = null;
+            $tmpUser->email = null;
+            $tmpUser->role = null;
+        }
+
+            echo $this->FormRow($this->GetTranslation('First Name'), $this->FormText('first_name', $tmpUser->first_name));
+            echo $this->FormRow($this->GetTranslation('Last Name'), $this->FormText('last_name', $tmpUser->last_name));
+            echo $this->FormRow($this->GetTranslation('Email Address'), $this->FormText('email', $tmpUser->email));
+            echo $this->FormRow($this->GetTranslation('Admin Role'), $this->SelectAdminRole('role', $tmpUser->role));
+            echo $this->FormRow($this->GetTranslation('Password'), $this->FormPassword('newPassword'));
+            echo $this->FormRow($this->GetTranslation('Confirm Password'), $this->FormPassword('newConfirmPassword'));
+            echo $this->FormRow('&nbsp;', $this->FormSubmit('update_password', $this->GetTranslation('Create User')));
+        ?>
+    </fieldset>
 </form>
