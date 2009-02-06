@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -20,102 +20,97 @@
  * @version    $Id: SiteController.php Tue Dec 25 19:46:11 EST 2007 19:46:11 forrest lyman $
  */
 
-class Admin_SiteController extends Zend_Controller_Action 
+class Admin_SiteController extends Zend_Controller_Action
 {
-	public function init()
-	{
-	    $this->view->breadcrumbs = array(
-	       $this->view->GetTranslation('Site Settings') =>   $this->getFrontController()->getBaseUrl() . '/admin/site'
-	    );
-	}
-	
-	/**
-	 * render the main site admin interface
-	 *
-	 */
-	public function indexAction()
-	{
-		$settings = new SiteSettings();
-		$this->view->settings = $settings->toObject();
-		$this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_site';
-	}
-	
-	/**
-	 * update the site settings file
-	 *
-	 */
-	public function editAction()
-	{
-		$settings = DSF_Filter_Post::raw('setting');
-		$s = new SiteSettings();
-		foreach ($settings as $k => $v) {
-			$s->set($k, $v);
-		}
-		$s->save();
-		$this->_redirect('admin/site');
-	}
-	
-	/**
-	 * the console provides an interface for simple command scripts.
-	 * those scripts go in library/DSF/Command/{script name}
-	 *
-	 */
-	public function consoleAction()
-	{
-	    //set up a unique id for this session
-	    $session = new Zend_Session_Namespace('console_session');
-	    $previousId = $session->id;
-	    $session->id = md5(time());
-	    $this->view->consoleSession = $session->id;
-	    	    
-	    //you must validate that the session ids match
-	    if($this->_request->isPost() && !empty($previousId))
-	    {
-	        $this->view->commandExecuted = true;
-	        $this->view->command = "Command: " . DSF_Filter_Post::get('command');
-	        $this->view->date = time();
-	        
-	        //execute command
-	        //validate the session
-	        
-	        if(DSF_Filter_Post::get('consoleSession') == $previousId)
-	        {
-	            $this->view->lastCommand = DSF_Filter_Post::get('command');
-	            if(DSF_Filter_Post::get('runCommand'))
-	            {
-	               $results = DSF_Command::run(DSF_Filter_Post::get('command'));
-	            }elseif (DSF_Filter_Post::get('getInfo'))
-	            {
-	                $results = DSF_Command::info(DSF_Filter_Post::get('command'));
-	            }else{
-	                $results = array('ERROR: invalid request');
-	            }
-	        }else{
-	            $results[] = "ERROR: invalid session";
-	        }
-	        
-	        $this->view->results = $results;
-	    }
-	    
-	    $breadcrumbLabel = $this->view->GetTranslation('Site Console');
-	    $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/site/console';
-	    $this->view->toolbarLinks = array();
-	    $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_site_console';
-	    
-	}
-	
-	public function mailTestAction()
-	{
-	    $settings = new SiteSettings();
-	    $message = new DSF_Mail();
-	    $message->send(
-	        $settings->get('default_email'), 
-	        array($settings->get('default_email'), $settings->get('default_email_sender')), 
-	        "Digitalus CMS Test Message", 
-	        'test'
+    public function init()
+    {
+        $this->view->breadcrumbs = array(
+           $this->view->GetTranslation('Site Settings') =>   $this->getFrontController()->getBaseUrl() . '/admin/site'
+        );
+    }
+
+    /**
+     * render the main site admin interface
+     *
+     */
+    public function indexAction()
+    {
+        $settings = new SiteSettings();
+        $this->view->settings = $settings->toObject();
+        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_site';
+    }
+
+    /**
+     * update the site settings file
+     *
+     */
+    public function editAction()
+    {
+        $settings = DSF_Filter_Post::raw('setting');
+        $s = new SiteSettings();
+        foreach ($settings as $k => $v) {
+            $s->set($k, $v);
+        }
+        $s->save();
+        $this->_redirect('admin/site');
+    }
+
+    /**
+     * the console provides an interface for simple command scripts.
+     * those scripts go in library/DSF/Command/{script name}
+     *
+     */
+    public function consoleAction()
+    {
+        //set up a unique id for this session
+        $session = new Zend_Session_Namespace('console_session');
+        $previousId = $session->id;
+        $session->id = md5(time());
+        $this->view->consoleSession = $session->id;
+
+        //you must validate that the session ids match
+        if ($this->_request->isPost() && !empty($previousId)) {
+            $this->view->commandExecuted = true;
+            $this->view->command = "Command: " . DSF_Filter_Post::get('command');
+            $this->view->date = time();
+
+            //execute command
+            //validate the session
+
+            if (DSF_Filter_Post::get('consoleSession') == $previousId) {
+                $this->view->lastCommand = DSF_Filter_Post::get('command');
+                if (DSF_Filter_Post::get('runCommand')) {
+                   $results = DSF_Command::run(DSF_Filter_Post::get('command'));
+                } elseif (DSF_Filter_Post::get('getInfo')) {
+                    $results = DSF_Command::info(DSF_Filter_Post::get('command'));
+                } else {
+                    $results = array('ERROR: invalid request');
+                }
+            } else {
+                $results[] = "ERROR: invalid session";
+            }
+
+            $this->view->results = $results;
+        }
+
+        $breadcrumbLabel = $this->view->GetTranslation('Site Console');
+        $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/site/console';
+        $this->view->toolbarLinks = array();
+        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_site_console';
+
+    }
+
+    public function mailTestAction()
+    {
+        $settings = new SiteSettings();
+        $message = new DSF_Mail();
+        $message->send(
+            $settings->get('default_email'),
+            array($settings->get('default_email'), $settings->get('default_email_sender')),
+            'Digitalus CMS Test Message',
+            'test'
         );
         $this->_forward('index');
-	}
-	
-	
+    }
+
 }

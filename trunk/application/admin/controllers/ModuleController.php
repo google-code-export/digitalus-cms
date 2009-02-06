@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -20,68 +20,68 @@
  * @version    $Id: ModuleController.php Mon Dec 24 20:57:41 EST 2007 20:57:41 forrest lyman $
  */
 
-class Admin_ModuleController extends Zend_Controller_Action 
+class Admin_ModuleController extends Zend_Controller_Action
 {
-	public function init()
-	{  
-	    $this->view->breadcrumbs = array(
-	       'Modules' =>   $this->getFrontController()->getBaseUrl() . '/admin/module'
-	    ); 
-	}
-	
-	/**
-	 * this displays the main module admin page
-	 * note that each of the actual modules manages themselved.  this serves as a dashboard for them
-	 * to ease integration with the admin interface
-	 *
-	 */
-	public function indexAction()
-	{}
-	
-	/**
-	 * renders the select control for each of the actions available on the selected module
-	 * used for the add module interface
-	 *
-	 */
-	public function selectModulePageAction()
-	{
-	    $this->view->moduleName = $this->_request->getParam('moduleName');
-	    $this->view->val = $this->_request->getParam('val');
-	}
-	
-	/**
-	 * if the selected module / action has a form this will render the form
-	 *
-	 */
-	public function renderFormAction()
-	{
-	    $module = $this->_request->getParam('moduleKey');
-	    $element = $this->_request->getParam('element');
-	    if($module != null) {
-	        $moduleParts = explode('_', $module);
-	        if(is_array($moduleParts) && count($moduleParts) == 2) {
-    	        $action = $moduleParts[1];
-    	        $name = $moduleParts[0];
-    	        
-        	    $data = new stdClass();
+    public function init()
+    {
+        $this->view->breadcrumbs = array(
+           'Modules' => $this->getFrontController()->getBaseUrl() . '/admin/module'
+        );
+    }
+
+    /**
+     * this displays the main module admin page
+     * note that each of the actual modules manages themselved.  this serves as a dashboard for them
+     * to ease integration with the admin interface
+     *
+     */
+    public function indexAction()
+    {
+    }
+
+    /**
+     * renders the select control for each of the actions available on the selected module
+     * used for the add module interface
+     *
+     */
+    public function selectModulePageAction()
+    {
+        $this->view->moduleName = $this->_request->getParam('moduleName');
+        $this->view->val = $this->_request->getParam('val');
+    }
+
+    /**
+     * if the selected module / action has a form this will render the form
+     *
+     */
+    public function renderFormAction()
+    {
+        $module = $this->_request->getParam('moduleKey');
+        $element = $this->_request->getParam('element');
+        if ($module != null) {
+            $moduleParts = explode('_', $module);
+            if (is_array($moduleParts) && count($moduleParts) == 2) {
+                $action = $moduleParts[1];
+                $name = $moduleParts[0];
+
+                $data = new stdClass();
                 $data->get = $this->_request->getParams();
                 $data->post = $_POST;
                 $this->view->data = $data;
-                
+
                 $this->view->element = $element;
-    
-        	    $dir = './application/modules/' . $name . '/views/scripts';
+
+                $dir = './application/modules/' . $name . '/views/scripts';
                 $helpers = './application/modules/' . $name . '/views/helpers';
                 $path = "/public/" . $action . ".form.phtml";
                 $fullPath = $dir . $path;
-    
-                if(file_exists($fullPath))
-                {
+
+                if (file_exists($fullPath)) {
                     $this->view->addScriptPath($dir);
                     $this->view->addHelperPath($helpers);
                     $this->view->placeholder('moduleForm')->set($this->view->render($path));
                 }
-	        }
-	    }
-	}
+            }
+        }
+    }
 }

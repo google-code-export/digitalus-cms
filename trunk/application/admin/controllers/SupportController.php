@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -20,16 +20,16 @@
  * @version    $Id: SupportController.php Tue Dec 25 19:48:11 EST 2007 19:48:11 forrest lyman $
  */
 
-class Admin_SupportController extends Zend_Controller_Action 
+class Admin_SupportController extends Zend_Controller_Action
 {
-	public function init()
-	{
-		$this->view->adminSection = 'support';
-	}
-	
-	
-	public function indexAction()
-	{
+    public function init()
+    {
+        $this->view->adminSection = 'support';
+    }
 
-	}
+
+    public function indexAction()
+    {
+
+    }
 }
