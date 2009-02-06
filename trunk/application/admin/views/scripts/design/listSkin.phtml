@@ -1,12 +1,11 @@
 <fieldset class='skin'>
-	<legend><?php echo $this->getData('skin'); ?></legend>
-	<?php if(is_array($this->styles)){
-	    if(isset($this->selectedStyles[$this->skin])) {
-	        $values = $this->selectedStyles[$this->skin];
-	    }else{
-	        $values = null;
-	    }
-		echo $this->formMultiCheckbox($this->name . "[" . $this->skin . "]",$values ,null,$this->styles,false);
-	}?>
+    <legend><?php echo $this->getData('skin'); ?></legend>
+    <?php if (is_array($this->styles)) {
+        if (isset($this->selectedStyles[$this->skin])) {
+            $values = $this->selectedStyles[$this->skin];
+        } else {
+            $values = null;
+        }
+        echo $this->formMultiCheckbox($this->name . "[" . $this->skin . "]", $values , null, $this->styles, false);
+    }?>
 </fieldset>
-	

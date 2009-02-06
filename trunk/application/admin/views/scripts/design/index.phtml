@@ -1,16 +1,16 @@
-<?php $this->placeholder("formHeadline")->set($this->GetTranslation("Design"))?>
+<?php $this->placeholder('formHeadline')->set($this->GetTranslation('Design'))?>
 
 <form action="<?php echo $this->baseUrl;?>/admin/design/create" method="post">
 <fieldset>
     <legend><?php echo $this->GetTranslation('Create a new design');?></legend>
-    <?php 
-    	echo $this->FormRow(
-    		$this->GetTranslation('Design Name'), $this->FormText('name')
-   		);
-		echo $this->FormRow(
-			$this->GetTranslation('Design Notes'), $this->FormTextarea('notes', null, array('class' => 'med'))
-		);
-	echo $this->FormRow(
-		'&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Create Design')));
+    <?php
+        echo $this->FormRow(
+            $this->GetTranslation('Design Name'), $this->FormText('name')
+           );
+        echo $this->FormRow(
+            $this->GetTranslation('Design Notes'), $this->FormTextarea('notes', null, array('class' => 'med'))
+        );
+    echo $this->FormRow(
+        '&nbsp;', $this->FormSubmit('site',$this->GetTranslation('Create Design')));
     ?>
 </fieldset>
