@@ -2,28 +2,28 @@
 
 class DSF_Toolbox_Page {
 
-    static function getUrl(Zend_Db_Table_Row $page, $separator = '/')
+    public static function getUrl(Zend_Db_Table_Row $page, $separator = '/')
     {
         $labels[] = self::getLabel($page);
         $mdlPage = new Page();
         $parents = $mdlPage->getParents($page);
-        if(is_array($parents)) {
-            foreach ($parents as $parent){
+        if (is_array($parents)) {
+            foreach ($parents as $parent) {
                 $labels[] = self::getLabel($parent);
             }
         }
-        
-        if(is_array($labels)) {
+
+        if (is_array($labels)) {
             $labels = array_reverse($labels);
             return implode($separator, $labels);
         }
     }
-    
-    static function getLabel(Zend_Db_Table_Row $page)
+
+    public static function getLabel(Zend_Db_Table_Row $page)
     {
-        if(empty($page->label)) {
+        if (empty($page->label)) {
             return $page->name;
-        }else{
+        } else {
             return $page->label;
         }
     }

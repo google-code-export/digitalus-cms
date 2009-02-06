@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -26,15 +26,14 @@ class DSF_View_RegisterHelpers
     /**
      * indexes the helper library and adds the script paths to the subdirs
      */
-    static function register($view)
+    public static function register($view)
     {
-    	$helperDirs = DSF_Filesystem_Dir::getDirectories('./application/helpers');
-    	if(is_array($helperDirs))
-    	{
-    		foreach ($helperDirs as $dir) {
-    			$view->addHelperPath('./application/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
-    		}
-    	}
+        $helperDirs = DSF_Filesystem_Dir::getDirectories('./application/helpers');
+        if (is_array($helperDirs)) {
+            foreach ($helperDirs as $dir) {
+                $view->addHelperPath('./application/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
+            }
+        }
     }
 
 }

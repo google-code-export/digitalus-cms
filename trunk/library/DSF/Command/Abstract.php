@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -23,33 +23,33 @@
 abstract class DSF_Command_Abstract
 {
     protected $_log = array();
-    
+
     /**
-     * if run is not overloaded by the class that 
+     * if run is not overloaded by the class that
      * extends this it is seen as an error
      *
      */
-    function run()
+    public function run()
     {
         $this->log('Invalid command');
     }
-    
+
     /**
      * add the message to the log stack
      *
      * @param string $message
      */
-    function log($message)
+    public function log($message)
     {
         $this->_log[] = $message;
     }
-    
+
     /**
      * returns the current log stack
      *
      * @return array
      */
-    function getResponse()
+    public function getResponse()
     {
         return $this->_log;
     }

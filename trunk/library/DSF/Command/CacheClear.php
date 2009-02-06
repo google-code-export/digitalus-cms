@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -20,42 +20,42 @@
  * @version    $Id: ImportSitemap.php Tue Dec 25 19:57:20 EST 2007 19:57:20 forrest lyman $
  */
 
-class DSF_Command_CacheClear extends DSF_Command_Abstract 
+class DSF_Command_CacheClear extends DSF_Command_Abstract
 {
-    
+
     /**
      *
      */
-    function __construct()
+    public function __construct()
     {
     }
-    
+
     /**
      *clears the cache
      * if the param key is set it will only clear the specified one
      */
-    function run($params)
-    { 
-    	if(Zend_Registry::isRegistered('cache')) {
-	    	$cache = Zend_Registry::get('cache');
-	        if(isset($params['key'])){
-	            $cache->clean($params['key']);
-	            $this->log("Cache cleared Key = " . $params['key']);
-	        }else{
-	            $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
-	            $this->log("Cache cleared");
-	        }
-    	}else{
-    		$this->log("Error: Cache is not registered");
-    	}
-        
+    public function run($params)
+    {
+        if (Zend_Registry::isRegistered('cache')) {
+            $cache = Zend_Registry::get('cache');
+            if (isset($params['key'])) {
+                $cache->clean($params['key']);
+                $this->log("Cache cleared Key = " . $params['key']);
+            } else {
+                $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
+                $this->log("Cache cleared");
+            }
+        } else {
+            $this->log("Error: Cache is not registered");
+        }
+
     }
-    
+
     /**
      * returns details about the current command
      *
      */
-    function info()
+    public function info()
     {
         $this->log("The cache clear function will either clear a specified key or all cache files if a key is not specified.");
         $this->log("Params: key (string, optional)");

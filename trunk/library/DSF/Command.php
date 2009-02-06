@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -23,60 +23,57 @@
 class DSF_Command
 {
     const PATH_TO_COMMANDS = '../library/DSF/Command';
-    
+
     /**
      * load the command
      *
      * @param string $command
      * @return mixed
      */
-    static function run($command)
+    public static function run($command)
     {
         //get params if they exist
         $parts = explode('?', $command);
         $params = null;
-        
-        if(is_array($parts) && count($parts) == 2)
-        {
+
+        if (is_array($parts) && count($parts) == 2) {
             $command = $parts[0];
             $params = DSF_Toolbox_Array::arrayFromGet($parts[1]);
         }
-        
+
         $cmd = self::loadCommand($command);
-        if(is_object($cmd))
-        {
+        if (is_object($cmd)) {
             $cmd->run($params);
             return $cmd->getResponse();
-        }else{
+        } else {
             return $cmd;
         }
     }
-    
+
     /**
      * run the info method of the command
      *
      * @param string $command
      * @return string
      */
-    static function info($command)
+    public static function info($command)
     {
         $cmd = self::loadCommand($command);
-        if(is_object($cmd))
-        {
+        if (is_object($cmd)) {
             $cmd->info();
             return $cmd->getResponse();
-        }else{
+        } else {
             return $cmd;
         }
     }
-    
+
     /**
      * load the requested command
      *
      * @param string $command
      * @return mixed
      */
-    function loadCommand($command)
+    public function loadCommand($command)
     {
         $class = "DSF_Command_" . $command;
         try {
@@ -86,5 +83,5 @@ class DSF_Command
         }
         return new $class();
     }
-    
+
 }

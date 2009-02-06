@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -20,109 +20,110 @@
  * @version    $Id: Post.php Tue Dec 25 20:51:45 EST 2007 20:51:45 forrest lyman $
  */
 
-class DSF_Filter_Post 
+class DSF_Filter_Post
 {
-	/**
-	 * default method, strips tags
-	 *
-	 * @param string $key
-	 */
-	static function get($key)
-	{
-		$filter = new Zend_Filter_StripTags();
-		$post = self::toObject();
-		return trim($filter->filter($post->$key));
-		
-	}
-	
-	/**
-	 * set a post value
-	 *
-	 * @param string $key
-	 * @param string $value
-	 */
-	static function set($key, $value)
-	{
-		$_POST[$key] = $value;
-	}
-	
-	/**
-	 * returns the whole post array as an object
-	 *
-	 * @todo make this method handle array data
-	 * @return stdClass object
-	 */
-	static function toObject()
-	{
-		$post = new stdClass();
-		foreach ($_POST as $k => $v)
-		{
-			if(is_array($v)) {
-				$post->$k = $v;
-			}else{
-				$post->$k = stripslashes($v);
-			}
-		}
-		return $post;
-	}
-	
-	/**
-	 * test whether the key is set
-	 *
-	 * @param string $key
-	 * @return bool
-	 */
-	static function has($key){
-		if(isset($_POST[$key])){return true;}	
-	}
-	
-	/**
-	 * returns the value without any filters
-	 *
-	 * @param string $key
-	 * @return mixed
-	 */
-	static function raw($key)
-	{
-		return $_POST[$key];
-	}
-	
-	/**
-	 * filters the value as alpha
-	 *
-	 * @param string $key
-	 * @return string
-	 */
-	static function alpha($key)
-	{
-		$filter = new Zend_Filter_Alpha();
-		$post =self::toObject();
-		return trim($filter->filter($post->$key));
-	}
-	
-	/**
-	 * filters the value as an integer
-	 *
-	 * @param string $key
-	 * @return int
-	 */
-	static function int($key)
-	{
-		$post = self::toObject();
-		return intval($post->$key);
-	}
+    /**
+     * default method, strips tags
+     *
+     * @param string $key
+     */
+    public static function get($key)
+    {
+        $filter = new Zend_Filter_StripTags();
+        $post = self::toObject();
+        return trim($filter->filter($post->$key));
 
-	/**
-	 * strips and adds slashes. i strip them first because the html editor adds them as well
-	 *
-	 * @param string $key
-	 * @return string
-	 */
-	static function text($key)
+    }
+
+    /**
+     * set a post value
+     *
+     * @param string $key
+     * @param string $value
+     */
+    public static function set($key, $value)
+    {
+        $_POST[$key] = $value;
+    }
+
+    /**
+     * returns the whole post array as an object
+     *
+     * @todo make this method handle array data
+     * @return stdClass object
+     */
+    public static function toObject()
+    {
+        $post = new stdClass();
+        foreach ($_POST as $k => $v) {
+            if (is_array($v)) {
+                $post->$k = $v;
+            } else {
+                $post->$k = stripslashes($v);
+            }
+        }
+        return $post;
+    }
+
+    /**
+     * test whether the key is set
+     *
+     * @param string $key
+     * @return bool
+     */
+    public static function has($key) {
+        if (isset($_POST[$key])) {
+            return true;
+        }
+    }
+
+    /**
+     * returns the value without any filters
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public static function raw($key)
+    {
+        return $_POST[$key];
+    }
+
+    /**
+     * filters the value as alpha
+     *
+     * @param string $key
+     * @return string
+     */
+    public static function alpha($key)
+    {
+        $filter = new Zend_Filter_Alpha();
+        $post =self::toObject();
+        return trim($filter->filter($post->$key));
+    }
+
+    /**
+     * filters the value as an integer
+     *
+     * @param string $key
+     * @return int
+     */
+    public static function int($key)
+    {
+        $post = self::toObject();
+        return intval($post->$key);
+    }
+
+    /**
+     * strips and adds slashes. i strip them first because the html editor adds them as well
+     *
+     * @param string $key
+     * @return string
+     */
+    public static function text($key)
     {
         //you must strip slashes first, as the HTML editors add them
         //by doing this you are able to process both raw HTML and WYSIWYG HTML
-		$post = self::toObject();
+        $post = self::toObject();
         return trim(addslashes($post->$key));
     }
 
@@ -132,12 +133,12 @@ class DSF_Filter_Post
      * @param string $key
      * @return float
      */
-    static function float($key)
+    public static function float($key)
     {
-		$post = self::toObject();
-		if(is_float($post[$key])){
-        	return floatval($post->$key);
-		}
+        $post = self::toObject();
+        if (is_float($post[$key])) {
+            return floatval($post->$key);
+        }
     }
 
     /**
@@ -147,22 +148,22 @@ class DSF_Filter_Post
      * @param string $key
      * @return timestamp
      */
-    static function date($key)
+    public static function date($key)
     {
-		$post =self::toObject();
-		if($post[$key]){
-			$date = new Zend_Date($post->$key);
-			return $date->get(Zend_Date::TIMESTAMP);
-		}
+        $post =self::toObject();
+        if ($post[$key]) {
+            $date = new Zend_Date($post->$key);
+            return $date->get(Zend_Date::TIMESTAMP);
+        }
     }
-    
+
     /**
      * dumps the post variables
      *
      */
-    static function dump()
+    public static function dump()
     {
-	    Zend_Debug::dump($_POST);
+        Zend_Debug::dump($_POST);
     }
 
 }

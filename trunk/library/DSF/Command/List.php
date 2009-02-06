@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -20,32 +20,30 @@
  * @version    $Id: List.php Tue Dec 25 20:01:46 EST 2007 20:01:46 forrest lyman $
  */
 
-class DSF_Command_List extends DSF_Command_Abstract 
+class DSF_Command_List extends DSF_Command_Abstract
 {
-	/**
-	 * display all of the current commands
-	 *
-	 */
-    function run()
+    /**
+     * display all of the current commands
+     *
+     */
+    public function run()
     {
         $commands = DSF_Filesystem_File::getFilesByType(DSF_Command::PATH_TO_COMMANDS, 'php');
-        foreach ($commands as $command)
-        {
+        foreach ($commands as $command) {
             //clean up the list
-            if($command != 'Abstract.php' && $command != 'List.php')
-            {
+            if ($command != 'Abstract.php' && $command != 'List.php') {
                 $cleanCommand = DSF_Toolbox_Regex::stripFileExtension($command);
                 $link = "<a class='loadCommand' href='#' title='" . $cleanCommand . "'>" . $cleanCommand . "</a>";
                 $this->log($link);
             }
         }
     }
-    
+
     /**
      * returns info about the current command
      *
      */
-    function info()
+    public function info()
     {
         $this->log('The list command lists all of the available functions.  Double click a function to open it.');
     }

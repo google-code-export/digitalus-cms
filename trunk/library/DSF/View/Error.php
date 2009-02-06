@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -22,85 +22,85 @@
 
 class DSF_View_Error
 {
-	/**
-	 * the storage
-	 *
-	 * @var zend_session_namespace
-	 */
-    private $ns;
-    
+    /**
+     * the storage
+     *
+     * @var zend_session_namespace
+     */
+    private $_ns;
+
     /**
      * the errors stack
      *
      * @var array
      */
-    private $errors;
-    
+    private $_errors;
+
     /**
      * set up the session namespace and load the errors stack
      *
      */
-    function __construct()
+    public function __construct()
     {
-        $this->ns = new Zend_Session_Namespace('errors'); 
-        if(isset($this->ns->errors)){
-            $this->errors = $this->ns->errors;   
+        $this->_ns = new Zend_Session_Namespace('errors');
+        if (isset($this->_ns->errors)) {
+            $this->_errors = $this->_ns->errors;
         }
     }
-    
+
     /**
      * clear the errors stack
      *
      */
-    function clear()
+    public function clear()
     {
-        unset($this->errors);
-        $this->updateNs();
+        unset($this->_errors);
+        $this->_updateNs();
     }
-    
+
     /**
      * add an error to the stack
      *
      * @param string $error
      */
-    function add($error)
+    public function add($error)
     {
-        $this->errors[] = $error;
-        $this->updateNs();
+        $this->_errors[] = $error;
+        $this->_updateNs();
     }
-    
+
     /**
      * check to see if any errors are set
      *
      * @return bool
      */
-    function hasErrors()
+    public function hasErrors()
     {
-        if(count($this->errors) > 0){
+        if (count($this->_errors) > 0) {
             return true;
         }
     }
-    
+
     /**
      * get the errors stack
      *
      * @return string
      */
-    function get()
+    public function get()
     {
-        return $this->errors;
+        return $this->_errors;
     }
-    
+
     /**
      * update the storage
      *
      */
-    private function updateNs()
+    private function _updateNs()
     {
-        if(isset($this->errors)){
-            $this->ns->errors = $this->errors;
-        }else{
-            unset($this->ns->errors);
+        if (isset($this->_errors)) {
+            $this->_ns->errors = $this->_errors;
+        } else {
+            unset($this->_ns->errors);
         }
     }
 }

@@ -25,21 +25,21 @@ class DSF_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Abstract
     public $pathToViews;
     public $view;
     public $layout;
-    
+
     public $module;
     public $section; //this is the admin section
     public $controller;
     public $action;
-    
+
     public $sections = array(
         'index'         =>  'index',
         'site'          =>  'site',
         'user'          =>  'site',
         'page'          =>  'page',
-        'module'        =>  'module' 
+        'module'        =>  'module'
     );
     public $defaultSection = 'index';
-    
+
     /**
      * this function routes all requests that come in to the default module to the index controller / index action
      *
@@ -47,45 +47,44 @@ class DSF_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        if(!$request->isXmlHttpRequest()) {
-    	    //load the module, controller, and action for reference
-    	    $this->module = $request->getModuleName();
-    	    $this->controller = $request->getControllerName();
-    	    $this->action = $request->getActionName();
-    	    
-    	    //load the section
-    	    if(isset($this->sections[$this->controller])){
-    	        $this->section = $this->sections[$this->controller];
-    	    }else{
-    	        $this->section = $this->defaultSection;
-    	    }
-    
-    		if($this->isAdminPage($request))
-    		{
-    		    $this->view->isAdminPage = true;
-    		    //load config
-    		    $config = Zend_Registry::get('config');
-    		    
-    		    //setup layout
-    		    $options = array(
+        if (!$request->isXmlHttpRequest()) {
+            //load the module, controller, and action for reference
+            $this->module = $request->getModuleName();
+            $this->controller = $request->getControllerName();
+            $this->action = $request->getActionName();
+
+            //load the section
+            if (isset($this->sections[$this->controller])) {
+                $this->section = $this->sections[$this->controller];
+            } else {
+                $this->section = $this->defaultSection;
+            }
+
+            if ($this->_isAdminPage($request)) {
+                $this->view->isAdminPage = true;
+                //load config
+                $config = Zend_Registry::get('config');
+
+                //setup layout
+                $options = array(
                     'layout'     => $config->design->adminLayout,
                     'layoutPath' => $config->design->adminLayoutFolder,
                     'contentKey' => 'form',           // ignored when MVC not used
                 );
-    		    $this->layout = Zend_Layout::startMvc($options);
-    		    $this->view = $this->layout->getView();
-    		    
-    		    //load the common helpers
+                $this->layout = Zend_Layout::startMvc($options);
+                $this->view = $this->layout->getView();
+
+                //load the common helpers
                 DSF_View_RegisterHelpers::register($this->view);
                 $this->view->setScriptPath($config->filepath->adminViews);
-                
+
                 //load language files
-        
+
                 $translate = null;
-                foreach ($config->language->translations as $locale => $translation){
-                    if(is_object($translate)) {
-                       $translate->addTranslation($config->language->path . '/' . $translation . '.csv', $locale); 
-                    }else{
+                foreach ($config->language->translations as $locale => $translation) {
+                    if (is_object($translate)) {
+                       $translate->addTranslation($config->language->path . '/' . $translation . '.csv', $locale);
+                    } else {
                         $translate = new Zend_Translate('csv', $config->language->path . '/' . $translation . '.csv', $locale);
                     }
                 }
@@ -93,17 +92,17 @@ class DSF_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Abstract
                 $translate->setLocale($locale);
                 $translate->setCache(Zend_Registry::get('cache'));
                 $this->view->translate = $translate;
-                
+
                 //page links
                 $this->view->toolbarLinks = array();
-                
-    		}    
-        }	
+
+            }
+        }
     }
-    
-    private function isAdminPage($request) {
-		if($this->module != 'public' && $this->controller != 'public' && !$request->isXmlHttpRequest()){
-		    return true;
-		}
+
+    private function _isAdminPage($request) {
+        if ($this->module != 'public' && $this->controller != 'public' && !$request->isXmlHttpRequest()) {
+            return true;
+        }
     }
 }

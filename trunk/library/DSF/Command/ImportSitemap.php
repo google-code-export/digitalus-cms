@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * DSF CMS
@@ -20,89 +20,85 @@
  * @version    $Id: ImportSitemap.php Tue Dec 25 19:57:20 EST 2007 19:57:20 forrest lyman $
  */
 
-class DSF_Command_ImportSitemap extends DSF_Command_Abstract 
+class DSF_Command_ImportSitemap extends DSF_Command_Abstract
 {
-	/**
-	 * the filepath to the sitemap.xml file
-	 *
-	 */
+    /**
+     * the filepath to the sitemap.xml file
+     *
+     */
     const PATH_TO_SITEMAP = "./application/data/sitemap.xml";
-    
+
     /**
      * db adapter
      *
      * @var zend_db_table adapter
      */
     private $_db;
-    
+
     /**
      * the sitemap.xml file contents
      *
      * @var simpleXml object
      */
     private $_xml;
-    
+
     /**
      * load the db adapter
      *
      */
-    function __construct()
+    public function __construct()
     {
         $this->_db = Zend_Db_Table::getDefaultAdapter();
     }
-    
+
     /**
      * open the sitemap file
      * if successfull then initiate the import process
      *
      */
-    function run()
+    public function run()
     {
         $this->log('starting import process');
-        if($this->_xml = simplexml_load_file(self::PATH_TO_SITEMAP))
-        {
-           $this->load();
-        }else{
+        if ($this->_xml = simplexml_load_file(self::PATH_TO_SITEMAP)) {
+           $this->_load();
+        } else {
             $this->log("ERROR: error loading sitemap file");
         }
     }
-    
+
     /**
      * returns details about the current command
      *
      */
-    function info()
+    public function info()
     {
         $this->log("The import sitemap command will import an xml sitemap.  This file should be located in application/data/ and be named sitemap.xml.");
     }
-    
+
     /**
      * performs the sitemap import
      * you can optionaly pass a xml node (used for the recursive functionality)
-     * 
+     *
      * @param simpleXml object $node
      * @param int $parentId
      */
-    private function load($node = false, $parentId = 0)
+    private function _load($node = false, $parentId = 0)
     {
         $this->log('loading page nodes');
-        if(!$node)
-        {
+        if (!$node) {
             $node = $this->_xml;
         }
-        
-        foreach ($node->page as $page)
-        {            
+
+        foreach ($node->page as $page) {
             //insert the page
-            $pageId = $this->addPage((string)$page->name, $parentId);
-   
-            if($page->subPages)
-            {
-                $this->load($page->subPages, $pageId);
+            $pageId = $this->_addPage((string)$page->name, $parentId);
+
+            if ($page->subPages) {
+                $this->_load($page->subPages, $pageId);
             }
         }
     }
-    
+
     /**
      * inserts the new page
      * defaults to inserting it into the root
@@ -111,32 +107,29 @@ class DSF_Command_ImportSitemap extends DSF_Command_Abstract
      * @param unknown_type $parentId
      * @return unknown
      */
-    private function addPage($page, $parentId = 0)
+    private function _addPage($page, $parentId = 0)
     {
-        if(!$parentId > 0)
-        {
+        if (!$parentId > 0) {
             $parentId = 0;
         }
         $sql = "SELECT id FROM content WHERE title = '{$page}' AND content_type = 'page' AND parent_id = " . $parentId;
         $exists = $this->_db->fetchRow($sql);
 
-        if($exists)
-        {
+        if ($exists) {
             //the page already exists
             $this->log("ignoring " . $page . ', page already exists in this location');
             return $exists->id;
-        }else{
+        } else {
             $data = array(
                 'content_type' => 'page',
                 'title' =>  $page,
                 'label' =>  $page,
                 'parent_id' => $parentId
             );
-            if($this->_db->insert('content', $data))
-            {
+            if ($this->_db->insert('content', $data)) {
                 $this->log("inserting " . $page);
                 return $this->_db->lastInsertId();
-            }else{
+            } else {
                 $this->log("ERROR: an error occured inserting " . $page);
                 return $parentId;
             }
