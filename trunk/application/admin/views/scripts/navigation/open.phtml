@@ -1,61 +1,61 @@
-<?php $this->placeholder('formHeadline')->set('Update Menu')?>
+<?php $this->placeholder('formHeadline')->set($this->GetTranslation('Update Menu'))?>
 
 <?php
-$iconSource = $this->baseUrl . "/images/icons/";
+$iconSource = $this->baseUrl . '/images/icons/';
 ?>
 
 <div class="formBox">
 <script type="text/javascript">
 $(document).ready(
-	function () {
-		<?php echo $this->JquerySortable('ul.sortable');?>
-		$(".visibility").click(function(){
-		    var rowId = $(this).attr('id');
-		    var val = $("#" + rowId + "_val").val();
-		    if(val == 1){
-		        $(this).attr('src', "<?php echo $iconSource;?>lightbulb_off.png");
-		        $("#" + rowId + "_val").val(0);
-		    }else{
-		        $(this).attr('src', "<?php echo $iconSource;?>lightbulb.png");
-		        $("#" + rowId + "_val").val(1);
-		    }
-		});
-	}
+    function () {
+        <?php echo $this->JquerySortable('ul.sortable');?>
+        $(".visibility").click(function() {
+            var rowId = $(this).attr('id');
+            var val = $("#" + rowId + "_val").val();
+            if (val == 1) {
+                $(this).attr('src', "<?php echo $iconSource;?>lightbulb_off.png");
+                $("#" + rowId + "_val").val(0);
+            } else {
+                $(this).attr('src', "<?php echo $iconSource;?>lightbulb.png");
+                $("#" + rowId + "_val").val(1);
+            }
+        });
+    }
 );
 </script>
 
-<form action='<?php echo $this->baseUrl; ?>/admin/navigation/edit' method="POST">
-<?php echo $this->formHidden('menuId', $this->menuId);?>
-	<ul class="sortable">
-	<?php 
-	$m = new Menu();
-	foreach ($this->menu as $item){
-		$row = $this->formHidden('id[]', $item->id);
-		$row .= "<span class='default'>( " . $item->name . ")</span> ";
-		$row .= $this->formText('label[]',$item->label) . ' ';
-		
-		//visibility
-		if($item->show_on_menu == 1){
-		    $eyeSource = "lightbulb.png";
-		}else{
-		    $eyeSource = "lightbulb_off.png";
-		}
-		
-		$row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . "_val"));
-		$row .= " <img src='{$iconSource}{$eyeSource}' title='click to toggle visibility' class='visibility' id='visibility_{$item->id}' />";
-		$row .= " <a href='" . $this->baseUrl . "admin/page/open/id/{$item->id}' class='page rightLink'></a>";
-		if($m->hasMenu($item->id))
-		{
-			$row .= $this->link(null, $this->baseUrl . '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
-		}
-		$rows[] = $row;
-		echo "<li class='sortableItem'><a href='#' class='handle'></a>" . $row . "</li>";
-		unset($row);
-	} 
-	?>
-	</ul>
-	<p><?php echo $this->formSubmit('save','Save Changes');?></p>
+<form action='<?php echo $this->baseUrl; ?>/admin/navigation/edit' method="post">
+    <fieldset>
+    <?php echo $this->formHidden('menuId', $this->menuId);?>
+        <ul class="sortable">
+        <?php
+        $m = new Menu();
+        foreach ($this->menu as $item) {
+            $row = $this->formHidden('id[]', $item->id);
+            $row .= '<span class="default">(' . $item->name . ')</span> ';
+            $row .= $this->formText('label[]', $item->label) . ' ';
+
+            //visibility
+            if ($item->show_on_menu == 1) {
+                $eyeSource = 'lightbulb.png';
+            } else {
+                $eyeSource = 'lightbulb_off.png';
+            }
+
+            $row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . '_val'));
+            $row .= " <img src='{$iconSource}{$eyeSource}' title='click to toggle visibility' class='visibility' id='visibility_{$item->id}' />";
+            $row .= " <a href='" . $this->baseUrl . "admin/page/open/id/{$item->id}' class='page rightLink'></a>";
+            if ($m->hasMenu($item->id))
+            {
+                $row .= $this->link(null, $this->baseUrl . '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
+            }
+            $rows[] = $row;
+            echo '<li class="sortableItem"><a href="#" class="handle"></a>' . $row . '</li>';
+            unset($row);
+        }
+        ?>
+        </ul>
+        <p><?php echo $this->formSubmit('save', 'Save Changes');?></p>
+    </fieldset>
 </form>
 </div>
-
-
