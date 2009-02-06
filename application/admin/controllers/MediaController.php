@@ -22,14 +22,14 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->_fullPathToMedia = $this->getFrontController()->getBaseUrl() . $this->_pathToMedia;
         $this->view->pathToMedia = $this->_pathToMedia;
         $this->view->breadcrumbs = array(
-           'Media' =>   $this->getFrontController()->getBaseUrl() . '/admin/media'
+           $this->view->GetTranslation('Media') => $this->getFrontController()->getBaseUrl() . '/admin/media'
         );
     }
     /**
      * The default action - show the home page
      */
     public function indexAction() {
-        $this->view->path = "";
+        $this->view->path = '';
     }
 
     public function openFolderAction()
@@ -40,7 +40,7 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->view->path = $folder;
         $folder = DSF_Toolbox_String::stripHyphens($folder);
 
-        $folder = DSF_Toolbox_String::stripLeading("_", $folder);
+        $folder = DSF_Toolbox_String::stripLeading('_', $folder);
         $folderArray = explode('_', $folder);
 
         if (is_array($folderArray)) {
@@ -61,12 +61,12 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->view->folders = DSF_Filesystem_Dir::getDirectories($pathToFolder);
         $this->view->files = DSF_Filesystem_File::getFilesByType($pathToFolder,false,false,true);
 
-        $this->view->breadcrumbs["Open Folder: " . $pathToFolder] = $this->getFrontController()->getBaseUrl() . "/admin/media/open-folder/folder/" . $folder;
+        $this->view->breadcrumbs[$this->view->GetTranslation('Open Folder') . ': ' . $pathToFolder] = $this->getFrontController()->getBaseUrl() . '/admin/media/open-folder/folder/' . $folder;
         $this->view->toolbarLinks = array();
 
         $tmpPath = DSF_Toolbox_String::addUnderscores($folder);
         $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_media_open-folder_folder_' . $tmpPath;
-        $this->view->toolbarLinks[$this->view->GetTranslation("Delete")] = $this->getFrontController()->getBaseUrl() . '/admin/media/delete-folder/folder/' . $folder;
+        $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = $this->getFrontController()->getBaseUrl() . '/admin/media/delete-folder/folder/' . $folder;
 
     }
 
@@ -77,7 +77,7 @@ class Admin_MediaController extends Zend_Controller_Action {
 
         //dont allow access outside the media folder
         if (strpos($baseFolder, './') || strpos($newFolder, './')) {
-            throw new Zend_Exception("Illegal file access attempt. Operation cancelled!");
+            throw new Zend_Exception('Illegal file access attempt. Operation cancelled!');
         }
 
         $forwardPath = $baseFolder;
@@ -122,7 +122,7 @@ class Admin_MediaController extends Zend_Controller_Action {
 
     public function deleteFolderAction()
     {
-        $folder = $this->_request->getParam("folder");
+        $folder = $this->_request->getParam('folder');
         DSF_Media::deleteFolder($folder);
         $folderPath = DSF_Toolbox_String::stripUnderscores($folder);
         $parent = DSF_Toolbox_String::getParentFromPath($folderPath);
@@ -148,8 +148,8 @@ class Admin_MediaController extends Zend_Controller_Action {
             DSF_Filter_Post::get('filepath'),
             DSF_Filter_Post::get('folder_name')
         );
-        $path = str_replace('./','',$path);
-        $path = str_replace('../','',$path);
+        $path = str_replace('./', '',$path);
+        $path = str_replace('../', '',$path);
 
         $folder = DSF_Toolbox_String::addUnderscores($path);
 

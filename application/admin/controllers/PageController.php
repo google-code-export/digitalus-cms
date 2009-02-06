@@ -29,7 +29,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           'Pages' =>   $this->getFrontController()->getBaseUrl() . '/admin/page'
+           $this->view->GetTranslation('Pages') => $this->getFrontController()->getBaseUrl() . '/admin/page'
         );
     }
 
@@ -53,12 +53,12 @@ class Admin_PageController extends Zend_Controller_Action
         $newPage = $page->createPage($name, $parentId, $contentType);
 
         if ($newPage) {
-            $url = "admin/page/edit/id/" . $newPage->id;
+            $url = 'admin/page/edit/id/' . $newPage->id;
         } else {
-            $url = "admin/page";
+            $url = 'admin/page';
             $e = new DSF_View_Error();
             $e->add(
-                $this->view->GetTranslation("Sorry, there was an error adding your page")
+                $this->view->GetTranslation('Sorry, there was an error adding your page')
             );
         }
         $this->_redirect($url);
@@ -86,10 +86,10 @@ class Admin_PageController extends Zend_Controller_Action
         $form = $this->getContentForm($pageTemplate);
 
         if (!is_object($currentPage)) {
-            $url = "admin/page";
+            $url = 'admin/page';
             $e = new DSF_View_Error();
             $e->add(
-                $this->view->GetTranslation("Sorry, there was an error opening your page")
+                $this->view->GetTranslation('Sorry, there was an error opening your page')
             );
             $this->_redirect($url);
         }
@@ -139,10 +139,10 @@ class Admin_PageController extends Zend_Controller_Action
 
         $this->view->design = $page->getDesign($pageId);
 
-        $this->view->breadcrumbs["Open: " . $currentPage->page->name] = $this->getFrontController()->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
+        $this->view->breadcrumbs[$this->view->GetTranslation('Open') . ': ' . $currentPage->page->name] = $this->getFrontController()->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
         $this->view->toolbarLinks = array();
         $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_page_edit_id_' . $pageId;
-        $this->view->toolbarLinks[$this->view->GetTranslation("Delete")] = $this->getFrontController()->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
+        $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = $this->getFrontController()->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
 
     }
 
@@ -204,7 +204,7 @@ class Admin_PageController extends Zend_Controller_Action
         $pageId = DSF_Filter_Post::int('page_id');
         foreach ($_POST as $k => $v) {
             if (substr($k, 0, 5) == 'file_' && $v == 1) {
-                $relatedFiles[] = str_replace('file_','',$k);
+                $relatedFiles[] = str_replace('file_', '',$k);
             }
         }
         if (is_array($relatedFiles)) {
@@ -230,7 +230,7 @@ class Admin_PageController extends Zend_Controller_Action
             $page = new Page();
             $page->deletePageById($id);
         }
-        $this->_redirect("admin/page");
+        $this->_redirect('admin/page');
     }
 
 // page interface builder
@@ -262,35 +262,35 @@ class Admin_PageController extends Zend_Controller_Action
         $form->setAction($this->getFrontController()->getBaseUrl() . self::META_ACTION )
              ->setMethod('post');
 
-        $pageId = $form->createElement('hidden','page_id');
+        $pageId = $form->createElement('hidden', 'page_id');
         $pageId->addFilter('int');
 
-        $pageTitle = $form->createElement('text','page_title');
-        $pageTitle->setLabel($this->view->GetTranslation("Page Title") . ':')
+        $pageTitle = $form->createElement('text', 'page_title');
+        $pageTitle->setLabel($this->view->GetTranslation('Page Title') . ':')
                   ->addFilter('stripTags')
-                  ->setAttrib('class',"med");
+                  ->setAttrib('class', 'med');
 
-        $filename = $form->createElement('text','filename');
-        $filename->setLabel($this->view->GetTranslation("Filename") . ':')
+        $filename = $form->createElement('text', 'filename');
+        $filename->setLabel($this->view->GetTranslation('Filename') . ':')
                  ->addFilter('stripTags')
-                 ->setAttrib('class',"med");
+                 ->setAttrib('class', 'med');
 
-        $metaDescription = $form->createElement('textarea','meta_description');
-        $metaDescription->setLabel($this->view->GetTranslation("Meta Description") . ':')
+        $metaDescription = $form->createElement('textarea', 'meta_description');
+        $metaDescription->setLabel($this->view->GetTranslation('Meta Description') . ':')
                         ->addFilter('stripTags')
-                        ->setAttrib('class',"med_short");
+                        ->setAttrib('class', 'med_short');
 
 
-        $metaKeywords = $form->createElement('textarea','keywords');
-        $metaKeywords->setLabel($this->view->GetTranslation("Meta Keywords") . ':')
+        $metaKeywords = $form->createElement('textarea', 'keywords');
+        $metaKeywords->setLabel($this->view->GetTranslation('Meta Keywords') . ':')
                      ->addFilter('stripTags')
-                     ->setAttrib('class',"med_short");
+                     ->setAttrib('class', 'med_short');
 
 
-        $searchTags = $form->createElement('textarea','search_tags');
-        $searchTags->setLabel($this->view->GetTranslation("Search Tags") . ':')
+        $searchTags = $form->createElement('textarea', 'search_tags');
+        $searchTags->setLabel($this->view->GetTranslation('Search Tags') . ':')
                    ->addFilter('stripTags')
-                   ->setAttrib('class',"med_short");
+                   ->setAttrib('class', 'med_short');
 
         // Add elements to form:
         $form->addElement($pageTitle)
@@ -298,7 +298,7 @@ class Admin_PageController extends Zend_Controller_Action
              ->addElement($metaDescription)
              ->addElement($metaKeywords)
              ->addElement($searchTags)
-             ->addElement('submit', 'update', array('label' => $this->view->GetTranslation("Update Meta Data")))
+             ->addElement('submit', 'update', array('label' => $this->view->GetTranslation('Update Meta Data')))
              ->addElement($pageId);
 
         //set data

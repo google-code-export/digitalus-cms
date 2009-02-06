@@ -21,10 +21,9 @@ class Admin_Util extends Zend_Controller_Action {
             $data->post = $_POST;
             $this->view->data = $data;
         } else {
-            throw new Zend_Exception("Invalid placeholder passed");
+            throw new Zend_Exception('Invalid placeholder passed');
         }
     }
 
 }
 ?>
-

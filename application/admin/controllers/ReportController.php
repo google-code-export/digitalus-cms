@@ -4,7 +4,7 @@ class Admin_ReportController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Site Settings') =>   $this->getFrontController()->getBaseUrl() . '/admin/site'
+           $this->view->GetTranslation('Site Settings') => $this->getFrontController()->getBaseUrl() . '/admin/site'
         );
     }
 

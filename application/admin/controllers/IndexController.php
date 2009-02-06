@@ -26,7 +26,7 @@ class Admin_IndexController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           'Home' =>   $this->getFrontController()->getBaseUrl() . '/admin'
+           $this->view->GetTranslation('Home') => $this->getFrontController()->getBaseUrl() . '/admin'
         );
     }
 
