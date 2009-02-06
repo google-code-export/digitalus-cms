@@ -1,28 +1,28 @@
-<?php 
-$this->placeholder("formHeadline")->set($this->GetTranslation("Create a Page"));
+<?php
+$this->placeholder('formHeadline')->set($this->GetTranslation('Create a Page'));
 ?>
 <fieldset>
-	<legend><?php echo $this->GetTranslation('Create Page');?></legend>
-	<form action='<?php echo $this->baseUrl;?>/admin/page/new' method="POST">
-	<p><?php echo $this->GetTranslation('To create a new page...');?></p>
-	<h3><?php echo $this->GetTranslation("Step 1:Select the parent section");?></h3>
-	<?php 
-	echo $this->FormRow(
-		$this->GetTranslation('Parent Page'), 
-		$this->SelectParentPage('parent_id', 
-		$this->createPageOptions->parentId) . 	$this->formButton("step1button",$this->GetTranslation("Next >>"), array('class' => 'inlineButton')));
-	?>
-	<div id="step2"></div>
-	<div id="step3"></div>
-	</form>
+    <legend><?php echo $this->GetTranslation('Create Page');?></legend>
+    <form action='<?php echo $this->baseUrl;?>/admin/page/new' method="post">
+    <p><?php echo $this->GetTranslation('To create a new page...');?></p>
+    <h3><?php echo $this->GetTranslation('Step 1: Select the parent section');?></h3>
+    <?php
+    echo $this->FormRow(
+        $this->GetTranslation('Parent Page'),
+        $this->SelectParentPage('parent_id',
+        $this->createPageOptions->parentId) . $this->formButton('step1button', $this->GetTranslation('Next >>'), array('class' => 'inlineButton')));
+    ?>
+    <div id="step2"></div>
+    <div id="step3"></div>
+    </form>
 </fieldset>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#step1button").click(function(){
-		var parentId = $("#parent_id").val();
-		$("#step2").load('<?php echo $this->baseUrl;?>/admin/page/select-content-template/parent_id/' + parentId);
-		$("#step3").html('');
-		return false;
-	});  
+    $("#step1button").click(function() {
+        var parentId = $("#parent_id").val();
+        $("#step2").load('<?php echo $this->baseUrl;?>/admin/page/select-content-template/parent_id/' + parentId);
+        $("#step3").html('');
+        return false;
+    });
 });
 </script>

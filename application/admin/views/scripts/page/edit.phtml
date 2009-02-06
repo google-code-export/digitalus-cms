@@ -1,5 +1,5 @@
-<?php 
-$this->placeholder("formHeadline")->set($this->GetTranslation("Update Page"));
+<?php
+$this->placeholder('formHeadline')->set($this->GetTranslation('Update Page'));
 
 $this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/jquery.markitup.js');
 $this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/sets/default/set.js');
@@ -14,45 +14,45 @@ $this->placeholder('jquery')->captureStart();
 ?>
 $(".wiki").markItUp(myWikiSettings);
 $(".html").markItUp(myHtmlSettings);
-<?php $this->placeholder('jquery')->captureEnd();?>	                 
+<?php $this->placeholder('jquery')->captureEnd();?>
 
 <div id="content">
 <fieldset>
-<legend><?php echo $this->GetTranslation("Edit Content");?></legend>
-<?php echo $this->render('page/edit/content.phtml');?>
+    <legend><?php echo $this->GetTranslation('Edit Content');?></legend>
+    <?php echo $this->render('page/edit/content.phtml');?>
 </fieldset>
 
 </div>
 
 <fieldset id="meta">
-	<legend><?php echo $this->GetTranslation("Edit Meta Data");?></legend>
-	<?php echo $this->render('page/edit/meta.phtml');?>
+    <legend><?php echo $this->GetTranslation('Edit Meta Data');?></legend>
+    <?php echo $this->render('page/edit/meta.phtml');?>
 </fieldset>
 
 <fieldset id="properties">
-	<legend><?php echo $this->GetTranslation("Edit Page Properties");?></legend>
-	<?php echo $this->render('page/edit/properties.phtml');?>
+    <legend><?php echo $this->GetTranslation('Edit Page Properties');?></legend>
+    <?php echo $this->render('page/edit/properties.phtml');?>
 </fieldset>
 
-<!-- 
+<!--
 this is not going to make it in the beta version
 <fieldset id="relatedContent">
-	<legend><?php echo $this->GetTranslation("Related Content");?></legend>
-	<?php echo $this->render('page/edit/relatedContent.phtml');?>
+    <legend><?php echo $this->GetTranslation('Related Content');?></legend>
+    <?php echo $this->render('page/edit/relatedContent.phtml');?>
 </fieldset>
 
 <fieldset id="attachments">
-	<legend><?php echo $this->GetTranslation("Attachments");?></legend>
-	<?php echo $this->render('page/edit/attachments.phtml');?>
+    <legend><?php echo $this->GetTranslation('Attachments');?></legend>
+    <?php echo $this->render('page/edit/attachments.phtml');?>
 </fieldset>
  -->
 
 <fieldset id="design">
-	<legend><?php echo $this->GetTranslation("Page Design");?></legend>
-	<?php echo $this->render('page/edit/design.phtml');?>
+    <legend><?php echo $this->GetTranslation('Page Design');?></legend>
+    <?php echo $this->render('page/edit/design.phtml');?>
 </fieldset>
 
 <fieldset id="move">
-	<legend><?php echo $this->GetTranslation("Move Page");?></legend>
-	<?php echo $this->render('page/edit/move.phtml');?>
+    <legend><?php echo $this->GetTranslation('Move Page');?></legend>
+    <?php echo $this->render('page/edit/move.phtml');?>
 </fieldset>
