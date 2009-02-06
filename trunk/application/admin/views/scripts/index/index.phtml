@@ -2,51 +2,49 @@
 $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
 ?>
 
-<fieldset class="formColumn">
-    <legend><?php echo $this->GetTranslation('My Account');?></legend>
-    <form action="<?php echo $this->baseUrl;?>/admin/user/update-my-account" method="POST">
-	<?php
-	    $u = new User();
-		$user = $u->getCurrentUser();
-	    echo $this->formHidden('id',$user->id);
-	    echo $this->FormRow($this->GetTranslation('First Name'), $this->formText('first_name' , $this->identity->first_name));
-	    echo $this->FormRow($this->GetTranslation('Last Name'), $this->formText('last_name', $this->identity->last_name));
-	    echo $this->FormRow($this->GetTranslation('Email'), $this->formText('email', $this->identity->email));
-	    echo $this->FormRow($this->formCheckbox('update_password'), $this->GetTranslation('Update password?'));
-	    echo $this->FormRow($this->GetTranslation('Password'), $this->formPassword('password'));
-	    echo $this->FormRow($this->GetTranslation('Confirm'), $this->formPassword('confirmation'));
-	    echo $this->formSubmit('submit',$this->GetTranslation('Update My Account'));
-	?>    
-	</form>
+<form action="<?php echo $this->baseUrl;?>/admin/user/update-my-account" method="post">
+    <fieldset class="formColumn">
+        <legend><?php echo $this->GetTranslation('My Account');?></legend>
+        <?php
+            $u = new User();
+            $user = $u->getCurrentUser();
+            echo $this->formHidden('id',$user->id);
+            echo $this->FormRow($this->GetTranslation('First Name'), $this->formText('first_name' , $this->identity->first_name));
+            echo $this->FormRow($this->GetTranslation('Last Name'), $this->formText('last_name', $this->identity->last_name));
+            echo $this->FormRow($this->GetTranslation('Email'), $this->formText('email', $this->identity->email));
+            echo $this->FormRow($this->formCheckbox('update_password'), $this->GetTranslation('Update password?'));
+            echo $this->FormRow($this->GetTranslation('Password'), $this->formPassword('password'));
+            echo $this->FormRow($this->GetTranslation('Confirm'), $this->formPassword('confirmation'));
+            echo $this->formSubmit('submit',$this->GetTranslation('Update My Account'));
+        ?>
+    </fieldset>
+</form>
 
-</fieldset>
 
 <fieldset class="formColumn">
     <legend><?php echo $this->GetTranslation('My Bookmarks');?></legend>
-    <?php if($this->bookmarks){
+    <?php if ($this->bookmarks) {
         ?>
     <ul>
-    <?php foreach ($this->bookmarks as $bookmark){?>
-    	<li><?php 
-    	    echo $this->link(null, $this->baseUrl . '/admin/index/delete-bookmark/id/' . $bookmark->id, 'link_delete.png', 'clear');
-    	    echo $this->link($bookmark->node, $this->baseUrl . '/' . DSF_Toolbox_String::stripUnderscores($bookmark->content));
-	    ?></li>
+    <?php foreach ($this->bookmarks as $bookmark) {?>
+        <li><?php
+            echo $this->link(null, $this->baseUrl . '/admin/index/delete-bookmark/id/' . $bookmark->id, 'link_delete.png', 'clear');
+            echo $this->link($bookmark->node, $this->baseUrl . '/' . DSF_Toolbox_String::stripUnderscores($bookmark->content));
+        ?></li>
     <?php } ?>
     </ul>
-    <?php }else{
+    <?php } else {
             echo $this->GetTranslation('You do not have any bookmarks.');
     } ?>
 </fieldset>
 
-<fieldset class="clearBoth">
-    <legend><?php echo $this->GetTranslation('My Writeboard');?></legend>
-    <p><?php echo $this->GetTranslation('The writeboard is a personal spot for you to keep notes about your site.');?></p>
-    <form action="<?php echo $this->baseUrl?>/admin/index/notes" method="POST" id="notes">
-        <?php 
-            echo $this->formTextarea('content', $this->notes->content);
-            echo $this->formSubmit('submit',$this->GetTranslation('Save My Writeboard'));
-        ?>
-    </form>    
-</fieldset>
-
-
+<form action="<?php echo $this->baseUrl?>/admin/index/notes" method="post" id="notes">
+    <fieldset class="clearBoth">
+        <legend><?php echo $this->GetTranslation('My Writeboard');?></legend>
+        <p><?php echo $this->GetTranslation('The writeboard is a personal spot for you to keep notes about your site.');?></p>
+            <?php
+                echo $this->formTextarea('content', $this->notes->content);
+                echo $this->formSubmit('submit',$this->GetTranslation('Save My Writeboard'));
+            ?>
+    </fieldset>
+</form>
