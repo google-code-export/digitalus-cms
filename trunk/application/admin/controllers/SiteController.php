@@ -25,7 +25,7 @@ class Admin_SiteController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Site Settings') =>   $this->getFrontController()->getBaseUrl() . '/admin/site'
+           $this->view->GetTranslation('Site Settings') => $this->getFrontController()->getBaseUrl() . '/admin/site'
         );
     }
 
@@ -71,7 +71,7 @@ class Admin_SiteController extends Zend_Controller_Action
         //you must validate that the session ids match
         if ($this->_request->isPost() && !empty($previousId)) {
             $this->view->commandExecuted = true;
-            $this->view->command = "Command: " . DSF_Filter_Post::get('command');
+            $this->view->command = 'Command: ' . DSF_Filter_Post::get('command');
             $this->view->date = time();
 
             //execute command
@@ -87,7 +87,7 @@ class Admin_SiteController extends Zend_Controller_Action
                     $results = array('ERROR: invalid request');
                 }
             } else {
-                $results[] = "ERROR: invalid session";
+                $results[] = 'ERROR: invalid session';
             }
 
             $this->view->results = $results;

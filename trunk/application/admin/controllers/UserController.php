@@ -26,7 +26,7 @@ class Admin_UserController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Site Settings') =>   $this->getFrontController()->getBaseUrl() . '/admin/site'
+           $this->view->GetTranslation('Site Settings') => $this->getFrontController()->getBaseUrl() . '/admin/site'
         );
     }
 
@@ -45,15 +45,15 @@ class Admin_UserController extends Zend_Controller_Action
     public function openAction()
     {
 
-       $id = $this->_request->getParam('id', 0);
-       if ($id > 0) {
-           $u = new User();
-           $row = $u->find($id)->current();
-           $this->view->user = $row;
-           $this->view->userPermissions = $u->getAclResources($row);
-       }
+        $id = $this->_request->getParam('id', 0);
+        if ($id > 0) {
+            $u = new User();
+            $row = $u->find($id)->current();
+            $this->view->user = $row;
+            $this->view->userPermissions = $u->getAclResources($row);
+        }
 
-        $breadcrumbLabel = $this->view->GetTranslation('Open User') . ": " . $this->view->user->first_name . ' ' . $this->view->user->last_name;
+        $breadcrumbLabel = $this->view->GetTranslation('Open User') . ': ' . $this->view->user->first_name . ' ' . $this->view->user->last_name;
         $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/user/open/id/' . $id;
         $this->view->toolbarLinks = array();
         $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = $this->getFrontController()->getBaseUrl() . '/admin/user/delete/id/' . $id;
@@ -146,8 +146,8 @@ class Admin_UserController extends Zend_Controller_Action
     {
        $id = $this->_request->getParam('id');
        $u = new User();
-       $u->delete("id = " . $id);
-       $url = "admin/site";
+       $u->delete('id = ' . $id);
+       $url = 'admin/site';
        $this->_redirect($url);
     }
 

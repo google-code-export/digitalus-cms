@@ -27,7 +27,7 @@ class Admin_NavigationController extends Zend_Controller_Action
         //the selected admin menu item
         $this->view->adminSection = 'navigation';
         $this->view->breadcrumbs = array(
-           'Navigation' =>   $this->getFrontController()->getBaseUrl() . '/admin/navigation'
+           $this->view->GetTranslation('Navigation') => $this->getFrontController()->getBaseUrl() . '/admin/navigation'
         );
 
     }
@@ -55,13 +55,12 @@ class Admin_NavigationController extends Zend_Controller_Action
         if ($menuId > 0) {
             $label = $mdlMenu->getLabel($menuId);
         } else {
-            $label = "Root";
+            $label = 'Root';
         }
 
         $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_navigation_open_id_' . $menuId;
 
-
-        $this->view->breadcrumbs['Open Menu: ' . $label] =   $this->getFrontController()->getBaseUrl() . '/admin/navigation/open/id/' . $menuId;
+        $this->view->breadcrumbs[$this->view->GetTranslation('Open Menu') . ': ' . $label] =   $this->getFrontController()->getBaseUrl() . '/admin/navigation/open/id/' . $menuId;
 
         //fetch the menu
         $this->view->menuId = $menuId;
@@ -81,7 +80,7 @@ class Admin_NavigationController extends Zend_Controller_Action
             $visibility = DSF_Filter_Post::raw('show_on_menu');
             $m->updateMenuItems($ids, $labels, $visibility);
             $menuId = DSF_Filter_Post::get('menuId');
-            $url = "admin/navigation/open/id/" . $menuId;
+            $url = 'admin/navigation/open/id/' . $menuId;
             $this->_redirect($url);
         }
     }

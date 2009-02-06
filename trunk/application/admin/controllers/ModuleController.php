@@ -25,7 +25,7 @@ class Admin_ModuleController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           'Modules' => $this->getFrontController()->getBaseUrl() . '/admin/module'
+           $this->view->GetTranslation('Modules') => $this->getFrontController()->getBaseUrl() . '/admin/module'
         );
     }
 
@@ -73,7 +73,7 @@ class Admin_ModuleController extends Zend_Controller_Action
 
                 $dir = './application/modules/' . $name . '/views/scripts';
                 $helpers = './application/modules/' . $name . '/views/helpers';
-                $path = "/public/" . $action . ".form.phtml";
+                $path = '/public/' . $action . '.form.phtml';
                 $fullPath = $dir . $path;
 
                 if (file_exists($fullPath)) {
