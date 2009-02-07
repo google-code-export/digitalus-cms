@@ -1,25 +1,25 @@
-<?php 
-echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>';
-echo $this->doctype() 
+<?php
+echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' . PHP_EOL;
+echo $this->doctype() . PHP_EOL;
 ?>
-<html>
-	<head>
-	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	    <?php     
-	        echo $this->placeholder('google_verify');	
-			echo $this->headTitle();
-			echo $this->headScript();	    	
-			echo $this->headLink();
-	    ?>
-	    <style type="text/css">
-			<?php echo $this->placeholder('inlineStyles'); ?>
-	    </style>
-	</head>
-	
-	<body>
-		<?php 
-		    echo $this->layout()->page;
-		    echo $this->placeholder('google_tracking');
-	    ?>
-	</body>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->placeholder('charset');?>" />
+        <?php
+            echo $this->placeholder('google_verify');
+            echo $this->headTitle();
+            echo $this->headScript();
+            echo $this->headLink();
+        ?>
+        <style type="text/css">
+            <?php echo $this->placeholder('inlineStyles'); ?>
+        </style>
+    </head>
+
+    <body>
+        <?php
+            echo $this->layout()->page;
+            echo $this->placeholder('google_tracking');
+        ?>
+    </body>
 </html>
