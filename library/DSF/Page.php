@@ -65,7 +65,7 @@ class DSF_Page
 
     public function getParents()
     {
-        return $this->parents;
+        return $this->_parents;
     }
 
     public function setParents($parents)
