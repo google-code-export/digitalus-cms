@@ -26,6 +26,7 @@ class DSF_View_Helper_Navigation_RenderMenu
             foreach ($menu->items as $item) {
                 $data = new stdClass();
                 $data->item = $item;
+                $data->menuId = $id;
 
                 //check for a submenu
                 if (($levels > $currentLevel) && ($item->hasSubmenu)) {
