@@ -12,6 +12,7 @@ class DSF_Menu_Item {
         $this->_innerItem = $item;
         $this->label = DSF_Toolbox_Page::getLabel($item);
         $this->link = DSF_Toolbox_Page::getUrl($item);
+        $this->id = $this->_innerItem->id;
 
         if ($item->show_on_menu) {
             $this->visible = true;
@@ -31,13 +32,13 @@ class DSF_Menu_Item {
     {
         $currentPage = DSF_Builder::getPage();
         $currentPageId = $currentPage->getId();
-        if ($this->_innerItem->id == $currentPageId) {
+        if ($this->id == $currentPageId) {
             return true;
         } else {
             $page = new Page();
             $parents = $page->getParents($currentPageId);
             if (is_array($parents)) {
-                if (isset($parents[$this->_innerItem->id])) {
+                if (isset($parents[$this->id])) {
                     return true;
                 }
             }
@@ -53,7 +54,7 @@ class DSF_Menu_Item {
     public function getInnerPage()
     {
         $page = new Page();
-        return $page->open($this->_innerItem->id);
+        return $page->open($this->id);
     }
 
     public function getInnerItem()
