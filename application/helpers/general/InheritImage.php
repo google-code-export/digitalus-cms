@@ -35,6 +35,6 @@ class DSF_View_Helper_General_InheritImage
     }
 
     public function renderImage($filepath){
-        return '<img src="/' . $filepath '" class="reflect" />';
+        return '<img src="/' . $filepath . '" class="reflect" />';
     }
 }
