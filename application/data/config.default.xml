@@ -62,10 +62,10 @@
 	<testing extends="production">
         <database>
             <adapter>PDO_MYSQL</adapter>
-            <host>localhost</host>
-            <username>root</username>
+            <host></host>
+            <username></username>
             <password/>
-            <dbname>digitalus_cms_1_5</dbname>
+            <dbname></dbname>
         </database>	
 	</testing>
 	<system>
