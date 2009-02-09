@@ -203,8 +203,8 @@ class Page extends DSF_Db_Table
     {
     	$mdlMeta = new MetaData();
     	$metaData = $mdlMeta->asArray($pageId);
-    	if(isset($metaData['title'])) {
-    		return $metaData['title'];
+    	if(!empty($metaData['page_title'])) {
+    		return $metaData['page_title'];
     	}else{
     		$page = $this->find($pageId)->current();
     		return $page->name;
