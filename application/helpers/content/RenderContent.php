@@ -1,24 +1,25 @@
 <?php
 class DSF_View_Helper_Content_RenderContent
 {
-	public function RenderContent($block, $rowset = null, $wordCount = 0){
-        if($rowset == null){
+    public function RenderContent($block, $rowset = null, $wordCount = 0)
+    {
+        if ($rowset == null) {
            $content = $this->view->page->getContent();
-        }else{
+        } else {
             $content = $rowset;
         }
-        
+
         $xhtml = '';
-        
-        if($wordCount > 0){
-          $xhtml .= $this->view->TruncateText($content->$block, $wordCount); 
-        }else{
-          $xhtml .= $content->$block;  
+
+        if ($wordCount > 0){
+          $xhtml .= $this->view->TruncateText($content->$block, $wordCount);
+        } else {
+          $xhtml .= $content->$block;
         }
-            	    
-    	return stripslashes($xhtml);
-	}
-		
+
+        return stripslashes($xhtml);
+    }
+
     /**
      * Set this->view object
      *

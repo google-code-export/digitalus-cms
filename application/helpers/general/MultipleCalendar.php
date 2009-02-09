@@ -1,6 +1,6 @@
 <?php
 class DSF_View_Helper_General_MultipleCalendar
-{	
+{
     /**
      * renders a set of calendars with links to each day
      * pass this an array of the months with the selected days
@@ -9,19 +9,19 @@ class DSF_View_Helper_General_MultipleCalendar
      *                          ));
      *
      */
-	public function MultipleCalendar($months = array())
-	{
-	    $xhtml = null;
-        foreach ($months as $month => $selectedDays){
+    public function MultipleCalendar($months = array())
+    {
+        $xhtml = null;
+        foreach ($months as $month => $selectedDays) {
             $monthParts = explode('-', $month);
-            if(!is_array($selectedDays)){
+            if (!is_array($selectedDays)) {
                 $selectedDays = array();
             }
             $xhtml .= $this->view->Calendar($monthParts[0], $monthParts[1], $selectedDays);
         }
         return $xhtml;
-	}
-	
+    }
+
     /**
      * Set this->view object
      *

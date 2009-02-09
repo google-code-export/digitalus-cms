@@ -1,40 +1,37 @@
 <?php
 class DSF_View_Helper_Filesystem_RenderFileBrowser
-{	
-	public function RenderFileBrowser($parentId, $link, $basePath = null, $level = 0, $id = 'fileTree')
-	{
-		$links = array();
-		$tree = new Page();
+{
+    public function RenderFileBrowser($parentId, $link, $basePath = null, $level = 0, $id = 'fileTree')
+    {
+        $links = array();
+        $tree = new Page();
 
-		$children = $tree->getChildren($parentId, null, 'name');
-		
-		foreach ($children as $child)
-		{			
-			if($tree->hasChildren($child))
-			{
-				$newLevel = $level + 1;
-				$submenu = $this->view->RenderFileBrowser($child->id, $link, $basePath, $newLevel);
-				$icon = 'folder.png';
-			}else{
-			    $icon = "page_white_text.png";
-				$submenu = false;
-			}
-			
-			$links[] ="<li class='menuItem'>" . $this->view->link($child->name, $link . $child->id, $icon) . $submenu . '</li>';
-		}
-		
-		if(is_array($links))
-		{
-			if($level == 0){
-				$strId = "id='{$id}'";
-			}else{
-			    $strId = null;
-			}
-			$filetree = "<ul {$strId}>" . implode(null, $links) . "</ul>";
-			return  $filetree;
-		}
-	}
-	
+        $children = $tree->getChildren($parentId, null, 'name');
+
+        foreach ($children as $child) {
+            if ($tree->hasChildren($child)) {
+                $newLevel = $level + 1;
+                $submenu = $this->view->RenderFileBrowser($child->id, $link, $basePath, $newLevel);
+                $icon = 'folder.png';
+            } else {
+                $icon = 'page_white_text.png';
+                $submenu = false;
+            }
+
+            $links[] = '<li class="menuItem">' . $this->view->link($child->name, $link . $child->id, $icon) . $submenu . '</li>';
+        }
+
+        if (is_array($links)) {
+            if ($level == 0) {
+                $strId = "id='{$id}'";
+            } else {
+                $strId = null;
+            }
+            $filetree = "<ul {$strId}>" . implode(null, $links) . '</ul>';
+            return  $filetree;
+        }
+    }
+
     /**
      * Set this->view object
      *
