@@ -1,7 +1,6 @@
 <?php
 set_include_path('.' . PATH_SEPARATOR . './library' . PATH_SEPARATOR . './application/models/' . PATH_SEPARATOR . get_include_path());
 require_once './application/Initializer.php';
-require_once "Zend/Loader.php"; 
 
 // Set up autoload.
 Zend_Loader::registerAutoload();
