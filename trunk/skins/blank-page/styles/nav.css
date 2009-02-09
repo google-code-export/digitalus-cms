@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 
 ul#menu{
-padding:5px 20px;
+padding:7px 20px 0 20px;
 margin:0;
 }
 
@@ -11,7 +11,44 @@ margin:0 10px;
 }
 
 ul#menu li a{
+font-weight:bold;
 text-decoration:none;
 font-size:14px;
+color:#666;
+}
+
+ul#menu li a:hover{
+text-decoration:underline;
+color:#333;
+}
+
+ul#menu li a.selected{
 color:#000;
+}
+
+ul#subnav{
+padding:25px 10px;
+}
+
+ul#subnav a{
+text-decoration:none;
+color:#666;
+font-weight:bold;
+}
+
+ul#subnav a:hover{
+text-decoration:underline;
+color:#333;
+}
+
+ul#subnav a.selected{
+color:#000;
+}
+
+ul#subnav ul{
+padding: 5px;
+}
+
+ul#subnav ul a{
+font-weight:normal;
 }
