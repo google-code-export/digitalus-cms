@@ -11,7 +11,7 @@ class DSF_View_Helper_Form_FormRow
         if ($required) {
             $class = ' required';
         }
-        $xhtml[] = '<dt><label class="formRow' . $class '">' . $label '</label></dt>' . PHP_EOL;
+        $xhtml[] = '<dt><label class="formRow' . $class . '">' . $label . '</label></dt>' . PHP_EOL;
         $xhtml[] = '<dd>' . $control . '</dd>';
         return implode(null, $xhtml);
     }
