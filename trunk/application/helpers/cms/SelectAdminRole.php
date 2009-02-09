@@ -1,13 +1,13 @@
 <?php
 class Zend_View_Helper_SelectAdminRole
-{	
-	public function SelectAdminRole($name, $value, $attribs = false)
-	{
-		$data['admin'] = "Site Administrator";
-		$data['superadmin'] = "Super Administrator";
-		return $this->view->formSelect($name, $value, $attribs, $data);
-	}
-	
+{
+    public function SelectAdminRole($name, $value, $attribs = false)
+    {
+        $data['admin']      = $this->view->GetTranslation('Site Administrator');
+        $data['superadmin'] = $this->view->GetTranslation('Super Administrator');
+        return $this->view->formSelect($name, $value, $attribs, $data);
+    }
+
     /**
      * Set this->view object
      *
