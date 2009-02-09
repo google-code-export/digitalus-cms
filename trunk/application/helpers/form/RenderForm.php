@@ -10,7 +10,7 @@ class DSF_View_Helper_Form_RenderForm
         if ($multipart) {
             $encType = 'enctype="multipart/form-data"';
         }
-        $xhtml  = '<form action="' . $action '" method="post" ' . $encType . '>';
+        $xhtml  = '<form action="' . $action . '" method="post" . ' . $encType . '>';
         $xhtml .= implode(null, $rows);
         $xhtml .= $this->view->formSubmit(str_replace(' ', '_', $submitText), $submitText);
         $xhtml .= '</form>';
