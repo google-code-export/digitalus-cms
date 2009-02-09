@@ -2,15 +2,15 @@
 class Zend_View_Helper_RenderSidebar
 {
 
-	/**
-	 * comments
-	 */
-	public function RenderSidebar(){
-		$path = str_replace('.phtml', '.sidebar.phtml', $this->view->actionScript);
-		
-		return $this->view->render($path);
-	}
-	
+    /**
+     * comments
+     */
+    public function RenderSidebar(){
+        $path = str_replace('.phtml', '.sidebar.phtml', $this->view->actionScript);
+
+        return $this->view->render($path);
+    }
+
     /**
      * Set this->view object
      *
