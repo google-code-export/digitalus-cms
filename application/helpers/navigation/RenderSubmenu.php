@@ -3,26 +3,21 @@ class DSF_View_Helper_Navigation_RenderSubMenu
 {
     public function RenderSubMenu($levels = 2, $id = 'subnav')
     {
-        $parents = $this->view->page->getParents();
+    	$page = DSF_Builder::getPage();
+        $parents = $page->getParents();
         if (is_array($parents) && count($parents) > 0) {
-            $parent = $parents[0];
-            $subMenu = $parent;
+	        // parents is returned as an ascending array, we need it to descend
+	        $parents = array_reverse($parents);
+            $rootParent = array_shift($parents);
+            $rootParentId = $rootParent->id;
+        }else{
+        	//this page is a root level page.  
+        	$rootParentId = $page->getId();
         }
 
-        if (!isset($subMenu)) {
-            $subMenu = $this->view->page;
+        if ($rootParentId > 0) {
+            return $this->view->RenderMenu($rootParentId, $levels, null, $id);
         }
-
-        if (!empty($subMenu->label)) {
-            $label = $subMenu->label;
-        } else {
-            $label = $subMenu->title;
-        }
-
-        if ($subMenu->id > 0) {
-                return $this->view->RenderMenu($subMenu->id, $levels, 0, '/' . DSF_Toolbox_String::addHyphens($label), $id);
-        }
-
     }
 
     /**
