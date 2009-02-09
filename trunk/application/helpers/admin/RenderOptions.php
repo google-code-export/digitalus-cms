@@ -2,11 +2,11 @@
 class DSF_View_Helper_Admin_RenderOptions
 {
     public $optionsPath;
-    public $defaultHeadline = "Options";
-  
+    public $defaultHeadline = 'Options';
+
     /**
      * this helper renders the admin options.
-     * 
+     *
      * you can add content before the body by setting options_before placeholder
      * you can add content after the body by setting options_after placeholder
      *
@@ -14,48 +14,48 @@ class DSF_View_Helper_Admin_RenderOptions
      * @param unknown_type $id
      * @return unknown
      */
-	public function RenderOptions($id = 'Options')
-	{
+    public function RenderOptions($id = 'Options')
+    {
         $this->setOptionsPath();
-        
+
         //render the column first so you can set the headline pla
         $column = $this->renderBody();
         $headline = $this->renderHeadline();
-   
-        return $headline . $column;
-	}
-	
-	public function renderHeadline()
-	{
-	    return "<h2 class='top'>" . $this->view->placeholder('optionsHeadline') . "</h2>";
-	}
-	
-	public function renderBody()
-	{
-	    $xhtml = "<div class='columnBody'>";
-	    
-	    //you can add content before the body by setting options_before placeholder
-        $xhtml .= $this->view->placeholder('options_before');
-	    
-	    $xhtml .= $this->view->render($this->optionsPath);
 
-	    //you can add content after the body by setting options_after placeholder
+        return $headline . $column;
+    }
+
+    public function renderHeadline()
+    {
+        return '<h2 class="top">' . $this->view->placeholder('optionsHeadline') . '</h2>';
+    }
+
+    public function renderBody()
+    {
+        $xhtml = '<div class="columnBody">';
+
+        //you can add content before the body by setting options_before placeholder
+        $xhtml .= $this->view->placeholder('options_before');
+
+        $xhtml .= $this->view->render($this->optionsPath);
+
+        //you can add content after the body by setting options_after placeholder
         $xhtml .= $this->view->placeholder('options_after');
-	    
-        $xhtml .= "</div>";
-	    return $xhtml;
-	}
-	
-	public function setOptionsPath()
-	{
-	    $front = Zend_Controller_Front::getInstance();
-	    $request = $front->getRequest();
-	    $controller = $request->getControllerName();
-	    $action = $request->getActionName();
+
+        $xhtml .= '</div>';
+        return $xhtml;
+    }
+
+    public function setOptionsPath()
+    {
+        $front = Zend_Controller_Front::getInstance();
+        $request = $front->getRequest();
+        $controller = $request->getControllerName();
+        $action = $request->getActionName();
 
         $this->optionsPath = $controller . '/' . $action . '.options.phtml';
-	}
-	
+    }
+
     /**
      * Set this->view object
      *

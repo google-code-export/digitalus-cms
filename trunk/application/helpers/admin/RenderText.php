@@ -1,25 +1,25 @@
 <?php
 class DSF_View_Helper_Admin_RenderText
 {
-  
+
     /**
      *
      * @return unknown
      */
-	public function RenderText($key, $tag = null)
-	{
-	    $xhtml = null;
-	    if($tag != null){
-	        $xhtml .= "<{$tag}>";
-	    }
-	    $xhtml .= $this->view->GetTranslation($key);
-	    if($tag != null){
-	        $xhtml .= "</{$tag}>";
-	    }
-	    return $xhtml;
-	    
-	}
-	
+    public function RenderText($key, $tag = null)
+    {
+        $xhtml = null;
+        if ($tag != null) {
+            $xhtml .= "<{$tag}>";
+        }
+        $xhtml .= $this->view->GetTranslation($key);
+        if ($tag != null) {
+            $xhtml .= "</{$tag}>";
+        }
+        return $xhtml;
+
+    }
+
     /**
      * Set this->view object
      *

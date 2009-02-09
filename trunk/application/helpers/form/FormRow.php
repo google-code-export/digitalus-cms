@@ -2,17 +2,20 @@
 class DSF_View_Helper_Form_FormRow
 {
 
-	/**
-	 * comments
-	 */
-	public function FormRow($label, $control, $required = false){
-	    $class = null;
-		if($required){$class = "required";}
-		$xhtml[] = "<dt><label class='formRow {$class}'>{$label}</label></dt>";
-		$xhtml[] = "<dd>{$control}</dd>";
-	return implode(null,$xhtml);
-	}
-	
+    /**
+     * comments
+     */
+    public function FormRow($label, $control, $required = false)
+    {
+        $class = null;
+        if ($required) {
+            $class = ' required';
+        }
+        $xhtml[] = '<dt><label class="formRow' . $class '">' . $label '</label></dt>' . PHP_EOL;
+        $xhtml[] = '<dd>' . $control . '</dd>';
+        return implode(null, $xhtml);
+    }
+
     /**
      * Set this->view object
      *

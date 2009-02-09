@@ -2,7 +2,7 @@
 /**
  *
  * @author forrest lyman
- * @version 
+ * @version
  */
 require_once 'Zend/View/Interface.php';
 
@@ -12,34 +12,36 @@ require_once 'Zend/View/Interface.php';
  * @uses viewHelper DSF_View_Helper_General
  */
 class DSF_View_Helper_General_getData {
-    
+
     /**
-     * @var Zend_View_Interface 
+     * @var Zend_View_Interface
      */
     public $view;
-    
+
     /**
-     *  
+     *
      */
-    public function getData($field, $dataSet = null) {
-        if(is_array($dataSet)) {
-            if(isset($dataSet[$field])) {
+    public function getData($field, $dataSet = null)
+    {
+        if (is_array($dataSet)) {
+            if (isset($dataSet[$field])) {
                 return $dataSet[$field];
             }
-        }elseif (is_object($dataSet)) {
-            if(isset($dataSet->$field)) {
+        } elseif (is_object($dataSet)) {
+            if (isset($dataSet->$field)) {
                 return $dataSet->$field;
             }
-        }else{
+        } else {
             return $this->view->$field;
         }
     }
-    
+
     /**
-     * Sets the view field 
+     * Sets the view field
      * @param $view Zend_View_Interface
      */
-    public function setView(Zend_View_Interface $view) {
+    public function setView(Zend_View_Interface $view)
+    {
         $this->view = $view;
     }
 }

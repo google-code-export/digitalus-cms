@@ -1,24 +1,23 @@
 <?php
 class DSF_View_Helper_Admin_SelectUser
-{	
-	public function SelectUser($name, $value = null, $attribs = null, $currentUser = 0)
-	{
+{
+    public function SelectUser($name, $value = null, $attribs = null, $currentUser = 0)
+    {
         $u = new User();
         $users = $u->fetchAll(null, 'first_name');
-        
+
         $userArray[] = $this->view->GetTranslation('Select User');
-        
-        if($users->count() > 0) {
-            foreach ($users as $user)
-            {
-                if($user->id != $currentUser) {
-            	   $userArray[$user->id] = $user->first_name . ' ' . $user->last_name;
+
+        if ($users->count() > 0) {
+            foreach ($users as $user) {
+                if ($user->id != $currentUser) {
+                   $userArray[$user->id] = $user->first_name . ' ' . $user->last_name;
                 }
             }
         }
-   		return $this->view->formSelect($name, $value, $attribs, $userArray);
-	}
-	
+        return $this->view->formSelect($name, $value, $attribs, $userArray);
+    }
+
     /**
      * Set this->view object
      *
