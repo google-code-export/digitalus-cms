@@ -1,6 +1,13 @@
-<li id='menu_item_<?php echo $this->item->id;?>' class='menuItem'>
+<li id='<?php echo $this->menuId . "_item_wrapper_" . $this->item->id;?>' class='menuItem'>
 <?php 
-    echo $this->item->asHyperlink();
+	if($this->item->isSelected()){
+	    $class="selected";
+	}else{
+		$class = "unselected";
+	}
+	
+	$menuItemId = $this->menuId . "_item_" . $this->item->id;
+    echo $this->item->asHyperlink($menuItemId, $class);
     if($this->submenu != null) {
         echo $this->submenu;
     }
