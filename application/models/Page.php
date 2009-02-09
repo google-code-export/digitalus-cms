@@ -217,6 +217,16 @@ class Page extends DSF_Db_Table
     	$this->_flushCache();
     	$where[] = $this->_db->quoteInto("id = ?", $pageId);
     	$this->delete($where);
+    	
+    	//delete content nodes
+    	unset($where);
+    	$mdlNodes = new ContentNode();
+    	$where[] = $this->_db->quoteInto("parent_id = ?", "page_" . $pageId);
+    	$mdlNodes->delete($where);
+    	
+    	//delete meta data
+    	$mdlMeta = new MetaData();
+    	$mdlMeta->deleteByPageId($pageId);    	
     }
     
     public function setDesign($pageId, $designId)

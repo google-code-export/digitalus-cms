@@ -37,6 +37,12 @@ class MetaData extends Xml
 		return $this->open($this->_getKey($pageId));
 	}
 	
+	public function deleteByPageId($pageId)
+	{
+		$where = $this->_db->quoteInto("tags = ?", $this->_getKey($pageId));
+		$this->delete($where);
+	}
+	
 	protected  function _getKey($pageId)
 	{
 		return $this->_namespace . '_' . $pageId;
