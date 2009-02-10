@@ -1,7 +1,5 @@
 <?php
-if(empty($this->placeholder('charset'))) {
-   $this->placeholder('charset') = 'utf-8'; 
-}
+$this->placeholder('charset')->set('utf-8'); 
 echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' . PHP_EOL;
 echo $this->doctype() . PHP_EOL;
 ?>
