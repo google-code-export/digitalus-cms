@@ -4,7 +4,7 @@ $this->placeholder('header_logo_content')->set(
 );
 
 $this->placeholder('header_search_content')->set(
-    ''
+    'search form'
 );
 
 if(is_object($this->page) && $this->isError != true) {
@@ -30,16 +30,20 @@ $this->placeholder('footer_content')->set(
 
 $grid = new DSF_Interface_Grid(16);
 $header = $grid->addElement('header', 16);
-    $logo = $grid->addElement('header_logo', 10, $header, DSF_Interface_Grid::TYPE_START);
-    $search = $grid->addElement('header_search',6,$header, DSF_Interface_Grid::TYPE_END);
+    $logo = $header->addElement('header_logo', 10);
+    $logo->setAttribute('first', true);
+    $search = $header->addElement('header_search',6);
+    $search->setAttribute('last', true);
 
 $nav = $grid->addElement('nav', 16);
 
 $body = $grid->addElement('body', 16);
-    $content = $grid->addElement('content', 12, $body, DSF_Interface_Grid::TYPE_START);
-    $sidebar = $grid->addElement('sidebar', 4, $body, DSF_Interface_Grid::TYPE_END);
+    $content = $body->addElement('content', 12);
+    $content->setAttribute('first', true);
+    $sidebar = $body->addElement('sidebar', 4);
+    $sidebar->setAttribute('last', true);
     
-$language = $grid->addElement('language', 16, $body);
+$language = $body->addElement('language', 16);
 
-$footer = $grid->addElement('footer', 16, $body);
+$footer = $body->addElement('footer', 16);
 echo $grid->render();
