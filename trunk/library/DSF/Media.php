@@ -64,24 +64,23 @@ class DSF_Media {
     public static function batchUpload($files, $path, $filenames = array(), $createPath = true, $base = '.')
     {
         if (is_array($files)) {
-            for ($i = 0; $i <= (count($files) - 1);$i++) {
-                if(isset($files["name"][$i])) {
-                    $file = array(
-                        "name"      => $files["name"][$i],
-                        "type"        => $files["type"][$i],
-                        "tmp_name"    => $files["tmp_name"][$i],
-                        "error"        => $files["error"][$i],
-                        "size"        => $files["size"][$i]
-                    );
-                    if (isset($filenames[$i])) {
-                        $filename = true;
-                    } else {
-                        $filename = null;
-                    }
-                    $result = self::upload($file, $path, $filename, $createPath, $base);
-                    if ($result != null) {
-                        $filepaths[] = $result;
-                    }
+            for ($i = 0; $i <= (count($files["size"]) - 1);$i++) {
+            
+                $file = array(
+                    "name"      => $files["name"][$i],
+                    "type"        => $files["type"][$i],
+                    "tmp_name"    => $files["tmp_name"][$i],
+                    "error"        => $files["error"][$i],
+                    "size"        => $files["size"][$i]
+                );
+                if (isset($filenames[$i])) {
+                    $filename = true;
+                } else {
+                    $filename = null;
+                }
+                $result = self::upload($file, $path, $filename, $createPath, $base);
+                if ($result != null) {
+                    $filepaths[] = $result;
                 }
             }
             return $filepaths;
