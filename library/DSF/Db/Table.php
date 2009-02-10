@@ -119,8 +119,8 @@ class DSF_Db_Table extends Zend_Db_Table
         $this->errors = new DSF_View_Error();
         $validations = array('Required','Text','Integer','Number','Email','Password','Date','HTML','Unique');
         foreach ($validations as $v) {
-            $type = 'validate' . $v;
-            $this->$type();
+            $validateFunction = '_validate' . $v;
+            $this->$validateFunction();
         }
     }
 
