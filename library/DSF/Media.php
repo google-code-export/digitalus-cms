@@ -65,21 +65,23 @@ class DSF_Media {
     {
         if (is_array($files)) {
             for ($i = 0; $i <= (count($files) - 1);$i++) {
-                $file = array(
-                    "name"      => $files["name"][$i],
-                    "type"        => $files["type"][$i],
-                    "tmp_name"    => $files["tmp_name"][$i],
-                    "error"        => $files["error"][$i],
-                    "size"        => $files["size"][$i]
-                );
-                if (isset($filenames[$i])) {
-                    $filename = true;
-                } else {
-                    $filename = null;
-                }
-                $result = self::upload($file, $path, $filename, $createPath, $base);
-                if ($result != null) {
-                    $filepaths[] = $result;
+                if(isset($files["name"][$i])) {
+                    $file = array(
+                        "name"      => $files["name"][$i],
+                        "type"        => $files["type"][$i],
+                        "tmp_name"    => $files["tmp_name"][$i],
+                        "error"        => $files["error"][$i],
+                        "size"        => $files["size"][$i]
+                    );
+                    if (isset($filenames[$i])) {
+                        $filename = true;
+                    } else {
+                        $filename = null;
+                    }
+                    $result = self::upload($file, $path, $filename, $createPath, $base);
+                    if ($result != null) {
+                        $filepaths[] = $result;
+                    }
                 }
             }
             return $filepaths;
@@ -122,7 +124,7 @@ class DSF_Media {
 
     public static function deleteFile($file)
     {
-        if (self::testFilepath($folder)) {
+        if (self::testFilepath($file)) {
             $filepath = DSF_Toolbox_String::stripUnderscores($file);
             $fullpath = self::rootDirectory() . '/' . $filepath;
             if (file_exists($fullpath)) {
