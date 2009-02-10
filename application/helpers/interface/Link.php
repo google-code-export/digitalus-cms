@@ -30,7 +30,7 @@ class DSF_View_Helper_Interface_Link {
         $linkParts[] = "<a href='{$link}' class='{$class}'>";
         $iconPath = $this->view->baseUrl . $this->iconPath;
         if (null !== $icon) {
-            $linkParts[] = "<img src='{$this->view->baseUrl}/{$iconPath}/{$icon}' alt='({$label}) ' class='icon' />";
+            $linkParts[] = "<img src='/{$iconPath}/{$icon}' alt='({$label}) ' class='icon' />";
         }
         if (!empty($label)) {
             $linkParts[] = $this->view->GetTranslation((string)$label);
