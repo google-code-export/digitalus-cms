@@ -47,6 +47,9 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
         $xhtml = "<div id='{$this->id}' class='{$class}'>" . PHP_EOL;
         $xhtml .= $content . PHP_EOL;
         $xhtml .= "</div>" . PHP_EOL;
+        if($this->getAttribute(self::CLEAR)) {
+            $xhtml .= "<div class='clear'></div>";
+        }
         return $xhtml;
     }
     
