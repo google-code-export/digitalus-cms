@@ -1,6 +1,9 @@
 <?php
 class Base_Wiki_Form extends DSF_Content_Form_Abstract {
     public function setup() {
+    	$headline = $this->form->createElement('text','headline');
+    	$headline->setLabel("Headline:");
+        
         $teaser = $this->form->createElement('textarea','teaser');
         $teaser->setLabel('Teaser:')
             ->setAttrib('class', "med_short");
@@ -13,7 +16,8 @@ class Base_Wiki_Form extends DSF_Content_Form_Abstract {
             ->setAttrib('class',"editor wiki");
         
         // Add elements to form:
-        $this->form->addElement($teaser)
+        $this->form->addElement($headline)
+            ->addElement($teaser)
             ->addElement($content)
             ->addElement('submit','update',array('label'=>'Update Page'));
     }
