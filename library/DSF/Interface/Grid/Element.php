@@ -9,7 +9,7 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
     public $children = array();
     public $unitClass = 'grid';
     
-    public function __construct ($id, $columns, $attr = array())
+    public function __construct ($id, $columns = null, $attr = array())
     {
         $this->id = $id;
         $this->columns = $columns;
@@ -17,7 +17,7 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
         $this->content = new DSF_Interface_Grid_ContentWrapper($id);
     }
     
-    public function addElement ($id, $columns, $attr = array())
+    public function addElement ($id, $columns = null, $attr = array())
     {
         $element = new DSF_Interface_Grid_Element($id, $columns, $attr);
         $this->children[] = $element;
@@ -44,7 +44,12 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
             }
         }
         $class = $this->makeClass();
-        $xhtml = "<div id='{$this->id}' class='{$class}'>" . PHP_EOL;
+        if(!empty($class)) {
+            $classString = "class='{$class}'";
+        }else{
+            $classString = null;
+        }
+        $xhtml = "<div id='{$this->id}' {$classString}>" . PHP_EOL;
         $xhtml .= $content . PHP_EOL;
         $xhtml .= "</div>" . PHP_EOL;
         if($this->getAttribute(self::CLEAR)) {
@@ -56,7 +61,10 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
     public function makeClass ($clearfix = false)
     {
         $class = array();
-        $class[] = $this->unitClass . '_' . $this->columns;
+        
+        if(null !== $this->columns) {
+            $class[] = $this->unitClass . '_' . $this->columns;
+        }
         
         $first = $this->getAttribute(self::FIRST);
         $last = $this->getAttribute(self::LAST);

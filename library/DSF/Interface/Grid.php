@@ -15,7 +15,7 @@ class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
         $this->id = $id;
         $this->columns = $columns;
         $this->_loadStyles();
-        $grid = new DSF_Interface_Grid_Element('wrapper', $columns, $attr);
+        $grid = new DSF_Interface_Grid_Element('wrapper');
         $this->grid = $grid;
     }
     
