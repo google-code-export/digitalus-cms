@@ -1,5 +1,9 @@
 @CHARSET "ISO-8859-1";
 
+ul#menu, ul#subnav, ul#subnav ul{
+list-style:none;
+}
+
 ul#menu{
 padding:7px 20px 0 20px;
 margin:0;
@@ -30,6 +34,11 @@ ul#subnav{
 padding:25px 10px;
 }
 
+ul#subnav li{
+padding:2px 0;
+margin:0 5px;
+}
+
 ul#subnav a{
 text-decoration:none;
 color:#666;
@@ -47,6 +56,7 @@ color:#000;
 
 ul#subnav ul{
 padding: 5px;
+margin:0;
 }
 
 ul#subnav ul a{
