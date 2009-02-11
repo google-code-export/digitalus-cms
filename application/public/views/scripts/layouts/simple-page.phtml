@@ -1,4 +1,23 @@
 <?php 
+$grid = new DSF_Interface_Grid('page', 16);
+$header = $grid->addElement('header', 16);
+    $logo = $header->addElement('header_logo', 10);
+    $logo->setAttribute('first', true);
+    $search = $header->addElement('header_search',6);
+    $search->setAttribute('last', true);
+
+$nav = $grid->addElement('nav', 16);
+
+$body = $grid->addElement('body', 16);
+    $content = $body->addElement('content', 10);
+    $content->setAttribute('first', true);
+    $sidebar = $body->addElement('sidebar', 6);
+    $sidebar->setAttribute('last', true);
+    
+$language = $body->addElement('language', 16);
+
+$footer = $body->addElement('footer', 16);
+
 $this->placeholder('header_logo_content')->set(
     "<a href='http://digitaluscms.com'><img src='" . $this->baseUrl . "/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
 );
@@ -28,22 +47,4 @@ $this->placeholder('footer_content')->set(
     $this->partial('partials/footer.phtml')
 );
 
-$grid = new DSF_Interface_Grid(16);
-$header = $grid->addElement('header', 16);
-    $logo = $header->addElement('header_logo', 10);
-    $logo->setAttribute('first', true);
-    $search = $header->addElement('header_search',6);
-    $search->setAttribute('last', true);
-
-$nav = $grid->addElement('nav', 16);
-
-$body = $grid->addElement('body', 16);
-    $content = $body->addElement('content', 12);
-    $content->setAttribute('first', true);
-    $sidebar = $body->addElement('sidebar', 4);
-    $sidebar->setAttribute('last', true);
-    
-$language = $body->addElement('language', 16);
-
-$footer = $body->addElement('footer', 16);
 echo $grid->render();
