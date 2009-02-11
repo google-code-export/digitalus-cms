@@ -190,19 +190,32 @@ class User extends DSF_Db_Table
 	}
 	
 	public function getUsersModules($userRowset) {
-		$user = $this->getCurrentUser();
-		$resources = $this->getAclResources($userRowset);
 		$modules = null;
-		if(is_array($resources)) {
-			foreach ($resources as $k => $v) {
-				if(1 == $v || self::SUPERUSER_ROLE == $user->role) {
-					$parts = explode('_', $k);
-					if('mod' == $parts[0]){
-						$key = $parts[1];
-						$modules[$key] = $key;
-					}
-				}
-			}
+		$user = $this->getCurrentUser();
+                if($user->role == user::SUPERUSER_ROLE) {
+                    //the superadmin has access to all of the modules
+                    $front = Zend_Controller_Front::getInstance();
+                    $ctlPaths = $front->getControllerDirectory();
+                    foreach ($ctlPaths as $module => $path) {
+                        if(substr($module, 0, 4) == 'mod_') {
+                            $modules[] = str_replace('mod_', '', $module);
+                        }
+                    }
+                }
+                else
+                {
+		    $resources = $this->getAclResources($userRowset);
+		    if(is_array($resources)) {
+			    foreach ($resources as $k => $v) {
+				    if(1 == $v ){
+					    $parts = explode('_', $k);
+					    if('mod' == $parts[0]){
+						    $key = $parts[1];
+						    $modules[$key] = $key;
+					    }
+				    }
+			    }
+		    }
 		}
 		if(is_array($modules)) {
 			return $modules;
