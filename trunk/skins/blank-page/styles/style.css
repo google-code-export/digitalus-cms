@@ -1,7 +1,8 @@
 @CHARSET "ISO-8859-1";
 body{
-font-family:"Trebuchet MS", Arial;
-font-size:12px;
+font-family:Arial, san-serif;
+font-size:13px;
+line-height:20px;
 background:url(../images/body.jpg) repeat-x #E0EDFF;
 }
 
@@ -75,3 +76,39 @@ clear:both;
 padding:20px;
 text-align:center;
 }
+
+h1, h2, h3{
+margin:10px 0;
+}
+
+h1{
+font-size:20px;
+}
+
+h2{
+font-size:16px;
+}
+
+h3{
+font-size:14px;
+font-style:italic;
+}
+
+p{
+margin:10px;
+}
+
+blockquote{
+	border-top:#ccc 1px solid;
+	border-bottom:#ccc 1px solid;
+	padding:2px;
+	font-family:Georgia, Serif;
+	color:#666;	
+}
+
+pre{
+	font-size:11px;
+	border:#ccc 1px solid;
+	padding: 10px;
+}
+
