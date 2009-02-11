@@ -1,6 +1,18 @@
 <?php 
 $user = new User();
-$modules = $user->getCurrentUsersModules();
+$currentUser = $user->getCurrentUser();
+if($currentUser->role == user::SUPERUSER_ROLE) {
+    //the superadmin has access to all of the modules
+    $front = Zend_Controller_Front::getInstance();
+    $ctlPaths = $front->getControllerDirectory();
+    foreach ($ctlPaths as $module => $path) {
+        if(substr($module, 0, 4) == 'mod_') {
+            $modules[] = str_replace('mod_', '', $module);
+        }
+    }
+}else{
+    $modules = $user->getCurrentUsersModules();
+}
 
 if(is_array($modules)) {
     
