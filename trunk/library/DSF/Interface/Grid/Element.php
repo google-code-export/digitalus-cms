@@ -28,10 +28,9 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
     {
         if(in_array($key, $this->_attribs)) {
             $this->attr[$key] = $value;
-            return true;
-        }else{
-            return false;
         }
+        
+        return $this;
     }
     
     public function render ()
