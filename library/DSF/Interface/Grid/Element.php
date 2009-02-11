@@ -71,6 +71,8 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
             $class[] = "alpha";
         } elseif ($last == true) {
             $class[] = "omega";
+            //automatically add the clear if last is true
+            $this->setAttribute(self::CLEAR, true);
         }
         
         $before = $this->getAttribute(self::BEFORE);
