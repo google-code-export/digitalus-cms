@@ -2,6 +2,7 @@
 
 class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
     public $containerClass = 'container';
+    public $id;
     public $columns;
     public $grid = null;
     private $_styleSheets = array(
@@ -10,7 +11,8 @@ class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
         'styles/grid-960/styles/reset.css'
     );
 
-    public function __construct($columns, $attr = array()) {
+    public function __construct($id, $columns, $attr = array()) {
+        $this->id = $id;
         $this->columns = $columns;
         $this->_loadStyles();
         $grid = new DSF_Interface_Grid_Element('wrapper', $columns, $attr);
@@ -24,7 +26,7 @@ class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
 
     public function render()
     {
-        $xhtml = "<div class='{$this->containerClass}_{$this->columns}'>";
+        $xhtml = "<div id='{$this->id}' class='{$this->containerClass}_{$this->columns}'>";
         $xhtml .= $this->grid->render();
         $xhtml .= "</div>" . PHP_EOL;
         return $xhtml;
