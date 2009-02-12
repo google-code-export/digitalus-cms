@@ -7,15 +7,15 @@ abstract class DSF_Content_Form_Abstract
         'Errors',
         'Composite',
         array('HtmlTag', array('tag' => 'div')),
-        array('Label', array('tag' => 'label')),
+        array('Label',   array('tag' => 'label')),
     );
 
     public function __construct()
     {
         $this->form = new Zend_Form();
         $front = Zend_Controller_Front::getInstance();
-        $this->form->setAction($front->getBaseUrl() . self::PAGE_ACTION )
-            ->setMethod('post');
+        $this->form->setAction($front->getBaseUrl() . self::PAGE_ACTION)
+                   ->setMethod('post');
         $this->form->addElementPrefixPath('DSF_Decorator', 'DSF/Form/Decorator', 'decorator');
         $this->form->addPrefixPath('DSF_Form_Element', 'DSF/Form/Element/', 'element');
         $this->addBase();
@@ -26,14 +26,14 @@ abstract class DSF_Content_Form_Abstract
     //adds the base fields to the form
     protected function addBase()
     {
-        $name = $this->form->createElement('text','name');
+        $name = $this->form->createElement('text', 'name');
         $name->setRequired(true)
              ->setLabel('Page Name:');
 
-        $page_id = $this->form->createElement('hidden','page_id');
+        $page_id = $this->form->createElement('hidden', 'page_id');
         $page_id->setRequired(true);
 
-        $version = $this->form->createElement('hidden','version');
+        $version = $this->form->createElement('hidden', 'version');
 
         $this->form->addElement($page_id)
                    ->addElement($name)
@@ -67,5 +67,10 @@ abstract class DSF_Content_Form_Abstract
     public function render()
     {
         return $this->form->render();
+    }
+
+    public function getView()
+    {
+        return $this->form->getView();
     }
 }

@@ -7,7 +7,7 @@
  *
  */
 class DSF_Language {
-    const SESSION_KEY = 'currentLanguage';
+    const SESSION_KEY  = 'currentLanguage';
     const LANGUAGE_KEY = 'current';
 
     public static function setLanguage($language)
