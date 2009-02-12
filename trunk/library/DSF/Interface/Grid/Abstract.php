@@ -2,14 +2,15 @@
 abstract class DSF_Interface_Grid_Abstract
 {
     public $view;
-    protected $_attribs = array('first','last','before','after','clear');
+    protected $_attribs = array('first', 'last', 'before', 'after', 'clear');
     const FIRST = 'first';
     const LAST = 'last';
     const BEFORE = 'before';
     const AFTER = 'after';
     const CLEAR = 'clear';
-    
-    public function loadView() {
+
+    public function loadView()
+    {
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         if (null === $viewRenderer->view) {
             $viewRenderer->initView();
@@ -17,6 +18,6 @@ abstract class DSF_Interface_Grid_Abstract
         $view = $viewRenderer->view;
         $this->view = $view;
     }
-    
+
 }
 ?>
