@@ -16,11 +16,14 @@ class DSF_View_Helper_Internationalization_GetTranslation
         if ($viewInstance !== null) {
             $this->setview($viewInstance);
         }
-        if ($locale == null) {
+        $front = Zend_Controller_Front::getInstance();
+        $moduleName = $front->getRequest()->getModuleName();
+        if ($locale != null) {
+            $this->view->translate()->setLocale($locale);
+        } elseif ($moduleName != 'admin') {
             $locale = $this->view->GetCurrentLanguage();
+            $this->view->translate()->setLocale($locale);
         }
-        $this->view->translate()->setLocale($locale);
-
         return $this->view->translate($key);
     }
 
