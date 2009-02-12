@@ -11,15 +11,16 @@ class DSF_View_Helper_Internationalization_GetTranslation
      *
      * @return unknown
      */
-    public function GetTranslation($key, $locale = null,$viewInstance = null)
+    public function GetTranslation($key, $locale = null, $viewInstance = null)
     {
         if ($viewInstance !== null) {
             $this->setview($viewInstance);
         }
-
-        if ($locale != null) {
-            $this->view->translate->setLocale($locale);
+        if ($locale == null) {
+            $locale = $this->view->GetCurrentLanguage();
         }
+        $this->view->translate()->setLocale($locale);
+
         return $this->view->translate($key);
     }
 
@@ -29,7 +30,7 @@ class DSF_View_Helper_Internationalization_GetTranslation
      * @param  Zend_this->view_Interface $this->view
      * @return Zend_this->view_Helper_DeclareVars
      */
-    public function setview(Zend_view_Interface $view)
+    public function setview(Zend_View_Interface $view)
     {
         $this->view = $view;
         return $this;
