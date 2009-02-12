@@ -1,6 +1,6 @@
-<p>New message from: <?php echo $this->data['name']?> / <?php echo $this->data['email']?></p>
-<p>Sent on <?php echo Zend_Date::now(); ?></p>
+<p><?php echo $this->GetTranslation('New message from') . ': ' . $this->data['name'] . ' / ' . $this->data['email']?></p>
+<p><?php echo $this->GetTranslation('Sent on') . ' ' . Zend_Date::now(); ?></p>
 
-<h2>Message</h2>
-<p>Subject: <?php echo $this->data['subject']?></p>
-<p>Message: <?php echo $this->data['message']?></p>
+<h2><?php echo $this->GetTranslation('Message');?></h2>
+<p><?php  echo $this->GetTranslation('Subject') . ':' . $this->data['subject']?></p>
+<p><?php  echo $this->GetTranslation('Message') . ':' . $this->data['message']?></p>

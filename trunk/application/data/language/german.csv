@@ -13,7 +13,7 @@ Design;Design
 Modules;Module
 Public Site;Öffentliche Seite
 
-value;value
+value;Wert
 
 # ----- toolbar -----
 You are here;Sie befinden sich hier
@@ -80,7 +80,7 @@ Site Reports;Website Reports
 Traffic report;Traffic Report
 Admin access report;Admin Zugriffsreport
 Site Console;Website-Konsole
-The site console enables you to interact directly with the CMS core.  It is for experienced administrators only.;Die Website-Konsole ermöglicht dir die direkte Interaktion mit dem CMS Kern.  Nur für erfahrene Administratoren.
+The site console enables you to interact directly with the CMS core. It is for experienced administrators only.;Die Website-Konsole ermöglicht dir die direkte Interaktion mit dem CMS Kern. Nur für erfahrene Administratoren.
 Open console;Öffne Konsole
 Site Settings;Website Einstellungen
 General settings;Allgemeine Einstellungen
@@ -215,6 +215,7 @@ Make Home Page;Als Homepage setzen
 Design;Design
 Page Design;Seiten Design
 Current design;Aktuelles Design
+The design is not yet set for this page.;Für diese Seite ist noch kein Design gesetzt.
 Default;Standard
 This is the standard page.;Dies ist das standard Design.
 Open design;Dieses Design öffnen
@@ -313,15 +314,12 @@ Select a module page;Wähle eine Modul Seite aus
 Enter the recipients email;Email-Adresse des Empfängers
 Content below;Inhalt unter Modul
 
-Your Name;Dein Name
-Your Email;Deine Email-Adresse
-Subject;Betreff
-Message;Nachricht
-Please verify you're a human;Beweise, dass Du ein Mensch bist
-Send Message;Absenden
-
 # ----- custom translations -----
 Login;Anmelden
 Contact;Kontakt
 Imprint;Impressum
 latest update;zuletzt geändert am
+
+language;Sprache
+You are reading this page in;Sie lesen dies in
+This page is also translated into; Diese Seite wurde in folgende Sprachen übersetzt
