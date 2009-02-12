@@ -1,7 +1,7 @@
 <?php
-class Zend_View_Helper_SelectParentPage
+class Zend_View_Helper_SelectPage
 {
-    public function SelectParentPage($name, $value = null, $attribs = null)
+    public function SelectPage($name, $value = null, $attribs = null)
     {
         $mdlIndex = new Page();
         $index = $mdlIndex->getIndex(0, 'name');
