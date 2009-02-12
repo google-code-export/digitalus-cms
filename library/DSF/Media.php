@@ -50,7 +50,7 @@ class DSF_Media {
             //clean the filename
             $filename = DSF_Filesystem_File::cleanFilename($filename);
             $filename = basename($filename);
-            $path .= "/" . $filename;
+            $path .= '/' . $filename;
 
             if (move_uploaded_file($file['tmp_name'], $path)) {
                 //return the filepath if things worked out
@@ -67,11 +67,11 @@ class DSF_Media {
             for ($i = 0; $i <= (count($files["size"]) - 1);$i++) {
             
                 $file = array(
-                    "name"      => $files["name"][$i],
-                    "type"        => $files["type"][$i],
-                    "tmp_name"    => $files["tmp_name"][$i],
-                    "error"        => $files["error"][$i],
-                    "size"        => $files["size"][$i]
+                    'name'     => $files['name'][$i],
+                    'type'     => $files['type'][$i],
+                    'tmp_name' => $files['tmp_name'][$i],
+                    'error'    => $files['error'][$i],
+                    'size'     => $files['size'][$i]
                 );
                 if (isset($filenames[$i])) {
                     $filename = true;
@@ -136,7 +136,7 @@ class DSF_Media {
     {
         //dont allow access outside the media folder
         if (strpos($filepath, './') || strpos($filepath, './')) {
-            throw new Zend_Exception("Illegal file access attempt. Operation cancelled!");
+            throw new Zend_Exception('Illegal file access attempt. Operation cancelled!');
             return false;
         } else {
             return true;
@@ -176,5 +176,4 @@ class DSF_Media {
         return $prepend . $baseUrl . '/' . $config->filepath->media;
     }
 }
-
 ?>

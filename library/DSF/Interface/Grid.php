@@ -11,14 +11,15 @@ class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
         'styles/grid-960/styles/reset.css'
     );
 
-    public function __construct($id, $columns, $attr = array()) {
+    public function __construct($id, $columns, $attr = array())
+    {
         $this->id = $id;
         $this->columns = $columns;
         $this->_loadStyles();
         $grid = new DSF_Interface_Grid_Element('wrapper');
         $this->grid = $grid;
     }
-    
+
     public function addElement($id, $columns, $attr = array())
     {
         return $this->grid->addElement($id, $columns, $attr);
@@ -31,8 +32,9 @@ class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
         $xhtml .= "</div>" . PHP_EOL;
         return $xhtml;
     }
-    
-    private function _loadStyles() {
+
+    private function _loadStyles()
+    {
         $this->loadView();
         $front = Zend_Controller_Front::getInstance();
         $baseUrl = $front->getBaseUrl();
@@ -41,5 +43,4 @@ class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
         }
     }
 }
-
 ?>
