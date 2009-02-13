@@ -39,14 +39,15 @@ class DSF_View_Helper_Interface_GetIconByFileType {
     public function getIcon($file)
     {
         $filetype = DSF_Media_Filetype::load($file);
-        $type = $filetype->key;
-
-        if (isset($this->icons->$type)) {
-            $filetype = $this->icons->$type;
-            return $filetype->icon;
-        } else {
-            return $this->defaultIcon;
+        if($filetype != null) {
+            $type = $filetype->key;
+    
+            if (isset($this->icons->$type)) {
+                $filetype = $this->icons->$type;
+                return $filetype->icon;
+            }
         }
+        return $this->defaultIcon;
     }
 
     /**
