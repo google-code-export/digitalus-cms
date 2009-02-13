@@ -39,7 +39,7 @@ class DSF_View_Helper_Cms_RenderModule
      * @param  Zend_this->view_Interface $this->view
      * @return Zend_this->view_Helper_DeclareVars
      */
-    public function setview(Zend_view_Interface $view)
+    public function setview(Zend_View_Interface $view)
     {
         $this->view = $view;
         return $this;

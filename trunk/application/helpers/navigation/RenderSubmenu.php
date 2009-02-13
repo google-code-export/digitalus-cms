@@ -11,7 +11,7 @@ class DSF_View_Helper_Navigation_RenderSubMenu
             $rootParent = array_shift($parents);
             $rootParentId = $rootParent->id;
         }else{
-        	//this page is a root level page.  
+        	//this page is a root level page.
         	$rootParentId = $page->getId();
         }
 
@@ -26,7 +26,7 @@ class DSF_View_Helper_Navigation_RenderSubMenu
      * @param  Zend_this->view_Interface $this->view
      * @return Zend_this->view_Helper_DeclareVars
      */
-    public function setview(Zend_view_Interface $view)
+    public function setview(Zend_View_Interface $view)
     {
         $this->view = $view;
         return $this;
