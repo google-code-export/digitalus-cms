@@ -13,11 +13,6 @@ this is not going to make it in the beta version
 
     <li><?php echo $this->link('Design', '#design', 'layout_content.png');?></li>
     <li><?php echo $this->link('Move Page', '#move', 'arrow_turn_right.png');?></li>
-<?php
-if (!Page::isHomePage($this->page)) { ?>
-    <li><?php echo $this->link('Make Home Page', $this->baseUrl . '/admin/page/make-home-page/id/' . $this->pageId, 'house.png');?></li><?php
-} ?>
-
 </ul>
 
 <h3><?php echo $this->GetTranslation('Page Versions');?></h3>
