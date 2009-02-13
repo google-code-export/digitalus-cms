@@ -52,8 +52,9 @@ class Admin_MediaController extends Zend_Controller_Action {
                 }
             }
         }
-
-        $this->view->folderPathParts = $folderPathParts;
+        if (isset($folderPathParts) && !empty($folderPathParts)) {
+            $this->view->folderPathParts = $folderPathParts;
+        }
 
         $pathToFolder = $this->_fullPathToMedia . '/' . DSF_Toolbox_String::stripUnderscores($folder);
         $this->view->filesystemPath = $pathToFolder;
@@ -73,7 +74,7 @@ class Admin_MediaController extends Zend_Controller_Action {
     public function createFolderAction()
     {
         $baseFolder = DSF_Filter_Post::get('path');
-        $newFolder = DSF_Filter_Post::get('folder_name');
+        $newFolder  = DSF_Filter_Post::get('folder_name');
 
         //dont allow access outside the media folder
         if (strpos($baseFolder, './') || strpos($newFolder, './')) {
@@ -98,7 +99,7 @@ class Admin_MediaController extends Zend_Controller_Action {
                 $exists = true;
             }
 
-            if ($result || $exists) {
+            if (isset($result) || isset($exists)) {
                 $forwardPath .= '_' . $newFolder;
             }
         }
