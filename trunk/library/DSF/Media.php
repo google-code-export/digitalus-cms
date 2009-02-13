@@ -63,9 +63,10 @@ class DSF_Media {
 
     public static function batchUpload($files, $path, $filenames = array(), $createPath = true, $base = '.')
     {
+        $filepaths = array();
         if (is_array($files)) {
             for ($i = 0; $i <= (count($files["size"]) - 1);$i++) {
-            
+
                 $file = array(
                     'name'     => $files['name'][$i],
                     'type'     => $files['type'][$i],
@@ -111,6 +112,7 @@ class DSF_Media {
 
     public static function deleteFolder($folder)
     {
+        $config = Zend_Registry::get('config');
         if (self::testFilepath($folder)) {
             $folder = DSF_Toolbox_String::stripUnderscores($folder);
             $fullPath = self::rootDirectory() . '/' . $folder;
