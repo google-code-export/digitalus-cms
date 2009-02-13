@@ -28,7 +28,15 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
         $mdlPage = new Page();
         $uri = $this->_page->getUri();
         $pointer = $mdlPage->fetchPointer($uri);
-        $this->_page->setId($pointer);
+        if($pointer > 0) {
+            $this->_page->setId($pointer);
+        }else{
+            //this needs to be refactored so the error controller can handle it
+            $front = Zend_Controller_Front::getInstance();
+            $response = $front->getResponse();
+            $response->setRawHeader('HTTP/1.1 404 Not Found');
+            throw new Zend_Exception("The page you requested was not found.  Digitalus CMS could not locate the error page either.");
+        }
     }
 
     public function setParents()
