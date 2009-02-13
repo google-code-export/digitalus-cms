@@ -1,5 +1,5 @@
 <?php if (is_array($this->folders) && count($this->folders) > 0) { ?>
-<h3>Subfolders</h3>
+<h3><?php echo $this->GetTranslation('Subfolders');?></h3>
 <?php
     foreach ($this->folders as $folder) {
         $cleanPath = DSF_Toolbox_String::stripHyphens($folder);
@@ -18,7 +18,6 @@
     </h4>
     <p><?php echo $this->GetTranslation('Full path') . ': <code>/' . $this->filepath . '/' . $cleanPath . '</code>';?></p>
 </div>
-
 <?php
     }
 }

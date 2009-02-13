@@ -1,8 +1,8 @@
 <form action='/admin/media/rename-folder' method='post' >
-    <?php 
+    <?php
         echo $this->FormRow($this->GetTranslation('New Name'), $this->formText('folder_name', $this->label));
         echo $this->formHidden('filepath', $this->filepath);
         echo $this->formHidden('mediapath', $this->mediapath);
-        echo $this->FormRow('&nbsp;', $this->formSubmit('renameFolder',$this->GetTranslation('Rename Folder')));
+        echo $this->FormRow('&nbsp;', $this->formSubmit('renameFolder', $this->GetTranslation('Rename Folder')));
     ?>
 </form>
