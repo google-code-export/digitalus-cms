@@ -3,6 +3,7 @@
 class DSF_Installer_Environment{
     const PATH_TO_CACHE = './cache';
     const PATH_TO_MEDIA = './media';
+    const PATH_TO_TRASH = './trash';
 
     public function __construct() {
 
@@ -44,6 +45,14 @@ class DSF_Installer_Environment{
             return false;
         }
     }
-}
 
+    public function trashIsWritable()
+    {
+        if (is_writable(self::PATH_TO_TRASH)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
 ?>
