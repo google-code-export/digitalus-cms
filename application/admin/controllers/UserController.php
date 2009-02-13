@@ -56,8 +56,10 @@ class Admin_UserController extends Zend_Controller_Action
         $breadcrumbLabel = $this->view->GetTranslation('Open User') . ': ' . $this->view->user->first_name . ' ' . $this->view->user->last_name;
         $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/user/open/id/' . $id;
         $this->view->toolbarLinks = array();
+        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+            . '/url/admin_user_open_id_' . $id
+            . '/label/' . $this->view->GetTranslation('User') . ':' . $this->view->user->first_name . '.' . $this->view->user->last_name;
         $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = $this->getFrontController()->getBaseUrl() . '/admin/user/delete/id/' . $id;
-        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_open_id_' . $id;
     }
 
     /**

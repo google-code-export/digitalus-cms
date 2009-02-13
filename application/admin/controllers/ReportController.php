@@ -12,7 +12,6 @@ class Admin_ReportController extends Zend_Controller_Action
     {
     }
 
-
     /**
      * render the traffic report
      *
@@ -21,7 +20,9 @@ class Admin_ReportController extends Zend_Controller_Action
     {
         $breadcrumbLabel = $this->view->GetTranslation('Traffic Report');
         $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/report/traffic';
-        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_report_traffic';
+        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+            . '/url/admin_report_traffic'
+            . '/label/' . $this->view->GetTranslation('Report') . ':' . $this->view->GetTranslation('Traffic');
         $log = new TrafficLog();
         $this->view->hitsThisWeek = $log->getLogByDay();
         $this->view->hitsByWeek = $log->getLogByWeek();
@@ -35,7 +36,9 @@ class Admin_ReportController extends Zend_Controller_Action
     {
         $breadcrumbLabel = $this->view->GetTranslation('Admin Access Report');
         $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/report/admin-access';
-        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_report_admin-access';
+        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url'
+            . '/admin_report_admin-access';
+            . '/label/' . $this->view->GetTranslation('Report') . ':' . $this->view->GetTranslation('Access');
         $log = new TrafficLog();
         $this->view->accessLog = $log->adminAccess();
     }

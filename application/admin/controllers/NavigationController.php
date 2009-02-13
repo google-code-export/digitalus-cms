@@ -58,7 +58,10 @@ class Admin_NavigationController extends Zend_Controller_Action
             $label = 'Root';
         }
 
-        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_navigation_open_id_' . $menuId;
+        $this->view->toolbarLinks = array();
+        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+            . '/url/admin_navigation_open_id_' . $menuId
+            . '/label/' . $this->view->GetTranslation('Navigation') . ':' . $label;
 
         $this->view->breadcrumbs[$this->view->GetTranslation('Open Menu') . ': ' . $label] =   $this->getFrontController()->getBaseUrl() . '/admin/navigation/open/id/' . $menuId;
 
