@@ -3,32 +3,34 @@
     <controller name='site'>
         <action>index</action>
         <action>edit</action>
-		<action>traffic</action>
-		<action>admin-access</action>
-		<action>console</action>
+        <action>traffic</action>
+        <action>admin-access</action>
+        <action>console</action>
     </controller>
     <controller name="report" />
-	<controller name="page">
-		<action>index</action>
-		<action>open</action>
-		<action>edit</action>
-		<action>new</action>
-		<action>advanced-options</action>
-		<action>ajax-editor</action>
-		<action>delete</action>
-	</controller>
-	<controller name="navigation">
-		<action>open</action>
-		<action>edit</action>
-		<action>redirectors</action>
-	</controller>
-	<controller name="user" >
-		<action>my-account</action>
-		<action>create</action>
-		<action>open</action>
-		<action>edit</action>
-		<action>delete</action>
-	</controller>
+    <controller name="page">
+        <action>index</action>
+        <action>open</action>
+        <action>edit</action>
+        <action>new</action>
+        <action>advanced-options</action>
+        <action>ajax-editor</action>
+        <action>delete</action>
+    </controller>
+    <controller name="navigation">
+        <action>index</action>
+        <action>open</action>
+        <action>edit</action>
+        <action>redirectors</action>
+    </controller>
+    <controller name="user" >
+        <action>index</action>
+        <action>my-account</action>
+        <action>create</action>
+        <action>open</action>
+        <action>edit</action>
+        <action>delete</action>
+    </controller>
     <controller name='media' />
     <controller name='design' />
     <controller name='module' />
