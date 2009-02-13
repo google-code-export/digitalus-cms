@@ -7,7 +7,7 @@
 </ul>
 
 <h3><?php echo $this->GetTranslation('Copy User Permissions');?></h3>
-<p><?php echo $this->GetTranslation("If you have another user who already has the same permissions as this user you can copy that user's role.");?></p>
+<p><?php echo $this->GetTranslation('If you have another user who already has the same permissions as this user you can copy that user\'s role.');?></p>
 
 <form action='<?php echo $this->baseUrl;?>/admin/user/copy-acl' method="post">
     <?php echo $this->formHidden('id',$this->user->id);?>

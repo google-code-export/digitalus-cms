@@ -1,4 +1,4 @@
-<?php $this->placeholder("formHeadline")->set($this->GetTranslation("Update User"))?>
+<?php $this->placeholder('formHeadline')->set($this->GetTranslation('Update User'))?>
 
 <form id="general" action="<?php echo $this->baseUrl;?>/admin/user/edit" method="post">
     <fieldset>
@@ -22,7 +22,7 @@
         <?php
             echo $this->formHidden('id',$this->user->id);
             echo $this->RenderAclList($this->userPermissions);
-            echo $this->FormSubmit('update_permissions',$this->GetTranslation('Update Permissions'));
+            echo $this->FormSubmit('update_permissions', $this->GetTranslation('Update Permissions'));
         ?>
     </fieldset>
 </form>

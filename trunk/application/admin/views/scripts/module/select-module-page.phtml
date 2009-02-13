@@ -1,6 +1,6 @@
 <?php
 echo $this->FormRow(
-    'Select the module page',
+    $this->GetTranslation('Select the module page'),
     $this->SelectModulePage('moduleAction', $this->moduleName, null, array('id' => 'modulePage'))
 );
 ?>
@@ -11,5 +11,5 @@ $(document).ready(function() {
         $('#moduleFormWrapper').load('/admin/module/render-form/modulename/<?php echo $this->moduleName;?>/moduleaction/' + action);
     });
 
- });
+});
 </script>
