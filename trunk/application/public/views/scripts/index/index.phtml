@@ -2,7 +2,7 @@
 echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' . PHP_EOL;
 echo $this->doctype() . PHP_EOL;
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html<?php echo $this->isXhtml();?>>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->placeholder('charset');?>" />
         <?php
