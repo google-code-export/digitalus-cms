@@ -37,7 +37,9 @@ class Admin_SiteController extends Zend_Controller_Action
     {
         $settings = new SiteSettings();
         $this->view->settings = $settings->toObject();
-        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_site';
+        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+            . '/url/admin_site'
+            . '/label/' . $this->view->GetTranslation('Site');
     }
 
     /**

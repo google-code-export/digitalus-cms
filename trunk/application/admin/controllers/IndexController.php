@@ -57,7 +57,11 @@ class Admin_IndexController extends Zend_Controller_Action
     public function bookmarkAction()
     {
         $url = $this->_request->getParam('url');
-        $label = $this->_request->getParam('label');
+        if ($this->_request->getParam('label')) {
+            $label = $this->_request->getParam('label');
+        } else {
+            $label = $url;
+        }
         $bookmark = new Bookmark();
         $bookmark->addUsersBookmark($label, $url);
     }
