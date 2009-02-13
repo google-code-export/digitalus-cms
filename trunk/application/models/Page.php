@@ -307,9 +307,17 @@ class Page extends DSF_Db_Table
     {
     	if(!is_array($uri)) {
     		//return home page
-    		return $this->getHomePage();
+    		$id = $this->getHomePage();
     	}else{
-    		return $this->_fetchPointer($uri);
+    		$id = $this->_fetchPointer($uri);
+    	}
+    	    	
+    	//test the pointer
+    	$row = $this->find($id)->current();
+    	if($row) {
+    	   return $row->id; 
+    	}else{
+    	    return $this->get404Page();
     	}
     }
     
@@ -579,9 +587,31 @@ class Page extends DSF_Db_Table
     
     public function getHomePage()
     {
-    	$where[] = "is_home_page = 1";
-    	$row = $this->fetchRow($where);
-    	return $row->id;
+        $settings = new SiteSettings();
+        $homePage = $settings->get('home_page');
+        
+        //the home page defaults to the first page added to the CMS
+        if($homePage > 0) {
+            return $homePage;
+        }else{
+            $select = $this->select();
+            $select->order('id');
+            $defaultHomePage = $this->fetchRow($select);
+            return $defaultHomePage->id;
+        }
+    }
+    
+    public function get404Page()
+    {
+        $settings = new SiteSettings();
+        $page = $settings->get('page_not_found');
+        
+        $front = Zend_Controller_Front::getInstance();
+        if($page > 0) {
+            $response = $front->getResponse();
+            $response->setRawHeader('HTTP/1.1 404 Not Found');
+            return $page;
+        }
     }
     
     /**
