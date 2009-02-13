@@ -21,8 +21,8 @@ class ContentNode extends DSF_Db_Table
 	    }
 	    
 	    $row = $this->fetchRow($where);
-	    if($row && !empty($row->contet))  {
-	        return stripslashes($row->contet);
+	    if($row && !empty($row->content))  {
+	        return stripslashes($row->content);
 	    }
 	    
 	    return false;
