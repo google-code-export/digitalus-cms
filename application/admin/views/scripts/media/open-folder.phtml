@@ -16,10 +16,10 @@
     <legend><?php echo $this->GetTranslation('Current folder contents');?></legend>
     <?php
         $data = array(
-            'filepath'    =>    $this->filesystemPath,
-            'mediapath'    =>    $this->mediaPath,
-            'files'        =>    $this->files,
-            'folders'    =>    $this->folders
+            'filepath'  => $this->filesystemPath,
+            'mediapath' => $this->mediaPath,
+            'files'     => $this->files,
+            'folders'   => $this->folders
         );
         echo $this->partial('media/partials/file-list.phtml', $data);
     ?>
@@ -29,9 +29,9 @@
     <legend><?php echo $this->GetTranslation('Upload Files');?></legend>
     <?php
         $data = array(
-            'action' => "upload",
-            'filepath'    =>    $this->filesystemPath,
-            'mediapath'    =>    $this->mediaPath,
+            'action'    => 'upload',
+            'filepath'  => $this->filesystemPath,
+            'mediapath' => $this->mediaPath,
         );
         echo $this->partial('media/partials/upload-files.phtml', $data);
     ?>
@@ -46,9 +46,9 @@
     <legend><?php echo $this->GetTranslation('Rename folder');?></legend>
     <?php
         $data = array(
-            'filepath'    =>    $this->filesystemPath,
-            'mediapath'    =>    $this->mediaPath,
-            'label'        =>    $label
+            'filepath'  => $this->filesystemPath,
+            'mediapath' => $this->mediaPath,
+            'label'     => $label
         );
         echo $this->partial('media/partials/rename-folder.phtml', $data);
     ?>

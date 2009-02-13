@@ -1,5 +1,5 @@
 <dt>
-    <?php 
+    <?php
     echo $this->formLabel(
         $this->element->getName(),
         $this->element->getLabel()
@@ -8,54 +8,50 @@
 </dt>
 <dd class="<?php echo $this->class;?>">
 
-<?php 
+<?php
 $elementName = $this->element->getName();
 $values = $this->element->getXml();
 
 //load values as url parameters
-if($values && (string)$values->module != '0') {
- foreach ($values as $k => $v) {
-     $params[$k] = $v;
-     $params[] = $k;
-     $params[] = $v;   
- }
- $paramsString = implode('/', $params) . '/';
- $module = $values->module;
-}else{
+if ($values && (string)$values->module != '0') {
+    foreach ($values as $k => $v) {
+        $params[$k] = $v;
+        $params[] = $k;
+        $params[] = $v;
+    }
+    $paramsString = implode('/', $params) . '/';
+    $module = $values->module;
+} else {
     $module = null;
     $paramsString = null;
 }
 
 $attr = $this->element->getAttribs();
-if(!is_array($attr)) {
+if (!is_array($attr)) {
     $attr = null;
 }
 echo $this->SelectModule($elementName . "[module]", $module, $attr);
 ?>
 </dd>
 <div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper">
-<?php 
+<?php
     if(isset($values->module)){
-         $params['element'] = $elementName;
-         $params['moduleKey'] = $values->module;
-        echo $this->action('render-form','module','admin',$params);
+        $params['element'] = $elementName;
+        $params['moduleKey'] = $values->module;
+        echo $this->action('render-form', 'module', 'admin', $params);
     }
 ?>
 </div>
 <script>
 $(document).ready(function() {
-	$('#<?php echo $elementName?>-module').change(function(){
-	    var module = $(this).val();
-	    $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
-	});
- 
+    $('#<?php echo $elementName?>-module').change(function(){
+        var module = $(this).val();
+        $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
+    });
+
  });
 </script>
 
-
-<?php 
+<?php
 echo $this->formErrors($this->element->getMessages());
 ?>
-
-
-

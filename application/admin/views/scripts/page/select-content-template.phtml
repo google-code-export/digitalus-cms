@@ -5,9 +5,8 @@ DSF_View_RegisterHelpers::register($this);
 if (is_array($this->allowedTemplates)) {?>
 <h3><?php echo $this->GetTranslation('Step 2: What type of page would you like to create?')?></h3>
 <?php
-
-        //load the common helpers
-        DSF_View_RegisterHelpers::register($this);
+//load the common helpers
+DSF_View_RegisterHelpers::register($this);
 echo $this->FormRow(
     $this->GetTranslation('Select a type', null, $this),
     $this->formSelect('contentType', $this->createPageOptions->contentType, null, $this->allowedTemplates) .
