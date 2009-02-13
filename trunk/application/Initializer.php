@@ -237,6 +237,15 @@ class Initializer extends Zend_Controller_Plugin_Abstract
             foreach ($extensions as $extension) {
                 $cmsModules['mod_' . $extension] = $extension;
                 $this->_front->addControllerDirectory($this->_root .  '/application/modules/' . $extension . '/controllers', 'mod_' . $extension);
+                //translations
+                $languageFiles = $this->_config->language->translations->toArray();
+                $adapter = Zend_Registry::get('Zend_Translate');
+                foreach ($languageFiles as $key => $language) {
+                    $languagePath = $this->_root . '/application/modules/' . $extension . '/data/language/' . $languageFiles[$key] . '.csv';
+                    if (is_file($languagePath)) {
+                        $adapter->addTranslation($languagePath, $key);
+                    }
+                }
             }
         }
 
