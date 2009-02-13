@@ -94,6 +94,7 @@ Content;Inhalt
 Managing Content;Inhalte verwalten
 Menu links;Menü Links
 Automatically add menu links;Automatisch Links ins Menü einfügen
+Update Page Meta Data;Aktualisiere Meta Daten der Seite
 Internationalization;Internationalisierung
 Default locale;Standard Lokalisierung
 Default language;Standard Sprache
@@ -211,7 +212,8 @@ Value;Wert
 Add a new property;Eigenschaft hinzufügen
 Remove;entfernen
 Update properties;Eigenschaften aktualiseren
-Make Home Page;Als Homepage setzen
+Home Page;Startseite
+404 Page;404 Fehlerseite
 Design;Design
 Page Design;Seiten Design
 Current design;Aktuelles Design
@@ -306,7 +308,6 @@ CMS Modules;CMS Module
 Digitalus CMS uses a system of modules to add custom functionality to your site.;Digitalus CMS verwendet ein System von Modulen, um der Website maßgeschneiderte Funktionalitäten hinzuzufügen.
 Module Browser;Modul-Browser
 Sign up for newsletter;Anmeldung zum Newsletter
-
 Headline;Überschrift
 Tagline;Stichwörter
 Content Above;Inhalt über Modul
@@ -320,6 +321,7 @@ Contact;Kontakt
 Imprint;Impressum
 latest update;zuletzt geändert am
 
+# ----- view helper -----
 language;Sprache
 You are reading this page in;Sie lesen dies in
-This page is also translated into; Diese Seite wurde in folgende Sprachen übersetzt
+This page is also translated into;Diese Seite wurde in folgende Sprachen übersetzt:
