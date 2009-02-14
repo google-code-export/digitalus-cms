@@ -24,7 +24,21 @@ class Page extends DSF_Db_Table
     
     public function getCurrentUsersPages()
     {
-        return null;
+        $user = new User();
+        $currentUser = $user->getCurrentUser();
+        if($currentUser) {
+            $select = $this->select();
+            $select->where('author_id = ?', $currentUser->id);
+            $select->where('namespace = ?', $this->_namespace);
+            $pages = $this->fetchAll($select);
+            if($pages->count() > 0) {
+                return $pages; 
+            }else{
+                return null;
+            }
+        }else{
+            throw new Zend_Exception("There is no user logged in currently");
+        }
     }
     
     public function createPage($pageName, $parentId = 0, $contentTemplate = null, $showOnMenu = null ) 
