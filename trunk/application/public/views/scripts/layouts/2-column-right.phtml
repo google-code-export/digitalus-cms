@@ -3,8 +3,8 @@ $grid = new DSF_Interface_Grid('page', 16);
 $header = $grid->addElement('header', 16);
     $logo = $header->addElement('header_logo', 10);
     $logo->setAttribute('first', true);
-    $search = $header->addElement('header_search',6);
-    $search->setAttribute('last', true);
+    $top = $header->addElement('header_top',6);
+    $top->setAttribute('last', true);
 $header->setAttribute('clear', true);
     
 $nav = $grid->addElement('nav', 16);
@@ -24,8 +24,8 @@ $this->placeholder('header_logo_content')->set(
     "<a href='http://digitaluscms.com'><img src='" . $this->baseUrl . "/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
 );
 
-$this->placeholder('header_search_content')->set(
-    'search form'
+$this->placeholder('header_top_content')->set(
+    ''
 );
 
 if(is_object($this->page) && $this->isError != true) {
