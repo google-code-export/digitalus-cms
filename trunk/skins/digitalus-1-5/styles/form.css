@@ -422,8 +422,9 @@ margin-left:10px;
 
 .wysiwyg{
 clear:both;
-width:510px;
+width:480px;
 height:300px;
+margin-bottom:20px;
 }
 
 .html, .wiki, .css{
