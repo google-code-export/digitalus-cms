@@ -20,7 +20,22 @@ class Design extends Zend_Db_Table
 		$row->name = $name;
 		$row->notes = $notes;
 		$row->layout = $layout;
-		$row->styles =	serialize($stylesheets);
+		
+		
+	    $xml = new SimpleXMLElement('<styles />');
+		if(is_array($stylesheets)) {
+		    foreach ($stylesheets as $skin => $styles) {
+		        if(is_array($styles)) {
+		            $currentSkin = $xml->addChild($skin);
+		            foreach ($styles as $stylesheet) {
+		                $currentSkin->addChild('stylesheet', $stylesheet);
+		            }
+		        }
+		    }
+		}
+		$strXml = $xml->asXML();
+		
+		$row->styles =	$strXml;
 		$row->inline_styles = $inlineStyles;
 		if($isDefault == 1) {
 		    $this->_resetDefault();
@@ -96,14 +111,23 @@ class Design extends Zend_Db_Table
 	public function getStylesheets()
 	{
 		if(!empty($this->_design->styles)) {
-			return unserialize($this->_design->styles);
+		    $stylesArray = array();
+		    $xml = simplexml_load_string($this->_design->styles);
+		    foreach ($xml as $skin => $styles) {
+		        $strSkin = (string)$skin;
+		        foreach ($styles as $stylesheet) {
+		            $strStylesheet = (string)$stylesheet;
+		            $stylesArray[$strSkin][] = $strStylesheet;
+		        }
+		    }
+		    return $stylesArray;
 		}
 	}
 	
 	public function getInlineStyles()
 	{
 		if(!empty($this->_design->inline_styles)) {
-			return unserialize($this->_design->inline_styles);
+			return $this->_design->inline_styles;
 		}
 	}
 	
