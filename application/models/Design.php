@@ -41,7 +41,14 @@ class Design extends Zend_Db_Table
 	{
 	    $select = $this->select();
 	    $select->where("is_default = 1");
-	    return $this->fetchRow($select);
+	    $row = $this->fetchRow($select);
+	    if($row) {
+	        return $row;
+	    }else{
+	        $defaultSelect = $this->select();
+	        $defaultSelect->order('id');
+	        return $this->fetchRow($defaultSelect);
+	    }
 	}
 		
     protected  function _resetDefault()
