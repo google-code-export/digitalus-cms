@@ -149,20 +149,20 @@ class DSF_Uri
             $uriString = $uri->getAbsolute();
         }
         if($stripParams == false) {
-            $existingParams = $uri->getParams();
-            $paramsString = null;
-            if(is_array($existingParams)) {
-                 foreach ($existingParams as $k => $v) {
-                     $paramsString .= '/' . $k . '/' . $v;   
-                 }
-            }
+            $params = $uri->getParams();
         }
         if(is_array($addParams)) {
-             foreach ($addParams as $k => $v) {
+            foreach ($addParams as $k => $v) {
+                $params[$k] = $v;
+            }
+        }
+        $paramsString = null;
+        if(is_array($params)){
+             foreach ($params as $k => $v) {
                  $paramsString .= '/' . $k . '/' . $v;   
              }
         }
-        
+
         if($paramsString != null) {
             $uriString .= '/p' . $paramsString;
         }
