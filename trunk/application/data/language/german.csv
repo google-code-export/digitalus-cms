@@ -5,7 +5,7 @@ Role;Rolle
 Log Out;Abmelden
 Log In;Anmelden
 Login;Anmelden
-Home;Home
+Home;Start
 Site;Website
 Pages;Seiten
 Navigation;Navigation
@@ -18,11 +18,11 @@ value;Wert
 # ----- toolbar -----
 You are here;Sie befinden sich hier
 Add to my bookmarks;Zu Favoriten hinzufügen
+Your bookmark was saved successfully.;Das Lesezeichen wurde erfolgreich gespeichert.
 Delete;Entfernen
 
 # ----- admin home -----
-Digitalus CMS is a community supported open source project. To learn more about the project check out:;Digitalus CMS ist ein von der Gemeinschaft unterstütztes
-Projekt. Gehe zu folgenden Links, um mehr darüber zu lernen:
+Digitalus CMS is a community supported open source project. To learn more about the project check out;Digitalus CMS ist ein von der Gemeinschaft unterstütztes Projekt. Gehe zu folgenden Links, um mehr darüber zu lernen
 Digitalus Site;Digitalus Seite
 Wiki;Wiki
 Forum;Forum
@@ -71,11 +71,11 @@ Update Permissions;Befugnisse aktualisieren
 Copy User Permissions;Befugnisse kopieren
 Select User;Benutzer auswählen
 
-
 # ----- admin_site -----
 The site sections is where you manage your site.;Im Website Abschnitt wird deine Website verwaltet.
 Admin Users;Admin Benutzer
 Create new user;Neuen Benutzer erzeugen
+Open User;Benutzer bearbeiten
 Site Reports;Website Reports
 Traffic report;Traffic Report
 Admin access report;Admin Zugriffsreport
@@ -98,10 +98,11 @@ Update Page Meta Data;Aktualisiere Meta Daten der Seite
 Internationalization;Internationalisierung
 Default locale;Standard Lokalisierung
 Default language;Standard Sprache
+Default charset;Standard Zeichensatz
 english;Englisch
 french;Französisch
 german;Deutsch
-Default charset;Standard Zeichensatz
+polish;Polnisch
 Date format;Datumsformat
 Currency format;Währungsformat
 Mail Settings;Mail Einstellungen
@@ -128,7 +129,6 @@ Update Internationalization Settings;Internationalisierungs-Einstellungen aktual
 Update Mail Settings;Email einstellungen aktualisieren
 Update Google Settings;Google Einstellungen aktualisieren
 System Console;System Konsole
-System Console;System Konsole
 About the Console;Über die Konsole
 Info;Info
 Run;Programmablauf
@@ -137,7 +137,6 @@ The console...;Die Konsole ...
 # ----- admin_user -----
 Update User;Benutzer aktualisieren
 Create User;Benutzer erzeugen
-Update User;Benutzer aktualisieren
 Options;Optionen
 User;Benutzer
 First Name;Vorname
@@ -197,7 +196,6 @@ Update Page;Seite aktualisieren
 Page Options;Seiten Optionen
 Page Versions;Seiten Versionen
 Edit Content;Inhalt bearbeiten
-Page Name:;Seitenname:
 Teaser:;Lockmittel:
 Edit Meta Data;Meta-Daten aktualisieren
 Page Head and Meta Data;Seiten Head- und Meta-Daten
@@ -229,7 +227,6 @@ Current Version;Aktuelle Version
 Available Versions;Vorhandene Versionen
 Open Page;Seite öffnen
 Delete Page;Seite entfernen
-Open Page;Seite öffnen
 Edit Options;Optionen editieren
 Page Details;Seiten Details
 Search and Meta Tags;Such- und Meta-Tags
@@ -271,7 +268,8 @@ Open Folder;Verzeichnis öffnen
 Current Folder;Aktuelles Verzeichnis
 Current folder contents;Aktuelles Verzeichnis Inhalt
 Subfolders;Unterverzeichnisse
-Full path:;Voller Verzeichnispfad
+Full path;Ganzer Pfad
+Files;Dateien
 Browse Folder;Verzeichnis durchsuchen
 Upload Media;Medien hochladen
 Upload Files;Dateien hochladen
@@ -311,15 +309,10 @@ Sign up for newsletter;Anmeldung zum Newsletter
 Headline;Überschrift
 Tagline;Stichwörter
 Content Above;Inhalt über Modul
+Select a module;Wähle eine Modul aus
 Select a module page;Wähle eine Modul Seite aus
 Enter the recipients email;Email-Adresse des Empfängers
 Content below;Inhalt unter Modul
-
-# ----- custom translations -----
-Login;Anmelden
-Contact;Kontakt
-Imprint;Impressum
-latest update;zuletzt geändert am
 
 # ----- view helper -----
 language;Sprache
