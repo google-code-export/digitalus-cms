@@ -23,6 +23,10 @@
             $this->GetTranslation('404 Page'),
             $this->SelectPage('setting[page_not_found]', $this->settings->page_not_found)
         );
+        echo $this->FormRow(
+            $this->GetTranslation('Site Offline Page'),
+            $this->SelectPage('setting[offline_page]', $this->settings->offline_page)
+        );
         echo $this->FormRow($this->GetTranslation('Menu links'),
             $this->formCheckbox('setting[add_menu_links]', intval($this->settings->add_menu_links)) . ' ' .
             $this->GetTranslation('Automatically add menu links')

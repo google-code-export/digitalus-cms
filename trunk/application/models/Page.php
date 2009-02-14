@@ -305,20 +305,26 @@ class Page extends DSF_Db_Table
     
     public function fetchPointer($uri)
     {
-    	if(!is_array($uri)) {
-    		//return home page
-    		$id = $this->getHomePage();
-    	}else{
-    		$id = $this->_fetchPointer($uri);
-    	}
-    	    	
-    	//test the pointer
-    	$row = $this->find($id)->current();
-    	if($row) {
-    	   return $row->id; 
-    	}else{
-    	    return $this->get404Page();
-    	}
+        $settings = new SiteSettings();
+        $isOnline = $settings->get('online');
+        if($isOnline == 0) {
+            return $this->getOfflinePage();
+        }else{        
+        	if(!is_array($uri)) {
+        		//return home page
+        		$id = $this->getHomePage();
+        	}else{
+        		$id = $this->_fetchPointer($uri);
+        	}
+        	    	
+        	//test the pointer
+        	$row = $this->find($id)->current();
+        	if($row) {
+        	   return $row->id; 
+        	}else{
+        	    return $this->get404Page();
+        	}
+        }
     }
     
     /**
@@ -617,6 +623,12 @@ class Page extends DSF_Db_Table
             $response->setRawHeader('HTTP/1.1 404 Not Found');
             return $page;
         }
+    }
+    
+    public function getOfflinePage()
+    {
+        $settings = new SiteSettings();
+        return $settings->get('offline_page');
     }
     
     /**
