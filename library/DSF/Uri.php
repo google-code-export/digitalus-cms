@@ -148,6 +148,7 @@ class DSF_Uri
         } else {
             $uriString = $uri->getAbsolute();
         }
+        $params = array();
         if($stripParams == false) {
             $params = $uri->getParams();
         }
