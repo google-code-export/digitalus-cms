@@ -11,10 +11,13 @@ $nav = $grid->addElement('nav', 16);
 $nav->setAttribute('clear', true);
 
 $body = $grid->addElement('body', 16);
-    $content = $body->addElement('content', 16);
-    $content->setAttribute('clear', true);
-
-    $language = $body->addElement('language', 16);
+	$sidebarLeft = $body->addElement('sidebar_left', 4);
+    $sidebarLeft->setAttribute('first', true);
+    $content = $body->addElement('content', 12);
+    $content->setAttribute('last', true);
+    
+    $language = $content->addElement('language', 12);
+    $language->setAttribute('first', true);
 	$language->setAttribute('clear', true);
 $body->setAttribute('clear', true);
 
@@ -40,7 +43,7 @@ $this->placeholder('nav_content')->set(
     $this->RenderMenu(0)
 );
 
-$this->placeholder('sidebar_content')->set(
+$this->placeholder('sidebar_left_content')->set(
     $this->submenu
 );
 

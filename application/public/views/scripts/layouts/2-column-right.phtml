@@ -11,11 +11,10 @@ $nav = $grid->addElement('nav', 16);
 $nav->setAttribute('clear', true);
 
 $body = $grid->addElement('body', 16);
-    $content = $body->addElement('content', 16);
-    $content->setAttribute('clear', true);
-
-    $language = $body->addElement('language', 16);
-	$language->setAttribute('clear', true);
+    $content = $body->addElement('content', 13);
+    $content->setAttribute('first', true);
+    $sidebarRight = $body->addElement('sidebar_right', 3);
+    $sidebarRight->setAttribute('last', true);
 $body->setAttribute('clear', true);
 
 $footer = $grid->addElement('footer', 16);
@@ -40,11 +39,12 @@ $this->placeholder('nav_content')->set(
     $this->RenderMenu(0)
 );
 
-$this->placeholder('sidebar_content')->set(
-    $this->submenu
-);
+##Not used
+#$this->placeholder('sidebar_left_content')->set(
+#    $this->submenu
+#);
 
-$this->placeholder('language_content')->set('language' . $this->ListLanguageLinks());
+$this->placeholder('sidebar_right_content')->set('language' . $this->ListLanguageLinks());
 
 $this->placeholder('footer_content')->set(
     $this->partial('partials/footer.phtml')
