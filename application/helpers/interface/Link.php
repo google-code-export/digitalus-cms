@@ -25,6 +25,7 @@ class DSF_View_Helper_Interface_Link {
      */
     public function link($label, $link, $icon = null, $class = 'link')
     {
+        $link = $this->view->baseUrl . $link;
         $config = Zend_Registry::get('config');
         $this->iconPath = $config->filepath->icons;
         $linkParts[] = "<a href='{$link}' class='{$class}'>";
