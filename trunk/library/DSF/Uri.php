@@ -140,14 +140,35 @@ class DSF_Uri
         return $this->_base . $uri;
     }
 
-    public static function get($relative = true)
+    public static function get($relative = true, $stripParams = true, $addParams = null)
     {
         $uri = new DSF_Uri();
         if ($relative) {
-            return $uri->getRelative();
+            $uriString = $uri->getRelative();
         } else {
-            return $uri->getAbsolute();
+            $uriString = $uri->getAbsolute();
         }
-
+        if($stripParams == false) {
+            $existingParams = $uri->getParams();
+            $paramsString = null;
+            if(is_array($existingParams)) {
+                 foreach ($existingParams as $k => $v) {
+                     $paramsString .= '/' . $k . '/' . $v;   
+                 }
+            }
+        }
+        if(is_array($addParams)) {
+             foreach ($addParams as $k => $v) {
+                 $paramsString .= '/' . $k . '/' . $v;   
+             }
+        }
+        
+        if($paramsString != null) {
+            $uriString .= '/p' . $paramsString;
+        }
+        return $uriString;
+        
     }
+    
+    
 }
