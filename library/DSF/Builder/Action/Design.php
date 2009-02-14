@@ -51,11 +51,11 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
 
     public function setStyles()
     {
+        $view = $this->_page->getView();
         $design = $this->_page->getDesign();
         //the design model returns the stylesheets organized by skin
         $skins = $design->getStylesheets();
         if (is_array($skins)) {
-            $view = $this->_page->getView();
             foreach ($skins as $skin => $styles) {
                 if (is_array($styles)) {
                     foreach ($styles as $style) {
@@ -63,6 +63,10 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
                     }
                 }
             }
+        }
+        $inlineStyles = $design->getInlineStyles();
+        if($inlineStyles) {
+            $view->headStyle()->setStyle($inlineStyles);
         }
     }
 
