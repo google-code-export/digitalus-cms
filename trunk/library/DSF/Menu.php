@@ -25,7 +25,7 @@ class DSF_Menu {
     {
         $page = new Page();
         $children = $page->getChildren($this->_parentId);
-        if ($children->count() > 0) {
+        if ($children != null && $children->count() > 0) {
             foreach ($children as $child) {
                 if ($child->show_on_menu == 1) {
                     $this->items[] = new DSF_Menu_Item($child);
