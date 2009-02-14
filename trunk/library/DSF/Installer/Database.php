@@ -170,6 +170,7 @@ class DSF_Installer_Database{
               `create_date` int(11) default null,
               `publish_date` int(11) default null,
               `archive_date` int(11) default null,
+              `publish_level` int(11) default null,              
               `name` varchar(250) default null,
               `label` varchar(250) default null,
               `namespace` varchar(100) default null,
