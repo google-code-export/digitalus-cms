@@ -340,7 +340,12 @@ class Page extends DSF_Db_Table
             $order = "position ASC";
         }
         
-        return $this->fetchAll($where, $order);
+        $result = $this->fetchAll($where, $order);
+        if($result->count() > 0) {
+            return $result;
+        }else{
+            return null;
+        }
     }
     
     public function getPages($treeItems)
