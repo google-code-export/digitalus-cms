@@ -35,12 +35,15 @@ class DSF_View_Helper_Internationalization_ListLanguageLinks {
             foreach ($availableLanguages as $locale => $name) {
                 if (!empty($locale) && $locale != $currentLanguage) {
                     $url = $base. '/p/lang/' . $locale;
-                    $languageLinks[] = '<a href="' . $url . '">' . $name . '</a>';
+                    $languageLinks[] = '<a href="' . $url . '">' . $this->view->GetTranslation($name) . '</a>';
                 }
             }
 
             if (is_array($languageLinks) && count($languageLinks) > 0) {
-                $xhtml .= ' ' . $this->view->GetTranslation('This page is also translated into') . ' ' . implode(', ' , $this->view->GetTranslation($languageLinks));
+                foreach ($languageLinks as $language) {
+                    $languageLinksTranslated[] = $this->view->GetTranslation($language);
+                }
+                $xhtml .= ' ' . $this->view->GetTranslation('This page is also translated into') . ' ' . implode(', ', $languageLinks);
             }
         }
 
