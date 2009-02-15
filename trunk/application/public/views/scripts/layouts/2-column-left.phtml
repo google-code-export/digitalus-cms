@@ -1,4 +1,4 @@
-<?php 
+<?php
 $grid = new DSF_Interface_Grid('page', 16);
 $header = $grid->addElement('header', 16);
     $logo = $header->addElement('header_logo', 10);
@@ -6,19 +6,19 @@ $header = $grid->addElement('header', 16);
     $top = $header->addElement('header_top',6);
     $top->setAttribute('last', true);
 $header->setAttribute('clear', true);
-    
+
 $nav = $grid->addElement('nav', 16);
 $nav->setAttribute('clear', true);
 
 $body = $grid->addElement('body', 16);
-	$sidebarLeft = $body->addElement('sidebar_left', 4);
+    $sidebarLeft = $body->addElement('sidebar_left', 4);
     $sidebarLeft->setAttribute('first', true);
     $content = $body->addElement('content', 12);
     $content->setAttribute('last', true);
-    
+
     $language = $content->addElement('language', 12);
     $language->setAttribute('first', true);
-	$language->setAttribute('clear', true);
+    $language->setAttribute('clear', true);
 $body->setAttribute('clear', true);
 
 $footer = $grid->addElement('footer', 16);
@@ -32,7 +32,7 @@ $this->placeholder('header_top_content')->set(
     ''
 );
 
-if(is_object($this->page) && $this->isError != true) {
+if (is_object($this->page) && $this->isError != true) {
     $this->content = $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent());
     $this->submenu = $this->RenderSubmenu();
 }
@@ -47,7 +47,7 @@ $this->placeholder('sidebar_left_content')->set(
     $this->submenu
 );
 
-$this->placeholder('language_content')->set('language' . $this->ListLanguageLinks());
+$this->placeholder('language_content')->set($this->GetTranslation('language') . $this->ListLanguageLinks());
 
 $this->placeholder('footer_content')->set(
     $this->partial('partials/footer.phtml')
