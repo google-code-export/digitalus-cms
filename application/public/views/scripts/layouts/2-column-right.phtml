@@ -1,4 +1,4 @@
-<?php 
+<?php
 $grid = new DSF_Interface_Grid('page', 16);
 $header = $grid->addElement('header', 16);
     $logo = $header->addElement('header_logo', 10);
@@ -6,7 +6,7 @@ $header = $grid->addElement('header', 16);
     $top = $header->addElement('header_top',6);
     $top->setAttribute('last', true);
 $header->setAttribute('clear', true);
-    
+
 $nav = $grid->addElement('nav', 16);
 $nav->setAttribute('clear', true);
 
@@ -28,7 +28,7 @@ $this->placeholder('header_top_content')->set(
     ''
 );
 
-if(is_object($this->page) && $this->isError != true) {
+if (is_object($this->page) && $this->isError != true) {
     $this->content = $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent());
     $this->submenu = $this->RenderSubmenu();
 }
@@ -44,7 +44,7 @@ $this->placeholder('nav_content')->set(
 #    $this->submenu
 #);
 
-$this->placeholder('sidebar_right_content')->set('language' . $this->ListLanguageLinks());
+$this->placeholder('sidebar_right_content')->set($this->GetTranslation('language') . $this->ListLanguageLinks());
 
 $this->placeholder('footer_content')->set(
     $this->partial('partials/footer.phtml')
