@@ -196,6 +196,7 @@ Update Page;Seite aktualisieren
 Page Options;Seiten Optionen
 Page Versions;Seiten Versionen
 Edit Content;Inhalt bearbeiten
+Title;Titel
 Teaser:;Lockmittel:
 Edit Meta Data;Meta-Daten aktualisieren
 Page Head and Meta Data;Seiten Head- und Meta-Daten
@@ -212,6 +213,8 @@ Remove;entfernen
 Update properties;Eigenschaften aktualiseren
 Home Page;Startseite
 404 Page;404 Fehlerseite
+Site Offline Page;Website offline Seite
+Site Offline;Website offline
 Design;Design
 Page Design;Seiten Design
 Current design;Aktuelles Design
@@ -318,3 +321,5 @@ Content below;Inhalt unter Modul
 language;Sprache
 You are reading this page in;Sie lesen dies in
 This page is also translated into;Diese Seite wurde in folgende Sprachen übersetzt:
+
+last update;zuletzt geändert am
