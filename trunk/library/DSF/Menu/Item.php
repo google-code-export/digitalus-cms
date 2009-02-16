@@ -64,10 +64,16 @@ class DSF_Menu_Item {
 
     public function asHyperlink($id = null, $class = null)
     {
+        if (isset($id) && !empty($id)) {
+            $id = 'id="' . $id . '"';
+        }
+        if (isset($class) && !empty($class)) {
+            $class = 'class="' . $class . '"';
+        }
         $cleanLink = DSF_Toolbox_String::addHyphens($this->link);
         $front = Zend_Controller_Front::getInstance();
         $baseUrl = $front->getBaseUrl();
-        return "<a href='" . $baseUrl . "/{$cleanLink}' id='{$id}' class='{$class}'>$this->label</a>";
+        return "<a href='" . $baseUrl . "/{$cleanLink}' {$id} {$class}>$this->label</a>";
     }
 }
 
