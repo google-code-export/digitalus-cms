@@ -63,7 +63,7 @@ class Admin_NavigationController extends Zend_Controller_Action
             . '/url/admin_navigation_open_id_' . $menuId
             . '/label/' . $this->view->GetTranslation('Navigation') . ':' . $label;
 
-        $this->view->breadcrumbs[$this->view->GetTranslation('Open Menu') . ': ' . $label] =   $this->getFrontController()->getBaseUrl() . '/admin/navigation/open/id/' . $menuId;
+        $this->view->breadcrumbs[$this->view->GetTranslation('Open Menu') . ': ' . $this->view->GetTranslation($label)] =   $this->getFrontController()->getBaseUrl() . '/admin/navigation/open/id/' . $menuId;
 
         //fetch the menu
         $this->view->menuId = $menuId;
