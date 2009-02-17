@@ -29,7 +29,13 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
     <?php foreach ($this->bookmarks as $bookmark) {?>
         <li><?php
             echo $this->link(null, $this->baseUrl . '/admin/index/delete-bookmark/id/' . $bookmark->id, 'link_delete.png', 'clear');
-            echo $this->link($bookmark->node, $this->baseUrl . '/' . DSF_Toolbox_String::stripUnderscores($bookmark->content));
+            $content = $bookmark->content;
+            if (strpos($content, 'mod_') == 0) {
+                $content = str_replace('mod_', '', $content);
+                $content = DSF_Toolbox_String::stripUnderscores($content);
+                $content = 'mod_' . $content;
+            }
+            echo $this->link($bookmark->node, $this->baseUrl . '/' . $content);
         ?></li>
     <?php } ?>
     </ul>
