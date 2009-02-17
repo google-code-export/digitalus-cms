@@ -18,7 +18,12 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
                 $submenu = false;
             }
 
-            $links[] = '<li class="menuItem">' . $this->view->link($child->name, $link . $child->id, $icon) . $submenu . '</li>';
+            if (isset($child->label) && !empty($child->label)) {
+                $label = $child->label;
+            } else {
+                $label = $child->name;
+            }
+            $links[] = '<li class="menuItem">' . $this->view->link($label, $link . $child->id, $icon) . $submenu . '</li>';
         }
 
         if (is_array($links)) {

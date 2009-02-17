@@ -139,7 +139,12 @@ class Admin_PageController extends Zend_Controller_Action
 
         $this->view->design = $page->getDesign($pageId);
 
-        $this->view->breadcrumbs[$this->view->GetTranslation('Open') . ': ' . $currentPage->page->name] = $this->getFrontController()->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
+        if (isset($currentPage->page->label) && !empty($currentPage->page->label)) {
+            $label = $currentPage->page->label;
+        } else {
+            $label = $currentPage->page->name;
+        }
+        $this->view->breadcrumbs[$this->view->GetTranslation('Open') . ': ' . $label] = $this->getFrontController()->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
         $this->view->toolbarLinks = array();
         $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_page_edit_id_' . $pageId
