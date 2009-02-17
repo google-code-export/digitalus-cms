@@ -1,189 +1,189 @@
 <?php
 require_once 'application/models/ContentNode.php';
 
-class Page extends DSF_Db_Table 
+class Page extends DSF_Db_Table
 {
-    protected $_name = "pages";
-    protected $_namespace = "content";
- 	protected $_defaultTemplate = "base_page";
- 	protected $_defaultPageName = "New Page";
- 	protected $_ignoredFields = array('update','version'); //these are the fields that are not saved as nodes
- 	
- 	public function getContent($uri, $version = null)
- 	{
- 	    if($version == null) {
+    protected $_name = 'pages';
+    protected $_namespace = 'content';
+    protected $_defaultTemplate = 'base_page';
+    protected $_defaultPageName = 'New Page';
+    protected $_ignoredFields = array('update','version'); //these are the fields that are not saved as nodes
+
+    public function getContent($uri, $version = null)
+    {
+        if ($version == null) {
             $version = $this->getDefaultVersion();
         }
-        
- 		$uriObj = new DSF_Uri($uri);
- 		$pointer = $this->fetchPointer($uriObj->toArray());
- 		$node = new ContentNode();
-		//fetch the content nodes
-		return $node->fetchContentArray($pointer, null, null, $version);
- 	}
-    
+
+        $uriObj = new DSF_Uri($uri);
+        $pointer = $this->fetchPointer($uriObj->toArray());
+        $node = new ContentNode();
+        //fetch the content nodes
+        return $node->fetchContentArray($pointer, null, null, $version);
+    }
+
     public function getCurrentUsersPages()
     {
         $user = new User();
         $currentUser = $user->getCurrentUser();
-        if($currentUser) {
+        if ($currentUser) {
             $select = $this->select();
             $select->where('author_id = ?', $currentUser->id);
             $select->where('namespace = ?', $this->_namespace);
             $pages = $this->fetchAll($select);
-            if($pages->count() > 0) {
-                return $pages; 
-            }else{
+            if ($pages->count() > 0) {
+                return $pages;
+            } else {
                 return null;
             }
-        }else{
-            throw new Zend_Exception("There is no user logged in currently");
+        } else {
+            throw new Zend_Exception('There is no user logged in currently');
         }
     }
-    
-    public function createPage($pageName, $parentId = 0, $contentTemplate = null, $showOnMenu = null ) 
+
+    public function createPage($pageName, $parentId = 0, $contentTemplate = null, $showOnMenu = null )
     {
-    	if(empty($pageName)) {
-    		$pageName = $this->_defaultPageName;
-    	}
-    	
-    	if($contentTemplate == null) {
-    		$contentTemplate = $this->_defaultTemplate;
-    	}
-    	
-    	if($showOnMenu !== null) {
-    	    if($showOnMenu == true) {
-    	        $makeMenuLinks = 1;
-    	    }else{
-    	        $makeMenuLinks = 0;
-    	    }
-    	}else{
-        	$settings = new SiteSettings();
-        	$makeMenuLinks = $settings->get('add_menu_links');
-    	}
-    	
+        if (empty($pageName)) {
+            $pageName = $this->_defaultPageName;
+        }
+
+        if ($contentTemplate == null) {
+            $contentTemplate = $this->_defaultTemplate;
+        }
+
+        if ($showOnMenu !== null) {
+            if ($showOnMenu == true) {
+                $makeMenuLinks = 1;
+            } else {
+                $makeMenuLinks = 0;
+            }
+        } else {
+            $settings = new SiteSettings();
+            $makeMenuLinks = $settings->get('add_menu_links');
+        }
+
         $u = new User();
-		$user = $u->getCurrentUser();
-		if($user) {
-		    $userId = $user->id;
-		}else{
-		    $userId = 0;
-		}
+        $user = $u->getCurrentUser();
+        if ($user) {
+            $userId = $user->id;
+        } else {
+            $userId = 0;
+        }
 
-    	//first create the new page
-    	$data = array(
-    	    'namespace'			=>  $this->_namespace,
-    	    'create_date'		=>  time(),
-    	    'author_id'			=>  $userId,
-    		'name'  			=>	$pageName,
-    		'content_template'	=>	$contentTemplate,
-			'parent_id'			=>	$parentId,
-    	    'show_on_menu'		=>  $makeMenuLinks				
-    	);
-    	$this->insert($data);
-    	$id = $this->_db->lastInsertId();
+        //first create the new page
+        $data = array(
+            'namespace'         =>  $this->_namespace,
+            'create_date'       =>  time(),
+            'author_id'         =>  $userId,
+            'name'              =>  $pageName,
+            'content_template'  =>  $contentTemplate,
+            'parent_id'         =>  $parentId,
+            'show_on_menu'      =>  $makeMenuLinks
+        );
+        $this->insert($data);
+        $id = $this->_db->lastInsertId();
 
-    	$this->_flushCache();
-    	
-    	//return the new page
-    	return $this->find($id)->current();
-    	
+        $this->_flushCache();
+
+        //return the new page
+        return $this->find($id)->current();
+
     }
-    
+
     public function getTemplate($pageId)
     {
-    	$currentPage = $this->find($pageId)->current();
-    	if($currentPage) {
-    		return $currentPage->content_template;
-    	}    	
+        $currentPage = $this->find($pageId)->current();
+        if ($currentPage) {
+            return $currentPage->content_template;
+        }
     }
-    
+
     public function open($pageId, $version = null)
     {
-        if($version == null) {
+        if ($version == null) {
             $version = $this->getDefaultVersion();
         }
-        
-    	$currentPage = $this->find($pageId)->current();
-    	if($currentPage) {
-    		$page = new stdClass();
-    		$page->page = $currentPage;
-    		
-    		$node = new ContentNode();
 
-    		//fetch the content nodes
-    		$page->content = $node->fetchContentArray($pageId, null, null, $version);
-    		$page->defaultContent = $node->fetchContentArray($pageId, null, null, $this->getDefaultVersion());
-    		
-    		return $page;   		
-    	}else{
-    		return null;
-    	}
+        $currentPage = $this->find($pageId)->current();
+        if ($currentPage) {
+            $page = new stdClass();
+            $page->page = $currentPage;
+
+            $node = new ContentNode();
+
+            //fetch the content nodes
+            $page->content = $node->fetchContentArray($pageId, null, null, $version);
+            $page->defaultContent = $node->fetchContentArray($pageId, null, null, $this->getDefaultVersion());
+
+            return $page;
+        } else {
+            return null;
+        }
     }
-    
+
     public function pageExists(DSF_Uri $uri)
-    {     
-        if($this->_fetchPointer($uri->toArray(), 0) || $uri == null) {
+    {
+        if ($this->_fetchPointer($uri->toArray(), 0) || $uri == null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
     public function edit($pageArray)
     {
-    	$pageId = $pageArray['page_id'];
-    	if(!$pageId) {
-    		throw new Zend_Exception("Invalid Page: No key found for id");
-    	}else{
-    		unset($pageArray['page_id']);
-    		$name = $pageArray['name'];
-    		unset($pageArray['name']);
-    		
-    		//save the page details
-    		$currentPage = $this->find($pageId)->current();
-    		if(!$currentPage) {
-    			throw new Zend_Exception("Could not load page");
-    		}else{
-    			$currentPage->name = $name;
-    			$currentPage->save();
-    		}
-    		
-    		//page version
-    		if(isset($pageArray['version']) && !empty($pageArray['version'])) {
-    		    $version = $pageArray['version'];
-    		}else{
-    		    $siteSettings = new SiteSettings();
-    		    $version = $this->getDefaultVersion();
-    		}    		
-    		//update the content
-    		$contentNode = new ContentNode();
-    		
-    		if(count($pageArray) > 0) {
-    			foreach ($pageArray as $node => $content) {
-    			    if(!in_array($node, $this->_ignoredFields)) { 
-    				    $contentNode->set($pageId,$node, $content, $version);
-    			    }
-    			}
-    		}
-    		
-    		$this->_flushCache();
-    		return $this->open($pageId, $version);
-    	}
+        $pageId = $pageArray['page_id'];
+        if (!$pageId) {
+            throw new Zend_Exception('Invalid Page: No key found for id');
+        } else {
+            unset($pageArray['page_id']);
+            $name = $pageArray['name'];
+            unset($pageArray['name']);
+
+            //save the page details
+            $currentPage = $this->find($pageId)->current();
+            if (!$currentPage) {
+                throw new Zend_Exception('Could not load page');
+            } else {
+                $currentPage->name = $name;
+                $currentPage->save();
+            }
+
+            //page version
+            if (isset($pageArray['version']) && !empty($pageArray['version'])) {
+                $version = $pageArray['version'];
+            } else {
+                $siteSettings = new SiteSettings();
+                $version = $this->getDefaultVersion();
+            }
+            //update the content
+            $contentNode = new ContentNode();
+
+            if (count($pageArray) > 0) {
+                foreach ($pageArray as $node => $content) {
+                    if (!in_array($node, $this->_ignoredFields)) {
+                        $contentNode->set($pageId,$node, $content, $version);
+                    }
+                }
+            }
+
+            $this->_flushCache();
+            return $this->open($pageId, $version);
+        }
     }
-    
+
     public function getVersions($pageId)
     {
         $node = new ContentNode();
-        return $node->getVersions("page_" . $pageId);
+        return $node->getVersions('page_' . $pageId);
     }
-    
+
     public function getDefaultVersion()
     {
         $settings = new SiteSettings();
         return $settings->get('default_language');
     }
-    
+
     /**
      * returns the content type of the selected page
      *
@@ -192,86 +192,86 @@ class Page extends DSF_Db_Table
      */
     public function getcontentTemplate($pageId)
     {
-    	$page = $this->find($pageId)->current();
-    	if($page) {
-    		return $page->content_template;
-    	}else{
-    		return null;
-    	}
+        $page = $this->find($pageId)->current();
+        if ($page) {
+            return $page->content_template;
+        } else {
+            return null;
+        }
     }
-    
+
     public function getTitle($pageId)
     {
-    	$titleParts[] = $this->getPageTitle($pageId);
-    	$parents = $this->getParents($pageId);
-    	if($parents){
-    		foreach ($parents as $parent) {
-    			$titleParts[] = $this->getPageTitle($parent->id);
-    		}
-    	}
-    	
-    	return array_reverse($titleParts);
+        $titleParts[] = $this->getPageTitle($pageId);
+        $parents = $this->getParents($pageId);
+        if ($parents){
+            foreach ($parents as $parent) {
+                $titleParts[] = $this->getPageTitle($parent->id);
+            }
+        }
+
+        return array_reverse($titleParts);
     }
-    
+
     public function getPageTitle($pageId)
     {
-    	$mdlMeta = new MetaData();
-    	$metaData = $mdlMeta->asArray($pageId);
-    	if(!empty($metaData['page_title'])) {
-    		return $metaData['page_title'];
-    	}else{
-    		$page = $this->find($pageId)->current();
-    		return $page->name;
-    	}
+        $mdlMeta = new MetaData();
+        $metaData = $mdlMeta->asArray($pageId);
+        if (!empty($metaData['page_title'])) {
+            return $metaData['page_title'];
+        } else {
+            $page = $this->find($pageId)->current();
+            return $page->name;
+        }
     }
-    
-    public function deletePageById($pageId) 
+
+    public function deletePageById($pageId)
     {
-    	
-    	$this->_flushCache();
-    	$where[] = $this->_db->quoteInto("id = ?", $pageId);
-    	$this->delete($where);
-    	
-    	//delete content nodes
-    	unset($where);
-    	$mdlNodes = new ContentNode();
-    	$where[] = $this->_db->quoteInto("parent_id = ?", "page_" . $pageId);
-    	$mdlNodes->delete($where);
-    	
-    	//delete meta data
-    	$mdlMeta = new MetaData();
-    	$mdlMeta->deleteByPageId($pageId);    	
+
+        $this->_flushCache();
+        $where[] = $this->_db->quoteInto('id = ?', $pageId);
+        $this->delete($where);
+
+        //delete content nodes
+        unset($where);
+        $mdlNodes = new ContentNode();
+        $where[] = $this->_db->quoteInto('parent_id = ?', 'page_' . $pageId);
+        $mdlNodes->delete($where);
+
+        //delete meta data
+        $mdlMeta = new MetaData();
+        $mdlMeta->deleteByPageId($pageId);
     }
-    
+
     public function setDesign($pageId, $designId)
     {
-    	$page = $this->find($pageId)->current();
-    	if($page) {
-    		$page->design = $designId;
-    		$page->save();
-    		return true;
-    	}else{
-    		return false;
-    	}
+        $page = $this->find($pageId)->current();
+        if ($page) {
+            $page->design = $designId;
+            $page->save();
+            return true;
+        } else {
+            return false;
+        }
     }
-    
+
     public function getDesign($pageId)
     {
-    	$page = $this->find($pageId)->current();
-    	$designId = $page->design;
-  		$mdlDesign = new Design();
-  		$mdlDesign->setDesign($designId);
-  		return $mdlDesign;
+        $page = $this->find($pageId)->current();
+        $designId = $page->design;
+        $mdlDesign = new Design();
+        $mdlDesign->setDesign($designId);
+        return $mdlDesign;
     }
-    
+
     public function getPagesByDesign($designId)
     {
-    	$select = $this->select();
-    	$select->where("design = ?", $designId);
-    	$select->order("name");
-    	return $this->fetchAll($select);
+        $select = $this->select();
+        $select->where('design = ?', $designId);
+        $select->order('name');
+        return $this->fetchAll($select);
     }
-    
+
     /**
      * this function sets the related pages for a given page
      *
@@ -281,15 +281,15 @@ class Page extends DSF_Db_Table
      */
     public function setRelatedPages($pageId, $relatedPages)
     {
-    	if(is_array($relatedPages)) {
-    		$data = array(
-    			'related_pages'	=> implode(',', $relatedPages)
-    		);
-    		$where[] = $this->_db->quoteInto("id = ?", $pageId);
-    		return $this->update($data, $where);
-    	}
+        if (is_array($relatedPages)) {
+            $data = array(
+                'related_pages' => implode(',', $relatedPages)
+            );
+            $where[] = $this->_db->quoteInto('id = ?', $pageId);
+            return $this->update($data, $where);
+        }
     }
-    
+
     /**
      * this function returns an array of the ids of the pages which are related to $pageId
      * if asObject is set to true it will return a rowset instead
@@ -300,47 +300,47 @@ class Page extends DSF_Db_Table
      */
     public function getRelatedPages($pageId, $asObject = false)
     {
-    	$row = $this->find($pageId)->current();
-    	if($row) {
-    		$pageArray = explode(',', $row->related_pages);
-    		if(is_array($pageArray) && count($pageArray) > 0) {
-    			if($asObject) {
-    				//return the rowset
-    				return $this->find($pageArray);
-    			}else{
-    				//return the array
-    				return $pageArray;
-    			}
-    		}
-    	}
+        $row = $this->find($pageId)->current();
+        if ($row) {
+            $pageArray = explode(',', $row->related_pages);
+            if (is_array($pageArray) && count($pageArray) > 0) {
+                if ($asObject) {
+                    //return the rowset
+                    return $this->find($pageArray);
+                } else {
+                    //return the array
+                    return $pageArray;
+                }
+            }
+        }
     }
-    
+
     // the following functions handle the site tree
-    
+
     public function fetchPointer($uri)
     {
         $settings = new SiteSettings();
         $isOnline = $settings->get('online');
-        if($isOnline == 0) {
+        if ($isOnline == 0) {
             return $this->getOfflinePage();
-        }else{        
-        	if(!is_array($uri)) {
-        		//return home page
-        		$id = $this->getHomePage();
-        	}else{
-        		$id = $this->_fetchPointer($uri);
-        	}
-        	    	
-        	//test the pointer
-        	$row = $this->find($id)->current();
-        	if($row) {
-        	   return $row->id; 
-        	}else{
-        	    return $this->get404Page();
-        	}
+        } else {
+            if (!is_array($uri)) {
+                //return home page
+                $id = $this->getHomePage();
+            } else {
+                $id = $this->_fetchPointer($uri);
+            }
+
+            //test the pointer
+            $row = $this->find($id)->current();
+            if ($row) {
+               return $row->id;
+            } else {
+                return $this->get404Page();
+            }
         }
     }
-    
+
     /**
      * this function returns the children of a selected page
      * you can pass it a page id (integer) or a page object
@@ -350,36 +350,36 @@ class Page extends DSF_Db_Table
      * @param array $where
      * @return zend_db_rowset
      */
-    public function getChildren($page, $where = array(), $order = null)
+    public function getChildren($page, $where = array(), $order = null, $limit = null)
     {
         $id = $this->_getPageId($page);
-                
-        $where[] = $this->_db->quoteInto("parent_id = ?", $id);
-        
-        if($order == null) {
-            $order = "position ASC";
+
+        $where[] = $this->_db->quoteInto('parent_id = ?', $id);
+
+        if ($order == null) {
+            $order = 'position ASC';
         }
-        
-        $result = $this->fetchAll($where, $order);
-        if($result->count() > 0) {
+
+        $result = $this->fetchAll($where, $order, $limit);
+        if ($result->count() > 0) {
             return $result;
-        }else{
+        } else {
             return null;
         }
     }
-    
+
     public function getPages($treeItems)
     {
-    	 if($treeItems->count() > 0) {
+         if ($treeItems->count() > 0) {
             foreach ($treeItems as $row) {
                 $arrIds[] = $row->id;
             }
             return $this->find($arrIds);
-        }else{
+        } else {
             return null;
         }
     }
-    
+
     /**
      * this function returns the parent of the selected page
      * you can pass it a page id (integer) or a page object
@@ -390,10 +390,10 @@ class Page extends DSF_Db_Table
     public function getParent($page)
     {
         $id = $this->_getPageId($page);
-     	$result = $this->find($id)->current();
+        $result = $this->find($id)->current();
         return $this->find($result->parent_id)->current();
     }
-    
+
     /**
      * this function returns an array of the parents of the current page
      *
@@ -402,16 +402,16 @@ class Page extends DSF_Db_Table
      */
     public function getParents($page)
     {
-    	$parents = null;
-    	while($parent = $this->getParent($page)) {
-    		$parents[$parent->id] = $parent;
-    		$page = $parent;
-    	}
-    	if(is_array($parents)) {
-    		return $parents;	
-    	}
+        $parents = null;
+        while($parent = $this->getParent($page)) {
+            $parents[$parent->id] = $parent;
+            $page = $parent;
+        }
+        if (is_array($parents)) {
+            return $parents;
+        }
     }
-    
+
     /**
      * this function tests whether the page is a child of another page
      *
@@ -423,18 +423,18 @@ class Page extends DSF_Db_Table
     {
         $pageId = $this->_getPageId($page);
         $parentId = $this->_getPageId($parent);
-        
-        $where[] = $this->_db->quoteInto("id = ?", $pageId);
-        $where[] = $this->_db->quoteInto("parent_id = ?", $parentId);
-        
-        if($this->fetchRow($where)) {
+
+        $where[] = $this->_db->quoteInto('id = ?', $pageId);
+        $where[] = $this->_db->quoteInto('parent_id = ?', $parentId);
+
+        if ($this->fetchRow($where)) {
             return true;
-        }else{
+        } else {
             return false;
         }
-        
+
     }
-    
+
     /**
      * this function tests whether the page is a parent of the other page
      *
@@ -446,17 +446,17 @@ class Page extends DSF_Db_Table
     {
         $pageId = $this->_getPageId($page);
         $childId = $this->_getPageId($child);
-        
-        $where[] = $this->_db->quoteInto("id = ?", $childId);
-        $where[] = $this->_db->quoteInto("parent_id = ?", $pageId);
-        
-        if($this->fetchRow($where)) {
+
+        $where[] = $this->_db->quoteInto('id = ?', $childId);
+        $where[] = $this->_db->quoteInto('parent_id = ?', $pageId);
+
+        if ($this->fetchRow($where)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
     /**
      * this function tests whether the page has children
      *
@@ -466,16 +466,16 @@ class Page extends DSF_Db_Table
     public function hasChildren($page)
     {
         $pageId = $this->_getPageId($page);
-        
-        $where[] = $this->_db->quoteInto("parent_id = ?", $pageId);
-        
-        if($this->fetchRow($where)) {
+
+        $where[] = $this->_db->quoteInto('parent_id = ?', $pageId);
+
+        if ($this->fetchRow($where)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    
+
     /**
      * this function returns the siblings for a selected page
      * you can pass it a page id (integer) or a page object
@@ -489,49 +489,49 @@ class Page extends DSF_Db_Table
     {
         $id = $this->_getPageId($page);
         $parent = $this->getParent($page);
-        
+
         //do not return the current page
-        $where[] = $this->_db->quoteInto("id != ?", $id);
-        
+        $where[] = $this->_db->quoteInto('id != ?', $id);
+
         return $this->getChildren($parent, $where);
     }
-    
-	/**
-	 * returns the current site index
-	 *
-	 * @return array
-	 */
-	public function getIndex($rootId = 0, $order = null)
-	{
-		if(empty($this->_index)) {
-		    $this->_indexPages($rootId, null, '/', $order);
-		}
-		return $this->_index;
-	}
-    
+
     /**
-	 * creates loads the page index
-	 * if you pass the optional parentId the index will start with this page
-	 * if not it will index the whole site
-	 * 
-	 * @param integer $parentId
-	 */
-	private function _indexPages($parentId = 0, $path = null, $pathSeparator = '/', $order = null)
-	{
-		if($this->hasChildren($parentId)){
-		    $children = $this->getChildren($parentId, null, $order);
-		    foreach ($children as $child) {
-		    	//check to see if the child has children
-		    	$tmpPath = $path . $child->name;
-		
-		    	//add the child
-		    	$this->_index[$child->id] = $tmpPath;
-		    	
-		    	$this->_indexPages($child->id, $tmpPath . $pathSeparator, $pathSeparator);		    	
-		    }		    
-		}
-	}
-    
+     * returns the current site index
+     *
+     * @return array
+     */
+    public function getIndex($rootId = 0, $order = null)
+    {
+        if (empty($this->_index)) {
+            $this->_indexPages($rootId, null, '/', $order);
+        }
+        return $this->_index;
+    }
+
+    /**
+     * creates loads the page index
+     * if you pass the optional parentId the index will start with this page
+     * if not it will index the whole site
+     *
+     * @param integer $parentId
+     */
+    private function _indexPages($parentId = 0, $path = null, $pathSeparator = '/', $order = null)
+    {
+        if ($this->hasChildren($parentId)){
+            $children = $this->getChildren($parentId, null, $order);
+            foreach ($children as $child) {
+                //check to see if the child has children
+                $tmpPath = $path . $child->name;
+
+                //add the child
+                $this->_index[$child->id] = $tmpPath;
+
+                $this->_indexPages($child->id, $tmpPath . $pathSeparator, $pathSeparator);
+            }
+        }
+    }
+
     /**
      * moves a page from one parent to another
      *
@@ -540,16 +540,16 @@ class Page extends DSF_Db_Table
      */
     public function movePage($page, $parent)
     {
-		$this->_flushCache();
+        $this->_flushCache();
         $id = $this->_getPageId($page);
         $parentId = $this->_getPageId($parent);
         $row = $this->find($id)->current();
-        if($row) {
+        if ($row) {
             $row->parent_id = $parentId;
             $row->save();
         }
     }
-    
+
     /**
      * this function removes all of the children from a page
      *
@@ -557,19 +557,19 @@ class Page extends DSF_Db_Table
      */
     public function removeChildren($page)
     {
-		$this->_flushCache();
-		$children = $this->getChildren($page);
-		if($children) {
-		    foreach ($children as $child) {
-		        $this->removeChildren($child, true);
-		    }   
-		   $where = array();
-		   $where[] = $this->_db->quoteInto("parent_id = ?", $this->_getPageId($page));
-		   $this->delete($where);
-		}
-           
+        $this->_flushCache();
+        $children = $this->getChildren($page);
+        if ($children) {
+            foreach ($children as $child) {
+                $this->removeChildren($child, true);
+            }
+           $where = array();
+           $where[] = $this->_db->quoteInto('parent_id = ?', $this->_getPageId($page));
+           $this->delete($where);
+        }
+
     }
-    
+
     /**
      * removes the selected page and all of its children
      *
@@ -578,73 +578,73 @@ class Page extends DSF_Db_Table
     public function removePage($page)
     {
         $id = $this->_getPageId($page);
-        $where[] = $this->_db->quoteInto("id = ?", $id);
+        $where[] = $this->_db->quoteInto('id = ?', $id);
         $this->delete($where);
         $this->removeChildren($page);
     }
-    
+
     public function makeHomePage($pageId)
     {
-    	$data['is_home_page'] = 0;
-    	$this->update($data);
-    	
-    	unset($data);
-    	$data['is_home_page'] = 1;
-        $where[] = $this->_db->quoteInto("id = ?", $pageId);
-        $this->update($data, $where);    	
+        $data['is_home_page'] = 0;
+        $this->update($data);
+
+        unset($data);
+        $data['is_home_page'] = 1;
+        $where[] = $this->_db->quoteInto('id = ?', $pageId);
+        $this->update($data, $where);
     }
-    
+
     public function select()
     {
         $select = parent::select();
-        $select->where("namespace = ?", $this->_namespace);
+        $select->where('namespace = ?', $this->_namespace);
         return $select;
     }
-    
+
     static function isHomePage($page)
     {
-        if(is_object($page) && $page->page->is_home_page == 1) {
+        if (is_object($page) && $page->page->is_home_page == 1) {
             return true;
-        }else{
-            return false;  
+        } else {
+            return false;
         }
     }
-    
+
     public function getHomePage()
     {
         $settings = new SiteSettings();
         $homePage = $settings->get('home_page');
-        
+
         //the home page defaults to the first page added to the CMS
-        if($homePage > 0) {
+        if ($homePage > 0) {
             return $homePage;
-        }else{
+        } else {
             $select = $this->select();
             $select->order('id');
             $defaultHomePage = $this->fetchRow($select);
             return $defaultHomePage->id;
         }
     }
-    
+
     public function get404Page()
     {
         $settings = new SiteSettings();
         $page = $settings->get('page_not_found');
-        
+
         $front = Zend_Controller_Front::getInstance();
-        if($page > 0) {
+        if ($page > 0) {
             $response = $front->getResponse();
             $response->setRawHeader('HTTP/1.1 404 Not Found');
             return $page;
         }
     }
-    
+
     public function getOfflinePage()
     {
         $settings = new SiteSettings();
         return $settings->get('offline_page');
     }
-    
+
     /**
      * if page is an object then this returns its id property
      * otherwise it returns its integer value
@@ -654,14 +654,13 @@ class Page extends DSF_Db_Table
      */
     private function _getPageId($page)
     {
-        if(is_object($page)){
+        if (is_object($page)){
             return $page->id;
-        }else{
+        } else {
             return intval($page);
         }
     }
-    
-    
+
     /**
      * returns the next position of the children of a page
      *
@@ -670,11 +669,11 @@ class Page extends DSF_Db_Table
      */
     private function _getNextPosition($parentId)
     {
-    	$last = $this->_getLastPosition($parentId);
-    	$next = intval($last) + 1;
-    	return $next;
+        $last = $this->_getLastPosition($parentId);
+        $next = intval($last) + 1;
+        return $next;
     }
-    
+
     /**
      * returns the last (highest) position of the children of a page
      *
@@ -683,54 +682,52 @@ class Page extends DSF_Db_Table
      */
     private function _getLastPosition($parentId)
     {
-    	$where[] = $this->_db->quoteInto('parent_id = ?', $parentId);
-    	$order = "position DESC";
-    	$row = $this->fetchRow($where, $order);
-    	return $row->position;
+        $where[] = $this->_db->quoteInto('parent_id = ?', $parentId);
+        $order = 'position DESC';
+        $row = $this->fetchRow($where, $order);
+        return $row->position;
     }
-    
-    
-    
+
     private function _flushCache()
     {
-    	$cache = Zend_Registry::get('cache');
-       	$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('filetree'));
-       	$cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('tree'));
+        $cache = Zend_Registry::get('cache');
+        $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('filetree'));
+        $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('tree'));
     }
-    
+
     private function _fetchPointer($uri, $parent = 0)
     {
-        if(is_array($uri)) {
-        	foreach ($uri as $uriPart) {
-        		//fetch the pointer to the current uri part
-        		$pointer = $this->_getPageByLabel($uriPart, $parent);
-        		
-        		//if the page was not found then return null
-        		if(null == $pointer) {
-        			return null;
-        		}
-        		
-        		//set the parent id to the current pointer to traverse down the tree
-        		$parent = $pointer;
-        	}
-        	
-        	return $pointer;
-        }else{
+        if (is_array($uri)) {
+            foreach ($uri as $uriPart) {
+                //fetch the pointer to the current uri part
+                $pointer = $this->_getPageByLabel($uriPart, $parent);
+
+                //if the page was not found then return null
+                if (null == $pointer) {
+                    return null;
+                }
+
+                //set the parent id to the current pointer to traverse down the tree
+                $parent = $pointer;
+            }
+
+            return $pointer;
+        } else {
             return $this->getHomePage();
         }
     }
-    
+
     private function _getPageByLabel($label, $parent = 0)
     {
-    	if($label != 'p') {
-	    	$where[] = $this->_db->quoteInto("(label = ? OR name = ?)", $label);
-	    	$where[] = $this->_db->quoteInto("parent_id = ?", $parent);
-	    	$page = $this->fetchRow($where);
-	    	if($page) {
-				return $page->id;
-			}else{
-				return null;
-			}
-    	}
+        if ($label != 'p') {
+            $where[] = $this->_db->quoteInto('(label = ? OR name = ?)', $label);
+            $where[] = $this->_db->quoteInto('parent_id = ?', $parent);
+            $page = $this->fetchRow($where);
+            if ($page) {
+                return $page->id;
+            } else {
+                return null;
+            }
+        }
     }
 }
