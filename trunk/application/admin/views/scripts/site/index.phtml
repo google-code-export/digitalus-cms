@@ -65,7 +65,7 @@
         echo $this->FormRow($this->GetTranslation('Default sender'), $this->FormText('setting[default_email_sender]', $this->settings->default_email_sender));
         echo $this->FormRow(
             $this->GetTranslation('Transport'),
-            $this->formCheckbox('setting[use_smtp_mail]', intval($this->settings->use_smtp_mail)) . ' ' . $this->GetTranslation('Use SMTP transport '));
+            $this->formCheckbox('setting[use_smtp_mail]', intval($this->settings->use_smtp_mail)) . ' ' . $this->GetTranslation('Use SMTP transport'));
         echo $this->FormRow($this->GetTranslation('SMTP host'), $this->FormText('setting[smtp_host]', $this->settings->smtp_host));
         echo $this->FormRow($this->GetTranslation('SMTP username'), $this->FormText('setting[smtp_username]', $this->settings->smtp_username));
         echo $this->FormRow($this->GetTranslation('SMTP password'), $this->FormPassword('setting[smtp_password]', $this->settings->smtp_password));

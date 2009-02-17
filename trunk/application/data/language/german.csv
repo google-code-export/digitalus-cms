@@ -253,6 +253,7 @@ Open Menu;Bearbeite Menü
 
 # ----- admin navigation -----
 Navigation;Navigation
+Root;Seitenwurzel
 Update Menu;Menü aktualisieren
 Navigation Options;Navigation Optionen
 Main Menu;Hauptmenü
@@ -322,4 +323,7 @@ language;Sprache
 You are reading this page in;Sie lesen dies in
 This page is also translated into;Diese Seite wurde in folgende Sprachen übersetzt:
 
+# ----- Custom Translations -----
 last update;zuletzt geändert am
+Imprint;Impressum
+Contact;Kontakt
