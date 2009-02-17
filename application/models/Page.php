@@ -350,7 +350,7 @@ class Page extends DSF_Db_Table
      * @param array $where
      * @return zend_db_rowset
      */
-    public function getChildren($page, $where = array(), $order = null, $limit = null)
+    public function getChildren($page, $where = array(), $order = null, $limit = null, $offset = null)
     {
         $id = $this->_getPageId($page);
 
@@ -360,7 +360,7 @@ class Page extends DSF_Db_Table
             $order = 'position ASC';
         }
 
-        $result = $this->fetchAll($where, $order, $limit);
+        $result = $this->fetchAll($where, $order, $limit, $offset);
         if ($result->count() > 0) {
             return $result;
         } else {
