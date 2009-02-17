@@ -6,6 +6,7 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('Create a Page'));
     <form action="<?php echo $this->baseUrl;?>/admin/page/new" method="post">
     <p><?php echo $this->GetTranslation('To create a new page...');?></p>
     <h3><?php echo $this->GetTranslation('Step 1: Select the parent section');?></h3>
+    <dl>
     <?php
     echo $this->FormRow(
         $this->GetTranslation('Parent Page'),
@@ -13,6 +14,7 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('Create a Page'));
         $this->createPageOptions->parentId) . $this->formButton('step1button', $this->GetTranslation('Next >>'), array('class' => 'inlineButton'))
     );
     ?>
+    </dl>
     <div id="step2"></div>
     <div id="step3"></div>
     </form>

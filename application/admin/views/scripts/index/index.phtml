@@ -5,10 +5,11 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
 <form action="<?php echo $this->baseUrl;?>/admin/user/update-my-account" method="post">
     <fieldset class="formColumn">
         <legend><?php echo $this->GetTranslation('My Account');?></legend>
+        <dl>
         <?php
             $u = new User();
             $user = $u->getCurrentUser();
-            echo $this->formHidden('id',$user->id);
+            echo '<dt>' . $this->formHidden('id', $user->id) . '</dt>';
             echo $this->FormRow($this->GetTranslation('First Name'), $this->formText('first_name' , $this->identity->first_name));
             echo $this->FormRow($this->GetTranslation('Last Name'), $this->formText('last_name', $this->identity->last_name));
             echo $this->FormRow($this->GetTranslation('Email'), $this->formText('email', $this->identity->email));
@@ -17,6 +18,7 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
             echo $this->FormRow($this->GetTranslation('Confirm'), $this->formPassword('confirmation'));
             echo $this->formSubmit('submit',$this->GetTranslation('Update My Account'));
         ?>
+        </dl>
     </fieldset>
 </form>
 
