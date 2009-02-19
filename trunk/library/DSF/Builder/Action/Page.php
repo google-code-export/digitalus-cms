@@ -146,12 +146,41 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
     {
         $view = $this->_page->getView();
         $pageId = $this->_page->getId();
+
+        //start the meta description and keywords with the site name
+        $mdlSettings = new SiteSettings();
+        $siteName = $mdlSettings->get('name');
+        $metaDescription[] = $siteName;
+        $metaKeywords[] = $siteName;
         
+        
+        //add the base settings
+        $metaDescription[] = $mdlSettings->get('meta_description');
+        $metaKeywords[] = $mdlSettings->get('meta_keywords');
+        
+        //next add all of the page titles
+        $mdlPage = new Page();
+        $title = $mdlPage->getTitle($pageId);
+        if(is_array($title)) {
+            $metaDescription[] = implode(',', $title);
+            $metaKeywords[] = implode(',', $title); 
+        }
+        
+        //now add the page specific settings
         $mdlMeta = new MetaData();
         $metaData = $mdlMeta->asArray($pageId);
         
-        $view->headMeta()->appendName('description', $metaData['meta_description']);
-        $view->headMeta()->appendName('keywords', $metaData['keywords']);
+        if(!empty($metaData['meta_description'])) {
+            $metaDescription[] = (string)$metaData['meta_description'];
+        }
+        
+        if(!empty($metaData['keywords'])) {
+            $metaKeywords[] =  (string)$metaData['keywords'];
+        }
+        
+        //now set the view placeholder
+        $view->headMeta()->appendName('description', implode(',', $metaDescription));
+        $view->headMeta()->appendName('keywords', implode(',', $metaKeywords));
     }
 
     public function googleIntegration()
