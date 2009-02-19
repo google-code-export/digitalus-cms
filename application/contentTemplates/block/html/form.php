@@ -3,7 +3,7 @@ class Block_Html_Form extends DSF_Content_Form_Abstract {
     public function setup()
     {
         $view = $this->getView();
-        $content = $this->form->createElement('textarea', 'content');
+        $content = $this->form->createElement('textarea', 'block');
 
         $content->setRequired(true)
                 ->setLabel($view->GetTranslation('Content'))
