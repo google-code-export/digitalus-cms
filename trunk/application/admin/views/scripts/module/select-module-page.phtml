@@ -1,10 +1,12 @@
+<dl>
 <?php
 echo $this->FormRow(
     $this->GetTranslation('Select the module page'),
     $this->SelectModulePage('moduleAction', $this->moduleName, null, array('id' => 'modulePage'))
 );
 ?>
-<script>
+</dl>
+<script type="text/javascript">
 $(document).ready(function() {
     $('#modulePage').change(function() {
         var action = $(this).val();

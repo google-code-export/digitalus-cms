@@ -7,7 +7,6 @@
     ?>
 </dt>
 <dd class="<?php echo $this->class;?>">
-
 <?php
 $elementName = $this->element->getName();
 $values = $this->element->getXml();
@@ -35,14 +34,14 @@ echo $this->SelectModule($elementName . "[module]", $module, $attr);
 </dd>
 <div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper">
 <?php
-    if(isset($values->module)){
+    if (isset($values->module)) {
         $params['element'] = $elementName;
         $params['moduleKey'] = $values->module;
         echo $this->action('render-form', 'module', 'admin', $params);
     }
 ?>
 </div>
-<script>
+<script type="text/javascript">
 $(document).ready(function() {
     $('#<?php echo $elementName?>-module').change(function(){
         var module = $(this).val();
