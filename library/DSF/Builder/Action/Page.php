@@ -141,6 +141,18 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 
         $view->headTitle()->setSeparator($separator);
     }
+    
+    public function setMetaData()
+    {
+        $view = $this->_page->getView();
+        $pageId = $this->_page->getId();
+        
+        $mdlMeta = new MetaData();
+        $metaData = $mdlMeta->asArray($pageId);
+        
+        $view->headMeta()->appendName('description', $metaData['meta_description']);
+        $view->headMeta()->appendName('keywords', $metaData['keywords']);
+    }
 
     public function googleIntegration()
     {
