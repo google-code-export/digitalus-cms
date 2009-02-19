@@ -78,10 +78,10 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
         $before = $this->getAttribute(self::BEFORE);
         $after  = $this->getAttribute(self::AFTER);
         if ($before > 0) {
-            $class[] = 'prefix_' . $this->before;
+            $class[] = 'prefix_' . $this->getAttribute(self::BEFORE);
         }
         if ($after > 0) {
-            $class[] = 'suffix_' . $this->after;
+            $class[] = 'suffix_' . $this->getAttribute(self::AFTER);
         }
         if ($clearfix == true) {
             $class[] = 'clearfix';
