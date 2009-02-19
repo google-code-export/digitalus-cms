@@ -47,6 +47,8 @@
         <?php
         echo $this->FormRow($this->GetTranslation('Doc Type'), $this->selectDoctype('setting[doc_type]', $this->settings->doc_type));
         echo $this->FormRow($this->GetTranslation('Default charset'), $this->FormText('setting[default_charset]', $this->settings->default_charset));
+        echo $this->FormRow($this->GetTranslation('Base meta description'), $this->FormTextarea('setting[meta_description]', $this->settings->meta_description, array('class' => 'med')));
+        echo $this->FormRow($this->GetTranslation('Base meta keywords'), $this->FormTextarea('setting[meta_keywords]', $this->settings->meta_keywords, array('class' => 'med')));
         echo $this->FormRow('&nbsp;', $this->FormSubmit('meta', $this->GetTranslation('Update Page Meta Data')));
         ?>
         </dl>
