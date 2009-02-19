@@ -1,0 +1,31 @@
+<form action='<?php echo dsf_uri::get();?>' method='post' id='searchForm'>
+<fieldset>
+	<legend><?php echo $this->GetTranslation("Search Site")?></legend>
+	<?php 
+    	if(isset($this->keywords)) {
+    	    $keywords = $this->keywords;
+    	}else{
+    	    $keywords = null;
+    	}
+    	
+	    echo $this->formHidden('submitSearchForm',1);
+	    echo $this->FormRow(
+	        $this->GetTranslation("Keywords: "),
+	        $this->formText('keywords', $keywords, array('size' => 50))
+	    );
+	    echo $this->FormRow(
+	        "&nbsp",
+	        $this->formSubmit('search',$this->GetTranslation("Search"))
+	    );
+	?>
+</fieldset>
+</form>
+
+<?php if($this->searchResults) { ?>
+<p><?php echo $this->GetTranslation("Your search for <em>") . $this->keywords . $this->GetTranslation("</em> returned ") . count($this->searchResults) . " results."?></p>
+<?php foreach ($this->searchResults as $result) {?>
+<a href="<?php echo $result->page_link; ?>"><h3><?php echo $result->page_title; ?></h3></a>
+<p><?php echo $result->page_teaser; ?></p>
+<?php }} else { ?>
+<p><?php echo $this->GetTranslation("Your search for <em>") . $this->keywords . $this->GetTranslation("</em> did not return any results.")?></p>
+<?php } ?>

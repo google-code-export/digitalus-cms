@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+    <icon>magnifier.png</icon>
+    <label>Site Search</label>
+    <adapters>
+    	<adapter>
+    		<classname>Search_Adapter_Content</classname>
+    		<filepath>./application/modules/search/adapter/Content.php</filepath>
+   		</adapter>
+	</adapters>
+	<pathToIndex>./application/modules/search/data/index</pathToIndex>
+</properties>
