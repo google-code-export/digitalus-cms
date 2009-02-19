@@ -7,6 +7,7 @@ echo $this->doctype() . PHP_EOL;
         <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->placeholder('charset');?>" />
         <?php
             echo $this->placeholder('google_verify');
+            echo $this->headMeta();
             echo $this->headTitle();
             echo $this->headScript();
             echo $this->headLink();
