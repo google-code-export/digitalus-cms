@@ -153,4 +153,15 @@ class DSF_Toolbox_String
         $parts = explode('/', $path);
         return array_pop($parts);
     }
+    
+    public static function truncateText($text, $count = 25, $stripTags = true)
+    {
+        if ($stripTags) {
+            $filter = new Zend_Filter_StripTags();
+            $text   = $filter->filter($text);
+        }
+        $words = split(' ', $text);
+        $text  = (string)join(' ', array_slice($words, 0, $count));
+        return $text;
+    }
 }
