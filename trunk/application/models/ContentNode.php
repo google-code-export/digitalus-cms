@@ -47,8 +47,6 @@ class ContentNode extends DSF_Db_Table
 	    $where[] = $this->_db->quoteInto("parent_id = ?", $namespace . '_' . $pageId);
 	    if($version != null){
 	        $where[] = $this->_db->quoteInto("version = ?", $version);
-	    }else{
-	        $where[] = "version IS NULL";
 	    }
 	    
 	    $rowset = $this->fetchAll($where);
