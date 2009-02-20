@@ -1,17 +1,17 @@
 # ----- mod_search -----
-Search;Suche
-Search Module;Such-Modul
-The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.;Das Such-Modul verwendet die Lucene Such-Maschine, um Suchindizes auf Ihren Seiten zu erzeugen, zu verwalten und abzufragen.
-Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.;Es ist sehr rechenintensiv den Suchindex zu erneuern. Daher wird er nicht automatisch bei jeder Aktualisierung der Webseite erneuert. Wenn Sie Ihre Webseite aktualisieren, gehen Sie zu diesem Modul und aktivieren Sie den "Suchindex erneuern" Link.
-Search Options;Such-Optionen
-Rebuild search index;Suchindex erneuern
-The search index was rebuilt successfully!;Der Suchindex wurde erfolgreich erneuert
-Search Site;Such-Seite
-Site Search;Seitensuche
-Keywords;Stichwörter
-Your search for;Ihre Suche nach
-returned;ergab
-results.;Ergebnisse
-did not return any results.;ergab keine Ergebnisse
-Please provide a keyword to search for!;Bitte geben Sie einen Suchbegriff ein!
-The search form does not have any user defined settings.;Das Such-Formular hat keine Benutzer-definierten Einstellungen.
+"Search";"Suche"
+"Search Module";"Such-Modul"
+"The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.";"Das Such-Modul verwendet die Lucene Such-Maschine, um Suchindizes auf Ihren Seiten zu erzeugen, zu verwalten und abzufragen."
+"Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.";"Es ist sehr rechenintensiv den Suchindex zu erneuern. Daher wird er nicht automatisch bei jeder Aktualisierung der Webseite erneuert. Wenn Sie Ihre Webseite aktualisieren, gehen Sie zu diesem Modul und aktivieren Sie den ""Suchindex erneuern"" Link."
+"Search Options";"Such-Optionen"
+"Rebuild search index";"Suchindex erneuern"
+"The search index was rebuilt successfully!";"Der Suchindex wurde erfolgreich erneuert"
+"Search Site";"Such-Seite"
+"Site Search";"Seitensuche"
+"Keywords";"Stichwörter"
+"Your search for";"Ihre Suche nach"
+"returned";"ergab"
+"results.";"Ergebnisse"
+"did not return any results.";"ergab keine Ergebnisse"
+"Please provide a keyword to search for!";"Bitte geben Sie einen Suchbegriff ein!"
+"The search form does not have any user defined settings.";"Das Such-Formular hat keine Benutzer-definierten Einstellungen."

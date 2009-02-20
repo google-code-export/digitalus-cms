@@ -1,332 +1,332 @@
 # ----- layout -----
-Digitalus CMS;Digitalus CMS
-Current User;Aktueller Benutzer
-Role;Rolle
-Log Out;Abmelden
-Log In;Anmelden
-Login;Anmelden
-Home;Start
-Site;Website
-Pages;Seiten
-Navigation;Navigation
-Design;Design
-Modules;Module
-Public Site;Öffentliche Seite
+"Digitalus CMS";"Digitalus CMS"
+"Current User";"Aktueller Benutzer"
+"Role";"Rolle"
+"Log Out";"Abmelden"
+"Log In";"Anmelden"
+"Login";"Anmelden"
+"Home";"Start"
+"Site";"Website"
+"Pages";"Seiten"
+"Navigation";"Navigation"
+"Design";"Design"
+"Modules";"Module"
+"Public Site";"Öffentliche Seite"
 
-value;Wert
+"value";"Wert"
 
 # ----- toolbar -----
-You are here;Sie befinden sich hier
-Add to my bookmarks;Zu Favoriten hinzufügen
-Your bookmark was saved successfully.;Das Lesezeichen wurde erfolgreich gespeichert.
-Delete;Entfernen
+"You are here";"Sie befinden sich hier"
+"Add to my bookmarks";"Zu Favoriten hinzufügen"
+"Your bookmark was saved successfully.";"Das Lesezeichen wurde erfolgreich gespeichert."
+"Delete";"Entfernen"
 
 # ----- admin home -----
-Digitalus CMS is a community supported open source project. To learn more about the project check out;Digitalus CMS ist ein von der Gemeinschaft unterstütztes Projekt. Gehe zu folgenden Links, um mehr darüber zu lernen
-Digitalus Site;Digitalus Seite
-Wiki;Wiki
-Forum;Forum
-Training and Support;Training und Support
-If you need any help building or managing your site check out our support options.;Wenn Sie Hilfe bei der Erstellung oder Verwaltung Ihrer Seite haben, überprüfen Sie unsere Support-Angebote.
-My Dashboard;Meine Armatur
-My Account;Mein Konto
-My Bookmarks;Meine Lesezeichen
-You do not have any bookmarks.;Sie haben keine Lesezeichen.
-My Writeboard;Mein Notizbuch
-The writeboard is a personal spot for you to keep notes about your site.;Das Notizbuch ist ein Platz, um persönliche Notizen über Ihre Seite zu hinterlegen.
-You have no notes to view;Sie haben keine Notizen
-Save My Writeboard;Notizen speichern
-My Content;Meine Inhalte
+"Digitalus CMS is a community supported open source project. To learn more about the project check out";"Digitalus CMS ist ein von der Gemeinschaft unterstütztes Projekt. Gehe zu folgenden Links, um mehr darüber zu lernen"
+"Digitalus Site";"Digitalus Seite"
+"Wiki";"Wiki"
+"Forum";"Forum"
+"Training and Support";"Training und Support"
+"If you need any help building or managing your site check out our support options.";"Wenn Sie Hilfe bei der Erstellung oder Verwaltung Ihrer Seite haben, überprüfen Sie unsere Support-Angebote."
+"My Dashboard";"Meine Armatur"
+"My Account";"Mein Konto"
+"My Bookmarks";"Meine Lesezeichen"
+"You do not have any bookmarks.";"Sie haben keine Lesezeichen."
+"My Writeboard";"Mein Notizbuch"
+"The writeboard is a personal spot for you to keep notes about your site.";"Das Notizbuch ist ein Platz, um persönliche Notizen über Ihre Seite zu hinterlegen."
+"You have no notes to view";"Sie haben keine Notizen"
+"Save My Writeboard";"Notizen speichern"
+"My Content";"Meine Inhalte"
 
 # ----- admin_auth -----
-Administrator Login;Administrator anmelden
-Admin User Login;Administrator anmelden
-Forgot Password;Passwort vergessen?
-Reset Password;Passwort zurücksetzen
-Admin Login;Administrator anmelden
-Please enter your username (this is your email address) and password to get started.;Bitte gib deinen Benutzernamen (deine Email-Adresse) und dein Passwort ein um zu beginnen.
-Username;Benutzername
-Password;Passwort
-Confirm Password;Passwort bestätigen
-Log In;Anmelden
-If you are having trouble logging in please enter your email address below and we will send you your login credentials.;Wenn Du Probleme beim Anmelden hast, gib bitte deine Email-Adresse unten ein und du bekommst ein neues Passwort zugeschickt.
-Send Reminder;Erinnerung absenden
+"Administrator Login";"Administrator anmelden"
+"Admin User Login";"Administrator anmelden"
+"Forgot Password";"Passwort vergessen?"
+"Reset Password";"Passwort zurücksetzen"
+"Admin Login";"Administrator anmelden"
+"Please enter your username (this is your email address) and password to get started.";"Bitte gib deinen Benutzernamen (deine Email-Adresse) und dein Passwort ein um zu beginnen."
+"Username";"Benutzername"
+"Password";"Passwort"
+"Confirm Password";"Passwort bestätigen"
+"Log In";"Anmelden"
+"If you are having trouble logging in please enter your email address below and we will send you your login credentials.";"Wenn Du Probleme beim Anmelden hast, gib bitte deine Email-Adresse unten ein und du bekommst ein neues Passwort zugeschickt."
+"Send Reminder";"Erinnerung absenden"
 
 # ----- admin_user -----
-Update My Account;Benutzerkonto aktualisieren
-Update Account;Konto aktualisieren
-Account Information;Konto Informationen
-First Name;Vorname
-Last Name;Nachname
-Email;Email
-Password;Passwort
-Confirm;Bestätigen
-Update password?;Password aktualisieren?
-Super Administrator;Super Administrator
-Site Administrator;Website Administrator
-User Options;Benutzer Optionen
-Account;Konto
-User Permissions;Benutzer Befugnisse
-Update Permissions;Befugnisse aktualisieren
-Copy User Permissions;Befugnisse kopieren
-Select User;Benutzer auswählen
+"Update My Account";"Benutzerkonto aktualisieren"
+"Update Account";"Konto aktualisieren"
+"Account Information";"Konto Informationen"
+"First Name";"Vorname"
+"Last Name";"Nachname"
+"Email";"Email"
+"Password";"Passwort"
+"Confirm";"Bestätigen"
+"Update password?";"Password aktualisieren?"
+"Super Administrator";"Super Administrator"
+"Site Administrator";"Website Administrator"
+"User Options";"Benutzer Optionen"
+"Account";"Konto"
+"User Permissions";"Benutzer Befugnisse"
+"Update Permissions";"Befugnisse aktualisieren"
+"Copy User Permissions";"Befugnisse kopieren"
+"Select User";"Benutzer auswählen"
 
 # ----- admin_site -----
-The site sections is where you manage your site.;Im Website Abschnitt wird deine Website verwaltet.
-Admin Users;Admin Benutzer
-Create new user;Neuen Benutzer erzeugen
-Open User;Benutzer bearbeiten
-Site Reports;Website Reports
-Traffic report;Traffic Report
-Admin access report;Admin Zugriffsreport
-Site Console;Website-Konsole
-The site console enables you to interact directly with the CMS core. It is for experienced administrators only.;Die Website-Konsole ermöglicht dir die direkte Interaktion mit dem CMS Kern. Nur für erfahrene Administratoren.
-Open console;Öffne Konsole
-Site Settings;Website Einstellungen
-General settings;Allgemeine Einstellungen
-Update Site Settings;Einstellungen Aktualisieren
-General Information;Allgemeine Informationen
-Site name;Website Name
-Title separator;Titel Trennzeichen
-Status:;Status:
-Site is online;Website ist online
-Content;Inhalt
-Managing Content;Inhalte verwalten
-Menu links;Menü Links
-Automatically add menu links;Automatisch Links ins Menü einfügen
-Update Page Meta Data;Aktualisiere Meta Daten der Seite
-Meta Data;Meta Daten
-Internationalization;Internationalisierung
-Default locale;Standard Lokalisierung
-Default language;Standard Sprache
-Default charset;Standard Zeichensatz
-Base meta description;Basis Meta Beschreibung
-Base meta keywords;Basis Meta Stichwörter
-english;Englisch
-french;Französisch
-german;Deutsch
-polish;Polnisch
-Date format;Datumsformat
-Currency format;Währungsformat
-Mail Settings;Mail Einstellungen
-Default email address;Standard Email-Addresse
-Default sender;Standard Absender
-Transport;Transport
-Use SMTP transport;Benutze SMTP Transport
-SMTP host;SMTP Host
-SMTP username;SMTP Benutzername
-SMTP password;SMTP Passwort
-Send test message;Testnachricht senden
-Google Integration;Google Integration
-Tracking code;Tracking Code
-Verification code;Verifikations Code
-Options;Optionen
-General settings;Allgemeine Einstellungen
-Content settings;Inhaltseinstellungen
-Internationalization;Internationalisierungs-Einstellungen
-Mail settings;Email Einstellungen
-Google integration;Google Integration
-Update General Site Settings;Allgemeine Website Einstellungen aktualisieren
-Update Content Settings;Inhaltseinstellungen aktualisieren
-Update Internationalization Settings;Internationalisierungs-Einstellungen aktualisieren
-Update Mail Settings;Email einstellungen aktualisieren
-Update Google Settings;Google Einstellungen aktualisieren
-System Console;System Konsole
-About the Console;Über die Konsole
-Info;Info
-Run;Programmablauf
-The console...;Die Konsole ...
+"The site sections is where you manage your site.";"Im Website Abschnitt wird deine Website verwaltet."
+"Admin Users";"Admin Benutzer"
+"Create new user";"Neuen Benutzer erzeugen"
+"Open User";"Benutzer bearbeiten"
+"Site Reports";"Website Reports"
+"Traffic report";"Traffic Report"
+"Admin access report";"Admin Zugriffsreport"
+"Site Console";"Website-Konsole"
+"The site console enables you to interact directly with the CMS core. It is for experienced administrators only.";"Die Website-Konsole ermöglicht dir die direkte Interaktion mit dem CMS Kern. Nur für erfahrene Administratoren."
+"Open console";"Öffne Konsole"
+"Site Settings";"Website Einstellungen"
+"General settings";"Allgemeine Einstellungen"
+"Update Site Settings";"Einstellungen Aktualisieren"
+"General Information";"Allgemeine Informationen"
+"Site name";"Website Name"
+"Title separator";"Titel Trennzeichen"
+"Status:";"Status:"
+"Site is online";"Website ist online"
+"Content";"Inhalt"
+"Managing Content";"Inhalte verwalten"
+"Menu links";"Menü Links"
+"Automatically add menu links";"Automatisch Links ins Menü einfügen"
+"Update Page Meta Data";"Aktualisiere Meta Daten der Seite"
+"Meta Data";"Meta Daten"
+"Internationalization";"Internationalisierung"
+"Default locale";"Standard Lokalisierung"
+"Default language";"Standard Sprache"
+"Default charset";"Standard Zeichensatz"
+"Base meta description";"Basis Meta Beschreibung"
+"Base meta keywords";"Basis Meta Stichwörter"
+"english";"Englisch"
+"french";"Französisch"
+"german";"Deutsch"
+"polish";"Polnisch"
+"Date format";"Datumsformat"
+"Currency format";"Währungsformat"
+"Mail Settings";"Mail Einstellungen"
+"Default email address";"Standard Email-Addresse"
+"Default sender";"Standard Absender"
+"Transport";"Transport"
+"Use SMTP transport";"Benutze SMTP Transport"
+"SMTP host";"SMTP Host"
+"SMTP username";"SMTP Benutzername"
+"SMTP password";"SMTP Passwort"
+"Send test message";"Testnachricht senden"
+"Google Integration";"Google Integration"
+"Tracking code";"Tracking Code"
+"Verification code";"Verifikations Code"
+"Options";"Optionen"
+"General settings";"Allgemeine Einstellungen"
+"Content settings";"Inhaltseinstellungen"
+"Internationalization";"Internationalisierungs-Einstellungen"
+"Mail settings";"Email Einstellungen"
+"Google integration";"Google Integration"
+"Update General Site Settings";"Allgemeine Website Einstellungen aktualisieren"
+"Update Content Settings";"Inhaltseinstellungen aktualisieren"
+"Update Internationalization Settings";"Internationalisierungs-Einstellungen aktualisieren"
+"Update Mail Settings";"Email einstellungen aktualisieren"
+"Update Google Settings";"Google Einstellungen aktualisieren"
+"System Console";"System Konsole"
+"About the Console";"Über die Konsole"
+"Info";"Info"
+"Run";"Programmablauf"
+"The console...";"Die Konsole ..."
 
 # ----- admin_user -----
-Update User;Benutzer aktualisieren
-Create User;Benutzer erzeugen
-Options;Optionen
-User;Benutzer
-First Name;Vorname
-Last Name;Nachame
-Email Address;Email-Addresse
-Admin Role;Administrator Rolle
-Create User;Benutzer erzeugen
-Options;Optionen
-General;Allgemein
-Credentials;Passwörter
-Permissions;Befugnisse
-Copy User;Benutzer kopieren
-If you have another user who already has the same permissions as this user you can copy that user's role.;Wenn ein anderer Benutzer mit den gleichen Befugnissen wie dieser existiert, kann seine Rolle einfach kopiert werden.
-Select a User;Benutzer auswählen
-Copy Users Permissions;Benutzerbefugnisse kopieren
+"Update User";"Benutzer aktualisieren"
+"Create User";"Benutzer erzeugen"
+"Options";"Optionen"
+"User";"Benutzer"
+"First Name";"Vorname"
+"Last Name";"Nachame"
+"Email Address";"Email-Addresse"
+"Admin Role";"Administrator Rolle"
+"Create User";"Benutzer erzeugen"
+"Options";"Optionen"
+"General";"Allgemein"
+"Credentials";"Passwörter"
+"Permissions";"Befugnisse"
+"Copy User";"Benutzer kopieren"
+"If you have another user who already has the same permissions as this user you can copy that user's role.";"Wenn ein anderer Benutzer mit den gleichen Befugnissen wie dieser existiert, kann seine Rolle einfach kopiert werden."
+"Select a User";"Benutzer auswählen"
+"Copy Users Permissions";"Benutzerbefugnisse kopieren"
 
 # ----- admin_report -----
-Report: Admin Access Log;Report: Administrator Zugriffs-Log
-Admin Access Log;Administrator Zugriffs-Log
-More Reports;Mehr Reports
-Date;Datum
-User;Benutzer
-Page;Seite
-Report: Site traffic;Report: Website Traffic
-Traffic Report;Traffic Report
-Weekly Summary;Wöchentliche Zusammenfassung
-Day;Tag
-Traffic History;Traffic Verlauf
-Week;Woche
-Hits;Treffer
-More Reports;Mehr Reports
-Admin access log;Administrator Zugriffs-Log
-Traffic report;Traffic Report
-Admin access log;Administrator Zugriffs-Log
+"Report: Admin Access Log";"Report: Administrator Zugriffs-Log"
+"Admin Access Log";"Administrator Zugriffs-Log"
+"More Reports";"Mehr Reports"
+"Date";"Datum"
+"User";"Benutzer"
+"Page";"Seite"
+"Report: Site traffic";"Report: Website Traffic"
+"Traffic Report";"Traffic Report"
+"Weekly Summary";"Wöchentliche Zusammenfassung"
+"Day";"Tag"
+"Traffic History";"Traffic Verlauf"
+"Week";"Woche"
+"Hits";"Treffer"
+"More Reports";"Mehr Reports"
+"Admin access log";"Administrator Zugriffs-Log"
+"Traffic report";"Traffic Report"
+"Admin access log";"Administrator Zugriffs-Log"
 
-# ----- admin_page -----
-Create a Page;Seite erstellen
-Create Page;Seite erstellen
-My Pages;Meine Seiten
-Website;Website
-Note: The filenames are displayed as: (menu label/page title);Notiz: Die Dateinamen werden angezeigt als: (Menü Name/Seitentitel)
-The following pages are the pages that you have recently created.;Die folgenden Seiten wurden kürzlich von Dir erstellt.
-Create New Page;Neue Seite erzeugen
-To create a new page enter the title and select the section below.;Um eine neue Seite zu erzeugen, gib den Titel ein und wähle den Abschnitt unten.
-Enter the title;Gib den Titel ein.
-To create a new page...;Um eine neue Seite zu erstellen...
-Step 1: Select the parent section;Schritt 1: Wähle einen übergeordneten Abschnitt
-Parent Page;Übergeordnete Seite
-Site Root;Seitenwurzel
-Next >>;Weiter >>
-Step 2: What type of page would you like to create?;Schritt 2: Was für einen Seitentyp möchten Sie erstellen?
-Select a type;Wählen Sie einen Seitentyp
-Step 3: Enter the name for your page;Schritt 3: Geben Sie den Namen für die neue Seite ein
-Page Name;Seitenname
-Create Page;Seite erstellen
-Update Page;Seite aktualisieren
-Page Options;Seiten Optionen
-Page Versions;Seiten Versionen
-Edit Content;Inhalt bearbeiten
-Title;Titel
-Teaser:;Lockmittel:
-Edit Meta Data;Meta-Daten aktualisieren
-Page Head and Meta Data;Seiten Head- und Meta-Daten
-Filename:;Dateiname:
-Meta Description:;Meta Beschreibung:
-Meta Keywords:;Meta Schlüsselwörter:
-Search Tags:;Such Tags:
-Properties;Eigenschaften
-Edit Page Properties;Seiteneigenschaften bearbeiten
-Property;Eigenschaft
-Value;Wert
-Add a new property;Eigenschaft hinzufügen
-Remove;entfernen
-Update properties;Eigenschaften aktualiseren
-Home Page;Startseite
-404 Page;404 Fehlerseite
-Site Offline Page;Website offline Seite
-Site Offline;Website offline
-Design;Design
-Page Design;Seiten Design
-Current design;Aktuelles Design
-The design is not yet set for this page.;Für diese Seite ist noch kein Design gesetzt.
-Default;Standard
-This is the standard page.;Dies ist das standard Design.
-Open design;Dieses Design öffnen
-Other designs;Vorhandene Designs
-Make current;Dieses Design verwenden
-Move Page;Seite verschieben
-Click the new parent page for this page to move it.;Klicken Sie die neue Elternseite für diese Seite an.
-Current Version;Aktuelle Version
-Available Versions;Vorhandene Versionen
-Open Page;Seite öffnen
-Delete Page;Seite entfernen
-Edit Options;Optionen editieren
-Page Details;Seiten Details
-Search and Meta Tags;Such- und Meta-Tags
-Main Content;Haupt-Inhalt
-Intro Content;Intro-Inhalt
-Additional Content;Zusätzlicher Inhalt
-Image;Bild
-Advanced Options;Erweiterte Optionen
-Page Title;Seiten Titel
-Page URL;Seiten URL
-Note that you can optionally add a page headline.  If you do not the CMS will use your page title as the headline.;Notiz: Du kannst optional eine Titelzeile hinzufügen. Wenn nicht, wird der Seitentitel als Titelzeile eingefügt.
-Headline (optional);Titelzeile (optional)
-Intro Text;Intro Text
-Additional Content;Zusätzlicher Inhalt
-Attached Image;Angefügtes Bild
-Current Image;Aktuelles Bild
-Remove Image;Bild entfernen
-Select an Image;Bild auswählen
-Open;Bearbeiten
-Open Menu;Bearbeite Menü
+"# ----- admin_page -----
+"Create a Page";"Seite erstellen"
+"Create Page";"Seite erstellen"
+"My Pages";"Meine Seiten"
+"Website";"Website"
+"Note: The filenames are displayed as: (menu label/page title)";"Notiz: Die Dateinamen werden angezeigt als: (Menü Name/Seitentitel)"
+"The following pages are the pages that you have recently created.";"Die folgenden Seiten wurden kürzlich von Dir erstellt."
+"Create New Page";"Neue Seite erzeugen"
+"To create a new page enter the title and select the section below.";"Um eine neue Seite zu erzeugen, gib den Titel ein und wähle den Abschnitt unten."
+"Enter the title";"Gib den Titel ein."
+"To create a new page...";"Um eine neue Seite zu erstellen..."
+"Step 1: Select the parent section";"Schritt 1: Wähle einen übergeordneten Abschnitt"
+"Parent Page";"Übergeordnete Seite"
+"Site Root";"Seitenwurzel"
+"Next >>";"Weiter >>"
+"Step 2: What type of page would you like to create?";"Schritt 2: Was für einen Seitentyp möchten Sie erstellen?"
+"Select a type";"Wählen Sie einen Seitentyp"
+"Step 3: Enter the name for your page";"Schritt 3: Geben Sie den Namen für die neue Seite ein"
+"Page Name";"Seitenname"
+"Create Page";"Seite erstellen"
+"Update Page";"Seite aktualisieren"
+"Page Options";"Seiten Optionen"
+"Page Versions";"Seiten Versionen"
+"Edit Content";"Inhalt bearbeiten"
+"Title";"Titel"
+"Teaser:";"Lockmittel:"
+"Edit Meta Data";"Meta-Daten aktualisieren"
+"Page Head and Meta Data";"Seiten Head- und Meta-Daten"
+"Filename:";"Dateiname:"
+"Meta Description:";"Meta Beschreibung:"
+"Meta Keywords:";"Meta Schlüsselwörter:"
+"Search Tags:";"Such Tags:"
+"Properties";"Eigenschaften"
+"Edit Page Properties";"Seiteneigenschaften bearbeiten"
+"Property";"Eigenschaft"
+"Value";"Wert"
+"Add a new property";"Eigenschaft hinzufügen"
+"Remove";"entfernen"
+"Update properties";"Eigenschaften aktualiseren"
+"Home Page";"Startseite"
+"404 Page";"404 Fehlerseite"
+"Site Offline Page";"Website offline Seite"
+"Site Offline";"Website offline"
+"Design";"Design"
+"Page Design";"Seiten Design"
+"Current design";"Aktuelles Design"
+"The design is not yet set for this page.";"Für diese Seite ist noch kein Design gesetzt."
+"Default";"Standard"
+"This is the standard page.";"Dies ist das standard Design."
+"Open design";"Dieses Design öffnen"
+"Other designs";"Vorhandene Designs"
+"Make current";"Dieses Design verwenden"
+"Move Page";"Seite verschieben"
+"Click the new parent page for this page to move it.";"Klicken Sie die neue Elternseite für diese Seite an."
+"Current Version";"Aktuelle Version"
+"Available Versions";"Vorhandene Versionen"
+"Open Page";"Seite öffnen"
+"Delete Page";"Seite entfernen"
+"Edit Options";"Optionen editieren"
+"Page Details";"Seiten Details"
+"Search and Meta Tags";"Such- und Meta-Tags"
+"Main Content";"Haupt-Inhalt"
+"Intro Content";"Intro-Inhalt"
+"Additional Content";"Zusätzlicher Inhalt"
+"Image";"Bild"
+"Advanced Options";"Erweiterte Optionen"
+"Page Title";"Seiten Titel"
+"Page URL";"Seiten URL"
+"Note that you can optionally add a page headline.  If you do not the CMS will use your page title as the headline.";"Notiz: Du kannst optional eine Titelzeile hinzufügen. Wenn nicht, wird der Seitentitel als Titelzeile eingefügt."
+"Headline (optional)";"Titelzeile (optional)"
+"Intro Text";"Intro Text"
+"Additional Content";"Zusätzlicher Inhalt"
+"Attached Image";"Angefügtes Bild"
+"Current Image";"Aktuelles Bild"
+"Remove Image";"Bild entfernen"
+"Select an Image";"Bild auswählen"
+"Open";"Bearbeiten"
+"Open Menu";"Bearbeite Menü"
 
 # ----- admin navigation -----
-Navigation;Navigation
-Root;Seitenwurzel
-Update Menu;Menü aktualisieren
-Navigation Options;Navigation Optionen
-Main Menu;Hauptmenü
-click to toggle visibility;anklicken um Sichtbarkeit zu ändern
-Save Changes;Änderungen speichern
+"Navigation";"Navigation"
+"Root";"Seitenwurzel"
+"Update Menu";"Menü aktualisieren"
+"Navigation Options";"Navigation Optionen"
+"Main Menu";"Hauptmenü"
+"click to toggle visibility";"anklicken um Sichtbarkeit zu ändern"
+"Save Changes";"Änderungen speichern"
 
 # ----- admin media -----
-Media;Medien
-Media Options;Medien Optionen
-Media Root;Medien Wurzelverzeichnis
-Media Manager;Medien Verwaltung
-Create New Folder;Neues Verzeichnis erstellen
-Folder Name;Verzeichnisname
-Create Folder;Verzeichnis erstellen
-Open Folder;Verzeichnis öffnen
-Current Folder;Aktuelles Verzeichnis
-Current folder contents;Aktuelles Verzeichnis Inhalt
-Subfolders;Unterverzeichnisse
-Full path;Ganzer Pfad
-Files;Dateien
-Browse Folder;Verzeichnis durchsuchen
-Upload Media;Medien hochladen
-Upload Files;Dateien hochladen
-Select the files to upload;Wählen Sie Dateien zum Hochladen aus
-Create Subfolder;Unterverzeichnis erstellen
-Rename folder;Verzeichnis umbenennen
-Rename Folder;Verzeichnis umbenennen
-New Name;Neuer Name
-You do not have any media files on the server;Sie haben noch keine Dateien auf dem Server
+"Media";"Medien"
+"Media Options";"Medien Optionen"
+"Media Root";"Medien Wurzelverzeichnis"
+"Media Manager";"Medien Verwaltung"
+"Create New Folder";"Neues Verzeichnis erstellen"
+"Folder Name";"Verzeichnisname"
+"Create Folder";"Verzeichnis erstellen"
+"Open Folder";"Verzeichnis öffnen"
+"Current Folder";"Aktuelles Verzeichnis"
+"Current folder contents";"Aktuelles Verzeichnis Inhalt"
+"Subfolders";"Unterverzeichnisse"
+"Full path";"Ganzer Pfad"
+"Files";"Dateien"
+"Browse Folder";"Verzeichnis durchsuchen"
+"Upload Media";"Medien hochladen"
+"Upload Files";"Dateien hochladen"
+"Select the files to upload";"Wählen Sie Dateien zum Hochladen aus"
+"Create Subfolder";"Unterverzeichnis erstellen"
+"Rename folder";"Verzeichnis umbenennen"
+"Rename Folder";"Verzeichnis umbenennen"
+"New Name";"Neuer Name"
+"You do not have any media files on the server";"Sie haben noch keine Dateien auf dem Server"
 
 # ----- admin_design -----
-Design;Design
-Current Designs;Aktuelles Design
-Create a new design;Erzeuge neues Design
-Design details;Design Details
-Design Name;Design Name
-Design Notes;Design Notizen
-Create Design;Design erstellen
-This is the default site design;Dies ist das standard Design
-Assets;Aktiva
-Step 1: Select Layout;Schritt 1: Layout auswählen
-Layout;Layout
-Select One;Auswählen
-Step 2: Select Style Sheets;Schritt 2: Style Sheets auswählen
-Step 3: Design specific styles;Schritt 3: Design-spezifische Styles
-Update Design;Design aktualisieren
-Design Options;Design Optionen
-Who Uses This?;Wer nutzt dies?
-These are the pages that use this design:;Diese Seiten verwenden dieses Design:
+"Design";"Design"
+"Current Designs";"Aktuelles Design"
+"Create a new design";"Erzeuge neues Design"
+"Design details";"Design Details"
+"Design Name";"Design Name"
+"Design Notes";"Design Notizen"
+"Create Design";"Design erstellen"
+"This is the default site design";"Dies ist das standard Design"
+"Assets";"Aktiva"
+"Step 1: Select Layout";"Schritt 1: Layout auswählen"
+"Layout";"Layout"
+"Select One";"Auswählen"
+"Step 2: Select Style Sheets";"Schritt 2: Style Sheets auswählen"
+"Step 3: Design specific styles";"Schritt 3: Design-spezifische Styles"
+"Update Design";"Design aktualisieren"
+"Design Options";"Design Optionen"
+"Who Uses This?";"Wer nutzt dies?"
+"These are the pages that use this design:";"Diese Seiten verwenden dieses Design:"
 
 # ----- admin modules -----
-My Modules;Meine Module
-CMS Modules;CMS Module
-Digitalus CMS uses a system of modules to add custom functionality to your site.;Digitalus CMS verwendet ein System von Modulen, um der Website maßgeschneiderte Funktionalitäten hinzuzufügen.
-Module Browser;Modul-Browser
-Sign up for newsletter;Anmeldung zum Newsletter
-Headline;Überschrift
-Tagline;Stichwörter
-Content Above;Inhalt über Modul
-Select a module;Wähle eine Modul aus
-Select a module page;Wähle eine Modul Seite aus
-Enter the recipients email;Email-Adresse des Empfängers
-Content below;Inhalt unter Modul
+"My Modules";"Meine Module"
+"CMS Modules";"CMS Module"
+"Digitalus CMS uses a system of modules to add custom functionality to your site.";"Digitalus CMS verwendet ein System von Modulen, um der Website maßgeschneiderte Funktionalitäten hinzuzufügen."
+"Module Browser";"Modul-Browser"
+"Sign up for newsletter";"Anmeldung zum Newsletter"
+"Headline";"Überschrift"
+"Tagline";"Stichwörter"
+"Content Above";"Inhalt über Modul"
+"Select a module";"Wähle eine Modul aus"
+"Select a module page";"Wähle eine Modul Seite aus"
+"Enter the recipients email";"Email-Adresse des Empfängers"
+"Content below";"Inhalt unter Modul"
 
 # ----- view helper -----
-language;Sprache
-You are reading this page in;Sie lesen dies in
-This page is also translated into;Diese Seite wurde in folgende Sprachen übersetzt:
+"language";"Sprache"
+"You are reading this page in";"Sie lesen dies in"
+"This page is also translated into";"Diese Seite wurde in folgende Sprachen übersetzt:"
 
 # ----- Custom Translations -----
-last update;zuletzt geändert am
-Imprint;Impressum
-Contact;Kontakt
+"last update";"zuletzt geändert am"
+"Imprint";"Impressum"
+"Contact";"Kontakt"
