@@ -95,10 +95,13 @@ Managing Content;Inhalte verwalten
 Menu links;Menü Links
 Automatically add menu links;Automatisch Links ins Menü einfügen
 Update Page Meta Data;Aktualisiere Meta Daten der Seite
+Meta Data;Meta Daten
 Internationalization;Internationalisierung
 Default locale;Standard Lokalisierung
 Default language;Standard Sprache
 Default charset;Standard Zeichensatz
+Base meta description;Basis Meta Beschreibung
+Base meta keywords;Basis Meta Stichwörter
 english;Englisch
 french;Französisch
 german;Deutsch
