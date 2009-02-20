@@ -8,7 +8,7 @@
             $keywords = null;
         }
 
-        echo $this->formHidden('submitSearchForm',1);
+        echo $this->formHidden('submitSearchForm', 1);
         echo $this->FormRow(
             $this->GetTranslation('Keywords') . ': ',
             $this->formText('keywords', $keywords, array('size' => 50))
@@ -23,14 +23,18 @@
 
 <?php
 if ($this->searchResults) { ?>
-<p><?php echo $this->GetTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->GetTranslation('returned ') . count($this->searchResults) . ' ' . $this->GetTranslation('results.');?></p>
+<p><?php echo $this->GetTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->GetTranslation('returned') . ' ' . count($this->searchResults) . ' ' . $this->GetTranslation('results.');?></p>
     <?php
     foreach ($this->searchResults as $result) {?>
 <a href='<?php echo $result->page_link; ?>'><h3><?php echo $result->page_title; ?></h3></a>
 <p><?php echo $result->page_teaser; ?></p>
     <?php
     }
-} else { ?>
+} elseif (isset($this->keywords) && !empty($this->keywords)) { ?>
 <p><?php echo $this->GetTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->GetTranslation('did not return any results.');?></p>
 <?php
-} ?>
+} elseif (isset($_POST['submitSearchForm'])) { ?>
+<p><?php echo $this->GetTranslation('Please provide a keyword to search for!');?></p>
+<?php
+}
+?>
