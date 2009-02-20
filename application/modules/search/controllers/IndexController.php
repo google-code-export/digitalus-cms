@@ -41,6 +41,7 @@ class Mod_Search_IndexController extends Zend_Controller_Action
         }
         $index->optimize();
         $this->_forward('index');
+        echo '<p><strong>' . $this->view->GetTranslation('The search index was rebuilt successfully!') . '</strong></p><br />';
     }
 
 }
