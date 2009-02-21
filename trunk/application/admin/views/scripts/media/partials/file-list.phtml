@@ -27,7 +27,7 @@ if (is_array($this->files) && count($this->files) > 0) { ?>
 <?php
     foreach ($this->files as $file) {
         if (substr($file,0,1) != '.') {
-            $filePath = DSF_Toolbox_String::stripUnderscores($this->basePath . '/' . $file);
+            $filePath = DSF_Toolbox_String::stripUnderscores($this->basePath) . '/' . $file;
 ?>
 
 <div class='fileWrapper'>
