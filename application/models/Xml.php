@@ -69,7 +69,7 @@ class Xml extends Data
         return Zend_Registry::get('cache');
     }
 
-    private function __getcacheKey($filename)
+    private function _getcacheKey($filename)
     {
         return 'xml_file_' . $filename;
     }
