@@ -7,9 +7,14 @@ echo $this->RenderText('The following pages are the pages that you have recently
 if ($this->pages) {
     ?>
     <ul>
-    <?php foreach ($this->pages as $page) { ?>
+    <?php foreach ($this->pages as $page) {
+        if (isset($page->label) && !empty($page->label)) {
+            $label = $page->label;
+        } else {
+            $label = $page->name;
+        } ?>
         <li class="page">
-            <?php echo $this->link($page->name, '/admin/page/edit/id/' . $page->id, 'page_white_text.png');?>
+            <?php echo $this->link($label, '/admin/page/edit/id/' . $page->id, 'page_white_text.png');?>
         </li>
     <?php } ?>
     </ul>
