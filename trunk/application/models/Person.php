@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 /**
@@ -21,12 +21,12 @@
  * @version    $Id: Person.php Sun Dec 23 11:24:28 EST 2007 11:24:28 forrest lyman $
  */
 
-class Person extends Zend_Db_Table 
+class Person extends Zend_Db_Table
 {
     /**
      * table name
      *
      * @var string
      */
-	protected $_name = "people";
+    protected $_name = 'people';
 }

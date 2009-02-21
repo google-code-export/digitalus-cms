@@ -7,7 +7,7 @@ class Page extends DSF_Db_Table
     protected $_namespace = 'content';
     protected $_defaultTemplate = 'base_page';
     protected $_defaultPageName = 'New Page';
-    protected $_ignoredFields = array('update','version'); //these are the fields that are not saved as nodes
+    protected $_ignoredFields = array('update', 'version'); //these are the fields that are not saved as nodes
 
     public function getContent($uri, $version = null)
     {
@@ -41,7 +41,7 @@ class Page extends DSF_Db_Table
         }
     }
 
-    public function createPage($pageName, $parentId = 0, $contentTemplate = null, $showOnMenu = null )
+    public function createPage($pageName, $parentId = 0, $contentTemplate = null, $showOnMenu = null)
     {
         if (empty($pageName)) {
             $pageName = $this->_defaultPageName;
@@ -72,13 +72,13 @@ class Page extends DSF_Db_Table
 
         //first create the new page
         $data = array(
-            'namespace'         =>  $this->_namespace,
-            'create_date'       =>  time(),
-            'author_id'         =>  $userId,
-            'name'              =>  $pageName,
-            'content_template'  =>  $contentTemplate,
-            'parent_id'         =>  $parentId,
-            'show_on_menu'      =>  $makeMenuLinks
+            'namespace'        => $this->_namespace,
+            'create_date'      => time(),
+            'author_id'        => $userId,
+            'name'             => $pageName,
+            'content_template' => $contentTemplate,
+            'parent_id'        => $parentId,
+            'show_on_menu'     => $makeMenuLinks
         );
         $this->insert($data);
         $id = $this->_db->lastInsertId();
@@ -87,7 +87,6 @@ class Page extends DSF_Db_Table
 
         //return the new page
         return $this->find($id)->current();
-
     }
 
     public function getTemplate($pageId)
@@ -162,7 +161,7 @@ class Page extends DSF_Db_Table
             if (count($pageArray) > 0) {
                 foreach ($pageArray as $node => $content) {
                     if (!in_array($node, $this->_ignoredFields)) {
-                        $contentNode->set($pageId,$node, $content, $version);
+                        $contentNode->set($pageId, $node, $content, $version);
                     }
                 }
             }
@@ -204,7 +203,7 @@ class Page extends DSF_Db_Table
     {
         $titleParts[] = $this->getPageTitle($pageId);
         $parents = $this->getParents($pageId);
-        if ($parents){
+        if ($parents) {
             foreach ($parents as $parent) {
                 $titleParts[] = $this->getPageTitle($parent->id);
             }
@@ -403,7 +402,7 @@ class Page extends DSF_Db_Table
     public function getParents($page)
     {
         $parents = null;
-        while($parent = $this->getParent($page)) {
+        while ($parent = $this->getParent($page)) {
             $parents[$parent->id] = $parent;
             $page = $parent;
         }
@@ -518,7 +517,7 @@ class Page extends DSF_Db_Table
      */
     private function _indexPages($parentId = 0, $path = null, $pathSeparator = '/', $order = null)
     {
-        if ($this->hasChildren($parentId)){
+        if ($this->hasChildren($parentId)) {
             $children = $this->getChildren($parentId, null, $order);
             foreach ($children as $child) {
                 //check to see if the child has children
@@ -654,7 +653,7 @@ class Page extends DSF_Db_Table
      */
     private function _getPageId($page)
     {
-        if (is_object($page)){
+        if (is_object($page)) {
             return $page->id;
         } else {
             return intval($page);
