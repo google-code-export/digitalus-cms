@@ -2,7 +2,7 @@
 abstract class DSF_Interface_Grid_Abstract
 {
     public $view;
-    protected $_attribs = array('first', 'last', 'before', 'after', 'clear');
+    protected $_attribs = array('first', 'last', 'before', 'after', 'clear', 'class');
     const FIRST = 'first';
     const LAST = 'last';
     const BEFORE = 'before';
