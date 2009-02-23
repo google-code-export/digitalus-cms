@@ -74,6 +74,11 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
             //automatically add the clear if last is true
             $this->setAttribute(self::CLEAR, true);
         }
+        
+        $elementClass = $this->getAttribute('class');
+        if($elementClass) {
+            $class[] = $elementClass;
+        }
 
         $before = $this->getAttribute(self::BEFORE);
         $after  = $this->getAttribute(self::AFTER);
