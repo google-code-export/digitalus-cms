@@ -96,6 +96,7 @@ class Initializer extends Zend_Controller_Plugin_Abstract
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
         $this->initConfig();
+        $this->initConstants();
         $this->initLocale();
         $this->initCache();
         $this->initDb();
@@ -120,6 +121,11 @@ class Initializer extends Zend_Controller_Plugin_Abstract
         $registry->set('config', $this->_config);
     }
 
+    public function initConstants()
+    {
+        define('SITE_ROOT', $this->_root);
+    }
+    
     public function initLocale()
     {
         //set defualt locale
