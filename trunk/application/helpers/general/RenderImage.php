@@ -7,7 +7,7 @@ class DSF_View_Helper_General_RenderImage
 	 */
 	public function renderImage($src, $height, $width,$attribs = false){
 	    $absPath = SITE_ROOT . $src;
-		if($src != '' && file_exists($absPath)){
+		if($src != '' && is_file($absPath)){
 		    
     		$imageSize = getimagesize($absPath);
     		$srcHeight = $imageSize[0];
