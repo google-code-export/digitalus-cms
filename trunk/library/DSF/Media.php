@@ -28,7 +28,7 @@ class DSF_Media {
         return null;
     }
 
-    public static function upload($file, $path, $filename, $createPath = true, $base = '.')
+    public static function upload($file, $path, $filename = null, $createPath = true, $base = '.')
     {
         if (self::isAllowed($file['type'])) {
             $path = self::getMediaPath($path);
@@ -40,8 +40,7 @@ class DSF_Media {
             $path = str_replace(self::rootDirectory(), '', $path);
             $path = DSF_Toolbox_String::stripUnderscores($path);
             $path = DSF_Toolbox_String::stripLeading('/', $path);
-            $path = $base . '/' . self::rootDirectory() . '/' . $path;
-
+            $path = self::rootDirectory() . '/' . $path;
             if ($createPath) {
                 //attempt to create the new path
                 DSF_Filesystem_Dir::makeRecursive($base, $path);
@@ -51,7 +50,6 @@ class DSF_Media {
             $filename = DSF_Filesystem_File::cleanFilename($filename);
             $filename = basename($filename);
             $path .= '/' . $filename;
-
             if (move_uploaded_file($file['tmp_name'], $path)) {
                 //return the filepath if things worked out
                 //this is relative to the site root as this is the format that will be required for links and what not
