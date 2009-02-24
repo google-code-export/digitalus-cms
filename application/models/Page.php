@@ -22,7 +22,7 @@ class Page extends DSF_Db_Table
         return $node->fetchContentArray($pointer, null, null, $version);
     }
 
-    public function getCurrentUsersPages()
+    public function getCurrentUsersPages($order = null, $limit = null)
     {
         $user = new User();
         $currentUser = $user->getCurrentUser();
@@ -30,6 +30,12 @@ class Page extends DSF_Db_Table
             $select = $this->select();
             $select->where('author_id = ?', $currentUser->id);
             $select->where('namespace = ?', $this->_namespace);
+            if($order != null) {
+                $select->order($order);
+            }
+            if($limit != null) {
+                $select->limit($limit);
+            }
             $pages = $this->fetchAll($select);
             if ($pages->count() > 0) {
                 return $pages;
