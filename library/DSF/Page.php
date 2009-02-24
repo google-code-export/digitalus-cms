@@ -210,3 +210,4 @@ class DSF_Page
         return $this->view;
     }
 }
+
