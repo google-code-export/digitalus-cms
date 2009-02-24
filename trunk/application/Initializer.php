@@ -97,9 +97,9 @@ class Initializer extends Zend_Controller_Plugin_Abstract
     {
         $this->initConfig();
         $this->initConstants();
-        $this->initLocale();
         $this->initCache();
         $this->initDb();
+        $this->initLocale();
         $this->initSiteSettings();
         $this->initView();
         $this->initControllers();
@@ -133,9 +133,15 @@ class Initializer extends Zend_Controller_Plugin_Abstract
         $locale = new Zend_Locale($this->_config->language->defaultLocale);
 
         //translations
+        $siteSettings = new SiteSettings();
+        $lang = $siteSettings->get('admin_language');
+        if(!empty($lang)) {
+            $key = $lang;
+        } else {
+            $key = $this->_config->language->defaultLocale;
+        }
         $languageFiles = $this->_config->language->translations->toArray();
-        $language =  $this->_config->language->defaultLocale;
-        $adapter = new Zend_Translate('csv',$this->_config->language->path . '/' . $languageFiles[$language] . '.csv',$language);
+        $adapter = new Zend_Translate('csv',$this->_config->language->path . '/' . $languageFiles[$key] . '.csv',$key);
         Zend_Registry::set('Zend_Translate', $adapter);
     }
 
