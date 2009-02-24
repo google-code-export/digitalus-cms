@@ -41,7 +41,7 @@ class Admin_IndexController extends Zend_Controller_Action
         $bookmark = new Bookmark();
         $this->view->bookmarks = $bookmark->getUsersBookmarks();
         $content = new Page();
-        $this->view->pages = $content->getCurrentUsersPages();
+        $this->view->pages = $content->getCurrentUsersPages('create_date DESC', 10);
         $user = new User();
         $this->view->identity = $user->getCurrentUser();
     }
