@@ -1,4 +1,5 @@
 <?php
+require_once '/DSF/Module/Service.php';
 class DSF_Module
 {
     const MODULE_KEY = 'module';
