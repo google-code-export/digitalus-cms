@@ -1,10 +1,8 @@
 <?php
-
 require_once ('Zend/Form/Element.php');
-
-class DSF_Form_Element_Xml extends Zend_Form_Element {
-
-    public function getValue($toString = true)
+class DSF_Form_Element_Xml extends Zend_Form_Element
+{
+    public function getValue ($toString = true)
     {
         $value = parent::getValue();
         if (is_array($value)) {
@@ -15,17 +13,19 @@ class DSF_Form_Element_Xml extends Zend_Form_Element {
         } else {
             $xml = simplexml_load_string($value);
         }
-        if ($toString) {
-            return $xml->asXML();
+        if (is_object($xml)) {
+            if ($toString) {
+                return $xml->asXML();
+            } else {
+                return $xml;
+            }
         } else {
-            return $xml;
+            return null;
         }
     }
-
-    public function getXml()
+    public function getXml ()
     {
         return $this->getValue(false);
     }
 }
-
 ?>
