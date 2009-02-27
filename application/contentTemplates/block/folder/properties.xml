@@ -1,6 +1,9 @@
 <contentProperties>
 	<name>Block Folder</name>
 	<allowedChildren>
+		<template>block_folder</template>
 		<template>block_html</template>
+		<template>block_module</template>
+		<template>block_wiki</template>
 	</allowedChildren>	
 </contentProperties>
