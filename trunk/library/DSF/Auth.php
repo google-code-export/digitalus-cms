@@ -57,21 +57,27 @@ class DSF_Auth
      *
      * @var string
      */
-    private $_userTable = "users";
+    protected  $_userTable = "users";
 
     /**
      * the indentity column
      *
      * @var string
      */
-    private $_identityColumn = "email";
+    protected  $_identityColumn = "email";
 
     /**
      * the credential column
      *
      * @var string
      */
-    private $_credentialColumn = "password";
+    protected  $_credentialColumn = "password";
+    
+    const USER_NAMESPACE = 'adminUser';
+    
+    protected $_resultRowColumns = array('id', 'user_group_id', 'first_name', 'last_name', 'email', 'role', 'acl_resources');
+    
+    
 
 
     /**
@@ -80,21 +86,21 @@ class DSF_Auth
      * @param string $username
      * @param string $password
      */
-    public function __construct($username, $password)
+    public function __construct($username = null, $password = null)
     {
         //set up the db authentication
         // zend auth uses FETCH_ASSOC for the fetchmode
         $this->_dbAdapter = clone (Zend_Db_Table::getDefaultAdapter());
         $this->_dbAdapter->setFetchMode(zend_db::FETCH_ASSOC );
 
-        $this->_authAdapter = new Zend_Auth_Adapter_DbTable($this->_dbAdapter, 'users', 'email', 'password');
+        $this->_authAdapter = new Zend_Auth_Adapter_DbTable($this->_dbAdapter, $this->_userTable, $this->_identityColumn, $this->_credentialColumn);
 
         $this->_username = $username;
         $this->_password = md5($password);
 
         //set up storage
         // @todo: i can not get zend to persist the identities for some reason .. figure out why
-        $this->_storage = new Zend_Session_Namespace('adminUser');
+        $this->_storage = new Zend_Session_Namespace(self::USER_NAMESPACE);
     }
 
     /**
@@ -112,7 +118,7 @@ class DSF_Auth
 
         if ($result->isValid()) {
             //save the user and return the result
-            $row = $this->_authAdapter->getResultRowObject(array('id', 'user_group_id', 'first_name', 'last_name', 'email', 'role', 'acl_resources'));
+            $row = $this->_authAdapter->getResultRowObject($this->_resultRowColumns);
             $this->_storage->user = $row;
             return $result;
         }
@@ -125,7 +131,7 @@ class DSF_Auth
      */
     public static function getIdentity()
     {
-        $storage = new Zend_Session_Namespace('adminUser');
+        $storage = new Zend_Session_Namespace(self::USER_NAMESPACE);
         if (isset($storage->user)) {
           return $storage->user;
         }
@@ -137,7 +143,7 @@ class DSF_Auth
      */
     public static function destroy()
     {
-        $storage = new Zend_Session_Namespace('adminUser');
+        $storage = new Zend_Session_Namespace(self::USER_NAMESPACE);
         $storage->unsetAll();
     }
 
