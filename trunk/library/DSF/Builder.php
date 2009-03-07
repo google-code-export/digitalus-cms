@@ -13,7 +13,7 @@ class DSF_Builder
         }
         
         // set whether to persist this page as the current page
-        if($persist == null) {
+        if($persist === null) {
             if(strtolower($config->builder->persistPage) == 'true') {
                $persist = true;
             }else{
@@ -37,7 +37,6 @@ class DSF_Builder
         
         // actions is a stack of all of the builder action files
         $actions = array();
-        
         
         foreach ($stack as $action) {
             $attributes = $action->attributes();
