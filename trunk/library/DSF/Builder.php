@@ -4,7 +4,7 @@ class DSF_Builder
     const PATH_TO_BUILDERS = './application/data/builders';
     const BASE_CLASSNAME = 'DSF_Builder_Action_';
 
-    public static function loadPage($uri = null, $buildStack = null, DSF_Page $page = null)
+    public static function loadPage($uri = null, $buildStack = null, DSF_Page $page = null, $persist = null)
     {
     	// fetch the builder stack from config
     	$config = Zend_Registry::get('config');
@@ -12,8 +12,15 @@ class DSF_Builder
             $buildStack = $config->builder->stack;
         }
         
+        // set whether to persist this page as the current page
+        if($persist == null) {
+            if(strtolower($config->builder->persistPage) == 'true') {
+               $persist = true;
+            }else{
+                $persist = false;
+            }
+        }
         
-
         $pathToBuildStack = self::PATH_TO_BUILDERS . '/' . $buildStack;
 
         //load the builder stack
@@ -40,7 +47,7 @@ class DSF_Builder
             if(isset($actions[$className])) {
             	$class = $actions[$className];
             }else{
-            	$class = new $className($page, $attributes);
+            	$class = new $className($page, $attributes, $persist);
             	$actions[$className] = $class;
             }
             
