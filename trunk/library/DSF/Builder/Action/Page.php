@@ -1,11 +1,6 @@
 <?php
 class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 {
-public function setUri()
-{
-    $uri = new DSF_Uri();
-    $this->_page->setUri($uri->toArray());
-}
 
     public function appendUriParams()
     {

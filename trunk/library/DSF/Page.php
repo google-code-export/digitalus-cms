@@ -1,86 +1,39 @@
 <?php
 class DSF_Page
 {
-    protected $_id = 0;
-    protected $_uri = null;
-    protected $_baseUrl = null;
+    // the page object stores all of its data in the params array
     protected $_params = array();
-    protected $_data;
-    protected $_parents = null;
-    protected $_meta = array();
-    protected $_properties = array();
-    protected $_content = array();
-    protected $_defaultContent = array();
-    protected $_language = array();
-    protected $_availableLanguages = array();
-    protected $_contentTemplate = null;
-    protected $_design;
-    protected $_layout;
+    
+    // these parameters are locked
+    protected $_protectedParams = array();
+    
     public $view;
 
-    public function __construct()
+    public function __construct($uri)
     {
+    	$this->setParam('uri', $uri);
         $this->view = new Zend_View();
-    }
-
-    public function setId($id)
-    {
-        $this->_id = $id;
-    }
-
-    public function getId()
-    {
-        return $this->_id;
-    }
-
-    public function setUri($uri)
-    {
-        $this->_uri = $uri;
-    }
-
-    public function getUri()
-    {
-        return $this->_uri;
-    }
-
-    public function setBaseUrl($url)
-    {
-        $this->_baseUrl = $url;
-    }
-
-    public function getBaseUrl()
-    {
-        return $this->_baseUrl;
-    }
-
-    public function setData($data)
-    {
-        $this->_data = $data;
-    }
-
-    public function getData()
-    {
-        return $this->_data;
-    }
-
-    public function getParents()
-    {
-        return $this->_parents;
-    }
-
-    public function setParents($parents)
-    {
-        $this->_parents = $parents;
     }
 
     public function setParams($params)
     {
-        $this->_params = $params;
+        if(is_array($params)) {
+            foreach ($params as $key => $value) {
+                $this->setParam($key, $value);
+            }
+        }
     }
 
-    public function setParam($key, $value)
+    public function setParam($key, $value, $protected = false)
     {
-        $this->_params[$key] = $value;
+        if($this->_isProtected($key)) {
+            throw new Zend_Exception('Unable to set protected property (' . $key . ') in DSF_Page');
+        }else{
+            $this->_params[$key] = $value;
+            if($protected == true) {
+                $this->_protectedParams[] = $key;
+            }
+        }
     }
 
     public function getParams()
@@ -94,36 +47,102 @@ class DSF_Page
             return $this->_params[$key];
         }
     }
+    
+    public function has($key)
+    {
+        if(isset($this->_params[$key])) {
+            return true;
+        }
+    }
+    
+    protected function _isProtected($key)
+    {
+        if(in_array($key, $this->_protectedParams)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function setId($id)
+    {
+        $this->setParam('id', $id);
+    }
+
+    public function getId()
+    {
+        return $this->getParam('id');
+    }
+
+    public function setUri($uri)
+    {
+        $this->setParam('uri', $uri);
+    }
+
+    public function getUri()
+    {
+        return $this->getParam('uri');
+    }
+
+    public function setBaseUrl($url)
+    {
+        $this->setParam('baseUrl', $url);
+    }
+
+    public function getBaseUrl()
+    {
+        return $this->getParam('baseUrl');
+    }
+
+    public function setData($data)
+    {
+        $this->setParam('data', $data);
+    }
+
+    public function getData()
+    {
+        return $this->getParam('data');
+    }
+
+    public function getParents()
+    {
+        return $this->getParam('parents');
+    }
+
+    public function setParents($parents)
+    {
+        $this->setParam('parents', $parents);
+    }
 
     public function setMeta($metaData)
     {
-        $this->_meta = $metaData;
+        $this->setParam('metaData', $metaData);
     }
 
     public function getMeta()
     {
-        return $this->_meta;
+        return $this->getParam('metaData');
     }
 
     public function setProperties($properties)
     {
-        $this->_properties = $properties;
+        $this->setParam('properties', $properties);
     }
 
     public function getProperties()
     {
-        return $this->_properties;
+        return $this->getParam('properties');
     }
 
     public function setLanguage($language)
     {
-        $this->_language = $language;
+        $this->setParam('language', $language);
     }
 
     public function getLanguage()
     {
-        if ($this->_language) {
-            return $this->_language;
+        if ($this->has('language')) {
+            return $this->getParam('language');
         } else {
             return null;
         }
@@ -132,35 +151,35 @@ class DSF_Page
 
     public function setAvailableLanguages($languages)
     {
-        $this->_availableLanguages = $languages;
+        $this->setParam('availableLanguages', $languages);
     }
 
     public function getAvailableLanguages()
     {
-        if ($this->_availableLanguages) {
-            return $this->_availableLanguages;
+        if ($this->has('availableLanguages')) {
+            return $this->getParam('availableLanguages');
         } else {
             return null;
         }
 
     }
 
-
     public function setContent($content)
     {
-        $this->_content = $content;
+        $this->setParam('content', $content);
     }
 
     public function setDefaultContent($content)
     {
-        $this->_defaultContent = $content;
+        $this->setParam('defaultContent', $content);
     }
 
     public function getContent($key = null, $useDefault = true)
     {
-        $content = $this->_content;
-        if ($useDefault && is_array($this->_defaultContent)) {
-            foreach ($this->_defaultContent as $k => $v) {
+        $content = $this->getParam('content');
+        $defaultContent = $this->getParam('defaultContent');
+        if ($useDefault && is_array($defaultContent)) {
+            foreach ($defaultContent as $k => $v) {
                 if (!empty($v) && empty($content[$k])) {
                     $content[$k] = $v;
                 }
@@ -177,32 +196,32 @@ class DSF_Page
 
     public function setContentTemplate($contentTemplate)
     {
-        $this->_contentTemplate = $contentTemplate;
+        $this->setParam('contentTemplate', $contentTemplate);
     }
 
     public function getContentTemplate()
     {
-        return $this->_contentTemplate;
+        return $this->getParam('contentTemplate');
     }
 
     public function setDesign($design)
     {
-        $this->_design = $design;
+        $this->setParam('design', $design);
     }
 
     public function getDesign()
     {
-        return $this->_design;
+        return $this->getParam('design');
     }
 
     public function setLayout($layout)
     {
-        $this->_layout = $layout;
+        $this->setParam('layout', $layout);
     }
 
     public function getLayout()
     {
-        return $this->_layout;
+        return $this->getParam('layout');
     }
 
     public function getView()
