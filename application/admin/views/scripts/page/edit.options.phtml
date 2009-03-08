@@ -16,4 +16,4 @@ this is not going to make it in the beta version
 </ul>
 
 <h3><?php echo $this->GetTranslation('Page Versions');?></h3>
-<?php echo $this->partial('page/partials/page-versions.phtml', array('pageId' => $this->pageId, 'version' => $this->currentVersion))?>
+<?php echo $this->render('page/partials/page-versions.phtml', array('pageId' => $this->pageId, 'version' => $this->currentVersion))?>
