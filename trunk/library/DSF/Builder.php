@@ -32,7 +32,11 @@ class DSF_Builder
         
         //create the page if one is not passed
         if($page == null) {
-            $page = new DSF_Page($uriArray, $view);
+            $page = new DSF_Page($uriArray);
+        }
+        
+        if($view != null) {
+            $page->setView($view);
         }
         
         // actions is a stack of all of the builder action files
