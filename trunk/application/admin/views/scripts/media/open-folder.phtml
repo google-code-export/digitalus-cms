@@ -21,7 +21,7 @@
             'files'     => $this->files,
             'folders'   => $this->folders
         );
-        echo $this->partial('media/partials/file-list.phtml', $data);
+        echo $this->render('media/partials/file-list.phtml', $data);
     ?>
 </fieldset>
 
@@ -33,7 +33,7 @@
             'filepath'  => $this->filesystemPath,
             'mediapath' => $this->mediaPath,
         );
-        echo $this->partial('media/partials/upload-files.phtml', $data);
+        echo $this->render('media/partials/upload-files.phtml', $data);
     ?>
 </fieldset>
 
@@ -50,7 +50,7 @@
             'mediapath' => $this->mediaPath,
             'label'     => $label
         );
-        echo $this->partial('media/partials/rename-folder.phtml', $data);
+        echo $this->render('media/partials/rename-folder.phtml', $data);
     ?>
 </fieldset>
 
