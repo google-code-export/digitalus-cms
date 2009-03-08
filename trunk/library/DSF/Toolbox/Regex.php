@@ -39,10 +39,19 @@ class DSF_Toolbox_Regex
      * @param string $string
      * @return string
      */
-    public static function stripFileExtension($string)
+    public static function stripFileExtension($string, $asArray = false)
     {
-        return preg_replace("/\..*$/", '', $string);
+	$regexp = "|\.\w{1,5}$|";
+	$new = preg_replace($regexp, "", $string);
+	$suf = substr($string, strlen($new)+1);
+	if($asArray == true) {
+	    return array('location' => $new, 'suffix' => $suf);
+	}else{
+	    return $new; // use this return for standard Digitalus setup
+	}
+        
     }
+    
 
     /**
      * returns the html between the the body tags
