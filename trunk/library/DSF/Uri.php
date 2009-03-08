@@ -89,6 +89,7 @@ class DSF_Uri
     {
         return $this->_uri;
     }
+    
 
     /**
      * cleans the uri
