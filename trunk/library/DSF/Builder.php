@@ -4,7 +4,7 @@ class DSF_Builder
     const PATH_TO_BUILDERS = './application/data/builders';
     const BASE_CLASSNAME = 'DSF_Builder_Action_';
 
-    public static function loadPage($uri = null, $buildStack = null, DSF_Page $page = null, $persist = null)
+    public static function loadPage($uri = null, $buildStack = null, DSF_Page $page = null, Zend_View $view = null, $persist = null)
     {
     	// fetch the builder stack from config
     	$config = Zend_Registry::get('config');
@@ -32,7 +32,7 @@ class DSF_Builder
         
         //create the page if one is not passed
         if($page == null) {
-            $page = new DSF_Page($uriArray);
+            $page = new DSF_Page($uriArray, $view);
         }
         
         // actions is a stack of all of the builder action files
@@ -62,5 +62,10 @@ class DSF_Builder
         } else {
             return null;
         }
+    }
+    
+    public static function setPage(DSF_Page $page)
+    {
+        Zend_Registry::set('page', $page);
     }
 }
