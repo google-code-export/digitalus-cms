@@ -39,9 +39,7 @@ class IndexController extends Zend_Controller_Action
         
         // render the page
         $this->view->page = $this->page;
-        $this->view->layout()->page = $this->view->render(
-        	'layouts/' . $this->page->getLayout()
-        );
+        $this->view->layout()->page = $this->view->render($this->page->getLayout());
     }
 }
 
