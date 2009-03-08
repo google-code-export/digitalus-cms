@@ -21,11 +21,11 @@ class DSF_View_Helper_Content_RenderContentTemplate {
     /**
      *
      */
-    public function renderContentTemplate($template, $content)
+    public function renderContentTemplate($template, $content, $namespace = null)
     {
         $loader = new DSF_Content_Template_Loader();
         $template = $loader->load($template);
-        return $template->render($content);
+        return $template->render($content, $this->view, $namespace);
     }
 
     /**
