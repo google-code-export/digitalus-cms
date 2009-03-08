@@ -9,10 +9,27 @@ class DSF_Page
     
     public $view;
 
-    public function __construct($uri)
+    public function __construct($uri, $view = null)
     {
     	$this->setParam('uri', $uri);
-        $this->view = new Zend_View();
+        $this->setView($view);
+    }
+    
+    public function setView(Zend_View $view = null)
+    {
+       if($view == null) {
+            $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+            if (null === $viewRenderer->view) {
+                $viewRenderer->initView();
+            }
+            $this->view = $viewRenderer->view;
+        }else{
+            $this->view = $view;
+        }
+    }
+    
+    public function __wakeup()
+    {
     }
 
     public function setParams($params)
@@ -96,12 +113,12 @@ class DSF_Page
 
     public function setData($data)
     {
-        $this->setParam('data', $data);
+        $this->setParam('data', serialize($data));
     }
 
     public function getData()
     {
-        return $this->getParam('data');
+        return unserialize($this->getParam('data'));
     }
 
     public function getParents()
@@ -211,7 +228,9 @@ class DSF_Page
 
     public function getDesign()
     {
-        return $this->getParam('design');
+        $design = new Design();
+        $design->setDesign($this->getParam('design'));
+        return $design;
     }
 
     public function setLayout($layout)

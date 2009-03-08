@@ -25,28 +25,26 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
         $data = $this->_page->getData();
         $designId = $data->design;
 
-        $mdlDesign = new Design();
-        $design = $mdlDesign->setDesign($designId);
-
         //load the parents or default if the current page does not have a design set
-        if (!$design) {
+        if (!empty($designId)) {
             $page = new Page();
             $parents = $page->getParents($this->_page->getId());
             if (is_array($parents)) {
                 foreach ($parents as $parent) {
-                    $design = $mdlDesign->setDesign($parent->design);
-                    if ($design) {
+                    if (!empty($parent->design)) {
+                        $design = $parent->design;
                         break;
                     }
                 }
             }
         }
 
-        if (!$design) {
+        if (empty($design)) {
+            $mdlDesign = new Design();
             $default = $mdlDesign->getDefaultDesign();
-            $mdlDesign->setDesign($default->id);
+            $design = $default->id;
         }
-        $this->_page->setDesign($mdlDesign);
+        $this->_page->setDesign($design);
     }
 
     public function setStyles()
