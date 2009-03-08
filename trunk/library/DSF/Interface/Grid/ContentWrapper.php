@@ -2,6 +2,7 @@
 class DSF_Interface_Grid_ContentWrapper extends DSF_Interface_Grid_Abstract
 {
     public $parentId;
+    public $content;
 
     public function __construct($parentId)
     {
@@ -10,14 +11,16 @@ class DSF_Interface_Grid_ContentWrapper extends DSF_Interface_Grid_Abstract
 
     public function render()
     {
-        //load the content from the placeholder
-        $this->loadView();
         $contentKey = $this->parentId . '_content';
-        $content = $this->view->placeholder($contentKey)->toString();
+    	if($this->content == null) {
+	        //load the content from the placeholder
+	        $this->loadView();
+	        $this->content = $this->view->placeholder($contentKey)->toString();
+    	}
 
         //Only need a nested container if there is content there
-        if (!empty($content)) {
-            return "<div id='{$contentKey}' class='innerContent'>{$content}</div>";
+        if (!empty($this->content)) {
+            return "<div id='{$contentKey}' class='innerContent'>{$this->content}</div>";
         } else {
             return null;
         }
