@@ -4,7 +4,7 @@ class DSF_View_Helper_Cms_RenderModule
     /**
      * render a module page like news_showNewPosts
      */
-    public function RenderModule($moduleData, $defaultModule = null)
+    public function RenderModule($moduleData, $defaultModule = null, $params = array())
     {
         if (!empty($moduleData) || $defaultModule != null) {
             if (!empty($moduleData)) {
