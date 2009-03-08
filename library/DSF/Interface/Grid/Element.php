@@ -16,6 +16,28 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
         $this->attr = $attr;
         $this->content = new DSF_Interface_Grid_ContentWrapper($id);
     }
+    
+    public function setContent($content)
+    {
+    	$this->content->content = $content;
+    }
+    
+    public function getElement($id)
+    {
+    	if($this->id == $id) {
+    		return $this;
+    	}else{
+    		if(count($this->children) > 0) {
+    			foreach($this->children as $child) {
+    				$result = $child->getElement($id);
+    				if(is_object($result)) {
+    					return $result;
+    				}
+    			}
+    		}
+    	}
+    	return false;
+    }
 
     public function addElement ($id, $columns = null, $attr = array())
     {

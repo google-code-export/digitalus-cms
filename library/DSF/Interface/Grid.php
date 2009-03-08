@@ -2,22 +2,47 @@
 
 class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
     public $containerClass = 'container';
+    const PATH_TO_GRIDS = './application/public/views/grids';
     public $id;
     public $columns;
     public $grid = null;
+    public $view;
     private $_styleSheets = array(
         'styles/grid-960/styles/text.css',
         'styles/grid-960/styles/960.css',
         'styles/grid-960/styles/reset.css'
     );
 
-    public function __construct($id, $columns, $attr = array())
+    public function __construct($id = null, $columns = null, $attr = array())
     {
-        $this->id = $id;
-        $this->columns = $columns;
+    	if($id != null) {
+            $this->id = $id;
+    	}
+    	if($columns != null) {
+            $this->columns = $columns;
+    	}
+    	
         $this->_loadStyles();
         $grid = new DSF_Interface_Grid_Element('wrapper');
         $this->grid = $grid;
+        $this->init();
+        
+        $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+        if (null === $viewRenderer->view) {
+            $viewRenderer->initView();
+        }
+        $this->view = $viewRenderer->view;        
+    }
+    
+    static function load($grid, $id)
+    {
+    	require_once self::PATH_TO_GRIDS . '/' . $grid . '.php';
+    	return new $grid($id);
+    }
+    
+    public function getElement($id)
+    {
+    	return $this->grid->getElement($id);
     }
 
     public function addElement($id, $columns, $attr = array())
@@ -42,5 +67,7 @@ class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
             $this->view->headLink()->prependStylesheet($baseUrl . '/' . $styleSheet);
         }
     }
+    
+    
 }
 ?>

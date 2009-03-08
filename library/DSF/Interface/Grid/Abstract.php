@@ -8,6 +8,8 @@ abstract class DSF_Interface_Grid_Abstract
     const BEFORE = 'before';
     const AFTER = 'after';
     const CLEAR = 'clear';
+    
+    public function init(){}
 
     public function loadView()
     {
