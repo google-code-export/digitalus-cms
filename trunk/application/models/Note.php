@@ -38,7 +38,7 @@ class Note extends ContentNode
             $where[] = $this->_db->quoteInto('node = ?', $this->_type);
             $row = $this->fetchRow($where);
             if ($row) {
-                $row->content = addslashes($notes);
+                $row->content = $notes;
                 $row->save();
             } else {
                 //the row does not exist.  create it
