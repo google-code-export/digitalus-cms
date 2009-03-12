@@ -22,28 +22,28 @@
 
 class DSF_Db_Table extends Zend_Db_Table
 {
-    protected $data;
-    private  $errors;
-    private $action;
+    protected $_data;
+    protected $_errors;
+    private   $_action;
 
     public function insertFromPost()
     {
         $this->_loadPost();
         //try to run the before method
-        if (method_exists($this,'before')) {
+        if (method_exists($this, 'before')) {
             $this->before();
         }
-        if (method_exists($this,'beforeInsert')) {
+        if (method_exists($this, 'beforeInsert')) {
             $this->beforeInsert();
         }
         $this->validateData();
-        if (!$this->errors->hasErrors()) { //there were no errors validating the data
+        if (!$this->_errors->hasErrors()) { //there were no errors validating the data
             //since this is a insert lets set the id to null
-            unset($this->data['id']);
-            $id = $this->insert($this->data);
+            unset($this->_data['id']);
+            $id = $this->insert($this->_data);
 
             //try to run the after method
-            if (method_exists($this,'after')) {
+            if (method_exists($this, 'after')) {
                 $this->after($id);
             }
             return $this->find($id)->current(); //i like to return the whole data object
@@ -52,24 +52,24 @@ class DSF_Db_Table extends Zend_Db_Table
 
     public function updateFromPost()
     {
-        $this->action = 'update';
+        $this->_action = 'update';
         $this->_loadPost();
         //try to run the before method
-        if (method_exists($this,'before')) {
+        if (method_exists($this, 'before')) {
             $this->before();
         }
-        if (method_exists($this,'beforeUpdate')) {
+        if (method_exists($this, 'beforeUpdate')) {
             $this->beforeUpdate();
         }
         $this->validateData();
-        $id = $this->data['id'];
-        unset($this->data['id']);
-        if (!$this->errors->get()) { //there were no errors validating the data
+        $id = $this->_data['id'];
+        unset($this->_data['id']);
+        if (!$this->_errors->get()) { //there were no errors validating the data
 
-            $this->update($this->data, "id=" . $id);
+            $this->update($this->_data, 'id=' . $id);
 
             //try to run the after method
-            if (method_exists($this,'after')) {
+            if (method_exists($this, 'after')) {
                 $this->after($id);
             }
         }
@@ -86,7 +86,7 @@ class DSF_Db_Table extends Zend_Db_Table
     {
         foreach ($this->_cols as $col) {
             if (DSF_Filter_Post::has($col)) {
-                $this->data[$col] = DSF_Filter_Post::raw($col);
+                $this->_data[$col] = DSF_Filter_Post::raw($col);
             }
         }
     }
@@ -116,8 +116,8 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     public function validateData()
     {
-        $this->errors = new DSF_View_Error();
-        $validations = array('Required','Text','Integer','Number','Email','Password','Date','HTML','Unique');
+        $this->_errors = new DSF_View_Error();
+        $validations = array('Required', 'Text', 'Integer', 'Number', 'Email', 'Password', 'Date', 'HTML', 'Unique');
         foreach ($validations as $v) {
             $validateFunction = '_validate' . $v;
             $this->$validateFunction();
@@ -132,7 +132,7 @@ class DSF_Db_Table extends Zend_Db_Table
     public function equalsNow($key)
     {
         $date = new Zend_Date();
-        $this->data[$key] = $date->get();
+        $this->_data[$key] = $date->get();
     }
 
     /**
@@ -143,7 +143,7 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     public function equalsValue($key, $value)
     {
-       $this->data[$key] = $value;
+       $this->_data[$key] = $value;
     }
 
     /**
@@ -151,7 +151,7 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     public function getValue($key)
     {
-        return $this->data[$key];
+        return $this->_data[$key];
     }
 
     /**
@@ -160,10 +160,10 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     private function _validateRequired()
     {
-        if ($this->Required) {
-            foreach ($this->Required as $r) {
-                if ($this->data[$r] == '') {
-                    $this->errors->add('The ' . $this->_getNiceName($r) . ' is required.');
+        if ($this->_required) {
+            foreach ($this->_required as $r) {
+                if ($this->_data[$r] == '') {
+                    $this->_errors->add('The ' . $this->_getNiceName($r) . ' is required.');
                 }
             }
         }
@@ -171,12 +171,12 @@ class DSF_Db_Table extends Zend_Db_Table
 
     private function _validateHTML()
     {
-        if ($this->HTML) {
-            foreach ($this->HTML as $f) {
+        if ($this->_HTML) {
+            foreach ($this->_HTML as $f) {
                 //you must strip slashes first, as the HTML editors add them
                 //by doing this you are able to process both raw HTML and WYSIWYG HTML
-                if (isset($this->data[$f])) {
-                    $this->data[$f] = addslashes(stripslashes($this->data[$f]));
+                if (isset($this->_data[$f])) {
+                    $this->_data[$f] = addslashes(stripslashes($this->_data[$f]));
                 }
             }
         }
@@ -184,19 +184,19 @@ class DSF_Db_Table extends Zend_Db_Table
 
     private function _validateUnique()
     {
-        if ($this->Unique) {
+        if ($this->_unique) {
             //first get the original data if this is an update
-            if ($this->action =='update') {
-                $curr = $this->find($this->data['id']);
+            if ($this->_action == 'update') {
+                $curr = $this->find($this->_data['id']);
             }
 
-            foreach ($this->Unique as $f) {
+            foreach ($this->_unique as $f) {
                 //if this is an update then confirm that the field has changed
-                if (($this->action == 'update' && $curr->$f != $this->data[$f])||$this->action != 'update') {
+                if (($this->_action == 'update' && $curr->$f != $this->_data[$f])||$this->_action != 'update') {
                     //note that this method is the last to run, so the data is already validated as secure
-                    $rows = $this->fetchAll($f . " LIKE '{$this->data[$f]}'");
+                    $rows = $this->fetchAll($f . " LIKE '{$this->_data[$f]}'");
                     if ($rows->count() > 0) {
-                        $this->errors->add('The ' . $this->_getNiceName($f) . ' ' . $this->data[$f] . ' already exists.');
+                        $this->_errors->add('The ' . $this->_getNiceName($f) . ' ' . $this->_data[$f] . ' already exists.');
                     }
                 }
             }
@@ -210,10 +210,10 @@ class DSF_Db_Table extends Zend_Db_Table
     private function _validateText()
     {
         $filter = new Zend_Filter_StripTags();
-        if ($this->Text) {
-            foreach ($this->Text as $t) {
-                if (isset($this->data[$t])) {
-                    $this->data[$t] = $filter->filter($this->data[$t]);
+        if ($this->_text) {
+            foreach ($this->_text as $t) {
+                if (isset($this->_data[$t])) {
+                    $this->_data[$t] = $filter->filter($this->_data[$t]);
                 }
             }
         }
@@ -225,11 +225,11 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     private function _validateNumber()
     {
-        if ($this->Number) {
+        if ($this->_number) {
             $validator = new Zend_Validate_Float();
-            foreach ($this->Number as $n) {
-                if (!$validator->isValid($this->data[$n])) {
-                    $this->errors->add('The ' . $this->_getNiceName($n) . ' must be a valid number.');
+            foreach ($this->_number as $n) {
+                if (!$validator->isValid($this->_data[$n])) {
+                    $this->_errors->add('The ' . $this->_getNiceName($n) . ' must be a valid number.');
                 }
             }
         }
@@ -237,10 +237,10 @@ class DSF_Db_Table extends Zend_Db_Table
 
     private function _validateInteger()
     {
-        if ($this->Integer) {
-            foreach ($this->Integer as $n) {
-                if (!is_integer($this->data[$n])) {
-                    $this->errors->add('The ' . $this->_getNiceName($n) . ' must be a valid integer.');
+        if ($this->_integer) {
+            foreach ($this->_integer as $n) {
+                if (!is_integer($this->_data[$n])) {
+                    $this->_errors->add('The ' . $this->_getNiceName($n) . ' must be a valid integer.');
                 }
             }
         }
@@ -252,11 +252,11 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     private function _validateEmail()
     {
-        if ($this->Email) {
+        if ($this->_email) {
             $validator = new Zend_Validate_EmailAddress();
-            foreach ($this->Email as $e) {
-                if (!$validator->isValid($this->data[$e])) {
-                    $this->errors->add('The ' . $this->_getNiceName($e) . ' must be a valid email address.');
+            foreach ($this->_email as $e) {
+                if (!$validator->isValid($this->_data[$e])) {
+                    $this->_errors->add('The ' . $this->_getNiceName($e) . ' must be a valid email address.');
                 }
             }
         }
@@ -270,18 +270,18 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     private function _validatePassword()
     {
-        if ($this->Password) {
-            if (strlen($data[$this->Password[0]] < $this->Password[1])) {
-                $this->errors->add('Your password must be at least ' . $this->Password[1] . ' characters in length.');
+        if ($this->_password) {
+            if (strlen($data[$this->_password[0]] < $this->_password[1])) {
+                $this->_errors->add('Your password must be at least ' . $this->_password[1] . ' characters in length.');
             }
 
-            if ($this->data[$this->Password[2]]) {
-                if ($data[$this->Password[0]] != $data[$this->Password[2]]) {
-                    $this->errors->add('Your passwords do not match.');
+            if ($this->_data[$this->_password[2]]) {
+                if ($data[$this->_password[0]] != $data[$this->_password[2]]) {
+                    $this->_errors->add('Your passwords do not match.');
                 }
             }
 
-            $data[$this->Password[0]] = libEncrypt::encryptData($data[$this->Password[0]]);
+            $data[$this->_password[0]] = libEncrypt::encryptData($data[$this->_password[0]]);
         }
     }
 
@@ -291,11 +291,11 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     private function _validateDate()
     {
-        if ($this->Date) {
-            foreach ($this->Date as $d) {
-                if ($this->data[$d] != '') {
-                    $date = new Zend_Date($this->data[$d]);
-                    $this->data[$d] = $date->get(Zend_Date::TIMESTAMP);
+        if ($this->_date) {
+            foreach ($this->_date as $d) {
+                if ($this->_data[$d] != '') {
+                    $date = new Zend_Date($this->_data[$d]);
+                    $this->_data[$d] = $date->get(Zend_Date::TIMESTAMP);
                 }
             }
         }
@@ -309,7 +309,7 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     private function _getNiceName($field)
     {
-        return str_replace('_',' ',$field);
+        return str_replace('_', ' ',$field);
     }
 
 }
