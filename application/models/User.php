@@ -36,42 +36,63 @@ class User extends DSF_Db_Table
      *
      * @var array
      */
-    protected $_required = array('email', 'first_name', 'last_name');
+    protected $Required = array('email', 'first_name', 'last_name');
 
     /**
      * unique fields
      *
      * @var array
      */
-    protected $_unique = array('email');
+    protected $Unique = array('email');
 
     /**
      * text fields.  these fields are filtered with zend_filter_striptags
      *
      * @var array
      */
-    protected $_text = array('first_name', 'last_name', 'role');
+    protected $Text = array('first_name', 'last_name', 'role');
 
     /**
      * integer fields.  all fields will be converted to integers
      *
      * @var array
      */
-    protected $_int = array('user_group_id');
+    protected $Integer = array();
 
     /**
      * numeric fields.  all fields filtered as floats / decimals
      *
      * @var array
      */
-    protected $_number = array();
+    protected $Number = array();
 
     /**
      * email fields
      *
      * @var array
      */
-    protected $_email = array('email');
+    protected $Email = array('email');
+
+    /**
+     * password fields
+     *
+     * @var array
+     */
+    protected $Password = array();
+
+    /**
+     * date fields
+     *
+     * @var array
+     */
+    protected $Date = array();
+
+    /**
+     * HTML fields
+     *
+     * @var array
+     */
+    protected $HTML = array();
 
     /**
      * run before insert or update
@@ -114,7 +135,7 @@ class User extends DSF_Db_Table
         //overload the unique email validation if the current user has not changed their email address
         $curr = $this->find($this->data['id'])->current();
         if ($curr->email == DSF_Filter_Post::raw('email')) {
-            unset($this->_unique[array_search('email',$this->_unique)]);
+            unset($this->_unique[array_search('email',$this->Unique)]);
         }
 
         //update the password

@@ -270,7 +270,7 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     private function _validatePassword()
     {
-        if ($this->password) {
+        if ($this->Password) {
             if (strlen($data[$this->Password[0]] < $this->Password[1])) {
                 $this->errors->add('Your password must be at least ' . $this->Password[1] . ' characters in length.');
             }
