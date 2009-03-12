@@ -36,63 +36,63 @@ class User extends DSF_Db_Table
      *
      * @var array
      */
-    protected $Required = array('email', 'first_name', 'last_name');
+    protected $_required = array('email', 'first_name', 'last_name');
 
     /**
      * unique fields
      *
      * @var array
      */
-    protected $Unique = array('email');
+    protected $_unique = array('email');
 
     /**
      * text fields.  these fields are filtered with zend_filter_striptags
      *
      * @var array
      */
-    protected $Text = array('first_name', 'last_name', 'role');
+    protected $_text = array('first_name', 'last_name', 'role');
 
     /**
      * integer fields.  all fields will be converted to integers
      *
      * @var array
      */
-    protected $Integer = array();
+    protected $_integer = array();
 
     /**
      * numeric fields.  all fields filtered as floats / decimals
      *
      * @var array
      */
-    protected $Number = array();
+    protected $_number = array();
 
     /**
      * email fields
      *
      * @var array
      */
-    protected $Email = array('email');
+    protected $_email = array('email');
 
     /**
      * password fields
      *
      * @var array
      */
-    protected $Password = array();
+    protected $_password = array();
 
     /**
      * date fields
      *
      * @var array
      */
-    protected $Date = array();
+    protected $_date = array();
 
     /**
      * HTML fields
      *
      * @var array
      */
-    protected $HTML = array();
+    protected $_HTML = array();
 
     /**
      * run before insert or update
@@ -135,7 +135,7 @@ class User extends DSF_Db_Table
         //overload the unique email validation if the current user has not changed their email address
         $curr = $this->find($this->data['id'])->current();
         if ($curr->email == DSF_Filter_Post::raw('email')) {
-            unset($this->_unique[array_search('email',$this->Unique)]);
+            unset($this->_unique[array_search('email',$this->_unique)]);
         }
 
         //update the password
