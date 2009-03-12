@@ -28,7 +28,7 @@ class DSF_Db_Table extends Zend_Db_Table
 
     public function insertFromPost()
     {
-        $this->loadPost();
+        $this->_loadPost();
         //try to run the before method
         if (method_exists($this,'before')) {
             $this->before();
@@ -53,7 +53,7 @@ class DSF_Db_Table extends Zend_Db_Table
     public function updateFromPost()
     {
         $this->action = 'update';
-        $this->loadPost();
+        $this->_loadPost();
         //try to run the before method
         if (method_exists($this,'before')) {
             $this->before();
@@ -82,7 +82,7 @@ class DSF_Db_Table extends Zend_Db_Table
      * the data hash with the unvalidated data
      *
      */
-    private function loadPost()
+    private function _loadPost()
     {
         foreach ($this->_cols as $col) {
             if (DSF_Filter_Post::has($col)) {
