@@ -146,7 +146,7 @@ class User extends DSF_Db_Table
                 $this->data['password'] = md5($newPwd);
 
             } else {
-                $this->errors->add('Your new password does not match your confirmation password');
+                $this->_errors->add('Your new password does not match your confirmation password');
             }
         } else {
             unset($this->data['password']);
