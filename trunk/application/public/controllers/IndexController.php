@@ -14,7 +14,7 @@ class IndexController extends Zend_Controller_Action
 	    // set up the cache and get the guid for the current page
         $this->cache = Zend_Registry::get('cache');
         $uri = new DSF_Uri();
-        $this->pageGUID = md5($uri->toString());
+        $this->pageGUID = md5($uri->get(false, false));     // Include absolute path and params in the hash
 	}
 	
     public function indexAction()
