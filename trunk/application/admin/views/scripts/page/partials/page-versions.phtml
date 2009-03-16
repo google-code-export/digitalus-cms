@@ -3,7 +3,7 @@
 <?php
 $config = Zend_Registry::get('config');
 $siteVersions = $config->language->translations;
-$version = $this->version;
+$version = $this->currentVersion;
 echo $this->GetTranslation($siteVersions->$version);
 ?>
 </strong></p>
