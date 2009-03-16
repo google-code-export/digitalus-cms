@@ -22,6 +22,6 @@ echo $this->HtmlList($userArray, null, null, false);
 <p><?php echo $this->link('Create new user', $this->baseUrl . '/admin/user/create', 'user_add.png');?></p>
 
 <h3><?php echo $this->GetTranslation('Site Console');?></h3>
-<p><?php echo $this->GetTranslation('The site console enables you to interact directly with the CMS core. It is for experienced administrators only.');?></p>
+<p><?php echo $this->GetTranslation('The site console enables you to interact directly with the CMS core.') . '<br /><strong>' . $this->GetTranslation('It is for experienced administrators only.') . '</strong>';?></p>
 
 <p><?php echo $this->link('Open console', $this->baseUrl . '/admin/site/console', 'application_xp_terminal.png');?></p>
