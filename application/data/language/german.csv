@@ -78,8 +78,8 @@
 "Create new user";"Neuen Benutzer erzeugen"
 "Open User";"Benutzer bearbeiten"
 "Site Reports";"Webseiten-Reports"
-"Traffic report";"Traffic Report"
-"Admin access report";"Admin Zugriffsreport"
+"Traffic Report";"Traffic Report"
+"Admin Access Report";"Admin Zugriffsreport"
 "Site Console";"Webseiten-Konsole"
 "The site console enables you to interact directly with the CMS core.";"Die Webseiten-Konsole ermöglicht Ihnen die direkte Interaktion mit dem CMS Kern."
 "It is for experienced administrators only.";"Nur für erfahrene Administratoren."
@@ -162,8 +162,7 @@
 "Copy Users Permissions";"Benutzerbefugnisse kopieren"
 
 # ----- admin_report -----
-"Report: Admin Access Log";"Report: Administrator Zugriffs-Log"
-"Admin Access Log";"Administrator Zugriffs-Log"
+"Admin Access Log";"Administrator Zugriffsprotokoll"
 "More Reports";"Mehr Reports"
 "Date";"Datum"
 "User";"Benutzer"
@@ -176,9 +175,7 @@
 "Week";"Woche"
 "Hits";"Treffer"
 "More Reports";"Mehr Reports"
-"Admin access log";"Administrator Zugriffs-Log"
-"Traffic report";"Traffic Report"
-"Admin access log";"Administrator Zugriffs-Log"
+"Traffic Report";"Traffic Report"
 
 "# ----- admin_page -----
 "Create a Page";"Seite erstellen"
