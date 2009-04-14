@@ -1,27 +1,33 @@
 <?php
 class DSF_Form extends Zend_Form
-{    
+{
     protected $_model;
     protected $_columns;
     protected $_session = null;
-    
-    public function __construct()
+
+    public function __construct($translator = null)
     {
+        if (empty($translator)) {
+            $front = Zend_Controller_Front::getInstance();
+            $translator = Zend_Registry::get('Zend_Translate');
+        }
+        $this->setTranslator($translator);
+
         $this->setMethod('post');
         $this->addElementPrefixPath('DSF_Decorator', 'DSF/Form/Decorator', 'decorator');
         $this->addPrefixPath('DSF_Form_Element', 'DSF/Form/Element/', 'element');
         parent::__construct();
-        
+
         //set instance
         $instance = $this->_addInstance();
-        
-        $instanceElement = $this->createElement('hidden', 'form_instance');
-        $instanceElement->setValue($instance);     
-        $this->addElement($instanceElement);   
-    }
-    
 
-    
+        $instanceElement = $this->createElement('hidden', 'form_instance');
+        $instanceElement->setValue($instance);
+        $this->addElement($instanceElement);
+    }
+
+
+
     public function setModel(Zend_Db_Table $model)
     {
         $this->_model = $model;
@@ -36,7 +42,7 @@ class DSF_Form extends Zend_Form
             parent::populate($row->toArray());
         }
     }
-    
+
     /**
      * you can override a posted value by setting it in the values array
      *
@@ -57,7 +63,7 @@ class DSF_Form extends Zend_Form
             return false;
         }
     }
-    
+
     /**
      * you can override a posted value by setting it in the values array
      *
@@ -78,7 +84,7 @@ class DSF_Form extends Zend_Form
         }
         return false;
     }
-    
+
     private function _setField($field, $value, $row, $values)
     {
         if(in_array($field, $this->_columns)) {
@@ -90,7 +96,7 @@ class DSF_Form extends Zend_Form
         }
         return false;
     }
-    
+
     public function getRow()
     {
         $values = $this->getValues();
@@ -101,7 +107,7 @@ class DSF_Form extends Zend_Form
         }
         return $this->_model->find($id)->current();
     }
-    
+
     public function isSubmitted()
     {
         if(DSF_Filter_Post::has('form_instance')) {
@@ -112,7 +118,7 @@ class DSF_Form extends Zend_Form
         }
         return false;
     }
-    
+
     protected function _getSession()
     {
         if($this->_session == null) {
@@ -120,7 +126,7 @@ class DSF_Form extends Zend_Form
         }
         return $this->_session;
     }
-    
+
     protected function _addInstance()
     {
         $instance = $this->_getInstance();
@@ -128,13 +134,13 @@ class DSF_Form extends Zend_Form
         $session->validInstances[$instance] = true;
         return $instance;
     }
-    
+
     protected function _getInstance()
     {
         //generate GUID for form instance
         return md5(get_class($this) . time());
     }
-    
+
     protected function _isValidInstance($instance)
     {
         $session = $this->_getSession();
@@ -144,7 +150,7 @@ class DSF_Form extends Zend_Form
             return false;
         }
     }
-    
+
     protected function _removeInstance($instance)
     {
         $session = $this->_getSession();
