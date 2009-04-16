@@ -351,8 +351,11 @@ class Page extends DSF_Db_Table
      * you can pass it a page id (integer) or a page object
      * you can optionally pass it an array of where clauses
      *
-     * @param mixed $page
-     * @param array $where
+     * @param mixed  $page
+     * @param array  $where
+     * @param string $order
+     * @param string $limit
+     * @param string $offset
      * @return zend_db_rowset
      */
     public function getChildren($page, $where = array(), $order = null, $limit = null, $offset = null)

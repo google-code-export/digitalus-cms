@@ -1,12 +1,22 @@
 <?php
 class DSF_View_Helper_Filesystem_RenderFileBrowser
 {
-    public function RenderFileBrowser($parentId, $link, $basePath = null, $level = 0, $id = 'fileTree')
+    public function RenderFileBrowser($parentId, $link, $basePath = null, $level = 0, $id = 'fileTree', $withRoot = false)
     {
         $links = array();
         $tree = new Page();
 
         $children = $tree->getChildren($parentId, null, 'name');
+
+        if (isset($withRoot) && $withRoot == true) {
+            // add a link for site root
+            $links[] = '<li class="menuItem">'
+                    . '    <a class="link" href="/admin/page/move/id/9/parent/0">'
+                    . '        <img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="/images/icons/folder.png"/>'
+                    . $this->view->getTranslation('Site Root')
+                    . '    </a>'
+                    . '</li>';
+        }
 
         foreach ($children as $child) {
             if ($tree->hasChildren($child)) {
