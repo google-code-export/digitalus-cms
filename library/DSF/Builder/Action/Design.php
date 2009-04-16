@@ -63,7 +63,7 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
             }
         }
         $inlineStyles = $design->getInlineStyles();
-        if($inlineStyles) {
+        if ($inlineStyles) {
             $view->headStyle()->setStyle($inlineStyles);
         }
     }
@@ -83,20 +83,20 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
     public function setLayout()
     {
         $view = $this->_page->getView();
-        Zend_Debug::dump($view->test);
+#        Zend_Debug::dump($view->test);
         $config = Zend_Registry::get('config');
         $pathToLayouts = $config->design->pathToPublicLayouts;
-        if(is_dir($pathToLayouts)) {
+        if (is_dir($pathToLayouts)) {
             $view->addScriptPath($pathToLayouts);
             $design = $this->_page->getDesign();
             $layout = $design->getLayout();
-            if(file_exists($pathToLayouts . '/' . $layout)) {
+            if (file_exists($pathToLayouts . '/' . $layout)) {
                 $this->_page->setLayout($layout);
-            }else{
-                throw new Zend_Exception("The layout file specified in your design does not exist");
+            } else {
+                throw new Zend_Exception('The layout file specified in your design does not exist');
             }
         } else {
-            throw new Zend_Exception("The layout folder specified in your site config file does not exist");
+            throw new Zend_Exception('The layout folder specified in your site config file does not exist');
         }
     }
 
