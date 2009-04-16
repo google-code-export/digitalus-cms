@@ -16,6 +16,9 @@
         <action>advanced-options</action>
         <action>ajax-editor</action>
         <action>delete</action>
+        <action>move</action>
+        <action>select-content-template</action>
+        <action>create-page-form</action>
     </controller>
     <controller name="navigation">
         <action>index</action>
