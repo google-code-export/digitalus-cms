@@ -8,10 +8,14 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
 
         $children = $tree->getChildren($parentId, null, 'name');
 
+        $frontController = Zend_Controller_Front::getInstance();
+        $request = $frontController->getRequest();
+        $pageId = $request->getParam('id', 0);
+
         if (isset($withRoot) && $withRoot == true) {
             // add a link for site root
             $links[] = '<li class="menuItem">'
-                    . '    <a class="link" href="/admin/page/move/id/9/parent/0">'
+                    . '    <a class="link" href="/admin/page/move/id/' . $pageId . '/parent/0">'
                     . '        <img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="/images/icons/folder.png"/>'
                     . $this->view->getTranslation('Site Root')
                     . '    </a>'
