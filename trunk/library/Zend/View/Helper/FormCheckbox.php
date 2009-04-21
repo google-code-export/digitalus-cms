@@ -42,8 +42,8 @@ class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
      * @var array
      */
     protected static $_defaultCheckedOptions = array(
-        'checked'   => 1,
-        'unChecked' => 0
+        'checked'   => '1',
+        'unChecked' => '0'
     );
 
     /**
@@ -131,10 +131,13 @@ class Zend_View_Helper_FormCheckbox extends Zend_View_Helper_FormElement
             if (null === $unCheckedValue) {
                 $unCheckedValue = array_shift($checkedOptions);
             }
+        } elseif ($value !== null) {
+            $unCheckedValue = self::$_defaultCheckedOptions['unChecked'];
         } else {
             $checkedValue   = self::$_defaultCheckedOptions['checked'];
             $unCheckedValue = self::$_defaultCheckedOptions['unChecked'];
         }
+
         // is the element checked?
         $checkedString = '';
         if ($checked || ($value === $checkedValue)) {

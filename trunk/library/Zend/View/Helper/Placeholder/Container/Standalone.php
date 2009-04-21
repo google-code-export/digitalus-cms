@@ -15,7 +15,7 @@
  * @package    Zend_View
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Standalone.php 10665 2008-08-05 10:57:18Z matthew $
+ * @version    $Id: Standalone.php 13198 2008-12-13 13:51:40Z matthew $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -52,6 +52,13 @@ abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_Vi
     protected $_regKey;
 
     /**
+     * Flag wheter to automatically escape output, must also be
+     * enforced in the child class if __toString/toString is overriden
+     * @var book
+     */
+    protected $_autoEscape = true;
+
+    /**
      * Constructor
      * 
      * @return void
@@ -59,7 +66,6 @@ abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_Vi
     public function __construct()
     {
         $this->setRegistry(Zend_View_Helper_Placeholder_Registry::getRegistry());
-        $registry = $this->getRegistry();
         $this->setContainer($this->getRegistry()->getContainer($this->_regKey));
     }
 
@@ -83,6 +89,28 @@ abstract class Zend_View_Helper_Placeholder_Container_Standalone extends Zend_Vi
     {
         $this->_registry = $registry;
         return $this;
+    }
+
+    /**
+     * Set whether or not auto escaping should be used
+     * 
+     * @param  bool $autoEscape whether or not to auto escape output
+     * @return Zend_View_Helper_Placeholder_Container_Standalone
+     */
+    public function setAutoEscape($autoEscape = true)
+    {
+        $this->_autoEscape = ($autoEscape) ? true : false;
+        return $this;
+    }
+    
+    /**
+     * Return whether autoEscaping is enabled or disabled
+     *
+     * return bool
+     */
+    public function getAutoEscape()
+    {
+        return $this->_autoEscape;
     }
 
     /**

@@ -16,7 +16,7 @@
  * @package    Zend_Dojo
  * @subpackage View
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id: Container.php 11087 2008-08-27 18:04:24Z matthew $
+ * @version    $Id: Container.php 14166 2009-02-25 17:58:58Z matthew $
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -55,19 +55,19 @@ class Zend_Dojo_View_Helper_Dojo_Container
      * Base CDN url to utilize
      * @var string
      */
-    protected $_cdnBase = Zend_Dojo::CDN_BASE_AOL;
+    protected $_cdnBase = Zend_Dojo::CDN_BASE_GOOGLE;
 
     /**
      * Path segment following version string of CDN path
      * @var string
      */
-    protected $_cdnDojoPath = Zend_Dojo::CDN_DOJO_PATH_AOL;
+    protected $_cdnDojoPath = Zend_Dojo::CDN_DOJO_PATH_GOOGLE;
 
     /**
      * Dojo version to use from CDN
      * @var string
      */
-    protected $_cdnVersion = '1.1.1';
+    protected $_cdnVersion = '1.2.0';
 
     /**
      * Has the dijit loader been registered?
@@ -142,6 +142,12 @@ class Zend_Dojo_View_Helper_Dojo_Container
     protected $_onLoadActions = array();
 
     /**
+     * Register the Dojo stylesheet?
+     * @var bool
+     */
+    protected $_registerDojoStylesheet = false;
+
+    /**
      * Style sheet modules to load
      * @var array
      */
@@ -152,7 +158,6 @@ class Zend_Dojo_View_Helper_Dojo_Container
      * @var array
      */
     protected $_stylesheets = array();
-
 
     /**
      * Set view object
@@ -205,13 +210,22 @@ class Zend_Dojo_View_Helper_Dojo_Container
      */
     public function requireModule($module)
     {
-        if (!preg_match('/^[a-z][a-z0-9._]+$/i', $module)) {
+        if (!is_string($module) && !is_array($module)) {
             require_once 'Zend/Dojo/View/Exception.php';
-            throw new Zend_Dojo_View_Exception(sprintf('Module name specified, "%s", contains invalid characters', (string) $module));
+            throw new Zend_Dojo_View_Exception('Invalid module name specified; must be a string or an array of strings');
         }
 
-        if (!in_array($module, $this->_modules)) {
-            $this->_modules[] = $module;
+        $module = (array) $module;
+
+        foreach ($module as $mod) {
+            if (!preg_match('/^[a-z][a-z0-9._-]+$/i', $mod)) {
+                require_once 'Zend/Dojo/View/Exception.php';
+                throw new Zend_Dojo_View_Exception(sprintf('Module name specified, "%s", contains invalid characters', (string) $mod));
+            }
+
+            if (!in_array($mod, $this->_modules)) {
+                $this->_modules[] = $mod;
+            }
         }
 
         return $this;
@@ -378,7 +392,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
     /**
      * Are we using the CDN?
      * 
-     * @return void
+     * @return bool
      */
     public function useCdn()
     {
@@ -479,7 +493,7 @@ class Zend_Dojo_View_Helper_Dojo_Container
      */
     public function addStylesheetModule($module)
     {
-        if (!preg_match('/^[a-z0-9]+\.[a-z0-9]+(\.[a-z0-9]+)*$/', $module)) {
+        if (!preg_match('/^[a-z0-9]+\.[a-z0-9_-]+(\.[a-z0-9_-]+)*$/i', $module)) {
             require_once 'Zend/Dojo/View/Exception.php';
             throw new Zend_Dojo_View_Exception('Invalid stylesheet module specified');
         }
@@ -516,6 +530,25 @@ class Zend_Dojo_View_Helper_Dojo_Container
     }
 
     /**
+     * Register the dojo.css stylesheet?
+     *
+     * With no arguments, returns the status of the flag; with arguments, sets 
+     * the flag and returns the object.
+     * 
+     * @param  null|bool $flag
+     * @return Zend_Dojo_View_Helper_Dojo_Container|bool
+     */
+    public function registerDojoStylesheet($flag = null)
+    {
+        if (null === $flag) {
+             return $this->_registerDojoStylesheet;
+        }
+
+        $this->_registerDojoStylesheet = (bool) $flag;
+        return $this;
+    }
+
+    /**
      * Retrieve registered stylesheets
      * 
      * @return array
@@ -544,6 +577,20 @@ class Zend_Dojo_View_Helper_Dojo_Container
     }
 
     /**
+     * Prepend an onLoad event to the list of onLoad actions
+     * 
+     * @param  string $callback Lambda
+     * @return Zend_Dojo_View_Helper_Dojo_Container
+     */
+    public function prependOnLoad($callback)
+    {
+        if (!in_array($callback, $this->_onLoadActions, true)) {
+            array_unshift($this->_onLoadActions, $callback);
+        }
+        return $this;
+    }
+
+    /**
      * Retrieve all registered onLoad actions
      * 
      * @return array
@@ -566,7 +613,8 @@ class Zend_Dojo_View_Helper_Dojo_Container
         }
 
         $this->_captureLock = true;
-        return ob_start();
+        ob_start();
+        return;
     }
 
     /**
@@ -737,12 +785,12 @@ function() {
         if (null != n) {
             dojo.attr(n, dojo.mixin({ id: info.id }, info.params));
         }
-    })
+    });
     dojo.parser.parse();
 }
 EOJ;
             $this->requireModule('dojo.parser');
-            $this->addOnLoad($js);
+            $this->prependOnLoad($js);
             $this->addJavascript('var zendDijits = ' . $this->dijitsToJson() . ';');
             $this->_dijitLoaderRegistered = true;
         }
@@ -803,7 +851,8 @@ EOJ;
         }
 
         $this->_captureLock = true;
-        return ob_start();
+        ob_start();
+        return;
     }
 
     /**
@@ -889,6 +938,10 @@ EOJ;
 
         foreach ($this->getStylesheets() as $stylesheet) {
             $stylesheets[] = $stylesheet;
+        }
+
+        if ($this->_registerDojoStylesheet) {
+            $stylesheets[] = $base . '/dojo/resources/dojo.css';
         }
 
         if (empty($stylesheets)) {

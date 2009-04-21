@@ -16,7 +16,7 @@
  * @package    Zend_Config
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Ini.php 11181 2008-09-01 09:41:44Z alexander $
+ * @version    $Id: Ini.php 14412 2009-03-21 18:40:48Z dasprid $
  */
 
 
@@ -41,6 +41,13 @@ class Zend_Config_Ini extends Zend_Config
      */
     protected $_nestSeparator = '.';
 
+    /**
+     * Wether to skip extends or not
+     *
+     * @var boolean
+     */
+    protected $_skipExtends = false;
+    
     /**
      * Loads the section $section from the config file $filename for
      * access facilitated by nested object properties.
@@ -103,6 +110,9 @@ class Zend_Config_Ini extends Zend_Config
             if (isset($options['nestSeparator'])) {
                 $this->_nestSeparator = (string) $options['nestSeparator'];
             }
+            if (isset($options['skipExtends'])) {
+                $this->_skipExtends = (bool) $options['skipExtends'];
+            }
         }
 
         set_error_handler(array($this, '_loadFileErrorHandler'));
@@ -110,6 +120,10 @@ class Zend_Config_Ini extends Zend_Config
         restore_error_handler();
         // Check if there was a error while loading file
         if ($this->_loadFileErrorStr !== null) {
+            /**
+             * @see Zend_Config_Exception
+             */
+            require_once 'Zend/Config/Exception.php';
             throw new Zend_Config_Exception($this->_loadFileErrorStr);
         }
         
@@ -194,7 +208,10 @@ class Zend_Config_Ini extends Zend_Config
             if (strtolower($key) == ';extends') {
                 if (isset($iniArray[$value])) {
                     $this->_assertValidExtend($section, $value);
-                    $config = $this->_processExtends($iniArray, $value, $config);
+                    
+                    if (!$this->_skipExtends) {
+                        $config = $this->_processExtends($iniArray, $value, $config);
+                    }
                 } else {
                     /**
                      * @see Zend_Config_Exception

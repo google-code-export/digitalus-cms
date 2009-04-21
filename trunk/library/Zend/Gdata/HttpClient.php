@@ -15,7 +15,8 @@
  *
  * @category   Zend
  * @package    Zend_Gdata
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage Gdata
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -38,7 +39,8 @@ require_once 'Zend/Http/Client.php';
  *
  * @category   Zend
  * @package    Zend_Gdata
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @subpackage Gdata
+ * @copyright  Copyright (c) 2005-2009 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Gdata_HttpClient extends Zend_Http_Client
@@ -62,6 +64,14 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
     private $_authSubToken = null;
 
     /**
+     * Token for ClientLogin authentication.  
+     * If only this token is set, ClientLogin authentication is used.
+     *
+     * @var string
+     */
+    private $_clientLoginToken = null;
+
+    /**
      * Token for ClientLogin authentication.
      * If this token is set, and the AuthSub key is not set,
      * ClientLogin authentication is used
@@ -69,6 +79,14 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
      * @var string
      */
     private $_clientLoginKey = null;
+
+    /**
+     * True if this request is being made with data supplied by
+     * a stream object instead of a raw encoded string.
+     *
+     * @var bool
+     */
+    protected $_streamingRequest = null;
 
     /**
      * Sets the PEM formatted private key, as read from a file.
@@ -232,6 +250,104 @@ class Zend_Gdata_HttpClient extends Zend_Http_Client
      */
     public function filterHttpResponse($response) {
         return $response;
+    }
+
+    /**
+     * Return the current connection adapter
+     *
+     * @return Zend_Http_Client_Adapter_Interface|string $adapter
+     */
+    public function getAdapter()
+    {
+    	return $this->adapter;
+    }
+
+   /**
+     * Load the connection adapter
+     *
+     * @param Zend_Http_Client_Adapter_Interface $adapter
+     * @return void
+     */
+    public function setAdapter($adapter)
+    {
+        if ($adapter == null) {
+            $this->adapter = $adapter;
+        } else {
+        	  parent::setAdapter($adapter);
+        }
+    }
+
+    /**
+     * Set the streamingRequest variable which controls whether we are
+     * sending the raw (already encoded) POST data from a stream source.
+     *
+     * @param boolean $value The value to set.
+     * @return void
+     */
+    public function setStreamingRequest($value)
+    {
+        $this->_streamingRequest = $value;
+    }
+
+    /**
+     * Check whether the client is set to perform streaming requests.
+     *
+     * @return boolean True if yes, false otherwise.
+     */
+    public function getStreamingRequest()
+    {
+        if ($this->_streamingRequest()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Prepare the request body (for POST and PUT requests)
+     *
+     * @return string
+     * @throws Zend_Http_Client_Exception
+     */
+    protected function _prepareBody()
+    {
+        if($this->_streamingRequest) {
+            $this->setHeaders(self::CONTENT_LENGTH,
+                $this->raw_post_data->getTotalSize());
+            return $this->raw_post_data;
+        }
+        else {
+            return parent::_prepareBody();
+        }
+    }
+
+    /**
+     * Clear all custom parameters we set.
+     *
+     * @return Zend_Http_Client
+     */
+    public function resetParameters()
+    {
+        $this->_streamingRequest = false;
+
+        return parent::resetParameters();
+    }
+
+    /**
+     * Set the raw (already encoded) POST data from a stream source.
+     *
+     * This is used to support POSTing from open file handles without
+     * caching the entire body into memory. It is a wrapper around
+     * Zend_Http_Client::setRawData().
+     *
+     * @param string $data The request data
+     * @param string $enctype The encoding type
+     * @return Zend_Http_Client
+     */
+    public function setRawDataStream($data, $enctype = null)
+    {
+        $this->_streamingRequest = true;
+        return $this->setRawData($data, $enctype);
     }
 
 }

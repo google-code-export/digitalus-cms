@@ -33,11 +33,22 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
 {
     /**
      * Constructor for Http File Transfers
+     *
+     * @param array $options OPTIONAL Options to set
      */
-    public function __construct()
+    public function __construct($options = array())
     {
+        if (ini_get('file_uploads') == false) {
+            require_once 'Zend/File/Transfer/Exception.php';
+            throw new Zend_File_Transfer_Exception('File uploads are not allowed in your php config!');
+        }
+
         $this->_files = $this->_prepareFiles($_FILES);
-        $this->addValidator('Upload', $this->_files);
+        $this->addValidator('Upload', false, $this->_files);
+
+        if (is_array($options)) {
+            $this->setOptions($options);
+        }
     }
 
     /**
@@ -50,7 +61,7 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
     public function setValidators(array $validators, $files = null)
     {
         $this->clearValidators();
-        $this->addValidator('Upload', null, $this->_files);
+        $this->addValidator('Upload', false, $this->_files);
         return $this->addValidators($validators, $files);
     }
 
@@ -70,9 +81,6 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
     /**
      * Receive the file from the client (Upload)
      *
-     * @todo Check if file exists otherwise existing will be overwritten
-     * @todo Add validations
-     * @todo Add filters
      * @param  string|array $files (Optional) Files to receive
      * @return bool
      */
@@ -84,14 +92,35 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
 
         $check = $this->_getFiles($files);
         foreach ($check as $file => $content) {
-            $directory = '';
-            if (null !== ($destination = $this->getDestination($file))) {
-                $directory = $destination . DIRECTORY_SEPARATOR;
+            if (!$content['received']) {
+                $directory   = '';
+                $destination = $this->getDestination($file);
+                if ($destination !== null) {
+                    $directory = $destination . DIRECTORY_SEPARATOR;
+                }
+
+                // Should never return false when it's tested by the upload validator
+                if (!move_uploaded_file($content['tmp_name'], ($directory . $content['name']))) {
+                    if ($content['options']['ignoreNoFile']) {
+                        $this->_files[$file]['received'] = true;
+                        $this->_files[$file]['filtered'] = true;
+                        continue;
+                    }
+
+                    $this->_files[$file]['received'] = false;
+                    return false;
+                }
+
+                $this->_files[$file]['received'] = true;
             }
 
-            // Should never go here as it's tested by the upload validator
-            if (!move_uploaded_file($content['tmp_name'], ($directory . $content['name']))) {
-                return false;
+            if (!$content['filtered']) {
+                if (!$this->_filter($file)) {
+                    $this->_files[$file]['filtered'] = false;
+                    return false;
+                }
+
+                $this->_files[$file]['filtered'] = true;
             }
         }
 
@@ -105,7 +134,7 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
      * @return bool
      * @throws Zend_File_Transfer_Exception Not implemented
      */
-    public function isSent($file = null)
+    public function isSent($files = null)
     {
         require_once 'Zend/File/Transfer/Exception.php';
         throw new Zend_File_Transfer_Exception('Method not implemented');
@@ -119,9 +148,47 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
      */
     public function isReceived($files = null)
     {
-        $validate = new Zend_Validate_File_Upload();
-        if (!$validate->isValid($files)) {
-            return false;
+        $files = $this->_getFiles($files);
+        foreach ($files as $content) {
+            if ($content['received'] !== true) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Checks if the file was already filtered
+     *
+     * @param  string|array $files (Optional) Files to check
+     * @return bool
+     */
+    public function isFiltered($files = null)
+    {
+        $files = $this->_getFiles($files);
+        foreach ($files as $content) {
+            if ($content['filtered'] !== true) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Has a file been uploaded ?
+     *
+     * @param  array|string|null $file
+     * @return bool
+     */
+    public function isUploaded($files = null)
+    {
+        $files = $this->_getFiles($files);
+        foreach ($files as $file) {
+            if (empty($file['name'])) {
+                return false;
+            }
         }
 
         return true;
@@ -153,13 +220,22 @@ class Zend_File_Transfer_Adapter_Http extends Zend_File_Transfer_Adapter_Abstrac
             if (is_array($content['name'])) {
                 foreach ($content as $param => $file) {
                     foreach ($file as $number => $target) {
-                        $result[$form . "__" . $number][$param] = $target;
+                        $result[$form . '_' . $number . '_'][$param]      = $target;
+                        $result[$form . '_' . $number . '_']['options']   = $this->_options;
+                        $result[$form . '_' . $number . '_']['validated'] = false;
+                        $result[$form . '_' . $number . '_']['received']  = false;
+                        $result[$form . '_' . $number . '_']['filtered']  = false;
                     }
                 }
             } else {
-                $result[$form] = $content;
+                $result[$form]              = $content;
+                $result[$form]['options']   = $this->_options;
+                $result[$form]['validated'] = false;
+                $result[$form]['received']  = false;
+                $result[$form]['filtered']  = false;
             }
         }
+
         return $result;
     }
 }
