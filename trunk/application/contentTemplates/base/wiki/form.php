@@ -18,7 +18,7 @@ class Base_Wiki_Form extends DSF_Content_Form_Abstract {
 
         // Add elements to form:
         $this->form->addElement($headline)
-                   ->addElement($teaser)
+//                   ->addElement($teaser)
                    ->addElement($content)
                    ->addElement('submit', 'update', array('label' => $view->GetTranslation('Update Page')));
     }
