@@ -17,7 +17,7 @@
  * @subpackage Helper
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: HtmlElement.php 10130 2008-07-16 14:51:08Z matthew $
+ * @version    $Id: HtmlElement.php 12477 2008-11-09 01:55:35Z yoshida@zend.co.jp $
  */
 
 /**
@@ -106,8 +106,36 @@ abstract class Zend_View_Helper_HtmlElement extends Zend_View_Helper_Abstract
                 $val = $this->view->escape($val);
             }
 
-            $xhtml .= " $key=\"$val\"";
+            if ('id' == $key) {
+                $val = $this->_normalizeId($val);
+            }
+
+            if (strpos($val, '"') !== false) {
+                $xhtml .= " $key='$val'";
+            } else {
+                $xhtml .= " $key=\"$val\"";
+            }
+            
         }
         return $xhtml;
+    }
+
+    /**
+     * Normalize an ID
+     * 
+     * @param  string $value 
+     * @return string
+     */
+    protected function _normalizeId($value)
+    {
+        if (strstr($value, '[')) {
+            if ('[]' == substr($value, -2)) {
+                $value = substr($value, 0, strlen($value) - 2);
+            }
+            $value = trim($value, ']');
+            $value = str_replace('][', '-', $value);
+            $value = str_replace('[', '-', $value);
+        }
+        return $value;
     }
 }

@@ -17,7 +17,7 @@
  * @subpackage View
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: CheckBox.php 10991 2008-08-24 03:48:21Z matthew $
+ * @version    $Id: CheckBox.php 11292 2008-09-08 18:51:39Z matthew $
  */
 
 /** Zend_Dojo_View_Helper_Dijit */
@@ -74,9 +74,16 @@ class Zend_Dojo_View_Helper_CheckBox extends Zend_Dojo_View_Helper_Dijit
         }
         $checkboxInfo = Zend_View_Helper_FormCheckbox::determineCheckboxInfo($value, $checked, $checkedOptions);
         $attribs['checked'] = $checkboxInfo['checked'];
-        $attribs['id']      = $id;
+        if (!array_key_exists('id', $attribs)) {
+            $attribs['id'] = $id;
+        }
 
         $attribs = $this->_prepareDijit($attribs, $params, 'element');
+
+        // strip options so they don't show up in markup
+        if (array_key_exists('options', $attribs)) {
+            unset($attribs['options']);
+        }
 
         // and now we create it:
         $html = '';

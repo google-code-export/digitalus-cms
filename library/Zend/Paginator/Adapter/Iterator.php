@@ -16,7 +16,7 @@
  * @package    Zend_Paginator
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Iterator.php 10013 2008-07-09 21:08:06Z norm2782 $
+ * @version    $Id: Iterator.php 11222 2008-09-04 03:18:34Z mratzloff $
  */
 
 /**
@@ -68,14 +68,18 @@ class Zend_Paginator_Adapter_Iterator implements Zend_Paginator_Adapter_Interfac
     }
 
     /**
-     * Returns an array of items for a page.
+     * Returns an iterator of items for a page, or an empty array.
      *
      * @param  integer $offset Page offset
      * @param  integer $itemCountPerPage Number of items per page
-     * @return array
+     * @return LimitIterator|array
      */
     public function getItems($offset, $itemCountPerPage)
     {
+        if ($this->_count == 0) {
+            return array();
+        }
+
         return new LimitIterator($this->_iterator, $offset, $itemCountPerPage);
     }
 

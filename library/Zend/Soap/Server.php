@@ -18,7 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/** Zend_Server_Interface */
+/**
+ * @see Zend_Server_Interface
+ */
 require_once 'Zend/Server/Interface.php';
 
 /** Zend_Soap_Server_Exception */
@@ -32,7 +34,7 @@ require_once 'Zend/Soap/Server/Exception.php';
  * @uses       Zend_Server_Interface
  * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Server.php 10761 2008-08-07 16:41:00Z matthew $
+ * @version    $Id: Server.php 13821 2009-01-29 19:37:15Z beberlei $
  */
 class Zend_Soap_Server implements Zend_Server_Interface
 {
@@ -53,6 +55,11 @@ class Zend_Soap_Server implements Zend_Server_Interface
      * @var array
      */
     protected $_classArgs = array();
+
+    /**
+     * Object registered with this server
+     */
+    protected $_object;
 
     /**
      * Array of SOAP type => PHP class pairings for handling return/incoming values
@@ -138,12 +145,9 @@ class Zend_Soap_Server implements Zend_Server_Interface
      */
     public function __construct($wsdl = null, array $options = null)
     {
-    	if (!extension_loaded('soap')) {
+        if (!extension_loaded('soap')) {
             throw new Zend_Soap_Server_Exception('SOAP extension is not loaded.');
         }
-
-        ini_set('display_errors', false);
-        set_error_handler(array($this, 'handlePhpErrors'), E_USER_ERROR);
 
         if (null !== $wsdl) {
             $this->setWsdl($wsdl);
@@ -356,11 +360,19 @@ class Zend_Soap_Server implements Zend_Server_Interface
      */
     public function setClassmap($classmap)
     {
-    	if (!is_array($classmap)) {
-    		throw new Zend_Soap_Server_Exception('Classmap must be an array');
-    	}
+        if (!is_array($classmap)) {
+            /**
+             * @see Zend_Soap_Server_Exception
+             */
+            require_once 'Zend/Soap/Server/Exception.php';
+            throw new Zend_Soap_Server_Exception('Classmap must be an array');
+        }
         foreach ($classmap as $type => $class) {
             if (!class_exists($class)) {
+                /**
+                 * @see Zend_Soap_Server_Exception
+                 */
+                require_once 'Zend/Soap/Server/Exception.php';
                 throw new Zend_Soap_Server_Exception('Invalid class in class map');
             }
         }
@@ -387,8 +399,6 @@ class Zend_Soap_Server implements Zend_Server_Interface
      */
     public function setWsdl($wsdl)
     {
-        is_readable($wsdl);
-
         $this->_wsdl = $wsdl;
         return $this;
     }
@@ -437,7 +447,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
         }
 
         if (is_array($this->_functions)) {
-        	$this->_functions = array_unique($this->_functions);
+            $this->_functions = array_unique($this->_functions);
         }
 
         return $this;
@@ -483,6 +493,29 @@ class Zend_Soap_Server implements Zend_Server_Interface
     }
 
     /**
+     * Attach an object to a server
+     *
+     * Accepts an instanciated object to use when handling requests.
+     *
+     * @param object $object
+     * @return Zend_Soap_Server
+     */
+    public function setObject($object)
+    {
+        if(!is_object($object)) {
+            throw new Zend_Soap_Server_Exception('Invalid object argument ('.gettype($object).')');
+        }
+
+        if(isset($this->_object)) {
+            throw new Zend_Soap_Server_Exception('An object has already been registered with this soap server instance');
+        }
+
+        $this->_object = $object;
+
+        return $this;
+    }
+
+    /**
      * Return a server definition array
      *
      * Returns a list of all functions registered with {@link addFunction()},
@@ -497,6 +530,8 @@ class Zend_Soap_Server implements Zend_Server_Interface
         $functions = array();
         if (null !== $this->_class) {
             $functions = get_class_methods($this->_class);
+        } elseif (null !== $this->_object) {
+            $functions = get_class_methods($this->_object);
         }
 
         return array_merge((array) $this->_functions, $functions);
@@ -569,7 +604,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
             }
 
             $dom = new DOMDocument();
-            if (!$dom->loadXML($xml)) {
+            if(strlen($xml) == 0 || !$dom->loadXML($xml)) {
                 throw new Zend_Soap_Server_Exception('Invalid XML');
             }
         }
@@ -638,10 +673,6 @@ class Zend_Soap_Server implements Zend_Server_Interface
         $options = $this->getOptions();
         $server  = new SoapServer($this->_wsdl, $options);
 
-        if (null !== $this->_persistence) {
-            $server->setPersistence($this->_persistence);
-        }
-
         if (!empty($this->_functions)) {
             $server->addFunction($this->_functions);
         }
@@ -650,6 +681,14 @@ class Zend_Soap_Server implements Zend_Server_Interface
             $args = $this->_classArgs;
             array_unshift($args, $this->_class);
             call_user_func_array(array($server, 'setClass'), $args);
+        }
+
+        if (!empty($this->_object)) {
+            $server->setObject($this->_object);
+        }
+
+        if (null !== $this->_persistence) {
+            $server->setPersistence($this->_persistence);
         }
 
         return $server;
@@ -680,26 +719,41 @@ class Zend_Soap_Server implements Zend_Server_Interface
             $request = file_get_contents('php://input');
         }
 
+        // Set Zend_Soap_Server error handler
+        $displayErrorsOriginalState = ini_get('display_errors');
+        ini_set('display_errors', false);
+        set_error_handler(array($this, 'handlePhpErrors'), E_USER_ERROR);
+
+        $setRequestException = null;
+        /**
+         * @see Zend_Soap_Server_Exception
+         */
+        require_once 'Zend/Soap/Server/Exception.php';
         try {
             $this->_setRequest($request);
-        } catch (Zend_Soap_Server_Exception $fault) {
+        } catch (Zend_Soap_Server_Exception $e) {
+            $setRequestException = $e;
         }
 
         $soap = $this->_getSoap();
 
         ob_start();
-        if (isset($fault)) {
-            $soap->fault($fault->getCode(), $fault->getMessage());
+        if($setRequestException instanceof Exception) {
+            // Send SOAP fault message if we've catched exception
+            $soap->fault("Sender", $setRequestException->getMessage());
         } else {
             try {
                 $soap->handle($request);
             } catch (Exception $e) {
                 $fault = $this->fault($e);
-                $soap->fault($e->getCode(), $e->getMessage());
+                $soap->fault($fault->faultcode, $fault->faultstring);
             }
         }
-
         $this->_response = ob_get_clean();
+
+        // Restore original error handler
+        restore_error_handler();
+        ini_set('display_errors', $displayErrorsOriginalState);
 
         if (!$this->_returnResponse) {
             echo $this->_response;
@@ -745,7 +799,7 @@ class Zend_Soap_Server implements Zend_Server_Interface
      */
     public function getFaultExceptions()
     {
-        return $this->_faultExceptions();
+        return $this->_faultExceptions;
     }
 
     /**
@@ -757,11 +811,12 @@ class Zend_Soap_Server implements Zend_Server_Interface
      * will be used to create the fault object if it has been registered via
      * {@Link registerFaultException()}.
      *
+     * @link   http://www.w3.org/TR/soap12-part1/#faultcodes
      * @param  string|Exception $fault
-     * @param  int $code Defaults to 404
+     * @param  string $code SOAP Fault Codes
      * @return SoapFault
      */
-    public function fault($fault = null, $code = 404)
+    public function fault($fault = null, $code = "Receiver")
     {
         if ($fault instanceof Exception) {
             $class = get_class($fault);
@@ -772,8 +827,18 @@ class Zend_Soap_Server implements Zend_Server_Interface
             } else {
                 $message = 'Unknown error';
             }
-        } else {
+        } elseif(is_string($fault)) {
             $message = $fault;
+        } else {
+            $message = 'Unknown error';
+        }
+
+        $allowedFaultModes = array(
+            'VersionMismatch', 'MustUnderstand', 'DataEncodingUnknown',
+            'Sender', 'Receiver', 'Server'
+        );
+        if(!in_array($code, $allowedFaultModes)) {
+            $code = "Receiver";
         }
 
         return new SoapFault($code, $message);
@@ -792,7 +857,6 @@ class Zend_Soap_Server implements Zend_Server_Interface
      */
     public function handlePhpErrors($errno, $errstr, $errfile = null, $errline = null, array $errcontext = null)
     {
-        $fault = $this->fault($errstr, $errno);
-        throw $fault;
+        throw $this->fault($errstr, "Receiver");
     }
 }

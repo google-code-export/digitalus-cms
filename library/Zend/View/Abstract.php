@@ -114,6 +114,12 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     private $_encoding = 'ISO-8859-1';
 
     /**
+     * Flag indicating whether or not LFI protection for rendering view scripts is enabled
+     * @var bool
+     */
+    private $_lfiProtectionOn = true;
+
+    /**
      * Plugin loaders
      * @var array
      */
@@ -197,6 +203,11 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
         // strict vars
         if (array_key_exists('strictVars', $config)) {
             $this->strictVars($config['strictVars']);
+        }
+
+        // LFI protection flag
+        if (array_key_exists('lfiProtectionOn', $config)) {
+            $this->setLfiProtection($config['lfiProtectionOn']);
         }
 
         $this->init();
@@ -432,9 +443,9 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
 
     /**
      * Set plugin loader for a particular plugin type
-     * 
-     * @param  Zend_Loader_PluginLoader $loader 
-     * @param  string $type 
+     *
+     * @param  Zend_Loader_PluginLoader $loader
+     * @param  string $type
      * @return Zend_View_Abstract
      */
     public function setPluginLoader(Zend_Loader_PluginLoader $loader, $type)
@@ -451,8 +462,8 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
 
     /**
      * Retrieve plugin loader for a specific plugin type
-     * 
-     * @param  string $type 
+     *
+     * @param  string $type
      * @return Zend_Loader_PluginLoader
      */
     public function getPluginLoader($type)
@@ -685,6 +696,28 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     }
 
     /**
+     * Set LFI protection flag
+     * 
+     * @param  bool $flag 
+     * @return Zend_View_Abstract
+     */
+    public function setLfiProtection($flag)
+    {
+        $this->_lfiProtectionOn = (bool) $flag;
+        return $this;
+    }
+
+    /**
+     * Return status of LFI protection flag
+     * 
+     * @return bool
+     */
+    public function isLfiProtectionOn()
+    {
+        return $this->_lfiProtectionOn;
+    }
+
+    /**
      * Assigns variables to the view script via differing strategies.
      *
      * Zend_View::assign('name', $value) assigns a variable called 'name'
@@ -856,6 +889,11 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
      */
     protected function _script($name)
     {
+        if ($this->isLfiProtectionOn() && preg_match('#\.\.[\\\/]#', $name)) {
+            require_once 'Zend/View/Exception.php';
+            throw new Zend_View_Exception('Requested scripts may not include parent directory traversal ("../", "..\\" notation)');
+        }
+
         if (0 == count($this->_path['script'])) {
             require_once 'Zend/View/Exception.php';
             throw new Zend_View_Exception('no view script directory set; unable to determine location for view script',
@@ -976,53 +1014,6 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
     }
 
     /**
-     * Loads a helper or filter class.
-     *
-     * @param  string $type The class type ('helper' or 'filter').
-     * @param  string $name The base name.
-     * @param  string The full class name.
-     * @return string class name loaded
-     * @throws Zend_View_Exception if unable to load class
-     */
-    private function _loadClass($type, $name)
-    {
-        // check to see if name => class mapping exists for helper/filter
-        $classLoaded = '_' . $type . 'Loaded';
-        $classAccess = '_set' . ucfirst($type) . 'Class';
-        if (isset($this->{$classLoaded}[$name])) {
-            return $this->{$classLoaded}[$name];
-        }
-
-        // only look for "$Name.php"
-        $file = ucfirst($name) . '.php';
-
-        // do LIFO search for helper
-        foreach ($this->_path[$type] as $info) {
-            $dir    = $info['dir'];
-            $prefix = $info['prefix'];
-
-            $class = $prefix . ucfirst($name);
-
-            if (class_exists($class, false)) {
-                $reflection = new ReflectionClass($class);
-                $file = $reflection->getFileName();
-                $this->$classAccess($name, $class, $file);
-                return $class;
-            } elseif (Zend_Loader::isReadable($dir . $file)) {
-                include_once $dir . $file;
-
-                if (class_exists($class, false)) {
-                    $this->$classAccess($name, $class, $dir . $file);
-                    return $class;
-                }
-            }
-        }
-
-        require_once 'Zend/View/Exception.php';
-        throw new Zend_View_Exception("$type '$name' not found in path", $this);
-    }
-
-    /**
      * Register helper class as loaded
      *
      * @param  string $name
@@ -1052,10 +1043,10 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
 
     /**
      * Add a prefixPath for a plugin type
-     * 
-     * @param  string $type 
-     * @param  string $classPrefix 
-     * @param  array $paths 
+     *
+     * @param  string $type
+     * @param  string $classPrefix
+     * @param  array $paths
      * @return Zend_View_Abstract
      */
     private function _addPluginPath($type, $classPrefix, array $paths)
@@ -1069,9 +1060,9 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
 
     /**
      * Get a path to a given plugin class of a given type
-     * 
-     * @param  string $type 
-     * @param  string $name 
+     *
+     * @param  string $type
+     * @param  string $name
      * @return string|false
      */
     private function _getPluginPath($type, $name)
@@ -1091,9 +1082,9 @@ abstract class Zend_View_Abstract implements Zend_View_Interface
 
     /**
      * Retrieve a plugin object
-     * 
-     * @param  string $type 
-     * @param  string $name 
+     *
+     * @param  string $type
+     * @param  string $name
      * @return object
      */
     private function _getPlugin($type, $name)
