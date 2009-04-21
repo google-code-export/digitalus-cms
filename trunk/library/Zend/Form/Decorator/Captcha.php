@@ -24,7 +24,7 @@ require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
  * Captcha generic decorator
- * 
+ *
  * Adds captcha adapter output
  *
  * @category   Zend
@@ -38,8 +38,8 @@ class Zend_Form_Decorator_Captcha extends Zend_Form_Decorator_Abstract
 {
     /**
      * Render captcha
-     * 
-     * @param  string $content 
+     *
+     * @param  string $content
      * @return string
      */
     public function render($content)
@@ -58,7 +58,7 @@ class Zend_Form_Decorator_Captcha extends Zend_Form_Decorator_Abstract
         $separator = $this->getSeparator();
 
         $captcha = $element->getCaptcha();
-	    $markup  = $captcha->render($view, $element);
+        $markup  = $captcha->render($view, $element);
         switch ($placement) {
             case 'PREPEND':
                 $content = $markup . $separator .  $content;
