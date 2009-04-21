@@ -8,18 +8,9 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
 
         $children = $tree->getChildren($parentId, null, 'name');
 
-        $frontController = Zend_Controller_Front::getInstance();
-        $request = $frontController->getRequest();
-        $pageId = $request->getParam('id', 0);
-
+        // add a link for site root
         if (isset($withRoot) && $withRoot == true) {
-            // add a link for site root
-            $links[] = '<li class="menuItem">'
-                    . '    <a class="link" href="/admin/page/move/id/' . $pageId . '/parent/0">'
-                    . '        <img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="/images/icons/folder.png"/>'
-                    . $this->view->getTranslation('Site Root')
-                    . '    </a>'
-                    . '</li>';
+            $links[] = $this->_getSiteRootElement();
         }
 
         foreach ($children as $child) {
@@ -49,6 +40,27 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
             $filetree = "<ul {$strId}>" . implode(null, $links) . '</ul>';
             return  $filetree;
         }
+    }
+
+    /**
+     * Get Site Root element
+     *
+     * @return string
+     */
+    protected function _getSiteRootElement()
+    {
+        $frontController = Zend_Controller_Front::getInstance();
+        $request = $frontController->getRequest();
+        $pageId = $request->getParam('id', 0);
+
+        $siteRoot = '<li class="menuItem" style="background-image: none; padding: 0px;">'
+                  . '<a class="link" href="/admin/page/move/id/' . $pageId . '/parent/0">'
+                  . '<img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="/images/icons/folder.png"/>'
+                  . $this->view->getTranslation('Site Root')
+                  . '</a>'
+                  . '</li>';
+
+        return $siteRoot;
     }
 
     /**
