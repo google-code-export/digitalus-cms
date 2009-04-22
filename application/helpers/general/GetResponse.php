@@ -13,7 +13,7 @@ require_once 'Zend/Controller/Front.php';
  * @subpackage
  * @copyright
  */
-class DSF_View_Helper_GetResponse
+class DSF_View_Helper_General_GetResponse
 {
     /**
      * Retrieve the response object
