@@ -68,8 +68,7 @@ class DSF_View_Helper_Admin_RenderSidebar
 
     public function setSidebarPath()
     {
-        $front = Zend_Controller_Front::getInstance();
-        $request = $front->getRequest();
+        $request = $this->view->getRequest();
 
         $module = $request->getModuleName();
         if (substr($module, 0, 4) == 'mod_') {
