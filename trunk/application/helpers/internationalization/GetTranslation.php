@@ -16,9 +16,8 @@ class DSF_View_Helper_Internationalization_GetTranslation
         if ($viewInstance !== null) {
             $this->setview($viewInstance);
         }
-        $front = Zend_Controller_Front::getInstance();
         $adapter = Zend_Registry::get('Zend_Translate');
-        $moduleName = $front->getRequest()->getModuleName();
+        $moduleName = $this->view->getRequest()->getModuleName();
         $currentLanguage = $this->view->GetCurrentLanguage();
         if ($locale != null) {
             $this->view->translate()->setLocale($locale);

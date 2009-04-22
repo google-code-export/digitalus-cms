@@ -75,8 +75,7 @@ class DSF_View_Helper_Admin_RenderAdminMenu
 
     public function setSelectedSection()
     {
-        $front = Zend_Controller_Front::getInstance();
-        $request = $front->getRequest();
+        $request = $this->view->getRequest();
 
         $module = $request->getModuleName();
         if (substr($module, 0, 4) == 'mod_') {

@@ -48,8 +48,7 @@ class DSF_View_Helper_Admin_RenderOptions
 
     public function setOptionsPath()
     {
-        $front = Zend_Controller_Front::getInstance();
-        $request = $front->getRequest();
+        $request = $this->view->getRequest();
         $controller = $request->getControllerName();
         $action = $request->getActionName();
 

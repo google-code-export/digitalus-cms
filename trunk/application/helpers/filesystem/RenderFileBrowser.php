@@ -49,9 +49,8 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
      */
     protected function _getSiteRootElement()
     {
-        $frontController = Zend_Controller_Front::getInstance();
-        $request = $frontController->getRequest();
-        $pageId = $request->getParam('id', 0);
+        $request = $this->view->getRequest();
+        $pageId  = $request->getParam('id', 0);
 
         $siteRoot = '<li class="menuItem" style="background-image: none; padding: 0px;">'
                   . '<a class="link" href="/admin/page/move/id/' . $pageId . '/parent/0">'
