@@ -125,23 +125,27 @@ class Initializer extends Zend_Controller_Plugin_Abstract
     {
         define('SITE_ROOT', $this->_root);
     }
-    
+
     public function initLocale()
     {
-        //set defualt locale
+        //set default locale
         setlocale(LC_ALL, $this->_config->language->defaultLocale);
         $locale = new Zend_Locale($this->_config->language->defaultLocale);
+
+        // set default timezone
+        $timezone = $this->_config->defaultTimezone;
+        date_default_timezone_set($timezone);
 
         //translations
         $siteSettings = new SiteSettings();
         $lang = $siteSettings->get('admin_language');
-        if(!empty($lang)) {
+        if (!empty($lang)) {
             $key = $lang;
         } else {
             $key = $this->_config->language->defaultLocale;
         }
         $languageFiles = $this->_config->language->translations->toArray();
-        $adapter = new Zend_Translate('csv',$this->_config->language->path . '/' . $languageFiles[$key] . '.csv',$key);
+        $adapter = new Zend_Translate('csv', $this->_config->language->path . '/' . $languageFiles[$key] . '.csv', $key);
         Zend_Registry::set('Zend_Translate', $adapter);
     }
 

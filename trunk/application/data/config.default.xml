@@ -59,6 +59,7 @@
               <pl>polish</pl>
           </translations>
         </language>
+        <defaultTimezone>America/Los_Angeles</defaultTimezone>
         <builder>
             <stack>default.xml</stack>
             <persistPage>true</persistPage>
