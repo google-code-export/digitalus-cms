@@ -146,10 +146,10 @@ class Admin_PageController extends Zend_Controller_Action
         }
         $this->view->breadcrumbs[$this->view->GetTranslation('Open') . ': ' . $label] = $this->getFrontController()->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
         $this->view->toolbarLinks = array();
-        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_page_edit_id_' . $pageId
             . '/label/' . $this->view->GetTranslation('Page') . ':' . $currentPage->page->name;
-        $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = $this->getFrontController()->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
+        $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
 
     }
 

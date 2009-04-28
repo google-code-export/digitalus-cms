@@ -11,9 +11,21 @@ class DSF_View_Helper_Admin_RenderLinks
             foreach ($links as $label => $link) {
                 $linkClass = strtolower($label);
                 $linkClass = str_replace(' ', '_', $linkClass);
-                $hyperlinks[] = "<a href='{$link}' class='{$linkClass}'>{$label}</a>";
+                $hyperlinks[] = '<a href="' . $link . '" class="' . $linkClass . '">' . $this->view->getTranslation($label) . '</a>';
             }
-            return "<p class='{$class}'>" . $prependText . implode($separator, $hyperlinks) . $appendText . "</p>";
+            return '<p class="' . $class . '">' . $prependText . implode($separator, $hyperlinks) . $appendText . '</p>';
         }
+    }
+
+    /**
+     * Set this->view object
+     *
+     * @param  Zend_View_Interface $view
+     * @return Zend_View_Helper_DeclareVars
+     */
+    public function setView(Zend_View_Interface $view)
+    {
+        $this->view = $view;
+        return $this;
     }
 }

@@ -66,10 +66,10 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->view->toolbarLinks = array();
 
         $tmpPath = DSF_Toolbox_String::addUnderscores($folder);
-        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_media_open-folder_folder_' . $tmpPath
             . '/label/' . $this->view->GetTranslation('Media') . ':' . $pathToFolder;
-        $this->view->toolbarLinks[$this->view->GetTranslation('Delete')] = $this->getFrontController()->getBaseUrl() . '/admin/media/delete-folder/folder/' . $folder;
+        $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/media/delete-folder/folder/' . $folder;
 
     }
 
