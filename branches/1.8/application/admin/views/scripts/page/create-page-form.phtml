@@ -1,0 +1,9 @@
+<h3><?php echo $this->GetTranslation('Step 3: Enter the name for your page');?></h3>
+<dl>
+    <?php
+    //load the common helpers
+    DSF_View_RegisterHelpers::register($this);
+    echo $this->FormRow($this->GetTranslation('Page Name'), $this->formText('page_name'));
+    echo $this->FormRow('&nbsp;', $this->formSubmit('create', $this->GetTranslation('Create Page')));
+    ?>
+</dl>

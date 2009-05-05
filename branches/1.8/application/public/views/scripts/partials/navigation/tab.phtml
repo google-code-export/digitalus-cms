@@ -1,0 +1,20 @@
+<?php 
+if($this->item->isSelected()){
+    $class="selected";
+}else{
+	$class = null;
+}
+?>
+<li id='menu_item_<?php echo $this->item->id;?>' class='tab <?php echo $class;?>'>
+<a href="<?php echo $this->baseUrl . '/' . DSF_Toolbox_String::addHyphens($this->item->link)?>" class='<?php echo $class?>'>
+	<span class='label'><?php echo $this->item->label; ?></span>
+	<span class='subtitle'>
+		<?php 
+		    $page = $this->item->getInnerPage();
+		    echo $page->content['tagline'];
+		?>
+	
+	</span>
+</a>
+</li>
+
