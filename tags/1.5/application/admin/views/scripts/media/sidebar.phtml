@@ -1,0 +1,24 @@
+ <?php $this->placeholder('sidebarHeadline')->set($this->GetTranslation('Media'))?>
+<script type="text/javascript">
+$(document).ready(function()
+{
+    $("#fileTree").treeview({
+        persist: "cookie",
+        collapsed: true,
+        unique: true
+    });
+}
+);
+</script>
+
+<div class='contentBrowser'>
+<p><?php echo $this->link('Media Root', '/admin/media', 'folder.png');?></p>
+<?php
+$browser = $this->RenderMediaBrowser($this->pathToMedia, 'admin/media/open-folder/folder', null);
+if (empty($browser)) {
+    echo '<p>' . $this->GetTranslation('You do not have any media files on the server') . '</p>';
+} else {
+    echo $browser;
+}
+?>
+</div>

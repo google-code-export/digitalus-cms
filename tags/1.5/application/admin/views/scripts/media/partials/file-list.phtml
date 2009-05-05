@@ -1,0 +1,51 @@
+<?php if (is_array($this->folders) && count($this->folders) > 0) { ?>
+<h3><?php echo $this->GetTranslation('Subfolders');?></h3>
+<?php
+    foreach ($this->folders as $folder) {
+        $cleanPath = DSF_Toolbox_String::stripHyphens($folder);
+        $cleanPath = DSF_Toolbox_String::stripUnderscores($folder);
+?>
+<div class='folderWrapper'>
+    <?php
+        $deleteLink = $this->baseUrl . '/admin/media/delete-folder/folder/' . $this->mediapath . '_' . $folder;
+        echo $this->link('Delete', $deleteLink, 'delete.png', 'rightLink delete');
+    ?>
+    <h4>
+        <?php
+            $path = $this->baseUrl . '/admin/media/open-folder/folder/' . $this->mediapath . '_' . $folder;
+            echo $this->link($folder, $path, 'folder.png');
+        ?>
+    </h4>
+    <p><?php echo $this->GetTranslation('Full path') . ': <code>/' . $this->filepath . '/' . $cleanPath . '</code>';?></p>
+</div>
+<?php
+    }
+}
+
+if (is_array($this->files) && count($this->files) > 0) { ?>
+<h3><?php echo $this->GetTranslation('Files');?></h3>
+<?php
+    foreach ($this->files as $file) {
+        if (substr($file,0,1) != '.') {
+            $filePath = DSF_Toolbox_String::stripUnderscores($this->basePath) . '/' . $file;
+?>
+
+<div class='fileWrapper'>
+    <?php
+        $fileLink = $this->mediapath . '_' . $file;
+        $deleteLink = $this->baseUrl . '/admin/media/delete-file/file/' . $fileLink . '/';
+        echo $this->link('Delete', $deleteLink, 'delete.png', 'rightLink delete');
+    ?>
+    <h4>
+        <?php
+            $path = '/' . $this->filepath . $filePath;
+            echo $this->link($file, $path, $this->getIconByFiletype($filePath, false));
+        ?>
+    </h4>
+    <p><?php echo $this->GetTranslation('Full path') . ': <code>/' . $this->filepath . $filePath . '</code>';?></p>
+</div><?php
+        }
+    }
+}
+
+?>

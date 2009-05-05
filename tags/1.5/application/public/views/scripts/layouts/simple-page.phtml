@@ -1,0 +1,53 @@
+<?php
+$grid = new DSF_Interface_Grid('page', 16);
+$header = $grid->addElement('header', 16);
+    $logo = $header->addElement('header_logo', 10);
+    $logo->setAttribute('first', true);
+    $search = $header->addElement('header_search',6);
+    $search->setAttribute('last', true);
+$header->setAttribute('clear', true);
+
+$nav = $grid->addElement('nav', 16);
+$nav->setAttribute('clear', true);
+
+$body = $grid->addElement('body', 16);
+    $content = $body->addElement('content', 16);
+    $content->setAttribute('clear', true);
+
+    $language = $body->addElement('language', 16);
+  $language->setAttribute('clear', true);
+$body->setAttribute('clear', true);
+
+$footer = $grid->addElement('footer', 16);
+$footer->setAttribute('clear', true);
+
+$this->placeholder('header_logo_content')->set(
+    "<a href='http://digitaluscms.com'><img src='" . $this->baseUrl . "/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
+);
+
+$this->placeholder('header_search_content')->set(
+    'search form'
+);
+
+if (is_object($this->page) && $this->isError != true) {
+    $this->content = $this->RenderContentTemplate($this->page->getContentTemplate(), $this->page->getContent());
+    $this->submenu = $this->RenderSubmenu();
+}
+
+$this->placeholder('content_content')->set($this->content);
+
+$this->placeholder('nav_content')->set(
+    $this->RenderMenu(0)
+);
+
+$this->placeholder('sidebar_content')->set(
+    $this->submenu
+);
+
+$this->placeholder('language_content')->set($this->GetTranslation('language') . $this->ListLanguageLinks());
+
+$this->placeholder('footer_content')->set(
+    $this->partial('partials/footer.phtml')
+);
+
+echo $grid->render();

@@ -1,0 +1,19 @@
+<form action="<?php echo $this->baseUrl;?>/admin/page/related-content" method="post">
+<?php
+echo $this->formHidden('page_id', $this->page->page->id);
+echo $this->RenderFileChecklist($this->relatedPages, 0);
+?>
+<p><?php echo $this->formSubmit('submit', $this->GetTranslation('Update Related Content'));?></p>
+</form>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+    $("#fileChecklist").treeview({
+        persist: "cookie",
+        collapsed: true,
+        unique: true
+    });
+}
+);
+</script>

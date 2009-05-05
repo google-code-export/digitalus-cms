@@ -1,0 +1,8 @@
+<?php $this->placeholder('optionsHeadline')->set($this->GetTranslation('Forgot Password'));?>
+<p><?php echo $this->GetTranslation('If you are having trouble logging in please enter your email address below and we will send you your login credentials.');?></p>
+<form action="/admin/auth/reset-password" method="post">
+<?php
+    echo $this->FormText('email', $this->email);
+    echo $this->FormSubmit('reminder', $this->GetTranslation('Reset Password'));
+?>
+</form>
