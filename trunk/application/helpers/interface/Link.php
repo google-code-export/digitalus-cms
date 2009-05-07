@@ -17,26 +17,29 @@ class DSF_View_Helper_Interface_Link {
      * @var Zend_View_Interface
      */
     public $view;
-    public $link;
-    public $baseUrl;
+
+    public $iconPath;
 
     /**
      *
      */
     public function link($label, $link, $icon = null, $class = 'link')
     {
-        $this->link = DSF_Toolbox_String::stripLeading('/', $link);
-        $this->baseUrl = DSF_Toolbox_String::stripLeading('/', $this->view->baseUrl);
-        
-        // clean the link
-        if($this->isRemoteLink($link) || $this->isAnchorLink($link)) {
-            $cleanLink = $link;
-        } else {
-            $cleanLink = '/' . $this->addBaseUrl($this->link);
+        /*
+         * Added by Brad Seefeld on May 6, 2009.
+         * First we need to check to see if the incoming link is an absolute
+         * address. If it is, we do not want to prepend the baseUrl.
+         *
+         * Also, check to see if we are targeting an anchor. If anchor, do
+         * not prepend base url.
+         */
+
+        if (!$this->isRemoteLink($link) && !$this->isAnchorLink($link) && !$this->containsBaseUrl($link)) {
+            $link = $this->view->baseUrl . $link;
         }
-       
-        $linkParts[] = "<a href='{$cleanLink}' class='{$class}'>";
-       
+
+        $linkParts[] = "<a href='{$link}' class='{$class}'>";
+
         if (null !== $icon) {
             $linkParts[] = $this->getIcon($icon, $label);
         }
@@ -47,6 +50,45 @@ class DSF_View_Helper_Interface_Link {
         return implode(null, $linkParts);
     }
 
+    public function isRemoteLink($link)
+    {
+        if ('http://'  == strtolower(substr($link, 0, 7)) ||
+            'https://' == strtolower(substr($link, 0, 8))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isAnchorLink($link)
+    {
+        if (substr($link, 0, 1) == '#') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function containsBaseUrl($link)
+    {
+        if (substr($link, 0, strlen($this->view->baseUrl)) == $this->view->baseUrl) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getIcon($icon, $alt)
+    {
+        $config = Zend_Registry::get('config');
+        $this->iconPath = $config->filepath->icons;
+        if (substr($this->iconPath, 0, 1) != '/') {
+            $this->iconPath = '/' . $this->iconPath;
+        }
+        $iconPath = $this->view->baseUrl . $this->iconPath;
+        return "<img src='{$iconPath}/{$icon}' alt='" . htmlspecialchars($this->view->GetTranslation((string)$alt)) . "' class='icon' />";
+    }
+
     /**
      * Sets the view field
      * @param $view Zend_View_Interface
@@ -54,42 +96,5 @@ class DSF_View_Helper_Interface_Link {
     public function setView(Zend_View_Interface $view)
     {
         $this->view = $view;
-    }
-    
-    public function addBaseUrl($path)
-    {
-        if(!empty($this->baseUrl)) {
-            if(substr($path, 0, strlen($this->baseUrl) != $this->baseUrl)) {
-                return $this->baseUrl . '/' . $path;
-            }
-        }
-        return $path;
-    }
-    
-    public function isAnchorLink($link)
-    {
-        if(strpos($link, '#') === FALSE) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-    
-    public function isRemoteLink($link)
-    {
-        if(strpos($link, 'http') === FALSE) {
-            return false;
-        } else {
-            return true;
-        } 
-    }
-    
-    public function getIcon($icon, $alt)
-    {
-        $config = Zend_Registry::get('config');
-        $this->iconPath = $config->filepath->icons;
-        $iconPath = $this->iconPath;
-        $iconPath = $this->addBaseUrl($iconPath . '/' . $icon);
-        return "<img src='/{$iconPath}' alt='" . htmlspecialchars($alt) . "' class='icon' />";
     }
 }
