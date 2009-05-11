@@ -3,7 +3,7 @@ class DSF_View_Helper_Content_RenderBlock
 {
     public function RenderBlock ($path)
     {
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $uriObj = new DSF_Uri($path);
         $pointer = $mdlPage->fetchPointer($uriObj->toArray());
         $pageObj = $mdlPage->open($pointer, $mdlPage->getDefaultVersion());

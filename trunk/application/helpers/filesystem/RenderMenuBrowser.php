@@ -3,7 +3,7 @@ class DSF_View_Helper_Filesystem_RenderMenuBrowser
 {
     public function RenderMenuBrowser($parentId, $basePath = null, $id = 'menuTree')
     {
-        $menu = new Menu();
+        $menu = new Model_Menu();
 
         $children = $menu->getMenuItems($parentId, true);
 

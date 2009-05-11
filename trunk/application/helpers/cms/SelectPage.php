@@ -3,7 +3,7 @@ class Zend_View_Helper_SelectPage
 {
     public function SelectPage($name, $value = null, $attribs = null)
     {
-        $mdlIndex = new Page();
+        $mdlIndex = new Model_Page();
         $index = $mdlIndex->getIndex(0, 'name');
 
         $pages = array();

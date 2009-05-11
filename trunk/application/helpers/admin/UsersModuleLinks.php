@@ -7,7 +7,7 @@ class  DSF_View_Helper_Admin_UsersModuleLinks
      * comments
      */
     public function UsersModuleLinks($id = 'moduleList'){
-        $u = new User();
+        $u = new Model_User();
         $modules = $u->getCurrentUsersModules();
         if ($modules) {
             foreach ($modules as $module) {

@@ -4,7 +4,7 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
     public function RenderFileBrowser($parentId, $link, $basePath = null, $level = 0, $id = 'fileTree', $withRoot = false)
     {
         $links = array();
-        $tree = new Page();
+        $tree = new Model_Page();
 
         $children = $tree->getChildren($parentId, null, 'name');
 
