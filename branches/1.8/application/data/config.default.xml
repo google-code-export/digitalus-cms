@@ -65,15 +65,12 @@
             <persistPage>true</persistPage>
         </builder>
     </production>
+    <staging extends="production">
+    </staging>
     <testing extends="production">
-        <database>
-            <adapter>PDO_MYSQL</adapter>
-            <host></host>
-            <username></username>
-            <password/>
-            <dbname></dbname>
-        </database>
     </testing>
+    <development extends="production">
+    </development>
     <system>
         <version>1.5</version>
         <installDate></installDate>
