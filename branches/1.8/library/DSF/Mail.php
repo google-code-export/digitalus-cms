@@ -50,7 +50,7 @@ class DSF_Mail
     public function __construct()
     {
         $this->_view = new Zend_View();
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         if ($settings->get('use_smtp_mail') == 1) {
             $config = array('auth' => 'Login',
                             'username' => $settings->get('smtp_username'),

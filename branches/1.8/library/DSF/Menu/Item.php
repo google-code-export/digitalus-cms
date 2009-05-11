@@ -25,7 +25,7 @@ class DSF_Menu_Item {
             $this->visible = false;
         }
 
-        $page = new Page();
+        $page = new Model_Page();
         if ($page->hasChildren($item)) {
             $this->hasSubmenu = true;
         } else {
@@ -46,7 +46,7 @@ class DSF_Menu_Item {
         if ($this->id == $currentPageId) {
             return true;
         } elseif ($ignoreParents == false) {
-            $page = new Page();
+            $page = new Model_Page();
             $parents = $page->getParents($currentPageId);
             if (is_array($parents)) {
                 if (isset($parents[$this->id])) {
@@ -74,7 +74,7 @@ class DSF_Menu_Item {
      */
     public function getInnerPage()
     {
-        $page = new Page();
+        $page = new Model_Page();
         return $page->open($this->id);
     }
 

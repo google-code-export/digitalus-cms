@@ -102,7 +102,7 @@ class DSF_Acl extends Zend_Acl
     }
 
     public function loadCurrentUsersPermissions() {
-        $user = new User();
+        $user = new Model_User();
         $permissions = $user->getCurrentUsersAclResources();
 
         if ($permissions) {

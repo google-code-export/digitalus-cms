@@ -27,7 +27,7 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
 
         //load the parents or default if the current page does not have a design set
         if (!empty($designId)) {
-            $page = new Page();
+            $page = new Model_Page();
             $parents = $page->getParents($this->_page->getId());
             if (is_array($parents)) {
                 foreach ($parents as $parent) {
@@ -40,7 +40,7 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
         }
 
         if (empty($design)) {
-            $mdlDesign = new Design();
+            $mdlDesign = new Model_Design();
             $default = $mdlDesign->getDefaultDesign();
             $design = $default->id;
         }

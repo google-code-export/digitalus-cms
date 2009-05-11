@@ -28,7 +28,7 @@ class DSF_Controller_Plugin_LogTraffic extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch($request)
     {
-        $log = new TrafficLog();
+        $log = new Model_TrafficLog();
         $log->logHit();
     }
 }

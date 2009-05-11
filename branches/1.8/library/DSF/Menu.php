@@ -23,7 +23,7 @@ class DSF_Menu {
      */
     protected function _load()
     {
-        $page = new Page();
+        $page = new Model_Page();
         $children = $page->getChildren($this->_parentId);
         if ($children != null && $children->count() > 0) {
             foreach ($children as $child) {

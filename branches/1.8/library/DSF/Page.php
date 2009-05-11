@@ -228,7 +228,7 @@ class DSF_Page
 
     public function getDesign()
     {
-        $design = new Design();
+        $design = new Model_Design();
         $design->setDesign($this->getParam('design'));
         return $design;
     }

@@ -20,7 +20,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 
     public function setPointer()
     {
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $uri = $this->_page->getUri();
         $pointer = $mdlPage->fetchPointer($uri);
         if($pointer > 0) {
@@ -36,7 +36,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 
     public function setParents()
     {
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $parents = $mdlPage->getParents($this->_page->getId());
         if (is_array($parents)) {
             $this->_page->setParents($parents);
@@ -45,7 +45,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 
     public function loadData()
     {
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $row = $mdlPage->find($this->_page->getId())->current();
         if ($row) {
             $this->_page->setData($row);
@@ -66,14 +66,14 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 
     public function setAvailableLanguages()
     {
-        $page = new Page();
+        $page = new Model_Page();
         $availableContent = $page->getVersions($this->_page->getId());
         $this->_page->setAvailableLanguages($availableContent);
     }
 
     public function loadContent()
     {
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $content = $mdlPage->open($this->_page->getId(), $this->_page->getLanguage());
         $this->_page->setContent($content->content);
         $this->_page->setDefaultContent($content->defaultContent);
@@ -89,14 +89,14 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
     public function loadMetaData()
     {
         //load meta data
-        $mdlMeta = new MetaData();
+        $mdlMeta = new Model_MetaData();
         $metaData = $mdlMeta->get($this->_page->getId());
         $this->_page->setMeta($metaData);
     }
 
     public function loadProperties()
     {
-        $mdlProperties = new Properties();
+        $mdlProperties = new Model_Properties();
         $properties = $mdlProperties->get($this->_page->getId());
         $this->_page->setProperties($properties);
     }
@@ -117,12 +117,12 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
         $pageId = $this->_page->getId();
 
         //load the base site name
-        $mdlSettings = new SiteSettings();
+        $mdlSettings = new Model_SiteSettings();
         $siteName = $mdlSettings->get('name');
         $separator = $mdlSettings->get('title_separator');
 
         //load the current page title
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $title = $mdlPage->getTitle($pageId);
 
         //set the title
@@ -143,7 +143,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
         $pageId = $this->_page->getId();
 
         //start the meta description and keywords with the site name
-        $mdlSettings = new SiteSettings();
+        $mdlSettings = new Model_SiteSettings();
         $siteName = $mdlSettings->get('name');
         $metaDescription[] = $siteName;
         $metaKeywords[] = $siteName;
@@ -154,7 +154,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
         $metaKeywords[] = $mdlSettings->get('meta_keywords');
         
         //next add all of the page titles
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $title = $mdlPage->getTitle($pageId);
         if(is_array($title)) {
             $metaDescription[] = implode(',', $title);
@@ -162,7 +162,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
         }
         
         //now add the page specific settings
-        $mdlMeta = new MetaData();
+        $mdlMeta = new Model_MetaData();
         $metaData = $mdlMeta->asArray($pageId);
         
         if(!empty($metaData['meta_description'])) {
@@ -181,7 +181,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
     public function googleIntegration()
     {
         $view = $this->_page->getView();
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         $view->placeholder('google_verify')->set($settings->get('google_verify'));
         $view->placeholder('google_tracking')->set($settings->get('google_tracking'));
     }
