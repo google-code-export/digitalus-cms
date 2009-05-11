@@ -17,14 +17,14 @@ class Page extends DSF_Db_Table
 
         $uriObj = new DSF_Uri($uri);
         $pointer = $this->fetchPointer($uriObj->toArray());
-        $node = new ContentNode();
+        $node = new Model_ContentNode();
         //fetch the content nodes
         return $node->fetchContentArray($pointer, null, null, $version);
     }
 
     public function getCurrentUsersPages($order = null, $limit = null)
     {
-        $user = new User();
+        $user = new Model_User();
         $currentUser = $user->getCurrentUser();
         if ($currentUser) {
             $select = $this->select();
@@ -64,11 +64,11 @@ class Page extends DSF_Db_Table
                 $makeMenuLinks = 0;
             }
         } else {
-            $settings = new SiteSettings();
+            $settings = new Model_SiteSettings();
             $makeMenuLinks = $settings->get('add_menu_links');
         }
 
-        $u = new User();
+        $u = new Model_User();
         $user = $u->getCurrentUser();
         if ($user) {
             $userId = $user->id;
@@ -114,7 +114,7 @@ class Page extends DSF_Db_Table
             $page = new stdClass();
             $page->page = $currentPage;
 
-            $node = new ContentNode();
+            $node = new Model_ContentNode();
 
             //fetch the content nodes
             $page->content = $node->fetchContentArray($pageId, null, null, $version);
@@ -158,11 +158,11 @@ class Page extends DSF_Db_Table
             if (isset($pageArray['version']) && !empty($pageArray['version'])) {
                 $version = $pageArray['version'];
             } else {
-                $siteSettings = new SiteSettings();
+                $siteSettings = new Model_SiteSettings();
                 $version = $this->getDefaultVersion();
             }
             //update the content
-            $contentNode = new ContentNode();
+            $contentNode = new Model_ContentNode();
 
             if (count($pageArray) > 0) {
                 foreach ($pageArray as $node => $content) {
@@ -179,13 +179,13 @@ class Page extends DSF_Db_Table
 
     public function getVersions($pageId)
     {
-        $node = new ContentNode();
+        $node = new Model_ContentNode();
         return $node->getVersions('page_' . $pageId);
     }
 
     public function getDefaultVersion()
     {
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         return $settings->get('default_language');
     }
 
@@ -220,7 +220,7 @@ class Page extends DSF_Db_Table
 
     public function getPageTitle($pageId)
     {
-        $mdlMeta = new MetaData();
+        $mdlMeta = new Model_MetaData();
         $metaData = $mdlMeta->asArray($pageId);
         if (!empty($metaData['page_title'])) {
             return $metaData['page_title'];
@@ -239,12 +239,12 @@ class Page extends DSF_Db_Table
 
         //delete content nodes
         unset($where);
-        $mdlNodes = new ContentNode();
+        $mdlNodes = new Model_ContentNode();
         $where[] = $this->_db->quoteInto('parent_id = ?', 'page_' . $pageId);
         $mdlNodes->delete($where);
 
         //delete meta data
-        $mdlMeta = new MetaData();
+        $mdlMeta = new Model_MetaData();
         $mdlMeta->deleteByPageId($pageId);
     }
 
@@ -264,7 +264,7 @@ class Page extends DSF_Db_Table
     {
         $page = $this->find($pageId)->current();
         $designId = $page->design;
-        $mdlDesign = new Design();
+        $mdlDesign = new Model_Design();
         $mdlDesign->setDesign($designId);
         return $mdlDesign;
     }
@@ -324,7 +324,7 @@ class Page extends DSF_Db_Table
 
     public function fetchPointer($uri)
     {
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         $isOnline = $settings->get('online');
         if ($isOnline == 0) {
             return $this->getOfflinePage();
@@ -620,7 +620,7 @@ class Page extends DSF_Db_Table
 
     public function getHomePage()
     {
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         $homePage = $settings->get('home_page');
 
         //the home page defaults to the first page added to the CMS
@@ -636,7 +636,7 @@ class Page extends DSF_Db_Table
 
     public function get404Page()
     {
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         $page = $settings->get('page_not_found');
 
         $front = Zend_Controller_Front::getInstance();
@@ -649,7 +649,7 @@ class Page extends DSF_Db_Table
 
     public function getOfflinePage()
     {
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         return $settings->get('offline_page');
     }
 
