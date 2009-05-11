@@ -73,7 +73,7 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             $role = null;
         }
         $controller = $request->controller;
-         $module = $request->module;
+        $module = $request->module;
         $controller = $controller;
         $action = $request->action;
 
