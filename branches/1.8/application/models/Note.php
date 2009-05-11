@@ -1,5 +1,5 @@
 <?php
-class Note extends ContentNode
+class Model_Note extends Model_ContentNode
 {
     protected $_type = 'note';
     protected $_namespace = 'user';

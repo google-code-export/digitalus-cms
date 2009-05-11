@@ -23,7 +23,7 @@
  * @version    $Id: SiteSettings.php Mon Dec 24 20:30:38 EST 2007 20:30:38 forrest lyman $
  */
 
-class SiteSettings extends Xml
+class Model_SiteSettings extends Model_Xml
 {
     /**
      * the filepath key

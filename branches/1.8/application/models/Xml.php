@@ -1,5 +1,5 @@
 <?php
-class Xml extends Data
+class Model_Xml extends Model_Data
 {
 
     public function fileExists($tags)

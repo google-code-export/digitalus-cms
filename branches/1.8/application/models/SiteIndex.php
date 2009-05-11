@@ -1,5 +1,5 @@
 <?php
-class SiteIndex extends Page
+class Model_SiteIndex extends Model_Page
 {
     protected $_index;
 

@@ -1,6 +1,6 @@
 <?php
 
-class Properties extends Xml
+class Model_Properties extends Model_Xml
 {
     protected $_namespace = 'properties';
 

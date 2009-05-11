@@ -1,5 +1,5 @@
 <?php
-class Bookmark extends ContentNode
+class Model_Bookmark extends Model_ContentNode
 {
     protected $_type = 'bookmark';
 

@@ -1,5 +1,5 @@
 <?php
-class Redirector extends DSF_Db_Table
+class Model_Redirector extends DSF_Db_Table
 {
     protected $_name = 'redirectors';
 

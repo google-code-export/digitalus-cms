@@ -1,5 +1,5 @@
 <?php
-class Data extends Zend_Db_Table
+class Model_Data extends Zend_Db_Table
 {
     protected $_name = 'data';
 }

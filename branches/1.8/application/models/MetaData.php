@@ -1,5 +1,5 @@
 <?php
-class MetaData extends Xml
+class Model_MetaData extends Model_Xml
 {
     protected $_namespace = 'meta_data';
 

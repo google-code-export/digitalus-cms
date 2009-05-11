@@ -20,7 +20,7 @@
  * @version    $Id: TrafficLog.php Mon Dec 24 20:35:48 EST 2007 20:35:48 forrest lyman $
  */
 
-class TrafficLog extends DSF_Db_Table
+class Model_TrafficLog extends DSF_Db_Table
 {
     /**
      * the table name

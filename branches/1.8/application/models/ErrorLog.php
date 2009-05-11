@@ -21,7 +21,7 @@
  * @version    $Id: ErrorLog.php Sun Dec 23 11:00:10 EST 2007 11:00:10 forrest lyman $
  */
 
-class ErrorLog extends Zend_Db_Table
+class Model_ErrorLog extends Zend_Db_Table
 {
     /**
      * content type

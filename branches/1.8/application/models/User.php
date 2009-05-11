@@ -21,7 +21,7 @@
  * @version    $Id: User.php Mon Dec 24 20:38:38 EST 2007 20:38:38 forrest lyman $
  */
 
-class User extends DSF_Db_Table
+class Model_User extends DSF_Db_Table
 {
     const SUPERUSER_ROLE = 'superadmin';
     /**
@@ -213,7 +213,7 @@ class User extends DSF_Db_Table
     {
         $modules = null;
         $user = $this->getCurrentUser();
-        if ($user->role == user::SUPERUSER_ROLE) {
+        if ($user->role == Model_User::SUPERUSER_ROLE) {
             //the superadmin has access to all of the modules
             $front = Zend_Controller_Front::getInstance();
             $ctlPaths = $front->getControllerDirectory();

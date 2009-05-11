@@ -1,5 +1,5 @@
 <?php
-class Menu extends Page
+class Model_Menu extends Model_Page
 {
     public function getMenus()
     {

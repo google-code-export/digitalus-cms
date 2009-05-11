@@ -1,5 +1,5 @@
 <?php
-class Design extends Zend_Db_Table
+class Model_Design extends Zend_Db_Table
 {
     protected $_name = 'designs';
     protected $_design = null;

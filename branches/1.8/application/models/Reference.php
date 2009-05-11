@@ -1,5 +1,5 @@
 <?php
-class Reference extends Zend_Db_Table
+class Model_Reference extends Zend_Db_Table
 {
     protected $_name = 'references';
 
