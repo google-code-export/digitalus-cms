@@ -1,7 +1,7 @@
 <p><?php echo $this->GetTranslation('page_my_pages_intro');?></p>
 
 <?php
-$content = new Page();
+$content = new Model_Page();
 $pages = $content->getCurrentUsersPages();
 if ($pages) {
     ?>

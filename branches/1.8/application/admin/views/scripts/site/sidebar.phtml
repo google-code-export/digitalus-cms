@@ -2,7 +2,7 @@
 <p><?php echo $this->GetTranslation('The site sections is where you manage your site.');?></p>
 
 <?php
-$u = new User();
+$u = new Model_User();
 $users = $u->fetchAll(null, 'first_name');
 foreach ($users as $user) {
     //having a little fun at 1:04

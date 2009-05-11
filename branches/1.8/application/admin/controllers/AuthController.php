@@ -89,7 +89,7 @@ class Admin_AuthController extends Zend_Controller_Action
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
             $email = DSF_Filter_Post::get('email');
-            $user = new User();
+            $user = new Model_User();
             $match = $user->getUserByUsername($email);
             if ($match) {
                 //create the password
@@ -102,7 +102,7 @@ class Admin_AuthController extends Zend_Controller_Action
                 $data['password'] = $password;
 
                 //get standard site settings
-                $s = new SiteSettings();
+                $s = new Model_SiteSettings();
                 $settings = $s->toObject();
 
                 //attempt to send the email

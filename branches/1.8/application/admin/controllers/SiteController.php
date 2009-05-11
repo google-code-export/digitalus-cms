@@ -35,7 +35,7 @@ class Admin_SiteController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         $this->view->settings = $settings->toObject();
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_site'
@@ -49,7 +49,7 @@ class Admin_SiteController extends Zend_Controller_Action
     public function editAction()
     {
         $settings = DSF_Filter_Post::raw('setting');
-        $s = new SiteSettings();
+        $s = new Model_SiteSettings();
         foreach ($settings as $k => $v) {
             $s->set($k, $v);
         }
@@ -104,7 +104,7 @@ class Admin_SiteController extends Zend_Controller_Action
 
     public function mailTestAction()
     {
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         $message = new DSF_Mail();
         $message->send(
             $settings->get('default_email'),

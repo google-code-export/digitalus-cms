@@ -23,7 +23,7 @@ class Admin_ReportController extends Zend_Controller_Action
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_report_traffic'
             . '/label/' . $this->view->GetTranslation('Report') . ':' . $this->view->GetTranslation('Traffic');
-        $log = new TrafficLog();
+        $log = new Model_TrafficLog();
         $this->view->hitsThisWeek = $log->getLogByDay();
         $this->view->hitsByWeek   = $log->getLogByWeek();
     }
@@ -39,7 +39,7 @@ class Admin_ReportController extends Zend_Controller_Action
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url'
             . '/admin_report_admin-access'
             . '/label/' . $this->view->GetTranslation('Report') . ':' . $this->view->GetTranslation('Access');
-        $log = new TrafficLog();
+        $log = new Model_TrafficLog();
         $this->view->accessLog = $log->adminAccess();
     }
 }

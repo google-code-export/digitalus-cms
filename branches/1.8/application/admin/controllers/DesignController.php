@@ -11,7 +11,7 @@ class Admin_DesignController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $mdlDesign = new Design();
+        $mdlDesign = new Model_Design();
         $this->view->designs = $mdlDesign->listDesigns();
 
         $this->view->breadcrumbs = array(
@@ -24,7 +24,7 @@ class Admin_DesignController extends Zend_Controller_Action
     {
         if ($this->_request->isPost()) {
             // NOTE: we will turn this into a Zend_Form after were sure it will work this way
-            $mdlDesign = new Design();
+            $mdlDesign = new Model_Design();
             $name = DSF_Filter_Post::get('name');
             $notes = DSF_Filter_Post::get('notes');
             $id = $mdlDesign->createDesign($name, $notes);
@@ -36,7 +36,7 @@ class Admin_DesignController extends Zend_Controller_Action
 
     public function updateAction()
     {
-        $mdlDesign = new Design();
+        $mdlDesign = new Model_Design();
         $this->view->designs = $mdlDesign->listDesigns();
 
         if ($this->_request->isPost()) {
@@ -56,7 +56,7 @@ class Admin_DesignController extends Zend_Controller_Action
         }
 
         $mdlDesign->setDesign($id);
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $this->view->pages = $mdlPage->getPagesByDesign($id);
 
         $this->view->breadcrumbs[$this->view->GetTranslation('Open') . ': ' . $this->view->GetTranslation($mdlDesign->getValue('name'))] = $this->getFrontController()->getBaseUrl() . '/admin/design/update/id/' . $id;
@@ -72,7 +72,7 @@ class Admin_DesignController extends Zend_Controller_Action
 
     public function deleteAction()
     {
-        $mdlDesign = new Design();
+        $mdlDesign = new Model_Design();
         $id = $this->_request->getParam('id');
         $mdlDesign->deleteDesign($id);
         $this->_forward('index');

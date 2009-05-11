@@ -47,7 +47,7 @@ class Admin_UserController extends Zend_Controller_Action
 
         $id = $this->_request->getParam('id', 0);
         if ($id > 0) {
-            $u = new User();
+            $u = new Model_User();
             $row = $u->find($id)->current();
             $this->view->user = $row;
             $this->view->userPermissions = $u->getAclResources($row);
@@ -69,7 +69,7 @@ class Admin_UserController extends Zend_Controller_Action
     public function createAction()
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            $u = new User();
+            $u = new Model_User();
             $user = $u->insertFromPost();
             $e = new DSF_View_Error();
             if (!$e->hasErrors()) {
@@ -89,7 +89,7 @@ class Admin_UserController extends Zend_Controller_Action
      */
     public function editAction()
     {
-        $u = new User();
+        $u = new Model_User();
         if (DSF_Filter_Post::has('update_permissions')) {
             //update the users permissions
             $resources = DSF_Filter_Post::raw('acl_resources');
@@ -112,7 +112,7 @@ class Admin_UserController extends Zend_Controller_Action
 
     public function updateMyAccountAction()
     {
-        $u = new User();
+        $u = new Model_User();
         if (DSF_Filter_Post::int('update_password') === 1) {
             $id = DSF_Filter_Post::int('id');
             $password = DSF_Filter_Post::get('password');
@@ -133,7 +133,7 @@ class Admin_UserController extends Zend_Controller_Action
         $copyFrom = DSF_Filter_Post::int('user_id');
 
         if ($currentUser > 0 && $copyFrom > 0) {
-            $u = new User();
+            $u = new Model_User();
             $u->copyPermissions($copyFrom, $currentUser);
         }
         $url = 'admin/user/open/id/' . $currentUser;
@@ -147,7 +147,7 @@ class Admin_UserController extends Zend_Controller_Action
     public function deleteAction()
     {
        $id = $this->_request->getParam('id');
-       $u = new User();
+       $u = new Model_User();
        $u->delete('id = ' . $id);
        $url = 'admin/site';
        $this->_redirect($url);

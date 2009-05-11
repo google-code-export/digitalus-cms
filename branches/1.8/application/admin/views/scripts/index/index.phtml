@@ -7,7 +7,7 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
         <legend><?php echo $this->GetTranslation('My Account');?></legend>
         <dl>
         <?php
-            $u = new User();
+            $u = new Model_User();
             $user = $u->getCurrentUser();
             echo '<dt>' . $this->formHidden('id', $user->id) . '</dt>';
             echo $this->FormRow($this->GetTranslation('First Name'), $this->formText('first_name' , $this->identity->first_name));

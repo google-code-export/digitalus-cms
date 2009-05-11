@@ -93,7 +93,7 @@ class DSF_View_Helper_Admin_RenderAdminMenu
     public function hasAccess($tab)
     {
         if ($this->currentUser) {
-            if ($this->currentUser->role == user::SUPERUSER_ROLE) {
+            if ($this->currentUser->role == Model_User::SUPERUSER_ROLE) {
                 return true;
             } elseif ($this->userModel->queryPermissions($tab)) {
                 return true;

@@ -29,7 +29,7 @@ $(document).ready(
     <?php echo $this->formHidden('menuId', $this->menuId);?>
         <ul class="sortable">
         <?php
-        $m = new Menu();
+        $m = new Model_Menu();
         foreach ($this->menu as $item) {
             $row = $this->formHidden('id[]', $item->id);
             $row .= '<span class="default">(' . $item->name . ')</span> ';

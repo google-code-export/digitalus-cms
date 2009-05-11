@@ -12,7 +12,7 @@ echo $this->GetTranslation($siteVersions->$version);
 <p><?php echo $this->GetTranslation('Available Versions')?>: </p>
 <ul>
 <?php
-$pageMdl = new Page();
+$pageMdl = new Model_Page();
 $pageVersions = $pageMdl->getVersions($this->pageId);
 $defaultVersion = $pageMdl->getDefaultVersion();
 

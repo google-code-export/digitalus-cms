@@ -49,7 +49,7 @@ class Admin_PageController extends Zend_Controller_Action
         $parentId = DSF_Filter_Post::int('parent_id');
         $this->_setCreateOptions($parentId, $contentType);
 
-        $page = new Page();
+        $page = new Model_Page();
         $newPage = $page->createPage($name, $parentId, $contentType);
 
         if ($newPage) {
@@ -68,7 +68,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function editAction()
     {
 
-        $page = new Page();
+        $page = new Model_Page();
         //load the current page
         if ($this->_request->isPost()) {
             $pageId = DSF_Filter_Post::int('page_id');
@@ -125,13 +125,13 @@ class Admin_PageController extends Zend_Controller_Action
         $this->view->page = $currentPage;
 
         //meta data form
-        $mdlMeta = new MetaData();
+        $mdlMeta = new Model_MetaData();
         $metaData = $mdlMeta->asArray($pageId);
         $metaData['page_id'] = $pageId;
         $this->view->metaForm = $this->getMetaForm($metaData);
 
         //properties
-        $mdlProperties = new Properties();
+        $mdlProperties = new Model_Properties();
         $this->view->properties = $mdlProperties->asArray($pageId);
 
         //related pages
@@ -157,14 +157,14 @@ class Admin_PageController extends Zend_Controller_Action
     {
         $id = $this->_request->getParam('id');
         $design = $this->_request->getParam('design');
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $mdlPage->setDesign($id, $design);
         $this->_forward('edit');
     }
 
     public function updateMetaDataAction()
     {
-        $mdlMetaData = new MetaData();
+        $mdlMetaData = new Model_MetaData();
 
         if ($this->_request->isPost()) {
             $form = $this->getMetaForm($_POST);
@@ -181,14 +181,14 @@ class Admin_PageController extends Zend_Controller_Action
     public function makeHomePageAction()
     {
         $id = $this->_request->getParam('id');
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $mdlPage->makeHomePage($id);
         $this->_redirect('admin/page/edit/id/' . $id);
     }
 
     public function updatePropertiesAction()
     {
-        $mdlProperties = new Properties();
+        $mdlProperties = new Model_Properties();
         if ($this->_request->isPost()) {
             $pageId = DSF_Filter_Post::int('page_id');
             $keys = DSF_Filter_Post::raw('key');
@@ -215,7 +215,7 @@ class Admin_PageController extends Zend_Controller_Action
             }
         }
         if (is_array($relatedFiles)) {
-            $page = new Page();
+            $page = new Model_Page();
             $page->setRelatedPages($pageId, $relatedFiles);
         }
         $this->_redirect('admin/page/edit/id/' . $pageId);
@@ -223,7 +223,7 @@ class Admin_PageController extends Zend_Controller_Action
 
     public function moveAction()
     {
-        $mdlPage = new Page();
+        $mdlPage = new Model_Page();
         $id = $this->_request->getParam('id');
         $parentId = $this->_request->getParam('parent');
         $mdlPage->movePage($id, $parentId);
@@ -234,7 +234,7 @@ class Admin_PageController extends Zend_Controller_Action
     {
         $id = $this->_request->getParam('id', 0);
         if ($id > 0) {
-            $page = new Page();
+            $page = new Model_Page();
             $page->deletePageById($id);
         }
         $this->_redirect('admin/page');
@@ -246,7 +246,7 @@ class Admin_PageController extends Zend_Controller_Action
     {
         $parentId = $this->_request->getParam('parent_id');
         $this->view->createPageOptions = $this->_getCreateOptions();
-        $page = new Page();
+        $page = new Model_Page();
         $contentType = $page->getContentTemplate($parentId);
         $templateLoader = new DSF_Content_Template_Loader();
         $template = $templateLoader->load($contentType);

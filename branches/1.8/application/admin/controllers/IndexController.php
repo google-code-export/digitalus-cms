@@ -36,19 +36,19 @@ class Admin_IndexController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $notes = new Note();
+        $notes = new Model_Note();
         $this->view->notes = $notes->getUsersNotes();
-        $bookmark = new Bookmark();
+        $bookmark = new Model_Bookmark();
         $this->view->bookmarks = $bookmark->getUsersBookmarks();
-        $content = new Page();
+        $content = new Model_Page();
         $this->view->pages = $content->getCurrentUsersPages('create_date DESC', 10);
-        $user = new User();
+        $user = new Model_User();
         $this->view->identity = $user->getCurrentUser();
     }
 
     public function notesAction()
     {
-        $notes = new Note();
+        $notes = new Model_Note();
         $myNotes = DSF_Filter_Post::get('content');
         $notes->saveUsersNotes($myNotes);
         $this->_redirect('admin/index');
@@ -62,14 +62,14 @@ class Admin_IndexController extends Zend_Controller_Action
         } else {
             $label = $url;
         }
-        $bookmark = new Bookmark();
+        $bookmark = new Model_Bookmark();
         $bookmark->addUsersBookmark($label, $url);
     }
 
     public function deleteBookmarkAction()
     {
         $id = $this->_request->getParam('id');
-        $bookmark = new Bookmark();
+        $bookmark = new Model_Bookmark();
         $bookmark->deleteBookmark($id);
         $this->_redirect('admin/index');
     }

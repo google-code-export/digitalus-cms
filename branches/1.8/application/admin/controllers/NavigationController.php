@@ -49,7 +49,7 @@ class Admin_NavigationController extends Zend_Controller_Action
      */
     public function openAction()
     {
-        $mdlMenu = new Menu();
+        $mdlMenu = new Model_Menu();
         $menuId = $this->_request->getParam('id', 0);
 
         if ($menuId > 0) {
@@ -77,7 +77,7 @@ class Admin_NavigationController extends Zend_Controller_Action
     public function editAction()
     {
         if ($this->_request->isPost()) {
-            $m = new Menu();
+            $m = new Model_Menu();
             $ids = DSF_Filter_Post::raw('id');
             $labels = DSF_Filter_Post::raw('label');
             $visibility = DSF_Filter_Post::raw('show_on_menu');
@@ -90,7 +90,7 @@ class Admin_NavigationController extends Zend_Controller_Action
 
     public function redirectorAction()
     {
-        $r = new Redirector();
+        $r = new Model_Redirector();
         if ($this->_request->isPost()) {
             $request = DSF_Filter_Post::raw('request');
             $response = DSF_Filter_Post::raw('response');
