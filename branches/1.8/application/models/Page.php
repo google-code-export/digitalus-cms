@@ -1,7 +1,7 @@
 <?php
 require_once 'application/models/ContentNode.php';
 
-class Page extends DSF_Db_Table
+class Model_Page extends DSF_Db_Table
 {
     protected $_name = 'pages';
     protected $_namespace = 'content';
