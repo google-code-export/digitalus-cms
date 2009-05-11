@@ -17,14 +17,14 @@ class Model_Page extends DSF_Db_Table
 
         $uriObj = new DSF_Uri($uri);
         $pointer = $this->fetchPointer($uriObj->toArray());
-        $node = new ContentNode();
+        $node = new Model_ContentNode();
         //fetch the content nodes
         return $node->fetchContentArray($pointer, null, null, $version);
     }
 
     public function getCurrentUsersPages($order = null, $limit = null)
     {
-        $user = new User();
+        $user = new Model_User();
         $currentUser = $user->getCurrentUser();
         if ($currentUser) {
             $select = $this->select();
@@ -64,11 +64,11 @@ class Model_Page extends DSF_Db_Table
                 $makeMenuLinks = 0;
             }
         } else {
-            $settings = new SiteSettings();
+            $settings = new Model_SiteSettings();
             $makeMenuLinks = $settings->get('add_menu_links');
         }
 
-        $u = new User();
+        $u = new Model_User();
         $user = $u->getCurrentUser();
         if ($user) {
             $userId = $user->id;
@@ -114,7 +114,7 @@ class Model_Page extends DSF_Db_Table
             $page = new stdClass();
             $page->page = $currentPage;
 
-            $node = new ContentNode();
+            $node = new Model_ContentNode();
 
             //fetch the content nodes
             $page->content = $node->fetchContentArray($pageId, null, null, $version);
@@ -158,11 +158,11 @@ class Model_Page extends DSF_Db_Table
             if (isset($pageArray['version']) && !empty($pageArray['version'])) {
                 $version = $pageArray['version'];
             } else {
-                $siteSettings = new SiteSettings();
+                $siteSettings = new Model_SiteSettings();
                 $version = $this->getDefaultVersion();
             }
             //update the content
-            $contentNode = new ContentNode();
+            $contentNode = new Model_ContentNode();
 
             if (count($pageArray) > 0) {
                 foreach ($pageArray as $node => $content) {
