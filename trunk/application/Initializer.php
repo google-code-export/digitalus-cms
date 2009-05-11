@@ -99,8 +99,8 @@ class Initializer extends Zend_Controller_Plugin_Abstract
         $this->initConstants();
         $this->initCache();
         $this->initDb();
-        $this->initLocale();
         $this->initSiteSettings();
+        $this->initLocale();
         $this->initView();
         $this->initControllers();
     }
@@ -137,8 +137,7 @@ class Initializer extends Zend_Controller_Plugin_Abstract
         date_default_timezone_set($timezone);
 
         //translations
-        $siteSettings = new SiteSettings();
-        $lang = $siteSettings->get('admin_language');
+        $lang = $this->_settings->get('admin_language');
         if (!empty($lang)) {
             $key = $lang;
         } else {
