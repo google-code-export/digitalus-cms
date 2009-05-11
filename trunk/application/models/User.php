@@ -135,7 +135,7 @@ class User extends DSF_Db_Table
         //overload the unique email validation if the current user has not changed their email address
         $curr = $this->find($this->data['id'])->current();
         if ($curr->email == DSF_Filter_Post::raw('email')) {
-            unset($this->_unique[array_search('email',$this->_unique)]);
+            unset($this->_unique[array_search('email', $this->_unique)]);
         }
 
         //update the password

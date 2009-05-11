@@ -6,7 +6,7 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
         // @todo: deal with selected menu items
         if ($level <= $depth - 1) {
             $links = array();
-            $menu = new Model_Menu();
+            $menu = new Menu();
 
             $children = $menu->getMenuItems($parentId);
 
