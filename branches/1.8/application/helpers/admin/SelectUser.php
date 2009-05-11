@@ -3,7 +3,7 @@ class DSF_View_Helper_Admin_SelectUser
 {
     public function SelectUser($name, $value = null, $attribs = null, $currentUser = 0)
     {
-        $u = new User();
+        $u = new Model_User();
         $users = $u->fetchAll(null, 'first_name');
 
         $userArray[] = $this->view->GetTranslation('Select User');

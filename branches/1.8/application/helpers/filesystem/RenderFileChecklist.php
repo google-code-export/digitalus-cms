@@ -4,7 +4,7 @@ class DSF_View_Helper_Filesystem_RenderFileChecklist
     public function RenderFileChecklist($values = array(), $parentId, $level = 0, $id = 'fileChecklist')
     {
             $links = array();
-            $page = new Page();
+            $page = new Model_Page();
 
             $children = $page->getChildren($parentId);
 

@@ -21,7 +21,7 @@ class DSF_View_Helper_Admin_RenderAdminMenu
 
     public function RenderAdminMenu($selectedItem = null, $id = 'adminMenu')
     {
-        $this->userModel = new User();
+        $this->userModel = new Model_User();
         $this->currentUser = $this->userModel->getCurrentUser();
 
         $this->setSelectedSection();

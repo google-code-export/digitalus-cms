@@ -23,7 +23,7 @@ class DSF_View_Helper_Interface_LoadDefaultDesign {
      */
     public function loadDefaultDesign()
     {
-        $mdlDesign = new Design();
+        $mdlDesign = new Model_Design();
         $design = $mdlDesign->getDefaultDesign();
         $mdlDesign->setDesign($design->id);
 

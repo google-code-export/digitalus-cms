@@ -7,7 +7,7 @@ class  DSF_View_Helper_Admin_CurrentAdminUser
      */
     public function CurrentAdminUser($id = 'currentUser')
     {
-        $u = new User();
+        $u = new Model_User();
         $user = $u->getCurrentUser();
 
         if ($user) {

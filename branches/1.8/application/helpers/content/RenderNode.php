@@ -22,7 +22,7 @@ class DSF_View_Helper_Content_RenderNode {
      *  
      */
     public function renderNode($uri, $node) {
-        $page = new Page();
+        $page = new Model_Page();
         $content = $page->getContent($uri);
         return $content[$node];
     }
