@@ -4,8 +4,8 @@ class Search_Adapter_Content extends Search_Adapter_Abstract
 {
     public function __construct()
     {
-        $mdlPage = new Page();
-        $mdlContentNode = new ContentNode();
+        $mdlPage = new Model_Page();
+        $mdlContentNode = new Model_ContentNode();
         $select = $mdlPage->select();
         $select->where("namespace = 'content'");
         $pages = $mdlPage->fetchAll($select);

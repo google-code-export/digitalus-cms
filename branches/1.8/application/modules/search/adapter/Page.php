@@ -31,7 +31,7 @@ class Search_Adapter_Page
 
     protected function _getCharset()
     {
-        $settings = new SiteSettings();
+        $settings = new Model_SiteSettings();
         $this->_charset = $settings->get('default_charset');
     }
 }
