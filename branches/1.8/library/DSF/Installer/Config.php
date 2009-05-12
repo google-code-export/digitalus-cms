@@ -1,7 +1,9 @@
 <?php
 
-class DSF_Installer_Config{
-    const PATH_TO_CONFIG = './application/data/config.xml';
+class DSF_Installer_Config
+{
+    const PATH_TO_CONFIG     = './application/data/config.xml';
+    const PATH_TO_CMS_CONFIG = './application/configs/application.ini';
 
     protected $_innerData;
 

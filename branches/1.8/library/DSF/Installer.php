@@ -3,7 +3,8 @@ require_once 'DSF/Installer/Database.php';
 require_once 'DSF/Installer/Config.php';
 require_once 'DSF/Installer/Environment.php';
 
-class DSF_Installer {
+class DSF_Installer
+{
     protected $_errors = array();
     protected $_warnings = array();
     protected $_messages = array();
@@ -16,9 +17,13 @@ class DSF_Installer {
     protected $_password;
 
     public function __construct() {
-        //we want the installer to manage its own warnings
+        // We want the installer to manage its own warnings
         error_reporting(E_ERROR);
         $this->_db = new DSF_Installer_Database();
+
+        // Load config
+        $this->loadConfig();
+
     }
 
     public function isInstalled()
@@ -33,7 +38,7 @@ class DSF_Installer {
 
     public function loadConfig()
     {
-        // load config
+        // Load config
         $this->_config = new DSF_Installer_Config();
 
         $configError = false;
@@ -257,5 +262,4 @@ class DSF_Installer {
         }
     }
 }
-
 ?>
