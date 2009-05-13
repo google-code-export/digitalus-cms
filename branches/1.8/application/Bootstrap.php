@@ -1,25 +1,29 @@
 <?php
 /**
- * Kurze Beschreibung der Datei
+ * Bootstrap of Digitalus CMS
  *
- * Lange Beschreibung der Datei (wenn vorhanden)...
+ * LICENSE
  *
- * LICENSE: Einige Lizenz Informationen
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  2009 Digitalus Media
- * @license    http://framework.zend.com/license   BSD License
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id:$
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
-*/
+ */
 
 /**
- * Kurze Beschreibung für die Klasse
+ * Bootstrap of Digitalus CMS
  *
- * Lange Beschreibung für die Klasse (wenn vorhanden)...
- *
- * @copyright  2009 Digitalus Media
- * @license    http://framework.zend.com/license   BSD License
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    Release: @package_version@
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
@@ -27,17 +31,24 @@
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
+    /**
+     * Initialize the autoloader
+     *
+     * @return Zend_Application_Module_Autoloader
+     */
     protected function _initAutoload()
     {
         // Ensure front controller instance is present
         $this->bootstrap('frontController');
-        // Get config resource
+        // Get frontController resource
         $this->_front = $this->getResource('frontController');
 
+        // Add autoloader empty namespace
         $autoLoader = new Zend_Application_Module_Autoloader(array(
             'namespace' => '',
             'basePath'  => APPLICATION_PATH)
         );
+        // Return it, so that it can be stored by the bootstrap
         return $autoLoader;
     }
 
@@ -60,9 +71,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Retrieve configuration from file
         $config = new Zend_Config_Xml(APPLICATION_PATH . '/data/config.xml', APPLICATION_ENV);
 
-        //add config to the registry so it is available sitewide
+        // Add config to the registry so it is available sitewide
         $registry = Zend_Registry::getInstance();
         $registry->set('config', $config);
+        // Return it, so that it can be stored by the bootstrap
         return $config;
     }
 
@@ -75,21 +87,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         // Cache options
         $frontendOptions = array(
-           'lifetime' => 7200, // cache lifetime of 2 hours
+           'lifetime' => 1200,                      // Cache lifetime of 20 minutes
            'automatic_serialization' => true,
         );
         $backendOptions = array(
-            'cache_dir' => BASE_PATH . '/cache/', // Directory where to put the cache files
+            'lifetime' => 3600,                     // Cache lifetime of 1 hour
+            'cache_dir' => BASE_PATH . '/cache/',   // Directory where to put the cache files
         );
-        // getting a Zend_Cache_Core object
+        // Get a Zend_Cache_Core object
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
         Zend_Registry::set('cache', $cache);
+        // Return it, so that it can be stored by the bootstrap
         return $cache;
     }
 
-
     /**
-     * Initialize data bases
+     * Initialize data base
      *
      * @return Zend_Db_Adapter_...???
      */
@@ -108,6 +121,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $db->query("SET NAMES 'utf8'");
         $db->query("SET CHARACTER SET 'utf8'");
         Zend_Db_Table::setDefaultAdapter($db);
+        // Return it, so that it can be stored by the bootstrap
         return $db;
     }
 
@@ -120,6 +134,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $siteSettings = new Model_SiteSettings();
         Zend_Registry::set('siteSettings', $siteSettings);
+        // Return it, so that it can be stored by the bootstrap
         return $siteSettings;
     }
 
@@ -146,7 +161,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Set default timezone
         $timezone = $config->defaultTimezone;
         date_default_timezone_set($timezone);
-
+        // Return it, so that it can be stored by the bootstrap
         return $locale;
     }
 
@@ -209,19 +224,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         if (is_array($cmsModules)) {
             $this->_front->setParam('cmsModules', $cmsModules);
         }
-    }
-
-    /**
-     * Initialize the request object
-     *
-     * @return Zend_Request_...???
-     */
-    protected function initRequest(array $options = array())
-    {
-        $this->bootstrap('FrontController');
-        $request = new Zend_Controller_Request_Http();
-        $this->_front->setRequest($request);
-        return $request;
     }
 
 /* ************************************************************************** */

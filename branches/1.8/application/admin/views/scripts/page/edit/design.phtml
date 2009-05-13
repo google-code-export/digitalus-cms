@@ -12,11 +12,10 @@
 <h3><?php echo $this->GetTranslation('Other designs');?></h3>
 <?php
 $designs = $this->design->listDesigns();
-if ($designs){
+if ($designs) {
     foreach ($designs as $design) {
         if ($design->id != $this->design->getValue('id')) {
 ?>
-
 <h4><?php echo $this->GetTranslation($design->name);?></h4>
 <p><?php echo $this->GetTranslation($design->notes);?></p>
 <ul>
