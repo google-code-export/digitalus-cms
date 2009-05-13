@@ -29,7 +29,7 @@ class DSF_View_Helper_Interface_GetIconByFileType {
         $this->icons = $config->filetypes;
         $icon = $this->getIcon($file);
         if ($asImage) {
-            $base = $this->view->baseUrl . '/' . $config->filepath->icons;
+            $base = $this->view->getBaseUrl() . '/' . $config->filepath->icons;
             return "<img src='{$base}/{$icon}' />";
         } else {
             return $icon;

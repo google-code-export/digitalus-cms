@@ -1,6 +1,6 @@
 <?php $this->placeholder('formHeadline')->set($this->GetTranslation('Update User'))?>
 
-<form id="general" action="<?php echo $this->baseUrl;?>/admin/user/edit" method="post">
+<form id="general" action="<?php echo $this->getBaseUrl();?>/admin/user/edit" method="post">
     <fieldset>
         <legend><?php echo $this->GetTranslation('Account Information');?></legend>
         <?php
@@ -16,7 +16,7 @@
     </fieldset>
 </form>
 
-<form id="permissions" action="<?php echo $this->baseUrl;?>/admin/user/edit" method="post">
+<form id="permissions" action="<?php echo $this->getBaseUrl();?>/admin/user/edit" method="post">
     <fieldset>
         <legend><?php echo $this->GetTranslation('User Permissions');?></legend>
         <?php
@@ -27,7 +27,7 @@
     </fieldset>
 </form>
 
-<form id="password" action="<?php echo $this->baseUrl;?>/admin/user/edit" method="post">
+<form id="password" action="<?php echo $this->getBaseUrl();?>/admin/user/edit" method="post">
     <fieldset>
         <legend><?php echo $this->GetTranslation('Login Credentials');?></legend>
         <?php

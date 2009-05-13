@@ -14,7 +14,7 @@ class  DSF_View_Helper_Admin_CurrentAdminUser
             $xhtml = "<ul id='{$id}'>
                     <li>" . $this->view->GetTranslation('Current User') . ": {$user->first_name}  {$user->last_name}</li>
                     <li>" . $this->view->GetTranslation('Role') . ": {$user->role}</li>
-                    <li><a href='{$this->view->baseUrl}/admin/auth/logout/'>" . $this->view->GetTranslation('Log Out') . "</a></li>
+                    <li><a href='{$this->view->getBaseUrl()}/admin/auth/logout/'>" . $this->view->GetTranslation('Log Out') . "</a></li>
                 </ul>";
             return $xhtml;
         } else {

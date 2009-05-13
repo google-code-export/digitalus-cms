@@ -1,4 +1,4 @@
-<form action="<?php echo $this->baseUrl;?>/admin/page/update-properties" method="post" class="formBox" id='propertiesForm'>
+<form action="<?php echo $this->getBaseUrl();?>/admin/page/update-properties" method="post" class="formBox" id='propertiesForm'>
 <?php echo $this->formHidden('page_id', $this->page->page->id);?>
     <p id='propLabels'>
         <span><?php echo $this->GetTranslation('Property');?></span>

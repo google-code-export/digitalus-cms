@@ -1,7 +1,7 @@
 <?php $this->placeholder('formHeadline')->set($this->GetTranslation('Update Menu'))?>
 
 <?php
-$iconSource = $this->baseUrl . '/images/icons/';
+$iconSource = $this->getBaseUrl() . '/images/icons/';
 ?>
 
 <div class="formBox">
@@ -24,7 +24,7 @@ $(document).ready(
 );
 </script>
 
-<form action='<?php echo $this->baseUrl; ?>/admin/navigation/edit' method="post">
+<form action='<?php echo $this->getBaseUrl(); ?>/admin/navigation/edit' method="post">
     <fieldset>
     <?php echo $this->formHidden('menuId', $this->menuId);?>
         <ul class="sortable">
@@ -46,10 +46,10 @@ $(document).ready(
 
             $row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . '_val'));
             $row .= " <img src='{$iconSource}{$eyeSource}' title='click to toggle visibility' class='visibility' id='visibility_{$item->id}' alt='{$alt}' />";
-            $row .= " <a href='" . $this->baseUrl . "admin/page/open/id/{$item->id}' class='page rightLink'></a>";
+            $row .= " <a href='" . $this->getBaseUrl() . "admin/page/open/id/{$item->id}' class='page rightLink'></a>";
             if ($m->hasMenu($item->id))
             {
-                $row .= $this->link(null, $this->baseUrl . '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
+                $row .= $this->link(null, $this->getBaseUrl() . '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
             }
             $rows[] = $row;
             echo '<li class="sortableItem"><a href="#" class="handle"></a>' . $row . '</li>';

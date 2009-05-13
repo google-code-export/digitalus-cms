@@ -10,7 +10,7 @@ $(document).ready(function() {
 </script>
 
 <?php $this->placeholder('formHeadline')->set($this->GetTranslation("Digitalus Console"))?>
-<form action="<?php echo $this->baseUrl; ?>/admin/site/console" method="post" id='consoleCommand'>
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/console" method="post" id='consoleCommand'>
 
 <?php
 echo $this->formHidden('consoleSession', $this->consoleSession);

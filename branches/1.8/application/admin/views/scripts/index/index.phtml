@@ -2,7 +2,7 @@
 $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
 ?>
 
-<form action="<?php echo $this->baseUrl;?>/admin/user/update-my-account" method="post">
+<form action="<?php echo $this->getBaseUrl();?>/admin/user/update-my-account" method="post">
     <fieldset class="formColumn">
         <legend><?php echo $this->GetTranslation('My Account');?></legend>
         <dl>
@@ -30,7 +30,7 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
     <ul>
     <?php foreach ($this->bookmarks as $bookmark) {?>
         <li><?php
-            echo $this->link(null, $this->baseUrl . '/admin/index/delete-bookmark/id/' . $bookmark->id, 'link_delete.png', 'clear');
+            echo $this->link(null, $this->getBaseUrl() . '/admin/index/delete-bookmark/id/' . $bookmark->id, 'link_delete.png', 'clear');
             $content = $bookmark->content;
             if (strpos($content, 'mod_') === 0) {
                 $content = str_replace('mod_', '', $content);
@@ -39,7 +39,7 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
             } else {
                 $content = DSF_Toolbox_String::stripUnderscores($content);
             }
-            echo $this->link($bookmark->node, $this->baseUrl . '/' . $content);
+            echo $this->link($bookmark->node, $this->getBaseUrl() . '/' . $content);
         ?></li>
     <?php } ?>
     </ul>
@@ -48,7 +48,7 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('My Dashboard'));
     } ?>
 </fieldset>
 
-<form action="<?php echo $this->baseUrl?>/admin/index/notes" method="post" id="notes">
+<form action="<?php echo $this->getBaseUrl()?>/admin/index/notes" method="post" id="notes">
     <fieldset class="clearBoth">
         <legend><?php echo $this->GetTranslation('My Writeboard');?></legend>
         <p><?php echo $this->GetTranslation('The writeboard is a personal spot for you to keep notes about your site.');?></p>

@@ -26,7 +26,7 @@ class DSF_View_Helper_Interface_Link {
     public function link($label, $link, $icon = null, $class = 'link')
     {
         $this->link = DSF_Toolbox_String::stripLeading('/', $link);
-        $this->baseUrl = DSF_Toolbox_String::stripLeading('/', $this->view->baseUrl);
+        $this->baseUrl = DSF_Toolbox_String::stripLeading('/', $this->view->getBaseUrl());
         
         // clean the link
         if($this->isRemoteLink($link) || $this->isAnchorLink($link)) {

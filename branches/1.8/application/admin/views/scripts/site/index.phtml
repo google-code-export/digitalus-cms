@@ -1,5 +1,5 @@
 <?php $this->placeholder('formHeadline')->set($this->GetTranslation('Update Site Settings'));?>
-<form action="<?php echo $this->baseUrl; ?>/admin/site/edit" method="post" id='site'>
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='site'>
     <fieldset>
         <legend><?php echo $this->GetTranslation('General settings');?></legend>
         <?php
@@ -11,7 +11,7 @@
     </fieldset>
 </form>
 
-<form action="<?php echo $this->baseUrl; ?>/admin/site/edit" method="post" id='content'>
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='content'>
     <fieldset>
         <legend><?php echo $this->GetTranslation('Managing Content');?></legend>
     <?php
@@ -36,7 +36,7 @@
     </fieldset>
 </form>
 
-<form action="<?php echo $this->baseUrl; ?>/admin/site/edit" method="post" id='meta'>
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='meta'>
     <fieldset>
         <legend><?php echo $this->GetTranslation('Meta Data');?></legend>
     <?php
@@ -47,7 +47,7 @@
     </fieldset>
 </form>
 
-<form action="<?php echo $this->baseUrl; ?>/admin/site/edit" method="post" id='international'>
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='international'>
     <fieldset>
         <legend><?php echo $this->GetTranslation('Internationalization');?></legend>
     <?php
@@ -66,7 +66,7 @@
     </fieldset>
 </form>
 
-<form action="<?php echo $this->baseUrl; ?>/admin/site/edit" method="post" id='mail'>
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='mail'>
     <fieldset>
         <legend><?php echo $this->GetTranslation('Mail Settings');?></legend>
     <?php
@@ -84,7 +84,7 @@
     </fieldset>
 </form>
 
-<form action="<?php echo $this->baseUrl; ?>/admin/site/edit" method="post" id='google'>
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='google'>
     <fieldset>
         <legend><?php echo $this->GetTranslation('Google Integration');?></legend>
     <?php

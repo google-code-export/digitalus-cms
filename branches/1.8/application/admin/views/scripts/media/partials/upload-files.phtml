@@ -1,4 +1,4 @@
-<form action='<?php echo $this->baseUrl;?>/admin/media/<?php echo $this->action;?>' method='post' enctype='multipart/form-data' class='uploadForm'>
+<form action='<?php echo $this->getBaseUrl();?>/admin/media/<?php echo $this->action;?>' method='post' enctype='multipart/form-data' class='uploadForm'>
     <dl>
     <?php
     echo '<dt>' . $this->formHidden('filepath', $this->filepath) . '</dt>';

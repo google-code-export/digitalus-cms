@@ -7,12 +7,12 @@
 ?>
 <div class='folderWrapper'>
     <?php
-        $deleteLink = $this->baseUrl . '/admin/media/delete-folder/folder/' . $this->mediapath . '_' . $folder;
+        $deleteLink = $this->getBaseUrl() . '/admin/media/delete-folder/folder/' . $this->mediapath . '_' . $folder;
         echo $this->link('Delete', $deleteLink, 'delete.png', 'rightLink delete');
     ?>
     <h4>
         <?php
-            $path = $this->baseUrl . '/admin/media/open-folder/folder/' . $this->mediapath . '_' . $folder;
+            $path = $this->getBaseUrl() . '/admin/media/open-folder/folder/' . $this->mediapath . '_' . $folder;
             echo $this->link($folder, $path, 'folder.png');
         ?>
     </h4>
@@ -33,7 +33,7 @@ if (is_array($this->files) && count($this->files) > 0) { ?>
 <div class='fileWrapper'>
     <?php
         $fileLink = $this->mediapath . '_' . $file;
-        $deleteLink = $this->baseUrl . '/admin/media/delete-file/file/' . $fileLink . '/';
+        $deleteLink = $this->getBaseUrl() . '/admin/media/delete-file/file/' . $fileLink . '/';
         echo $this->link('Delete', $deleteLink, 'delete.png', 'rightLink delete');
     ?>
     <h4>

@@ -25,7 +25,7 @@ $footer = $grid->addElement('footer', 16);
 $footer->setAttribute('clear', true);
 
 $this->placeholder('header_logo_content')->set(
-    "<a href='http://digitaluscms.com'><img src='" . $this->baseUrl . "/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
+    "<a href='http://digitaluscms.com'><img src='" . $this->getBaseUrl() . "/images/logo.png' alt='Powered by Digitalus CMS' /></a>"
 );
 
 $this->placeholder('header_top_content')->set(

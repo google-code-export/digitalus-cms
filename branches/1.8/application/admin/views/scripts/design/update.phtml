@@ -1,10 +1,10 @@
 <?php $this->placeholder('formHeadline')->set('Update Design');
-$this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/jquery.markitup.js');
-$this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/sets/default/set.js');
-$this->headScript()->appendFile($this->baseUrl . '/scripts/markitup/sets/css/set.js');
+$this->headScript()->appendFile($this->getBaseUrl() . '/scripts/markitup/jquery.markitup.js');
+$this->headScript()->appendFile($this->getBaseUrl() . '/scripts/markitup/sets/default/set.js');
+$this->headScript()->appendFile($this->getBaseUrl() . '/scripts/markitup/sets/css/set.js');
 
-$this->headLink()->appendStylesheet($this->baseUrl . '/scripts/markitup/skins/markitup/style.css');
-$this->headLink()->appendStylesheet($this->baseUrl . '/scripts/markitup/sets/css/style.css');
+$this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/skins/markitup/style.css');
+$this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/sets/css/style.css');
 //jquery block
 $this->placeholder('jquery')->captureStart();
 ?>
@@ -12,7 +12,7 @@ $this->placeholder('jquery')->captureStart();
 $(".css").markItUp(mySettings);
 <?php $this->placeholder('jquery')->captureEnd();?>
 
-<form action="<?php echo $this->baseUrl;?>/admin/design/update" method="post">
+<form action="<?php echo $this->getBaseUrl();?>/admin/design/update" method="post">
 <fieldset>
     <legend><?php echo $this->GetTranslation('Design details');?></legend>
     <dl>

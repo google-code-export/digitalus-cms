@@ -26,7 +26,7 @@ class DSF_View_Helper_Filesystem_RenderMediaBrowser
                 if (substr($file,0,1) != '.') {
                     $filePath = $path . '/' . $file;
                     $links[] = '<li class="menuItem">' .
-                    $this->view->link($file , $this->view->baseUrl . $fileLink . '/' . $filePath, $this->view->getIconByFiletype($file, false)) . '</li>';
+                    $this->view->link($file , $this->view->getBaseUrl() . $fileLink . '/' . $filePath, $this->view->getIconByFiletype($file, false)) . '</li>';
                 }
             }
         }

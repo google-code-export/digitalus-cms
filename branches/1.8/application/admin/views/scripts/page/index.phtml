@@ -3,7 +3,7 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('Create a Page'));
 ?>
 <fieldset>
     <legend><?php echo $this->GetTranslation('Create Page');?></legend>
-    <form action="<?php echo $this->baseUrl;?>/admin/page/new" method="post">
+    <form action="<?php echo $this->getBaseUrl();?>/admin/page/new" method="post">
     <p><?php echo $this->GetTranslation('To create a new page...');?></p>
     <h3><?php echo $this->GetTranslation('Step 1: Select the parent section');?></h3>
     <dl>
@@ -23,7 +23,7 @@ $this->placeholder('formHeadline')->set($this->GetTranslation('Create a Page'));
 $(document).ready(function() {
     $("#step1button").click(function() {
         var parentId = $("#parent_id").val();
-        $("#step2").load('<?php echo $this->baseUrl;?>/admin/page/select-content-template/parent_id/' + parentId);
+        $("#step2").load('<?php echo $this->getBaseUrl();?>/admin/page/select-content-template/parent_id/' + parentId);
         $("#step3").html('');
         return false;
     });

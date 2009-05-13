@@ -4,12 +4,12 @@
         $pathParts[] = $this->pathToMedia;
         if (is_array($this->folderPathParts)) {
             foreach ($this->folderPathParts as $path => $label) {
-                $pathParts[] = "<a href='{$this->baseUrl}/admin/media/open-folder/folder/{$path}'>{$label}</a>";
+                $pathParts[] = "<a href='{$this->getBaseUrl()}/admin/media/open-folder/folder/{$path}'>{$label}</a>";
             }
         }
     ?>
     <legend><?php echo $this->GetTranslation('Current Folder');?></legend>
-    <p><?php echo $this->baseUrl . '/' . implode('/', $pathParts);?></p>
+    <p><?php echo $this->getBaseUrl() . '/' . implode('/', $pathParts);?></p>
 </fieldset>
 
 <fieldset id='browse'>
