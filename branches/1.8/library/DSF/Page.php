@@ -3,18 +3,18 @@ class DSF_Page
 {
     // the page object stores all of its data in the params array
     protected $_params = array();
-    
+
     // these parameters are locked
     protected $_protectedParams = array();
-    
+
     public $view;
 
     public function __construct($uri, $view = null)
     {
-    	$this->setParam('uri', $uri);
+        $this->setParam('uri', $uri);
         $this->setView($view);
     }
-    
+
     public function setView(Zend_View $view = null)
     {
        if($view == null) {
@@ -27,7 +27,7 @@ class DSF_Page
             $this->view = $view;
         }
     }
-    
+
     public function __wakeup()
     {
     }
@@ -64,14 +64,14 @@ class DSF_Page
             return $this->_params[$key];
         }
     }
-    
+
     public function has($key)
     {
         if(isset($this->_params[$key])) {
             return true;
         }
     }
-    
+
     protected function _isProtected($key)
     {
         if(in_array($key, $this->_protectedParams)) {
@@ -248,4 +248,3 @@ class DSF_Page
         return $this->view;
     }
 }
-

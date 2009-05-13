@@ -19,7 +19,6 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
         $view->placeholder('content')->set($view->render($templateParts[0] . '/' . $templateParts[1] . '/template.phtml'));
     }
 
-
     public function loadDesign()
     {
         $data = $this->_page->getData();
@@ -83,7 +82,6 @@ class DSF_Builder_Action_Design extends DSF_Builder_Abstract
     public function setLayout()
     {
         $view = $this->_page->getView();
-#        Zend_Debug::dump($view->test);
         $config = Zend_Registry::get('config');
         $pathToLayouts = $config->design->pathToPublicLayouts;
         if (is_dir($pathToLayouts)) {

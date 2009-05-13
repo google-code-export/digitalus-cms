@@ -1,25 +1,29 @@
 <?php
 /**
- * Kurze Beschreibung der Datei
+ * Initializer of Digitalus CMS
  *
- * Lange Beschreibung der Datei (wenn vorhanden)...
+ * LICENSE
  *
- * LICENSE: Einige Lizenz Informationen
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  2009 Digitalus Media
- * @license    http://framework.zend.com/license   BSD License
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id:$
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
-*/
+ */
 
 /**
- * Kurze Beschreibung für die Klasse
+ * Initializer of Digitalus CMS
  *
- * Lange Beschreibung für die Klasse (wenn vorhanden)...
- *
- * @copyright  2009 Digitalus Media
- * @license    http://framework.zend.com/license   BSD License
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    Release: @package_version@
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
@@ -42,29 +46,27 @@ class DSF_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
      *
      * Initialize environment, root path, and configuration.
      *
-     * @param  string       $env
-     * @param  string|null  $root
+     * @param  string      $env
+     * @param  string|null $root
      * @return void
      */
     public function __construct()
     {
-        //get front controller instance
+        // Get front controller instance
         $this->_front = Zend_Controller_Front::getInstance();
 
-        //get request object
+        // Get request object
         $this->_request = $this->_front->getRequest();
     }
 
     /**
      * Pre dispatch
      *
-     * @param   Zend_Controller_Request_Abstract  $request
-     * @return  void
+     * @param  Zend_Controller_Request_Abstract $request
+     * @return void
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-#Zend_Debug::dump($this);
-#Zend_Debug::dump($request);
         $this->_initCmsRouter();
         $this->_initTranslation();
         $this->_initInterface();
@@ -107,7 +109,7 @@ class DSF_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
         }
 
         $languageFiles = $config->language->translations->toArray();
-        if (!$this->_request->isXmlHttpRequest()) {
+#        if (!$this->_request->isXmlHttpRequest()) {
             // Get cache object
             $cache = Zend_Registry::get('cache');
             Zend_Translate::setCache($cache);
@@ -115,10 +117,10 @@ class DSF_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
             $module     = $this->_request->getModuleName();
             $controller = $this->_request->getControllerName();
             // Add translation file depending on current module ('public' or 'admin')
-            if ('public' != $module && 'public' != $controller) {
-                $end = 'back';
-            } else {
+            if ('public' == $module && 'public' == $controller) {
                 $end = 'front';
+            } else {
+                $end = 'back';
             }
             $adapter = new Zend_Translate(
                 'csv',
@@ -133,7 +135,7 @@ class DSF_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
                     $this->_addTranslation(APPLICATION_PATH . '/modules/' . $module . '/data/language/' . $languageFiles[$key] . '.csv', $key);
                 }
             }
-        }
+ #       }
         return $adapter;
     }
 
