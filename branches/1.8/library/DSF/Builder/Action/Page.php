@@ -54,7 +54,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 
     public function setLanguage()
     {
-        $lang = $this->_page->getParam('lang');
+        $lang = $this->_page->getParam('language');
         if (!empty($lang)) {
             DSF_Language::setLanguage($lang);
             $this->_page->setLanguage($lang);
@@ -91,7 +91,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
         //load meta data
         $mdlMeta = new Model_MetaData();
         $metaData = $mdlMeta->get($this->_page->getId());
-        $this->_page->setMeta($metaData);
+        $this->_page->setMetaData($metaData);
     }
 
     public function loadProperties()
@@ -136,7 +136,7 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
 
         $view->headTitle()->setSeparator($separator);
     }
-    
+
     public function setMetaData()
     {
         $view = $this->_page->getView();
@@ -147,32 +147,32 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
         $siteName = $mdlSettings->get('name');
         $metaDescription[] = $siteName;
         $metaKeywords[] = $siteName;
-        
-        
+
+
         //add the base settings
         $metaDescription[] = $mdlSettings->get('meta_description');
         $metaKeywords[] = $mdlSettings->get('meta_keywords');
-        
+
         //next add all of the page titles
         $mdlPage = new Model_Page();
         $title = $mdlPage->getTitle($pageId);
         if(is_array($title)) {
             $metaDescription[] = implode(',', $title);
-            $metaKeywords[] = implode(',', $title); 
+            $metaKeywords[] = implode(',', $title);
         }
-        
+
         //now add the page specific settings
         $mdlMeta = new Model_MetaData();
         $metaData = $mdlMeta->asArray($pageId);
-        
+
         if(!empty($metaData['meta_description'])) {
             $metaDescription[] = (string)$metaData['meta_description'];
         }
-        
+
         if(!empty($metaData['keywords'])) {
             $metaKeywords[] =  (string)$metaData['keywords'];
         }
-        
+
         //now set the view placeholder
         $view->headMeta()->appendName('description', implode(',', $metaDescription));
         $view->headMeta()->appendName('keywords', implode(',', $metaKeywords));

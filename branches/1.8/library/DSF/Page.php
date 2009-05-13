@@ -1,10 +1,25 @@
 <?php
-class DSF_Page
+class DSF_Page extends DSF_Model_Abstract
 {
-    // the page object stores all of its data in the params array
-    protected $_params = array();
+    // The page object stores all of its data in the params array
+    protected $_params = array(
+        'id'                 => null,
+        'uri'                => null,
+        'baseUrl'            => null,
+        'data'               => null,
+        'parents'            => null,
+        'metaData'           => null,
+        'properties'         => null,
+        'language'           => null,
+        'availableLanguages' => null,
+        'content'            => null,
+        'defaultContent'     => null,
+        'contentTemplate'    => null,
+        'design'             => null,
+        'layout'             => null,
+    );
 
-    // these parameters are locked
+    // These parameters are locked
     protected $_protectedParams = array();
 
     public $view;
@@ -15,26 +30,13 @@ class DSF_Page
         $this->setView($view);
     }
 
-    public function setView(Zend_View $view = null)
-    {
-       if($view == null) {
-            $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-            if (null === $viewRenderer->view) {
-                $viewRenderer->initView();
-            }
-            $this->view = $viewRenderer->view;
-        }else{
-            $this->view = $view;
-        }
-    }
-
     public function __wakeup()
     {
     }
 
     public function setParams($params)
     {
-        if(is_array($params)) {
+        if (is_array($params)) {
             foreach ($params as $key => $value) {
                 $this->setParam($key, $value);
             }
@@ -43,11 +45,11 @@ class DSF_Page
 
     public function setParam($key, $value, $protected = false)
     {
-        if($this->_isProtected($key)) {
+        if ($this->_isProtected($key)) {
             throw new Zend_Exception('Unable to set protected property (' . $key . ') in DSF_Page');
-        }else{
+        } else {
             $this->_params[$key] = $value;
-            if($protected == true) {
+            if ($protected == true) {
                 $this->_protectedParams[] = $key;
             }
         }
@@ -63,24 +65,13 @@ class DSF_Page
         if (isset($this->_params[$key])) {
             return $this->_params[$key];
         }
+#        $method = 'get' . ucfirst($key) . '()';
+#        if (method_exists($this, $method)) {
+#            return $this->$method();
+#        }
     }
 
-    public function has($key)
-    {
-        if(isset($this->_params[$key])) {
-            return true;
-        }
-    }
-
-    protected function _isProtected($key)
-    {
-        if(in_array($key, $this->_protectedParams)) {
-            return true;
-        }else{
-            return false;
-        }
-    }
-
+/*
     public function setId($id)
     {
         $this->setParam('id', $id);
@@ -110,7 +101,7 @@ class DSF_Page
     {
         return $this->getParam('baseUrl');
     }
-
+*/
     public function setData($data)
     {
         $this->setParam('data', serialize($data));
@@ -120,7 +111,7 @@ class DSF_Page
     {
         return unserialize($this->getParam('data'));
     }
-
+/*
     public function getParents()
     {
         return $this->getParam('parents');
@@ -155,32 +146,32 @@ class DSF_Page
     {
         $this->setParam('language', $language);
     }
-
+*/
     public function getLanguage()
     {
-        if ($this->has('language')) {
+        if ($this->_hasProperty('language')) {
             return $this->getParam('language');
         } else {
             return null;
         }
 
     }
-
+/*
     public function setAvailableLanguages($languages)
     {
         $this->setParam('availableLanguages', $languages);
     }
-
+*/
     public function getAvailableLanguages()
     {
-        if ($this->has('availableLanguages')) {
+        if ($this->_hasProperty('availableLanguages')) {
             return $this->getParam('availableLanguages');
         } else {
             return null;
         }
 
     }
-
+/*
     public function setContent($content)
     {
         $this->setParam('content', $content);
@@ -190,7 +181,7 @@ class DSF_Page
     {
         $this->setParam('defaultContent', $content);
     }
-
+*/
     public function getContent($key = null, $useDefault = true)
     {
         $content = $this->getParam('content');
@@ -210,7 +201,7 @@ class DSF_Page
         }
 
     }
-
+/*
     public function setContentTemplate($contentTemplate)
     {
         $this->setParam('contentTemplate', $contentTemplate);
@@ -225,14 +216,14 @@ class DSF_Page
     {
         $this->setParam('design', $design);
     }
-
+*/
     public function getDesign()
     {
         $design = new Model_Design();
         $design->setDesign($this->getParam('design'));
         return $design;
     }
-
+/*
     public function setLayout($layout)
     {
         $this->setParam('layout', $layout);
@@ -242,9 +233,23 @@ class DSF_Page
     {
         return $this->getParam('layout');
     }
-
+*/
     public function getView()
     {
         return $this->view;
     }
+
+    public function setView(Zend_View $view = null)
+    {
+       if ($view == null) {
+            $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+            if (null === $viewRenderer->view) {
+                $viewRenderer->initView();
+            }
+            $this->view = $viewRenderer->view;
+        } else {
+            $this->view = $view;
+        }
+    }
+
 }
