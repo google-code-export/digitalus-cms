@@ -23,9 +23,8 @@ class DSF_View_Helper_Admin_SelectLayout {
      */
     public function selectLayout($name, $value = null, $attr = null, $defaut = null) {
         $config = Zend_Registry::get('config');
-        $pathToLayouts = $config->design->pathToLayouts;
-        $layouts = DSF_Filesystem_File::getFilesByType($pathToLayouts, 'phtml');
-
+        $pathToPublicLayouts = $config->design->pathToPublicLayouts;
+        $layouts = DSF_Filesystem_File::getFilesByType($pathToPublicLayouts, 'phtml');
         if ($defaut == NULL) {
             $defaut = $this->view->GetTranslation('Select One');
         }
