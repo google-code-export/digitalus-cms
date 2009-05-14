@@ -1,6 +1,6 @@
 <?php
 /**
- * SelectDoctype helper
+ * SelectTimezone helper
  *
  * LICENSE
  *
@@ -16,7 +16,7 @@
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id:$
  * @link       http://www.digitaluscms.com
- * @since      Release 1.5.0
+ * @since      Release 1.8.0
  */
 
 /**
@@ -25,16 +25,16 @@
 require_once 'Zend/View/Interface.php';
 
 /**
- * SelectDoctype helper
+ * SelectTimezone helper
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    Release: @package_version@
  * @link       http://www.digitaluscms.com
- * @since      Release 1.5.0
+ * @since      Release 1.8.0
  * @uses       viewHelper DSF_View_Helper_Controls
  */
-class DSF_View_Helper_Controls_SelectDoctype
+class DSF_View_Helper_Controls_SelectTimezone
 {
     /**
      * @var Zend_View_Interface
@@ -44,18 +44,10 @@ class DSF_View_Helper_Controls_SelectDoctype
     /**
      *
      */
-    public function selectDoctype($name, $value, $attr = null)
+
+    public function selectTimezone($name, $value, $attr = null)
     {
-        $data = array(
-            'XHTML1_TRANSITIONAL' => 'XHTML1_TRANSITIONAL',
-            'XHTML11'             => 'XHTML11',
-            'XHTML1_STRICT'       => 'XHTML1_STRICT',
-            'XHTML1_FRAMESET'     => 'XHTML1_FRAMESET',
-            'XHTML_BASIC1'        => 'XHTML_BASIC1',
-            'HTML4_STRICT'        => 'HTML4_STRICT',
-            'HTML4_LOOSE'         => 'HTML4_LOOSE',
-            'HTML4_FRAMESET'      => 'HTML4_FRAMESET'
-        );
+        $data = DSF_Validate_Timezone::getValidTimezones(null, true);
 
         return $this->view->formSelect($name, $value, $attr, $data);
     }

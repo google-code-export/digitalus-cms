@@ -27,7 +27,6 @@
  * @version    Release: @package_version@
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
- * @deprecated
  */
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
@@ -154,12 +153,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $cache = $this->getResource('cache');
         Zend_Locale::setCache($cache);
 
+        $this->bootstrap('siteSettings');
+        // Get siteSettings object
+        $siteSettings = $this->getResource('siteSettings');
+
         // Set default locale
         setlocale(LC_ALL, $config->language->defaultLocale);
         $locale = new Zend_Locale($config->language->defaultLocale);
 
         // Set default timezone
-        $timezone = $config->defaultTimezone;
+        $timezone = $siteSettings->get('default_timezone');
         date_default_timezone_set($timezone);
         // Return it, so that it can be stored by the bootstrap
         return $locale;

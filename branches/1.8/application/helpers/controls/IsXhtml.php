@@ -11,7 +11,8 @@ require_once 'Zend/View/Interface.php';
  *
  * @uses viewHelper DSF_View_Helper_Controls
  */
-class DSF_View_Helper_Controls_IsXhtml {
+class DSF_View_Helper_Controls_IsXhtml
+{
 
     /**
      * @var Zend_View_Interface
