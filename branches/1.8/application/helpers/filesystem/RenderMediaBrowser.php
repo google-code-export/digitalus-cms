@@ -3,7 +3,7 @@ class DSF_View_Helper_Filesystem_RenderMediaBrowser
 {
 
 
-    public function RenderMediaBrowser($path, $folderLink, $fileLink)
+    public function renderMediaBrowser($path, $folderLink, $fileLink)
     {
 
         $folders = DSF_Filesystem_Dir::getDirectories('./' . $path);
@@ -26,7 +26,7 @@ class DSF_View_Helper_Filesystem_RenderMediaBrowser
                 if (substr($file,0,1) != '.') {
                     $filePath = $path . '/' . $file;
                     $links[] = '<li class="menuItem">' .
-                    $this->view->link($file , $this->view->getBaseUrl() . $fileLink . '/' . $filePath, $this->view->getIconByFiletype($file, false)) . '</li>';
+                    $this->view->link($file , $fileLink . '/' . $filePath, $this->view->getIconByFiletype($file, false)) . '</li>';
                 }
             }
         }

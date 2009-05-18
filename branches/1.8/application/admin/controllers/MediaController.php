@@ -18,8 +18,8 @@ class Admin_MediaController extends Zend_Controller_Action {
     public function init()
     {
         $config = Zend_Registry::get('config');
-        $this->_pathToMedia = $config->filepath->media;
-        $this->_fullPathToMedia = $this->getFrontController()->getBaseUrl() . $this->_pathToMedia;
+        $this->_pathToMedia = $this->getFrontController()->getBaseUrl() . $config->filepath->media;
+        $this->_fullPathToMedia = DSF_Toolbox_String::stripLeading('/', $this->getFrontController()->getBaseUrl() . '/' . $this->_pathToMedia);
         $this->view->pathToMedia = $this->_pathToMedia;
         $this->view->breadcrumbs = array(
            $this->view->getTranslation('Media') => $this->getFrontController()->getBaseUrl() . '/admin/media'
