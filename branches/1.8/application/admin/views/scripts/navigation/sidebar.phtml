@@ -12,7 +12,7 @@
         foreach ($menus as $menu) {
             $label = $mdlMenu->getLabel($menu);
 ?>
-    <li><?php echo $this->link($label, $this->getBaseUrl() . '/admin/navigation/open/id/' . $menu->id, 'text_list_bullets.png');?></li>
+    <li><?php echo $this->link($label, '/admin/navigation/open/id/' . $menu->id, 'text_list_bullets.png');?></li>
 <?php
         }
     }

@@ -19,7 +19,7 @@ if (is_array($modules)) {
             $label = $module;
         }
 
-        echo '<li>' . $this->link($label, $this->getBaseUrl() . '/' . $key, $icon) . '</li>';
+        echo '<li>' . $this->link($label, '/' . $key, $icon) . '</li>';
     }
     echo '</ul>';
 }

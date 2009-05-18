@@ -1,6 +1,6 @@
 <?php
 /**
- * Initializer of Digitalus CMS
+ * Retrieve the base url
  *
  * LICENSE
  *

@@ -49,7 +49,7 @@ $(document).ready(
             $row .= " <a href='" . $this->getBaseUrl() . "admin/page/open/id/{$item->id}' class='page rightLink'></a>";
             if ($m->hasMenu($item->id))
             {
-                $row .= $this->link(null, $this->getBaseUrl() . '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
+                $row .= $this->link(null, '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
             }
             $rows[] = $row;
             echo '<li class="sortableItem"><a href="#" class="handle"></a>' . $row . '</li>';

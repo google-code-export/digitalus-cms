@@ -1,7 +1,7 @@
 <h3><?php echo $this->GetTranslation('Current design');?></h3>
 <?php if ($this->design->getValue('id') > 0) {?>
 <p class="rightLinks">
-<?php echo $this->link('Open design', $this->getBaseUrl() . '/admin/design/update/id/' . $this->design->getValue('id'), 'layout_edit.png');?>
+<?php echo $this->link('Open design', '/admin/design/update/id/' . $this->design->getValue('id'), 'layout_edit.png');?>
 </p>
 <h4><?php echo $this->GetTranslation($this->design->getValue('name'));?></h4>
 <p><?php echo $this->GetTranslation($this->design->getValue('notes'));?></p>
@@ -19,8 +19,8 @@ if ($designs) {
 <h4><?php echo $this->GetTranslation($design->name);?></h4>
 <p><?php echo $this->GetTranslation($design->notes);?></p>
 <ul>
-    <li><?php echo $this->link('Open design', $this->getBaseUrl() . '/admin/design/update/id/' . $design->id, 'layout_edit.png');?></li>
-    <li><?php echo $this->link('Make current', $this->getBaseUrl() . '/admin/page/update-design/id/' . $this->page->page->id . '/design/' . $design->id, 'layout_link.png');?></li>
+    <li><?php echo $this->link('Open design', '/admin/design/update/id/' . $design->id, 'layout_edit.png');?></li>
+    <li><?php echo $this->link('Make current', '/admin/page/update-design/id/' . $this->page->page->id . '/design/' . $design->id, 'layout_link.png');?></li>
 </ul><?php
         }
     }
