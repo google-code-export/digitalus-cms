@@ -6,12 +6,12 @@ class Mod_Search_IndexController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Modules') => $this->getFrontController()->getBaseUrl() . '/admin/module',
-           $this->view->GetTranslation('Search') => $this->getFrontController()->getBaseUrl() . '/mod_search'
+           $this->view->getTranslation('Modules') => $this->getFrontController()->getBaseUrl() . '/admin/module',
+           $this->view->getTranslation('Search') => $this->getFrontController()->getBaseUrl() . '/mod_search'
         );
-        $this->view->toolbarLinks[$this->view->GetTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks[$this->view->getTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/mod_search'
-            . '/label/' . $this->view->GetTranslation('Module') . ':' . $this->view->GetTranslation('Search');
+            . '/label/' . $this->view->getTranslation('Module') . ':' . $this->view->getTranslation('Search');
     }
 
     public function indexAction()
@@ -41,7 +41,7 @@ class Mod_Search_IndexController extends Zend_Controller_Action
         }
         $index->optimize();
         $this->_forward('index');
-        echo '<p><strong>' . $this->view->GetTranslation('The search index was rebuilt successfully!') . '</strong></p><br />';
+        echo '<p><strong>' . $this->view->getTranslation('The search index was rebuilt successfully!') . '</strong></p><br />';
     }
 
 }

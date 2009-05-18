@@ -1,4 +1,4 @@
-<?php $this->placeholder('formHeadline')->set($this->GetTranslation('Open Folder'))?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Open Folder'))?>
 <fieldset>
     <?php
         $pathParts[] = $this->pathToMedia;
@@ -8,12 +8,12 @@
             }
         }
     ?>
-    <legend><?php echo $this->GetTranslation('Current Folder');?></legend>
+    <legend><?php echo $this->getTranslation('Current Folder');?></legend>
     <p><?php echo $this->getBaseUrl() . '/' . implode('/', $pathParts);?></p>
 </fieldset>
 
 <fieldset id='browse'>
-    <legend><?php echo $this->GetTranslation('Current folder contents');?></legend>
+    <legend><?php echo $this->getTranslation('Current folder contents');?></legend>
     <?php
         $data = array(
             'filepath'  => $this->filesystemPath,
@@ -26,7 +26,7 @@
 </fieldset>
 
 <fieldset id='upload'>
-    <legend><?php echo $this->GetTranslation('Upload Files');?></legend>
+    <legend><?php echo $this->getTranslation('Upload Files');?></legend>
     <?php
         $data = array(
             'action'    => 'upload',
@@ -38,12 +38,12 @@
 </fieldset>
 
 <fieldset id='subfolder'>
-    <legend><?php echo $this->GetTranslation('Create Subfolder');?></legend>
+    <legend><?php echo $this->getTranslation('Create Subfolder');?></legend>
     <?php echo $this->render('media/partials/create-subfolder.phtml'); ?>
 </fieldset>
 
 <fieldset id='rename'>
-    <legend><?php echo $this->GetTranslation('Rename folder');?></legend>
+    <legend><?php echo $this->getTranslation('Rename folder');?></legend>
     <?php
         $data = array(
             'filepath'  => $this->filesystemPath,

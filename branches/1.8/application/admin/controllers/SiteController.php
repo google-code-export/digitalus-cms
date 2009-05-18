@@ -25,7 +25,7 @@ class Admin_SiteController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Site Settings') => $this->getFrontController()->getBaseUrl() . '/admin/site'
+           $this->view->getTranslation('Site Settings') => $this->getFrontController()->getBaseUrl() . '/admin/site'
         );
     }
 
@@ -39,7 +39,7 @@ class Admin_SiteController extends Zend_Controller_Action
         $this->view->settings = $settings->toObject();
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_site'
-            . '/label/' . $this->view->GetTranslation('Site');
+            . '/label/' . $this->view->getTranslation('Site');
     }
 
     /**
@@ -95,7 +95,7 @@ class Admin_SiteController extends Zend_Controller_Action
             $this->view->results = $results;
         }
 
-        $breadcrumbLabel = $this->view->GetTranslation('Site Console');
+        $breadcrumbLabel = $this->view->getTranslation('Site Console');
         $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/site/console';
         $this->view->toolbarLinks = array();
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_site_console';

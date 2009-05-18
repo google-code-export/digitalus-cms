@@ -1,5 +1,5 @@
 <?php
-$this->placeholder('formHeadline')->set($this->GetTranslation('Update Page'));
+$this->placeholder('formHeadline')->set($this->getTranslation('Update Page'));
 
 $this->headScript()->appendFile($this->getBaseUrl() . '/scripts/markitup/jquery.markitup.js');
 $this->headScript()->appendFile($this->getBaseUrl() . '/scripts/markitup/sets/default/set.js');
@@ -18,41 +18,41 @@ $(".html").markItUp(myHtmlSettings);
 
 <div id="content">
 <fieldset>
-    <legend><?php echo $this->GetTranslation('Edit Content');?></legend>
+    <legend><?php echo $this->getTranslation('Edit Content');?></legend>
     <?php echo $this->render('page/edit/content.phtml');?>
 </fieldset>
 
 </div>
 
 <fieldset id="meta">
-    <legend><?php echo $this->GetTranslation('Edit Meta Data');?></legend>
+    <legend><?php echo $this->getTranslation('Edit Meta Data');?></legend>
     <?php echo $this->render('page/edit/meta.phtml');?>
 </fieldset>
 
 <fieldset id="properties">
-    <legend><?php echo $this->GetTranslation('Edit Page Properties');?></legend>
+    <legend><?php echo $this->getTranslation('Edit Page Properties');?></legend>
     <?php echo $this->render('page/edit/properties.phtml');?>
 </fieldset>
 
 <!--
 this is not going to make it in the beta version
 <fieldset id="relatedContent">
-    <legend><?php echo $this->GetTranslation('Related Content');?></legend>
+    <legend><?php echo $this->getTranslation('Related Content');?></legend>
     <?php echo $this->render('page/edit/relatedContent.phtml');?>
 </fieldset>
 
 <fieldset id="attachments">
-    <legend><?php echo $this->GetTranslation('Attachments');?></legend>
+    <legend><?php echo $this->getTranslation('Attachments');?></legend>
     <?php echo $this->render('page/edit/attachments.phtml');?>
 </fieldset>
  -->
 
 <fieldset id="design">
-    <legend><?php echo $this->GetTranslation('Page Design');?></legend>
+    <legend><?php echo $this->getTranslation('Page Design');?></legend>
     <?php echo $this->render('page/edit/design.phtml');?>
 </fieldset>
 
 <fieldset id="move">
-    <legend><?php echo $this->GetTranslation('Move Page');?></legend>
+    <legend><?php echo $this->getTranslation('Move Page');?></legend>
     <?php echo $this->render('page/edit/move.phtml');?>
 </fieldset>

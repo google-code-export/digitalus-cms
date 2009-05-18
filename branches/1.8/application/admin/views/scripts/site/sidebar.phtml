@@ -1,5 +1,5 @@
-<?php $this->placeholder('sidebarHeadline')->set($this->GetTranslation('Site'));?>
-<p><?php echo $this->GetTranslation('The site sections is where you manage your site.');?></p>
+<?php $this->placeholder('sidebarHeadline')->set($this->getTranslation('Site'));?>
+<p><?php echo $this->getTranslation('The site sections is where you manage your site.');?></p>
 
 <?php
 $u = new Model_User();
@@ -15,13 +15,13 @@ foreach ($users as $user) {
     $userArray[] = $this->link($user->first_name . ' ' . $user->last_name, '/admin/user/open/id/' . $user->id, $icon);
 }
 ?>
-<h3><?php echo $this->GetTranslation('Admin Users');?></h3>
+<h3><?php echo $this->getTranslation('Admin Users');?></h3>
 <?php
 echo $this->HtmlList($userArray, null, null, false);
 ?>
 <p><?php echo $this->link('Create new user', '/admin/user/create', 'user_add.png');?></p>
 
-<h3><?php echo $this->GetTranslation('Site Console');?></h3>
-<p><?php echo $this->GetTranslation('The site console enables you to interact directly with the CMS core.') . '<br /><strong>' . $this->GetTranslation('It is for experienced administrators only.') . '</strong>';?></p>
+<h3><?php echo $this->getTranslation('Site Console');?></h3>
+<p><?php echo $this->getTranslation('The site console enables you to interact directly with the CMS core.') . '<br /><strong>' . $this->getTranslation('It is for experienced administrators only.') . '</strong>';?></p>
 
 <p><?php echo $this->link('Open console', '/admin/site/console', 'application_xp_terminal.png');?></p>

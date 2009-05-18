@@ -6,7 +6,7 @@ echo $this->doctype() . PHP_EOL;
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>
-    <?php echo $this->GetTranslation('Digitalus CMS') . $this->escape($this->title); ?></title>
+    <?php echo $this->getTranslation('Digitalus CMS') . $this->escape($this->title); ?></title>
 <?php
 //style sheets
 $this->headLink()->appendStylesheet($this->getBaseUrl() . '/skins/digitalus-1-5/styles/layout.css')
@@ -98,7 +98,7 @@ $('.spreadsheet tr:odd').addClass('oddRow');
                     <div id="toolbar">
                        <?php
                            echo $this->RenderLinks($this->toolbarLinks, 'rightLinks');
-                           echo $this->RenderLinks($this->breadcrumbs, 'breadcrumbs', $this->GetTranslation('You are here') . ': ', null, ' > ');
+                           echo $this->RenderLinks($this->breadcrumbs, 'breadcrumbs', $this->getTranslation('You are here') . ': ', null, ' > ');
                        ?>
                     </div>
                     <div id="main">

@@ -29,7 +29,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Pages') => $this->getFrontController()->getBaseUrl() . '/admin/page'
+           $this->view->getTranslation('Pages') => $this->getFrontController()->getBaseUrl() . '/admin/page'
         );
     }
 
@@ -58,7 +58,7 @@ class Admin_PageController extends Zend_Controller_Action
             $url = 'admin/page';
             $e = new DSF_View_Error();
             $e->add(
-                $this->view->GetTranslation('Sorry, there was an error adding your page')
+                $this->view->getTranslation('Sorry, there was an error adding your page')
             );
         }
         $this->_redirect($url);
@@ -89,7 +89,7 @@ class Admin_PageController extends Zend_Controller_Action
             $url = 'admin/page';
             $e = new DSF_View_Error();
             $e->add(
-                $this->view->GetTranslation('Sorry, there was an error opening your page')
+                $this->view->getTranslation('Sorry, there was an error opening your page')
             );
             $this->_redirect($url);
         }
@@ -144,11 +144,11 @@ class Admin_PageController extends Zend_Controller_Action
         } else {
             $label = $currentPage->page->name;
         }
-        $this->view->breadcrumbs[$this->view->GetTranslation('Open') . ': ' . $label] = $this->getFrontController()->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
+        $this->view->breadcrumbs[$this->view->getTranslation('Open') . ': ' . $label] = $this->getFrontController()->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
         $this->view->toolbarLinks = array();
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_page_edit_id_' . $pageId
-            . '/label/' . $this->view->GetTranslation('Page') . ':' . $currentPage->page->name;
+            . '/label/' . $this->view->getTranslation('Page') . ':' . $currentPage->page->name;
         $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
 
     }
@@ -273,29 +273,29 @@ class Admin_PageController extends Zend_Controller_Action
         $pageId->addFilter('int');
 
         $pageTitle = $form->createElement('text', 'page_title');
-        $pageTitle->setLabel($this->view->GetTranslation('Page Title') . ':')
+        $pageTitle->setLabel($this->view->getTranslation('Page Title') . ':')
                   ->addFilter('stripTags')
                   ->setAttrib('class', 'med');
 
         $filename = $form->createElement('text', 'filename');
-        $filename->setLabel($this->view->GetTranslation('Filename') . ':')
+        $filename->setLabel($this->view->getTranslation('Filename') . ':')
                  ->addFilter('stripTags')
                  ->setAttrib('class', 'med');
 
         $metaDescription = $form->createElement('textarea', 'meta_description');
-        $metaDescription->setLabel($this->view->GetTranslation('Meta Description') . ':')
+        $metaDescription->setLabel($this->view->getTranslation('Meta Description') . ':')
                         ->addFilter('stripTags')
                         ->setAttrib('class', 'med_short');
 
 
         $metaKeywords = $form->createElement('textarea', 'keywords');
-        $metaKeywords->setLabel($this->view->GetTranslation('Meta Keywords') . ':')
+        $metaKeywords->setLabel($this->view->getTranslation('Meta Keywords') . ':')
                      ->addFilter('stripTags')
                      ->setAttrib('class', 'med_short');
 
 
         $searchTags = $form->createElement('textarea', 'search_tags');
-        $searchTags->setLabel($this->view->GetTranslation('Search Tags') . ':')
+        $searchTags->setLabel($this->view->getTranslation('Search Tags') . ':')
                    ->addFilter('stripTags')
                    ->setAttrib('class', 'med_short');
 
@@ -305,7 +305,7 @@ class Admin_PageController extends Zend_Controller_Action
              ->addElement($metaDescription)
              ->addElement($metaKeywords)
              ->addElement($searchTags)
-             ->addElement('submit', 'update', array('label' => $this->view->GetTranslation('Update Meta Data')))
+             ->addElement('submit', 'update', array('label' => $this->view->getTranslation('Update Meta Data')))
              ->addElement($pageId);
 
         //set data

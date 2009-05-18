@@ -25,7 +25,7 @@ class Admin_AuthController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Login') => $this->getFrontController()->getBaseUrl() . '/admin/auth/login'
+           $this->view->getTranslation('Login') => $this->getFrontController()->getBaseUrl() . '/admin/auth/login'
         );
     }
 
@@ -47,10 +47,10 @@ class Admin_AuthController extends Zend_Controller_Action
             $e = new DSF_View_Error();
 
             if ($username == '') {
-                $e->add($this->view->GetTranslation('You must enter a username.'));
+                $e->add($this->view->getTranslation('You must enter a username.'));
             }
             if ($password == '') {
-                $e->add($this->view->GetTranslation('You must enter a password.'));
+                $e->add($this->view->getTranslation('You must enter a password.'));
             }
 
 
@@ -64,7 +64,7 @@ class Admin_AuthController extends Zend_Controller_Action
                      $this->_redirect($uri);
                 } else {
                     $e = new DSF_View_Error();
-                    $e->add($this->view->GetTranslation('The username or password you entered was not correct.'));
+                    $e->add($this->view->getTranslation('The username or password you entered was not correct.'));
                 }
             }
             $this->view->uri = $uri;
@@ -113,18 +113,18 @@ class Admin_AuthController extends Zend_Controller_Action
                     $match->save();//save the new password
                     $m = new DSF_View_Message();
                     $m->add(
-                        $this->view->GetTranslation('Your password has been reset for security and sent to your email address')
+                        $this->view->getTranslation('Your password has been reset for security and sent to your email address')
                        );
                 } else {
                     $e = new DSF_View_Error();
                     $e->add(
-                        $this->view->GetTranslation('Sorry, there was an error sending you your updated password.  Please contact us for more help.')
+                        $this->view->getTranslation('Sorry, there was an error sending you your updated password.  Please contact us for more help.')
                        );
                 }
             } else {
                 $e = new DSF_View_Error();
                 $e->add(
-                    $this->view->GetTranslation('Sorry, we could not locate your account. Please contact us to resolve this issue.')
+                    $this->view->getTranslation('Sorry, we could not locate your account. Please contact us to resolve this issue.')
                 );
             }
             $url =  'admin/auth/login';

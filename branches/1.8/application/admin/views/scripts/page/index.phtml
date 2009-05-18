@@ -1,17 +1,17 @@
 <?php
-$this->placeholder('formHeadline')->set($this->GetTranslation('Create a Page'));
+$this->placeholder('formHeadline')->set($this->getTranslation('Create a Page'));
 ?>
 <fieldset>
-    <legend><?php echo $this->GetTranslation('Create Page');?></legend>
+    <legend><?php echo $this->getTranslation('Create Page');?></legend>
     <form action="<?php echo $this->getBaseUrl();?>/admin/page/new" method="post">
-    <p><?php echo $this->GetTranslation('To create a new page...');?></p>
-    <h3><?php echo $this->GetTranslation('Step 1: Select the parent section');?></h3>
+    <p><?php echo $this->getTranslation('To create a new page...');?></p>
+    <h3><?php echo $this->getTranslation('Step 1: Select the parent section');?></h3>
     <dl>
     <?php
     echo $this->FormRow(
-        $this->GetTranslation('Parent Page'),
+        $this->getTranslation('Parent Page'),
         $this->SelectPage('parent_id',
-        $this->createPageOptions->parentId) . $this->formButton('step1button', $this->GetTranslation('Next >>'), array('class' => 'inlineButton'))
+        $this->createPageOptions->parentId) . $this->formButton('step1button', $this->getTranslation('Next >>'), array('class' => 'inlineButton'))
     );
     ?>
     </dl>

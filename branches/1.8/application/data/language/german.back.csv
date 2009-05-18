@@ -19,7 +19,6 @@
 # ----- toolbar -----
 "You are here";"Sie befinden sich hier"
 "Add to my bookmarks";"Zu Favoriten hinzufügen"
-"Your bookmark was saved successfully.";"Das Lesezeichen wurde erfolgreich gespeichert."
 "Delete";"Entfernen"
 
 # ----- admin home -----
@@ -338,3 +337,4 @@
 
 # ----- javascript -----
 "Are you sure you want to delete this?";"Sind Sie sicher, dass dies gelöscht werden soll?"
+"Your bookmark was successfully saved.";"Das Lesezeichen wurde erfolgreich gespeichert."

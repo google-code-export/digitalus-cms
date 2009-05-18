@@ -1,5 +1,5 @@
-<?php $this->placeholder('optionsHeadline')->set($this->GetTranslation('Who Uses This?'))?>
-<p><?php echo $this->GetTranslation('These are the pages that use this design:');?></p>
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Who Uses This?'))?>
+<p><?php echo $this->getTranslation('These are the pages that use this design:');?></p>
 <?php
 if (is_object($this->pages)) {
     $links = array();
@@ -9,5 +9,5 @@ if (is_object($this->pages)) {
     echo $this->htmlList($links, null, null, false);
 } else {
 ?>
-<p><?php echo $this->GetTranslation('No pages use this design currently.');?></p>
+<p><?php echo $this->getTranslation('No pages use this design currently.');?></p>
 <?php }?>

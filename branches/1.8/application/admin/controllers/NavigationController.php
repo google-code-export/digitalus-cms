@@ -27,7 +27,7 @@ class Admin_NavigationController extends Zend_Controller_Action
         //the selected admin menu item
         $this->view->adminSection = 'navigation';
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Navigation') => $this->getFrontController()->getBaseUrl() . '/admin/navigation'
+           $this->view->getTranslation('Navigation') => $this->getFrontController()->getBaseUrl() . '/admin/navigation'
         );
 
     }
@@ -61,9 +61,9 @@ class Admin_NavigationController extends Zend_Controller_Action
         $this->view->toolbarLinks = array();
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_navigation_open_id_' . $menuId
-            . '/label/' . $this->view->GetTranslation('Navigation') . ':' . $label;
+            . '/label/' . $this->view->getTranslation('Navigation') . ':' . $label;
 
-        $this->view->breadcrumbs[$this->view->GetTranslation('Open Menu') . ': ' . $this->view->GetTranslation($label)] =   $this->getFrontController()->getBaseUrl() . '/admin/navigation/open/id/' . $menuId;
+        $this->view->breadcrumbs[$this->view->getTranslation('Open Menu') . ': ' . $this->view->getTranslation($label)] =   $this->getFrontController()->getBaseUrl() . '/admin/navigation/open/id/' . $menuId;
 
         //fetch the menu
         $this->view->menuId = $menuId;

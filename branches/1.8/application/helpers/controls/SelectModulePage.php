@@ -5,14 +5,14 @@ class DSF_View_Helper_Controls_SelectModulePage
     {
         $pages = DSF_Filesystem_File::getFilesByType('./application/modules/' . $module . '/views/scripts/public', 'phtml');
         if (is_array($pages)) {
-            $data[] = $this->view->GetTranslation('Select One');
+            $data[] = $this->view->getTranslation('Select One');
             foreach ($pages as $page) {
                 $page = DSF_Toolbox_Regex::stripFileExtension($page);
                 $data[$page] = $page;
             }
             return $this->view->formSelect($name, $value, $attribs, $data);
         } else {
-            return $this->view->GetTranslation('There are no pages in this module');
+            return $this->view->getTranslation('There are no pages in this module');
         }
     }
 

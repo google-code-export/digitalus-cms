@@ -7,7 +7,7 @@ class Zend_View_Helper_SelectPage
         $index = $mdlIndex->getIndex(0, 'name');
 
         $pages = array();
-        $pages[0] = $this->view->GetTranslation('Site Root');
+        $pages[0] = $this->view->getTranslation('Site Root');
 
         if (is_array($index)) {
             foreach ($index as $id => $page) {

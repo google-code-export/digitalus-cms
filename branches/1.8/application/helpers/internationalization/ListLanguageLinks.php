@@ -26,7 +26,7 @@ class DSF_View_Helper_Internationalization_ListLanguageLinks {
         $page = DSF_Builder::getPage();
         $currentLanguage = $page->getLanguage();
         $availableLanguages = $page->getAvailableLanguages();
-        $xhtml = $this->view->GetTranslation('You are reading this page in') . ' ' . $this->view->GetTranslation(DSF_Language::getFullName($currentLanguage)) . '.';
+        $xhtml = $this->view->getTranslation('You are reading this page in') . ' ' . $this->view->getTranslation(DSF_Language::getFullName($currentLanguage)) . '.';
 
         if (is_array($availableLanguages)) {
             $languageLinks = array();
@@ -35,15 +35,15 @@ class DSF_View_Helper_Internationalization_ListLanguageLinks {
             foreach ($availableLanguages as $locale => $name) {
                 if (!empty($locale) && $locale != $currentLanguage) {
                     $url = $base. '/p/lang/' . $locale;
-                    $languageLinks[] = '<a href="' . $url . '">' . $this->view->GetTranslation($name) . '</a>';
+                    $languageLinks[] = '<a href="' . $url . '">' . $this->view->getTranslation($name) . '</a>';
                 }
             }
 
             if (is_array($languageLinks) && count($languageLinks) > 0) {
                 foreach ($languageLinks as $language) {
-                    $languageLinksTranslated[] = $this->view->GetTranslation($language);
+                    $languageLinksTranslated[] = $this->view->getTranslation($language);
                 }
-                $xhtml .= ' ' . $this->view->GetTranslation('This page is also translated into') . ' ' . implode(', ', $languageLinks);
+                $xhtml .= ' ' . $this->view->getTranslation('This page is also translated into') . ' ' . implode(', ', $languageLinks);
             }
         }
 

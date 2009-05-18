@@ -1,4 +1,4 @@
-<?php $this->placeholder('optionsHeadline')->set($this->GetTranslation('Page Options'))?>
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Page Options'))?>
 
 <ul class="idTabs">
     <li><?php echo $this->link('Content', '#content', 'page_white_edit.png');?></li>
@@ -15,5 +15,5 @@ this is not going to make it in the beta version
     <li><?php echo $this->link('Move Page', '#move', 'arrow_turn_right.png');?></li>
 </ul>
 
-<h3><?php echo $this->GetTranslation('Page Versions');?></h3>
+<h3><?php echo $this->getTranslation('Page Versions');?></h3>
 <?php echo $this->render('page/partials/page-versions.phtml', array('pageId' => $this->pageId, 'version' => $this->currentVersion))?>

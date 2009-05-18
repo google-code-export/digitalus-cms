@@ -29,34 +29,34 @@ class DSF_View_Helper_Admin_RenderAdminMenu
         $menu = "<ul id='{$id}'>";
 
         if (!$this->currentUser) {
-            $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/auth/login' id='loginLink' class='selected'>" . $this->view->GetTranslation('Login') . "</a></li>";
+            $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/auth/login' id='loginLink' class='selected'>" . $this->view->getTranslation('Login') . "</a></li>";
         } else {
             if ($this->hasAccess('admin_index')) {
-                $menu .= "<li class='small'><a href='{$this->view->getBaseUrl()}/admin' id='homeLink'" . $this->isSelected('index') . ">" . $this->view->GetTranslation('Home') . "</a></li>";
+                $menu .= "<li class='small'><a href='{$this->view->getBaseUrl()}/admin' id='homeLink'" . $this->isSelected('index') . ">" . $this->view->getTranslation('Home') . "</a></li>";
             }
 
             if ($this->hasAccess('admin_site')) {
-                $menu .= "<li class='small'><a href='{$this->view->getBaseUrl()}/admin/site' id='siteLink'" . $this->isSelected('site') . ">" . $this->view->GetTranslation('Site') . "</a></li>";
+                $menu .= "<li class='small'><a href='{$this->view->getBaseUrl()}/admin/site' id='siteLink'" . $this->isSelected('site') . ">" . $this->view->getTranslation('Site') . "</a></li>";
             }
 
             if ($this->hasAccess('admin_page')) {
-                $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/page' id='pageLink'" . $this->isSelected('page') . ">" . $this->view->GetTranslation('Pages') . "</a></li>";
+                $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/page' id='pageLink'" . $this->isSelected('page') . ">" . $this->view->getTranslation('Pages') . "</a></li>";
             }
 
             if ($this->hasAccess('admin_navigation')) {
-                $menu .= "<li class='large'><a href='{$this->view->getBaseUrl()}/admin/navigation' id='navigationLink'" . $this->isSelected('navigation') . ">" . $this->view->GetTranslation('Navigation') . "</a></li>";
+                $menu .= "<li class='large'><a href='{$this->view->getBaseUrl()}/admin/navigation' id='navigationLink'" . $this->isSelected('navigation') . ">" . $this->view->getTranslation('Navigation') . "</a></li>";
             }
 
             if ($this->hasAccess('admin_media')) {
-                $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/media' id='mediaLink'" . $this->isSelected('media') . ">" . $this->view->GetTranslation('Media') . "</a></li>";
+                $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/media' id='mediaLink'" . $this->isSelected('media') . ">" . $this->view->getTranslation('Media') . "</a></li>";
             }
 
             if ($this->hasAccess('admin_design')) {
-                $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/design' id='designLink'" . $this->isSelected('design') . ">" . $this->view->GetTranslation('Design') . "</a></li>";
+                $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/design' id='designLink'" . $this->isSelected('design') . ">" . $this->view->getTranslation('Design') . "</a></li>";
             }
 
             if ($this->hasAccess('admin_module')) {
-                $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/module' id='moduleLink'" . $this->isSelected('module') . ">" . $this->view->GetTranslation('Modules') . "</a></li>";
+                $menu .= "<li class='med'><a href='{$this->view->getBaseUrl()}/admin/module' id='moduleLink'" . $this->isSelected('module') . ">" . $this->view->getTranslation('Modules') . "</a></li>";
             }
         }
 

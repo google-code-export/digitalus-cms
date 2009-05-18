@@ -1,7 +1,7 @@
 <dl>
 <?php
 echo $this->FormRow(
-    $this->GetTranslation('Enter the recipients email:'),
+    $this->getTranslation('Enter the recipients email:'),
     $this->formText(
         $this->element . '[email]',
         $this->getData('email', $this->data->get)

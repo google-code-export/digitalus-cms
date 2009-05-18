@@ -3,21 +3,21 @@
 DSF_View_RegisterHelpers::register($this);
 
 if (is_array($this->allowedTemplates)) {?>
-<h3><?php echo $this->GetTranslation('Step 2: What type of page would you like to create?')?></h3>
+<h3><?php echo $this->getTranslation('Step 2: What type of page would you like to create?')?></h3>
 <dl>
     <?php
     //load the common helpers
     DSF_View_RegisterHelpers::register($this);
     echo $this->FormRow(
-        $this->GetTranslation('Select a type', null, $this),
+        $this->getTranslation('Select a type', null, $this),
         $this->formSelect('contentType', $this->createPageOptions->contentType, null, $this->allowedTemplates) .
-        $this->formButton('step2button', $this->GetTranslation('Next >>', null, $this), array('class' => 'inlineButton'))
+        $this->formButton('step2button', $this->getTranslation('Next >>', null, $this), array('class' => 'inlineButton'))
     );
 ?>
 </dl>
 <?php
 } else {?>
-<p><?php echo $this->GetTranslation('You can not add any pages to this section.', null, $this)?></p>
+<p><?php echo $this->getTranslation('You can not add any pages to this section.', null, $this)?></p>
 <?php } ?>
 
 <script type="text/javascript">

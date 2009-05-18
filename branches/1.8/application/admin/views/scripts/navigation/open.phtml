@@ -1,4 +1,4 @@
-<?php $this->placeholder('formHeadline')->set($this->GetTranslation('Update Menu'))?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Menu'))?>
 
 <?php
 $iconSource = $this->getBaseUrl() . '/images/icons/';
@@ -57,7 +57,7 @@ $(document).ready(
         }
         ?>
         </ul>
-        <p><?php echo $this->formSubmit('save', $this->GetTranslation('Save Changes'));?></p>
+        <p><?php echo $this->formSubmit('save', $this->getTranslation('Save Changes'));?></p>
     </fieldset>
 </form>
 </div>

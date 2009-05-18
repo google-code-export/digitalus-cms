@@ -22,7 +22,7 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->_fullPathToMedia = $this->getFrontController()->getBaseUrl() . $this->_pathToMedia;
         $this->view->pathToMedia = $this->_pathToMedia;
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Media') => $this->getFrontController()->getBaseUrl() . '/admin/media'
+           $this->view->getTranslation('Media') => $this->getFrontController()->getBaseUrl() . '/admin/media'
         );
     }
     /**
@@ -62,13 +62,13 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->view->folders = DSF_Filesystem_Dir::getDirectories($pathToFolder);
         $this->view->files = DSF_Filesystem_File::getFilesByType($pathToFolder,false,false,true);
 
-        $this->view->breadcrumbs[$this->view->GetTranslation('Open Folder') . ': ' . $pathToFolder] = $this->getFrontController()->getBaseUrl() . '/admin/media/open-folder/folder/' . $folder;
+        $this->view->breadcrumbs[$this->view->getTranslation('Open Folder') . ': ' . $pathToFolder] = $this->getFrontController()->getBaseUrl() . '/admin/media/open-folder/folder/' . $folder;
         $this->view->toolbarLinks = array();
 
         $tmpPath = DSF_Toolbox_String::addUnderscores($folder);
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_media_open-folder_folder_' . $tmpPath
-            . '/label/' . $this->view->GetTranslation('Media') . ':' . $pathToFolder;
+            . '/label/' . $this->view->getTranslation('Media') . ':' . $pathToFolder;
         $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/media/delete-folder/folder/' . $folder;
 
     }

@@ -6,7 +6,7 @@ class DSF_View_Helper_Admin_SelectUser
         $u = new Model_User();
         $users = $u->fetchAll(null, 'first_name');
 
-        $userArray[] = $this->view->GetTranslation('Select User');
+        $userArray[] = $this->view->getTranslation('Select User');
 
         if ($users->count() > 0) {
             foreach ($users as $user) {

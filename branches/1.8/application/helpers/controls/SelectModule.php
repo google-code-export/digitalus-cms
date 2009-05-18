@@ -5,7 +5,7 @@ class DSF_View_Helper_Controls_SelectModule
     {
         $modules = DSF_Filesystem_Dir::getDirectories('./application/modules');
         if (is_array($modules)) {
-            $data[] = $this->view->GetTranslation('Select a module');
+            $data[] = $this->view->getTranslation('Select a module');
             foreach ($modules as $module) {
                 $pages = DSF_Filesystem_File::getFilesByType('./application/modules/' . $module . '/views/scripts/public', 'phtml');
                 if (is_array($pages)) {
@@ -17,7 +17,7 @@ class DSF_View_Helper_Controls_SelectModule
             }
             return $this->view->formSelect($name, $value, $attribs, $data);
         } else {
-            return $this->view->GetTranslation('There are no modules currently installed');
+            return $this->view->getTranslation('There are no modules currently installed');
         }
     }
 

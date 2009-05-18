@@ -14,13 +14,13 @@
             $tmpUser->role = null;
         }
 
-            echo $this->FormRow($this->GetTranslation('First Name'), $this->FormText('first_name', $tmpUser->first_name));
-            echo $this->FormRow($this->GetTranslation('Last Name'), $this->FormText('last_name', $tmpUser->last_name));
-            echo $this->FormRow($this->GetTranslation('Email Address'), $this->FormText('email', $tmpUser->email));
-            echo $this->FormRow($this->GetTranslation('Admin Role'), $this->SelectAdminRole('role', $tmpUser->role));
-            echo $this->FormRow($this->GetTranslation('Password'), $this->FormPassword('newPassword'));
-            echo $this->FormRow($this->GetTranslation('Confirm Password'), $this->FormPassword('newConfirmPassword'));
-            echo $this->FormRow('&nbsp;', $this->FormSubmit('update_password', $this->GetTranslation('Create User')));
+            echo $this->FormRow($this->getTranslation('First Name'), $this->FormText('first_name', $tmpUser->first_name));
+            echo $this->FormRow($this->getTranslation('Last Name'), $this->FormText('last_name', $tmpUser->last_name));
+            echo $this->FormRow($this->getTranslation('Email Address'), $this->FormText('email', $tmpUser->email));
+            echo $this->FormRow($this->getTranslation('Admin Role'), $this->SelectAdminRole('role', $tmpUser->role));
+            echo $this->FormRow($this->getTranslation('Password'), $this->FormPassword('newPassword'));
+            echo $this->FormRow($this->getTranslation('Confirm Password'), $this->FormPassword('newConfirmPassword'));
+            echo $this->FormRow('&nbsp;', $this->FormSubmit('update_password', $this->getTranslation('Create User')));
         ?>
     </fieldset>
 </form>

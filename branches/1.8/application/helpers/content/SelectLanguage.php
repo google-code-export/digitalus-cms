@@ -28,7 +28,7 @@ class DSF_View_Helper_Content_SelectLanguage {
         $siteVersions = $config->language->translations;
 
         foreach ($siteVersions as $locale => $label) {
-            $data[$locale] = $this->view->GetTranslation($label);
+            $data[$locale] = $this->view->getTranslation($label);
         }
 
         return $this->view->formSelect($name, $value, $attribs, $data);

@@ -41,7 +41,7 @@ class DSF_View_Helper_Interface_Link {
             $linkParts[] = $this->getIcon($icon, $label);
         }
         if (!empty($label)) {
-            $linkParts[] = $this->view->GetTranslation((string)$label);
+            $linkParts[] = $this->view->getTranslation((string)$label);
         }
         $linkParts[] = '</a>';
         return implode(null, $linkParts);

@@ -19,12 +19,12 @@ class DSF_View_Helper_General_Pagination
             }
 
             //first page
-            $xhtml = "<a href='{$baseUrl}/page/1'>&lt;&lt; " . $this->view->GetTranslation('First') . '</a>';
+            $xhtml = "<a href='{$baseUrl}/page/1'>&lt;&lt; " . $this->view->getTranslation('First') . '</a>';
 
             //previous page
             if ($currentPage > 1) {
                 $previous = $currentPage - 1;
-                $xhtml .= "<a href='{$baseUrl}/page/{$previous}'>&lt; " . $this->view->GetTranslation('Previous') . '</a>';
+                $xhtml .= "<a href='{$baseUrl}/page/{$previous}'>&lt; " . $this->view->getTranslation('Previous') . '</a>';
             }
 
             //direct links
@@ -33,11 +33,11 @@ class DSF_View_Helper_General_Pagination
             //next page
             if ($currentPage < $pages) {
                 $next = $currentPage + 1;
-                $xhtml .= "<a href='{$baseUrl}/page/{$next}'>" . $this->view->GetTranslation('Next') . ' &gt;</a>';
+                $xhtml .= "<a href='{$baseUrl}/page/{$next}'>" . $this->view->getTranslation('Next') . ' &gt;</a>';
             }
 
             //last page
-            $xhtml .= "<a href='{$baseUrl}/page/{$pages}'>" . $this->view->GetTranslation('Last') .  '&gt;&gt;</a>';
+            $xhtml .= "<a href='{$baseUrl}/page/{$pages}'>" . $this->view->getTranslation('Last') .  '&gt;&gt;</a>';
 
             return $xhtml;
         }

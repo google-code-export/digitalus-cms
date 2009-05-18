@@ -1,10 +1,10 @@
 <form action='/admin/media/rename-folder' method='post' >
     <dl>
     <?php
-        echo $this->FormRow($this->GetTranslation('New Name'), $this->formText('folder_name', $this->label));
+        echo $this->FormRow($this->getTranslation('New Name'), $this->formText('folder_name', $this->label));
         echo '<dt>' . $this->formHidden('filepath', $this->filepath) . '</dt>';
         echo '<dt>' . $this->formHidden('mediapath', $this->mediapath) . '</dt>';
-        echo $this->FormRow('&nbsp;', $this->formSubmit('renameFolder', $this->GetTranslation('Rename Folder')));
+        echo $this->FormRow('&nbsp;', $this->formSubmit('renameFolder', $this->getTranslation('Rename Folder')));
     ?>
     </dl>
 </form>

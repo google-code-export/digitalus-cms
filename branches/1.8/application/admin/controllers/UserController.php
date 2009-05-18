@@ -26,7 +26,7 @@ class Admin_UserController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Site Settings') => $this->getFrontController()->getBaseUrl() . '/admin/site'
+           $this->view->getTranslation('Site Settings') => $this->getFrontController()->getBaseUrl() . '/admin/site'
         );
     }
 
@@ -53,12 +53,12 @@ class Admin_UserController extends Zend_Controller_Action
             $this->view->userPermissions = $u->getAclResources($row);
         }
 
-        $breadcrumbLabel = $this->view->GetTranslation('Open User') . ': ' . $this->view->user->first_name . ' ' . $this->view->user->last_name;
+        $breadcrumbLabel = $this->view->getTranslation('Open User') . ': ' . $this->view->user->first_name . ' ' . $this->view->user->last_name;
         $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/user/open/id/' . $id;
         $this->view->toolbarLinks = array();
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_user_open_id_' . $id
-            . '/label/' . $this->view->GetTranslation('User') . ':' . $this->view->user->first_name . '.' . $this->view->user->last_name;
+            . '/label/' . $this->view->getTranslation('User') . ':' . $this->view->user->first_name . '.' . $this->view->user->last_name;
         $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/user/delete/id/' . $id;
     }
 

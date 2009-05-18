@@ -5,7 +5,7 @@ class Admin_DesignController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Design') => $this->getFrontController()->getBaseUrl() . '/admin/design'
+           $this->view->getTranslation('Design') => $this->getFrontController()->getBaseUrl() . '/admin/design'
         );
     }
 
@@ -15,7 +15,7 @@ class Admin_DesignController extends Zend_Controller_Action
         $this->view->designs = $mdlDesign->listDesigns();
 
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Design') => $this->getFrontController()->getBaseUrl() . '/admin/design'
+           $this->view->getTranslation('Design') => $this->getFrontController()->getBaseUrl() . '/admin/design'
         );
         $this->design = new stdClass();
     }
@@ -59,11 +59,11 @@ class Admin_DesignController extends Zend_Controller_Action
         $mdlPage = new Model_Page();
         $this->view->pages = $mdlPage->getPagesByDesign($id);
 
-        $this->view->breadcrumbs[$this->view->GetTranslation('Open') . ': ' . $this->view->GetTranslation($mdlDesign->getValue('name'))] = $this->getFrontController()->getBaseUrl() . '/admin/design/update/id/' . $id;
+        $this->view->breadcrumbs[$this->view->getTranslation('Open') . ': ' . $this->view->getTranslation($mdlDesign->getValue('name'))] = $this->getFrontController()->getBaseUrl() . '/admin/design/update/id/' . $id;
         $this->view->toolbarLinks = array();
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_design_update_id_' . $id
-            . '/label/' . $this->view->GetTranslation('Design') . ':' . $mdlDesign->getValue('name');
+            . '/label/' . $this->view->getTranslation('Design') . ':' . $mdlDesign->getValue('name');
         $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/design/delete/id/' . $id;
 
 

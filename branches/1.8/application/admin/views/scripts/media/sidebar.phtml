@@ -1,4 +1,4 @@
- <?php $this->placeholder('sidebarHeadline')->set($this->GetTranslation('Media'))?>
+ <?php $this->placeholder('sidebarHeadline')->set($this->getTranslation('Media'))?>
 <script type="text/javascript">
 $(document).ready(function()
 {
@@ -16,7 +16,7 @@ $(document).ready(function()
 <?php
 $browser = $this->RenderMediaBrowser($this->pathToMedia, 'admin/media/open-folder/folder', null);
 if (empty($browser)) {
-    echo '<p>' . $this->GetTranslation('You do not have any media files on the server') . '</p>';
+    echo '<p>' . $this->getTranslation('You do not have any media files on the server') . '</p>';
 } else {
     echo $browser;
 }

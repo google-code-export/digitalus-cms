@@ -26,7 +26,7 @@ class DSF_View_Helper_Admin_SelectLayout {
         $pathToPublicLayouts = $config->design->pathToPublicLayouts;
         $layouts = DSF_Filesystem_File::getFilesByType($pathToPublicLayouts, 'phtml');
         if ($defaut == NULL) {
-            $defaut = $this->view->GetTranslation('Select One');
+            $defaut = $this->view->getTranslation('Select One');
         }
         $options[0] = $defaut;
 

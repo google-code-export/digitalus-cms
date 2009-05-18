@@ -1,4 +1,4 @@
-<?php $this->placeholder("optionsHeadline")->set($this->GetTranslation('User Options'));?>
+<?php $this->placeholder("optionsHeadline")->set($this->getTranslation('User Options'));?>
 
 <ul class="idTabs">
 <li><?php echo $this->link('Account', '#general', 'vcard_edit.png');?></li>
@@ -6,11 +6,11 @@
 <li><?php echo $this->link('Permissions', '#permissions', 'application_cascade.png')?></li>
 </ul>
 
-<h3><?php echo $this->GetTranslation('Copy User Permissions');?></h3>
-<p><?php echo $this->GetTranslation('If you have another user who already has the same permissions as this user you can copy that user\'s role.');?></p>
+<h3><?php echo $this->getTranslation('Copy User Permissions');?></h3>
+<p><?php echo $this->getTranslation('If you have another user who already has the same permissions as this user you can copy that user\'s role.');?></p>
 
 <form action='<?php echo $this->getBaseUrl();?>/admin/user/copy-acl' method="post">
     <?php echo $this->formHidden('id',$this->user->id);?>
     <?php echo $this->SelectUser('user_id', null, null, $this->user->id);?>
-    <?php echo $this->FormSubmit('update',$this->GetTranslation('Copy Users Permissions'));?>
+    <?php echo $this->FormSubmit('update',$this->getTranslation('Copy Users Permissions'));?>
 </form>

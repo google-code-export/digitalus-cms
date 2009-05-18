@@ -12,7 +12,7 @@ class DSF_View_Helper_Admin_RenderText
         if ($tag != null) {
             $xhtml .= "<{$tag}>";
         }
-        $xhtml .= $this->view->GetTranslation($key);
+        $xhtml .= $this->view->getTranslation($key);
         if ($tag != null) {
             $xhtml .= "</{$tag}>";
         }

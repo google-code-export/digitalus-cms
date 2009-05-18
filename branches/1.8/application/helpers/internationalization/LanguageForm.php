@@ -37,7 +37,7 @@ class DSF_View_Helper_Internationalization_LanguageForm {
         $languageSelector = $this->view->selectLanguage('language',$currentLanguage);
         $xhtml  = '<form action="' . $this->view->ModuleAction() . '" method="post">';
         $xhtml .= '<p>' . $languageSelector . '</p>';
-        $xhtml .= '<p>' . $this->view->formSubmit('setLang', $this->view->GetTranslation('Set Language')) . '</p>';
+        $xhtml .= '<p>' . $this->view->formSubmit('setLang', $this->view->getTranslation('Set Language')) . '</p>';
         $xhtml .= '</form>';
         return $xhtml;
     }

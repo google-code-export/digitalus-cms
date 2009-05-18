@@ -25,7 +25,7 @@ class Admin_ModuleController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->GetTranslation('Modules') => $this->getFrontController()->getBaseUrl() . '/admin/module'
+           $this->view->getTranslation('Modules') => $this->getFrontController()->getBaseUrl() . '/admin/module'
         );
     }
 

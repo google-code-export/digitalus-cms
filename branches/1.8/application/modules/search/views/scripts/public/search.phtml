@@ -1,6 +1,6 @@
 <form action='<?php echo dsf_uri::get();?>' method='post' id='searchForm'>
 <fieldset>
-    <legend><?php echo $this->GetTranslation('Search Site')?></legend>
+    <legend><?php echo $this->getTranslation('Search Site')?></legend>
     <?php
         if (isset($this->keywords)) {
             $keywords = $this->keywords;
@@ -10,12 +10,12 @@
 
         echo $this->formHidden('submitSearchForm', 1);
         echo $this->FormRow(
-            $this->GetTranslation('Keywords') . ': ',
+            $this->getTranslation('Keywords') . ': ',
             $this->formText('keywords', $keywords, array('size' => 50))
         );
         echo $this->FormRow(
             '&nbsp',
-            $this->formSubmit('search', $this->GetTranslation('Search'))
+            $this->formSubmit('search', $this->getTranslation('Search'))
         );
     ?>
 </fieldset>
@@ -23,7 +23,7 @@
 
 <?php
 if ($this->searchResults) { ?>
-<p><?php echo $this->GetTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->GetTranslation('returned') . ' ' . count($this->searchResults) . ' ' . $this->GetTranslation('results.');?></p>
+<p><?php echo $this->getTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->getTranslation('returned') . ' ' . count($this->searchResults) . ' ' . $this->getTranslation('results.');?></p>
     <?php
     foreach ($this->searchResults as $result) {?>
 <a href='<?php echo $result->page_link; ?>'><h3><?php echo $result->page_title; ?></h3></a>
@@ -31,10 +31,10 @@ if ($this->searchResults) { ?>
     <?php
     }
 } elseif (isset($this->keywords) && !empty($this->keywords)) { ?>
-<p><?php echo $this->GetTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->GetTranslation('did not return any results.');?></p>
+<p><?php echo $this->getTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->getTranslation('did not return any results.');?></p>
 <?php
 } elseif (isset($_POST['submitSearchForm'])) { ?>
-<p><?php echo $this->GetTranslation('Please provide a keyword to search for!');?></p>
+<p><?php echo $this->getTranslation('Please provide a keyword to search for!');?></p>
 <?php
 }
 ?>
