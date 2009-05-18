@@ -54,7 +54,7 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
 
         $siteRoot = '<li class="menuItem" style="background-image: none; padding: 0px;">'
                   . '<a class="link" href="/admin/page/move/id/' . $pageId . '/parent/0">'
-                  . '<img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="/images/icons/folder.png"/>'
+                  . '<img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="' . $this->view->getBaseUrl() . '/images/icons/folder.png"/>'
                   . $this->view->getTranslation('Site Root')
                   . '</a>'
                   . '</li>';
