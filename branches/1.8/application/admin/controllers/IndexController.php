@@ -1,5 +1,4 @@
 <?php
-
 /**
  * DSF CMS
  *
@@ -13,16 +12,35 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: IndexController.php Mon Dec 24 20:50:29 EST 2007 20:50:29 forrest lyman $
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
  */
 
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+/**
+ * Admin Index Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    $Id: IndexController.php Mon Dec 24 20:50:29 EST 2007 20:50:29 forrest lyman $
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
 class Admin_IndexController extends Zend_Controller_Action
 {
 
+    /**
+     * Initialize the action
+     *
+     * @return void
+     */
     public function init()
     {
         $this->view->breadcrumbs = array(
@@ -31,8 +49,11 @@ class Admin_IndexController extends Zend_Controller_Action
     }
 
     /**
-     * displays the admin dashboard
+     * The default action
      *
+     * Displays the admin dashboard
+     *
+     * @return void
      */
     public function indexAction()
     {
@@ -46,6 +67,11 @@ class Admin_IndexController extends Zend_Controller_Action
         $this->view->identity = $user->getCurrentUser();
     }
 
+    /**
+     * Notes action
+     *
+     * @return void
+     */
     public function notesAction()
     {
         $notes = new Model_Note();
@@ -54,6 +80,11 @@ class Admin_IndexController extends Zend_Controller_Action
         $this->_redirect('admin/index');
     }
 
+    /**
+     * Bookmark action
+     *
+     * @return void
+     */
     public function bookmarkAction()
     {
         $url = $this->_request->getParam('url');
@@ -66,6 +97,11 @@ class Admin_IndexController extends Zend_Controller_Action
         $bookmark->addUsersBookmark($label, $url);
     }
 
+    /**
+     * Delete bookmark action
+     *
+     * @return void
+     */
     public function deleteBookmarkAction()
     {
         $id = $this->_request->getParam('id');
@@ -74,6 +110,11 @@ class Admin_IndexController extends Zend_Controller_Action
         $this->_redirect('admin/index');
     }
 
+    /**
+     * Test action
+     *
+     * @return void
+     */
     public function testAction()
     {
 

@@ -12,16 +12,35 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: AuthController.php Mon Dec 24 20:48:35 EST 2007 20:48:35 forrest lyman $
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
  */
 
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+/**
+ * Admin Auth Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    $Id: AuthController.php Mon Dec 24 20:48:35 EST 2007 20:48:35 forrest lyman $
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
 class Admin_AuthController extends Zend_Controller_Action
 {
 
+    /**
+     * Initialize the action
+     *
+     * @return void
+     */
     public function init()
     {
         $this->view->breadcrumbs = array(
@@ -30,12 +49,15 @@ class Admin_AuthController extends Zend_Controller_Action
     }
 
     /**
+     * Login action
+     *
      * if the form has not been submitted this renders the login form
      * if it has then it validates the data
      * if it is sound then it runs the DSF_Auth_Adapter function
      * to authorise the request
-     * on success it redirct to the admin home page
+     * on success it redirect to the admin home page
      *
+     * @return void
      */
     public function loginAction()
     {
@@ -75,9 +97,12 @@ class Admin_AuthController extends Zend_Controller_Action
     }
 
     /**
+     * Login action
+     *
      * kills the authorized user object
      * then redirects to the main index page
      *
+     * @return void
      */
     public function logoutAction()
     {
@@ -85,6 +110,11 @@ class Admin_AuthController extends Zend_Controller_Action
         $this->_redirect('/');
     }
 
+    /**
+     * Reset password action
+     *
+     * @return void
+     */
     public function resetPasswordAction()
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {

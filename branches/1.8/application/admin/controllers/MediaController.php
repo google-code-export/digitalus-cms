@@ -1,20 +1,60 @@
 <?php
-
 /**
- * MediaZendController
+ * DSF CMS
  *
- * @author
- * @version
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
  */
 
+/** Zend_Controller_Action */
 require_once 'Zend/Controller/Action.php';
 
-class Admin_MediaController extends Zend_Controller_Action {
-
+/**
+ * Admin Media Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    Release: @package_version@
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
+class Admin_MediaController extends Zend_Controller_Action
+{
+    /**
+     * @var string
+     */
     protected $_fullPathToMedia;
+
+    /**
+     * @var string
+     */
     protected $_pathToMedia;
+
+    /**
+     * @var string
+     */
     protected $_currentFolder;
 
+    /**
+     * Initialize the action
+     *
+     * @return void
+     */
     public function init()
     {
         $config = Zend_Registry::get('config');
@@ -25,13 +65,21 @@ class Admin_MediaController extends Zend_Controller_Action {
            $this->view->getTranslation('Media') => $this->getFrontController()->getBaseUrl() . '/admin/media'
         );
     }
+
     /**
      * The default action - show the home page
+     *
+     * @return void
      */
     public function indexAction() {
         $this->view->path = '';
     }
 
+    /**
+     * Open Folder Action
+     *
+     * @return void
+     */
     public function openFolderAction()
     {
         $folder = $this->_request->getParam('folder');
@@ -60,7 +108,7 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->view->filesystemPath = $pathToFolder;
         $this->view->mediaPath = $folder;
         $this->view->folders = DSF_Filesystem_Dir::getDirectories($pathToFolder);
-        $this->view->files = DSF_Filesystem_File::getFilesByType($pathToFolder,false,false,true);
+        $this->view->files = DSF_Filesystem_File::getFilesByType($pathToFolder, false, false, true);
 
         $this->view->breadcrumbs[$this->view->getTranslation('Open Folder') . ': ' . $pathToFolder] = $this->getFrontController()->getBaseUrl() . '/admin/media/open-folder/folder/' . $folder;
         $this->view->toolbarLinks = array();
@@ -73,6 +121,12 @@ class Admin_MediaController extends Zend_Controller_Action {
 
     }
 
+    /**
+     * Create Folder Action
+     *
+     * @throws Zend_Exception
+     * @return void
+     */
     public function createFolderAction()
     {
         $baseFolder = DSF_Filter_Post::get('path');
@@ -110,19 +164,29 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->_forward('open-folder');
     }
 
+    /**
+     * Upload Action
+     *
+     * @return void
+     */
     public function uploadAction()
     {
         $path = DSF_Filter_Post::get('filepath');
         $mediapath = DSF_Filter_Post::get('mediapath');
         $files = $_FILES['uploads'];
         if (is_array($files)) {
-            DSF_Media::batchUpload($files, $path);
+            echo DSF_Media::batchUpload($files, $path);
         }
         $this->_request->setParam('folder', $mediapath);
 
         $this->_forward('open-folder');
     }
 
+    /**
+     * Delete Folder Action
+     *
+     * @return void
+     */
     public function deleteFolderAction()
     {
         $folder = $this->_request->getParam('folder');
@@ -134,6 +198,11 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->_forward('open-folder');
     }
 
+    /**
+     * Delete File Action
+     *
+     * @return void
+     */
     public function deleteFileAction()
     {
         $file = $this->_request->getParam('file');
@@ -145,20 +214,24 @@ class Admin_MediaController extends Zend_Controller_Action {
         $this->_forward('open-folder');
     }
 
+    /**
+     * Rename Folder Action
+     *
+     * @return void
+     */
     public function renameFolderAction()
     {
         $path = DSF_Media::renameFolder(
             DSF_Filter_Post::get('filepath'),
             DSF_Filter_Post::get('folder_name')
         );
-        $path = str_replace('./', '',$path);
-        $path = str_replace('../', '',$path);
+        $path = str_replace('./', '', $path);
+        $path = str_replace('../', '', $path);
 
         $folder = DSF_Toolbox_String::addUnderscores($path);
 
         $this->_request->setParam('folder', $folder);
         $this->_forward('open-folder');
     }
-
 }
 ?>

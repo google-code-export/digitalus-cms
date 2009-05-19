@@ -1,5 +1,4 @@
 <?php
-
 /**
  * DSF CMS
  *
@@ -13,15 +12,34 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: MenuController.php Mon Dec 24 20:53:11 EST 2007 20:53:11 forrest lyman $
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
  */
 
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+/**
+ * Admin Navigation Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    $Id: MenuController.php Mon Dec 24 20:53:11 EST 2007 20:53:11 forrest lyman $
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
 class Admin_NavigationController extends Zend_Controller_Action
 {
+    /**
+     * Initialize the action
+     *
+     * @return void
+     */
     public function init()
     {
         //the selected admin menu item
@@ -33,8 +51,11 @@ class Admin_NavigationController extends Zend_Controller_Action
     }
 
     /**
-     * display the main menu admin page
+     * The default action
      *
+     * Display the main menu admin page
+     *
+     * @return void
      */
     public function indexAction()
     {
@@ -43,9 +64,12 @@ class Admin_NavigationController extends Zend_Controller_Action
     }
 
     /**
-     * open the specified menu
+     * Open action
+     *
+     * Open the specified menu
      *
      * @param int $id
+     * @return void
      */
     public function openAction()
     {
@@ -71,8 +95,11 @@ class Admin_NavigationController extends Zend_Controller_Action
     }
 
     /**
-     * edit a menu
+     * Edit action
      *
+     * Edit a menu
+     *
+     * @return void
      */
     public function editAction()
     {
@@ -88,6 +115,11 @@ class Admin_NavigationController extends Zend_Controller_Action
         }
     }
 
+    /**
+     * Redirector action
+     *
+     * @return void
+     */
     public function redirectorAction()
     {
         $r = new Model_Redirector();

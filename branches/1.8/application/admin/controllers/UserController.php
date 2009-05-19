@@ -1,5 +1,4 @@
 <?php
-
 /**
  * DSF CMS
  *
@@ -13,16 +12,34 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: UserController.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
  */
 
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+/**
+ * Admin User Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    $Id: UserController.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
 class Admin_UserController extends Zend_Controller_Action
 {
-
+    /**
+     * Initialize the action
+     *
+     * @return void
+     */
     public function init()
     {
         $this->view->breadcrumbs = array(
@@ -31,20 +48,25 @@ class Admin_UserController extends Zend_Controller_Action
     }
 
     /**
-     * render the user management interface
+     * The default action
      *
+     * Render the user management interface
+     *
+     * @return void
      */
     public function indexAction()
     {
     }
 
     /**
-     * open a user for editing
+     * Open action
      *
+     * Open a user for editing
+     *
+     * @return void
      */
     public function openAction()
     {
-
         $id = $this->_request->getParam('id', 0);
         if ($id > 0) {
             $u = new Model_User();
@@ -63,8 +85,11 @@ class Admin_UserController extends Zend_Controller_Action
     }
 
     /**
-     * add a new user
+     * Add action
      *
+     * Add a new user
+     *
+     * @return void
      */
     public function createAction()
     {
@@ -84,8 +109,11 @@ class Admin_UserController extends Zend_Controller_Action
     }
 
     /**
-     * edit an existing user
+     * Edit action
      *
+     * Edit an existing user
+     *
+     * @return void
      */
     public function editAction()
     {
@@ -110,6 +138,11 @@ class Admin_UserController extends Zend_Controller_Action
 
     }
 
+    /**
+     * Update my account action
+     *
+     * @return void
+     */
     public function updateMyAccountAction()
     {
         $u = new Model_User();
@@ -127,6 +160,11 @@ class Admin_UserController extends Zend_Controller_Action
         $this->_redirect($url);
     }
 
+    /**
+     * Copy ACL action
+     *
+     * @return void
+     */
     public function copyAclAction()
     {
         $currentUser = DSF_Filter_Post::int('id');
@@ -141,8 +179,11 @@ class Admin_UserController extends Zend_Controller_Action
     }
 
     /**
-     * delete a user
+     * Delete action
      *
+     * Delete a user
+     *
+     * @return void
      */
     public function deleteAction()
     {

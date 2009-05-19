@@ -1,7 +1,46 @@
 <?php
+/**
+ * DSF CMS
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
+
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+/**
+ * Admin Design Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    $Id:
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
 class Admin_DesignController extends Zend_Controller_Action
 {
 
+    /**
+     * Initialize the action
+     *
+     * @return void
+     */
     public function init()
     {
         $this->view->breadcrumbs = array(
@@ -9,6 +48,11 @@ class Admin_DesignController extends Zend_Controller_Action
         );
     }
 
+    /**
+     * The default action
+     *
+     * @return void
+     */
     public function indexAction()
     {
         $mdlDesign = new Model_Design();
@@ -20,6 +64,11 @@ class Admin_DesignController extends Zend_Controller_Action
         $this->design = new stdClass();
     }
 
+    /**
+     * Create action
+     *
+     * @return void
+     */
     public function createAction()
     {
         if ($this->_request->isPost()) {
@@ -34,6 +83,11 @@ class Admin_DesignController extends Zend_Controller_Action
         $this->_forward('index');
     }
 
+    /**
+     * Update action
+     *
+     * @return void
+     */
     public function updateAction()
     {
         $mdlDesign = new Model_Design();
@@ -70,6 +124,11 @@ class Admin_DesignController extends Zend_Controller_Action
         $this->view->design = $mdlDesign;
     }
 
+    /**
+     * Delete action
+     *
+     * @return void
+     */
     public function deleteAction()
     {
         $mdlDesign = new Model_Design();

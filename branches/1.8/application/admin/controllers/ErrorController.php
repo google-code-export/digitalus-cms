@@ -1,5 +1,4 @@
 <?php
-
 /**
  * DSF CMS
  *
@@ -13,22 +12,46 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: ErrorController.php Mon Dec 24 20:49:53 EST 2007 20:49:53 forrest lyman $
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
  */
 
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+/**
+ * Admin Error Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    $Id: ErrorController.php Mon Dec 24 20:49:53 EST 2007 20:49:53 forrest lyman $
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
 class Admin_ErrorController extends Zend_Controller_Action
 {
 
+    /**
+     * The default action
+     *
+     * @return void
+     */
     public function indexAction()
     {
         $view = $this->view;
         echo $view->render('admin.tpl.php');
     }
 
+    /**
+     * No auth action
+     *
+     * @return void
+     */
     public function noAuthAction()
     {
 

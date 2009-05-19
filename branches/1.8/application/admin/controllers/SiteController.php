@@ -1,5 +1,4 @@
 <?php
-
 /**
  * DSF CMS
  *
@@ -13,15 +12,34 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: SiteController.php Tue Dec 25 19:46:11 EST 2007 19:46:11 forrest lyman $
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
  */
 
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+/**
+ * Admin Site Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    $Id: SiteController.php Tue Dec 25 19:46:11 EST 2007 19:46:11 forrest lyman $
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
 class Admin_SiteController extends Zend_Controller_Action
 {
+    /**
+     * Initialize the action
+     *
+     * @return void
+     */
     public function init()
     {
         $this->view->breadcrumbs = array(
@@ -30,8 +48,11 @@ class Admin_SiteController extends Zend_Controller_Action
     }
 
     /**
-     * render the main site admin interface
+     * The default action
      *
+     * Render the main site admin interface
+     *
+     * @return void
      */
     public function indexAction()
     {
@@ -43,8 +64,11 @@ class Admin_SiteController extends Zend_Controller_Action
     }
 
     /**
-     * update the site settings file
+     * Edit action
      *
+     * Update the site settings file
+     *
+     * @return void
      */
     public function editAction()
     {
@@ -58,9 +82,12 @@ class Admin_SiteController extends Zend_Controller_Action
     }
 
     /**
-     * the console provides an interface for simple command scripts.
+     * Console action
+     *
+     * The console provides an interface for simple command scripts.
      * those scripts go in library/DSF/Command/{script name}
      *
+     * @return void
      */
     public function consoleAction()
     {
@@ -102,6 +129,11 @@ class Admin_SiteController extends Zend_Controller_Action
 
     }
 
+    /**
+     * Mail test action
+     *
+     * @return void
+     */
     public function mailTestAction()
     {
         $settings = new Model_SiteSettings();

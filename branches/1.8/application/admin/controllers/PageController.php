@@ -1,5 +1,4 @@
 <?php
-
 /**
  * DSF CMS
  *
@@ -13,19 +12,38 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: PageController.php Tue Dec 25 19:38:20 EST 2007 19:38:20 forrest lyman $
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
  */
 
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+/**
+ * Admin Page Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    $Id: PageController.php Tue Dec 25 19:38:20 EST 2007 19:38:20 forrest lyman $
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.0.0
+ */
 class Admin_PageController extends Zend_Controller_Action
 {
     const META_ACTION = '/admin/page/update-meta-data';
     const PROPERTY_ACTION = '/admin/page/properties';
     const RELATED_ACTION = '/admin/page/related-data';
 
+    /**
+     * Initialize the action
+     *
+     * @return void
+     */
     public function init()
     {
         $this->view->breadcrumbs = array(
@@ -34,14 +52,22 @@ class Admin_PageController extends Zend_Controller_Action
     }
 
     /**
-     * render the admin page interface
+     * The default action
      *
+     * Render the admin page interface
+     *
+     * @return void
      */
     public function indexAction()
     {
         $this->view->createPageOptions = $this->_getCreateOptions();
     }
 
+    /**
+     * New action
+     *
+     * @return void
+     */
     public function newAction()
     {
         $name = DSF_Filter_Post::get('page_name');
@@ -65,6 +91,11 @@ class Admin_PageController extends Zend_Controller_Action
 
     }
 
+    /**
+     * Edit action
+     *
+     * @return void
+     */
     public function editAction()
     {
 
@@ -153,6 +184,11 @@ class Admin_PageController extends Zend_Controller_Action
 
     }
 
+    /**
+     * Update design action
+     *
+     * @return void
+     */
     public function updateDesignAction()
     {
         $id = $this->_request->getParam('id');
@@ -162,6 +198,11 @@ class Admin_PageController extends Zend_Controller_Action
         $this->_forward('edit');
     }
 
+    /**
+     * Update meta data action
+     *
+     * @return void
+     */
     public function updateMetaDataAction()
     {
         $mdlMetaData = new Model_MetaData();
@@ -178,6 +219,11 @@ class Admin_PageController extends Zend_Controller_Action
         $this->_redirect('admin/page/edit/id/' . $id);
     }
 
+    /**
+     * Make homepage action
+     *
+     * @return void
+     */
     public function makeHomePageAction()
     {
         $id = $this->_request->getParam('id');
@@ -186,6 +232,11 @@ class Admin_PageController extends Zend_Controller_Action
         $this->_redirect('admin/page/edit/id/' . $id);
     }
 
+    /**
+     * Update properties action
+     *
+     * @return void
+     */
     public function updatePropertiesAction()
     {
         $mdlProperties = new Model_Properties();
@@ -206,6 +257,11 @@ class Admin_PageController extends Zend_Controller_Action
         $this->_redirect('admin/page/edit/id/' . $pageId);
     }
 
+    /**
+     * Related content action
+     *
+     * @return void
+     */
     public function relatedContentAction()
     {
         $pageId = DSF_Filter_Post::int('page_id');
@@ -221,6 +277,11 @@ class Admin_PageController extends Zend_Controller_Action
         $this->_redirect('admin/page/edit/id/' . $pageId);
     }
 
+    /**
+     * Move action
+     *
+     * @return void
+     */
     public function moveAction()
     {
         $mdlPage = new Model_Page();
@@ -230,6 +291,11 @@ class Admin_PageController extends Zend_Controller_Action
         $this->_redirect('admin/page/edit/id/' . $id);
     }
 
+    /**
+     * Delete action
+     *
+     * @return void
+     */
     public function deleteAction()
     {
         $id = $this->_request->getParam('id', 0);
@@ -240,8 +306,11 @@ class Admin_PageController extends Zend_Controller_Action
         $this->_redirect('admin/page');
     }
 
-// page interface builder
-
+    /**
+     * Select content template action
+     *
+     * @return void
+     */
     public function selectContentTemplateAction()
     {
         $parentId = $this->_request->getParam('parent_id');
@@ -253,16 +322,33 @@ class Admin_PageController extends Zend_Controller_Action
         $this->view->allowedTemplates = $template->getAllowedChildTemplates();
     }
 
+    /**
+     * Create page form action
+     *
+     * @return void
+     */
     public function createPageFormAction()
     {
 
     }
 
+    /**
+     * Get content form action
+     *
+     * @param  string $template
+     * @return Zend_Form
+     */
     public function getContentForm($template)
     {
         return $template->getForm();
     }
 
+    /**
+     * Get meta action
+     *
+     * @param  string $data
+     * @return Zend_Form
+     */
     public function getMetaForm($data)
     {
         $form = new Zend_Form();
@@ -314,9 +400,15 @@ class Admin_PageController extends Zend_Controller_Action
         }
 
         return $form;
-
     }
 
+    /**
+     * Set create options action
+     *
+     * @param  id     $parentId
+     * @param  string $contentType
+     * @return void
+     */
     protected function _setCreateOptions($parentId, $contentType)
     {
         $session = $this->_getCreateOptions();
@@ -324,6 +416,11 @@ class Admin_PageController extends Zend_Controller_Action
         $session->parentId = intval($parentId);
     }
 
+    /**
+     * Get create options action
+     *
+     * @return Zend_Session_Namespace
+     */
     protected function _getCreateOptions()
     {
         return new Zend_Session_Namespace('createPageOptions');
