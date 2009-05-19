@@ -15,4 +15,4 @@
 "did not return any results.";"ergab keine Ergebnisse"
 "Please provide a keyword to search for!";"Bitte geben Sie einen Suchbegriff ein!"
 "The search form does not have any user defined settings.";"Das Such-Formular hat keine Benutzer-definierten Einstellungen."
-"For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";"Damit das Such-Modul einwandfrei funktioniert, muss das Index-Verzeichnis beschreibbar sein. Überprüfen Sie die Schreibrechte diese Verzeichnisses!"
+"For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";"Damit das Such-Modul einwandfrei funktioniert, muss das Index-Verzeichnis beschreibbar sein. Überprüfen Sie die Schreibrechte diese Verzeichnisses:"

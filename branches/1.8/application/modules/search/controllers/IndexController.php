@@ -1,6 +1,45 @@
 <?php
+/**
+ * DSF CMS
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version    $Id:$
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.5.0
+ */
+
+/** Zend_Controller_Action */
+require_once 'Zend/Controller/Action.php';
+
+/**
+ * Search Module Index Conroller of Digitalus CMS
+ *
+ * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_CMS_Controllers
+ * @version    $Id:
+ * @link       http://www.digitaluscms.com
+ * @since      Release 1.5.0
+ */
 class Mod_Search_IndexController extends Zend_Controller_Action
 {
+    /**
+     * Initialize the action
+     *
+     * @return void
+     */
     public function init()
     {
         $this->view->breadcrumbs = array(
@@ -12,16 +51,24 @@ class Mod_Search_IndexController extends Zend_Controller_Action
             . '/label/' . $this->view->getTranslation('Module') . ':' . $this->view->getTranslation('Search');
     }
 
+    /**
+     * The default action
+     *
+     * Checks the permissions of the index directory
+     *
+     * @return void
+     */
     public function indexAction()
     {
         // Check whether index directory is writeable
-        $indexPath = APPLICATION_PATH . '/modules/search/data/index';
-        if (!file_exists($indexPath) || !is_writeable($indexPath)) {
-            $this->view->errorMessage = 'For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:';
-            $this->view->indexPath = $indexPath;
-        }
+        $this->_isIndexWriteable();
     }
 
+    /**
+     * Rebuild action
+     *
+     * @return void
+     */
     public function rebuildAction()
     {
         //this can take a lot of time
@@ -45,6 +92,22 @@ class Mod_Search_IndexController extends Zend_Controller_Action
         $index->optimize();
         $this->_forward('index');
         echo '<p><strong>' . $this->view->getTranslation('The search index was rebuilt successfully!') . '</strong></p><br />';
+    }
+
+    /**
+     * Check whether the index directory is writeable
+     *
+     * @return boolean true|false
+     */
+    protected function _isIndexWriteable()
+    {
+        $indexPath = APPLICATION_PATH . '/modules/search/data/index';
+        if (!file_exists($indexPath) || !is_writeable($indexPath)) {
+            $this->view->errorMessage = 'For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:';
+            $this->view->indexPath = $indexPath;
+            return false;
+        }
+        return true;
     }
 
 }
