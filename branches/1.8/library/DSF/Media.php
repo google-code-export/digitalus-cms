@@ -1,6 +1,7 @@
 <?php
 
-class DSF_Media {
+class DSF_Media
+{
 
     public static function isAllowed($mimeType)
     {
@@ -34,8 +35,8 @@ class DSF_Media {
             $path = self::getMediaPath($path);
             //default to the name on the client machine
             if ($filename == null) {$filename = $file['name'];}
-            $filename = str_replace('_','-',$filename);
-            $filename = str_replace(' ','-',$filename);
+            $filename = str_replace('_', '-', $filename);
+            $filename = str_replace(' ', '-', $filename);
 
             $path = str_replace(self::rootDirectory(), '', $path);
             $path = DSF_Toolbox_String::stripUnderscores($path);

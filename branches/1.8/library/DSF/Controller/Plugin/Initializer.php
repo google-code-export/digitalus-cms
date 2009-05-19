@@ -1,6 +1,6 @@
 <?php
 /**
- * Initializer of Digitalus CMS
+ * DSF CMS
  *
  * LICENSE
  *
@@ -19,15 +19,19 @@
  * @since      Release 1.8.0
  */
 
+/** Zend_Controller_Plugin_Abstract */
+require_once 'Zend/Controller/Plugin/Abstract.php';
+
 /**
  * Initializer of Digitalus CMS
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category   DSF CMS
+ * @package    DSF_Core_Library
  * @version    Release: @package_version@
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
- * @deprecated
  */
 class DSF_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
 {
