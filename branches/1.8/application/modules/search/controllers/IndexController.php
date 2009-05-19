@@ -1,8 +1,6 @@
 <?php
 class Mod_Search_IndexController extends Zend_Controller_Action
 {
-
-
     public function init()
     {
         $this->view->breadcrumbs = array(
@@ -16,7 +14,12 @@ class Mod_Search_IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-
+        // Check whether index directory is writeable
+        $indexPath = APPLICATION_PATH . '/modules/search/data/index';
+        if (!file_exists($indexPath) || !is_writeable($indexPath)) {
+            $this->view->errorMessage = 'For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:';
+            $this->view->indexPath = $indexPath;
+        }
     }
 
     public function rebuildAction()
