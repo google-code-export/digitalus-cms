@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * getData helper
  *
- * @uses viewHelper DSF_View_Helper_General
+ * @uses viewHelper Digitalus_View_Helper_General
  */
-class DSF_View_Helper_General_getData {
+class Digitalus_View_Helper_General_getData {
 
     /**
      * @var Zend_View_Interface

@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Content_ListWhatsNew
+class Digitalus_View_Helper_Content_ListWhatsNew
 {
     /**
      * render a module page like news_showNewPosts
@@ -9,7 +9,7 @@ class DSF_View_Helper_Content_ListWhatsNew
         $newStories = $this->view->pageObj->getNewStories();
         if ($newStories) {
             foreach ($newStories as $story) {
-                $link = DSF_Toolbox_String::addHyphens($this->view->RealPath($story->id));
+                $link = Digitalus_Toolbox_String::addHyphens($this->view->RealPath($story->id));
                 $data[] = "<a href='{$link}'>" . $this->view->pageObj->getLabel($story) . '</a>';
             }
             if (is_array($data)) {

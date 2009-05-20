@@ -1,12 +1,12 @@
 <?php
-require_once 'DSF/Module/Service.php';
-class DSF_Module
+require_once 'Digitalus/Module/Service.php';
+class Digitalus_Module
 {
     const MODULE_KEY = 'module';
     protected $_page;
     public function __construct ()
     {
-        $this->_page = DSF_Builder::getPage();
+        $this->_page = Digitalus_Builder::getPage();
     }
     public function getData ($content = null)
     {

@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Navigation_RenderBreadcrumbs
+class Digitalus_View_Helper_Navigation_RenderBreadcrumbs
 {
     public function RenderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
     {
@@ -8,7 +8,7 @@ class DSF_View_Helper_Navigation_RenderBreadcrumbs
             $path = null;
             foreach ($parents as $parent) {
                 $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . DSF_Toolbox_String::addHyphens($label);
+                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
                 $path .= $link;
                 $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
             }

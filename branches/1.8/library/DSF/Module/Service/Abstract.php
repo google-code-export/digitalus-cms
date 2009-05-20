@@ -1,10 +1,10 @@
 <?php
-abstract class DSF_Module_Service_Abstract
+abstract class Digitalus_Module_Service_Abstract
 {
     protected $_response;
     public function __construct ()
     {
-        $this->_response = new DSF_Module_Service_Response();
+        $this->_response = new Digitalus_Module_Service_Response();
     }
     public function getResponse ($asXml = false)
     {

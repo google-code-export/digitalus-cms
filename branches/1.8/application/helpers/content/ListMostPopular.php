@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Content_ListMostPopular
+class Digitalus_View_Helper_Content_ListMostPopular
 {
     /**
      * render a module page like news_showNewPosts
@@ -9,7 +9,7 @@ class DSF_View_Helper_Content_ListMostPopular
         $popular = $this->view->pageObj->getPopularStories();
         if ($popular) {
             foreach ($popular as $story) {
-                $link = DSF_Toolbox_String::addHyphens($this->view->RealPath($story->id));
+                $link = Digitalus_Toolbox_String::addHyphens($this->view->RealPath($story->id));
                 $data[] = "<a href='{$link}'>" . $this->view->pageObj->getLabel($story) . "</a>";
             }
             if (is_array($data)) {

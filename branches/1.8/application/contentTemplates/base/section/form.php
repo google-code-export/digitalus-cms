@@ -1,5 +1,5 @@
 <?php
-class Base_Section_Form extends DSF_Content_Form_Abstract {
+class Base_Section_Form extends Digitalus_Content_Form_Abstract {
     public function setup() {
         $view = $this->getView();
         $headline = $this->form->createElement('text', 'headline');

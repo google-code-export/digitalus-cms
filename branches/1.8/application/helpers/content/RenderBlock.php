@@ -1,10 +1,10 @@
 <?php
-class DSF_View_Helper_Content_RenderBlock
+class Digitalus_View_Helper_Content_RenderBlock
 {
     public function RenderBlock ($path)
     {
         $mdlPage = new Model_Page();
-        $uriObj = new DSF_Uri($path);
+        $uriObj = new Digitalus_Uri($path);
         $pointer = $mdlPage->fetchPointer($uriObj->toArray());
         $pageObj = $mdlPage->open($pointer, $mdlPage->getDefaultVersion());
         $namespace = $pageObj->page->namespace . '_' . $pointer;

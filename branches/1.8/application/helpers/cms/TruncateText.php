@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Cms_TruncateText
+class Digitalus_View_Helper_Cms_TruncateText
 {
     /**
      * returns a truncated version of the text

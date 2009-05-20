@@ -6,7 +6,7 @@
  * @subpackage Helpers
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DSF_View_Helper_Cms_Controller
+class Digitalus_View_Helper_Cms_Controller
 {
     public $defaultModule;
     public $dispatcher;

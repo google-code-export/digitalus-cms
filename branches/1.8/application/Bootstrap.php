@@ -193,10 +193,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $viewRenderer->setView($view);
 
         // Load digitalus helpers
-        $helperDirs = DSF_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/helpers');
+        $helperDirs = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/helpers');
         if (is_array($helperDirs)) {
             foreach ($helperDirs as $dir) {
-                $view->addHelperPath(APPLICATION_PATH . '/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
+                $view->addHelperPath(APPLICATION_PATH . '/helpers/' . $dir, 'Digitalus_View_Helper_' . ucfirst($dir));
             }
         }
         $view->baseUrl = $this->_front->getBaseUrl();
@@ -238,7 +238,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _getModules()
     {
-        $modules = DSF_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
+        $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
         if (is_array($modules)) {
             return $modules;
         } else {

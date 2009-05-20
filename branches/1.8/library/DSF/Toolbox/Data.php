@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Toolbox_Data {
+class Digitalus_Toolbox_Data {
     public static function getValueOrNull($value)
     {
         if (empty($value)) {

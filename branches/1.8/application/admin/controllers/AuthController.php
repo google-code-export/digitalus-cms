@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    $Id: AuthController.php Mon Dec 24 20:48:35 EST 2007 20:48:35 forrest lyman $
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0
@@ -53,7 +53,7 @@ class Admin_AuthController extends Zend_Controller_Action
      *
      * if the form has not been submitted this renders the login form
      * if it has then it validates the data
-     * if it is sound then it runs the DSF_Auth_Adapter function
+     * if it is sound then it runs the Digitalus_Auth_Adapter function
      * to authorise the request
      * on success it redirect to the admin home page
      *
@@ -62,11 +62,11 @@ class Admin_AuthController extends Zend_Controller_Action
     public function loginAction()
     {
         if ($this->_request->isPost()) {
-            $uri = DSF_Filter_Post::get('uri');
-            $username = DSF_Filter_Post::get('adminUsername');
-            $password = DSF_Filter_Post::raw('adminPassword');
+            $uri = Digitalus_Filter_Post::get('uri');
+            $username = Digitalus_Filter_Post::get('adminUsername');
+            $password = Digitalus_Filter_Post::raw('adminPassword');
 
-            $e = new DSF_View_Error();
+            $e = new Digitalus_View_Error();
 
             if ($username == '') {
                 $e->add($this->view->getTranslation('You must enter a username.'));
@@ -77,7 +77,7 @@ class Admin_AuthController extends Zend_Controller_Action
 
 
             if (!$e->hasErrors()) {
-                $auth = new DSF_Auth($username, $password);
+                $auth = new Digitalus_Auth($username, $password);
                 $result = $auth->authenticate();
                 if ($result) {
                     if ($uri == '' || $uri == 'admin/auth/login') {
@@ -85,13 +85,13 @@ class Admin_AuthController extends Zend_Controller_Action
                     }
                      $this->_redirect($uri);
                 } else {
-                    $e = new DSF_View_Error();
+                    $e = new Digitalus_View_Error();
                     $e->add($this->view->getTranslation('The username or password you entered was not correct.'));
                 }
             }
             $this->view->uri = $uri;
         } else {
-            $this->view->uri = DSF_Uri::get();
+            $this->view->uri = Digitalus_Uri::get();
         }
 
     }
@@ -106,7 +106,7 @@ class Admin_AuthController extends Zend_Controller_Action
      */
     public function logoutAction()
     {
-        DSF_Auth::destroy();
+        Digitalus_Auth::destroy();
         $this->_redirect('/');
     }
 
@@ -118,12 +118,12 @@ class Admin_AuthController extends Zend_Controller_Action
     public function resetPasswordAction()
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            $email = DSF_Filter_Post::get('email');
+            $email = Digitalus_Filter_Post::get('email');
             $user = new Model_User();
             $match = $user->getUserByUsername($email);
             if ($match) {
                 //create the password
-                $password = DSF_Toolbox_String::random(10); //10 character random string
+                $password = Digitalus_Toolbox_String::random(10); //10 character random string
 
                 //load the email data
                 $data['first_name'] = $match->first_name;
@@ -136,23 +136,23 @@ class Admin_AuthController extends Zend_Controller_Action
                 $settings = $s->toObject();
 
                 //attempt to send the email
-                $mail = new DSF_Mail();
+                $mail = new Digitalus_Mail();
                 if ($mail->send($match->email, array($sender), 'Password Reminder', 'passwordReminder', $data)) {
                     //update the user's password
                     $match->password = md5($password);
                     $match->save();//save the new password
-                    $m = new DSF_View_Message();
+                    $m = new Digitalus_View_Message();
                     $m->add(
                         $this->view->getTranslation('Your password has been reset for security and sent to your email address')
                        );
                 } else {
-                    $e = new DSF_View_Error();
+                    $e = new Digitalus_View_Error();
                     $e->add(
                         $this->view->getTranslation('Sorry, there was an error sending you your updated password.  Please contact us for more help.')
                        );
                 }
             } else {
-                $e = new DSF_View_Error();
+                $e = new Digitalus_View_Error();
                 $e->add(
                     $this->view->getTranslation('Sorry, we could not locate your account. Please contact us to resolve this issue.')
                 );

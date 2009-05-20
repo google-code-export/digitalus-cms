@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    $Id:
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0
@@ -74,8 +74,8 @@ class Admin_DesignController extends Zend_Controller_Action
         if ($this->_request->isPost()) {
             // NOTE: we will turn this into a Zend_Form after were sure it will work this way
             $mdlDesign = new Model_Design();
-            $name = DSF_Filter_Post::get('name');
-            $notes = DSF_Filter_Post::get('notes');
+            $name = Digitalus_Filter_Post::get('name');
+            $notes = Digitalus_Filter_Post::get('notes');
             $id = $mdlDesign->createDesign($name, $notes);
             $this->_redirect('admin/design/update/id/' . $id);
             return;
@@ -95,15 +95,15 @@ class Admin_DesignController extends Zend_Controller_Action
 
         if ($this->_request->isPost()) {
             // NOTE: we will turn this into a Zend_Form after were sure it will work this way
-            $id = DSF_Filter_Post::int('id');
+            $id = Digitalus_Filter_Post::int('id');
             $mdlDesign->updateDesign(
                 $id,
-                DSF_Filter_Post::get('name'),
-                DSF_Filter_Post::get('notes'),
-                DSF_Filter_Post::get('layout'),
-                DSF_Filter_Post::raw('styles'),
-                DSF_Filter_Post::get('inline_styles'),
-                DSF_Filter_Post::int('is_default')
+                Digitalus_Filter_Post::get('name'),
+                Digitalus_Filter_Post::get('notes'),
+                Digitalus_Filter_Post::get('layout'),
+                Digitalus_Filter_Post::raw('styles'),
+                Digitalus_Filter_Post::get('inline_styles'),
+                Digitalus_Filter_Post::int('is_default')
             );
         } else {
             $id = $this->_request->getParam('id');

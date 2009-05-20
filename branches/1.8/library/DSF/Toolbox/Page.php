@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Toolbox_Page {
+class Digitalus_Toolbox_Page {
 
     public static function getUrl(Zend_Db_Table_Row $page, $separator = '/')
     {

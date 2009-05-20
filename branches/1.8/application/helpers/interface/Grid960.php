@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * Grid960 helper
  *
- * @uses viewHelper DSF_View_Helper_Controls
+ * @uses viewHelper Digitalus_View_Helper_Controls
  */
-class DSF_View_Helper_Interface_Grid960 {
+class Digitalus_View_Helper_Interface_Grid960 {
 
     /**
      * @var Zend_View_Interface

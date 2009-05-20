@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Message
+class Digitalus_View_Message
 {
     private $_ns;
     private $_message;

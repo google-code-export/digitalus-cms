@@ -1,7 +1,7 @@
 
 
 <?php
-class DSF_View_Helper_Jquery_JquerySortable
+class Digitalus_View_Helper_Jquery_JquerySortable
 {
 
     /**

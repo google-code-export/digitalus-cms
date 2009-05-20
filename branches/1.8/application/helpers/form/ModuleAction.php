@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Form_ModuleAction
+class Digitalus_View_Helper_Form_ModuleAction
 {
 
     /**

@@ -203,7 +203,7 @@ Applying Attributes:
 @define('txt_registered',         '&#174;');
 @define('txt_copyright',          '&#169;');
 
-class DSF_Content_Renderer_Textile
+class Digitalus_Content_Renderer_Textile
 {
     public $btag;
     public $hlgn;

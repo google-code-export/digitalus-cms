@@ -12,7 +12,7 @@ class Zend_View_Helper_RenderApplet
         //create a new instance of view
         $appletView = new Zend_View();
         $appletView->setScriptPath($config->view->applet->path . '/' . $applet);
-        $appletView->setHelperPath($config->view->applet->path . '/' . $applet, 'DSF_Applet');
+        $appletView->setHelperPath($config->view->applet->path . '/' . $applet, 'Digitalus_Applet');
 
         //tell the applet about where it is
         $appletView->page    = $this->view->page;

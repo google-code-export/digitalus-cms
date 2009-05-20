@@ -1,7 +1,7 @@
 <?php
 require_once 'application/models/ContentNode.php';
 
-class Model_Page extends DSF_Db_Table
+class Model_Page extends Digitalus_Db_Table
 {
     protected $_name = 'pages';
     protected $_namespace = 'content';
@@ -15,7 +15,7 @@ class Model_Page extends DSF_Db_Table
             $version = $this->getDefaultVersion();
         }
 
-        $uriObj = new DSF_Uri($uri);
+        $uriObj = new Digitalus_Uri($uri);
         $pointer = $this->fetchPointer($uriObj->toArray());
         $node = new Model_ContentNode();
         //fetch the content nodes
@@ -126,7 +126,7 @@ class Model_Page extends DSF_Db_Table
         }
     }
 
-    public function pageExists(DSF_Uri $uri)
+    public function pageExists(Digitalus_Uri $uri)
     {
         if ($this->_fetchPointer($uri->toArray(), 0) || $uri == null) {
             return true;

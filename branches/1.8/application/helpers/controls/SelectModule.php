@@ -1,16 +1,16 @@
 <?php
-class DSF_View_Helper_Controls_SelectModule
+class Digitalus_View_Helper_Controls_SelectModule
 {
     public function SelectModule($name, $value, $attribs = null)
     {
-        $modules = DSF_Filesystem_Dir::getDirectories('./application/modules');
+        $modules = Digitalus_Filesystem_Dir::getDirectories('./application/modules');
         if (is_array($modules)) {
             $data[] = $this->view->getTranslation('Select a module');
             foreach ($modules as $module) {
-                $pages = DSF_Filesystem_File::getFilesByType('./application/modules/' . $module . '/views/scripts/public', 'phtml');
+                $pages = Digitalus_Filesystem_File::getFilesByType('./application/modules/' . $module . '/views/scripts/public', 'phtml');
                 if (is_array($pages)) {
                     foreach ($pages as $page) {
-                        $page = DSF_Toolbox_Regex::stripFileExtension($page);
+                        $page = Digitalus_Toolbox_Regex::stripFileExtension($page);
                         $data[$module . '_' . $page] = $module . ' -> ' . $page;
                     }
                 }

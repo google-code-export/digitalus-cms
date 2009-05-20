@@ -10,7 +10,7 @@
  *
  */
 
-class DSF_View_Helper_General_Calendar
+class Digitalus_View_Helper_General_Calendar
 {
     public function Calendar($year, $month, $days = array(), $day_name_length = 3, $month_href = NULL, $first_day = 0, $pn = array())
     {

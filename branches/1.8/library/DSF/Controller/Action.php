@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Controller_Action extends Zend_Controller_Action
+class Digitalus_Controller_Action extends Zend_Controller_Action
 {
     public $page;
 
@@ -10,7 +10,7 @@ class DSF_Controller_Action extends Zend_Controller_Action
         if (Zend_Registry::isRegistered('page')) {
             $this->page = Zend_Registry::get('page');
         } else {
-            $this->page = new DSF_Page();
+            $this->page = new Digitalus_Page();
             $this->_registerPage();
         }
     }

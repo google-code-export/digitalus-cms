@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Content_RenderContent
+class Digitalus_View_Helper_Content_RenderContent
 {
     public function RenderContent($block, $rowset = null, $wordCount = 0)
     {

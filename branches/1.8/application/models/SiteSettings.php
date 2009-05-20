@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * DESCRIPTION
  * manages site settings
@@ -16,8 +16,8 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Models
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Models
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: SiteSettings.php Mon Dec 24 20:30:38 EST 2007 20:30:38 forrest lyman $

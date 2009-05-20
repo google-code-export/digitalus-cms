@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Installer_Config
+class Digitalus_Installer_Config
 {
     const PATH_TO_CONFIG     = './application/data/config.xml';
     const PATH_TO_CMS_CONFIG = './application/configs/application.ini';

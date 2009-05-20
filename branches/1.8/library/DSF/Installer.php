@@ -1,9 +1,9 @@
 <?php
-require_once 'DSF/Installer/Database.php';
-require_once 'DSF/Installer/Config.php';
-require_once 'DSF/Installer/Environment.php';
+require_once 'Digitalus/Installer/Database.php';
+require_once 'Digitalus/Installer/Config.php';
+require_once 'Digitalus/Installer/Environment.php';
 
-class DSF_Installer
+class Digitalus_Installer
 {
     protected $_errors = array();
     protected $_warnings = array();
@@ -19,7 +19,7 @@ class DSF_Installer
     public function __construct() {
         // We want the installer to manage its own warnings
         error_reporting(E_ERROR);
-        $this->_db = new DSF_Installer_Database();
+        $this->_db = new Digitalus_Installer_Database();
 
         // Load config
         $this->loadConfig();
@@ -39,16 +39,16 @@ class DSF_Installer
     public function loadConfig()
     {
         // Load config
-        $this->_config = new DSF_Installer_Config();
+        $this->_config = new Digitalus_Installer_Config();
 
         $configError = false;
         if (!$this->_config->isReadable()) {
-            $this->addError('Could not load config file (' . DSF_Installer_Config::PATH_TO_CONFIG . ')');
+            $this->addError('Could not load config file (' . Digitalus_Installer_Config::PATH_TO_CONFIG . ')');
             $configError = true;
         }
 
         if (!$this->_config->isWritable()) {
-            $this->addError('Could not write to config file (' . DSF_Installer_Config::PATH_TO_CONFIG . ')');
+            $this->addError('Could not write to config file (' . Digitalus_Installer_Config::PATH_TO_CONFIG . ')');
             $configError = true;
         }
 
@@ -61,7 +61,7 @@ class DSF_Installer
 
     public function testEnvironment()
     {
-        $this->_env = new DSF_Installer_Environment();
+        $this->_env = new Digitalus_Installer_Environment();
         $requiredPhpVersion = $this->_config->getRequiredPhpVersion();
         if (!$this->_env->checkPhpVersion($requiredPhpVersion)) {
             $this->addError('PHP Version: <b>' . $requiredPhpVersion . '</b> or greater is required for Digitalus CMS');
@@ -70,19 +70,19 @@ class DSF_Installer
         }
 
         if (!$this->_env->cacheIsWritable()) {
-            $this->addError('Could not write to cache directory  (' . DSF_Installer_Environment::PATH_TO_CACHE . ')');
+            $this->addError('Could not write to cache directory  (' . Digitalus_Installer_Environment::PATH_TO_CACHE . ')');
         } else {
             $this->addMessage('Checked cache directory...OK!');
         }
 
         if (!$this->_env->mediaIsWritable()) {
-            $this->addError('Could not write to media directory  (' . DSF_Installer_Environment::PATH_TO_MEDIA . ')');
+            $this->addError('Could not write to media directory  (' . Digitalus_Installer_Environment::PATH_TO_MEDIA . ')');
         } else {
             $this->addMessage('Checked media directory...OK!');
         }
 
         if (!$this->_env->trashIsWritable()) {
-            $this->addError('Could not write to trash directory  (' . DSF_Installer_Environment::PATH_TO_TRASH . ')');
+            $this->addError('Could not write to trash directory  (' . Digitalus_Installer_Environment::PATH_TO_TRASH . ')');
         } else {
             $this->addMessage('Checked trash directory...OK!');
         }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: Auth.php Tue Dec 25 20:16:55 EST 2007 20:16:55 forrest lyman $
  */
 
-class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
+class Digitalus_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 {
     /**
      * the current user's identity
@@ -64,8 +64,8 @@ class DSF_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $this->_identity = DSF_Auth::getIdentity();
-        $this->_acl = new DSF_Acl();
+        $this->_identity = Digitalus_Auth::getIdentity();
+        $this->_acl = new Digitalus_Acl();
 
         if (!empty($this->_identity)) {
             $role = $this->_identity->role;

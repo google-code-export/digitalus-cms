@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    $Id:
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0
@@ -45,7 +45,7 @@ class Admin_UtilController extends Zend_Controller_Action
     {
         $partial = $this->_request->getParam('partial');
         if ($partial != null) {
-            $this->view->partialKey = DSF_Toolbox_String::stripUnderscores($partial);
+            $this->view->partialKey = Digitalus_Toolbox_String::stripUnderscores($partial);
             $data = new stdClass();
             $data->get = $this->_request->getParams();
             $data->post = $_POST;

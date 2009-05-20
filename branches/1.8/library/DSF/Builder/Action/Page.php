@@ -1,10 +1,10 @@
 <?php
-class DSF_Builder_Action_Page extends DSF_Builder_Abstract
+class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
 {
 
     public function appendUriParams()
     {
-        $uri = new DSF_Uri();
+        $uri = new Digitalus_Uri();
         $params = $uri->getParams();
         if (is_array($params)) {
             $this->_page->setParams($params);
@@ -56,10 +56,10 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
     {
         $lang = $this->_page->getParam('language');
         if (!empty($lang)) {
-            DSF_Language::setLanguage($lang);
+            Digitalus_Language::setLanguage($lang);
             $this->_page->setLanguage($lang);
         } else {
-            $this->_page->setLanguage(DSF_Language::getLanguage());
+            $this->_page->setLanguage(Digitalus_Language::getLanguage());
         }
 
     }
@@ -189,10 +189,10 @@ class DSF_Builder_Action_Page extends DSF_Builder_Abstract
     public function registerViewHelpers()
     {
         $view = $this->_page->getView();
-        $helperDirs = DSF_Filesystem_Dir::getDirectories('./application/helpers');
+        $helperDirs = Digitalus_Filesystem_Dir::getDirectories('./application/helpers');
         if (is_array($helperDirs)) {
             foreach ($helperDirs as $dir) {
-                $view->addHelperPath('./application/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
+                $view->addHelperPath('./application/helpers/' . $dir, 'Digitalus_View_Helper_' . ucfirst($dir));
             }
         }
     }

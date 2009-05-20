@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Internationalization_GetTranslation
+class Digitalus_View_Helper_Internationalization_GetTranslation
 {
     /**
      * this helper returns the translation for the passed key

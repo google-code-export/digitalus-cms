@@ -1,5 +1,5 @@
 <?php
-class Base_Wysiwyg_Form extends DSF_Content_Form_Abstract
+class Base_Wysiwyg_Form extends Digitalus_Content_Form_Abstract
 {
     public function setup ()
     {

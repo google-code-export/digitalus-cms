@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Form_DatePicker
+class Digitalus_View_Helper_Form_DatePicker
 {
 
     /**

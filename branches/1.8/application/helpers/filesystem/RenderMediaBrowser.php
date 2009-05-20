@@ -1,19 +1,19 @@
 <?php
-class DSF_View_Helper_Filesystem_RenderMediaBrowser
+class Digitalus_View_Helper_Filesystem_RenderMediaBrowser
 {
 
 
     public function renderMediaBrowser($path, $folderLink, $fileLink)
     {
 
-        $folders = DSF_Filesystem_Dir::getDirectories('./' . $path);
-        $files = DSF_Filesystem_File::getFilesByType('./' . $path, false, false, true);
+        $folders = Digitalus_Filesystem_Dir::getDirectories('./' . $path);
+        $files = Digitalus_Filesystem_File::getFilesByType('./' . $path, false, false, true);
         $links = null;
 
         if (is_array($folders) && count($folders) > 0) {
             foreach ($folders as $folder) {
                 $folderPath = $path . '/' . $folder;
-                $link = DSF_Toolbox_String::addUnderscores($folderPath);
+                $link = Digitalus_Toolbox_String::addUnderscores($folderPath);
                 //remove reference to media
                 $link = str_replace('media_', '', $link);
                 $submenu = $this->view->RenderMediaBrowser($folderPath, $folderLink, $fileLink);

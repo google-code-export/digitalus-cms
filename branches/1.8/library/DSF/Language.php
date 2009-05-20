@@ -6,7 +6,7 @@
  * @todo refactor this class to use Zend_Translate
  *
  */
-class DSF_Language {
+class Digitalus_Language {
     const SESSION_KEY  = 'currentLanguage';
     const LANGUAGE_KEY = 'current';
 

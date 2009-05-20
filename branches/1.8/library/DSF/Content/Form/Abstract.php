@@ -1,5 +1,5 @@
 <?php
-abstract class DSF_Content_Form_Abstract
+abstract class Digitalus_Content_Form_Abstract
 {
     const PAGE_ACTION = '/admin/page/edit';
     public $form;
@@ -16,8 +16,8 @@ abstract class DSF_Content_Form_Abstract
         $front = Zend_Controller_Front::getInstance();
         $this->form->setAction($front->getBaseUrl() . self::PAGE_ACTION)
                    ->setMethod('post');
-        $this->form->addElementPrefixPath('DSF_Decorator', 'DSF/Form/Decorator', 'decorator');
-        $this->form->addPrefixPath('DSF_Form_Element', 'DSF/Form/Element/', 'element');
+        $this->form->addElementPrefixPath('Digitalus_Decorator', 'Digitalus/Form/Decorator', 'decorator');
+        $this->form->addPrefixPath('Digitalus_Form_Element', 'Digitalus/Form/Element/', 'element');
         $this->addBase();
         $this->setup();
         //$this->setDecorators();

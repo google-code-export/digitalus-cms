@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * CheckSkinStyles helper
  *
- * @uses viewHelper DSF_View_Helper_Admin
+ * @uses viewHelper Digitalus_View_Helper_Admin
  */
-class DSF_View_Helper_Admin_CheckSkinStyles {
+class Digitalus_View_Helper_Admin_CheckSkinStyles {
 
     /**
      * @var Zend_View_Interface
@@ -31,11 +31,11 @@ class DSF_View_Helper_Admin_CheckSkinStyles {
 
         //load the skin folders
         if (is_dir('./' . $basePath)) {
-            $folders = DSF_Filesystem_Dir::getDirectories('./' . $basePath);
+            $folders = Digitalus_Filesystem_Dir::getDirectories('./' . $basePath);
             if (count($folders) > 0) {
                 foreach ($folders as $folder) {
                     $this->view->skin = $folder;
-                    $styles = DSF_Filesystem_File::getFilesByType('./' . $basePath . '/' . $folder . '/styles', 'css');
+                    $styles = Digitalus_Filesystem_File::getFilesByType('./' . $basePath . '/' . $folder . '/styles', 'css');
                     if (is_array($styles)) {
                         foreach ($styles  as $style) {
                             //add each style sheet to the hash

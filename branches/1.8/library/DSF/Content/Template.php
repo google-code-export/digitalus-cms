@@ -1,5 +1,5 @@
 <?php
-class DSF_Content_Template
+class Digitalus_Content_Template
 {
     const PROPERTIES_FILENAME = 'properties.xml';
     const FORM_FILENAME = 'form.php';
@@ -42,7 +42,7 @@ class DSF_Content_Template
             return false;
         } else {
             //if no template is passed then you can add any subtemplate
-            $loader = new DSF_Content_Template_Loader();
+            $loader = new Digitalus_Content_Template_Loader();
             return $loader->getTemplates();
         }
     }
@@ -63,7 +63,7 @@ class DSF_Content_Template
             $view = $viewInstance;
         }
         //load helpers for this view instance
-        DSF_View_RegisterHelpers::register($view);
+        Digitalus_View_RegisterHelpers::register($view);
         $view->content = $content;
         $view->addScriptPath($this->_templatePath);
         $templateScript = $this->_folder . '/' . $this->_template . '/template.phtml';

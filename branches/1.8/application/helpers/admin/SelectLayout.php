@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * SelectLayout helper
  *
- * @uses viewHelper DSF_View_Helper_Admin
+ * @uses viewHelper Digitalus_View_Helper_Admin
  */
-class DSF_View_Helper_Admin_SelectLayout {
+class Digitalus_View_Helper_Admin_SelectLayout {
 
     /**
      * @var Zend_View_Interface
@@ -24,7 +24,7 @@ class DSF_View_Helper_Admin_SelectLayout {
     public function selectLayout($name, $value = null, $attr = null, $defaut = null) {
         $config = Zend_Registry::get('config');
         $pathToPublicLayouts = $config->design->pathToPublicLayouts;
-        $layouts = DSF_Filesystem_File::getFilesByType($pathToPublicLayouts, 'phtml');
+        $layouts = Digitalus_Filesystem_File::getFilesByType($pathToPublicLayouts, 'phtml');
         if ($defaut == NULL) {
             $defaut = $this->view->getTranslation('Select One');
         }

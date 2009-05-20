@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Module_Property {
+class Digitalus_Module_Property {
 
     public function __construct() {
 

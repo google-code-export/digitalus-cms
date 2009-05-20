@@ -1,5 +1,5 @@
 <?php
-class DSF_Module_Service
+class Digitalus_Module_Service
 {
     protected $_module;
     protected $_pathToModules = './application/modules';
@@ -27,7 +27,7 @@ class DSF_Module_Service
     }
     static function load ($module)
     {
-        $service = new DSF_Module_Service($module);
+        $service = new Digitalus_Module_Service($module);
         return $service->getService();
     }
 }

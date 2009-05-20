@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Admin_RenderAdminMenu
+class Digitalus_View_Helper_Admin_RenderAdminMenu
 {
     public $sections = array(
         'index'      => 'index',

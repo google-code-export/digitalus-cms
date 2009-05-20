@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Installer_Database
+class Digitalus_Installer_Database
 {
     protected $_config = array();
     protected $_db;

@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Installer_Environment
+class Digitalus_Installer_Environment
 {
     const PATH_TO_CACHE = './cache';
     const PATH_TO_MEDIA = './media';

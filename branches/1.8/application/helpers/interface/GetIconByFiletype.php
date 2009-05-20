@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * GetIconByType helper
  *
- * @uses viewHelper DSF_View_Helper_Interface
+ * @uses viewHelper Digitalus_View_Helper_Interface
  */
-class DSF_View_Helper_Interface_GetIconByFileType {
+class Digitalus_View_Helper_Interface_GetIconByFileType {
 
     /**
      * @var Zend_View_Interface
@@ -38,7 +38,7 @@ class DSF_View_Helper_Interface_GetIconByFileType {
 
     public function getIcon($file)
     {
-        $filetype = DSF_Media_Filetype::load($file);
+        $filetype = Digitalus_Media_Filetype::load($file);
         if($filetype != null) {
             $type = $filetype->key;
     

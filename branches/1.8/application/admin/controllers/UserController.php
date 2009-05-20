@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    $Id: UserController.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0
@@ -96,12 +96,12 @@ class Admin_UserController extends Zend_Controller_Action
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
             $u = new Model_User();
             $user = $u->insertFromPost();
-            $e = new DSF_View_Error();
+            $e = new Digitalus_View_Error();
             if (!$e->hasErrors()) {
                 $url = 'admin/user/open/id/' . $user->id;
                 $this->_redirect($url);
             } else {
-                $storage = new DSF_Data_Storage();
+                $storage = new Digitalus_Data_Storage();
                 $storage->savePost();
             }
         }
@@ -118,15 +118,15 @@ class Admin_UserController extends Zend_Controller_Action
     public function editAction()
     {
         $u = new Model_User();
-        if (DSF_Filter_Post::has('update_permissions')) {
+        if (Digitalus_Filter_Post::has('update_permissions')) {
             //update the users permissions
-            $resources = DSF_Filter_Post::raw('acl_resources');
-            $id = DSF_Filter_Post::int('id');
+            $resources = Digitalus_Filter_Post::raw('acl_resources');
+            $id = Digitalus_Filter_Post::int('id');
             $u->updateAclResources($id, $resources);
-        } elseif (DSF_Filter_Post::has('admin_user_password')) {
-            $id = DSF_Filter_Post::int('id');
-            $password = DSF_Filter_Post::get('newPassword');
-            $passwordConfirm = DSF_Filter_Post::get('newConfirmPassword');
+        } elseif (Digitalus_Filter_Post::has('admin_user_password')) {
+            $id = Digitalus_Filter_Post::int('id');
+            $password = Digitalus_Filter_Post::get('newPassword');
+            $passwordConfirm = Digitalus_Filter_Post::get('newConfirmPassword');
             $u->updatePassword($id, $password, true, $passwordConfirm);
         } else {
             $user = $u->updateFromPost();
@@ -146,10 +146,10 @@ class Admin_UserController extends Zend_Controller_Action
     public function updateMyAccountAction()
     {
         $u = new Model_User();
-        if (DSF_Filter_Post::int('update_password') === 1) {
-            $id = DSF_Filter_Post::int('id');
-            $password = DSF_Filter_Post::get('password');
-            $passwordConfirm = DSF_Filter_Post::get('confirmation');
+        if (Digitalus_Filter_Post::int('update_password') === 1) {
+            $id = Digitalus_Filter_Post::int('id');
+            $password = Digitalus_Filter_Post::get('password');
+            $passwordConfirm = Digitalus_Filter_Post::get('confirmation');
             $u->updatePassword($id, $password, true, $passwordConfirm);
         }
 
@@ -167,8 +167,8 @@ class Admin_UserController extends Zend_Controller_Action
      */
     public function copyAclAction()
     {
-        $currentUser = DSF_Filter_Post::int('id');
-        $copyFrom = DSF_Filter_Post::int('user_id');
+        $currentUser = Digitalus_Filter_Post::int('id');
+        $copyFrom = Digitalus_Filter_Post::int('user_id');
 
         if ($currentUser > 0 && $copyFrom > 0) {
             $u = new Model_User();

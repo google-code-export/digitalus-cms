@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * LoadDefaultDesign helper
  *
- * @uses viewHelper DSF_View_Helper_Interface
+ * @uses viewHelper Digitalus_View_Helper_Interface
  */
-class DSF_View_Helper_Interface_LoadDefaultDesign {
+class Digitalus_View_Helper_Interface_LoadDefaultDesign {
 
     /**
      * @var Zend_View_Interface

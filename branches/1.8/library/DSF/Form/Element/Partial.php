@@ -2,7 +2,7 @@
 
 require_once ('Zend/Form/Element.php');
 
-class DSF_Form_Element_Partial extends DSF_Form_Element_Xml  {
+class Digitalus_Form_Element_Partial extends Digitalus_Form_Element_Xml  {
 
     public $partial;
 

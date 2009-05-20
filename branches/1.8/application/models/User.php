@@ -2,7 +2,7 @@
 
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -14,14 +14,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Models
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Models
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: User.php Mon Dec 24 20:38:38 EST 2007 20:38:38 forrest lyman $
  */
 
-class Model_User extends DSF_Db_Table
+class Model_User extends Digitalus_Db_Table
 {
     const SUPERUSER_ROLE = 'superadmin';
     /**
@@ -109,12 +109,12 @@ class Model_User extends DSF_Db_Table
     public function beforeInsert()
     {
         //validate password
-        $newPwd = DSF_Filter_Post::get('newPassword');
-        $confirm = DSF_Filter_Post::get('newConfirmPassword');
+        $newPwd = Digitalus_Filter_Post::get('newPassword');
+        $confirm = Digitalus_Filter_Post::get('newConfirmPassword');
         if ($newPwd == $confirm) {
             $this->data['password'] = md5($newPwd);
         } else {
-            $e = new DSF_View_Error();
+            $e = new Digitalus_View_Error();
             $e->add('Your new password does not match your confirmation password');
         }
     }
@@ -126,7 +126,7 @@ class Model_User extends DSF_Db_Table
     public function beforeUpdate()
     {
         //if 0 is passed as the id then set the id to the current users
-        $id = DSF_Filter_Post::int('id');
+        $id = Digitalus_Filter_Post::int('id');
         if (0 == $id) {
             $currentUser = $this->getCurrentUser();
             $this->data['id'] = $currentUser->id;
@@ -134,14 +134,14 @@ class Model_User extends DSF_Db_Table
 
         //overload the unique email validation if the current user has not changed their email address
         $curr = $this->find($this->data['id'])->current();
-        if ($curr->email == DSF_Filter_Post::raw('email')) {
+        if ($curr->email == Digitalus_Filter_Post::raw('email')) {
             unset($this->_unique[array_search('email',$this->_unique)]);
         }
 
         //update the password
-        if (DSF_Filter_Post::int('update_password') == 1) {
-            $newPwd = DSF_Filter_Post::get('newPassword');
-            $confirm = DSF_Filter_Post::get('newConfirmPassword');
+        if (Digitalus_Filter_Post::int('update_password') == 1) {
+            $newPwd = Digitalus_Filter_Post::get('newPassword');
+            $confirm = Digitalus_Filter_Post::get('newConfirmPassword');
             if ($newPwd == $confirm) {
                 $this->data['password'] = md5($newPwd);
 
@@ -189,7 +189,7 @@ class Model_User extends DSF_Db_Table
      */
     public function getCurrentUser()
     {
-        $currentUser = DSF_Auth::getIdentity();
+        $currentUser = Digitalus_Auth::getIdentity();
         if ($currentUser) {
             return $this->find($currentUser->id)->current();
         }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: Resource.php Tue Dec 25 21:52:35 EST 2007 21:52:35 forrest lyman $
  */
 
-class DSF_File
+class Digitalus_File
 {
     /**
      * the path to the Files dir
@@ -47,20 +47,20 @@ class DSF_File
                 $filename = $_FILES[$key]['name'];
             }
 
-            $path = DSF_Toolbox_String::stripLeading('/', $path);
+            $path = Digitalus_Toolbox_String::stripLeading('/', $path);
             if ($createPath) {
                 //attempt to create the new path
-                DSF_Filesystem_Dir::makeRecursive(self::PATH_TO_FileS, $path);
+                Digitalus_Filesystem_Dir::makeRecursive(self::PATH_TO_FileS, $path);
             }
 
             //clean the filename
-            $filename = DSF_Filesystem_File::cleanFilename($filename);
-            $filename = DSF_Toolbox_String::getSelfFromPath($filename);
+            $filename = Digitalus_Filesystem_File::cleanFilename($filename);
+            $filename = Digitalus_Toolbox_String::getSelfFromPath($filename);
             $fullPath .= "/" . $filename;
             if (move_uploaded_file($_FILES[$key]['tmp_name'], $fullPath)) {
                 //return the filepath if things worked out
                 //this is relative to the site root as this is the format that will be required for links and what not
-                $fullPath = DSF_Toolbox_String::stripLeading('./', $fullPath);
+                $fullPath = Digitalus_Toolbox_String::stripLeading('./', $fullPath);
                 return $fullPath;
             }
         }

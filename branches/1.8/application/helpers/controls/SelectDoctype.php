@@ -32,9 +32,9 @@ require_once 'Zend/View/Interface.php';
  * @version    Release: @package_version@
  * @link       http://www.digitaluscms.com
  * @since      Release 1.5.0
- * @uses       viewHelper DSF_View_Helper_Controls
+ * @uses       viewHelper Digitalus_View_Helper_Controls
  */
-class DSF_View_Helper_Controls_SelectDoctype
+class Digitalus_View_Helper_Controls_SelectDoctype
 {
     /**
      * @var Zend_View_Interface

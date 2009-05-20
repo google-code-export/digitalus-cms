@@ -1,5 +1,5 @@
 <?php 
-class DSF_Decorator_Composite extends Zend_Form_Decorator_Abstract
+class Digitalus_Decorator_Composite extends Zend_Form_Decorator_Abstract
 {
     public function buildLabel()
     {

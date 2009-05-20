@@ -1,5 +1,5 @@
 <?php
-class Module_Page_Form extends DSF_Content_Form_Abstract
+class Module_Page_Form extends Digitalus_Content_Form_Abstract
 {
     public function setup()
     {

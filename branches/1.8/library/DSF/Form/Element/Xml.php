@@ -1,6 +1,6 @@
 <?php
 require_once ('Zend/Form/Element.php');
-class DSF_Form_Element_Xml extends Zend_Form_Element
+class Digitalus_Form_Element_Xml extends Zend_Form_Element
 {
     public function getValue ($toString = true)
     {

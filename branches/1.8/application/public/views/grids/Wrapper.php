@@ -3,7 +3,7 @@
  * these are just samples!
  *
  */
-class Wrapper extends DSF_Interface_Grid 
+class Wrapper extends Digitalus_Interface_Grid 
 {
 	public $columns = 16;
 	public function init()

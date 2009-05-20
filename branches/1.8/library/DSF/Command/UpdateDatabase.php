@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: UpdateDatabase.php Mon Aug 18 EST 2008 19:57:20 forrest lyman $
  */
 
-class DSF_Command_UpdateDatabase extends DSF_Command_Abstract
+class Digitalus_Command_UpdateDatabase extends Digitalus_Command_Abstract
 {
 
     /**

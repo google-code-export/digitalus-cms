@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    $Id:
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0

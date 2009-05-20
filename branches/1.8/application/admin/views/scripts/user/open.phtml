@@ -4,7 +4,7 @@
     <fieldset>
         <legend><?php echo $this->getTranslation('Account Information');?></legend>
         <?php
-        $data = new DSF_Data_Storage();
+        $data = new Digitalus_Data_Storage();
         $user = $data->get();
         echo $this->formHidden('id',$this->user->id);
             echo $this->FormRow($this->getTranslation('First Name'), $this->FormText('first_name', $this->user->first_name));

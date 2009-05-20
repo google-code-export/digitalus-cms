@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: String.php Tue Dec 25 21:17:02 EST 2007 21:17:02 forrest lyman $
  */
 
-class DSF_Toolbox_String
+class Digitalus_Toolbox_String
 {
     /**
      * returns a randomly generated string
@@ -104,7 +104,7 @@ class DSF_Toolbox_String
     {
         $string = str_replace('_', '/', trim($string));
         if ($relative) {
-            $string = DSF_Toolbox_String::stripLeading('/', $string);
+            $string = Digitalus_Toolbox_String::stripLeading('/', $string);
         }
         $string = str_replace("[UNDERSCORE]", "_", $string);
         return $string;
@@ -134,7 +134,7 @@ class DSF_Toolbox_String
      */
     public static function getParentFromPath($path)
     {
-        $path = DSF_Toolbox_Regex::stripTrailingSlash($path);
+        $path = Digitalus_Toolbox_Regex::stripTrailingSlash($path);
         $parts = explode('/', $path);
         array_pop($parts);
         return implode('/', $parts);
@@ -149,7 +149,7 @@ class DSF_Toolbox_String
      */
     public static function getSelfFromPath($path)
     {
-        $path = DSF_Toolbox_Regex::stripTrailingSlash($path);
+        $path = Digitalus_Toolbox_Regex::stripTrailingSlash($path);
         $parts = explode('/', $path);
         return array_pop($parts);
     }

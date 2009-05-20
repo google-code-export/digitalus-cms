@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Admin_SelectUser
+class Digitalus_View_Helper_Admin_SelectUser
 {
     public function SelectUser($name, $value = null, $attribs = null, $currentUser = 0)
     {

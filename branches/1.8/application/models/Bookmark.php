@@ -5,7 +5,7 @@ class Model_Bookmark extends Model_ContentNode
 
     public function getUsersBookmarks($userId = null)
     {
-        $identity = DSF_Auth::getIdentity();
+        $identity = Digitalus_Auth::getIdentity();
         $userId = $identity->id;
 
         if ($userId > 0) {
@@ -21,7 +21,7 @@ class Model_Bookmark extends Model_ContentNode
 
     public function addUsersBookmark($label, $url, $userId = null)
     {
-        $identity = DSF_Auth::getIdentity();
+        $identity = Digitalus_Auth::getIdentity();
         $userId = $identity->id;
 
         if ($userId > 0) {
@@ -44,7 +44,7 @@ class Model_Bookmark extends Model_ContentNode
 
     public function deleteBookmark($id)
     {
-        $identity = DSF_Auth::getIdentity();
+        $identity = Digitalus_Auth::getIdentity();
         $userId = $identity->id;
 
         if ($userId > 0) {

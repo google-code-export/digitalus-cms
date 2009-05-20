@@ -1,13 +1,13 @@
 <?php
 
 
-class DSF_View_Helper_Admin_RenderAclList
+class Digitalus_View_Helper_Admin_RenderAclList
 {
     public function RenderAclList($usersPermissions = array(), $id = 'aclList')
     {
         $this->permissions = $usersPermissions;
 
-        $acl = new DSF_Acl();
+        $acl = new Digitalus_Acl();
         $resources = $acl->getResourceList();
 
         $xhtml = "<ul id='{$id}'>";

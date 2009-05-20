@@ -13,7 +13,7 @@ require_once 'Zend/Session/Namespace.php';
  * @subpackage
  * @copyright
  */
-class DSF_View_Helper_General_GetSession
+class Digitalus_View_Helper_General_GetSession
 {
     /**
      * Retrieve a (specific) session namespace object

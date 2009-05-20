@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Cms_FckEditor
+class Digitalus_View_Helper_Cms_FckEditor
 {
 
     /**
@@ -8,7 +8,7 @@ class DSF_View_Helper_Cms_FckEditor
     public function FckEditor($instance = 'content', $value = 'Enter text here', $height = 600, $width = 600, $fullToolbar = true)
     {
         $view=$this->view;
-        include('DSF/editor/fckeditor.php') ;
+        include('Digitalus/editor/fckeditor.php') ;
         ?>
         <script>
         function FCKeditor_OnComplete( editorInstance )
@@ -25,7 +25,7 @@ class DSF_View_Helper_Cms_FckEditor
         $oFCKeditor->Width      = $width ;
         $oFCKeditor->Height     = $height ;
         if ($fullToolbar) {
-            $oFCKeditor->ToolbarSet = 'DSF' ;
+            $oFCKeditor->ToolbarSet = 'Digitalus' ;
         } else {
             $oFCKeditor->ToolbarSet = 'Basic' ;
         }

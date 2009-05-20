@@ -1,5 +1,5 @@
 <?php
-class Block_Folder_Form extends DSF_Content_Form_Abstract {
+class Block_Folder_Form extends Digitalus_Content_Form_Abstract {
     public function setup()
     {
         $view = $this->getView();

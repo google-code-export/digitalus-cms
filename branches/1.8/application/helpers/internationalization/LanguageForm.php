@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * SelectLanguage helper
  *
- * @uses viewHelper DSF_View_Helper_Internationalization
+ * @uses viewHelper Digitalus_View_Helper_Internationalization
  */
-class DSF_View_Helper_Internationalization_LanguageForm {
+class Digitalus_View_Helper_Internationalization_LanguageForm {
 
     /**
      * @var Zend_View_Interface
@@ -27,12 +27,12 @@ class DSF_View_Helper_Internationalization_LanguageForm {
     public function languageForm()
     {
         //process form if this is a post back
-        if (DSF_Filter_Post::has('setLang')) {
-            DSF_Language::setLanguage($_POST['language']);
+        if (Digitalus_Filter_Post::has('setLang')) {
+            Digitalus_Language::setLanguage($_POST['language']);
             // @todo: this needs to redirect so it loads the whole page in the new language
         }
 
-        $currentLanguage = DSF_Language::getLanguage();
+        $currentLanguage = Digitalus_Language::getLanguage();
 
         $languageSelector = $this->view->selectLanguage('language',$currentLanguage);
         $xhtml  = '<form action="' . $this->view->ModuleAction() . '" method="post">';

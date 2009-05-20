@@ -1,5 +1,5 @@
 <?php
-class DSF_Builder_Action_Design extends DSF_Builder_Abstract
+class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
 {
     public function loadContentTemplate()
     {

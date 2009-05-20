@@ -2,7 +2,7 @@
 <dl>
     <?php
     //load the common helpers
-    DSF_View_RegisterHelpers::register($this);
+    Digitalus_View_RegisterHelpers::register($this);
     echo $this->FormRow($this->getTranslation('Page Name'), $this->formText('page_name'));
     echo $this->FormRow('&nbsp;', $this->formSubmit('create', $this->getTranslation('Create Page')));
     ?>

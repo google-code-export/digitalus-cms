@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Filesystem_RenderMenuBrowser
+class Digitalus_View_Helper_Filesystem_RenderMenuBrowser
 {
     public function RenderMenuBrowser($parentId, $basePath = null, $id = 'menuTree')
     {
@@ -17,7 +17,7 @@ class DSF_View_Helper_Filesystem_RenderMenuBrowser
             $class = 'menu';
             $submenu = $this->view->RenderMenuBrowser($child->id, $link);
 
-            $linkId = DSF_Toolbox_String::addUnderscores($menu->path, true);
+            $linkId = Digitalus_Toolbox_String::addUnderscores($menu->path, true);
             $links[] ="<li class='menuItem'><a href='/admin/navigation/open/id/{$child->id}' class='{$class}' id='page-{$child->id}'>{$label}</a>" . $submenu . '</li>';
         }
 

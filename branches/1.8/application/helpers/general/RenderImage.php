@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_General_RenderImage
+class Digitalus_View_Helper_General_RenderImage
 {
 
 	/**

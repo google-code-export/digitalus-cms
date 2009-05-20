@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    $Id: IndexController.php Mon Dec 24 20:50:29 EST 2007 20:50:29 forrest lyman $
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0
@@ -75,7 +75,7 @@ class Admin_IndexController extends Zend_Controller_Action
     public function notesAction()
     {
         $notes = new Model_Note();
-        $myNotes = DSF_Filter_Post::get('content');
+        $myNotes = Digitalus_Filter_Post::get('content');
         $notes->saveUsersNotes($myNotes);
         $this->_redirect('admin/index');
     }

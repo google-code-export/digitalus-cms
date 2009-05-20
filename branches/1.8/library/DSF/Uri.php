@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,8 +13,8 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: Uri.php Tue Dec 25 21:53:29 EST 2007 21:53:29 forrest lyman $
@@ -24,14 +24,14 @@
  * this class builds the uri object that the site uses
  *
  */
-class DSF_Uri
+class Digitalus_Uri
 {
     /**
      * the clean request uri
      *
      * @var string
      */
-    const REGISTRY_KEY = "DSF_URI";
+    const REGISTRY_KEY = "Digitalus_URI";
     protected $_uri;
     protected $_params;
     protected $_base;
@@ -99,18 +99,18 @@ class DSF_Uri
      */
     private function _cleanUri($uri)
     {
-        $uri = DSF_Toolbox_Regex::stripFileExtension($uri);
-        $uri = DSF_Toolbox_Regex::stripTrailingSlash($uri);
+        $uri = Digitalus_Toolbox_Regex::stripFileExtension($uri);
+        $uri = Digitalus_Toolbox_Regex::stripTrailingSlash($uri);
         $uri = urldecode($uri);
         $array = explode('/', $uri);
-        $splitPaths = DSF_Toolbox_Array::splitOnValue($array, 'p');
+        $splitPaths = Digitalus_Toolbox_Array::splitOnValue($array, 'p');
         if (is_array($splitPaths)) {
             $uri = implode('/', $splitPaths[0]);
             if (is_array($splitPaths[1])) {
-                $this->_params = DSF_Toolbox_Array::makeHashFromArray($splitPaths[1]);
+                $this->_params = Digitalus_Toolbox_Array::makeHashFromArray($splitPaths[1]);
             }
         }
-        return DSF_Toolbox_String::stripHyphens($uri);
+        return Digitalus_Toolbox_String::stripHyphens($uri);
     }
 
     public function getParams()
@@ -143,7 +143,7 @@ class DSF_Uri
 
     public static function get($relative = true, $stripParams = true, $addParams = null)
     {
-        $uri = new DSF_Uri();
+        $uri = new Digitalus_Uri();
         if ($relative) {
             $uriString = $uri->getRelative();
         } else {

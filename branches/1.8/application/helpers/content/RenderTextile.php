@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * RenderTextile helper
  *
- * @uses viewHelper DSF_View_Helper_Content
+ * @uses viewHelper Digitalus_View_Helper_Content
  */
-class DSF_View_Helper_Content_RenderTextile {
+class Digitalus_View_Helper_Content_RenderTextile {
 
     /**
      * @var Zend_View_Interface
@@ -24,7 +24,7 @@ class DSF_View_Helper_Content_RenderTextile {
     public function renderTextile($content)
     {
         $content = stripslashes($content);
-        $textile = new DSF_Content_Render_Textile();
+        $textile = new Digitalus_Content_Render_Textile();
         return $textile->TextileThis($content);
     }
 

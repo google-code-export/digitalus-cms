@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Models
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Models
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: TrafficLog.php Mon Dec 24 20:35:48 EST 2007 20:35:48 forrest lyman $
  */
 
-class Model_TrafficLog extends DSF_Db_Table
+class Model_TrafficLog extends Digitalus_Db_Table
 {
     /**
      * the table name
@@ -45,7 +45,7 @@ class Model_TrafficLog extends DSF_Db_Table
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
 
         //get the admin identity
-        $user = DSF_Auth::getIdentity();
+        $user = Digitalus_Auth::getIdentity();
         if ($user) {
           $data['user_id'] = $user->id;
         }

@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * SelectLanguage helper
  *
- * @uses viewHelper DSF_View_Helper_Content
+ * @uses viewHelper Digitalus_View_Helper_Content
  */
-class DSF_View_Helper_Content_SelectLanguage {
+class Digitalus_View_Helper_Content_SelectLanguage {
 
     /**
      * @var Zend_View_Interface

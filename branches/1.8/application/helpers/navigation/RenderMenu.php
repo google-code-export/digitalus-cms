@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Navigation_RenderMenu
+class Digitalus_View_Helper_Navigation_RenderMenu
 {
     public $partialScript = 'partials/navigation/menu-item.phtml';
     public $levels = 1;
@@ -19,7 +19,7 @@ class DSF_View_Helper_Navigation_RenderMenu
             $this->currentLevel = $currentLevel;
         }
 
-        $menu = new DSF_Menu($parentId);
+        $menu = new Digitalus_Menu($parentId);
         $links = array();
 
         if (count($menu->items) > 0) {

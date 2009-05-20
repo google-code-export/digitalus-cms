@@ -1,5 +1,5 @@
 <?php
-abstract class DSF_Model_Abstract implements IteratorAggregate
+abstract class Digitalus_Model_Abstract implements IteratorAggregate
 {
     protected $_params = array();
     protected $_protectedParams = array();

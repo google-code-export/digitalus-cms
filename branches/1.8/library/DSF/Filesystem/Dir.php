@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: Dir.php Tue Dec 25 20:38:14 EST 2007 20:38:14 forrest lyman $
  */
 
-class DSF_Filesystem_Dir
+class Digitalus_Filesystem_Dir
 {
     /**
      * returns the directories in the path
@@ -126,7 +126,7 @@ class DSF_Filesystem_Dir
 
                 $Entry = $source . '/' . $entry;
                 if (is_dir($Entry)) {
-                    DSF_Filesystem_Directory_Writer::copyRecursive( $Entry, $target . '/' . $entry );
+                    Digitalus_Filesystem_Directory_Writer::copyRecursive( $Entry, $target . '/' . $entry );
                     continue;
                 }
                 copy( $Entry, $target . '/' . $entry );
@@ -160,7 +160,7 @@ class DSF_Filesystem_Dir
                 if ($verbose)
                     echo 'Processing: <strong>'.$object."</strong><br />\n";
                 if (is_dir($object))
-                    DSF_Filesystem_Dir::deleteRecursive($object);
+                    Digitalus_Filesystem_Dir::deleteRecursive($object);
                 if (is_file($object)) {
                     $result=@unlink($object);
                     if ($verbose&&$result)

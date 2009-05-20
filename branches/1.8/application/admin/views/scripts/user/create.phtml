@@ -2,7 +2,7 @@
     <fieldset>
         <legend>General Information</legend>
         <?php
-        $data = new DSF_Data_Storage();
+        $data = new Digitalus_Data_Storage();
         $user = $data->get();
         $tmpUser = new stdClass();
         if ($user) {

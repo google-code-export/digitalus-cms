@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <configdata>
-    <DSF>
+    <Digitalus>
         <constants>
             <version>1.0</version>
         </constants>
@@ -22,8 +22,8 @@
 			<style>public/styles</style>
 			<image>public/images</image>
 		</filepath>	
-	</DSF>
-	<testing extends='DSF'>
+	</Digitalus>
+	<testing extends='Digitalus'>
         <database>
             <adapter>PDO_MYSQL</adapter>
             <host>localhost</host>

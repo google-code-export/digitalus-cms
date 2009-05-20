@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_General_RenderDate
+class Digitalus_View_Helper_General_RenderDate
 {
 
     /**

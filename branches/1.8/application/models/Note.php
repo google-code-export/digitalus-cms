@@ -6,7 +6,7 @@ class Model_Note extends Model_ContentNode
 
     public function getUsersNotes($userId = null)
     {
-        $identity = DSF_Auth::getIdentity();
+        $identity = Digitalus_Auth::getIdentity();
         $userId = $identity->id;
 
         if ($userId > 0) {
@@ -30,7 +30,7 @@ class Model_Note extends Model_ContentNode
 
     public function saveUsersNotes($notes, $userId = null)
     {
-        $identity = DSF_Auth::getIdentity();
+        $identity = Digitalus_Auth::getIdentity();
         $userId = $identity->id;
 
         if ($userId > 0) {

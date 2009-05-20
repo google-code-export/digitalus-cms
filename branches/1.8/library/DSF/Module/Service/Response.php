@@ -1,5 +1,5 @@
 <?php
-class DSF_Module_Service_Response
+class Digitalus_Module_Service_Response
 {
     protected $_response;
     public function __construct ()

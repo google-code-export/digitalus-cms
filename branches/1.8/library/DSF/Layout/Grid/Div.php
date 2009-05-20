@@ -1,6 +1,6 @@
 <?php
 
-abstract class DSF_Layout_Grid_Div {
+abstract class Digitalus_Layout_Grid_Div {
     protected $_children = array();
     protected $_types = array(
         'unit' => 'Unit',

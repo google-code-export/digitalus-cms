@@ -7,7 +7,7 @@ class Zend_View_Helper_LoadModule
     public function LoadModule($module, $action, $params = null)
     {
         //validate the module
-        $modules = DSF_Filesystem_Dir::getDirectories('./application/modules');
+        $modules = Digitalus_Filesystem_Dir::getDirectories('./application/modules');
 
         // @todo: validate the action as well
         if (in_array($module, $modules)) {

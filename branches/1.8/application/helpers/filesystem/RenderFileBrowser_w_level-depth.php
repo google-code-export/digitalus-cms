@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Filesystem_RenderFileBrowser
+class Digitalus_View_Helper_Filesystem_RenderFileBrowser
 {
     public function RenderFileBrowser($parentId, $depth = 1 , $level = 0, $basePath = null, $id = 'fileTree')
     {
@@ -26,7 +26,7 @@ class DSF_View_Helper_Filesystem_RenderFileBrowser
                     $class = 'page';
                     $submenu = false;
                 }
-                $linkId = DSF_Toolbox_String::addUnderscores($menu->path, true);
+                $linkId = Digitalus_Toolbox_String::addUnderscores($menu->path, true);
                 $links[] = "<li class='menuItem'><a href='/admin/page/open/id/{$child->id}' class='{$class}' id='page-{$child->id}'>{$label}</a>" . $submenu . '</li>';
             }
         }

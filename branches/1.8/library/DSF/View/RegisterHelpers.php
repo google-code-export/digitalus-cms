@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: RegisterHelpers.php Tue Dec 25 21:38:04 EST 2007 21:38:04 forrest lyman $
  */
 
-class DSF_View_RegisterHelpers
+class Digitalus_View_RegisterHelpers
 {
 
     /**
@@ -28,10 +28,10 @@ class DSF_View_RegisterHelpers
      */
     public static function register($view)
     {
-        $helperDirs = DSF_Filesystem_Dir::getDirectories('./application/helpers');
+        $helperDirs = Digitalus_Filesystem_Dir::getDirectories('./application/helpers');
         if (is_array($helperDirs)) {
             foreach ($helperDirs as $dir) {
-                $view->addHelperPath('./application/helpers/' . $dir, 'DSF_View_Helper_' . ucfirst($dir));
+                $view->addHelperPath('./application/helpers/' . $dir, 'Digitalus_View_Helper_' . ucfirst($dir));
             }
         }
     }

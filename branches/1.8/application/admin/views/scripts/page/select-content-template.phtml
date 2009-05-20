@@ -1,13 +1,13 @@
 <?php
 //register the helpers (ajax request)
-DSF_View_RegisterHelpers::register($this);
+Digitalus_View_RegisterHelpers::register($this);
 
 if (is_array($this->allowedTemplates)) {?>
 <h3><?php echo $this->getTranslation('Step 2: What type of page would you like to create?')?></h3>
 <dl>
     <?php
     //load the common helpers
-    DSF_View_RegisterHelpers::register($this);
+    Digitalus_View_RegisterHelpers::register($this);
     echo $this->FormRow(
         $this->getTranslation('Select a type', null, $this),
         $this->formSelect('contentType', $this->createPageOptions->contentType, null, $this->allowedTemplates) .

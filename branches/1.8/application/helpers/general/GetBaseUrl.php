@@ -33,7 +33,7 @@ require_once 'Zend/Controller/Front.php';
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
  */
-class DSF_View_Helper_General_GetBaseUrl
+class Digitalus_View_Helper_General_GetBaseUrl
 {
     /**
      * Retrieve the base url

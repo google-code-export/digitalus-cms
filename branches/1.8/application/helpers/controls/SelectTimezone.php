@@ -32,9 +32,9 @@ require_once 'Zend/View/Interface.php';
  * @version    Release: @package_version@
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
- * @uses       viewHelper DSF_View_Helper_Controls
+ * @uses       viewHelper Digitalus_View_Helper_Controls
  */
-class DSF_View_Helper_Controls_SelectTimezone
+class Digitalus_View_Helper_Controls_SelectTimezone
 {
     /**
      * @var Zend_View_Interface
@@ -47,7 +47,7 @@ class DSF_View_Helper_Controls_SelectTimezone
 
     public function selectTimezone($name, $value, $attr = null)
     {
-        $data = DSF_Validate_Timezone::getValidTimezones(null, true);
+        $data = Digitalus_Validate_Timezone::getValidTimezones(null, true);
 
         return $this->view->formSelect($name, $value, $attr, $data);
     }

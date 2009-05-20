@@ -5,7 +5,7 @@
  * so i can give credit ;)
  *
  */
-class DSF_Controller_Action_Helper_InterfaceLoader
+class Digitalus_Controller_Action_Helper_InterfaceLoader
     extends Zend_Controller_Action_Helper_ViewRenderer
 {
 
@@ -41,7 +41,7 @@ class DSF_Controller_Action_Helper_InterfaceLoader
         }
 
         //load the common helpers
-        DSF_View_RegisterHelpers::register($this->view);
+        Digitalus_View_RegisterHelpers::register($this->view);
 
         //do not add the layout script to any of the public controllers
         //these are the controllers that render module parts

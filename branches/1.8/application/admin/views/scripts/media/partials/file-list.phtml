@@ -2,8 +2,8 @@
 <h3><?php echo $this->getTranslation('Subfolders');?></h3>
 <?php
     foreach ($this->folders as $folder) {
-        $cleanPath = DSF_Toolbox_String::stripHyphens($folder);
-        $cleanPath = DSF_Toolbox_String::stripUnderscores($folder);
+        $cleanPath = Digitalus_Toolbox_String::stripHyphens($folder);
+        $cleanPath = Digitalus_Toolbox_String::stripUnderscores($folder);
 ?>
 <div class='folderWrapper'>
     <?php
@@ -27,7 +27,7 @@ if (is_array($this->files) && count($this->files) > 0) { ?>
 <?php
     foreach ($this->files as $file) {
         if (substr($file,0,1) != '.') {
-            $filePath = DSF_Toolbox_String::stripUnderscores($this->basePath) . '/' . $file;
+            $filePath = Digitalus_Toolbox_String::stripUnderscores($this->basePath) . '/' . $file;
 ?>
 
 <div class='fileWrapper'>

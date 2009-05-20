@@ -1,9 +1,9 @@
 <?php
-class DSF_View_Helper_Navigation_RenderSubMenu
+class Digitalus_View_Helper_Navigation_RenderSubMenu
 {
     public function RenderSubMenu($levels = 2, $id = 'subnav')
     {
-      $page = DSF_Builder::getPage();
+      $page = Digitalus_Builder::getPage();
         $parents = $page->getParents();
         if (is_array($parents) && count($parents) > 0) {
           // parents is returned as an ascending array, we need it to descend

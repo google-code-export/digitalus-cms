@@ -1,5 +1,5 @@
 <?php
-class DSF_Page extends DSF_Model_Abstract
+class Digitalus_Page extends Digitalus_Model_Abstract
 {
     // The page object stores all of its data in the params array
     protected $_params = array(
@@ -46,7 +46,7 @@ class DSF_Page extends DSF_Model_Abstract
     public function setParam($key, $value, $protected = false)
     {
         if ($this->_isProtected($key)) {
-            throw new Zend_Exception('Unable to set protected property (' . $key . ') in DSF_Page');
+            throw new Zend_Exception('Unable to set protected property (' . $key . ') in Digitalus_Page');
         } else {
             $this->_params[$key] = $value;
             if ($protected == true) {

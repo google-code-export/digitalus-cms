@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_General_CleanUri
+class Digitalus_View_Helper_General_CleanUri
 {
     /**
      * removes any params from the uri
@@ -14,9 +14,9 @@ class DSF_View_Helper_General_CleanUri
         }
 
         if ($stripUnderscores) {
-            $uri = DSF_Toolbox_String::stripUnderscores($uri, true);
+            $uri = Digitalus_Toolbox_String::stripUnderscores($uri, true);
         }
-        return  DSF_Toolbox_String::addHyphens($uri);
+        return  Digitalus_Toolbox_String::addHyphens($uri);
     }
 
     /**

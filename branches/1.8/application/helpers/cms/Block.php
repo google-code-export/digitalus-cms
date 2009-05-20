@@ -10,7 +10,7 @@
  * @subpackage Helpers
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class DSF_View_Helper_Cms_Block
+class Digitalus_View_Helper_Cms_Block
 {
     public function Block($request, $params = null)
     {

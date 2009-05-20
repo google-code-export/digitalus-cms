@@ -1,5 +1,5 @@
 <?php
-abstract class DSF_Interface_Grid_Abstract
+abstract class Digitalus_Interface_Grid_Abstract
 {
     public $view;
     protected $_attribs = array('first', 'last', 'before', 'after', 'clear', 'class');

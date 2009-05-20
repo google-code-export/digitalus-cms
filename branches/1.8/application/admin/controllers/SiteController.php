@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    $Id: SiteController.php Tue Dec 25 19:46:11 EST 2007 19:46:11 forrest lyman $
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0
@@ -72,7 +72,7 @@ class Admin_SiteController extends Zend_Controller_Action
      */
     public function editAction()
     {
-        $settings = DSF_Filter_Post::raw('setting');
+        $settings = Digitalus_Filter_Post::raw('setting');
         $s = new Model_SiteSettings();
         foreach ($settings as $k => $v) {
             $s->set($k, $v);
@@ -85,7 +85,7 @@ class Admin_SiteController extends Zend_Controller_Action
      * Console action
      *
      * The console provides an interface for simple command scripts.
-     * those scripts go in library/DSF/Command/{script name}
+     * those scripts go in library/Digitalus/Command/{script name}
      *
      * @return void
      */
@@ -100,18 +100,18 @@ class Admin_SiteController extends Zend_Controller_Action
         //you must validate that the session ids match
         if ($this->_request->isPost() && !empty($previousId)) {
             $this->view->commandExecuted = true;
-            $this->view->command = 'Command: ' . DSF_Filter_Post::get('command');
+            $this->view->command = 'Command: ' . Digitalus_Filter_Post::get('command');
             $this->view->date = time();
 
             //execute command
             //validate the session
 
-            if (DSF_Filter_Post::get('consoleSession') == $previousId) {
-                $this->view->lastCommand = DSF_Filter_Post::get('command');
-                if (DSF_Filter_Post::get('runCommand')) {
-                   $results = DSF_Command::run(DSF_Filter_Post::get('command'));
-                } elseif (DSF_Filter_Post::get('getInfo')) {
-                    $results = DSF_Command::info(DSF_Filter_Post::get('command'));
+            if (Digitalus_Filter_Post::get('consoleSession') == $previousId) {
+                $this->view->lastCommand = Digitalus_Filter_Post::get('command');
+                if (Digitalus_Filter_Post::get('runCommand')) {
+                   $results = Digitalus_Command::run(Digitalus_Filter_Post::get('command'));
+                } elseif (Digitalus_Filter_Post::get('getInfo')) {
+                    $results = Digitalus_Command::info(Digitalus_Filter_Post::get('command'));
                 } else {
                     $results = array('ERROR: invalid request');
                 }
@@ -137,7 +137,7 @@ class Admin_SiteController extends Zend_Controller_Action
     public function mailTestAction()
     {
         $settings = new Model_SiteSettings();
-        $message = new DSF_Mail();
+        $message = new Digitalus_Mail();
         $message->send(
             $settings->get('default_email'),
             array($settings->get('default_email'), $settings->get('default_email_sender')),

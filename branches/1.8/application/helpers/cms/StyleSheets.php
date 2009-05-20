@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Cms_StyleSheets
+class Digitalus_View_Helper_Cms_StyleSheets
 {
 
     /**

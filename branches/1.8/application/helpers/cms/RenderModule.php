@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Cms_RenderModule
+class Digitalus_View_Helper_Cms_RenderModule
 {
     /**
      * render a module page like news_showNewPosts

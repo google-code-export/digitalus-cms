@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    Release: @package_version@
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0
@@ -59,7 +59,7 @@ class Admin_MediaController extends Zend_Controller_Action
     {
         $config = Zend_Registry::get('config');
         $this->_pathToMedia = $this->getFrontController()->getBaseUrl() . $config->filepath->media;
-        $this->_fullPathToMedia = DSF_Toolbox_String::stripLeading('/', $this->getFrontController()->getBaseUrl() . '/' . $this->_pathToMedia);
+        $this->_fullPathToMedia = Digitalus_Toolbox_String::stripLeading('/', $this->getFrontController()->getBaseUrl() . '/' . $this->_pathToMedia);
         $this->view->pathToMedia = $this->_pathToMedia;
         $this->view->breadcrumbs = array(
            $this->view->getTranslation('Media') => $this->getFrontController()->getBaseUrl() . '/admin/media'
@@ -86,9 +86,9 @@ class Admin_MediaController extends Zend_Controller_Action
         $folder = str_replace('media_', '', $folder);
 
         $this->view->path = $folder;
-        $folder = DSF_Toolbox_String::stripHyphens($folder);
+        $folder = Digitalus_Toolbox_String::stripHyphens($folder);
 
-        $folder = DSF_Toolbox_String::stripLeading('_', $folder);
+        $folder = Digitalus_Toolbox_String::stripLeading('_', $folder);
         $folderArray = explode('_', $folder);
 
         if (is_array($folderArray)) {
@@ -104,16 +104,16 @@ class Admin_MediaController extends Zend_Controller_Action
             $this->view->folderPathParts = $folderPathParts;
         }
 
-        $pathToFolder = $this->_fullPathToMedia . '/' . DSF_Toolbox_String::stripUnderscores($folder);
+        $pathToFolder = $this->_fullPathToMedia . '/' . Digitalus_Toolbox_String::stripUnderscores($folder);
         $this->view->filesystemPath = $pathToFolder;
         $this->view->mediaPath = $folder;
-        $this->view->folders = DSF_Filesystem_Dir::getDirectories($pathToFolder);
-        $this->view->files = DSF_Filesystem_File::getFilesByType($pathToFolder, false, false, true);
+        $this->view->folders = Digitalus_Filesystem_Dir::getDirectories($pathToFolder);
+        $this->view->files = Digitalus_Filesystem_File::getFilesByType($pathToFolder, false, false, true);
 
         $this->view->breadcrumbs[$this->view->getTranslation('Open Folder') . ': ' . $pathToFolder] = $this->getFrontController()->getBaseUrl() . '/admin/media/open-folder/folder/' . $folder;
         $this->view->toolbarLinks = array();
 
-        $tmpPath = DSF_Toolbox_String::addUnderscores($folder);
+        $tmpPath = Digitalus_Toolbox_String::addUnderscores($folder);
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_media_open-folder_folder_' . $tmpPath
             . '/label/' . $this->view->getTranslation('Media') . ':' . $pathToFolder;
@@ -129,8 +129,8 @@ class Admin_MediaController extends Zend_Controller_Action
      */
     public function createFolderAction()
     {
-        $baseFolder = DSF_Filter_Post::get('path');
-        $newFolder  = DSF_Filter_Post::get('folder_name');
+        $baseFolder = Digitalus_Filter_Post::get('path');
+        $newFolder  = Digitalus_Filter_Post::get('folder_name');
 
         //dont allow access outside the media folder
         if (strpos($baseFolder, './') || strpos($newFolder, './')) {
@@ -144,7 +144,7 @@ class Admin_MediaController extends Zend_Controller_Action
             $base = str_replace('media_', '', $baseFolder);
 
             if (!empty($base)) {
-                $base = DSF_Toolbox_String::stripUnderscores($base);
+                $base = Digitalus_Toolbox_String::stripUnderscores($base);
                 $fullPath .= '/' . $base;
             }
             $fullPath .= '/' . $newFolder;
@@ -171,11 +171,11 @@ class Admin_MediaController extends Zend_Controller_Action
      */
     public function uploadAction()
     {
-        $path = DSF_Filter_Post::get('filepath');
-        $mediapath = DSF_Filter_Post::get('mediapath');
+        $path = Digitalus_Filter_Post::get('filepath');
+        $mediapath = Digitalus_Filter_Post::get('mediapath');
         $files = $_FILES['uploads'];
         if (is_array($files)) {
-            echo DSF_Media::batchUpload($files, $path);
+            echo Digitalus_Media::batchUpload($files, $path);
         }
         $this->_request->setParam('folder', $mediapath);
 
@@ -190,10 +190,10 @@ class Admin_MediaController extends Zend_Controller_Action
     public function deleteFolderAction()
     {
         $folder = $this->_request->getParam('folder');
-        DSF_Media::deleteFolder($folder);
-        $folderPath = DSF_Toolbox_String::stripUnderscores($folder);
-        $parent = DSF_Toolbox_String::getParentFromPath($folderPath);
-        $cleanParent = DSF_Toolbox_String::addUnderscores($parent);
+        Digitalus_Media::deleteFolder($folder);
+        $folderPath = Digitalus_Toolbox_String::stripUnderscores($folder);
+        $parent = Digitalus_Toolbox_String::getParentFromPath($folderPath);
+        $cleanParent = Digitalus_Toolbox_String::addUnderscores($parent);
         $this->_request->setParam('folder', $cleanParent);
         $this->_forward('open-folder');
     }
@@ -206,10 +206,10 @@ class Admin_MediaController extends Zend_Controller_Action
     public function deleteFileAction()
     {
         $file = $this->_request->getParam('file');
-        DSF_Media::deleteFile($file);
-        $filePath = DSF_Toolbox_String::stripUnderscores($file);
-        $parent = DSF_Toolbox_String::getParentFromPath($filePath);
-        $cleanParent = DSF_Toolbox_String::addUnderscores($parent);
+        Digitalus_Media::deleteFile($file);
+        $filePath = Digitalus_Toolbox_String::stripUnderscores($file);
+        $parent = Digitalus_Toolbox_String::getParentFromPath($filePath);
+        $cleanParent = Digitalus_Toolbox_String::addUnderscores($parent);
         $this->_request->setParam('folder', $cleanParent);
         $this->_forward('open-folder');
     }
@@ -221,14 +221,14 @@ class Admin_MediaController extends Zend_Controller_Action
      */
     public function renameFolderAction()
     {
-        $path = DSF_Media::renameFolder(
-            DSF_Filter_Post::get('filepath'),
-            DSF_Filter_Post::get('folder_name')
+        $path = Digitalus_Media::renameFolder(
+            Digitalus_Filter_Post::get('filepath'),
+            Digitalus_Filter_Post::get('folder_name')
         );
         $path = str_replace('./', '', $path);
         $path = str_replace('../', '', $path);
 
-        $folder = DSF_Toolbox_String::addUnderscores($path);
+        $folder = Digitalus_Toolbox_String::addUnderscores($path);
 
         $this->_request->setParam('folder', $folder);
         $this->_forward('open-folder');

@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
+class Digitalus_Interface_Grid extends Digitalus_Interface_Grid_Abstract {
     public $containerClass = 'container';
     const PATH_TO_GRIDS = './application/public/views/grids';
     public $id;
@@ -23,7 +23,7 @@ class DSF_Interface_Grid extends DSF_Interface_Grid_Abstract {
     	}
     	
         $this->_loadStyles();
-        $grid = new DSF_Interface_Grid_Element('wrapper');
+        $grid = new Digitalus_Interface_Grid_Element('wrapper');
         $this->grid = $grid;
         $this->init();
         

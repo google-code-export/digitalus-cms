@@ -2,7 +2,7 @@
 
 require_once ('Zend/Form/Element.php');
 
-class DSF_Form_Element_ModuleSelector extends DSF_Form_Element_Xml  {
+class Digitalus_Form_Element_ModuleSelector extends Digitalus_Form_Element_Xml  {
 
     public function init()
     {

@@ -1,5 +1,5 @@
 <?php
- class DSF_View_Helper_General_FormatPercentage
+ class Digitalus_View_Helper_General_FormatPercentage
  {
 
     /**

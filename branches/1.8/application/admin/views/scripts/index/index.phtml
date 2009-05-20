@@ -34,10 +34,10 @@ $this->placeholder('formHeadline')->set($this->getTranslation('My Dashboard'));
             $content = $bookmark->content;
             if (strpos($content, 'mod_') === 0) {
                 $content = str_replace('mod_', '', $content);
-                $content = DSF_Toolbox_String::stripUnderscores($content);
+                $content = Digitalus_Toolbox_String::stripUnderscores($content);
                 $content = 'mod_' . $content;
             } else {
-                $content = DSF_Toolbox_String::stripUnderscores($content);
+                $content = Digitalus_Toolbox_String::stripUnderscores($content);
             }
             echo $this->link($bookmark->node, '/' . $content);
         ?></li>

@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * RenderNode helper
  *
- * @uses viewHelper DSF_View_Helper_Content
+ * @uses viewHelper Digitalus_View_Helper_Content
  */
-class DSF_View_Helper_Content_RenderNode {
+class Digitalus_View_Helper_Content_RenderNode {
     
     /**
      * @var Zend_View_Interface 

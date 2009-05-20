@@ -1,5 +1,5 @@
 <?php
-class  DSF_View_Helper_Admin_CurrentAdminUser
+class  Digitalus_View_Helper_Admin_CurrentAdminUser
 {
 
     /**

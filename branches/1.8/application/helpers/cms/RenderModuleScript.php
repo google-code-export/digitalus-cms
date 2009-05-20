@@ -8,7 +8,7 @@
  * $param = $this->view->{module name}->{param}
  *
  */
-class DSF_View_Helper_Cms_RenderModuleScript
+class Digitalus_View_Helper_Cms_RenderModuleScript
 {
     public function RenderModuleScript($module, $script, $params = false)
     {

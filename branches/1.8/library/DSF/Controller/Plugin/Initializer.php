@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,13 +27,13 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package    Digitalus_Core_Library
  * @version    Release: @package_version@
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
  */
-class DSF_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
+class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
 {
     /**
      * @var Zend_Controller_Front
@@ -83,7 +83,7 @@ class DSF_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
      */
     protected function _initCmsRouter()
     {
-        $uri = new DSF_Uri();
+        $uri = new Digitalus_Uri();
         $page = new Model_Page();
         if ($page->pageExists($uri) || 'public' == $this->_request->getModuleName()) {
             $this->_request->setModuleName('public');
@@ -169,7 +169,7 @@ class DSF_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
                 $this->view = $this->layout->getView();
 
                 // Load the common helpers
-                DSF_View_RegisterHelpers::register($this->view);
+                Digitalus_View_RegisterHelpers::register($this->view);
                 $this->view->setScriptPath($config->filepath->adminViews);
 
                 // Page links
@@ -202,7 +202,7 @@ class DSF_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
      */
     protected function _getModules()
     {
-        $modules = DSF_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
+        $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
         if (is_array($modules)) {
             return $modules;
         } else {

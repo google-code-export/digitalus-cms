@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: List.php Tue Dec 25 20:32:04 EST 2007 20:32:04 forrest lyman $
  */
 
-class DSF_Data_List
+class Digitalus_Data_List
 {
     /**
      * the list of items
@@ -60,11 +60,11 @@ class DSF_Data_List
      * the group is a new list
      *
      * @param string $key
-     * @return DSF_Data_list
+     * @return Digitalus_Data_list
      */
     public function addGroup($key)
     {
-        $newList = new DSF_Data_List();
+        $newList = new Digitalus_Data_List();
         $this->items->$key = $newList;
         return $newList;
     }

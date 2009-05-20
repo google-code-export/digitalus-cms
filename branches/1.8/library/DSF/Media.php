@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Media
+class Digitalus_Media
 {
 
     public static function isAllowed($mimeType)
@@ -20,7 +20,7 @@ class DSF_Media
         $filetypes = $config->filetypes;
         if ($filetypes) {
             foreach ($filetypes as $key => $filetype) {
-                $type = new DSF_Media_Filetype($key, $filetype);
+                $type = new Digitalus_Media_Filetype($key, $filetype);
                 $type->setFromConfigItem($key, $filetype);
                 $registeredFiletypes[$key] = $type;
             }
@@ -39,22 +39,22 @@ class DSF_Media
             $filename = str_replace(' ', '-', $filename);
 
             $path = str_replace(self::rootDirectory(), '', $path);
-            $path = DSF_Toolbox_String::stripUnderscores($path);
-            $path = DSF_Toolbox_String::stripLeading('/', $path);
+            $path = Digitalus_Toolbox_String::stripUnderscores($path);
+            $path = Digitalus_Toolbox_String::stripLeading('/', $path);
             $path = self::rootDirectory() . '/' . $path;
             if ($createPath) {
                 //attempt to create the new path
-                DSF_Filesystem_Dir::makeRecursive($base, $path);
+                Digitalus_Filesystem_Dir::makeRecursive($base, $path);
             }
 
             //clean the filename
-            $filename = DSF_Filesystem_File::cleanFilename($filename);
+            $filename = Digitalus_Filesystem_File::cleanFilename($filename);
             $filename = basename($filename);
             $path .= '/' . $filename;
             if (move_uploaded_file($file['tmp_name'], $path)) {
                 //return the filepath if things worked out
                 //this is relative to the site root as this is the format that will be required for links and what not
-                $fullPath = DSF_Toolbox_String::stripLeading($base . '/', $path);
+                $fullPath = Digitalus_Toolbox_String::stripLeading($base . '/', $path);
                 return $fullPath;
             }
         }
@@ -99,10 +99,10 @@ class DSF_Media
         $path = self::getMediaPath($path);
 
         //get the new name
-        $parent = DSF_Toolbox_String::getParentFromPath($path);
+        $parent = Digitalus_Toolbox_String::getParentFromPath($path);
         $newpath = $parent . '/' . $newName;
 
-        if (DSF_Filesystem_Dir::rename($path, $newpath)) {
+        if (Digitalus_Filesystem_Dir::rename($path, $newpath)) {
             return $newpath;
         } else {
             return false;
@@ -113,19 +113,19 @@ class DSF_Media
     {
         $config = Zend_Registry::get('config');
         if (self::testFilepath($folder)) {
-            $folder = DSF_Toolbox_String::stripUnderscores($folder);
+            $folder = Digitalus_Toolbox_String::stripUnderscores($folder);
             $fullPath = self::rootDirectory() . '/' . $folder;
 
             //move the folder to the trash
-            DSF_Filesystem_Dir::copyRecursive($fullPath, $config->filepath->trash);
-            DSF_Filesystem_Dir::deleteRecursive($fullPath);
+            Digitalus_Filesystem_Dir::copyRecursive($fullPath, $config->filepath->trash);
+            Digitalus_Filesystem_Dir::deleteRecursive($fullPath);
         }
     }
 
     public static function deleteFile($file)
     {
         if (self::testFilepath($file)) {
-            $filepath = DSF_Toolbox_String::stripUnderscores($file);
+            $filepath = Digitalus_Toolbox_String::stripUnderscores($file);
             $fullpath = self::rootDirectory() . '/' . $filepath;
             if (file_exists($fullpath)) {
                 unlink($fullpath);
@@ -146,7 +146,7 @@ class DSF_Media
 
     public static function getMediaPath($path, $relative = true)
     {
-        $path = DSF_Toolbox_String::stripUnderscores($path);
+        $path = Digitalus_Toolbox_String::stripUnderscores($path);
 
         //make it impossible to get out of the media library
         $path = str_replace('./','',$path);

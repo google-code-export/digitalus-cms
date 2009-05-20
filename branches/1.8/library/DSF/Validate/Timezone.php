@@ -15,8 +15,8 @@
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id:$
- * @category   DSF core
- * @package    DSF_Validate
+ * @category   Digitalus core
+ * @package    Digitalus_Validate
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
  */
@@ -35,7 +35,7 @@ require_once 'Zend/Validate/Abstract.php';
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
  */
-class DSF_Validate_Timezone extends Zend_Validate_Abstract
+class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
 {
     /**
      * Error constants

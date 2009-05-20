@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: File.php Tue Dec 25 20:46:07 EST 2007 20:46:07 forrest lyman $
  */
 
-class DSF_Filesystem_File
+class Digitalus_Filesystem_File
 {
     /**
      * this returns an array of all of the files of a set type in a directory path
@@ -198,20 +198,20 @@ class DSF_Filesystem_File
                 $filename = $_FILES[$key]['name'];
             }
 
-            $path = DSF_Toolbox_String::stripLeading('/', $path);
+            $path = Digitalus_Toolbox_String::stripLeading('/', $path);
             if ($createPath) {
                 //attempt to create the new path
-                DSF_Filesystem_Dir::makeRecursive($base, $path);
+                Digitalus_Filesystem_Dir::makeRecursive($base, $path);
             }
 
             //clean the filename
-            $filename = DSF_Filesystem_File::cleanFilename($filename);
+            $filename = Digitalus_Filesystem_File::cleanFilename($filename);
             $filename = basename($filename);
             $fullPath .= "/" . $filename;
             if (move_uploaded_file($_FILES[$key]['tmp_name'], $fullPath)) {
                 //return the filepath if things worked out
                 //this is relative to the site root as this is the format that will be required for links and what not
-                $fullPath = DSF_Toolbox_String::stripLeading('./', $fullPath);
+                $fullPath = Digitalus_Toolbox_String::stripLeading('./', $fullPath);
                 return $fullPath;
             }
         }

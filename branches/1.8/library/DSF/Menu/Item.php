@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Menu_Item {
+class Digitalus_Menu_Item {
     protected $_innerItem;
     public $id;
     public $label;
@@ -15,8 +15,8 @@ class DSF_Menu_Item {
      */
     public function __construct(Zend_Db_Table_Row $item) {
         $this->_innerItem = $item;
-        $this->label = DSF_Toolbox_Page::getLabel($item);
-        $this->link = DSF_Toolbox_Page::getUrl($item);
+        $this->label = Digitalus_Toolbox_Page::getLabel($item);
+        $this->link = Digitalus_Toolbox_Page::getUrl($item);
         $this->id = $this->_innerItem->id;
 
         if ($item->show_on_menu) {
@@ -41,7 +41,7 @@ class DSF_Menu_Item {
      */
     public function isSelected($ignoreParents = false)
     {
-        $currentPage = DSF_Builder::getPage();
+        $currentPage = Digitalus_Builder::getPage();
         $currentPageId = $currentPage->getId();
         if ($this->id == $currentPageId) {
             return true;
@@ -60,11 +60,11 @@ class DSF_Menu_Item {
     /**
      * Retrieve this item as Submenu
      *
-     * @return  DSF_Menu    Returns a DSF_Menu object of this item
+     * @return  Digitalus_Menu    Returns a Digitalus_Menu object of this item
      */
     public function getSubmenu()
     {
-        return new DSF_Menu($this->id);
+        return new Digitalus_Menu($this->id);
     }
 
     /**
@@ -106,7 +106,7 @@ class DSF_Menu_Item {
         if (isset($class) && !empty($class)) {
             $class = 'class="' . $class . '"';
         }
-        $cleanLink = DSF_Toolbox_String::addHyphens($this->link);
+        $cleanLink = Digitalus_Toolbox_String::addHyphens($this->link);
         $front = Zend_Controller_Front::getInstance();
         $baseUrl = $front->getBaseUrl();
         if (isset($currentId) && !empty($currentId) && $this->isSelected($ignoreParents)) {

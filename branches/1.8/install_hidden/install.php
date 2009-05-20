@@ -2,14 +2,14 @@
 set_include_path('.' . PATH_SEPARATOR . './library' . PATH_SEPARATOR . get_include_path());
 
 require_once 'Zend/Loader/Autoloader.php';
-#require_once 'DSF/Installer.php';
+#require_once 'Digitalus/Installer.php';
 
 // Set up autoload
 $loader = Zend_Loader_Autoloader::getInstance();
-$loader->registerNamespace('DSF_');
+$loader->registerNamespace('Digitalus_');
 
-// The DSF_Installer class manages the installation resources
-$installer = new DSF_Installer();
+// The Digitalus_Installer class manages the installation resources
+$installer = new Digitalus_Installer();
 
 // Set up view
 $view = new Zend_View();
@@ -63,7 +63,7 @@ if (!$installer->isInstalled()) {
 } else {
     // The cms is already installed
     // Remove the install directory
-    DSF_Filesystem_Dir::deleteRecursive('./install');
+    Digitalus_Filesystem_Dir::deleteRecursive('./install');
     // Return to the index file
     header('location: ./');
 }

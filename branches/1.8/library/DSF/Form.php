@@ -1,5 +1,5 @@
 <?php
-class DSF_Form extends Zend_Form
+class Digitalus_Form extends Zend_Form
 {
     protected $_model;
     protected $_columns;
@@ -14,8 +14,8 @@ class DSF_Form extends Zend_Form
         $this->setTranslator($translator);
 
         $this->setMethod('post');
-        $this->addElementPrefixPath('DSF_Decorator', 'DSF/Form/Decorator', 'decorator');
-        $this->addPrefixPath('DSF_Form_Element', 'DSF/Form/Element/', 'element');
+        $this->addElementPrefixPath('Digitalus_Decorator', 'Digitalus/Form/Decorator', 'decorator');
+        $this->addPrefixPath('Digitalus_Form_Element', 'Digitalus/Form/Element/', 'element');
         parent::__construct();
 
         //set instance
@@ -110,8 +110,8 @@ class DSF_Form extends Zend_Form
 
     public function isSubmitted()
     {
-        if(DSF_Filter_Post::has('form_instance')) {
-            $instance = DSF_Filter_Post::get('form_instance');
+        if(Digitalus_Filter_Post::has('form_instance')) {
+            $instance = Digitalus_Filter_Post::get('form_instance');
             if($this->_isValidInstance($instance)) {
                 return true;
             }

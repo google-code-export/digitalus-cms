@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_General_RenderAlert
+class Digitalus_View_Helper_General_RenderAlert
 {
 
     /**
@@ -7,8 +7,8 @@ class DSF_View_Helper_General_RenderAlert
      */
     public function RenderAlert()
     {
-        $m = new DSF_View_Message();
-        $ve = new DSF_View_Error();
+        $m = new Digitalus_View_Message();
+        $ve = new Digitalus_View_Error();
         $alert = false;
         $message = null;
         $verror = null;

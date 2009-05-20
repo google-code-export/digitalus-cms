@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Filesystem_RenderFileBrowser
+class Digitalus_View_Helper_Filesystem_RenderFileBrowser
 {
     public function RenderFileBrowser($parentId, $link, $basePath = null, $level = 0, $id = 'fileTree', $withRoot = false)
     {

@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_General_MultipleCalendar
+class Digitalus_View_Helper_General_MultipleCalendar
 {
     /**
      * renders a set of calendars with links to each day

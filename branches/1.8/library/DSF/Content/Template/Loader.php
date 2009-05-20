@@ -1,5 +1,5 @@
 <?php
-class DSF_Content_Template_Loader
+class Digitalus_Content_Template_Loader
 {
 
     protected $_templatePath;
@@ -18,12 +18,12 @@ class DSF_Content_Template_Loader
 
     public function getTemplates()
     {
-        $templates = DSF_Filesystem_Dir::getDirectories($this->_templatePath);
+        $templates = Digitalus_Filesystem_Dir::getDirectories($this->_templatePath);
         if (is_array($templates)) {
             foreach ($templates as $template) {
                 if ($template != self::SYSTEM_FOLDER ) {
                     $path = $this->_templatePath  . '/' . $template;
-                    $subtemplates = DSF_Filesystem_Dir::getDirectories($path);
+                    $subtemplates = Digitalus_Filesystem_Dir::getDirectories($path);
                     if (is_array($subtemplates)) {
                         foreach ($subtemplates as $subtemplate) {
                             $this->_templates[$template . '_' . $subtemplate] = ucwords($template . ' ' . $subtemplate);
@@ -45,6 +45,6 @@ class DSF_Content_Template_Loader
             $folder = null;
             $template = null;
         }
-        return new DSF_Content_Template($folder, $template, $this->_templatePath );
+        return new Digitalus_Content_Template($folder, $template, $this->_templatePath );
     }
 }

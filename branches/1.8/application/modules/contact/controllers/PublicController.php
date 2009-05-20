@@ -56,20 +56,20 @@ class Mod_Contact_PublicController extends Zend_Controller_Action
 
         $this->view->form = $form;
 
-        if ($this->_request->isPost() && DSF_Filter_Post::has('submitContactForm')) {
+        if ($this->_request->isPost() && Digitalus_Filter_Post::has('submitContactForm')) {
             if ($form->isValid($_POST)) {
                 //get form data
                 $data = $form->getValues();
 
                 //get the module data
-                $module = new DSF_Module();
+                $module = new Digitalus_Module();
                 $moduleData = $module->getData();
 
                 //render the message
                 $this->view->data = $data;
                 $htmlMessage = $this->view->render('public/message.phtml');
 
-                $mail = new DSF_Mail();
+                $mail = new Digitalus_Mail();
                 $this->view->isSent = $mail->send(
                     $moduleData->email,
                     array($data['email'], $data['name']),

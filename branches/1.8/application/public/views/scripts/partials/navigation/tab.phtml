@@ -6,7 +6,7 @@ if($this->item->isSelected()){
 }
 ?>
 <li id='menu_item_<?php echo $this->item->id;?>' class='tab <?php echo $class;?>'>
-<a href="<?php echo $this->getBaseUrl() . '/' . DSF_Toolbox_String::addHyphens($this->item->link)?>" class='<?php echo $class?>'>
+<a href="<?php echo $this->getBaseUrl() . '/' . Digitalus_Toolbox_String::addHyphens($this->item->link)?>" class='<?php echo $class?>'>
 	<span class='label'><?php echo $this->item->label; ?></span>
 	<span class='subtitle'>
 		<?php 

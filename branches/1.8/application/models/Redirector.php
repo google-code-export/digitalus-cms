@@ -1,5 +1,5 @@
 <?php
-class Model_Redirector extends DSF_Db_Table
+class Model_Redirector extends Digitalus_Db_Table
 {
     protected $_name = 'redirectors';
 
@@ -35,7 +35,7 @@ class Model_Redirector extends DSF_Db_Table
                 return $response;
             } else {
                 //this is not a valid http uri.  return as an array to find the page
-                $uriObj = new DSF_Uri();
+                $uriObj = new Digitalus_Uri();
                 $response->path = $uriObj->toArray($newPath->response);
                 return $response;
             }

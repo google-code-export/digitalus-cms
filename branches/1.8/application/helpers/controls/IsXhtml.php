@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * SelectDoctype helper
  *
- * @uses viewHelper DSF_View_Helper_Controls
+ * @uses viewHelper Digitalus_View_Helper_Controls
  */
-class DSF_View_Helper_Controls_IsXhtml
+class Digitalus_View_Helper_Controls_IsXhtml
 {
 
     /**

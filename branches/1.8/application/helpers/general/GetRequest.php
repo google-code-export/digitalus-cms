@@ -13,7 +13,7 @@ require_once 'Zend/Controller/Front.php';
  * @subpackage
  * @copyright
  */
-class DSF_View_Helper_General_GetRequest
+class Digitalus_View_Helper_General_GetRequest
 {
     /**
      * Retrieve the request object

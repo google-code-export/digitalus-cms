@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Layout_Grid {
+class Digitalus_Layout_Grid {
     protected $_container = null;
 
     /**

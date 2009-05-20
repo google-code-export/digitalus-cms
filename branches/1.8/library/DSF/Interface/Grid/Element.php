@@ -1,5 +1,5 @@
 <?php
-class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
+class Digitalus_Interface_Grid_Element extends Digitalus_Interface_Grid_Abstract
 {
     public $parentElement;
     public $id;
@@ -14,7 +14,7 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
         $this->id = $id;
         $this->columns = $columns;
         $this->attr = $attr;
-        $this->content = new DSF_Interface_Grid_ContentWrapper($id);
+        $this->content = new Digitalus_Interface_Grid_ContentWrapper($id);
     }
     
     public function setContent($content)
@@ -41,7 +41,7 @@ class DSF_Interface_Grid_Element extends DSF_Interface_Grid_Abstract
 
     public function addElement ($id, $columns = null, $attr = array())
     {
-        $element = new DSF_Interface_Grid_Element($id, $columns, $attr);
+        $element = new Digitalus_Interface_Grid_Element($id, $columns, $attr);
         $this->children[] = $element;
         return $element;
     }

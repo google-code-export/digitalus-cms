@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Internationalization_GetCurrentLanguage
+class Digitalus_View_Helper_Internationalization_GetCurrentLanguage
 {
 
     /**
@@ -9,6 +9,6 @@ class DSF_View_Helper_Internationalization_GetCurrentLanguage
      */
     public function GetCurrentLanguage()
     {
-        return DSF_Language::getLanguage();
+        return Digitalus_Language::getLanguage();
     }
 }

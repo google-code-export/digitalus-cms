@@ -1,5 +1,5 @@
 <?php
-class DSF_View_Helper_Filesystem_RenderFileChecklist
+class Digitalus_View_Helper_Filesystem_RenderFileChecklist
 {
     public function RenderFileChecklist($values = array(), $parentId, $level = 0, $id = 'fileChecklist')
     {

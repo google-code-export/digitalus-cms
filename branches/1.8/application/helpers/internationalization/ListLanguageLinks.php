@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * ListLanguageLinks helper
  *
- * @uses viewHelper DSF_View_Helper_Internationalization
+ * @uses viewHelper Digitalus_View_Helper_Internationalization
  */
-class DSF_View_Helper_Internationalization_ListLanguageLinks {
+class Digitalus_View_Helper_Internationalization_ListLanguageLinks {
 
     /**
      * @var Zend_View_Interface
@@ -23,14 +23,14 @@ class DSF_View_Helper_Internationalization_ListLanguageLinks {
      */
     public function listLanguageLinks()
     {
-        $page = DSF_Builder::getPage();
+        $page = Digitalus_Builder::getPage();
         $currentLanguage = $page->getLanguage();
         $availableLanguages = $page->getAvailableLanguages();
-        $xhtml = $this->view->getTranslation('You are reading this page in') . ' ' . $this->view->getTranslation(DSF_Language::getFullName($currentLanguage)) . '.';
+        $xhtml = $this->view->getTranslation('You are reading this page in') . ' ' . $this->view->getTranslation(Digitalus_Language::getFullName($currentLanguage)) . '.';
 
         if (is_array($availableLanguages)) {
             $languageLinks = array();
-            $uri = new DSF_Uri();
+            $uri = new Digitalus_Uri();
             $base = $uri->toString();
             foreach ($availableLanguages as $locale => $name) {
                 if (!empty($locale) && $locale != $currentLanguage) {

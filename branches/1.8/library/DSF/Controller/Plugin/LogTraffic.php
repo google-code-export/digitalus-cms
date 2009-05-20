@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: LogTraffic.php Tue Dec 25 20:26:40 EST 2007 20:26:40 forrest lyman $
  */
 
-class DSF_Controller_Plugin_LogTraffic extends Zend_Controller_Plugin_Abstract
+class Digitalus_Controller_Plugin_LogTraffic extends Zend_Controller_Plugin_Abstract
 {
     /**
      * log the current request in the traffic log

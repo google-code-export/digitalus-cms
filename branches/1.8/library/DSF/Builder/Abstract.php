@@ -1,13 +1,13 @@
 <?php
-abstract class DSF_Builder_Abstract
+abstract class Digitalus_Builder_Abstract
 {
     protected $_page;
     protected $_attributes = array();
 
-    public function __construct(DSF_Page $page = null, $attributes = array(), $persistPage = true)
+    public function __construct(Digitalus_Page $page = null, $attributes = array(), $persistPage = true)
     {
     	if($page == null) {
-    		$page = new DSF_Page();
+    		$page = new Digitalus_Page();
     	}
         if($persistPage == true) {
         	if (Zend_Registry::isRegistered('page')) {

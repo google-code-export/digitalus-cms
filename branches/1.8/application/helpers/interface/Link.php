@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * Link helper
  *
- * @uses viewHelper DSF_View_Helper_Interface
+ * @uses viewHelper Digitalus_View_Helper_Interface
  */
-class DSF_View_Helper_Interface_Link {
+class Digitalus_View_Helper_Interface_Link {
 
     /**
      * @var Zend_View_Interface
@@ -25,8 +25,8 @@ class DSF_View_Helper_Interface_Link {
      */
     public function link($label, $link, $icon = null, $class = 'link')
     {
-        $this->link = DSF_Toolbox_String::stripLeading('/', $link);
-        $this->baseUrl = DSF_Toolbox_String::stripLeading('/', $this->view->getBaseUrl());
+        $this->link = Digitalus_Toolbox_String::stripLeading('/', $link);
+        $this->baseUrl = Digitalus_Toolbox_String::stripLeading('/', $this->view->getBaseUrl());
         
         // clean the link
         if($this->isRemoteLink($link) || $this->isAnchorLink($link)) {

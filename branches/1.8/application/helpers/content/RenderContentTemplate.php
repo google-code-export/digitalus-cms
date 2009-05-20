@@ -9,9 +9,9 @@ require_once 'Zend/View/Interface.php';
 /**
  * RenderContentTemplate helper
  *
- * @uses viewHelper DSF_View_Helper_Content
+ * @uses viewHelper Digitalus_View_Helper_Content
  */
-class DSF_View_Helper_Content_RenderContentTemplate {
+class Digitalus_View_Helper_Content_RenderContentTemplate {
 
     /**
      * @var Zend_View_Interface
@@ -23,7 +23,7 @@ class DSF_View_Helper_Content_RenderContentTemplate {
      */
     public function renderContentTemplate($template, $content, $namespace = null)
     {
-        $loader = new DSF_Content_Template_Loader();
+        $loader = new Digitalus_Content_Template_Loader();
         $template = $loader->load($template);
         return $template->render($content, $this->view, $namespace);
     }

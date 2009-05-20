@@ -1,6 +1,6 @@
 <?php
 
-class DSF_Media_Filetype {
+class Digitalus_Media_Filetype {
     public $key;
     public $type;
     public $mime;
@@ -11,9 +11,9 @@ class DSF_Media_Filetype {
 
     public static function load($filepath)
     {
-        $fileExtension = DSF_Filesystem_File::getFileExtension($filepath);
+        $fileExtension = Digitalus_Filesystem_File::getFileExtension($filepath);
         $fileExtension = strtolower($fileExtension);
-        $allowedFiletypes = DSF_Media::getFiletypes();
+        $allowedFiletypes = Digitalus_Media::getFiletypes();
         if (is_array($allowedFiletypes) && array_key_exists($fileExtension, $allowedFiletypes)) {
             return $allowedFiletypes[$fileExtension];
         }

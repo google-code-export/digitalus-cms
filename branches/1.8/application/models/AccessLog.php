@@ -2,7 +2,7 @@
 
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -14,8 +14,8 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package    DSF_CMS_Models
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Models
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: AccessLog.php Sun Dec 23 09:17:31 EST 2007 09:17:31 forrest lyman $

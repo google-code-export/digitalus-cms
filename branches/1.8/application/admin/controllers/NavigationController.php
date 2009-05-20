@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    $Id: MenuController.php Mon Dec 24 20:53:11 EST 2007 20:53:11 forrest lyman $
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0
@@ -105,11 +105,11 @@ class Admin_NavigationController extends Zend_Controller_Action
     {
         if ($this->_request->isPost()) {
             $m = new Model_Menu();
-            $ids = DSF_Filter_Post::raw('id');
-            $labels = DSF_Filter_Post::raw('label');
-            $visibility = DSF_Filter_Post::raw('show_on_menu');
+            $ids = Digitalus_Filter_Post::raw('id');
+            $labels = Digitalus_Filter_Post::raw('label');
+            $visibility = Digitalus_Filter_Post::raw('show_on_menu');
             $m->updateMenuItems($ids, $labels, $visibility);
-            $menuId = DSF_Filter_Post::get('menuId');
+            $menuId = Digitalus_Filter_Post::get('menuId');
             $url = 'admin/navigation/open/id/' . $menuId;
             $this->_redirect($url);
         }
@@ -124,9 +124,9 @@ class Admin_NavigationController extends Zend_Controller_Action
     {
         $r = new Model_Redirector();
         if ($this->_request->isPost()) {
-            $request = DSF_Filter_Post::raw('request');
-            $response = DSF_Filter_Post::raw('response');
-            $responseCode = DSF_Filter_Post::raw('response_code');
+            $request = Digitalus_Filter_Post::raw('request');
+            $response = Digitalus_Filter_Post::raw('response');
+            $responseCode = Digitalus_Filter_Post::raw('response_code');
             $r->setFromArray($request, $response, $responseCode);
         }
         $this->view->redirectors = $r->fetchAll();

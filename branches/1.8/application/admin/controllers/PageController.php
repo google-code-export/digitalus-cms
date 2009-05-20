@@ -1,6 +1,6 @@
 <?php
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -27,8 +27,8 @@ require_once 'Zend/Controller/Action.php';
  *
  * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   DSF CMS
- * @package    DSF_CMS_Controllers
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Controllers
  * @version    $Id: PageController.php Tue Dec 25 19:38:20 EST 2007 19:38:20 forrest lyman $
  * @link       http://www.digitaluscms.com
  * @since      Release 1.0.0
@@ -70,9 +70,9 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function newAction()
     {
-        $name = DSF_Filter_Post::get('page_name');
-        $contentType = DSF_Filter_Post::get('contentType');
-        $parentId = DSF_Filter_Post::int('parent_id');
+        $name = Digitalus_Filter_Post::get('page_name');
+        $contentType = Digitalus_Filter_Post::get('contentType');
+        $parentId = Digitalus_Filter_Post::int('parent_id');
         $this->_setCreateOptions($parentId, $contentType);
 
         $page = new Model_Page();
@@ -82,7 +82,7 @@ class Admin_PageController extends Zend_Controller_Action
             $url = 'admin/page/edit/id/' . $newPage->id;
         } else {
             $url = 'admin/page';
-            $e = new DSF_View_Error();
+            $e = new Digitalus_View_Error();
             $e->add(
                 $this->view->getTranslation('Sorry, there was an error adding your page')
             );
@@ -102,8 +102,8 @@ class Admin_PageController extends Zend_Controller_Action
         $page = new Model_Page();
         //load the current page
         if ($this->_request->isPost()) {
-            $pageId = DSF_Filter_Post::int('page_id');
-            $version = DSF_Filter_Post::get('version');
+            $pageId = Digitalus_Filter_Post::int('page_id');
+            $version = Digitalus_Filter_Post::get('version');
         } else {
             $pageId = $this->_request->getParam('id',0);
             $version = $this->_request->getParam('version', $page->getDefaultVersion());
@@ -112,13 +112,13 @@ class Admin_PageController extends Zend_Controller_Action
         $currentPage = $page->open($pageId, $version);
 
         $template = $page->getTemplate($pageId);
-        $templateLoader = new DSF_Content_Template_Loader();
+        $templateLoader = new Digitalus_Content_Template_Loader();
         $pageTemplate = $templateLoader->load($template);
         $form = $this->getContentForm($pageTemplate);
 
         if (!is_object($currentPage)) {
             $url = 'admin/page';
-            $e = new DSF_View_Error();
+            $e = new Digitalus_View_Error();
             $e->add(
                 $this->view->getTranslation('Sorry, there was an error opening your page')
             );
@@ -241,9 +241,9 @@ class Admin_PageController extends Zend_Controller_Action
     {
         $mdlProperties = new Model_Properties();
         if ($this->_request->isPost()) {
-            $pageId = DSF_Filter_Post::int('page_id');
-            $keys = DSF_Filter_Post::raw('key');
-            $values = DSF_Filter_Post::raw('value');
+            $pageId = Digitalus_Filter_Post::int('page_id');
+            $keys = Digitalus_Filter_Post::raw('key');
+            $values = Digitalus_Filter_Post::raw('value');
             if (is_array($keys)) {
                 for ($i = 0; $i <= (count($keys) - 1); $i++) {
                     $k = $keys[$i];
@@ -264,7 +264,7 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function relatedContentAction()
     {
-        $pageId = DSF_Filter_Post::int('page_id');
+        $pageId = Digitalus_Filter_Post::int('page_id');
         foreach ($_POST as $k => $v) {
             if (substr($k, 0, 5) == 'file_' && $v == 1) {
                 $relatedFiles[] = str_replace('file_', '',$k);
@@ -317,7 +317,7 @@ class Admin_PageController extends Zend_Controller_Action
         $this->view->createPageOptions = $this->_getCreateOptions();
         $page = new Model_Page();
         $contentType = $page->getContentTemplate($parentId);
-        $templateLoader = new DSF_Content_Template_Loader();
+        $templateLoader = new Digitalus_Content_Template_Loader();
         $template = $templateLoader->load($contentType);
         $this->view->allowedTemplates = $template->getAllowedChildTemplates();
     }

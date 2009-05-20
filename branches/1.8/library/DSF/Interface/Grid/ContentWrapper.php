@@ -1,5 +1,5 @@
 <?php
-class DSF_Interface_Grid_ContentWrapper extends DSF_Interface_Grid_Abstract
+class Digitalus_Interface_Grid_ContentWrapper extends Digitalus_Interface_Grid_Abstract
 {
     public $parentId;
     public $content;

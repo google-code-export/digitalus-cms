@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DSF CMS
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -13,14 +13,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   DSF CMS
- * @package   DSF_Core_Library
+ * @category   Digitalus CMS
+ * @package   Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: Table.php Tue Dec 25 20:37:43 EST 2007 20:37:43 forrest lyman $
  */
 
-class DSF_Db_Table extends Zend_Db_Table
+class Digitalus_Db_Table extends Zend_Db_Table
 {
     protected $_data;
     protected $_errors;
@@ -85,8 +85,8 @@ class DSF_Db_Table extends Zend_Db_Table
     private function _loadPost()
     {
         foreach ($this->_cols as $col) {
-            if (DSF_Filter_Post::has($col)) {
-                $this->_data[$col] = DSF_Filter_Post::raw($col);
+            if (Digitalus_Filter_Post::has($col)) {
+                $this->_data[$col] = Digitalus_Filter_Post::raw($col);
             }
         }
     }
@@ -116,7 +116,7 @@ class DSF_Db_Table extends Zend_Db_Table
      */
     public function validateData()
     {
-        $this->_errors = new DSF_View_Error();
+        $this->_errors = new Digitalus_View_Error();
         $validations = array('Required', 'Text', 'Integer', 'Number', 'Email', 'Password', 'Date', 'HTML', 'Unique');
         foreach ($validations as $v) {
             $validateFunction = '_validate' . $v;

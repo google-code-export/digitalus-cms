@@ -1,6 +1,6 @@
 <?php
 
-class  DSF_View_Helper_Admin_UsersModuleLinks
+class  Digitalus_View_Helper_Admin_UsersModuleLinks
 {
 
     /**
