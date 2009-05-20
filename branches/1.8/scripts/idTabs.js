@@ -1,80 +1,12 @@
-/* idTabs ~ Sean Catchpole - Version 1.0 */ 
- 
-/* Options (in any order): 
- 
- start (number|string) 
-    Index number of default tab. ex: idTabs(0) 
-    String of id of default tab. ex: idTabs("#tab1") 
-    default: class "selected" or index 0 
- 
- return (boolean) 
-    True - Url will change. ex: idTabs(true) 
-    False - Url will not change. ex: idTabs(false) 
-    default: false 
- 
- click (function) 
-    Function will be called when a tab is clicked. ex: idTabs(foo) 
-    If the function returns true, idTabs will show/hide content (as usual). 
-    If the function returns false, idTabs will not take any action. 
-    The function is passed three variables: 
-      The id of the element to be shown 
-      an array of all id's that can be shown 
-      and the element containing the tabs 
-*/ 
-(function($){ 
-  $.fn.idTabs = function(){ 
-    //Defaults 
-    var s = { "start":null, 
-              "return":false, 
-              "click":null }; 
- 
-    //Loop Arguments matching options 
-    for(var i=0; i<arguments.length; ++i) { 
-      var n = {}, a=arguments[i]; 
-      switch(typeof a){ 
-        case "object": $.extend(n,a); break; 
-        case "number": 
-        case "string": n.start = a; break; 
-        case "boolean": n["return"] = a; break; 
-        case "function": n.click = a; break; 
-      }; $.extend(s,n); 
-    } 
-     
-    //Setup Tabs 
-    var self = this; //Save scope 
-    var list = $("a[@href^='#']",this).click(function(){ 
-      if($("a.selected",self)[0]==this) 
-        return s["return"]; //return if already selected 
-      var id = "#"+this.href.split('#')[1]; 
-      var aList = []; //save tabs 
-      var idList = []; //save possible elements 
-      $("a",self).each(function(){ 
-        if(this.href.match(/#/)) { 
-          aList[aList.length]=this; 
-          idList[idList.length]="#"+this.href.split('#')[1]; 
-        } 
-      }); 
-      if(s.click && !s.click(id,idList,self)) return s["return"]; 
-      //Clear tabs, and hide all 
-      for(i in aList) $(aList[i]).removeClass("selected"); 
-      for(i in idList) $(idList[i]).hide(); 
-      //Select clicked tab and show content 
-      $(this).addClass("selected"); 
-      $(id).show(); 
-      return s["return"]; //Option for changing url 
-    }); 
- 
-    //Select default tab 
-    var test; 
-    if(typeof s.start == "number" && (test=list.filter(":eq("+s.start+")")).length) 
-      test.click(); //Select num tab 
-    else if(typeof s.start == "string" && (test=list.filter("[@href='#"+s.start+"']")).length) 
-      test.click(); //Select tab linking to id 
-    else if((test=list.filter(".selected")).length) 
-      test.removeClass("selected").click(); //Select tab with class 'selected' 
-    else list.filter(":first").click(); //Select first tab 
- 
-    return this; //Chainable 
-  }; 
-  $(function(){ $(".idTabs").each(function(){ $(this).idTabs(); }); }); 
-})(jQuery)
+/* idTabs ~ Sean Catchpole - Version 2.2 - MIT/GPL */
+(function(){var dep={"jQuery":"http://code.jquery.com/jquery-latest.min.js"};var init=function(){(function($){$.fn.idTabs=function(){var s={};for(var i=0;i<arguments.length;++i){var a=arguments[i];switch(a.constructor){case Object:$.extend(s,a);break;case Boolean:s.change=a;break;case Number:s.start=a;break;case Function:s.click=a;break;case String:if(a.charAt(0)=='.')s.selected=a;else if(a.charAt(0)=='!')s.event=a;else s.start=a;break;}}
+if(typeof s['return']=="function")
+s.change=s['return'];return this.each(function(){$.idTabs(this,s);});}
+$.idTabs=function(tabs,options){var meta=($.metadata)?$(tabs).metadata():{};var s=$.extend({},$.idTabs.settings,meta,options);if(s.selected.charAt(0)=='.')s.selected=s.selected.substr(1);if(s.event.charAt(0)=='!')s.event=s.event.substr(1);if(s.start==null)s.start=-1;var showId=function(){if($(this).is('.'+s.selected))
+return s.change;var id="#"+this.href.split('#')[1];var aList=[];var idList=[];$("a",tabs).each(function(){if(this.href.match(/#/)){aList.push(this);idList.push("#"+this.href.split('#')[1]);}});if(s.click&&!s.click.apply(this,[id,idList,tabs,s]))return s.change;for(i in aList)$(aList[i]).removeClass(s.selected);for(i in idList)$(idList[i]).hide();$(this).addClass(s.selected);$(id).show();return s.change;}
+var list=$("a[href*='#']",tabs).unbind(s.event,showId).bind(s.event,showId);list.each(function(){$("#"+this.href.split('#')[1]).hide();});var test=false;if((test=list.filter('.'+s.selected)).length);else if(typeof s.start=="number"&&(test=list.eq(s.start)).length);else if(typeof s.start=="string"&&(test=list.filter("[href*='#"+s.start+"']")).length);if(test){test.removeClass(s.selected);test.trigger(s.event);}
+return s;}
+$.idTabs.settings={start:0,change:false,click:null,selected:".selected",event:"!click"};$.idTabs.version="2.2";$(function(){$(".idTabs").idTabs();});})(jQuery);}
+var check=function(o,s){s=s.split('.');while(o&&s.length)o=o[s.shift()];return o;}
+var head=document.getElementsByTagName("head")[0];var add=function(url){var s=document.createElement("script");s.type="text/javascript";s.src=url;head.appendChild(s);}
+var s=document.getElementsByTagName('script');var src=s[s.length-1].src;var ok=true;for(d in dep){if(check(this,d))continue;ok=false;add(dep[d]);}if(ok)return init();add(src);})();
