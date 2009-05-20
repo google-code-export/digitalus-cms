@@ -20,25 +20,12 @@ $this->headLink()->appendStylesheet($this->getBaseUrl() . '/skins/digitalus-1-5/
                  ->appendStylesheet($this->getBaseUrl() . '/styles/menutree.css')
                  ->appendStylesheet($this->getBaseUrl() . '/styles/jquery.treeview.css')
                  ->appendStylesheet($this->getBaseUrl() . '/styles/spreadsheet.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/jquery.wysiwyg.css')
                  ->appendStylesheet($this->getBaseUrl() . '/styles/sortable.css');
 echo $this->headLink();
 
-//javascripts
-$this->headScript()->prependFile($this->getBaseUrl() . '/scripts/jquery.pack.js')
-                   ->appendFile($this->getBaseUrl() . '/scripts/interface.js')
-                   ->appendFile($this->getBaseUrl() . '/scripts/jqueryTooltip.js')
-                   ->appendFile($this->getBaseUrl() . '/scripts/jqueryDatePicker.js')
-                   ->appendFile($this->getBaseUrl() . '/scripts/jquery.dateCompletion.js')
-                   ->appendFile($this->getBaseUrl() . '/scripts/jquery.treeview.js')
-                   ->appendFile($this->getBaseUrl() . '/scripts/idTabs.js')
-                   ->appendFile($this->getBaseUrl() . '/scripts/jquery.wysiwyg.js')
-                   ->appendFile($this->getBaseUrl() . '/scripts/jquery.multifile.js')
-                   ->appendFile($this->getBaseUrl() . '/scripts/jquery.cookie.js');
-echo $this->headScript();
-
-//jquery block
-$this->placeholder('baseJquery')->captureStart();
+//$this->jQuery()->addJavascriptFile('/scripts/jquery.multifile.js');
+$this->jQuery()->addJavascriptFile('/scripts/idTabs.js');
+$this->jQuery()->onLoadCaptureStart();
 ?>
 $(".message_box").bind("click",function(){
        $(this).fadeOut("slow");
@@ -61,24 +48,12 @@ $('a.add_to_my_bookmarks').click(function(){
     return false;
 });
 
-$('.wysiwyg').wysiwyg({
-    controls : {
-        separator04 : { visible : true },
-
-        insertOrderedList : { visible : true },
-        insertUnorderedList : { visible : true },
-        alert : {
-            visible   : true,
-            exec      : function() { alert('Hello World'); },
-            className : 'alert'
-        }
-
-    }
-});
-
 $('.spreadsheet tr:odd').addClass('oddRow');
 
-<?php $this->placeholder('baseJquery')->captureEnd();?>
+<?php 
+    $this->jQuery()->onLoadCaptureEnd();
+    echo $this->jQuery();  
+?>
 </head>
 
 <body>
@@ -116,10 +91,5 @@ $('.spreadsheet tr:odd').addClass('oddRow');
         </div>
         <div id="footer"></div>
     </div>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        <?php echo $this->placeholder('jquery');echo $this->placeholder('baseJquery');?>
-    });
-    </script>
 </body>
 </html>

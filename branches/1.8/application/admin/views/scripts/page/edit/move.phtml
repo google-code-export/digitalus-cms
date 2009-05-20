@@ -1,15 +1,14 @@
 <p><?php echo $this->getTranslation('Click the new parent page for this page to move it.')?></p>
-<script type="text/javascript">
-$(document).ready(function()
-{
+<?php 
+$this->jQuery()->addJavascriptFile('/scripts/jquery.treeview.js');
+$this->jQuery()->addJavascriptFile('/scripts/jquery.cookie.js');
+$this->jQuery()->onLoadCaptureStart()?>
     $("#parentTree").treeview({
         persist: "cookie",
         collapsed: true,
         unique: true
     });
-}
-);
-</script>
+<?php $this->jQuery()->onLoadCaptureEnd()?>
 
 
 <?php
