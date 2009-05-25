@@ -57,6 +57,7 @@
               <de>german</de>
               <fr>french</fr>
               <pl>polish</pl>
+              <ru>russian</ru>
           </translations>
         </language>
         <defaultTimezone>America/Los_Angeles</defaultTimezone>
