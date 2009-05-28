@@ -8,7 +8,7 @@ class Model_Page extends Digitalus_Db_Table
     protected $_defaultTemplate = 'base_page';
     protected $_defaultPageName = 'New Page';
     protected $_ignoredFields = array('update', 'version'); //these are the fields that are not saved as nodes
-
+    
     public function getContent($uri, $version = null)
     {
         if ($version == null) {
@@ -175,6 +175,11 @@ class Model_Page extends Digitalus_Db_Table
             $this->_flushCache();
             return $this->open($pageId, $version);
         }
+    }
+
+    public function setNamespace($namespace)
+    {
+        $this->_namespace = $namespace;
     }
 
     public function getVersions($pageId)
