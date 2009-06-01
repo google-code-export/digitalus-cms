@@ -10,7 +10,7 @@ class Digitalus_View_Helper_Jquery_JquerySortable
     public function JquerySortable($selector, $sortableClass = 'sortableItem')
     {
         $xhtml = "
-                $('$selector').Sortable(
+                $('$selector').sortable(
                     {
                         accept :        '$sortableClass',
                         helperclass :   'sorthelper',

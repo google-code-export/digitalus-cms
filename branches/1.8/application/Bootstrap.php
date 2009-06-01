@@ -214,6 +214,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->jQuery()->setUiLocalPath('/scripts/jquery-ui-1.7.custom.min.js');
         $view->jQuery()->addStylesheet('/scripts/ui-theme/jquery-ui-1.7.1.custom.css');
         $view->jQuery()->enable();
+        $view->jQUery()->uiEnable();
     }
     /**
      * Initialize the controllers
