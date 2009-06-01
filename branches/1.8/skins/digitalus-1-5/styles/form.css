@@ -506,5 +506,8 @@ div.wysiwyg{
 	margin-bottom:25px;
 }
 
-
+ul.errors{
+	max-width:320px;
+	color:#cc0000;
+}
 

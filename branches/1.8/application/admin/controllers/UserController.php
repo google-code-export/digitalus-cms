@@ -68,6 +68,12 @@ class Admin_UserController extends Zend_Controller_Action
     public function openAction()
     {
         $id = $this->_request->getParam('id', 0);
+        $form = new Admin_Form_User();
+        $form->removeElement('password');
+        $form->removeElement('password_confirm');
+        $form->setModel(new Model_User());
+        $form->populateFromModel($id);
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/user/edit');
         if ($id > 0) {
             $u = new Model_User();
             $row = $u->find($id)->current();
@@ -93,18 +99,18 @@ class Admin_UserController extends Zend_Controller_Action
      */
     public function createAction()
     {
-        if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            $u = new Model_User();
-            $user = $u->insertFromPost();
-            $e = new Digitalus_View_Error();
-            if (!$e->hasErrors()) {
-                $url = 'admin/user/open/id/' . $user->id;
-                $this->_redirect($url);
-            } else {
-                $storage = new Digitalus_Data_Storage();
-                $storage->savePost();
+        $form = new Admin_Form_User();
+        $form->removeElement('update_password');
+        $mdlUser = new Model_User();
+        $form->setModel($mdlUser);
+        if($form->isSubmitted()) {
+            $result = $form->create();
+            if($result) {
+                $this->_redirect('admin/user/open/id/' . $result->id);
             }
         }
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/user/create');
+        $this->view->form = $form;
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_create';
     }
 
@@ -117,7 +123,11 @@ class Admin_UserController extends Zend_Controller_Action
      */
     public function editAction()
     {
+        $form = new Admin_Form_User();
+        $form->removeElement('password');
+        $form->removeElement('password_confirm');
         $u = new Model_User();
+        $form->setModel($u);
         if (Digitalus_Filter_Post::has('update_permissions')) {
             //update the users permissions
             $resources = Digitalus_Filter_Post::raw('acl_resources');
@@ -129,13 +139,11 @@ class Admin_UserController extends Zend_Controller_Action
             $passwordConfirm = Digitalus_Filter_Post::get('newConfirmPassword');
             $u->updatePassword($id, $password, true, $passwordConfirm);
         } else {
-            $user = $u->updateFromPost();
+            $user = $form->update();
             $id = $user->id;
         }
-           $url = 'admin/user/open/id/' . $id;
-
-      $this->_redirect($url);
-
+        $url = 'admin/user/open/id/' . $id;
+        $this->_redirect($url);
     }
 
     /**

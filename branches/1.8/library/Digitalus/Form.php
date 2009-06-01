@@ -58,7 +58,9 @@ class Digitalus_Form extends Zend_Form
             foreach ($values as $field => $value) {
                $this->_setField($field, $value, $row, $valueOverride);
             }
-            return $row->save();
+            $row->save();
+            $row->id = Zend_Db_Table::getDefaultAdapter()->lastInsertId();
+            return $row;
         }else{
             return false;
         }
@@ -79,7 +81,8 @@ class Digitalus_Form extends Zend_Form
                 foreach ($values as $field => $value) {
                     $this->_setField($field, $value, $row, $valueOverride);
                 }
-                return $row->save();
+                $row->save();
+                return $row;
             }
         }
         return false;

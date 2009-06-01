@@ -43,10 +43,20 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_front = $this->getResource('frontController');
 
         // Add autoloader empty namespace
-        $autoLoader = new Zend_Application_Module_Autoloader(array(
-            'namespace' => '',
-            'basePath'  => APPLICATION_PATH)
-        );
+        $autoLoader =  new Zend_Loader_Autoloader_Resource(array(
+        'basePath'      => APPLICATION_PATH,
+        'namespace'     => '',
+        'resourceTypes' => array(
+            'form' => array(
+                'path'      => 'admin/forms/',
+                'namespace' => 'Admin_Form_',
+            ),
+            'model' => array(
+                'path'      => 'models/',
+                'namespace' => 'Model_'
+            ),
+        ),
+    ));
         // Return it, so that it can be stored by the bootstrap
         return $autoLoader;
     }
