@@ -24,16 +24,21 @@ class Digitalus_Media_Filetype {
     {
         $this->key = strtolower($key);
         $this->type = strtolower($type->type);
-        $this->mime = strtolower($type->mime);
+        $this->mime = $type->mime;
     }
 
     public function isType($mimeType)
     {
-        if ($mimeType == $this->mime) {
+        if(is_object($this->mime)) {
+            if(in_array($mimeType, $this->mime->type->toArray())) {
+                return true;
+            }else{
+                return false;
+            }
+        }elseif ($mimeType == $this->mime) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }
 

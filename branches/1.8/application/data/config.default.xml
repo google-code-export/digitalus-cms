@@ -47,7 +47,13 @@
             <jpg type="image" icon="picture.png" mime="image/jpeg"/>
             <gif type="image" icon="picture.png" mime="image/gif"/>
             <png type="image" icon="picture.png" mime="image/png"/>
-            <zip type="archive" icon="compress.png" mime="image/zip"/>
+            <zip type="archive" icon="compress.png">
+            	<mime>
+            		<type>image/zip</type>
+            		<type>application/x-zip-compressed</type>
+            		<type>application/zip</type>
+           		</mime>
+       		</zip>
         </filetypes>
         <language>
           <path>./application/data/language</path>

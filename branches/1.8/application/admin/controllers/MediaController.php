@@ -175,7 +175,7 @@ class Admin_MediaController extends Zend_Controller_Action
         $mediapath = Digitalus_Filter_Post::get('mediapath');
         $files = $_FILES['uploads'];
         if (is_array($files)) {
-            echo Digitalus_Media::batchUpload($files, $path);
+            $result = Digitalus_Media::batchUpload($files, $path);
         }
         $this->_request->setParam('folder', $mediapath);
 
