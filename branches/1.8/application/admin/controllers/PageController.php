@@ -247,7 +247,8 @@ class Admin_PageController extends Zend_Controller_Action
             if (is_array($keys)) {
                 for ($i = 0; $i <= (count($keys) - 1); $i++) {
                     $k = $keys[$i];
-                    $data[$k] = $values[$i];
+                    $cleanKey = str_replace(' ', '_', $k);
+                    $data[$cleanKey] = $values[$i];
                 }
                 if (is_array($data)) {
                     $mdlProperties->set($data, $pageId);
