@@ -23,7 +23,7 @@ class Digitalus_Interface_Grid extends Digitalus_Interface_Grid_Abstract {
     	}
     	
         $this->_loadStyles();
-        $grid = new Digitalus_Interface_Grid_Element('wrapper');
+        $grid = new Digitalus_Interface_Grid_Element($id . '_wrapper');
         $this->grid = $grid;
         $this->init();
         
