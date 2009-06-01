@@ -26,7 +26,7 @@ class Model_Design extends Zend_Db_Table
         if (is_array($stylesheets)) {
             foreach ($stylesheets as $skin => $styles) {
                 if (is_array($styles)) {
-                    $currentSkin = $xml->addChild($skin);
+                    $currentSkin = $xml->addChild('skinElement_' . $skin);
                     foreach ($styles as $stylesheet) {
                         $currentSkin->addChild('stylesheet', $stylesheet);
                     }
@@ -114,7 +114,7 @@ class Model_Design extends Zend_Db_Table
             $stylesArray = array();
             $xml = simplexml_load_string($this->_design->styles);
             foreach ($xml as $skin => $styles) {
-                $strSkin = (string)$skin;
+                $strSkin = str_replace('skinElement_', '', $skin);
                 foreach ($styles as $stylesheet) {
                     $strStylesheet = (string)$stylesheet;
                     $stylesArray[$strSkin][] = $strStylesheet;
