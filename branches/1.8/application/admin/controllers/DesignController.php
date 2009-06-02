@@ -101,7 +101,7 @@ class Admin_DesignController extends Zend_Controller_Action
                 Digitalus_Filter_Post::get('name'),
                 Digitalus_Filter_Post::get('notes'),
                 Digitalus_Filter_Post::get('layout'),
-                Digitalus_Filter_Post::raw('styles'),
+                Digitalus_Filter_Post::raw('skin'),
                 Digitalus_Filter_Post::get('inline_styles'),
                 Digitalus_Filter_Post::int('is_default')
             );

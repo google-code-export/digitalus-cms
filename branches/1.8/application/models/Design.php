@@ -14,7 +14,7 @@ class Model_Design extends Zend_Db_Table_Abstract
         return $this->_db->lastInsertId();
     }
 
-    public function updateDesign($id, $name, $notes, $layout, $stylesheets, $inlineStyles, $isDefault)
+    public function updateDesign($id, $name, $notes, $layout, $skin, $inlineStyles, $isDefault)
     {
         $row = $this->find($id)->current();
         $row->name = $name;
@@ -23,16 +23,7 @@ class Model_Design extends Zend_Db_Table_Abstract
 
 
         $xml = new SimpleXMLElement('<styles />');
-        if (is_array($stylesheets)) {
-            foreach ($stylesheets as $skin => $styles) {
-                if (is_array($styles)) {
-                    $currentSkin = $xml->addChild('skinElement_' . $skin);
-                    foreach ($styles as $stylesheet) {
-                        $currentSkin->addChild('stylesheet', $stylesheet);
-                    }
-                }
-            }
-        }
+        $xml->skin = $skin;
         $strXml = $xml->asXML();
 
         $row->styles =  $strXml;
@@ -107,17 +98,41 @@ class Model_Design extends Zend_Db_Table_Abstract
             return false;
         }
     }
+    
+    public function getSkin()
+    {
+        if (!empty($this->_design->styles)) {
+            $stylesArray = array();
+            $xml = simplexml_load_string($this->_design->styles);
+            return (string)$xml->skin;
+        }
+        return false;
+    }
 
     public function getStylesheets()
     {
         if (!empty($this->_design->styles)) {
             $stylesArray = array();
             $xml = simplexml_load_string($this->_design->styles);
-            foreach ($xml as $skin => $styles) {
-                $strSkin = str_replace('skinElement_', '', $skin);
-                foreach ($styles as $stylesheet) {
-                    $strStylesheet = (string)$stylesheet;
-                    $stylesArray[$strSkin][] = $strStylesheet;
+            $skin = (string)$xml->skin;
+            if(!empty($skin)) {
+                // load all of the style sheets from the skin
+                $config = Zend_Registry::get('config');
+                $styles = Digitalus_Filesystem_File::getFilesByType('./' . $config->design->pathToSkins . '/' . $skin . '/styles', 'css');
+                if (is_array($styles)) {
+                        foreach ($styles  as $style) {
+                            //add each style sheet to the hash
+                            // key = path / value = filename
+                            $stylesArray[$skin][] = $style;
+                        }
+                }
+            }else{
+                foreach ($xml as $skin => $styles) {
+                    $strSkin = str_replace('skinElement_', '', $skin);
+                    foreach ($styles as $stylesheet) {
+                        $strStylesheet = (string)$stylesheet;
+                        $stylesArray[$strSkin][] = $strStylesheet;
+                    }
                 }
             }
             return $stylesArray;
