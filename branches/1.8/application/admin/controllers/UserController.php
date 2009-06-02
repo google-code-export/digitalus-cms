@@ -109,6 +109,7 @@ class Admin_UserController extends Zend_Controller_Action
                 $this->_redirect('admin/user/open/id/' . $result->id);
             }
         }
+        $this->view->breadcrumbs['Create User'] = $this->getFrontController()->getBaseUrl() . '/admin/user/create';
         $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/user/create');
         $this->view->form = $form;
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_create';
