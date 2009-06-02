@@ -22,18 +22,26 @@ $(".css").markItUp(mySettings);
         echo $this->FormRow(
             $this->getTranslation('Design Name'), $this->FormText('name',$this->design->getValue('name'))
         );
-        echo $this->FormRow('&nbsp;', $this->formCheckbox('is_default', intval($this->design->getValue('is_default')), null, array(1,0)) . ' ' . $this->getTranslation('This is the default site design'));
-        echo $this->FormRow('Layout', $this->selectLayout('layout', $this->design->getLayout()));
-        
+        echo $this->FormRow(
+            '&nbsp;', $this->formCheckbox('is_default', intval($this->design->getValue('is_default')), null, array(1,0)) . ' ' . $this->getTranslation('This is the default site design')
+        );
+        echo $this->FormRow(
+            $this->getTranslation('Layout'), $this->selectLayout('layout', $this->design->getLayout())
+        );
+
         // get the current skin
         $currentSkin = $this->design->getSkin();
-        echo $this->FormRow('Skin', $this->selectSkin('skin', $this->design->getSkin()));
-       
+        echo $this->FormRow(
+            $this->getTranslation('Skin'), $this->selectSkin('skin', $this->design->getSkin())
+        );
+
         echo $this->FormRow(
             $this->getTranslation('Design Notes'), $this->FormTextarea('notes',$this->design->getValue('notes'), array('class' => 'med'))
         );
-        echo '<dt>' . $this->FormTextarea('inline_styles',$this->design->getValue('inline_styles'), array('class' => 'css')) . '</dt>';
-        echo $this->FormRow('&nbsp;', $this->FormSubmit('site', $this->getTranslation('Update Design')));
+        echo '<dt>' . $this->FormTextarea('inline_styles', $this->design->getValue('inline_styles'), array('class' => 'css')) . '</dt>';
+        echo $this->FormRow(
+            '&nbsp;', $this->FormSubmit('site', $this->getTranslation('Update Design'))
+        );
         ?>
     </dl>
 </fieldset>
