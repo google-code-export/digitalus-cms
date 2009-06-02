@@ -21,7 +21,7 @@
  * @version    $Id: AccessLog.php Sun Dec 23 09:17:31 EST 2007 09:17:31 forrest lyman $
  */
 
-class Model_AccessLog extends Zend_Db_Table
+class Model_AccessLog extends Zend_Db_Table_Abstract
 {
     /**
      * table name

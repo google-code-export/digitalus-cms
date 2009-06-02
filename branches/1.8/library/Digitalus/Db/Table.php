@@ -20,7 +20,7 @@
  * @version    $Id: Table.php Tue Dec 25 20:37:43 EST 2007 20:37:43 forrest lyman $
  */
 
-class Digitalus_Db_Table extends Zend_Db_Table
+class Digitalus_Db_Table extends Zend_Db_Table_Abstract
 {
     protected $_data;
     protected $_errors;

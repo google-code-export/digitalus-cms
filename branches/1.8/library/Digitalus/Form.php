@@ -26,9 +26,7 @@ class Digitalus_Form extends Zend_Form
         $this->addElement($instanceElement);
     }
 
-
-
-    public function setModel(Zend_Db_Table $model)
+    public function setModel(Zend_Db_Table_Abstract $model)
     {
         $this->_model = $model;
         $info = $model->info();

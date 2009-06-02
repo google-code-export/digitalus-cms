@@ -21,7 +21,7 @@
  * @version    $Id: Person.php Sun Dec 23 11:24:28 EST 2007 11:24:28 forrest lyman $
  */
 
-class Model_Person extends Zend_Db_Table
+class Model_Person extends Zend_Db_Table_Abstract
 {
     /**
      * table name
