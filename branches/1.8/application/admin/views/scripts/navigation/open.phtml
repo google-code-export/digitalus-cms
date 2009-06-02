@@ -5,9 +5,7 @@ $iconSource = $this->getBaseUrl() . '/images/icons/';
 ?>
 
 <div class="formBox">
-<script type="text/javascript">
-$(document).ready(
-    function () {
+<?php $this->jQuery()->onLoadCaptureStart()?>
         <?php echo $this->JquerySortable('ul.sortable');?>
         $(".visibility").click(function() {
             var rowId = $(this).attr('id');
@@ -20,9 +18,7 @@ $(document).ready(
                 $("#" + rowId + "_val").val(1);
             }
         });
-    }
-);
-</script>
+<?php $this->jQuery()->onLoadCaptureEnd()?>
 
 <form action='<?php echo $this->getBaseUrl(); ?>/admin/navigation/edit' method="post">
     <fieldset>

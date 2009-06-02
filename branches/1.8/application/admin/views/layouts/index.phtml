@@ -25,6 +25,7 @@ echo $this->headLink();
 
 //$this->jQuery()->addJavascriptFile('/scripts/jquery.multifile.js');
 $this->jQuery()->addJavascriptFile('/scripts/idTabs.js');
+ 
 $this->jQuery()->onLoadCaptureStart();
 ?>
 $(".message_box").bind("click",function(){
@@ -51,8 +52,7 @@ $('a.add_to_my_bookmarks').click(function(){
 $('.spreadsheet tr:odd').addClass('oddRow');
 
 <?php 
-    $this->jQuery()->onLoadCaptureEnd();
-    echo $this->jQuery();  
+    $this->jQuery()->onLoadCaptureEnd(); 
 ?>
 </head>
 
@@ -91,5 +91,6 @@ $('.spreadsheet tr:odd').addClass('oddRow');
         </div>
         <div id="footer"></div>
     </div>
+    <?php echo $this->jQuery(); ?>
 </body>
 </html>
