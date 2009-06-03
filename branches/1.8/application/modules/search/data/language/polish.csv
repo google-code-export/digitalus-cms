@@ -1,20 +1,4 @@
 # Language File – MOD_SEARCH
 # POLISH
 # ----- search module -----
-"Search";""
-"Search Module";""
-"The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.";""
-"Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.";""
-"Search Options";""
-"Rebuild search index";""
-"The search index was rebuilt successfully!";""
-"Search Site";""
-"Site Search";""
-"Keywords";""
-"Your search for";""
-"returned";""
-"results.";""
-"did not return any results.";""
-"Please provide a keyword to search for!";""
-"The search form does not have any user defined settings.";""
-"For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";""
+"Digitalus CMS";"Digitalus CMS"
