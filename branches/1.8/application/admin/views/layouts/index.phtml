@@ -20,11 +20,13 @@ $this->headLink()->appendStylesheet($this->getBaseUrl() . '/skins/digitalus-1-5/
                  ->appendStylesheet($this->getBaseUrl() . '/styles/menutree.css')
                  ->appendStylesheet($this->getBaseUrl() . '/styles/jquery.treeview.css')
                  ->appendStylesheet($this->getBaseUrl() . '/styles/spreadsheet.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/sortable.css');
+                 ->appendStylesheet($this->getBaseUrl() . '/styles/sortable.css')
+                 ->appendStylesheet($this->getBaseUrl() . '/styles/ThickBox.css');
 echo $this->headLink();
 
 //$this->jQuery()->addJavascriptFile('/scripts/jquery.multifile.js');
 $this->jQuery()->addJavascriptFile('/scripts/idTabs.js');
+$this->jQuery()->addJavascriptFile('/scripts/thickbox.js');
  
 $this->jQuery()->onLoadCaptureStart();
 ?>
