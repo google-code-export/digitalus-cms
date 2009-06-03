@@ -23,7 +23,7 @@ class Digitalus_View_Helper_Interface_Link {
     /**
      *
      */
-    public function link($label, $link, $icon = null, $class = 'link')
+    public function link($label, $link, $icon = null, $class = 'link', $target = null)
     {
         $this->link = Digitalus_Toolbox_String::stripLeading('/', $link);
         $this->baseUrl = Digitalus_Toolbox_String::stripLeading('/', $this->view->getBaseUrl());
@@ -34,8 +34,12 @@ class Digitalus_View_Helper_Interface_Link {
         } else {
             $cleanLink = '/' . $this->addBaseUrl($this->link);
         }
+        
+        if($target != null) {
+            $target = "target='{$target}'";
+        }
        
-        $linkParts[] = "<a href='{$cleanLink}' class='{$class}'>";
+        $linkParts[] = "<a href='{$cleanLink}' class='{$class}' $target>";
        
         if (null !== $icon) {
             $linkParts[] = $this->getIcon($icon, $label);

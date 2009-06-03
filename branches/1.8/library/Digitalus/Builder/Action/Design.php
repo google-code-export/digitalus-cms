@@ -21,11 +21,19 @@ class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
 
     public function loadDesign()
     {
-        $data = $this->_page->getData();
-        $designId = $data->design;
+        
 
+        // if the design id is passed as a url parameter use that design instead
+        $uri = new Digitalus_Uri();
+        $params = $uri->getParams();
+        if(is_array($params) && isset($params['preview_design'])) {
+            $design = $params['preview_design'];
+        }else{
+            $data = $this->_page->getData();
+            $design = $data->design;
+        }
         //load the parents or default if the current page does not have a design set
-        if (!empty($designId)) {
+        if (empty($design)) {
             $page = new Model_Page();
             $parents = $page->getParents($this->_page->getId());
             if (is_array($parents)) {

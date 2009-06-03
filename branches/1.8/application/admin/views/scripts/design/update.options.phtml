@@ -1,4 +1,6 @@
-<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Who Uses This?'))?>
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Tools'))?>
+<p><?php echo $this->link('Preview design', '/p/preview_design/' . $this->design->getValue('id'), 'monitor_go.png', 'link', '_blank');?></p>
+<h3><?php echo $this->getTranslation('Who Uses This?')?></h3>
 <p><?php echo $this->getTranslation('These are the pages that use this design:');?></p>
 <?php
 if (is_object($this->pages)) {
