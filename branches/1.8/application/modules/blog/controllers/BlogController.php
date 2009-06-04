@@ -12,7 +12,7 @@ class Mod_Blog_BlogController extends Zend_Controller_Action
            $this->view->getTranslation('Modules') => $this->view->getBaseUrl() . '/admin/module',
            $this->view->getTranslation('Blog') => $this->view->getBaseUrl() . '/mod_blog'
         );
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/mod_contact';
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/mod_blog';
 
     }
 
@@ -44,7 +44,7 @@ class Mod_Blog_BlogController extends Zend_Controller_Action
             $blog = $mdlBlog->find($id)->current();
             $form->populate($blog->toArray());
         }
-        $form->setAction($this->view->baseUrl . '/mod_blog/blog/edit');
+        $form->setAction($this->view->getBaseUrl() . '/mod_blog/blog/edit');
         $submit = $form->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Update Blog'));
 
@@ -56,7 +56,7 @@ class Mod_Blog_BlogController extends Zend_Controller_Action
         $postForm = new Post_Form();
         $postFormValues['blog_id'] = $blog->id;
         $postForm->populate($postFormValues);
-        $postForm->setAction($this->view->baseUrl . '/mod_blog/post/create');
+        $postForm->setAction($this->view->getBaseUrl() . '/mod_blog/post/create');
         $submit = $postForm->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Add New Post'));
         $this->view->postForm = $postForm;

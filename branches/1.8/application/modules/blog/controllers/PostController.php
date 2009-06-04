@@ -63,7 +63,7 @@ class Mod_Blog_PostController extends Zend_Controller_Action
         }
         $blog = $mdlBlog->find($post->blogId)->current();
 
-        $form->setAction($this->view->baseUrl . '/mod_blog/post/edit');
+        $form->setAction($this->view->getBaseUrl() . '/mod_blog/post/edit');
         $submit = $form->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Update Post'));
 
