@@ -2,7 +2,7 @@
 $this->placeholder('optionsHeadline')->set($this->getTranslation('Blog Post'));?>
 
 <p><?php
-$path = $this->getBaseUrl() . '/mod_blog/blog/edit/id/' . $this->blog->id;
+$path = '/mod_blog/blog/edit/id/' . $this->blog->id;
 $link = $this->getTranslation('Back to') . ' ' . $this->blog->name . ' ' . $this->getTranslation('blog');
 echo $this->link($link, $path, 'arrow_left.png');?>
 <a href='?>'>
