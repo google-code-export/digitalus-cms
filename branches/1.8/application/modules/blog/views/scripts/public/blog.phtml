@@ -1,0 +1,10 @@
+<?php
+if (isset($this->openPost)) {
+    echo $this->partial('partials/post.phtml', $this->openPost);
+
+} elseif (isset($this->blog)) { ?>
+    <h2 class='blog-title'><?php echo $this->blog->name; ?></h2><?php
+    if ($this->posts != null) {
+        echo $this->partialLoop('partials/post-min.phtml', $this->posts);
+    }
+} ?>

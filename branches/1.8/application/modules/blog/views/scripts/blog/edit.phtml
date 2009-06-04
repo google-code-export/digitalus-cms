@@ -1,0 +1,14 @@
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Blog'))?>
+
+<fieldset>
+    <legend><?php echo $this->getTranslation('Update Blog');?></legend>
+    <?php echo $this->form; ?>
+</fieldset>
+
+<fieldset>
+    <legend><?php echo $this->getTranslation('Add New Post');?></legend>
+    <?php
+    $this->postForm->removeElement('teaser');
+    $this->postForm->removeElement('content');
+    echo $this->postForm; ?>
+</fieldset>

@@ -1,0 +1,13 @@
+<?php
+$this->placeholder('optionsHeadline')->set($this->getTranslation('Blog Posts'));
+if ($this->posts != null) {
+    echo '<ul>';
+    foreach ($this->posts as $post) {
+        echo '<li>' . $this->link($post->title, '/mod_blog/post/edit/id/' . $post->id, 'page_white_text.png') . '</li>';
+    }
+    echo '</ul>';
+} else {
+  echo '<p>' . $this->getTranslation('This blog does not have any posts') . '</p>';
+}
+?>
+
