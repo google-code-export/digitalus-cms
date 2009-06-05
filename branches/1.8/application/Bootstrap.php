@@ -44,19 +44,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // Add autoloader empty namespace
         $autoLoader =  new Zend_Loader_Autoloader_Resource(array(
-        'basePath'      => APPLICATION_PATH,
-        'namespace'     => '',
-        'resourceTypes' => array(
-            'form' => array(
-                'path'      => 'admin/forms/',
-                'namespace' => 'Admin_Form_',
+            'basePath'      => APPLICATION_PATH,
+            'namespace'     => '',
+            'resourceTypes' => array(
+                'form' => array(
+                    'path'      => 'admin/forms/',
+                    'namespace' => 'Admin_Form_',
+                ),
+                'model' => array(
+                    'path'      => 'models/',
+                    'namespace' => 'Model_'
+                ),
             ),
-            'model' => array(
-                'path'      => 'models/',
-                'namespace' => 'Model_'
-            ),
-        ),
-    ));
+        ));
         // Return it, so that it can be stored by the bootstrap
         return $autoLoader;
     }
@@ -213,12 +213,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Return it, so that it can be stored by the bootstrap
         return $view;
     }
-    
+
     protected function _initJquery()
     {
         $view = $this->getResource('view');
         // add helpers
-        $view->addHelperPath('ZendX/JQuery/View/Helper', 'ZendX_JQuery_View_Helper'); 
+        $view->addHelperPath('ZendX/JQuery/View/Helper', 'ZendX_JQuery_View_Helper');
 
         $view->jQuery()->setLocalPath($view->baseUrl . '/scripts/jquery-1.3.2.min.js');
         $view->jQuery()->setUiLocalPath($view->baseUrl . '/scripts/jquery-ui-1.7.custom.min.js');
@@ -240,7 +240,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Setup extension modules
         $this->_front->setParam('pathToModules', APPLICATION_PATH . '/modules');
         $cmsModules = null;
-        if ($modules = $this->_getModules()) {
+        if ($modules = self::getModules()) {
             foreach ($modules as $module) {
                 $cmsModules['mod_' . $module] = $module;
                 $this->_front->addControllerDirectory(APPLICATION_PATH . '/modules/' . $module . '/controllers', 'mod_' . $module);
@@ -258,7 +258,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      *
      * @return array|false
      */
-    protected function _getModules()
+    public static function getModules()
     {
         $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
         if (is_array($modules)) {
