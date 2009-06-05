@@ -240,7 +240,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Setup extension modules
         $this->_front->setParam('pathToModules', APPLICATION_PATH . '/modules');
         $cmsModules = null;
-        if ($modules = self::getModules()) {
+        if ($modules = Digitalus_Module::getModules()) {
             foreach ($modules as $module) {
                 $cmsModules['mod_' . $module] = $module;
                 $this->_front->addControllerDirectory(APPLICATION_PATH . '/modules/' . $module . '/controllers', 'mod_' . $module);
@@ -250,23 +250,5 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $this->_front->setParam('cmsModules', $cmsModules);
         }
     }
-
-/* ************************************************************************** */
-
-    /**
-     * Return an array with the existing extension modules
-     *
-     * @return array|false
-     */
-    public static function getModules()
-    {
-        $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
-        if (is_array($modules)) {
-            return $modules;
-        } else {
-            return false;
-        }
-    }
-
 }
 ?>
