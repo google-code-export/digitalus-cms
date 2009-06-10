@@ -11,8 +11,8 @@ require_once 'Zend/View/Interface.php';
  *
  * @uses viewHelper Digitalus_View_Helper_Internationalization
  */
-class Digitalus_View_Helper_Internationalization_ListLanguageLinks {
-
+class Digitalus_View_Helper_Internationalization_ListLanguageLinks
+{
     /**
      * @var Zend_View_Interface
      */
@@ -34,7 +34,7 @@ class Digitalus_View_Helper_Internationalization_ListLanguageLinks {
             $base = $uri->toString();
             foreach ($availableLanguages as $locale => $name) {
                 if (!empty($locale) && $locale != $currentLanguage) {
-                    $url = $base. '/p/lang/' . $locale;
+                    $url = $base . '/p/language/' . $locale;
                     $languageLinks[] = '<a href="' . $url . '">' . $this->view->getTranslation($name) . '</a>';
                 }
             }

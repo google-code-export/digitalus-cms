@@ -1,7 +1,6 @@
 <?php
 class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
 {
-
     public function appendUriParams()
     {
         $uri = new Digitalus_Uri();
@@ -23,9 +22,9 @@ class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
         $mdlPage = new Model_Page();
         $uri = $this->_page->getUri();
         $pointer = $mdlPage->fetchPointer($uri);
-        if($pointer > 0) {
+        if ($pointer > 0) {
             $this->_page->setId($pointer);
-        }else{
+        } else {
             //this needs to be refactored so the error controller can handle it
             $front = Zend_Controller_Front::getInstance();
             $response = $front->getResponse();
@@ -156,7 +155,7 @@ class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
         //next add all of the page titles
         $mdlPage = new Model_Page();
         $title = $mdlPage->getTitle($pageId);
-        if(is_array($title)) {
+        if (is_array($title)) {
             $metaDescription[] = implode(',', $title);
             $metaKeywords[] = implode(',', $title);
         }
@@ -165,11 +164,11 @@ class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
         $mdlMeta = new Model_MetaData();
         $metaData = $mdlMeta->asArray($pageId);
 
-        if(!empty($metaData['meta_description'])) {
+        if (!empty($metaData['meta_description'])) {
             $metaDescription[] = (string)$metaData['meta_description'];
         }
 
-        if(!empty($metaData['keywords'])) {
+        if (!empty($metaData['keywords'])) {
             $metaKeywords[] =  (string)$metaData['keywords'];
         }
 

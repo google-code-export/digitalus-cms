@@ -17,7 +17,7 @@ class Digitalus_View_Helper_Internationalization_GetTranslation
         }
         $adapter = Zend_Registry::get('Zend_Translate');
         $moduleName = $this->view->getRequest()->getModuleName();
-        $currentLanguage = $this->view->GetCurrentLanguage();
+        $currentLanguage = $this->view->getCurrentLanguage();
         if ($locale != null) {
             $this->view->translate()->setLocale($locale);
         } elseif ($moduleName != 'admin' && $adapter->isAvailable($currentLanguage)) {

@@ -11,8 +11,8 @@ require_once 'Zend/View/Interface.php';
  *
  * @uses viewHelper Digitalus_View_Helper_Internationalization
  */
-class Digitalus_View_Helper_Internationalization_LanguageForm {
-
+class Digitalus_View_Helper_Internationalization_LanguageForm
+{
     /**
      * @var Zend_View_Interface
      */
