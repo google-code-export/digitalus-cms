@@ -60,7 +60,7 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $this->view->createPageOptions = $this->_getCreateOptions();
+    	$this->_forward('new');
     }
 
     /**
@@ -70,25 +70,38 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function newAction()
     {
-        $name = Digitalus_Filter_Post::get('page_name');
-        $contentType = Digitalus_Filter_Post::get('contentType');
-        $parentId = Digitalus_Filter_Post::int('parent_id');
-        $this->_setCreateOptions($parentId, $contentType);
-
-        $page = new Model_Page();
-        $newPage = $page->createPage($name, $parentId, $contentType);
-
-        if ($newPage) {
-            $url = 'admin/page/edit/id/' . $newPage->id;
-        } else {
-            $url = 'admin/page';
-            $e = new Digitalus_View_Error();
-            $e->add(
-                $this->view->getTranslation('Sorry, there was an error adding your page')
-            );
+        $frmPage = new Admin_Form_Page();
+        if($this->_request->isPost()) {
+        if($frmPage->isValid($_POST)) {
+	        $this->_setCreateOptions($frmPage->getValue('parent_id'), $frmPage->getElement('continue_adding_pages')->isChecked());
+	        $page = new Model_Page();
+	        $newPage = $page->createPage($frmPage->getValue('page_name', $frmPage->getValue('parent_id')));
+	       
+	        if ($newPage) {
+		        if($frmPage->getElement('continue_adding_pages')->isChecked()) {
+		            $url = 'admin/page/new';
+		        }else{
+		            $url = 'admin/page/edit/id/' . $newPage->id;
+		        }	        	
+	        } else {
+	            $url = 'admin/page';
+	            $e = new Digitalus_View_Error();
+	            $e->add(
+	                $this->view->getTranslation('Sorry, there was an error adding your page')
+	            );
+	        }
+	        $formVaues = $this->_getCreateOptions();	        
+	        $this->_redirect($url);
         }
-        $this->_redirect($url);
-
+        
+        }else{
+        	$formVaues = $this->_getCreateOptions();
+        	$frmPage->getElement('parent_id')->setValue($formVaues->parentId);
+            $frmPage->getElement('continue_adding_pages')->setValue($formVaues->continue);
+        }
+        
+        $frmPage->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/new');
+        $this->view->form = $frmPage;
     }
 
     /**
@@ -410,11 +423,11 @@ class Admin_PageController extends Zend_Controller_Action
      * @param  string $contentType
      * @return void
      */
-    protected function _setCreateOptions($parentId, $contentType)
+    protected function _setCreateOptions($parentId, $continue = false)
     {
         $session = $this->_getCreateOptions();
-        $session->contentType = $contentType;
-        $session->parentId = intval($parentId);
+        $session->continue = $continue;
+        $session->parentId = $parentId;
     }
 
     /**

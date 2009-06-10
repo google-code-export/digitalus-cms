@@ -19,13 +19,11 @@ $this->placeholder('formHeadline')->set($this->getTranslation('Create a Page'));
     <div id="step3"></div>
     </form>
 </fieldset>
-<script type="text/javascript">
-$(document).ready(function() {
+<?php $this->jQuery()->onLoadCaptureStart(); ?>
     $("#step1button").click(function() {
         var parentId = $("#parent_id").val();
         $("#step2").load('<?php echo $this->getBaseUrl();?>/admin/page/select-content-template/parent_id/' + parentId);
         $("#step3").html('');
         return false;
     });
-});
-</script>
+<?php $this->jQuery()->onLoadCaptureEnd(); ?>
