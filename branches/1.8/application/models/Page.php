@@ -5,7 +5,7 @@ class Model_Page extends Digitalus_Db_Table
 {
     protected $_name = 'pages';
     protected $_namespace = 'content';
-    protected $_defaultTemplate = 'base_page';
+    protected $_defaultTemplate = 'default';
     protected $_defaultPageName = 'New Page';
     protected $_ignoredFields = array('update', 'version'); //these are the fields that are not saved as nodes
     
@@ -137,7 +137,7 @@ class Model_Page extends Digitalus_Db_Table
 
     public function edit($pageArray)
     {
-        $pageId = $pageArray['page_id'];
+        $pageId = $pageArray['id'];
         if (!$pageId) {
             throw new Zend_Exception('Invalid Page: No key found for id');
         } else {
@@ -258,6 +258,18 @@ class Model_Page extends Digitalus_Db_Table
         $page = $this->find($pageId)->current();
         if ($page) {
             $page->design = $designId;
+            $page->save();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function setContentTemplate($pageId, $template)
+    {
+        $page = $this->find($pageId)->current();
+        if ($page) {
+            $page->content_template = $template;
             $page->save();
             return true;
         } else {

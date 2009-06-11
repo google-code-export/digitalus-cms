@@ -21,11 +21,10 @@ class Digitalus_View_Helper_Content_RenderContentTemplate {
     /**
      *
      */
-    public function renderContentTemplate($template, $content, $namespace = null)
+    public function renderContentTemplate($template, $content)
     {
-        $loader = new Digitalus_Content_Template_Loader();
-        $template = $loader->load($template);
-        return $template->render($content, $this->view, $namespace);
+        $template = new Digitalus_Content_Template($template);
+        return $template->render($content);
     }
 
     /**

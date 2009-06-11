@@ -1,26 +1,22 @@
 <?php
 class Digitalus_Content_Template
 {
-    const PROPERTIES_FILENAME = 'properties.xml';
-    const FORM_FILENAME = 'form.php';
-    const ALL_TEMPLATES = 'all';
-    protected $_folder;
-    protected $_template;
-    protected $_templatePath;
+    public $template;
+    public $templatePath = '/public/views/scripts/layouts/sublayouts';
     public $properties;
 
-    public function __construct($folder, $template, $templatePath)
+    public function __construct($template, $templatePath = null)
     {
-        $this->_folder = $folder;
-        $this->_template = $template;
-        $this->_templatePath = $templatePath;
-        if (!empty($folder) && !empty($template)) {
-            $this->_loadProperties();
+        
+        $this->template = $template;
+        if($templatePath != NULL) {
+            $this->templatePath = $templatePath;
         }
     }
 
     public function getAllowedChildTemplates()
     {
+        /* deprecated as of version 1.8
         if (isset($this->_properties->allowedChildren)) {
             if (isset($this->_properties->allowedChildren)) {
                 //templates are set
@@ -45,36 +41,26 @@ class Digitalus_Content_Template
             $loader = new Digitalus_Content_Template_Loader();
             return $loader->getTemplates();
         }
+		*/
     }
 
     public function getForm()
     {
-        $pathToForm = $this->_templatePath . '/' . $this->_folder . '/' . $this->_template . '/' . self::FORM_FILENAME ;
-        require_once($pathToForm);
-        $formClass = ucfirst($this->_folder) . '_' . ucfirst($this->_template) . '_Form';
-        return new $formClass();
+        $form = new Digitalus_Content_Form();
+        $view = clone($form->getView());
+        $view->setScriptPath(APPLICATION_PATH . $this->templatePath);
+        $view->formInstance = $form;
+        $page = $view->render($this->template . '.phtml');
+        return $form;
     }
 
-    public function render($content, $viewInstance = null)
+    public function render($content)
     {
-        if ($viewInstance == null) {
-            $view = new Zend_View();
-        } else {
-            $view = $viewInstance;
-        }
-        //load helpers for this view instance
-        Digitalus_View_RegisterHelpers::register($view);
+        $form = new Digitalus_Content_Form();
+        $view = clone($form->getView());
+        $view->setScriptPath(APPLICATION_PATH . $this->templatePath);
         $view->content = $content;
-        $view->addScriptPath($this->_templatePath);
-        $templateScript = $this->_folder . '/' . $this->_template . '/template.phtml';
-        return $view->render($templateScript);
-
-    }
-
-    protected function _loadProperties()
-    {
-        $path = $this->_templatePath . '/' . $this->_folder . '/' . $this->_template . '/' . self::PROPERTIES_FILENAME;
-        $this->_properties = new Zend_Config_Xml($path);
+        return $view->render($this->template . '.phtml');
     }
 
 }

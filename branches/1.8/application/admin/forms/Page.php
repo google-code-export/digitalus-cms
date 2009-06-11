@@ -28,18 +28,18 @@ class Admin_Form_Page extends Digitalus_Form
         $parentId->setOrder(1);	
         $this->addElement($parentId);
         
-        $design = $this->createElement('select','design_id');
-        $design->setLabel($this->getView()->getTranslation('Page design: '));
-        $design->addMultiOption(0, $this->getView()->getTranslation('Use default'));
-        $mdlDesign = new Model_Design();
-        $designs = $mdlDesign->listDesigns();
-        if ($designs) {
-            foreach ($designs as $d) {
-                $design->addMultiOption($d->id, $d->name);
+        $template = $this->createElement('select','content_template');
+        $template->setLabel($this->getView()->getTranslation('Content Template: '));
+        $template->addMultiOption('default', $this->getView()->getTranslation('Default'));
+        
+        $availableTemplates = Digitalus_Filesystem_File::getFilesByType(APPLICATION_PATH . '/public/views/scripts/layouts/sublayouts', 'phtml', false, false);
+        if (is_array($availableTemplates) && count($availableTemplates) > 0) {
+            foreach ($availableTemplates as $t) {
+                $template->addMultiOption($t, $this->getView()->getTranslation($t));
             }
         }
-        $design->setOrder(2);
-        $this->addElement($design);
+        $template->setOrder(2);
+        $this->addElement($template);
                 
         $continue = $this->createElement('checkbox', 'continue_adding_pages');
         $continue->setLabel($this->getView()->getTranslation('Continue adding pages') . '?');

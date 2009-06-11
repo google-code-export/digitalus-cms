@@ -109,7 +109,6 @@ class Zend_View_Helper_FormSelect extends Zend_View_Helper_FormElement
                 . $disabled
                 . $this->_htmlAttribs($attribs)
                 . ">\n    ";
-
         // build the list of options
         $list       = array();
         $translator = $this->getTranslator();

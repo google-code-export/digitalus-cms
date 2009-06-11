@@ -30,7 +30,7 @@ class Digitalus_Filesystem_File
      * @param mixed $type, the file extension to return
      * @param string $appendPath, the path to append to the returned files
      */
-    public static function getFilesByType($path, $type = false, $appendPath = false, $includeExtension = false)
+    public static function getFilesByType($path, $type = false, $appendPath = false, $includeExtension = true)
     {
         if (is_dir($path)) {
             $dir = scandir($path); //open directory and get contents
@@ -41,9 +41,9 @@ class Digitalus_Filesystem_File
                         if ($type) { //validate the type
                             $fileParts = explode('.', $file);
                             if (is_array($fileParts)) {
-                                $c = count($fileParts) - 1; //arrays always start with 0
-                                $fileType = $fileParts[$c];
-
+                                $fileType = array_pop($fileParts);
+                                $file = implode('.', $fileParts);
+                             
                                 //check whether the filetypes were passed as an array or string
                                 if (is_array($type)) {
                                     if (in_array($fileType, $type)) {

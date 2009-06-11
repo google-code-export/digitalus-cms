@@ -45,6 +45,11 @@ this is not going to make it in the beta version
 </fieldset>
  -->
 
+<fieldset id="template">
+    <legend><?php echo $this->getTranslation('Content Template');?></legend>
+    <?php echo $this->render('page/edit/template.phtml');?>
+</fieldset>
+
 <fieldset id="design">
     <legend><?php echo $this->getTranslation('Page Design');?></legend>
     <?php echo $this->render('page/edit/design.phtml');?>

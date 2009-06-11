@@ -10,11 +10,14 @@ class Digitalus_View_Helper_Controls_SelectModule
                 $pages = Digitalus_Filesystem_File::getFilesByType('./application/modules/' . $module . '/views/scripts/public', 'phtml');
                 if (is_array($pages)) {
                     foreach ($pages as $page) {
-                        $page = Digitalus_Toolbox_Regex::stripFileExtension($page);
-                        $data[$module . '_' . $page] = $module . ' -> ' . $page;
+                        if(!strpos($page, '.form.')) { 
+                            $page = Digitalus_Toolbox_Regex::stripFileExtension($page);
+                            $data[$module . '_' . $page] = $module . ' -> ' . $page;
+                        }
                     }
                 }
             }
+            $attribs['multiple'] = false;
             return $this->view->formSelect($name, $value, $attribs, $data);
         } else {
             return $this->view->getTranslation('There are no modules currently installed');

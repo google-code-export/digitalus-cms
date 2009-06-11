@@ -3,17 +3,18 @@ class Digitalus_Decorator_Composite extends Zend_Form_Decorator_Abstract
 {
     public function buildLabel()
     {
+        $attr = array();
         $element = $this->getElement();
         $label = $element->getLabel();
         if ($translator = $element->getTranslator()) {
             $label = $translator->translate($label);
         }
         if ($element->isRequired()) {
-            $label .= '*';
+            $attr['class'] = 'required';
         }
-        $label .= ':';
+        
         return $element->getView()
-                       ->formLabel($element->getName(), $label);
+                       ->formLabel($element->getName(), $label, $attr);
     }
 
     public function buildInput()

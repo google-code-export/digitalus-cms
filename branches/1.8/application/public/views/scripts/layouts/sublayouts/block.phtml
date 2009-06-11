@@ -1,0 +1,9 @@
+<?php 
+    $contentOptions = array(
+        'label'		=> 'Content',
+        'required'	=> TRUE,
+        'cols'		=> 60,
+        'rows'		=> 4
+    );
+    echo $this->contentControl('fckeditor', 'content', $this->content['content'], $contentOptions); 
+?>

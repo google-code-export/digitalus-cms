@@ -72,32 +72,32 @@ class Admin_PageController extends Zend_Controller_Action
     {
         $frmPage = new Admin_Form_Page();
         if($this->_request->isPost()) {
-        if($frmPage->isValid($_POST)) {
-	        $this->_setCreateOptions($frmPage->getValue('parent_id'), $frmPage->getElement('continue_adding_pages')->isChecked());
-	        $page = new Model_Page();
-	        $newPage = $page->createPage($frmPage->getValue('page_name', $frmPage->getValue('parent_id')));
-	       
-	        if ($newPage) {
-		        if($frmPage->getElement('continue_adding_pages')->isChecked()) {
-		            $url = 'admin/page/new';
-		        }else{
-		            $url = 'admin/page/edit/id/' . $newPage->id;
-		        }	        	
-	        } else {
-	            $url = 'admin/page';
-	            $e = new Digitalus_View_Error();
-	            $e->add(
-	                $this->view->getTranslation('Sorry, there was an error adding your page')
-	            );
-	        }
-	        $formVaues = $this->_getCreateOptions();	        
-	        $this->_redirect($url);
-        }
-        
+            if($frmPage->isValid($_POST)) {
+    	        $this->_setCreateOptions($frmPage->getValue('parent_id'), $frmPage->getElement('continue_adding_pages')->isChecked(), $frmPage->getValue('content_template'));
+    	        $page = new Model_Page();
+    	        $newPage = $page->createPage($frmPage->getValue('page_name'), $frmPage->getValue('parent_id'), $frmPage->getValue('content_template'));
+    	       
+    	        if ($newPage) {
+    		        if($frmPage->getElement('continue_adding_pages')->isChecked()) {
+    		            $url = 'admin/page/new';
+    		        }else{
+    		            $url = 'admin/page/edit/id/' . $newPage->id;
+    		        }	        	
+    	        } else {
+    	            $url = 'admin/page';
+    	            $e = new Digitalus_View_Error();
+    	            $e->add(
+    	                $this->view->getTranslation('Sorry, there was an error adding your page')
+    	            );
+    	        }
+    	        $formVaues = $this->_getCreateOptions();	        
+    	        $this->_redirect($url);
+            }        
         }else{
         	$formVaues = $this->_getCreateOptions();
-        	$frmPage->getElement('parent_id')->setValue($formVaues->parentId);
+        	$frmPage->getElement('parent_id')->setValue($formVaues->parent_id);
             $frmPage->getElement('continue_adding_pages')->setValue($formVaues->continue);
+            $frmPage->getElement('content_template')->setValue($formVaues->content_template);
         }
         
         $frmPage->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/new');
@@ -113,21 +113,12 @@ class Admin_PageController extends Zend_Controller_Action
     {
 
         $page = new Model_Page();
-        //load the current page
-        if ($this->_request->isPost()) {
-            $pageId = Digitalus_Filter_Post::int('page_id');
-            $version = Digitalus_Filter_Post::get('version');
-        } else {
-            $pageId = $this->_request->getParam('id',0);
-            $version = $this->_request->getParam('version', $page->getDefaultVersion());
-        }
-
+        $pageId = $this->_request->getParam('id',0);
+        $version = $this->_request->getParam('version', $page->getDefaultVersion());
         $currentPage = $page->open($pageId, $version);
-
-        $template = $page->getTemplate($pageId);
-        $templateLoader = new Digitalus_Content_Template_Loader();
-        $pageTemplate = $templateLoader->load($template);
-        $form = $this->getContentForm($pageTemplate);
+        $template = $page->getTemplate($pageId);        
+        $pageTemplate = new Digitalus_Content_Template($template);
+        $form = $pageTemplate->getForm();
 
         if (!is_object($currentPage)) {
             $url = 'admin/page';
@@ -139,33 +130,29 @@ class Admin_PageController extends Zend_Controller_Action
         }
 
         //process the form if this is a post back
-        if ($this->_request->isPost()) {
-            //load the content form
+        if ($this->_request->isPost() && $form->isValid($_POST)) {
             $values = $form->getValues();
-            if (is_array($values)) {
-                $currentPage = $page->edit($values);
+            unset($values['submit']);
+            unset($values['form_instance']);
+            $page->edit($values);
+        }else{
+            if ($currentPage->content) {
+                $data = $currentPage->content;
             } else {
-                $form->getErrors();
+                $data = array();
             }
+    
+            $data['id'] = $pageId;
+            $data['name'] = $currentPage->page->name;
+            $data['version'] = $version;
+            $form->populate($data);
         }
-
-        if ($currentPage->content) {
-            $data = $currentPage->content;
-        } else {
-            $data = array();
-        }
-
+            
         $this->view->currentVersion = $version;
-
-        $data['page_id'] = $pageId;
-        $data['name'] = $currentPage->page->name;
-        $data['version'] = $version;
-
         $this->view->pageId = $pageId;
 
         //main content form
         $this->view->form = $form;
-        $this->view->form->setValues($data);
         $this->view->page = $currentPage;
 
         //meta data form
@@ -242,6 +229,15 @@ class Admin_PageController extends Zend_Controller_Action
         $id = $this->_request->getParam('id');
         $mdlPage = new Model_Page();
         $mdlPage->makeHomePage($id);
+        $this->_redirect('admin/page/edit/id/' . $id);
+    }
+    
+    public function updateTemplateAction()
+    {
+        $id = $this->_request->getParam('id');
+        $content_template = $this->_request->getParam('content_template');
+        $mdlPage = new Model_Page();
+        $mdlPage->setContentTemplate($id, $content_template);
         $this->_redirect('admin/page/edit/id/' . $id);
     }
 
@@ -423,11 +419,12 @@ class Admin_PageController extends Zend_Controller_Action
      * @param  string $contentType
      * @return void
      */
-    protected function _setCreateOptions($parentId, $continue = false)
+    protected function _setCreateOptions($parentId, $continue = false, $contentTemplate = false)
     {
         $session = $this->_getCreateOptions();
         $session->continue = $continue;
-        $session->parentId = $parentId;
+        $session->parent_id = $parentId;
+        $session->content_template = $contentTemplate;
     }
 
     /**

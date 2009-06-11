@@ -61,7 +61,7 @@ width:125px;
 font-weight:bold;
 }
 
-dt label.required{
+label.required{
 	color:#cc0000;
 }
 
@@ -114,6 +114,7 @@ clear:both;
 display:block;
 padding:5px;
 margin:0 0 5px 0;
+font-weight:bold;
 }
 
 #centerPane label span{

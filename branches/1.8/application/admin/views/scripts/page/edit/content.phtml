@@ -7,7 +7,7 @@ $('.fckeditor').fck({
 	height: 500
 });
 <?php $this->jQuery()->onLoadCaptureEnd();
-$name = $this->form->form->getElement('name');
+$name = $this->form->getElement('name');
 $label = $name->getLabel();
 $name->setLabel($this->getTranslation($label));
 echo $this->form->render();

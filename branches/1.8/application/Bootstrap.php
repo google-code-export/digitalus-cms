@@ -203,6 +203,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $viewRenderer->setView($view);
 
         // Load digitalus helpers
+
+        // base helpers
+        $view->addHelperPath('Digitalus/View/Helper', 'Digitalus_View_Helper');
+        
         $helperDirs = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/helpers');
         if (is_array($helperDirs)) {
             foreach ($helperDirs as $dir) {

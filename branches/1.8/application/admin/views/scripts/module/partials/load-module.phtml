@@ -41,16 +41,11 @@ echo $this->SelectModule($elementName . "[module]", $module, $attr);
     }
 ?>
 </div>
-<script type="text/javascript">
-$(document).ready(function() {
+<?php $this->jQuery()->onLoadCaptureStart() ?>
     $('#<?php echo $elementName?>-module').change(function(){
         var module = $(this).val();
         $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
     });
-
- });
-</script>
-
-<?php
+<?php $this->jQuery()->onLoadCaptureEnd();
 echo $this->formErrors($this->element->getMessages());
 ?>

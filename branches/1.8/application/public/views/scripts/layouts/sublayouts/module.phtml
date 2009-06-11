@@ -1,0 +1,39 @@
+<h1>
+    <?php 
+        $headlineOptions = array(
+            'label'		=> 'Headline',
+            'required'	=> TRUE,
+            'size'		=> 50
+        );
+        echo $this->contentControl('text', 'headline', $this->content['headline'], $headlineOptions); 
+    ?>
+</h1>
+<div class="contentWrapper">
+    <?php 
+        $contentAboveOptions = array(
+            'label'		=> 'Content Above',
+            'cols'		=> 60,
+            'rows'		=> 4
+        );
+        echo $this->contentControl('textarea', 'content_above', $this->content['content_above'], $contentAboveOptions); 
+    ?>
+</div>
+<div class="module">
+    <?php 
+        $moduleOptions = array(
+            'label'		=> 'Select Module',
+            'required'	=> TRUE
+        );
+        echo $this->moduleControl('module', $this->content['module'], $moduleOptions); 
+    ?>
+</div>
+<div class="contentWrapper">
+    <?php 
+        $contentBelowOptions = array(
+            'label'		=> 'Content Below',
+            'cols'		=> 60,
+            'rows'		=> 4
+        );
+        echo $this->contentControl('textarea', 'content_below', $this->content['content_below'], $contentBelowOptions); 
+    ?>
+</div>

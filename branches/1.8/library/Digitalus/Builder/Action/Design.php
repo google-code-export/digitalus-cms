@@ -10,13 +10,10 @@ class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
 
         //get the page object and template
         $template = $this->_page->getContentTemplate();
-
         $content = $this->_page->getContent();
-        $view->content = $content;
-
-        //render the content template
-        $templateParts = explode('_',$template);
-        $view->placeholder('content')->set($view->render($templateParts[0] . '/' . $templateParts[1] . '/template.phtml'));
+        $pageTemplate = new Digitalus_Content_Template($template);
+        $page = $pageTemplate->render($content);
+        $view->placeholder('content')->set($page);
     }
 
     public function loadDesign()
