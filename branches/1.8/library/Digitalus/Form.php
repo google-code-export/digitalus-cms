@@ -36,7 +36,7 @@ class Digitalus_Form extends Zend_Form
     public function populateFromModel($id)
     {
         $row = $this->_model->find($id)->current();
-        if($row) {
+        if ($row) {
             parent::populate($row->toArray());
         }
     }
@@ -50,7 +50,7 @@ class Digitalus_Form extends Zend_Form
     public function create($valueOverride = array())
     {
         $this->removeElement('id');
-        if($this->isValid($_POST)) {
+        if ($this->isValid($_POST)) {
             $row = $this->_model->createRow();
             $values = $this->getValues();
             foreach ($values as $field => $value) {
@@ -59,7 +59,7 @@ class Digitalus_Form extends Zend_Form
             $row->save();
             $row->id = Zend_Db_Table::getDefaultAdapter()->lastInsertId();
             return $row;
-        }else{
+        } else {
             return false;
         }
     }
@@ -72,10 +72,10 @@ class Digitalus_Form extends Zend_Form
      */
     public function update($valueOverride = array())
     {
-       if($this->isValid($_POST)) {
+       if ($this->isValid($_POST)) {
             $values = $this->getValues();
             $row = $this->_model->find($values['id'])->current();
-            if($row) {
+            if ($row) {
                 foreach ($values as $field => $value) {
                     $this->_setField($field, $value, $row, $valueOverride);
                 }
@@ -88,8 +88,8 @@ class Digitalus_Form extends Zend_Form
 
     private function _setField($field, $value, $row, $values)
     {
-        if(in_array($field, $this->_columns)) {
-            if(isset($values[$field])) {
+        if (in_array($field, $this->_columns)) {
+            if (isset($values[$field])) {
                 $value = $values[$field];
             }
              $row->$field = $value;
@@ -101,9 +101,9 @@ class Digitalus_Form extends Zend_Form
     public function getRow()
     {
         $values = $this->getValues();
-        if(isset($values['id'])) {
+        if (isset($values['id'])) {
             $id = $values['id'];
-        }else{
+        } else {
             $id = $this->_model->getAdapter()->lastInsertId();
         }
         return $this->_model->find($id)->current();
@@ -111,9 +111,9 @@ class Digitalus_Form extends Zend_Form
 
     public function isSubmitted()
     {
-        if(Digitalus_Filter_Post::has('form_instance')) {
+        if (Digitalus_Filter_Post::has('form_instance')) {
             $instance = Digitalus_Filter_Post::get('form_instance');
-            if($this->_isValidInstance($instance)) {
+            if ($this->_isValidInstance($instance)) {
                 return true;
             }
         }
@@ -122,7 +122,7 @@ class Digitalus_Form extends Zend_Form
 
     protected function _getSession()
     {
-        if($this->_session == null) {
+        if ($this->_session == null) {
              $this->_session = new Zend_Session_Namespace(get_class($this) . '_Instance');
         }
         return $this->_session;
@@ -145,9 +145,9 @@ class Digitalus_Form extends Zend_Form
     protected function _isValidInstance($instance)
     {
         $session = $this->_getSession();
-        if(isset($session->validInstances[$instance]) && $session->validInstances[$instance] === true) {
+        if (isset($session->validInstances[$instance]) && $session->validInstances[$instance] === true) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

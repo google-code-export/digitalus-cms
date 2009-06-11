@@ -1,39 +1,55 @@
 <h1>
-    <?php 
+    <?php
         $headlineOptions = array(
-            'label'		=> 'Headline',
-            'required'	=> TRUE,
-            'size'		=> 50
+            'label'     => $this->getTranslation('Headline'),
+            'required'  => true,
+            'size'      => 50
         );
-        echo $this->contentControl('text', 'headline', $this->content['headline'], $headlineOptions); 
+        $contentHeadline = null;
+        if (isset($this->content['headline'])) {
+            $contentHeadline = $this->content['headline'];
+        }
+        echo $this->contentControl('text', 'headline', $contentHeadline, $headlineOptions);
     ?>
 </h1>
 <div class="contentWrapper">
-    <?php 
+    <?php
         $contentAboveOptions = array(
-            'label'		=> 'Content Above',
-            'cols'		=> 60,
-            'rows'		=> 4
+            'label'     => $this->getTranslation('Content Above'),
+            'cols'      => 60,
+            'rows'      => 4
         );
-        echo $this->contentControl('textarea', 'content_above', $this->content['content_above'], $contentAboveOptions); 
+        $contentAbove = null;
+        if (isset($this->content['content_above'])) {
+            $contentAbove = $this->content['content_above'];
+        }
+        echo $this->contentControl('textarea', 'content_above', $contentAbove, $contentAboveOptions);
     ?>
 </div>
 <div class="module">
-    <?php 
+    <?php
         $moduleOptions = array(
-            'label'		=> 'Select Module',
-            'required'	=> TRUE
+            'label'     => $this->getTranslation('Select Module'),
+            'required'  => true
         );
-        echo $this->moduleControl('module', $this->content['module'], $moduleOptions); 
+        $contentModule = null;
+        if (isset($this->content['module'])) {
+            $contentModule = $this->content['module'];
+        }
+        echo $this->moduleControl('module', $contentModule, $moduleOptions);
     ?>
 </div>
 <div class="contentWrapper">
-    <?php 
+    <?php
         $contentBelowOptions = array(
-            'label'		=> 'Content Below',
-            'cols'		=> 60,
-            'rows'		=> 4
+            'label'     => $this->getTranslation('Content Below'),
+            'cols'      => 60,
+            'rows'      => 4
         );
-        echo $this->contentControl('textarea', 'content_below', $this->content['content_below'], $contentBelowOptions); 
+        $contentBelow = null;
+        if (isset($this->content['content_below'])) {
+            $contentBelow = $this->content['content_below'];
+        }
+        echo $this->contentControl('textarea', 'content_below', $contentBelow, $contentBelowOptions);
     ?>
 </div>

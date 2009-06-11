@@ -1,23 +1,31 @@
 <div class='pageContent'>
-	<h1>
-	    <?php 
+    <h1>
+        <?php
             $headlineOptions = array(
-                'label'		=> 'Headline',
-                'required'	=> TRUE,
-                'size'		=> 50
+                'label'     => $this->getTranslation('Headline'),
+                'required'  => true,
+                'size'      => 50
             );
-	        echo $this->contentControl('text', 'headline', $this->content['headline'], $headlineOptions); 
+            $contentHeadline = null;
+            if (isset($this->content['headline'])) {
+                $contentHeadline = $this->content['headline'];
+            }
+            echo $this->contentControl('text', 'headline', $contentHeadline, $headlineOptions);
         ?>
     </h1>
-	<div class='contentWrapper'>
-	    <?php 
+    <div class='contentWrapper'>
+        <?php
             $contentOptions = array(
-                'label'		=> 'Content',
-                'required'	=> TRUE,
-                'cols'		=> 60,
-                'rows'		=> 4
+                'label'     => $this->getTranslation('Content'),
+                'required'  => true,
+                'cols'      => 60,
+                'rows'      => 4
             );
-	        echo $this->contentControl('fckeditor', 'content', $this->content['content'], $contentOptions); 
+            $content = null;
+            if (isset($this->content['content'])) {
+                $content = $this->content['content'];
+            }
+            echo $this->contentControl('fckeditor', 'content', $content, $contentOptions);
         ?>
-	</div>
+    </div>
 </div>

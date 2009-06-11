@@ -1,9 +1,13 @@
-<?php 
+<?php
     $contentOptions = array(
-        'label'		=> 'Content',
-        'required'	=> TRUE,
-        'cols'		=> 60,
-        'rows'		=> 4
+        'label'     => $this->getTranslation('Content'),
+        'required'  => true,
+        'cols'      => 60,
+        'rows'      => 4
     );
-    echo $this->contentControl('fckeditor', 'content', $this->content['content'], $contentOptions); 
+    $content = null;
+    if (isset($this->content['content'])) {
+        $content = $this->content['content'];
+    }
+    echo $this->contentControl('fckeditor', 'content', $content, $contentOptions);
 ?>

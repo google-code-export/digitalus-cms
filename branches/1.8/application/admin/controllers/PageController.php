@@ -60,7 +60,7 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-    	$this->_forward('new');
+        $this->_forward('new');
     }
 
     /**
@@ -73,33 +73,33 @@ class Admin_PageController extends Zend_Controller_Action
         $frmPage = new Admin_Form_Page();
         if($this->_request->isPost()) {
             if($frmPage->isValid($_POST)) {
-    	        $this->_setCreateOptions($frmPage->getValue('parent_id'), $frmPage->getElement('continue_adding_pages')->isChecked(), $frmPage->getValue('content_template'));
-    	        $page = new Model_Page();
-    	        $newPage = $page->createPage($frmPage->getValue('page_name'), $frmPage->getValue('parent_id'), $frmPage->getValue('content_template'));
-    	       
-    	        if ($newPage) {
-    		        if($frmPage->getElement('continue_adding_pages')->isChecked()) {
-    		            $url = 'admin/page/new';
-    		        }else{
-    		            $url = 'admin/page/edit/id/' . $newPage->id;
-    		        }	        	
-    	        } else {
-    	            $url = 'admin/page';
-    	            $e = new Digitalus_View_Error();
-    	            $e->add(
-    	                $this->view->getTranslation('Sorry, there was an error adding your page')
-    	            );
-    	        }
-    	        $formVaues = $this->_getCreateOptions();	        
-    	        $this->_redirect($url);
-            }        
-        }else{
-        	$formVaues = $this->_getCreateOptions();
-        	$frmPage->getElement('parent_id')->setValue($formVaues->parent_id);
+                $this->_setCreateOptions($frmPage->getValue('parent_id'), $frmPage->getElement('continue_adding_pages')->isChecked(), $frmPage->getValue('content_template'));
+                $page = new Model_Page();
+                $newPage = $page->createPage($frmPage->getValue('page_name'), $frmPage->getValue('parent_id'), $frmPage->getValue('content_template'));
+
+                if ($newPage) {
+                    if($frmPage->getElement('continue_adding_pages')->isChecked()) {
+                        $url = 'admin/page/new';
+                    } else {
+                        $url = 'admin/page/edit/id/' . $newPage->id;
+                    }
+                } else {
+                    $url = 'admin/page';
+                    $e = new Digitalus_View_Error();
+                    $e->add(
+                        $this->view->getTranslation('Sorry, there was an error adding your page')
+                    );
+                }
+                $formVaues = $this->_getCreateOptions();
+                $this->_redirect($url);
+            }
+        } else {
+            $formVaues = $this->_getCreateOptions();
+            $frmPage->getElement('parent_id')->setValue($formVaues->parent_id);
             $frmPage->getElement('continue_adding_pages')->setValue($formVaues->continue);
             $frmPage->getElement('content_template')->setValue($formVaues->content_template);
         }
-        
+
         $frmPage->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/new');
         $this->view->form = $frmPage;
     }
@@ -116,7 +116,7 @@ class Admin_PageController extends Zend_Controller_Action
         $pageId = $this->_request->getParam('id',0);
         $version = $this->_request->getParam('version', $page->getDefaultVersion());
         $currentPage = $page->open($pageId, $version);
-        $template = $page->getTemplate($pageId);        
+        $template = $page->getTemplate($pageId);
         $pageTemplate = new Digitalus_Content_Template($template);
         $form = $pageTemplate->getForm();
 
@@ -135,19 +135,19 @@ class Admin_PageController extends Zend_Controller_Action
             unset($values['submit']);
             unset($values['form_instance']);
             $page->edit($values);
-        }else{
+        } else {
             if ($currentPage->content) {
                 $data = $currentPage->content;
             } else {
                 $data = array();
             }
-    
+
             $data['id'] = $pageId;
             $data['name'] = $currentPage->page->name;
             $data['version'] = $version;
             $form->populate($data);
         }
-            
+
         $this->view->currentVersion = $version;
         $this->view->pageId = $pageId;
 
@@ -231,7 +231,7 @@ class Admin_PageController extends Zend_Controller_Action
         $mdlPage->makeHomePage($id);
         $this->_redirect('admin/page/edit/id/' . $id);
     }
-    
+
     public function updateTemplateAction()
     {
         $id = $this->_request->getParam('id');
