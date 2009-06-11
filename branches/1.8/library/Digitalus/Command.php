@@ -73,9 +73,9 @@ class Digitalus_Command
      * @param string $command
      * @return mixed
      */
-    public function loadCommand($command)
+    public static function loadCommand($command)
     {
-        $class = "Digitalus_Command_" . $command;
+        $class = 'Digitalus_Command_' . $command;
         try {
             Zend_Loader::loadClass($class);
         } catch (Zend_Exception $e) {

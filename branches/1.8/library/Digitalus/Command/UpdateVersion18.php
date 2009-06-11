@@ -46,13 +46,13 @@ class Digitalus_Command_UpdateVersion18 extends Digitalus_Command_Abstract
      * migrate content table rows to pages / content_nodes
      *
      */
-    public function run($params)
+    public function run()
     {
         $result = $this->_updateTemplateReferences();
         if (!$result) {
-            $this->log("ERROR: could not update content template references.");
+            $this->log('ERROR: could not update content template references.');
         } else {
-            $this->log("Content template references updated OK.");
+            $this->log('Content template references updated OK.');
         }
     }
 
@@ -62,8 +62,8 @@ class Digitalus_Command_UpdateVersion18 extends Digitalus_Command_Abstract
      */
     public function info()
     {
-        $this->log("The Update Version 18 command will update your database from verion 1.5 to 1.8");
-        $this->log("Params: none");
+        $this->log('The Update Version 18 command will update your database from version 1.5 to 1.8');
+        $this->log('Params: none');
     }
 
     private function _updateTemplateReferences()
