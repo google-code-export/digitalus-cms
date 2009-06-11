@@ -1,4 +1,4 @@
-# Language File – BACKEND
+"# Language File – BACKEND";"80,18%"
 # RUSSIAN
 # ----- layout -----
 "Digitalus CMS";"Digitalus CMS"
@@ -45,10 +45,10 @@
 "Update My Account";"Обновить учетную запись"
 "First Name";"Имя"
 "Last Name";"Фамилия"
-"Password";"Пароль"
 "Confirm";"Подтвердить"
 "The site sections is where you manage your site.";"Секции сайта – это то место, где вы управляете сайтом"
 "Admin Users";"Администраторы"
+"Create New User";"Создать нового пользователя"
 "Create new user";"Создать нового пользователя"
 "Site Reports";"Отчеты по сайту"
 "Traffic Report";"Отчеты по трафику"
@@ -254,7 +254,7 @@
 "Select a module";"Выбрать модуль"
 "Select a module page";"Выбрать страницу модуля"
 "Enter the recipients email";"Ввести e-mail получателя"
-"Content below";"Содержимое ниже"
+"Content Below";"Содержимое ниже"
 "language";"Язык"
 "You are reading this page in";"Вы читаете эту страницу в"
 "This page is also translated into";"Эта страница также переведена на"

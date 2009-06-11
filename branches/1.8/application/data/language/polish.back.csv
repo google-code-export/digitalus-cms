@@ -1,4 +1,4 @@
-# Language File – BACKEND
+"# Language File – BACKEND";"86,49%"
 # POLISH
 # ----- layout -----
 "Digitalus CMS";"Digitalus CMS"
@@ -45,7 +45,6 @@
 "Update My Account";"Uaktualnienie konta"
 "First Name";"Imię"
 "Last Name";"Nazwisko"
-"Password";"Hasło"
 "Confirm";"Potwierdź"
 "Site Administrator";"Administrator strony"
 "User Options";"Opcje użytkownika"
@@ -56,6 +55,7 @@
 "Select User";"Wybierz użytkownika"
 "The site sections is where you manage your site.";"W tej sekcji zarządzasz stroną"
 "Admin Users";"Administratorzy"
+"Create New User";"Stwórz nowego użytkownika"
 "Create new user";"Stwórz nowego użytkownika"
 "Open User";"Otwórz użytkownika"
 "Site Reports";"Raporty strony"
@@ -272,7 +272,7 @@
 "Select a module";"Wybierz moduł"
 "Select a module page";"Wybierz stronę modułu"
 "Enter the recipients email";"Wprowadź odbiorców maila"
-"Content below";"Zawartość dolna"
+"Content Below";"Zawartość dolna"
 "language";"język"
 "You are reading this page in";"Czytasz tę stronę in języku"
 "This page is also translated into";"Ta strona jest również przetłumaczona na język"

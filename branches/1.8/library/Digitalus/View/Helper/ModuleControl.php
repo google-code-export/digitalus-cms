@@ -8,7 +8,7 @@ class Digitalus_View_Helper_ModuleControl extends Digitalus_View_Helper_ContentC
 
     public function render()
     {
-        return $this->view->RenderModule($this->content[$this->id]);
+        return $this->view->renderModule($this->content[$this->id]);
     }
 }
 ?>

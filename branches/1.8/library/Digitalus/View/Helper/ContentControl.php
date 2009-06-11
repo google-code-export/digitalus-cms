@@ -11,7 +11,7 @@ class Digitalus_View_Helper_ContentControl extends Zend_View_Helper_Abstract
         $this->id = $id;
         $this->content[$id] = $content;
         $form = $this->getForm();
-        if ($form != NULL) {
+        if ($form != null) {
             // if a form is registered then you want to add the control to the form and return it
             return $this->getControl($type, $id, $attribs);
         } else {
@@ -38,7 +38,7 @@ class Digitalus_View_Helper_ContentControl extends Zend_View_Helper_Abstract
             $label = $attribs['label'];
             unset($attribs['label']);
         } else {
-            $label = $id;
+            $label = $this->view->getTranslation($id);
         }
 
         $form = $this->getForm();
@@ -56,7 +56,7 @@ class Digitalus_View_Helper_ContentControl extends Zend_View_Helper_Abstract
         if (isset($this->view->formInstance)) {
             return $this->view->formInstance;
         } else {
-            return NULL;
+            return null;
         }
     }
 }
