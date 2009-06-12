@@ -5,7 +5,7 @@ error_reporting(E_ALL | E_STRICT);
 
 if (file_exists('./install/install.php')) {
     // Start installation if the file "install.php" exists in the directory "install"
-    require './install_hidden/install.php';
+    require './install/install.php';
 } else {
     // Define base path obtainable throughout the whole application
     defined('BASE_PATH')
