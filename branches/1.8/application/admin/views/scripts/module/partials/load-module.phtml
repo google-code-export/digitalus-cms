@@ -41,11 +41,16 @@ echo $this->SelectModule($elementName . "[module]", $module, $attr);
     }
 ?>
 </div>
-<?php $this->jQuery()->onLoadCaptureStart() ?>
+<?php 
+// make sure this only loads once for each element
+if(!Zend_Registry::isRegistered($elementName . 'Jquery')) {
+$this->jQuery()->onLoadCaptureStart() ?>
     $('#<?php echo $elementName?>-module').change(function(){
         var module = $(this).val();
         $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
     });
 <?php $this->jQuery()->onLoadCaptureEnd();
+Zend_Registry::set($elementName . 'Jquery', true);
+}
 echo $this->formErrors($this->element->getMessages());
 ?>
