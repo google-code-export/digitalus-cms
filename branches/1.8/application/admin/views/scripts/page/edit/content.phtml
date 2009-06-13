@@ -1,10 +1,10 @@
 <?php
-$this->jQuery()->addJavascriptFile('/scripts/jquery.FCKEditor.pack.js');
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery.FCKEditor.pack.js');
 $this->jQuery()->onLoadCaptureStart()?>
 $('.fckeditor').fck({
-    path: '<?php echo $this->baseUrl . "/scripts/fckeditor/" ?>',
-    toolbar: 'Digitalus',
-    height: 500
+	path: '<?php echo $this->getBaseUrl() . "/scripts/fckeditor/" ?>',
+	toolbar: 'Digitalus',
+	height: 300
 });
 <?php $this->jQuery()->onLoadCaptureEnd();
 $name = $this->form->getElement('name');

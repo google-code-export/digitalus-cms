@@ -217,19 +217,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Return it, so that it can be stored by the bootstrap
         return $view;
     }
-
-    protected function _initJquery()
-    {
-        $view = $this->getResource('view');
-        // add helpers
-        $view->addHelperPath('ZendX/JQuery/View/Helper', 'ZendX_JQuery_View_Helper');
-
-        $view->jQuery()->setLocalPath($view->baseUrl . '/scripts/jquery-1.3.2.min.js');
-        $view->jQuery()->setUiLocalPath($view->baseUrl . '/scripts/jquery-ui-1.7.custom.min.js');
-        $view->jQuery()->addStylesheet($view->baseUrl . '/scripts/ui-theme/jquery-ui-1.7.1.custom.css');
-        $view->jQuery()->enable();
-        $view->jQUery()->uiEnable();
-    }
     /**
      * Initialize the controllers
      *

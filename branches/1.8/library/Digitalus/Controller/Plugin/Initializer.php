@@ -171,13 +171,21 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
                 // Load the common helpers
                 Digitalus_View_RegisterHelpers::register($this->view);
                 $this->view->setScriptPath($config->filepath->adminViews);
+        
+                // add helpers
+                $this->view->addHelperPath('ZendX/JQuery/View/Helper', 'ZendX_JQuery_View_Helper');
+                $this->view->jQuery()->setLocalPath($this->view->getBaseUrl() . '/scripts/jquery-1.3.2.min.js');
+                $this->view->jQuery()->setUiLocalPath($this->view->getBaseUrl() . '/scripts/jquery-ui-1.7.custom.min.js');
+                $this->view->jQuery()->addStylesheet($this->view->getBaseUrl() . '/scripts/ui-theme/jquery-ui-1.7.1.custom.css');
+                $this->view->jQuery()->enable();
+                $this->view->jQUery()->uiEnable();
 
                 // Page links
                 $this->view->toolbarLinks = array();
             }
         }
     }
-
+    
 /* ************************************************************************** */
 
     /**
