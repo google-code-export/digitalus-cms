@@ -13,7 +13,7 @@ $this->jQuery()->onLoadCaptureStart()?>
 <div class='contentBrowser'>
 <p><?php echo $this->link('Media Root', '/admin/media', 'folder.png');?></p>
 <?php
-$browser = $this->RenderMediaBrowser($this->pathToMedia, 'admin/media/open-folder/folder', null);
+$browser = $this->RenderMediaBrowser($this->mediaFolder, 'admin/media/open-folder/folder', null);
 if (empty($browser)) {
     echo '<p>' . $this->getTranslation('You do not have any media files on the server') . '</p>';
 } else {

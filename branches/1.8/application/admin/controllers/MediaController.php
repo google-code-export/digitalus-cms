@@ -38,7 +38,7 @@ class Admin_MediaController extends Zend_Controller_Action
     /**
      * @var string
      */
-    protected $_fullPathToMedia;
+    protected $_mediaFolder;
 
     /**
      * @var string
@@ -58,9 +58,9 @@ class Admin_MediaController extends Zend_Controller_Action
     public function init()
     {
         $config = Zend_Registry::get('config');
-        $this->_pathToMedia = $this->getFrontController()->getBaseUrl() . $config->filepath->media;
-        $this->_fullPathToMedia = Digitalus_Toolbox_String::stripLeading('/', $this->getFrontController()->getBaseUrl() . '/' . $this->_pathToMedia);
-        $this->view->pathToMedia = $this->_pathToMedia;
+        $this->_pathToMedia = APPLICATION_PATH . '/../' . $config->filepath->media;
+        $this->_mediaFolder = $config->filepath->media;
+        $this->view->mediaFolder = $config->filepath->media;
         $this->view->breadcrumbs = array(
            $this->view->getTranslation('Media') => $this->getFrontController()->getBaseUrl() . '/admin/media'
         );
@@ -72,7 +72,7 @@ class Admin_MediaController extends Zend_Controller_Action
      * @return void
      */
     public function indexAction() {
-        $this->view->path = '';
+        $this->_forward('open-folder');
     }
 
     /**
@@ -104,13 +104,12 @@ class Admin_MediaController extends Zend_Controller_Action
             $this->view->folderPathParts = $folderPathParts;
         }
 
-        $pathToFolder = $this->_fullPathToMedia . '/' . Digitalus_Toolbox_String::stripUnderscores($folder);
+        $pathToFolder = Digitalus_Toolbox_String::stripUnderscores($folder);
         $this->view->filesystemPath = $pathToFolder;
         $this->view->mediaPath = $folder;
-        $this->view->folders = Digitalus_Filesystem_Dir::getDirectories($pathToFolder);
-        $this->view->files = Digitalus_Filesystem_File::getFilesByType($pathToFolder, false, false, true);
-
-        $this->view->breadcrumbs[$this->view->getTranslation('Open Folder') . ': ' . $pathToFolder] = $this->getFrontController()->getBaseUrl() . '/admin/media/open-folder/folder/' . $folder;
+        $this->view->folders = Digitalus_Filesystem_Dir::getDirectories($this->_pathToMedia . '/' . $pathToFolder);
+        $this->view->files = Digitalus_Filesystem_File::getFilesByType($this->_pathToMedia . '/' . $pathToFolder, false, false, true);
+        $this->view->breadcrumbs[$this->view->getTranslation('Open Folder') . ': ' . Digitalus_Toolbox_String::stripUnderscores($folder)] = $this->getFrontController()->getBaseUrl() . '/admin/media/open-folder/folder/' . $folder;
         $this->view->toolbarLinks = array();
 
         $tmpPath = Digitalus_Toolbox_String::addUnderscores($folder);
@@ -131,7 +130,6 @@ class Admin_MediaController extends Zend_Controller_Action
     {
         $baseFolder = Digitalus_Filter_Post::get('path');
         $newFolder  = Digitalus_Filter_Post::get('folder_name');
-
         //dont allow access outside the media folder
         if (strpos($baseFolder, './') || strpos($newFolder, './')) {
             throw new Zend_Exception('Illegal file access attempt. Operation cancelled!');
@@ -140,7 +138,6 @@ class Admin_MediaController extends Zend_Controller_Action
         $forwardPath = $baseFolder;
         if (!empty($newFolder)) {
             $fullPath = $this->_pathToMedia;
-
             $base = str_replace('media_', '', $baseFolder);
 
             if (!empty($base)) {
@@ -221,14 +218,13 @@ class Admin_MediaController extends Zend_Controller_Action
      */
     public function renameFolderAction()
     {
-        $path = Digitalus_Media::renameFolder(
-            Digitalus_Filter_Post::get('filepath'),
-            Digitalus_Filter_Post::get('folder_name')
+        $filepath = Digitalus_Filter_Post::get('filepath');
+        $folderName = Digitalus_Filter_Post::get('folder_name');
+        Digitalus_Media::renameFolder(
+            $filepath,
+            $folderName
         );
-        $path = str_replace('./', '', $path);
-        $path = str_replace('../', '', $path);
-
-        $folder = Digitalus_Toolbox_String::addUnderscores($path);
+        $folder = Digitalus_Toolbox_String::addUnderscores(Digitalus_Toolbox_String::getParentFromPath($filepath) . '/' . $folderName);
 
         $this->_request->setParam('folder', $folder);
         $this->_forward('open-folder');

@@ -1,3 +1,11 @@
+<?php 
+    $baseUrl = $this->getBaseUrl();
+    if(!empty($baseUrl)){ $siteRoot = $baseUrl . '/'; } else { $siteRoot = '/'; }
+    $basePath = $siteRoot . $this->mediaFolder;
+    if(!empty($this->filepath)) {
+        $basePath .= '/' . $this->filepath;
+    }
+?>
 <?php if (is_array($this->folders) && count($this->folders) > 0) { ?>
 <h3><?php echo $this->getTranslation('Subfolders');?></h3>
 <?php
@@ -7,16 +15,20 @@
 ?>
 <div class='folderWrapper'>
     <?php
-        $deleteLink = $this->getBaseUrl() . '/admin/media/delete-folder/folder/' . $this->mediapath . '_' . $folder;
+        $deleteLink = '/admin/media/delete-folder/folder/' . $this->mediapath . '_' . $folder;
         echo $this->link('Delete', $deleteLink, 'delete.png', 'rightLink delete');
     ?>
     <h4>
         <?php
-            $path = $this->getBaseUrl() . '/admin/media/open-folder/folder/' . $this->mediapath . '_' . $folder;
+            $path = '/admin/media/open-folder/folder/' . $this->mediapath . '_' . $folder;
             echo $this->link($folder, $path, 'folder.png');
         ?>
     </h4>
-    <p><?php echo $this->getTranslation('Full path') . ': <code>/' . $this->filepath . '/' . $cleanPath . '</code>';?></p>
+    <p>
+        <?php 
+            echo $this->getTranslation('Full path') . ': <code>' . $basePath . '/' . $cleanPath . '</code>';
+        ?>
+    </p>
 </div>
 <?php
     }
@@ -33,16 +45,16 @@ if (is_array($this->files) && count($this->files) > 0) { ?>
 <div class='fileWrapper'>
     <?php
         $fileLink = $this->mediapath . '_' . $file;
-        $deleteLink = $this->getBaseUrl() . '/admin/media/delete-file/file/' . $fileLink . '/';
+        $deleteLink = '/admin/media/delete-file/file/' . $fileLink . '/';
         echo $this->link('Delete', $deleteLink, 'delete.png', 'rightLink delete');
     ?>
     <h4>
         <?php
-            $path = '/' . $this->filepath . $filePath;
+            $path = $this->mediaFolder . '/' . $this->filepath . $filePath;
             echo $this->link($file, $path, $this->getIconByFiletype($filePath, false));
         ?>
     </h4>
-    <p><?php echo $this->getTranslation('Full path') . ': <code>/' . $this->filepath . $filePath . '</code>';?></p>
+    <p><?php echo $this->getTranslation('Full path') . ': <code>' . $basePath . $filePath . '</code>';?></p>
 </div><?php
         }
     }

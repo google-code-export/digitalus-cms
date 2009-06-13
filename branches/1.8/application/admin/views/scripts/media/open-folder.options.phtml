@@ -1,4 +1,5 @@
 <?php $this->placeholder("optionsHeadline")->set($this->getTranslation('Options'))?>
+<?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/idTabs.js');?>
 
 <ul class="idTabs">
     <li><?php echo $this->link('Browse Folder',    '#browse',    'folder_explore.png')?></li>

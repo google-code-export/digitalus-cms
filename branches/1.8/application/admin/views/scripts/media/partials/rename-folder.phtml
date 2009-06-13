@@ -1,4 +1,4 @@
-<form action='/admin/media/rename-folder' method='post' >
+<form action='<?php echo $this->getBaseUrl() ;?>/admin/media/rename-folder' method='post' >
     <dl>
     <?php
         echo $this->FormRow($this->getTranslation('New Name'), $this->formText('folder_name', $this->label));

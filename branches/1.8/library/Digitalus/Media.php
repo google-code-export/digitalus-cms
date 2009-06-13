@@ -1,7 +1,6 @@
 <?php
 
-class Digitalus_Media
-{
+class Digitalus_Media {
 
     public static function isAllowed($mimeType)
     {
@@ -29,28 +28,41 @@ class Digitalus_Media
         return null;
     }
 
-    public static function upload($file, $path, $filename = null, $createPath = true, $base = '.')
+    public static function upload($file, $path, $filename, $createPath = true, $base = '.')
     {
         if (self::isAllowed($file['type'])) {
+
             $path = self::getMediaPath($path);
+
             //default to the name on the client machine
             if ($filename == null) {$filename = $file['name'];}
-            $filename = str_replace('_', '-', $filename);
-            $filename = str_replace(' ', '-', $filename);
+            $filename = str_replace('_','-',$filename);
+            $filename = str_replace(' ','-',$filename);
 
             $path = str_replace(self::rootDirectory(), '', $path);
             $path = Digitalus_Toolbox_String::stripUnderscores($path);
             $path = Digitalus_Toolbox_String::stripLeading('/', $path);
-            $path = self::rootDirectory() . '/' . $path;
+
+			/*
+			 * Update by Brad Seefeld on May 12, 2009
+			 *
+			 * This fixes an issue when the system is installed on a path other than
+			 * root. Path should contain a path that is relative to the (cms) root
+			 * index.php (not root to the public_html of the web server (as it was trying
+			 * to do before).
+			 */
+            $config = Zend_Registry::get('config');
+            $path = $config->filepath->media . '/' . $path;
+
             if ($createPath) {
                 //attempt to create the new path
                 Digitalus_Filesystem_Dir::makeRecursive($base, $path);
             }
-
             //clean the filename
             $filename = Digitalus_Filesystem_File::cleanFilename($filename);
             $filename = basename($filename);
             $path .= '/' . $filename;
+
             if (move_uploaded_file($file['tmp_name'], $path)) {
                 //return the filepath if things worked out
                 //this is relative to the site root as this is the format that will be required for links and what not
@@ -101,7 +113,6 @@ class Digitalus_Media
         //get the new name
         $parent = Digitalus_Toolbox_String::getParentFromPath($path);
         $newpath = $parent . '/' . $newName;
-
         if (Digitalus_Filesystem_Dir::rename($path, $newpath)) {
             return $newpath;
         } else {
@@ -152,6 +163,12 @@ class Digitalus_Media
         $path = str_replace('./','',$path);
         $path = str_replace('../','',$path);
 
+        /*
+         * Update by Brad Seefeld on May 12, 2009
+         * Remove root path from path if it exists in path already.
+         */
+		$path = str_replace(self::rootDirectory(false), '', $path);
+
         //remove the reference to media if it exists
         $pathParts = explode('/', $path);
         if (is_array($pathParts)) {
@@ -159,8 +176,17 @@ class Digitalus_Media
                 unset($pathParts[0]);
             }
 
+			/*
+			 * Update by Brad Seefeld on May 12, 2009
+			 * Remove any leading slash that may exist.
+			 */
+            $partial = implode('/', $pathParts);
+            if(substr($partial, 0, 1) == '/')
+            	$partial = substr($partial, 1);
+
             //add the media root
-            $path = self::rootDirectory($relative) . '/' . implode('/', $pathParts);
+            $path = self::rootDirectory($relative) . '/' . $partial;
+
             return $path;
         }
         return false;
@@ -169,12 +195,7 @@ class Digitalus_Media
     public static function rootDirectory($relative = true)
     {
         $config = Zend_Registry::get('config');
-        $front = Zend_Controller_Front::getInstance();
-        $baseUrl = $front->getBaseUrl();
-        if ($relative) {
-            $prepend = '.';
-        }
-        return $prepend . $baseUrl . '/' . $config->filepath->media;
+        return APPLICATION_PATH . '/../' . $config->filepath->media;
     }
 }
 ?>

@@ -6,8 +6,8 @@ class Digitalus_View_Helper_Filesystem_RenderMediaBrowser
     public function renderMediaBrowser($path, $folderLink, $fileLink)
     {
 
-        $folders = Digitalus_Filesystem_Dir::getDirectories('./' . $path);
-        $files = Digitalus_Filesystem_File::getFilesByType('./' . $path, false, false, true);
+        $folders = Digitalus_Filesystem_Dir::getDirectories($path);
+        $files = Digitalus_Filesystem_File::getFilesByType($path, false, false, true);
         $links = null;
 
         if (is_array($folders) && count($folders) > 0) {
