@@ -88,10 +88,11 @@ class Admin_IndexController extends Zend_Controller_Action
     public function bookmarkAction()
     {
         $url = $this->_request->getParam('url');
-        if ($this->_request->getParam('label')) {
-            $label = $this->_request->getParam('label');
-        } else {
-            $label = $url;
+        $label = $this->_request->getParam('label', $url);
+        // the bookmark links are set up so if you dont have js enabled it will just use a default value for you
+        // this makes it pass an array as the label if you do set it, so we need to fetch the last item if it is an array
+        if(is_array($label)) {
+            $label = array_pop($label);
         }
         $bookmark = new Model_Bookmark();
         $bookmark->addUsersBookmark($label, $url);
