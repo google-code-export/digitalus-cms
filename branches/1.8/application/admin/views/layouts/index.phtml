@@ -1,4 +1,7 @@
 <?php
+// first load the template
+$this->loadTemplate('admin', 'default');
+
 $this->placeholder('charset')->set('utf-8');
 echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' . PHP_EOL;
 echo $this->doctype() . PHP_EOL;
@@ -6,22 +9,13 @@ echo $this->doctype() . PHP_EOL;
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>
-    <?php echo $this->getTranslation('Digitalus CMS') . $this->escape($this->title); ?></title>
+    <?php echo $this->getTranslation('Digitalus CMS') . $this->escape($this->title); ?>
+</title>
 <?php
-//style sheets
-$this->headLink()->appendStylesheet($this->getBaseUrl() . '/skins/digitalus-1-5/styles/layout.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/skins/digitalus-1-5/styles/text.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/skins/digitalus-1-5/styles/nav.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/skins/digitalus-1-5/styles/style.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/skins/digitalus-1-5/styles/form.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/datePicker.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/adminForms.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/filetree.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/menutree.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/jquery.treeview.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/spreadsheet.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/sortable.css')
-                 ->appendStylesheet($this->getBaseUrl() . '/styles/ThickBox.css');
+echo $this->layout()->pageHead;
+
+// the loadTemplate() helper loads all of the stylesheets now
+
 echo $this->headLink();
  
 $this->jQuery()->onLoadCaptureStart();
@@ -55,40 +49,9 @@ $('.spreadsheet tr:odd').addClass('oddRow');
 </head>
 
 <body>
-    <div id="page">
-        <div id="header">
-            <?php
-               echo $this->CurrentAdminUser();
-               echo $this->RenderAdminMenu();
-           ?>
-        </div>
-        <div id="pageShadow">
-            <div id="pageInner" class="clearFix">
-                <div id="sidebar" class="column">
-                        <?php echo $this->RenderSidebar();?>
-                </div>
-                <div id="centerPane">
-                    <div id="toolbar">
-                       <?php
-                           echo $this->RenderLinks($this->toolbarLinks, 'rightLinks');
-                           echo $this->RenderLinks($this->breadcrumbs, 'breadcrumbs', $this->getTranslation('You are here') . ': ', null, ' > ');
-                       ?>
-                    </div>
-                    <div id="main">
-                        <h2 class="top"><?php echo $this->placeholder('formHeadline');?></h2>
-                        <div id="form">
-                            <?php echo $this->RenderAlert();?>
-                            <?php echo $this->layout()->form ?>
-                        </div>
-                    </div>
-                    <div id="options" class="column">
-                        <?php echo $this->RenderOptions();?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="footer"></div>
-    </div>
-    <?php echo $this->jQuery(); ?>
+    <?php 
+        echo $this->layout()->template;
+        echo $this->jQuery(); 
+    ?>
 </body>
 </html>

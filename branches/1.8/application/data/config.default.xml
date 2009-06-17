@@ -11,6 +11,14 @@
             <password></password>
             <dbname></dbname>
         </database>
+        <template>
+        	<pathToTemplates>templates</pathToTemplates>
+        	<default>
+        		<admin>admin</admin>
+        		<public>public</public>
+				<design>default</design>
+       		</default>
+       	</template>
         <design>
             <pathToSkins>skins</pathToSkins>
             <pathToPublicLayouts>./application/public/views/scripts/layouts</pathToPublicLayouts>
