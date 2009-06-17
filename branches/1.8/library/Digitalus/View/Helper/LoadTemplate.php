@@ -1,7 +1,7 @@
 <?php
 class Digitalus_View_Helper_LoadTemplate extends Zend_View_Helper_Abstract 
 {
-    public function loadTemplate($template = null, $design = null, $scope = 'public')
+    public function loadTemplate($scope = 'public', $template = null, $design = null)
     {
         $templateConfig = Zend_Registry::get('config')->template;
         
@@ -13,7 +13,7 @@ class Digitalus_View_Helper_LoadTemplate extends Zend_View_Helper_Abstract
             $design = $templateConfig->default->design;
         }
         
-        $designFile = BASE_PATH . '/' . $templateConfig->pathToTemplates . '/' . $template . '/designs/' . $design . '.xml';
+        $designFile = BASE_PATH . '/' . $templateConfig->pathToTemplates . '/' . $scope . '/' . $template . '/designs/' . $design . '.xml';
         $designConfig = new Zend_Config_Xml($designFile);
         
         // first load all of the style sheets
@@ -40,7 +40,7 @@ class Digitalus_View_Helper_LoadTemplate extends Zend_View_Helper_Abstract
                 $importStyles = array();
             }
              
-            $templatePath = $this->view->getBaseUrl() . '/' . $templateConfig->pathToTemplates . '/' . $template;
+            $templatePath = $this->view->getBaseUrl() . '/' . $templateConfig->pathToTemplates . '/' . $scope . '/' . $template;
             foreach ($templateStyles as $style) {
             	$this->view->headLink()->appendStylesheet($templatePath . '/styles/' . $style);
             }
@@ -51,7 +51,7 @@ class Digitalus_View_Helper_LoadTemplate extends Zend_View_Helper_Abstract
                 $this->view->headLink()->appendStylesheet($style);
             }
             
-            $this->view->addScriptPath(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/' . $template . '/layouts');
+            $this->view->addScriptPath(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/' . $scope . '/' . $template . '/layouts');
             $this->view->layout()->template = $this->view->render($design . '.phtml');
         }        
     }
