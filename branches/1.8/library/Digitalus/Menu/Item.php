@@ -117,7 +117,6 @@ class Digitalus_Menu_Item {
             $class[] = $currentClass;
             $class = implode(' ', $class);
         }
-        $id     = (isset($id)    && !empty($id))    ? ' id="'    . $id    . '"' : null;
         $class  = (isset($class) && !empty($class)) ? ' class="' . $class . '"' : null;
         return '<a href="' . $baseUrl . '/' . $cleanLink . '"' . $id . $class . '>' . $this->label . '</a>' . PHP_EOL;
     }

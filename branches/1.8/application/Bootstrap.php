@@ -206,11 +206,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // base helpers
         $view->addHelperPath('Digitalus/View/Helper', 'Digitalus_View_Helper');
+        $view->addHelperPath('Digitalus/Content/Control', 'Digitalus_Content_Control');
         
-        $helperDirs = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/helpers');
+        $helperDirs = Digitalus_Filesystem_Dir::getDirectories(BASE_PATH . '/library/Digitalus/View/Helper');
         if (is_array($helperDirs)) {
             foreach ($helperDirs as $dir) {
-                $view->addHelperPath(APPLICATION_PATH . '/helpers/' . $dir, 'Digitalus_View_Helper_' . ucfirst($dir));
+                $view->addHelperPath(BASE_PATH . '/library/Digitalus/View/Helper/' . $dir, 'Digitalus_View_Helper_' . ucfirst($dir));
             }
         }
         $view->baseUrl = $this->_front->getBaseUrl();

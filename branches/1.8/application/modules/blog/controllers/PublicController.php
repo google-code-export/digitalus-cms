@@ -30,4 +30,7 @@ class Mod_Blog_PublicController extends Zend_Controller_Action
             }
         }
     }
+    
+    public function sayHiAction()
+    {}
 }

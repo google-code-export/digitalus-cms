@@ -216,14 +216,12 @@ class Digitalus_Page extends Digitalus_Model_Abstract
     {
         $this->setParam('design', $design);
     }
-*/
     public function getDesign()
     {
         $design = new Model_Design();
         $design->setDesign($this->getParam('design'));
         return $design;
     }
-/*
     public function setLayout($layout)
     {
         $this->setParam('layout', $layout);

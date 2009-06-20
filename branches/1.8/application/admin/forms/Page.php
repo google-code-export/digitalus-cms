@@ -28,18 +28,22 @@ class Admin_Form_Page extends Digitalus_Form
         $parentId->setOrder(1);
         $this->addElement($parentId);
 
-        $template = $this->createElement('select','content_template');
-        $template->setLabel($this->getView()->getTranslation('Content Template') . ':');
-        $template->addMultiOption('default', $this->getView()->getTranslation('Default'));
+        $contentTemplate = $this->createElement('select','content_template');
+        $contentTemplate->setLabel($this->getView()->getTranslation('Template') . ':');
 
-        $availableTemplates = Digitalus_Filesystem_File::getFilesByType(APPLICATION_PATH . '/public/views/scripts/layouts/sublayouts', 'phtml', false, false);
-        if (is_array($availableTemplates) && count($availableTemplates) > 0) {
-            foreach ($availableTemplates as $t) {
-                $template->addMultiOption($t, $this->getView()->getTranslation($t));
+        $templateConfig = Zend_Registry::get('config')->template;        
+        $templates = Digitalus_Filesystem_Dir::getDirectories(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public');
+        foreach ($templates as $template) {
+            $designs = Digitalus_Filesystem_File::getFilesByType(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public/' . $template . '/designs', 'xml');
+            if(is_array($designs)) {
+                foreach ($designs as $design) {
+                    $design = Digitalus_Toolbox_Regex::stripFileExtension($design);
+                    $contentTemplate->addMultiOption($template . '_' . $design, $template . ' / ' . $design);
+                }
             }
         }
-        $template->setOrder(2);
-        $this->addElement($template);
+        $contentTemplate->setOrder(2);
+        $this->addElement($contentTemplate);
 
         $continue = $this->createElement('checkbox', 'continue_adding_pages');
         $continue->setLabel($this->getView()->getTranslation('Continue adding pages') . '?');

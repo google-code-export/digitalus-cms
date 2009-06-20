@@ -32,4 +32,10 @@ class Digitalus_Content_Form extends Digitalus_Form
              ->addElement($submit);
              
     }
+    
+    public function loadFromTemplate($template)
+    {
+        $control = new Digitalus_Content_Control($this);
+        $control->registerControlsFromTemplate($template);
+    }
 }

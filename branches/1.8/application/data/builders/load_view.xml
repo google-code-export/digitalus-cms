@@ -3,10 +3,9 @@
 	<request class='Page' method='setTitle' />
 	<request class='Page' method='setMetaData' />
 	<request class='Page' method='googleIntegration' />
-	<request class='Design' method='loadContentTemplate' />
-	<request class='Design' method='loadDesign' />
+	<request class='Design' method='setTemplate' />
 	<request class='Design' method='setStyles' />
-	<request class='Design' method='setScripts' />
-	<request class='Design' method='setLayout' />
+	<request class='Design' method='setFilters' />
+	<request class='Design' method='renderTemplate' />
 	<request class='Page' method='getPage' />
 </pageBuilder>

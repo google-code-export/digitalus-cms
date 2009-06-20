@@ -21,10 +21,9 @@ class IndexController extends Zend_Controller_Action
 
         // load the view
         Digitalus_Builder::loadPage(null, 'load_view.xml', $this->page, $this->view);
-        
         // render the page
         $this->view->page = $this->page;
-        $this->view->layout()->page = $this->view->render($this->page->getLayout());
+        $this->view->layout()->page = $this->page->getParam('xhtml');
     }
 }
 

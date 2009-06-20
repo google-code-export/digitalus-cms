@@ -14,9 +14,14 @@
         <template>
         	<pathToTemplates>templates</pathToTemplates>
         	<default>
-        		<admin>admin</admin>
-        		<public>public</public>
-				<design>default</design>
+        		<admin>
+					<template>default</template>
+					<design>default</design>
+				</admin>
+        		<public>
+					<template>default</template>
+					<design>default</design>
+				</public>
        		</default>
        	</template>
         <design>

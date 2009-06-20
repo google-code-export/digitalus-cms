@@ -7,8 +7,38 @@ $('.fckeditor').fck({
 	height: 300
 });
 <?php $this->jQuery()->onLoadCaptureEnd();
-$name = $this->form->getElement('name');
-$label = $name->getLabel();
-$name->setLabel($this->getTranslation($label));
-echo $this->form->render();
+
+// get all of the controls and load them into groups
+$submitButton = $this->form->getElement('submit');
+$this->form->removeElement('submit');
+$controls = $this->form->getElements();
+foreach ($controls as $control) {
+    $rel = $control->getAttrib('rel');
+	$group = (!empty($rel) ? $rel : 'main');
+	$groups[$group][] = $control->getName();;
+}
+$this->form->addDisplayGroup($groups['main'], 'main', 'main items');
+unset($groups['main']);
+
+if(is_array($groups)) {
+    foreach ($groups as $key => $controls) {
+        $this->form->addDisplayGroup($controls, $key);
+    }
+}
+
+$displayGroups = $this->form->getDisplayGroups();
+foreach ($displayGroups as $title => $group) {
+    $content = '';
+    foreach ($group->getElements() as $element) {
+        $content .= $element->render();
+    }
+    $this->accordionPane('contentForm', $content, array('title' => $title));
+}
 ?>
+<form action='<?php $this->form->getAction()?>' method='post' enctype='multipart/form-data'>
+<?php 
+    echo $submitButton;
+    echo '<br />';
+    echo $this->accordionContainer('contentForm');
+?>
+</form>

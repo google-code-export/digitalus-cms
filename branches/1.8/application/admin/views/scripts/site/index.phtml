@@ -36,6 +36,19 @@
     </fieldset>
 </form>
 
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='design'>
+    <fieldset>
+        <legend><?php echo $this->getTranslation('Design');?></legend>
+    <?php
+        $designConfig = Zend_Registry::get('config')->template->default->public;
+        $currentDesign = isset($this->settings->default_design)? $this->settings->default_design : $designConfig->template . '_' . $designConfig->design;
+        
+        echo $this->FormRow($this->getTranslation('Default design'), $this->selectDesign('setting[default_design]', $currentDesign));
+        echo $this->FormRow('&nbsp;', $this->FormSubmit('design', $this->getTranslation('Update Design Settings')));
+    ?>
+    </fieldset>
+</form>
+
 <form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='meta'>
     <fieldset>
         <legend><?php echo $this->getTranslation('Meta Data');?></legend>

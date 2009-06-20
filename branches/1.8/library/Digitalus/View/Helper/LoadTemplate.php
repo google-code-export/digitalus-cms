@@ -1,23 +1,23 @@
 <?php
 class Digitalus_View_Helper_LoadTemplate extends Zend_View_Helper_Abstract 
 {
-    public function loadTemplate($scope = 'public', $template = null, $design = null)
+    public function loadTemplate($scope = 'public', $template = null, $page = null)
     {
         $templateConfig = Zend_Registry::get('config')->template;
         
         if(null == $template) {
-            $template = $templateConfig->default->$scope;
+            $template = $templateConfig->default->$scope->template;
         }
         
-        if(null == $design) {
-            $design = $templateConfig->default->design;
+        if(null == $page) {
+            $page = $templateConfig->default->$scope->page;
         }
         
-        $designFile = BASE_PATH . '/' . $templateConfig->pathToTemplates . '/' . $scope . '/' . $template . '/designs/' . $design . '.xml';
-        $designConfig = new Zend_Config_Xml($designFile);
+        $pageFile = BASE_PATH . '/' . $templateConfig->pathToTemplates . '/' . $scope . '/' . $template . '/pages/' . $page . '.xml';
+        $pageConfig = new Zend_Config_Xml($pageFile);
         
         // first load all of the style sheets
-        $styleArray = $designConfig->styles->toArray();
+        $styleArray = $pageConfig->styles->toArray();
         
         if(is_array($styleArray)) {
             if(isset($styleArray['stylesheet'])) {
@@ -52,7 +52,7 @@ class Digitalus_View_Helper_LoadTemplate extends Zend_View_Helper_Abstract
             }
             
             $this->view->addScriptPath(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/' . $scope . '/' . $template . '/layouts');
-            $this->view->layout()->template = $this->view->render($design . '.phtml');
+            $this->view->layout()->template = $this->view->render($page . '.phtml');
         }        
     }
 }

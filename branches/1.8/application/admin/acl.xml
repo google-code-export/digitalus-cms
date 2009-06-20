@@ -35,6 +35,5 @@
         <action>delete</action>
     </controller>
     <controller name='media' />
-    <controller name='design' />
     <controller name='module' />
 </controllers>

@@ -38,7 +38,7 @@ class ZendX_JQuery_View_Helper_AccordionContainer extends ZendX_JQuery_View_Help
 {
     protected $_panes = array();
 
-    protected $_elementHtmlTemplate = '<li class="ui-accordion-group"><a href="#" class="ui-accordion-header">%s</a><div class="ui-accordion-content">%s</div></li>';
+    protected $_elementHtmlTemplate = '<h3><a href="#">%s</a></h3><div>%s</div>';
 
     /**
      * Add Accordion Pane for the Accordion-Id
@@ -86,7 +86,7 @@ class ZendX_JQuery_View_Helper_AccordionContainer extends ZendX_JQuery_View_Help
         if(isset($this->_panes[$id])) {
             $html = "";
             foreach($this->_panes[$id] AS $element) {
-                $html .= sprintf($this->_elementHtmlTemplate, $element['name'], $element['content']);
+                $html .= sprintf($this->_elementHtmlTemplate, $element['name'], $element['content']). PHP_EOL;
             }
 
             if(count($params) > 0) {
@@ -102,14 +102,16 @@ class ZendX_JQuery_View_Helper_AccordionContainer extends ZendX_JQuery_View_Help
             );
             $this->jquery->addOnLoad($js);
 
-            $html = '<ul'
+            $html = '<div'
                   . $this->_htmlAttribs($attribs)
                   . '>'.PHP_EOL
                   . $html
-                  . '</ul>'.PHP_EOL;
+                  . '</div>'.PHP_EOL;
             return $html;
             unset($this->_panes[$id]);
         }
         return '';
     }
 }
+
+

@@ -116,9 +116,13 @@ class Admin_PageController extends Zend_Controller_Action
         $pageId = $this->_request->getParam('id',0);
         $version = $this->_request->getParam('version', $page->getDefaultVersion());
         $currentPage = $page->open($pageId, $version);
+        
+        // load the template and form
         $template = $page->getTemplate($pageId);
-        $pageTemplate = new Digitalus_Content_Template($template);
-        $form = $pageTemplate->getForm();
+        $template = BASE_PATH . '/templates/public/default/layouts/2-column-left.phtml';
+        $pageTemplate = new Digitalus_Interface_Template();
+        $form = $pageTemplate->getForm($template);
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/edit');
 
         if (!is_object($currentPage)) {
             $url = 'admin/page';
@@ -167,8 +171,6 @@ class Admin_PageController extends Zend_Controller_Action
 
         //related pages
         $this->view->relatedPages = $page->getRelatedPages($pageId);
-
-        $this->view->design = $page->getDesign($pageId);
 
         if (isset($currentPage->page->label) && !empty($currentPage->page->label)) {
             $label = $currentPage->page->label;
