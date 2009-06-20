@@ -90,7 +90,7 @@ class Digitalus_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             $resource = $moduleLevel;
         }
 
-        if ($module != 'public') {
+        if ($module != 'public' && $controller != 'public') {
             if ($this->_acl->has($resource) && !$this->_acl->isAllowed($role, $resource)) {
                 if (!$this->_identity) {
                     $request->setModuleName($this->_noauth['module']);
