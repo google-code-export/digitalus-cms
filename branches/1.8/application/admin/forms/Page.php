@@ -34,7 +34,7 @@ class Admin_Form_Page extends Digitalus_Form
         $templateConfig = Zend_Registry::get('config')->template;        
         $templates = Digitalus_Filesystem_Dir::getDirectories(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public');
         foreach ($templates as $template) {
-            $designs = Digitalus_Filesystem_File::getFilesByType(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public/' . $template . '/designs', 'xml');
+            $designs = Digitalus_Filesystem_File::getFilesByType(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public/' . $template . '/pages', 'xml');
             if(is_array($designs)) {
                 foreach ($designs as $design) {
                     $design = Digitalus_Toolbox_Regex::stripFileExtension($design);
