@@ -2,18 +2,13 @@
 class Digitalus_View_Helper_Navigation_RenderMenu
 {
     public $levels = 1;
-    public $currentLevel = 1;
 
-    public function RenderMenu($parentId = 0, $levels = null, $currentLevel = null, $id = 'menu')
+    public function RenderMenu($parentId = 0, $levels = 1, $currentLevel = 1, $id = 'menu')
     {
-        if (null !== $levels) {
-            $this->levels = $levels;
+        if(null == $currentLevel) {
+            $currentLevel = 1;
         }
-
-        if (null !== $currentLevel) {
-            $this->currentLevel = $currentLevel;
-        }
-
+        
         $menu = new Digitalus_Menu($parentId);
         $links = array();
 
