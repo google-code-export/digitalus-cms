@@ -119,9 +119,16 @@ class Admin_PageController extends Zend_Controller_Action
         
         // load the template and form
         $template = $page->getTemplate($pageId);
-        $template = BASE_PATH . '/templates/public/default/layouts/2-column-left.phtml';
+        
+        // @todo: refactor this into some sort of helper function
+        $templateParts = explode('_', $template);
+        $currentTemplate = $templateParts[0];
+        $currentTemplatePage = $templateParts[1];
+        $templatePath = BASE_PATH . '/templates/public/' . $currentTemplate;
+        $templateConfig = new Zend_Config_Xml($templatePath . '/pages/' . $currentTemplatePage . '.xml');
         $pageTemplate = new Digitalus_Interface_Template();
-        $form = $pageTemplate->getForm($template);
+        $form = $pageTemplate->getForm($templatePath . '/layouts/' . $templateConfig->layout);
+        
         $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/edit');
 
         if (!is_object($currentPage)) {

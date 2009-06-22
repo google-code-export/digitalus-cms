@@ -1,21 +1,14 @@
-<p><?php echo $this->getTranslation('Select the content template for this page')?> ...</p>
+<p><?php echo $this->getTranslation('Select the template for this page')?> ...</p>
 <?php
-$availableTemplates = Digitalus_Filesystem_File::getFilesByType(APPLICATION_PATH . '/public/views/scripts/layouts/sublayouts', 'phtml', false, false);
-if (is_array($availableTemplates)) {
-    foreach ($availableTemplates as $template) {
-        if ($template == $this->page->page->content_template) {
-            $selected = "checked='checked'";
-        } else {
-            $selected = null;
-        }
-        $options[] = "<input id='{$template}' type='radio' name='content_template' value='{$template}' {$selected} /> " . $this->getTranslation($template);
-    }
+$contentForm = new Admin_Form_Page();
+$templateControl = $contentForm->getElement('content_template');
+$currentTemplate = !empty($this->page->page->content_template) ? $this->page->page->content_template : null;
+$templateControl->setValue($currentTemplate);
 ?>
 <form action='<?php echo $this->getBaseUrl()?>/admin/page/update-template' method='post'>
 <?php
     echo $this->formHidden('id', $this->pageId);
-    echo $this->htmlList($options, false, null, false);
+    echo $templateControl;
     echo $this->formSubmit('updateContentTemplate', $this->getTranslation('Update Content Template'));
 ?>
 </form>
-<?php } ?>
