@@ -58,6 +58,7 @@ class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
     {
         $view = $this->_page->getView();
         $view->content = $this->_page->getContent();
+        $view->page = $this->_page;
         $xhtml = $view->render($this->_page->getParam('template_data')->layout);
         $this->_page->setParam('xhtml', $xhtml);
     }
