@@ -1,6 +1,6 @@
 <?php
 // first load the template
-$this->loadTemplate('admin');
+$this->loadTemplate('admin','default','default');
 
 $this->placeholder('charset')->set('utf-8');
 echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' . PHP_EOL;
@@ -20,6 +20,16 @@ echo $this->headLink();
  
 $this->jQuery()->onLoadCaptureStart();
 ?>
+$("#adminMenu li a[class!='selected']").each(function() {
+	$(this).hover(
+		function() {
+			$(this).addClass("hover");
+		},
+		function() {
+			$(this).removeClass("hover");
+		}
+	);
+});
 $(".message_box").bind("click",function(){
        $(this).fadeOut("slow");
   });

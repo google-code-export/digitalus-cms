@@ -1,4 +1,4 @@
-<p><?php echo $this->getTranslation('Current Version') . ':';?> <strong>
+<p class="padding-10"><?php echo $this->getTranslation('Current Version') . ':';?> <strong>
 
 <?php
 $config = Zend_Registry::get('config');
@@ -6,11 +6,14 @@ $siteVersions = $config->language->translations;
 $version = $this->currentVersion;
 echo $this->getTranslation($siteVersions->$version);
 ?>
-</strong></p>
+</strong>
 
 <?php if ($siteVersions) { ?>
-<p><?php echo $this->getTranslation('Available Versions')?>: </p>
-<ul>
+<?php echo $this->getTranslation('Available Versions')?>:
+<?php } ?>
+</p>
+<?php if ($siteVersions) { ?>
+<ul class="padding-10">
 <?php
 $pageMdl = new Model_Page();
 $pageVersions = $pageMdl->getVersions($this->pageId);

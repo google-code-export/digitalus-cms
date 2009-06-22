@@ -1,13 +1,13 @@
 <?php
-$this->placeholder('optionsHeadline')->set($this->getTranslation('Current Blogs'));
+$this->placeholder('optionsHeadline')->set($this->getTranslation('My Blogs'));
 if ($this->blogs != null) {
-    echo '<ul>';
+    echo '<ul class="padding-10">';
     foreach ($this->blogs as $blog) {
         echo '<li>' . $this->link($blog->name, '/mod_blog/blog/edit/id/' . $blog->id, 'report.png') . '</li>';
     }
     echo '</ul>';
 } else {
-  echo '<p>' . $this->getTranslation('You do not have any blogs currently') . '</p>';
+  echo '<p class="padding-10">' . $this->getTranslation('You do not have any blogs currently') . '</p>';
 }
 ?>
 

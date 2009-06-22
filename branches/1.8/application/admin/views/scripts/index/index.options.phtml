@@ -1,12 +1,11 @@
 <?php
 $this->placeholder('optionsHeadline')->Set($this->translate('My Content'));
-echo $this->RenderText('The following pages are the pages that you have recently created.', 'p');
+echo $this->RenderText('The following pages are the pages that you have recently created.', 'p class="padding-10"');
 ?>
-
 <?php
 if ($this->pages) {
     ?>
-    <ul>
+    <ul class="padding-10">
     <?php foreach ($this->pages as $page) {
         if (isset($page->label) && !empty($page->label)) {
             $label = $page->label;
@@ -20,5 +19,5 @@ if ($this->pages) {
     </ul>
 <?php }
 
-echo $this->RenderText('These are the modules that you are working with.', 'p');
+echo $this->RenderText('These are the modules that you are working with.', 'p class="padding-10"');
 echo $this->render('./module/partials/my-modules.phtml');

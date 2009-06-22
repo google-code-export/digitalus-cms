@@ -5,7 +5,7 @@ if (is_object($this->designs)) {
     foreach ($this->designs as $design) {
         $links[] = $this->link($design->name, '/admin/design/update/id/' . $design->id, 'layout_content.png');
     }
-    echo $this->htmlList($links, null, null, false);
+    $links[] = $this->link('Create a new design', '/admin/design', 'layout_add.png');
+    echo $this->htmlList($links, null, array('class'=>'padding-10'), false);
 }
 ?>
-<p><?php echo $this->link('Create a new design', '/admin/design', 'layout_add.png');?></p>

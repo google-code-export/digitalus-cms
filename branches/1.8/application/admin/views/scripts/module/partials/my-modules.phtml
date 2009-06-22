@@ -4,7 +4,7 @@ $modules = $user->getCurrentUsersModules();
 
 if (is_array($modules)) {
 
-    echo '<ul>';
+    echo '<ul class="padding-10">';
     foreach ($modules as $module) {
         $key = 'mod_' . $module;
         $props = Digitalus_Module_Property::load($key);
