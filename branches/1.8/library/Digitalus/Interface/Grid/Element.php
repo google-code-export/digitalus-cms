@@ -91,10 +91,12 @@ class Digitalus_Interface_Grid_Element extends Digitalus_Interface_Grid_Abstract
         $last = $this->getAttribute(self::LAST);
         if ($first == true) {
             $class[] = 'alpha';
-        } elseif ($last == true) {
+        }
+        if ($last == true) {
             $class[] = 'omega';
             //automatically add the clear if last is true
-            $this->setAttribute(self::CLEAR, true);
+            //There are might be exceptions
+            //$this->setAttribute(self::CLEAR, true);
         }
         
         $elementClass = $this->getAttribute('class');
