@@ -24,6 +24,7 @@ body{background: #E0EDFF url(../images/body-bg.jpg) repeat-x 0% 0%;padding: 20px
 	border-top-left-radius:15px;
 	border-bottom-right-radius:5px;
 	border-bottom-left-radius:5px;
+	padding: 0 5px;
 }
 #header {height:105px;}
 #breadcrumbs_block_content {
@@ -44,7 +45,5 @@ body{background: #E0EDFF url(../images/body-bg.jpg) repeat-x 0% 0%;padding: 20px
 	border-radius: 5px;
 	background-color: #F7F7F7;
 }
-#main_content {width: 540px; margin: 0 0;}
-#breadcrumbs_block {width: 710px;margin: 0 0;}
 #footer {margin-top: 10px;}
 p.rightLinks{float:right;}

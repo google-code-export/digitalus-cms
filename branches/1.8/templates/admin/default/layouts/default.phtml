@@ -1,5 +1,6 @@
 <?php 
 	$grid = new Digitalus_Interface_Grid('page', 16);
+	
 	$header = $grid->addElement('header', 16);
 		$logo = $header->addElement('header_logo', 13);
     	$logo->setAttribute('first', true);
@@ -13,7 +14,7 @@
     	$sidebarLeft = $grid->addElement('sidebar_left', 4);
     	
     	$breadcrumb = $grid->addElement('breadcrumbs_block', 12);
-    	$breadcrumb->setAttribute('first', true);
+    	$breadcrumb->setAttribute('last', true);
     	
     	$content = $grid->addElement('main_content', 9);
 		$sidebarRight = $grid->addElement('sidebar_right', 3);
