@@ -1,4 +1,5 @@
 <?php $this->placeholder("optionsHeadline")->set($this->getTranslation('User Options'));?>
+<?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/idTabs.js');?>
 
 <ul class="idTabs padding-10">
 <li><?php echo $this->link('Account', '#general', 'vcard_edit.png');?></li>
