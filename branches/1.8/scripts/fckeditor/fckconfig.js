@@ -116,15 +116,11 @@ FCKConfig.ToolbarSets["Default"] = [
 
 FCKConfig.ToolbarSets["Digitalus"] = [
 	['Source', 'FitWindow'],
-	['PasteWord'],
-	['Undo','Redo'],
-	['Image','Table','SpecialChar'],
-	['Link','Unlink','Anchor'],
+	['PasteWord', '-', 'Undo','Redo', '-','Find'],
+	['Image','Table','SpecialChar', '-', 'Link','Unlink','Anchor'],
 	['About'],
 	'/',
-	['Bold','Italic','StrikeThrough'],
-	['FontFormat'],
-	['OrderedList','UnorderedList','-','Outdent','Indent','Blockquote']
+	['FontFormat', '-', 'Bold','Italic','StrikeThrough','-','Subscript','Superscript', '-', 'OrderedList','UnorderedList','-','Outdent','Indent','Blockquote']
 			// No comma for the last row.
 ] ;
 
