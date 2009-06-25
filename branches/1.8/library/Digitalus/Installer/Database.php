@@ -195,7 +195,7 @@ class Digitalus_Installer_Database
           `last_name` varchar(45) NOT null default '',
           `email` varchar(100) NOT null default '',
           `password` text NOT null,
-          `role` varchar(45) NOT null default 'staff',
+          `role` varchar(45) NOT null default 'admin',
           `acl_resources` text,
           PRIMARY KEY  (`id`)
         ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
