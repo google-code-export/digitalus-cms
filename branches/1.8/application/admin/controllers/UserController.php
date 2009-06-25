@@ -104,7 +104,8 @@ class Admin_UserController extends Zend_Controller_Action
         $mdlUser = new Model_User();
         $form->setModel($mdlUser);
         if($form->isSubmitted()) {
-            $result = $form->create();
+            $password = $form->getValue('password');
+            $result = $form->create(array('password' => md5($password)));
             if($result) {
                 $this->_redirect('admin/user/open/id/' . $result->id);
             }

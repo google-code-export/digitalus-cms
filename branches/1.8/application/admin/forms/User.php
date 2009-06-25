@@ -39,7 +39,7 @@ class Admin_Form_User extends Digitalus_Form
         $this->addElement($email);
 
         // create new element
-        $adminRole = $this->createElement('select', 'admin_role');
+        $adminRole = $this->createElement('select', 'role');
         // element options
         $adminRole->setLabel('Admin Role');
         $adminRole->addMultiOptions(array(
