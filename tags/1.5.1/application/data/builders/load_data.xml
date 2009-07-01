@@ -1,0 +1,10 @@
+<pageBuilder>
+	<request class='Page' method='loadData' />
+	<request class='Page' method='loadContent' />
+	<request class='Page' method='loadContentTemplate' />
+	<request class='Page' method='setParents' />
+	<request class='Page' method='loadMetaData' />
+	<request class='Page' method='loadProperties' />
+	<request class='Page' method='loadAttachments' />
+	<request class='Page' method='loadRelatedPages' />
+</pageBuilder>

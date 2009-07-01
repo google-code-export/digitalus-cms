@@ -1,0 +1,6 @@
+<p><?php echo $this->GetTranslation('New message from') . ': ' . $this->data['name'] . ' / ' . $this->data['email']?></p>
+<p><?php echo $this->GetTranslation('Sent on') . ' ' . Zend_Date::now(); ?></p>
+
+<h2><?php echo $this->GetTranslation('Message');?></h2>
+<p><?php  echo $this->GetTranslation('Subject') . ':' . $this->data['subject']?></p>
+<p><?php  echo $this->GetTranslation('Message') . ':' . $this->data['message']?></p>

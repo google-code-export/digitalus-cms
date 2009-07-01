@@ -1,0 +1,13 @@
+<?php $this->placeholder('optionsHeadline')->set($this->GetTranslation('Who Uses This?'))?>
+<p><?php echo $this->GetTranslation('These are the pages that use this design:');?></p>
+<?php
+if (is_object($this->pages)) {
+    $links = array();
+    foreach ($this->pages as $page) {
+        $links[] = $this->link($page->name, $this->baseUrl . '/admin/page/edit/id/' . $page->id, 'page_white.png');
+    }
+    echo $this->htmlList($links, null, null, false);
+} else {
+?>
+<p><?php echo $this->GetTranslation('No pages use this design currently.');?></p>
+<?php }?>
