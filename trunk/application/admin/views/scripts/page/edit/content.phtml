@@ -30,7 +30,7 @@ $displayGroups = $this->form->getDisplayGroups();
 
 $panes = '';
 foreach ($displayGroups as $title => $group) {
-    $id = $title . '_content';
+    $id = $title . '_content_pane';
     $title = ucwords($title) . ' Content';
     $ids[$id] = $title;
     $content = '';

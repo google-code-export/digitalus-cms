@@ -1,7 +1,7 @@
 <?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Page Options'))?>
 <?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/idTabs.js');?>
 <ul class="idTabs">
-    <li><?php echo $this->link('Content', '#main_content', 'page_white_edit.png');?>
+    <li><?php echo $this->getTranslation('Content Sections')?>
     	<ul>
     		<?php foreach ($this->contentPanes as $id => $title) {?>
     		<li><?php echo $this->link($title, '#' . $id, 'bullet_black.png');?></li>
