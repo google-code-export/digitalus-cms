@@ -3,7 +3,6 @@
 	<name>default</name>
 	<layout>default.phtml</layout>
 	<styles>
-		<stylesheet>960-grid.css</stylesheet>
 		<stylesheet>layout.css</stylesheet>
 		<stylesheet>text.css</stylesheet>
 		<stylesheet>nav.css</stylesheet>

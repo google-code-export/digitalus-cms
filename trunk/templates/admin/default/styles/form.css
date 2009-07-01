@@ -61,7 +61,7 @@ width:125px;
 font-weight:bold;
 }
 
-dt label.required{
+label.required{
 	color:#cc0000;
 }
 
@@ -71,7 +71,7 @@ margin-bottom:10px;
 }
 
 fieldset.formColumn{
-width:235px;
+width:245px;
 float:left;
 }
 
@@ -114,6 +114,7 @@ clear:both;
 display:block;
 padding:5px;
 margin:0 0 5px 0;
+font-weight:bold;
 }
 
 #centerPane label span{
@@ -260,7 +261,7 @@ max-width:350px;
 }
 
 form#notes textarea{
-width:490px;
+width:510px;
 height:300px;
 margin:0 0 5px 0;
 }
@@ -271,7 +272,7 @@ float:right;
 
 
 #form input[type='text']{
-width:220px;
+width:240px;
 }
 
 #form select{
@@ -506,5 +507,8 @@ div.wysiwyg{
 	margin-bottom:25px;
 }
 
-
+ul.errors{
+	max-width:320px;
+	color:#cc0000;
+}
 
