@@ -16,11 +16,11 @@
         	<default>
         		<admin>
 					<template>default</template>
-					<design>default</design>
+					<page>default</page>
 				</admin>
         		<public>
 					<template>default</template>
-					<design>default</design>
+					<page>default</page>
 				</public>
        		</default>
        	</template>
