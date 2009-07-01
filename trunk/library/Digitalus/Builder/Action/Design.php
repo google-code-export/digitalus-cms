@@ -27,20 +27,19 @@ class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
         $view = $this->_page->getView();
         $templatePath = $view->getBaseUrl() . '/' . Zend_Registry::get('config')->template->pathToTemplates . '/public/' . $this->_page->getParam('template_template');
         $templateData = $this->_page->getParam('template_data');
-        if($templateData->styles->stylesheet) {
+        if($templateData->styles) {
             foreach ($templateData->styles->stylesheet as $style) {
-                $view->headLink()->appendStylesheet($templatePath . '/styles/' . $style);
-            }
-        }        
-        if($templateData->styles->import) {
-            foreach ($templateData->styles->import as $style) {
-                if(substr($style, 0, 4) != 'http') {
-                    $style = $view->getBaseUrl() . '/' . $style;
+                $attr = $style->attributes();
+                if(is_object($attr) && (string)$attr['import'] == 'true') {
+                    if(substr($style, 0, 4) != 'http') {
+                        $style = $view->getBaseUrl() . '/' . $style;
+                    }
+                    $view->headLink()->appendStylesheet($style);
+                }else{
+                   $view->headLink()->appendStylesheet($templatePath . '/styles/' . (string)$style); 
                 }
-                $view->headLink()->appendStylesheet($style);
             }
         }
-
     }
     
     public function setFilters()
