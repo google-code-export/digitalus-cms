@@ -1,8 +1,0 @@
-<form action="<?php echo $this->baseUrl;?>/admin/page/ajax-editor" method="post">
-<?php
-    echo $this->formHidden('id', $this->id);
-    echo $this->formHidden('block', $this->block);
-    echo $this->formHidden('return', $this->return);
-    $this->FckEditor('content', stripslashes($this->content), 600, 600, false);
-?>
-</form>
