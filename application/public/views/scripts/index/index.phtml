@@ -1,0 +1,27 @@
+<?php
+echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' . PHP_EOL;
+echo $this->doctype() . PHP_EOL;
+?>
+<html<?php echo $this->isXhtml();?>>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->placeholder('charset');?>" />
+        <?php
+            echo $this->placeholder('google_verify');
+            echo $this->headMeta();
+            echo $this->headTitle();
+            echo $this->headScript();
+            echo $this->headLink();
+            echo $this->headStyle();
+        ?>
+        <style type="text/css">
+            <?php echo $this->placeholder('inlineStyles'); ?>
+        </style>
+    </head>
+
+    <body>
+        <?php
+            echo $this->layout()->page;
+            echo $this->placeholder('google_tracking');
+        ?>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<?php
+    $this->placeholder('sidebarHeadline')->set($this->GetTranslation('Navigation'));
+
+    $mdlMenu = new Menu();
+    $menus = $mdlMenu->getMenus();
+?>
+
+<ul>
+    <li><?php echo $this->link('Main Menu', '/admin/navigation/open/id/0', 'text_list_bullets.png');?></li>
+<?php
+    if ($menus) {
+        foreach ($menus as $menu) {
+            $label = $mdlMenu->getLabel($menu);
+?>
+    <li><?php echo $this->link($label, $this->baseUrl . '/admin/navigation/open/id/' . $menu->id, 'text_list_bullets.png');?></li>
+<?php
+        }
+    }
+?>
+</ul>
