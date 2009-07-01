@@ -1,8 +1,14 @@
 <?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Page Options'))?>
 <?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/idTabs.js');?>
-<ul class="idTabs padding-10">
-    <li><?php echo $this->link('Content', '#content', 'page_white_edit.png');?></li>
-    <li><?php echo $this->link('Head and Meta Data', '#meta', 'page_white_code.png');?></li>
+<ul class="idTabs">
+    <li><?php echo $this->link('Content', '#main_content', 'page_white_edit.png');?>
+    	<ul>
+    		<?php foreach ($this->contentPanes as $id => $title) {?>
+    		<li><?php echo $this->link($title, '#' . $id, 'bullet_black.png');?></li>
+    		<?php } ?>
+    	</ul>
+    </li>
+    <li><?php echo $this->link('Page Head and Meta Data', '#meta', 'page_white_code.png');?></li>
     <li><?php echo $this->link('Properties', '#properties', 'textfield_add.png');?></li>
 
 <!--
@@ -17,3 +23,4 @@ this is not going to make it in the beta version
 
 <h3><?php echo $this->getTranslation('Page Versions');?></h3>
 <?php echo $this->render('page/partials/page-versions.phtml', array('pageId' => $this->pageId, 'version' => $this->currentVersion))?>
+

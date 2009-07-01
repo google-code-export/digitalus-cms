@@ -14,13 +14,7 @@ $(".wiki").markItUp(myWikiSettings);
 $(".html").markItUp(myHtmlSettings);
 <?php $this->jQuery()->onLoadCaptureEnd()?>
 
-<div id="content">
-<fieldset>
-    <legend><?php echo $this->getTranslation('Edit Content');?></legend>
-    <?php echo $this->render('page/edit/content.phtml');?>
-</fieldset>
-
-</div>
+<?php echo $this->render('page/edit/content.phtml');?>
 
 <fieldset id="meta">
     <legend><?php echo $this->getTranslation('Edit Meta Data');?></legend>

@@ -27,18 +27,23 @@ if(is_array($groups)) {
 }
 
 $displayGroups = $this->form->getDisplayGroups();
+
+$panes = '';
 foreach ($displayGroups as $title => $group) {
+    $id = $title . '_content';
+    $title = ucwords($title) . ' Content';
+    $ids[$id] = $title;
     $content = '';
     foreach ($group->getElements() as $element) {
         $content .= $element->render();
     }
-    $this->accordionPane('contentForm', $content, array('title' => $title));
+    $panes .= "<fieldset id='{$id}'><legend>{$title}</legend>{$content}<br />{$submitButton}</fieldset>";
 }
+
+$this->contentPanes = $ids;
 ?>
 <form action='<?php $this->form->getAction()?>' method='post' enctype='multipart/form-data'>
 <?php 
-    echo $submitButton;
-    echo '<br />';
-    echo $this->accordionContainer('contentForm');
+    echo $panes;
 ?>
 </form>
