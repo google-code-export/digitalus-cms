@@ -43,6 +43,7 @@ class Digitalus_Interface_Template
                     unset($attribs['label']);
                 } else {
                     $label = $view->getTranslation($id);
+                    $label = ucwords(str_replace('_', ' ', $label));
                 }
                 
                 
