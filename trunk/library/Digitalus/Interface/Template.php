@@ -7,7 +7,12 @@ class Digitalus_Interface_Template
         if(is_object($template)) {
             return $template;
         }elseif(file_exists($template)) {
-            $fileContents = file_get_contents($template);
+            $form = new Digitalus_Content_Form();
+            $view = $form->getView();
+            $templateName = basename($template);
+            $layoutPath = Digitalus_Toolbox_String::getParentFromPath($template);
+            $view->addScriptPath($layoutPath);
+            $fileContents = $view->render($templateName);
             $cleanFile = preg_replace('/(<\?{1}[pP\s]{1}.+\?>)/', '', $fileContents);
             return simplexml_load_string($cleanFile);
         }else{
