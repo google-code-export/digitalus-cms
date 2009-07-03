@@ -57,7 +57,12 @@
             <xlsx type="excel" icon="page_white_excel.png" mime="#"/>
             <docx type="document" icon="page_white_word.png" mime="#"/>
             <doc type="document" icon="page_white_word.png" mime="application/msword"/>
-            <jpg type="image" icon="picture.png" mime="image/jpeg"/>
+            <jpg type="image" icon="picture.png">
+			     <mime>
+			         <type>image/jpeg</type>
+			         <type>image/pjpeg</type>
+			     </mime>
+			</jpg>
             <gif type="image" icon="picture.png" mime="image/gif"/>
             <png type="image" icon="picture.png" mime="image/png"/>
             <zip type="archive" icon="compress.png">
