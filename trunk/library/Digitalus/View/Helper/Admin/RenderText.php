@@ -43,9 +43,9 @@ class Digitalus_View_Helper_Admin_RenderText extends Zend_View_Helper_Abstract
 {
     /**
      *
-     * @return unknown
+     * @return string
      */
-    public function RenderText($key, $tag = null)
+    public function renderText($key, $tag = null)
     {
         $xhtml = null;
         if ($tag != null) {

@@ -42,7 +42,7 @@
     <?php
         $designConfig = Zend_Registry::get('config')->template->default->public;
         $currentDesign = isset($this->settings->default_design)? $this->settings->default_design : $designConfig->template . '_' . $designConfig->design;
-        
+
         echo $this->FormRow($this->getTranslation('Default design'), $this->selectDesign('setting[default_design]', $currentDesign));
         echo $this->FormRow('&nbsp;', $this->FormSubmit('design', $this->getTranslation('Update Design Settings')));
     ?>
@@ -53,6 +53,7 @@
     <fieldset>
         <legend><?php echo $this->getTranslation('Meta Data');?></legend>
     <?php
+        echo $this->FormRow($this->getTranslation('XML declaration'), $this->radioXmlDeclaration('setting[xml_declaration]', $this->settings->xml_declaration));
         echo $this->FormRow($this->getTranslation('Doc Type'), $this->selectDoctype('setting[doc_type]', $this->settings->doc_type));
         echo $this->FormRow($this->getTranslation('Default charset'), $this->FormText('setting[default_charset]', $this->settings->default_charset));
         echo $this->FormRow($this->getTranslation('Default timezone'), $this->selectTimezone('setting[default_timezone]', $this->settings->default_timezone));

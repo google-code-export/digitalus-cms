@@ -12,18 +12,18 @@
             <dbname></dbname>
         </database>
         <template>
-        	<pathToTemplates>templates</pathToTemplates>
-        	<default>
-        		<admin>
-					<template>default</template>
-					<page>default</page>
-				</admin>
-        		<public>
-					<template>default</template>
-					<page>default</page>
-				</public>
-       		</default>
-       	</template>
+            <pathToTemplates>templates</pathToTemplates>
+            <default>
+                <admin>
+                    <template>default</template>
+                    <page>default</page>
+                </admin>
+                <public>
+                    <template>default</template>
+                    <page>default</page>
+                </public>
+            </default>
+        </template>
         <design>
             <pathToSkins>skins</pathToSkins>
             <pathToPublicLayouts>./application/public/views/scripts/layouts</pathToPublicLayouts>
@@ -58,20 +58,20 @@
             <docx type="document" icon="page_white_word.png" mime="#"/>
             <doc type="document" icon="page_white_word.png" mime="application/msword"/>
             <jpg type="image" icon="picture.png">
-			     <mime>
-			         <type>image/jpeg</type>
-			         <type>image/pjpeg</type>
-			     </mime>
-			</jpg>
+                 <mime>
+                     <type>image/jpeg</type>
+                     <type>image/pjpeg</type>
+                 </mime>
+            </jpg>
             <gif type="image" icon="picture.png" mime="image/gif"/>
             <png type="image" icon="picture.png" mime="image/png"/>
             <zip type="archive" icon="compress.png">
-            	<mime>
-            		<type>image/zip</type>
-            		<type>application/x-zip-compressed</type>
-            		<type>application/zip</type>
-           		</mime>
-       		</zip>
+                <mime>
+                    <type>image/zip</type>
+                    <type>application/x-zip-compressed</type>
+                    <type>application/zip</type>
+                </mime>
+            </zip>
         </filetypes>
         <language>
           <path>./application/data/language</path>
@@ -82,6 +82,7 @@
               <fr>french</fr>
               <pl>polish</pl>
               <ru>russian</ru>
+              <se>swedish</se>
           </translations>
         </language>
         <defaultTimezone>America/Los_Angeles</defaultTimezone>

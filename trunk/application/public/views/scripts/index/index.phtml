@@ -1,10 +1,15 @@
 <?php
-echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' . PHP_EOL;
+// xml declaration and doc type
+echo $this->getXmlDeclaration();
 echo $this->doctype() . PHP_EOL;
+
+// set site-wide meta data
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=' . $this->placeholder('charset'))
+                 ->appendHttpEquiv('Content-Language', 'en-US');
 ?>
 <html<?php echo $this->isXhtml();?>>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->placeholder('charset');?>" />
+<!--        <meta http-equiv="Content-Type" content="text/html; charset=<?php //echo $this->placeholder('charset');?>" />-->
         <?php
             echo $this->placeholder('google_verify');
             echo $this->headMeta();

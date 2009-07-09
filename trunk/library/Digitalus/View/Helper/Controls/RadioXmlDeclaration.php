@@ -1,6 +1,6 @@
 <?php
 /**
- * SelectDesign helper
+ * RadioXmlDeclaration helper
  *
  * LICENSE
  *
@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @author      Forrest Lyman
+ * @author      LowTower - lowtower@gmx.de
  * @category    Digitalus
  * @package     Digitalus_View
  * @subpackage  Helper
@@ -20,7 +20,7 @@
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id:$
  * @link        http://www.digitaluscms.com
- * @since       Release 1.5.0
+ * @since       Release 1.8.0
  */
 
 /**
@@ -29,33 +29,31 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * SelectDesign helper
+ * RadioXmlDeclaration helper
  *
- * @author      Forrest Lyman
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
- * @since       Release 1.5.0
+ * @since       Release 1.8.0
+ * @uses        viewHelper Digitalus_View_Helper_Controls
  */
-class Digitalus_View_Helper_Admin_SelectDesign extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Controls_RadioXmlDeclaration extends Zend_View_Helper_Abstract
 {
     /**
-     *
+     * @param   string  $name
+     * @param   string  $value
+     * @param   array   $attribs
+     * @return  string  HTML radio input element
      */
-    public function selectDesign($name, $value = null, $attr = null, $options = null)
+    public function radioXmlDeclaration($name, $value, $attribs = null)
     {
-        $templateConfig = Zend_Registry::get('config')->template;
-        $templates = Digitalus_Filesystem_Dir::getDirectories(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public');
-        foreach ($templates as $template) {
-            $designs = Digitalus_Filesystem_File::getFilesByType(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public/' . $template . '/designs', 'xml');
-            if (is_array($designs)) {
-                foreach ($designs as $design) {
-                    $design = Digitalus_Toolbox_Regex::stripFileExtension($design);
-                    $options[$template . '_' . $design] = $template . ' / ' . $design;
-                }
-            }
-        }
-        return $this->view->formSelect($name, $value, $attr, $options);
+        $options = array(
+            'always'  => 'Always add an XML Declaration',
+            'never'   => 'Never add an XML Declaration',
+            'browser' => 'Let a browser check decide (e.g. "Yes" for Firefox, "No" for InternetExplorer 6',
+        );
+        return $this->view->formRadio($name, $value, $attribs, $options);
     }
 }
