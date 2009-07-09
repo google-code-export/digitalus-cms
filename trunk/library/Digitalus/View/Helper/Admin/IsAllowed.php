@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * IsAllowed helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * IsAllowed helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +38,31 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class  Digitalus_View_Helper_Admin_IsAllowed extends Zend_View_Helper_Abstract
 {
     /**
      * comments
      */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function isAllowed($output, $module, $controller = null, $action = null)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        $role = 'admin';
+        $acl = Zend_Registry::get('acl');
+        //go from more specific to less specific
+        $moduleLevel = $module;
+        $controllerLevel = $moduleLevel . '_' . $controller;
+        $actionLevel = $controllerLevel . '_' . $action;
+
+        if (null != $action && $acl->has($actionLevel)) {
+            $resource = $actionLevel;
+        } elseif (null != $controller && $acl->has($controllerLevel)) {
+            $resource = $controllerLevel;
+        } else {
+            $resource = $moduleLevel;
+        }
+        if ($acl->has($resource)) {
+            if ($acl->isAllowed($role, $resource)) {
+                return $output;
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * StyleSheets helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * StyleSheets helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +38,31 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Cms_StyleSheets extends Zend_View_Helper_Abstract
 {
     /**
-     * comments
+     * inserts the code to include a style sheet
+     * pretty simple stuff, but makes it easier than inserting your base url every time
+     * if default is true it will insert the base url tothe default style directory
+     *
+     * @param files, array
      */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function StyleSheets($files, $default = true)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
+        //get the style path
+        $config = Zend_Registry::get('config');
+
+        //build xhtml
+        $xhtml = "\n<!--Begining of style sheets-->\n";
+        foreach ($files as $file) {
+            if ($default) {
+                $path = '/' . $config->filepath->style . '/' . $file;
+            } else {
+                $path = $file;
+            }
+            $xhtml .= "\t<link rel='stylesheet' type='text/css' media='screen' href='{$path}' /> \n";
+        }
+        $xhtml .= "<!--End of style sheets-->\n";
         return $xhtml;
     }
 }

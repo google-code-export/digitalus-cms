@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * TruncateText helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * TruncateText helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,22 +38,23 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Cms_TruncateText extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    /**
+     * returns a truncated version of the text
+     *
+     * @param   unknown_type  $text
+     * @param   unknown_type  $count
+     * @return  unknown
+     */
+    public function truncateText($text, $count = 25, $stripTags = true)
     {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
-            }
+        if ($stripTags) {
+            $filter = new Zend_Filter_StripTags();
+            $text   = $filter->filter($text);
         }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
-
-        return implode($separator, $arrLinks);
+        $words = split(' ', $text);
+        $text  = (string)join(' ', array_slice($words, 0, $count));
+        return $text;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * SelectTimezone helper
  *
  * LICENSE
  *
@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @author      Forrest Lyman
+ * @author      LowTower - lowtower@gmx.de
  * @category    Digitalus
  * @package     Digitalus_View
  * @subpackage  Helper
@@ -20,7 +20,7 @@
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id:$
  * @link        http://www.digitaluscms.com
- * @since       Release 1.5.0
+ * @since       Release 1.8.0
  */
 
 /**
@@ -29,31 +29,28 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * SelectTimezone helper
  *
- * @author      Forrest Lyman
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
- * @since       Release 1.5.0
+ * @since       Release 1.8.0
+ * @uses        viewHelper Digitalus_View_Helper_Controls
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Controls_SelectTimezone extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    /**
+     * @param   string  $name   name of the select tag
+     * @param   string  $value  value for the select tag
+     * @param   array   $attr   attributes for the select tag
+     * @return  string  HTML select element
+     */
+    public function selectTimezone($name, $value, $attr = null)
     {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
-            }
-        }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
+        $data = Digitalus_Validate_Timezone::getValidTimezones(null, true);
 
-        return implode($separator, $arrLinks);
+        return $this->view->formSelect($name, $value, $attr, $data);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * MultipleCalendar helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * MultipleCalendar helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +38,26 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_General_MultipleCalendar extends Zend_View_Helper_Abstract
 {
     /**
-     * comments
+     * renders a set of calendars with links to each day
+     * pass this an array of the months with the selected days
+     * @param $months = array(numericYear-numericMonth = array(
+     *                          numericDay => array('link', 'class', 'content to render on day')
+     *                          ));
+     *
      */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function multipleCalendar($months = array())
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
+        $xhtml = null;
+        foreach ($months as $month => $selectedDays) {
+            $monthParts = explode('-', $month);
+            if (!is_array($selectedDays)) {
+                $selectedDays = array();
+            }
+            $xhtml .= $this->view->calendar($monthParts[0], $monthParts[1], $selectedDays);
+        }
         return $xhtml;
     }
 }

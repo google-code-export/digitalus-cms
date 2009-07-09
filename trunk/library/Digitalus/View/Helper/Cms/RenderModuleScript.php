@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * RenderModuleScript helper
  *
  * LICENSE
  *
@@ -29,7 +29,14 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * RenderModuleScript helper
+ *
+ * This helper script renders one of the public cms module pages.
+ * These are mapped to:
+ * /application/modules/{module name}/views/scripts/public/{script name}.phtml
+ * You can optionally send this helper an array of parameters.
+ * These will be added to the view object and can be retrieved later by going like:
+ * $param = $this->view->{module name}->{param}
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,22 +45,18 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Cms_RenderModuleScript extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    public function renderModuleScript($module, $script, $params = false)
     {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
+        if (is_array($params)) {
+            $this->view->$module = new stdClass();
+            $mdl = $this->view->$module;
+            foreach ($params as $k => $v) {
+                $mdl->$k = $v;
             }
         }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
-
-        return implode($separator, $arrLinks);
+        $this->view->addScriptPath('./application/modules/' . $module . '/views/scripts/public');
+        return $this->view->render($script . '.phtml');
     }
 }

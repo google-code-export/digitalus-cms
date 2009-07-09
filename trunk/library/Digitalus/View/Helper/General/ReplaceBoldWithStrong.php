@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * ReplaceBoldWithStrong helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * ReplaceBoldWithStrong helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +38,20 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_General_ReplaceBoldWithStrong extends Zend_View_Helper_Abstract
 {
-    /**
-     * comments
-     */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+
+    public function replaceBoldWithStrong($content, $strongClass = null)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        if ($strongClass) {
+            $class = 'class="' . $strongClass . '"';
+        }
+
+        //get the content body
+        $content = Digitalus_Toolbox_Regex::extractHtmlPart($content, 'body');
+
+        //replace the tags
+        $content = Digitalus_Toolbox_Regex::replaceTag('b', 'strong', $content, $class) ;
+        return $content;
     }
 }

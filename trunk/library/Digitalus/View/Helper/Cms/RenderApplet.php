@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * RenderApplet helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * RenderApplet helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,22 +38,28 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Zend_View_Helper_RenderApplet extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    /**
+     * comments
+     */
+    public function renderApplet($applet)
     {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
-            }
-        }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
+        $config = Zend_Registry::get('config');
 
-        return implode($separator, $arrLinks);
+        //create a new instance of view
+        $appletView = new Zend_View();
+        $appletView->setScriptPath($config->view->applet->path . '/' . $applet);
+        $appletView->setHelperPath($config->view->applet->path . '/' . $applet, 'Digitalus_Applet');
+
+        //tell the applet about where it is
+        $appletView->page    = $this->view->page;
+        $appletView->pageObj = $this->view->pageObj;
+
+        //run the code behind
+        if (file_exists($config->view->applet->path . '/' . $applet . '/' . $applet . '.php')) {
+           $appletView->$applet();
+        }
+        return $appletView->render($applet . '.phtml');
     }
 }

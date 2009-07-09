@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * HighlightText helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * HighlightText helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +38,25 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_General_HighlightText extends Zend_View_Helper_Abstract
 {
     /**
-     * comments
+     * if string is separated into multiple words this will hightlight each indipendently
      */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function highlightText($content, $string)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        //match upper and lower case
+        $upper = explode(' ', ucwords($string));
+        $lower = explode(' ', strtolower($string));
+
+        $string = array_merge($upper, $lower);
+
+        foreach ($string as $str) {
+            $content = str_replace($str, '[bOp]' . $str . '[bCl]', $content);
+        }
+
+        $content = str_replace('[bOp]', '<strong class="highlight">', $content);
+        $content = str_replace('[bCl]', '</strong>', $content);
+        return $content;
     }
 }

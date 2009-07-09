@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * GetTranslation helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * GetTranslation helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -37,29 +37,32 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
+ * @uses        viewHelper  Digitalus_View_Helper_GetCurrentLanguage
+ * @uses        viewHelper  Digitalus_View_Helper_GetRequest
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Internationalization_GetTranslation extends Zend_View_Helper_Abstract
 {
     /**
-     * comments
+     * This helper returns the translation for the passed key,
+     * it will optionally add the controller and action to the key
+     *
+     * example: controller_action_page_title
+     *
+     * @return  unknown
      */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function getTranslation($key, $locale = null, $viewInstance = null)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        if ($viewInstance !== null) {
+            $this->setview($viewInstance);
+        }
+        $adapter = Zend_Registry::get('Zend_Translate');
+        $moduleName = $this->view->getRequest()->getModuleName();
+        $currentLanguage = $this->view->getCurrentLanguage();
+        if ($locale != null) {
+            $this->view->translate()->setLocale($locale);
+        } elseif ($moduleName != 'admin' && $adapter->isAvailable($currentLanguage)) {
+            $this->view->translate()->setLocale($currentLanguage);
+        }
+        return $this->view->translate($key);
     }
 }

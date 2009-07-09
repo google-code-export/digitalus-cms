@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * SelectDesign helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * SelectDesign helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,22 +38,24 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Admin_SelectDesign extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    /**
+     *
+     */
+    public function selectDesign($name, $value = null, $attr = null)
     {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
+        $templateConfig = Zend_Registry::get('config')->template;
+        $templates = Digitalus_Filesystem_Dir::getDirectories(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public');
+        foreach ($templates as $template) {
+            $designs = Digitalus_Filesystem_File::getFilesByType(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public/' . $template . '/designs', 'xml');
+            if (is_array($designs)) {
+                foreach ($designs as $design) {
+                    $design = Digitalus_Toolbox_Regex::stripFileExtension($design);
+                    $options[$template . '_' . $design] = $template . ' / ' . $design;
+                }
             }
         }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
-
-        return implode($separator, $arrLinks);
+        return $this->view->formSelect($name, $value, $attr, $options);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * SelectUser helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * SelectUser helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -37,29 +37,24 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
+ * @uses        viewHelper Digitalus_View_Helper_GetTranslation
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Admin_SelectUser extends Zend_View_Helper_Abstract
 {
-    /**
-     * comments
-     */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function selectUser($name, $value = null, $attribs = null, $currentUser = 0)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        $u = new Model_User();
+        $users = $u->fetchAll(null, 'first_name');
+
+        $userArray[] = $this->view->getTranslation('Select User');
+
+        if ($users->count() > 0) {
+            foreach ($users as $user) {
+                if ($user->id != $currentUser) {
+                   $userArray[$user->id] = $user->first_name . ' ' . $user->last_name;
+                }
+            }
+        }
+        return $this->view->formSelect($name, $value, $attribs, $userArray);
     }
 }

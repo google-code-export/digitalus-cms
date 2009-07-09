@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * RenderImage helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * RenderImage helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,22 +38,39 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    /**
+     * comments
+     */
+    public function renderImage($src, $height, $width,$attribs = false)
     {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
-            }
-        }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
+        $absPath = SITE_ROOT . $src;
+        if ($src != '' && is_file($absPath)) {
+            $imageSize = getimagesize($absPath);
+            $srcHeight = $imageSize[0];
+            $srcWidth = $imageSize[1];
 
-        return implode($separator, $arrLinks);
+            //if the height is greater than the width then adjust by the height
+            //otherwise adjust by the width
+            if ($srcHeight > $srcWidth) {
+                $percentage = $height / $srcHeight;
+            } else {
+                $percentage = $width / $srcWidth;
+            }
+
+            //gets the new value and applies the percentage, then rounds the value
+            $width = round($srcWidth * $percentage);
+            $height = round($srcHeight * $percentage);
+
+            if ($attribs) {
+                foreach ($attribs as $k => $v) {
+                    $attributes .= $k . "='" . $v . "' ";
+                }
+            } else {
+                $attributes = null;
+            }
+            return "<img width='{$width}' heigth='{$height}' src='{$src}' {$attributes}/>";
+        }
     }
 }

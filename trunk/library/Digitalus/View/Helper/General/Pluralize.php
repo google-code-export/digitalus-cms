@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * Pluralize helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * Pluralize helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +38,25 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_General_Pluralize extends Zend_View_Helper_Abstract
 {
     /**
      * comments
      */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function pluralize($string, $count)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        if ($count > 1) {
+            //get the last letter
+            //this wont be perfect, but well try to pluralize things right
+            $lastChar = substr($string, strlen($string) - 1, 1);
+            if ($lastChar == 'y') {
+                //remove the y
+                $string = substr($string, 0, strlen($string) - 1);
+                $string .= 'ies';
+            } else {
+                $string .= 's';
+            }
+        }
+        return $string;
     }
 }

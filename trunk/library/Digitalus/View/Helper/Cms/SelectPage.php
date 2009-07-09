@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * SelectPage helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * SelectPage helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -37,23 +37,24 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
+ * @uses        viewHelper Digitalus_View_Helper_GetTranslation
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Zend_View_Helper_SelectPage extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    public function selectPage($name, $value = null, $attribs = null)
     {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
+        $mdlIndex = new Model_Page();
+        $index = $mdlIndex->getIndex(0, 'name');
+
+        $pages = array();
+        $pages[0] = $this->view->getTranslation('Site Root');
+
+        if (is_array($index)) {
+            foreach ($index as $id => $page) {
+                $pages[$id] = $page;
             }
         }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
 
-        return implode($separator, $arrLinks);
+        return $this->view->formSelect($name, $value, $attribs, $pages);
     }
 }

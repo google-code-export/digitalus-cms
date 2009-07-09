@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * RenderModuleForm helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * RenderModuleForm helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +38,21 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Zend_View_Helper_RenderModuleForm extends Zend_View_Helper_Abstract
 {
     /**
      * comments
      */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
-    {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+    public function renderModuleForm($module, $action, $parameters){
+        $dir      = './application/modules/' . $module . '/views/scripts';
+        $helpers  = './application/modules/' . $module . '/views/helpers';
+        $path     = '/public/' . $action . '.form.phtml';
+        $fullPath = $dir . $path;
+        if (file_exists($fullPath)) {
+            $this->view->addScriptPath($dir);
+            $this->view->addHelperPath($helpers);
+            $this->view->formParams = $parameters;
+            return $this->view->render($path);
+        }
     }
 }

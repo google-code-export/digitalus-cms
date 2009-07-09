@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * Scripts helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * Scripts helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +38,26 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Cms_Scripts extends Zend_View_Helper_Abstract
 {
     /**
-     * comments
+     * inserts the code to include a script
+     * pretty simple stuff, but nice and clean in the view
+     *
+     * @param files, array
      */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function scripts($files)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
+        //get the style path
+        $config = Zend_Registry::get('config');
+
+        //build xhtml
+        $xhtml = "\n<!--Beginning of scripts-->\n";
+        foreach ($files as $file) {
+            $path = '/' . $config->filepath->script . '/' . $file;
+            $xhtml .= "\t<script type='text/javascript' src='{$path}'></script> \n";
+        }
+        $xhtml .= "<!--End of scripts-->\n";
         return $xhtml;
     }
 }

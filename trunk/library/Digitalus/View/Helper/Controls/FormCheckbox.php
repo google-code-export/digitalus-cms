@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * FormCheckbox helper
  *
  * LICENSE
  *
@@ -24,12 +24,12 @@
  */
 
 /**
- * @see Zend_View_Helper_Abstract
+ * @see Zend_View_Helper_FormCheckbox
  */
-require_once 'Zend/View/Helper/Abstract.php';
+require_once 'Zend/View/Helper/FormCheckbox.php';
 
 /**
- * JquerySortable helper
+ * FormCheckbox helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +38,10 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Controls_FormCheckbox extends Zend_View_Helper_FormCheckbox
 {
-    /**
-     * comments
-     */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function formCheckbox($name, $value = null, $attribs = null, array $checkedOptions = array(1, 0))
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        return parent::formCheckbox($name, $value, $attribs, $checkedOptions);
     }
 }

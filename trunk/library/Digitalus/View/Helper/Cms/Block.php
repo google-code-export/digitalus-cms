@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * Block helper
  *
  * LICENSE
  *
@@ -29,7 +29,13 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * Block helper
+ *
+ * Renders a cms block
+ * The blocks are formatted as:
+ * module_block_action
+ *
+ * Note that in this case the module does not have the mod_ prefix
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +44,24 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Cms_Block extends Zend_View_Helper_Abstract
 {
-    /**
-     * comments
-     */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function block($request, $params = null)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        //process the block request
+        $requestArray = explode('_',$request);
+        $module = $requestArray[0];
+        $controller = $requestArray[1];
+        $action = $requestArray[2];
+
+        // set the block module path. note that this resolves differently than the standard modules
+        $module = $module . '_blocks';
+
+        //check to see if the module block has already been added
+        $front = Zend_Controller_Front::getInstance();
+        $modulePaths = $front->getControllerDirectory();
+        if (!isset($modulePaths[$moduleBlock])) {
+            $front->addControllerDirectory();
+        }
     }
 }

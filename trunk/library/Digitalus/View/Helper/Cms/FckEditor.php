@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * FckEditor helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * FckEditor helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -37,23 +37,40 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
+ * @uses        viewHelper Digitalus_View_Helper_GetTranslation
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Cms_FckEditor extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
-    {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
-            }
-        }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
 
-        return implode($separator, $arrLinks);
+    /**
+     * i know it is not well liked to output this here, but for integration purposes it makes sense
+     */
+    public function fckEditor($instance = 'content', $value = 'Enter text here', $height = 600, $width = 600, $fullToolbar = true)
+    {
+        include('Digitalus/editor/fckeditor.php') ;
+        ?>
+        <script>
+        function FCKeditor_OnComplete( editorInstance )
+        {
+        }
+        </script>
+
+        <?php
+        $sBasePath = '/public/scripts/fckeditor/' ;
+
+        $oFCKeditor = new FCKeditor($instance) ;
+        $oFCKeditor->BasePath = $sBasePath ;
+        $oFCKeditor->Config['SkinPath'] = $sBasePath . 'editor/skins/office2003/' ;
+        $oFCKeditor->Width  = $width ;
+        $oFCKeditor->Height = $height ;
+        if ($fullToolbar) {
+            $oFCKeditor->ToolbarSet = 'Digitalus' ;
+        } else {
+            $oFCKeditor->ToolbarSet = 'Basic' ;
+        }
+        $oFCKeditor->Value = $this->view->getTranslation($value);
+
+        $oFCKeditor->Create() ;
+
     }
 }

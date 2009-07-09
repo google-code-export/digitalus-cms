@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * RenderAlert helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * RenderAlert helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -37,23 +37,37 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
+ * @uses        viewHelper Digitalus_View_Helper_GetTranslation
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_General_RenderAlert extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    /**
+     * comments
+     */
+    public function renderAlert()
     {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
-            }
-        }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
+        $m = new Digitalus_View_Message();
+        $ve = new Digitalus_View_Error();
+        $alert = false;
+        $message = null;
+        $verror = null;
 
-        return implode($separator, $arrLinks);
+        $alert = null;
+
+        if ($ve->hasErrors()) {
+            $verror = '<p>'. $this->view->getTranslation('The following errors have occurred') . ':</p>' . $this->view->htmlList($ve->get());
+            $alert .= '<fieldset><legend>'. $this->view->getTranslation('Errors') . '</legend>' . $verror . '</fieldset>';
+        }
+
+        if ($m->hasMessage()) {
+            $message .= '<p>' . $m->get() . '</p>';
+            $alert   .= '<fieldset><legend>'. $this->view->getTranslation('Message') . '</legend>' . $message . '</fieldset>';
+        }
+
+        //after this renders it clears the errors and messages
+        $m->clear();
+        $ve->clear();
+
+        return $alert;
     }
 }

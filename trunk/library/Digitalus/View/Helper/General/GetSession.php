@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * GetSession helper
  *
  * LICENSE
  *
@@ -29,7 +29,14 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * @see Zend_Session_Namespace
+ */
+require_once 'Zend/Session/Namespace.php';
+
+/**
+ * GetSession helper
+ *
+ * Retrieve a session namespace object
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -38,28 +45,15 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_General_GetSession extends Zend_View_Helper_Abstract
 {
     /**
-     * comments
+     * Retrieve a (specific) session namespace object
+     *
+     * @return Zend_Session_Namespace
      */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function getSession($namespace = 'Default', $singleInstance = false)
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        return new Zend_Session_Namespace($namespace, $singleInstance);
     }
 }

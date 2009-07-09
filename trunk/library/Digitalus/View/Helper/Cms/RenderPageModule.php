@@ -1,6 +1,6 @@
 <?php
 /**
- * JquerySortable helper
+ * RenderPageModule helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * JquerySortable helper
+ * RenderPageModule helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -37,29 +37,16 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
+ * @uses        viewHelper Digitalus_View_Helper_RenderModuleScript
  */
-class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Cms_RenderPageModule extends Zend_View_Helper_Abstract
 {
-    /**
-     * comments
-     */
-    public function jquerySortable($selector, $sortableClass = 'sortableItem')
+    public function renderPageModule()
     {
-        $xhtml = "
-                $('$selector').sortable(
-                    {
-                        accept :        '$sortableClass',
-                        helperclass :   'sorthelper',
-                        activeclass :   'sortableactive',
-                        hoverclass :    'sortablehover',
-                        opacity:        0.8,
-                        fx:             200,
-                        axis:           'vertically',
-                        opacity:        0.4,
-                        revert:         true,
-                        handle:         'a.handle'
-                    }
-                );";
-        return $xhtml;
+        $module = $this->view->pageData->module_page;
+        $parts = explode('/', $module);
+        if (count($parts) == 2) {
+            return $this->view->renderModuleScript($parts[0], $parts[1]);
+        }
     }
 }

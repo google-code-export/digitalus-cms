@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * GetIconByFileType helper
  *
  * LICENSE
  *
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * GetIconByFileType helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
@@ -37,23 +37,41 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
+ * @uses        viewHelper Digitalus_View_Helper_GetBaseUrl
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Interface_GetIconByFileType extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    public $defaultIcon = 'page.png';
+    public $folderIcon = 'folder.png';
+    public $icons = array();
+
+    /**
+     *
+     */
+    public function getIconByFileType($file, $asImage = true)
     {
-        $parents = $this->view->pageObj->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = null;
-            foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
+        $config = Zend_Registry::get('config');
+        $this->icons = $config->filetypes;
+        $icon = $this->getIcon($file);
+        if ($asImage) {
+            $base = $this->view->getBaseUrl() . '/' . $config->filepath->icons;
+            return "<img src='{$base}/{$icon}' />";
+        } else {
+            return $icon;
+        }
+    }
+
+    public function getIcon($file)
+    {
+        $filetype = Digitalus_Media_Filetype::load($file);
+        if($filetype != null) {
+            $type = $filetype->key;
+
+            if (isset($this->icons->$type)) {
+                $filetype = $this->icons->$type;
+                return $filetype->icon;
             }
         }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
-
-        return implode($separator, $arrLinks);
+        return $this->defaultIcon;
     }
 }
