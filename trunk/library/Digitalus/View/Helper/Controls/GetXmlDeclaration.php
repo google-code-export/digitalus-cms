@@ -80,6 +80,10 @@ class Digitalus_View_Helper_Controls_GetXmlDeclaration extends Zend_View_Helper_
             $siteSettings = new Model_SiteSettings();
             $option = $siteSettings->get('xml_declaration');
         }
+        // return null if content is not XHTML but simply HTML
+        if (!$this->view->isXhtml) {
+            return null;
+        }
         // decide whether to return an xml declaration depending on the option
         switch ($option) {
             case 'never':

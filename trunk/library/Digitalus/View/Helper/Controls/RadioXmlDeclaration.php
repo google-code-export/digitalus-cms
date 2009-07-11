@@ -47,13 +47,13 @@ class Digitalus_View_Helper_Controls_RadioXmlDeclaration extends Zend_View_Helpe
      * @param   array   $attribs
      * @return  string  HTML radio input element
      */
-    public function radioXmlDeclaration($name, $value, $attribs = null)
+    public function radioXmlDeclaration($name, $value, $attribs = null, $options = null, $listsep = "\n")
     {
         $options = array(
-            'always'  => 'Always add an XML Declaration',
-            'never'   => 'Never add an XML Declaration',
-            'browser' => 'Let a browser check decide (e.g. "Yes" for Firefox, "No" for InternetExplorer 6',
+            'always'  => 'Always',
+            'never'   => 'Never',
+            'browser' => 'Browser check',
         );
-        return $this->view->formRadio($name, $value, $attribs, $options);
+        return $this->view->formRadio($name, $value, $attribs, $options, $listsep);
     }
 }
