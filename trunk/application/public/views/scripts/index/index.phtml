@@ -4,19 +4,19 @@ echo $this->getXmlDeclaration();
 echo $this->doctype() . PHP_EOL;
 
 // set site-wide meta data
+$contentLanguage = Digitalus_Language::getLanguage();
 $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=' . $this->placeholder('charset'))
-                 ->appendHttpEquiv('Content-Language', 'en-US');
+                 ->appendHttpEquiv('Content-Language', $contentLanguage);
 ?>
-<html<?php echo $this->isXhtml();?>>
+<html <?php echo $this->isXhtml();?>>
     <head>
-<!--        <meta http-equiv="Content-Type" content="text/html; charset=<?php //echo $this->placeholder('charset');?>" />-->
         <?php
             echo $this->placeholder('google_verify');
-            echo $this->headMeta();
-            echo $this->headTitle();
+            echo $this->headMeta() . PHP_EOL;
+            echo $this->headTitle() . PHP_EOL;
             echo $this->headScript();
             echo $this->headLink();
-            echo $this->headStyle();
+            echo $this->headStyle() . PHP_EOL;
         ?>
         <style type="text/css">
             <?php echo $this->placeholder('inlineStyles'); ?>
