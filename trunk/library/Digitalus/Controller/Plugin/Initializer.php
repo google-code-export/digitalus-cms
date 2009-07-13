@@ -134,7 +134,7 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
             Zend_Registry::set('Zend_Translate', $adapter);
 
             // Module translations (are NOT separated into  'back' and 'front')
-            if ($modules = $this->_getModules()) {
+            if ($modules = self::getModules()) {
                 foreach ($modules as $module) {
                     $this->_addTranslation(APPLICATION_PATH . '/modules/' . $module . '/data/language/' . $languageFiles[$key] . '.csv', $key);
                 }
@@ -171,7 +171,7 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
                 // Load the common helpers
                 Digitalus_View_RegisterHelpers::register($this->view);
                 $this->view->setScriptPath($config->filepath->adminViews);
-        
+
                 // add helpers
                 $this->view->addHelperPath('ZendX/JQuery/View/Helper', 'ZendX_JQuery_View_Helper');
                 $this->view->jQuery()->setLocalPath($this->view->getBaseUrl() . '/scripts/jquery-1.3.2.min.js');
@@ -185,7 +185,7 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
             }
         }
     }
-    
+
 /* ************************************************************************** */
 
     /**
@@ -208,7 +208,7 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
      *
      * @return array|false
      */
-    protected function _getModules()
+    public static function getModules()
     {
         $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
         if (is_array($modules)) {
@@ -217,6 +217,5 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
             return false;
         }
     }
-
 }
 ?>
