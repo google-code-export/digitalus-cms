@@ -1,0 +1,13 @@
+<dt>
+    <?php
+    echo $this->formLabel(
+        $this->element->getName(),
+        $this->element->getLabel()
+    );
+    ?>
+</dt>
+<dd class="<?php echo $this->class;?>">
+<?php
+echo $this->renderImage('/' . $this->element->getValue(), 400, 300);
+?>
+</dd>

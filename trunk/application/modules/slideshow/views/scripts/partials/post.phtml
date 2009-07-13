@@ -1,0 +1,7 @@
+<h2 class="post_title"><?php echo $this->title; ?></h2>
+<p><em><?php echo $this->getTranslation('Written by') . ' ' . $this->author . ' ' . $this->getTranslation('on') . ' ' . $this->renderDate($this->dateCreated);?></em></p>
+<?php
+    $textile = new Digitalus_Content_Renderer_Textile();
+    echo $textile->textileThis($this->content);
+?>
+<p><a href="<?php echo Digitalus_Uri::get(false);?>"><?php echo $this->getTranslation('View All');?></a></p>
