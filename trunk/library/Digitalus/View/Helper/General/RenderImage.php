@@ -45,7 +45,7 @@ class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstrac
      */
     public function renderImage($src, $height, $width,$attribs = false)
     {
-        $absPath = SITE_ROOT . $src;
+        $absPath = BASE_PATH . $src;
         if ($src != '' && is_file($absPath)) {
             $imageSize = getimagesize($absPath);
             $srcHeight = $imageSize[0];
