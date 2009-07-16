@@ -98,14 +98,14 @@ class Admin_ModuleController extends Zend_Controller_Action
 
                 $this->view->element = $element;
 
-                $dir = './application/modules/' . $name . '/views/scripts';
-                $helpers = './application/modules/' . $name . '/views/helpers';
+                $dir = APPLICATION_PATH . '/modules/' . $name . '/views/scripts';
+                $helpers = APPLICATION_PATH . '/modules/' . $name . '/views/helpers';
                 $path = '/public/' . $action . '.form.phtml';
                 $fullPath = $dir . $path;
 
                 if (file_exists($fullPath)) {
                     $this->view->addScriptPath($dir);
-                    $this->view->addHelperPath($helpers);
+                    $this->view->addHelperPath($helpers, 'Digitalus_View_Helper');
                     $this->view->placeholder('moduleForm')->set($this->view->render($path));
                 }
             }
