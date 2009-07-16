@@ -1,5 +1,6 @@
 # Language File – BACKEND
 # SWEDISH
+# languages
 "english";"Engelska"
 "french";"Franska"
 "german";"Tyska"
@@ -59,6 +60,7 @@
 "Create Subfolder";"Skapa Undermapp"
 "Rename Folder";"Byt namn på Mapp"
 "Current Folder";"Nuvarande Mapp"
+"Media Root";"Media Rot"
 "Current folder contents";"Nyvarande mappinnehåll"
 "Upload Files";"Ladda upp Filer"
 "Rename folder";"Byt namn på mapp"
@@ -69,7 +71,6 @@
 "Files";"Filer"
 "New Name";"Nytt Namn"
 "Select the files to upload";"Välj filer att ladda upp"
-"Media Root";"Media Rot"
 "You do not have any media files on the server";"Det finns inga media filer på servern"
 "Modules";"Modul"
 "CMS Modules";"CMS Moduler"

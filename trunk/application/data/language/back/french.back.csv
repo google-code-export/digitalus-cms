@@ -1,5 +1,6 @@
 # Language File – BACKEND
 # FRENCH
+# languages
 "english";"Anglais"
 "french";"Français"
 "german";"Allemand"
@@ -35,7 +36,6 @@
 "No pages use this design currently.";"Aucune page n'utilise ce design pour l'instant."
 "Update Design";"Mise à jour du design"
 "Design details";"Détail du design"
-"Sorry, you are not authorized to edit this resource!";"Désolé, vous n'êtes pas autorisé à éditer cette ressource!"
 "Home";"Accueil"
 "Your bookmark was saved successfully.";"Votre marque-page a été sauvegardé avec succès."
 "The following pages are the pages that you have recently created.";"Les pages suivantes sont les pages que vous avez récemment créées."
@@ -62,6 +62,7 @@
 "Create Subfolder";"Créer un sous-dossier"
 "Rename Folder";"Renommer le dossier"
 "Current Folder";"Dossier en cours"
+"Media Root";"Racine de média"
 "Current folder contents";"Contenu du dossier en cours"
 "Upload Files";"Uploader les fichiers"
 "Rename folder";"Renommer le dossier"
@@ -72,7 +73,6 @@
 "Files";"Fichiers"
 "New Name";"Nouveau nom"
 "Select the files to upload";"Sélectionner les fichiers à uploader"
-"Media Root";"Racine de média"
 "You do not have any media files on the server";"Vous n'avez aucun fichier de média sur le serveur"
 "Download";"Télécharger"
 "CMS Modules";"Modules CMS"
@@ -164,7 +164,6 @@
 "Update Content Settings";"Mettre à jour les configurations de contenu"
 "Default design";"Design par défaut"
 "Update Design Settings";"Mettre à jour les configurations du design"
-"XML declaration";"Déclaration XML"
 "Doc Type";"Type de document"
 "Default charset";"Jeu de caractère par défaut"
 "Default timezone";"Zone temporelle par défaut"
@@ -228,4 +227,5 @@
 "You are reading this page in";"Vous lisez cette page en"
 "This page is also translated into";"Cette page est aussi traduite en"
 "Digitalus CMS";"Digitalus CMS"
+"Unable to delete item";"Element konnte nicht gelöscht werden"
 "You are here";"Vous êtes ici"

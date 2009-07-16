@@ -128,7 +128,7 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
             }
             $adapter = new Zend_Translate(
                 'csv',
-                $config->language->path . '/' . $languageFiles[$key] . '.' . $end . '.csv',
+                $config->language->path . '/' . $end . '/' . $languageFiles[$key] . '.' . $end . '.csv',
                 $key
             );
             Zend_Registry::set('Zend_Translate', $adapter);

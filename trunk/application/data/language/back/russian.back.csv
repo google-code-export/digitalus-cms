@@ -1,5 +1,6 @@
 # Language File – BACKEND
 # RUSSIAN
+# languages
 "Login";"На главную"
 "If you are having trouble logging in please enter your email address below and we will send you your login credentials.";"Если у вас проблемы с входом, пожалуйста, введите ваш e-mail ниже и мы вам вышлем ваши данные для логина."
 "Reset Password";"Переустановить пароль"
@@ -45,6 +46,7 @@
 "Create Subfolder";"Создать подпапку"
 "Rename Folder";"Переименовать папку"
 "Current Folder";"Текущая папка"
+"Media Root";"Корень медиа"
 "Current folder contents";"Содержимое текущей папки"
 "Upload Files";"Загрузить файлы"
 "Rename folder";"Переименовать папку"
@@ -55,7 +57,6 @@
 "Files";"Файлы"
 "New Name";"Новое имя"
 "Select the files to upload";"Выберите файлы для загрузки"
-"Media Root";"Корень медиа"
 "You do not have any media files on the server";"У вас нет никаких медиа на сервере"
 "Modules";"Модули"
 "CMS Modules";"Модули CMS"
