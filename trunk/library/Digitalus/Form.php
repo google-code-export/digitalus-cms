@@ -7,22 +7,18 @@ class Digitalus_Form extends Zend_Form
 
     public function __construct($translator = null)
     {
-        if (empty($translator)) {
-            $front = Zend_Controller_Front::getInstance();
-            $translator = Zend_Registry::get('Zend_Translate');
-        }
-        $this->setTranslator($translator);
-
         $this->setMethod('post');
         $this->addElementPrefixPath('Digitalus_Decorator', 'Digitalus/Form/Decorator', 'decorator');
         $this->addPrefixPath('Digitalus_Form_Element', 'Digitalus/Form/Element/', 'element');
+        $this->_setTranslator($translator);
         parent::__construct();
 
         //set instance
         $instance = $this->_addInstance();
 
         $instanceElement = $this->createElement('hidden', 'form_instance');
-        $instanceElement->setValue($instance);
+        $instanceElement->setValue($instance)
+                        ->removeDecorator('Label');
         $this->addElement($instanceElement);
     }
 
@@ -92,8 +88,8 @@ class Digitalus_Form extends Zend_Form
             if (isset($values[$field])) {
                 $value = $values[$field];
             }
-             $row->$field = $value;
-             return true;
+            $row->$field = $value;
+            return true;
         }
         return false;
     }
@@ -123,7 +119,7 @@ class Digitalus_Form extends Zend_Form
     protected function _getSession()
     {
         if ($this->_session == null) {
-             $this->_session = new Zend_Session_Namespace(get_class($this) . '_Instance');
+            $this->_session = new Zend_Session_Namespace(get_class($this) . '_Instance');
         }
         return $this->_session;
     }
@@ -156,6 +152,37 @@ class Digitalus_Form extends Zend_Form
     {
         $session = $this->_getSession();
         $session->validInstances[$instance] = false;
+    }
+
+    protected function _setTranslator($translator = null)
+    {
+        if (empty($translator)) {
+            // Get site settings
+            $settings = Zend_Registry::get('siteSettings');
+
+            // Get site config
+            $config = Zend_Registry::get('config');
+
+            $language = $settings->get('admin_language');
+            if (!empty($language)) {
+                $key = $language;
+            } else {
+                $key = $config->language->defaultLocale;
+            }
+            $languageFiles = $config->language->translations->toArray();
+            $languagePath  = $config->language->path . '/form/' . $languageFiles[$key] . '.form.csv';
+
+            if (is_file($languagePath)) {
+                $translator = new Zend_Translate(
+                    'csv',
+                    $languagePath,
+                    $key
+                );
+            } else {
+                $translator = null;
+            }
+        }
+        $this->setTranslator($translator);
     }
 }
 ?>
