@@ -2,9 +2,9 @@
 $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery.FCKEditor.pack.js');
 $this->jQuery()->onLoadCaptureStart()?>
 $('.fckeditor').fck({
-	path: '<?php echo $this->getBaseUrl() . "/scripts/fckeditor/" ?>',
-	toolbar: 'Digitalus',
-	height: 300
+    path: '<?php echo $this->getBaseUrl() . '/scripts/fckeditor/';?>',
+    toolbar: 'Digitalus',
+    height: 300
 });
 <?php $this->jQuery()->onLoadCaptureEnd();
 
@@ -14,13 +14,13 @@ $this->form->removeElement('submit');
 $controls = $this->form->getElements();
 foreach ($controls as $control) {
     $rel = $control->getAttrib('rel');
-	$group = (!empty($rel) ? $rel : 'main');
-	$groups[$group][] = $control->getName();;
+    $group = (!empty($rel) ? $rel : 'main');
+    $groups[$group][] = $control->getName();;
 }
 $this->form->addDisplayGroup($groups['main'], 'main', 'main items');
 unset($groups['main']);
 
-if(is_array($groups)) {
+if (is_array($groups)) {
     foreach ($groups as $key => $controls) {
         $this->form->addDisplayGroup($controls, $key);
     }
@@ -31,7 +31,7 @@ $displayGroups = $this->form->getDisplayGroups();
 $panes = '';
 foreach ($displayGroups as $title => $group) {
     $id = $title . '_content_pane';
-    $title = ucwords($title) . ' Content';
+    $title = $this->getTranslation(ucwords($title)) . ' ' . $this->getTranslation('Content');
     $ids[$id] = $title;
     $content = '';
     foreach ($group->getElements() as $element) {
@@ -42,8 +42,8 @@ foreach ($displayGroups as $title => $group) {
 
 $this->contentPanes = $ids;
 ?>
-<form action='<?php $this->form->getAction()?>' method='post' enctype='multipart/form-data'>
-<?php 
+<form action="<?php $this->form->getAction();?>" method="post" enctype="multipart/form-data">
+<?php
     echo $panes;
 ?>
 </form>

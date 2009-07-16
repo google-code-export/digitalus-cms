@@ -13,7 +13,7 @@ $this->placeholder('formHeadline')->set($this->getTranslation('My Dashboard'));
             echo $this->FormRow($this->getTranslation('First Name'), $this->formText('first_name' , $this->identity->first_name));
             echo $this->FormRow($this->getTranslation('Last Name'), $this->formText('last_name', $this->identity->last_name));
             echo $this->FormRow($this->getTranslation('Email'), $this->formText('email', $this->identity->email));
-            echo $this->FormRow($this->formCheckbox('update_password'), $this->getTranslation('Update password?'));
+            echo $this->FormRow($this->formCheckbox('update_password'), $this->getTranslation('Update Password?'));
             echo $this->FormRow($this->getTranslation('Password'), $this->formPassword('password'));
             echo $this->FormRow($this->getTranslation('Confirm'), $this->formPassword('confirmation'));
             echo $this->formSubmit('submit',$this->getTranslation('Update My Account'));

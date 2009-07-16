@@ -9,7 +9,7 @@
         }
     ?>
     <legend><?php echo $this->getTranslation('Current Folder');?></legend>
-    <p>Media Root<?php echo implode('/', $pathParts);?></p>
+    <p><?php echo $this->getTranslation('Media Root'); ?><?php echo implode('/', $pathParts);?></p>
 </fieldset>
 
 <fieldset id='browse'>
