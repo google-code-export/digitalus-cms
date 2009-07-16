@@ -214,10 +214,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 $view->addHelperPath(BASE_PATH . '/library/Digitalus/View/Helper/' . $dir, 'Digitalus_View_Helper_' . ucfirst($dir));
             }
         }
-        // add helpers from Modules
-        foreach (Digitalus_Controller_Plugin_Initializer::getModules() as $module) {
-            $view->addHelperPath(APPLICATION_PATH . '/modules/' . $module . '/views/helpers/', 'Digitalus_View_Helper');
-        }
         $view->baseUrl = $this->_front->getBaseUrl();
         // Return it, so that it can be stored by the bootstrap
         return $view;
