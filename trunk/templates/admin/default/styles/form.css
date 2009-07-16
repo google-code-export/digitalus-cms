@@ -441,7 +441,7 @@ a.link img.icon{
 	text-decoration:none;
 	color:#000;
 	height:1.5em;
-	
+
 }
 #form a:hover, .column a:hover{
 	color:#5D86BD;
@@ -495,7 +495,7 @@ h4 img{
 .folderWrapper, .fileWrapper{
 	padding:5px;
 }
-	
+
 #errorWrapper{
 	width:	500px;
 	overflow:auto;

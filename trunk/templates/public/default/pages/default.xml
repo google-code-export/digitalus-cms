@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <design>
-	<name>default</name>
-	<layout>2-column-left.phtml</layout>
-	<styles>
-		<stylesheet import='true'>styles/grid-960/styles/960.css</stylesheet>
-		<stylesheet import='true'>styles/grid-960/styles/reset.css</stylesheet>
-		<stylesheet import='true'>styles/grid-960/styles/text.css</stylesheet>
-		<stylesheet>style.css</stylesheet>
-		<stylesheet>nav.css</stylesheet>
-	</styles>
+    <name>default</name>
+    <layout>2-column-left.phtml</layout>
+    <styles>
+        <stylesheet import='true'>styles/grid-960/styles/960.css</stylesheet>
+        <stylesheet import='true'>styles/grid-960/styles/reset.css</stylesheet>
+        <stylesheet import='true'>styles/grid-960/styles/text.css</stylesheet>
+        <stylesheet>style.css</stylesheet>
+        <stylesheet>nav.css</stylesheet>
+    </styles>
 </design>
