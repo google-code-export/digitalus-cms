@@ -1,5 +1,12 @@
-<?php $this->placeholder('formHeadline')->set($this->getTranslation('Reorder Slides'));?>
-<?php if ($this->slides) { ?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Reorder Slides'));
+
+$iconSource = $this->getBaseUrl() . '/images/icons/arrow_out.png';
+
+$this->jQuery()->onLoadCaptureStart();
+    echo $this->JquerySortable('ul.sortable');
+$this->jQuery()->onLoadCaptureEnd();
+
+if ($this->slides) { ?>
 <fieldset>
     <legend><?php echo $this->getTranslation('Slides');?></legend>
     <p><?php echo $this->getTranslation('To change the order a slide is displayed in click the drag icon next to the item and move the item up or down.') . PHP_EOL .
@@ -8,7 +15,8 @@
         <?php echo $this->formHidden('show', $this->show->id);?>
         <ul class="sortable">
         <?php foreach ($this->slides as $slide) { ?>
-            <li class="sortableItem"><a href="#" class="handle"></a>
+            <li class="sortableItem">
+                <a href="#" class="handle"><img src="<?php echo $iconSource;?>" /></a>
                 <?php echo $this->formHidden('id[]', $slide->id) . ' ' . $slide->title;?>
             </li>
         <?php } ?>
@@ -16,11 +24,3 @@
         <p><?php echo $this->formSubmit('reorder', $this->getTranslation('Done Reordering Slides'));?></p>
     </form>
 <?php } ?>
-
-<script type="text/javascript">
-$(document).ready(
-    function () {
-        <?php echo $this->JquerySortable('ul.sortable');?>
-    }
-);
-</script>
