@@ -15,7 +15,7 @@
                     }
                 ?>
             </span>
-            <span class="imageTitle"><?php echo $this->slide->title?></span>
+            <span class="imageTitle"><?php echo $this->slide->title;?></span>
             <span class="rightLinks">
             <?php
                     if ($this->pageLinks->next == null) {
@@ -33,7 +33,7 @@
             <br class="clear" />
         </div>
         <div class="imageWrapper">
-            <a href="/<?php echo $this->slide->imagePath;?>"><img src="/<?php echo $this->slide->previewPath;?>" alt="<?php echo $this->slide->title?> image" /></a>
+            <a href="/<?php echo $this->slide->imagePath;?>"><img src="/<?php echo $this->slide->previewPath;?>" alt="<?php echo $this->slide->title . ' ' . $this->getTranslation('image');?>" /></a>
         </div>
         <div class="caption">
             <?php
@@ -41,6 +41,6 @@
                 echo $textile->textileThis($this->slide->caption);
             ?>
         </div>
-        <p class="slideIndex"><?php echo $this->getTranslation('Slide') . ' ' . $this->index . ' ' . $this->getTranslation('of') . ' ' . $this->count ?></p>
+        <p class="slideIndex"><?php echo $this->getTranslation('Slide') . ' ' . $this->index . ' ' . $this->getTranslation('of') . ' ' . $this->count;?></p>
     </div>
 </div>

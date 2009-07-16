@@ -1,5 +1,5 @@
 <?php
-class Slide_Form extends Zend_Form
+class Slide_Form extends Digitalus_Form
 {
     public function __construct($options = null)
     {
@@ -10,8 +10,10 @@ class Slide_Form extends Zend_Form
              ->setEnctype('multipart/form-data');
 
         $id = $this->createElement('hidden', 'id');
+        $id->removeDecorator('Label');
 
         $show = $this->createElement('hidden', 'show_id');
+        $show->removeDecorator('Label');
 
         $title = $this->createElement('text', 'title');
         $title->setLabel($this->getView()->getTranslation('Title') . ':');
@@ -30,23 +32,20 @@ class Slide_Form extends Zend_Form
         $imagePreview = $this->createElement('file', 'image_preview');
         // element options
         $imagePreview->setLabel($this->getView()->getTranslation('Image Preview (scaled)'))
-                     ->setRequired(false);
-
-        // create new element
-        $imagepath = $this->createElement('hidden', 'imagepath');
-        // element options
-        $imagepath->setLabel($this->getView()->getTranslation('Current Image'))
-                  ->setRequired(false)
-                  ->setDecorators(array(array('ViewScript', array(
-                      'viewScript' => 'slide/render-image.phtml',
-                      'class'      => 'partial'
-                  ))));
+                     ->setRequired(false)
+                     ->setRequired(false)
+                     ->addValidator('Count', false, 1)                      // only one image allowed
+                     ->addValidator('Size', false, 204800)                  // maximum 200kB
+                     ->addValidator('Extension', false, 'jpg, png, gif');   // only JPEG, PNG, und GIF allowed
 
         // create new element
         $image = $this->createElement('file', 'image');
         // element options
         $image->setLabel($this->getView()->getTranslation('Image'))
-              ->setRequired(false);
+              ->setRequired(false)
+              ->addValidator('Count', false, 1)                     // only one image allowed
+              ->addValidator('Size', false, 1024000)                // maximum 1000kB
+              ->addValidator('Extension', false, 'jpg, png, gif');  // only JPEG, PNG, und GIF allowed
 
         $caption = $this->createElement('textarea', 'caption');
         $caption->setLabel($this->getView()->getTranslation('Caption'))

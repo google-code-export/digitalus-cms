@@ -67,7 +67,8 @@ class Mod_Slideshow_ShowController extends Zend_Controller_Action
         $submit->setLabel($this->view->getTranslation('Add New Slide'));
         $this->view->slideForm = $slideForm;
 
-        $this->view->breadcrumbs[$show->name] = $this->getFrontController()->getBaseUrl() . '/mod_slideshow/edit/id/' . $show->id;
+        $this->view->breadcrumbs[$show->name] = $this->getFrontController()->getBaseUrl() . '/mod_slideshow/show/edit/id/' . $show->id;
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/mod_slideshow/show/edit/id/' . $show->id;
         $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/mod_slideshow/show/delete/id/' . $show->id;
 
     }

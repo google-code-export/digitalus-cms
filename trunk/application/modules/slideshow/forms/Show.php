@@ -1,5 +1,5 @@
 <?php
-class Show_Form extends Zend_Form
+class Show_Form extends Digitalus_Form
 {
     public function __construct($options = null)
     {
@@ -7,6 +7,8 @@ class Show_Form extends Zend_Form
         $this->setMethod('post');
 
         $id = $this->createElement('hidden', 'id');
+        $id->removeDecorator('Label');
+
 
         $name = $this->createElement('text', 'name');
         $name->setAttrib('size', 40)

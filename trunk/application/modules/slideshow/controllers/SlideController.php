@@ -12,7 +12,6 @@ class Mod_Slideshow_SlideController extends Zend_Controller_Action
            $this->view->getTranslation('Slideshow') => $this->view->getBaseUrl() . '/mod_slideshow'
         );
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/mod_slideshow';
-
     }
 
     public function createAction()
@@ -44,70 +43,66 @@ class Mod_Slideshow_SlideController extends Zend_Controller_Action
         $form = new Slide_Form();
         $mdlShow = new Slideshow_Show();
         $mdlSlide = new Slideshow_Slide();
-        if ($this->_request->isPost() && $form->isValid($_POST) && $this->_request->getParam('isInsert') != true){
-            $values = $form->getValues();
 
-            //upload the image
-            $preview = $_FILES['image_preview'];
-            $previewPath = null;
-            if (isset($preview)) {
-                $properties = Digitalus_Module_Property::load('mod_slideshow');
-                $folder =  $properties->mediaFolder . '/' . $mdlSlide->getShowBySlide($values['id']) .'/preview';
-                if ($preview) {
-                    $previewPath = Digitalus_Media::upload($preview, $folder, null);
+        // generate path to save file to
+        $id = $this->_request->getParam('id');
+        $properties = Digitalus_Module_Property::load('mod_slideshow');
+        $config = Zend_Registry::get('config');
+        $path = $config->filepath->media;
+        $directory =  $path . '/' . $properties->mediaFolder . '/' . $mdlSlide->getShowBySlide($id);
+        $directoryFull    = $directory . '/full';
+        $directoryPreview = $directory . '/preview';
+        // create and set file's destination directory
+        Digitalus_Filesystem_dir::makeRecursive(BASE_PATH, $directoryFull);
+        Digitalus_Filesystem_dir::makeRecursive(BASE_PATH, $directoryPreview);
+        $form->image->setDestination($directoryFull);
+        $form->image_preview->setDestination($directoryPreview);
 
-                }
+        if ($this->_request->isPost() && $this->_request->getParam('isInsert') != true) {
+            $formData = $this->_request->getPost();
+            if ($form->isValid($formData)) {
+                // success - do something with the uploaded file
+                $values      = $form->getValues();
+                $imagePath   = $form->image->getFileName();
+                $previewPath = $form->image_preview->getFileName();
+                // some servers set different permissions, so set them explicitly here
+                if (!empty($imagePath)) { chmod($imagePath, 0644); }
+                if (!empty($previewPath)) { chmod($previewPath, 0644); }
+
+                $slide = $mdlSlide->updateSlide(
+                    $values['id'],
+                    $values['title'],
+                    $values['caption'],
+                    $previewPath,
+                    $imagePath
+                );
+                $slide = $mdlSlide->openSlide($values['id']);
             }
-
-            //upload the image
-            $file = $_FILES['image'];
-            $imagePath = null;
-            if (isset($file)) {
-                $properties = Digitalus_Module_Property::load('mod_slideshow');
-                $path =  $properties->mediaFolder . '/' . $mdlSlide->getShowBySlide($values['id']) . '/full' ;
-                if ($file) {
-#                    $imagePath = Digitalus_Media::upload($file, $path, null);
-                    $imagePath = Digitalus_Media::upload($file, $path, $file['name']);
-#                   echo "here is the problem, <br>
-#                        Media library upload.php never returns cause never move filename from tmp $imagePath";
-                }
-            }
-            $slide = $mdlSlide->updateSlide(
-                $values['id'],
-                $values['title'],
-                $values['caption'],
-                $previewPath,
-                $imagePath
-            );
-
-            $slide = $mdlSlide->openSlide($values['id']);
-        } else {
-            $id = $this->_request->getParam('id');
-            $slide = $mdlSlide->openSlide($id);
         }
+        $slide = $mdlSlide->openSlide($id);
+        $slideArray['id']          = $slide->id;
+        $slideArray['blog_id']     = $slide->showId;
+        $slideArray['title']       = $slide->title;
+        $slideArray['previewpath'] = $slide->previewPath;
+        $slideArray['imagepath']   = $slide->imagePath;
+        $slideArray['caption']     = $slide->caption;
 
-        $slideArray['id'] = $slide->id;
-        $slideArray['blog_id'] = $slide->showId;
-        $slideArray['title'] = $slide->title;
-        $slideArray['previewpath']= $slide->previewPath;
-        $slideArray['imagepath']= $slide->imagePath;
-        $slideArray['caption'] = $slide->caption;
-        $form->populate($slideArray);
+        $form->setAction($this->view->getBaseUrl() . '/mod_slideshow/slide/edit')
+            ->populate($slideArray);
 
         $show = $mdlShow->find($slide->showId)->current();
 
-        $form->setAction($this->view->getBaseUrl() . '/mod_slideshow/slide/edit');
         $submit = $form->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Update Slide'));
 
-        $this->view->form = $form;
-        $this->view->show = $show;
+        $this->view->form  = $form;
+        $this->view->show  = $show;
         $this->view->slide = $slide;
 
         $this->view->breadcrumbs[$show->name] = $this->view->getBaseUrl() . '/mod_slideshow/show/edit/id/' . $show->id;
         $this->view->breadcrumbs[$slide->title] = $this->view->getBaseUrl() . '/mod_slideshow/slide/edit/id/' . $slide->id;
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/mod_slideshow/slide/edit/id/' . $slide->id;
         $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/mod_slideshow/slide/delete/id/' . $slide->id;
-
     }
 
     public function reorderAction()
