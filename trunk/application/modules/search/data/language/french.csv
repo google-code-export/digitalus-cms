@@ -2,3 +2,18 @@
 # FRENCH
 # ----- search module -----
 "Digitalus CMS";"Digitalus CMS"
+"Search";"Recherche"
+"The search index was rebuilt successfully!";"L'index de recherche a été régénérer avec succès!"
+"Rebuild search";"Régénérer l'index de recherche"
+"Search Module";"Module de recherche"
+"The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.";"Le module de recherche utilise le moteur Lucene afin de générer, gérer et interroger les index de recherche sur votre site."
+"Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.";"La régénération de l'index de recherche demande beaucoup de ressources processeur, donc Digitalus ne le régénère pas à chaque fois que vous mettez à jour votre site. Quand vous mettez à jour votre site, ouvrez ce module et cliquez le lien Régénérer l'index de recherche."
+"The search form does not have any user defined settings.";"Le formulaire de recherche n'a aucune préférence utilisateur."
+"Search Site";"Rechercher sur le site"
+"Keywords";"Mots clés"
+"Your search for";"Votre recherche pour"
+"returned";"a retourné"
+"results.";"résultats."
+"did not return any results.";"n'a retourné aucun résultat."
+"Please provide a keyword to search for!";"Veuillez fournir un mot clé à rechercher!"
+"For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";"Pour que le module de recherche fonctionne correctement, le répertoire index doit être accessible en écriture! Veuillez vérifier les permissions sur ce répertoire:"
