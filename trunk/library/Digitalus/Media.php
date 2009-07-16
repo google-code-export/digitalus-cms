@@ -1,7 +1,7 @@
 <?php
 
-class Digitalus_Media {
-
+class Digitalus_Media
+{
     public static function isAllowed($mimeType)
     {
         $filetypes = self::getFiletypes();
@@ -30,27 +30,31 @@ class Digitalus_Media {
 
     public static function upload($file, $path, $filename, $createPath = true, $base = '.')
     {
-        if (self::isAllowed($file['type'])) {
+        $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
+        $e = new Digitalus_View_Error();
 
+        if ($file['error'] == 4 || empty($file['name'])) {
+            return;
+        }
+
+        if (self::isAllowed($file['type'])) {
             $path = self::getMediaPath($path);
 
             //default to the name on the client machine
             if ($filename == null) {$filename = $file['name'];}
-            $filename = str_replace('_','-',$filename);
-            $filename = str_replace(' ','-',$filename);
+            $filename = str_replace('_', '-', $filename);
+            $filename = str_replace(' ', '-', $filename);
 
             $path = str_replace(self::rootDirectory(), '', $path);
             $path = Digitalus_Toolbox_String::stripUnderscores($path);
             $path = Digitalus_Toolbox_String::stripLeading('/', $path);
 
-			/*
-			 * Update by Brad Seefeld on May 12, 2009
-			 *
-			 * This fixes an issue when the system is installed on a path other than
-			 * root. Path should contain a path that is relative to the (cms) root
-			 * index.php (not root to the public_html of the web server (as it was trying
-			 * to do before).
-			 */
+            /*
+             * This fixes an issue when the system is installed on a path other than
+             * root. Path should contain a path that is relative to the (cms) root
+             * index.php (not root to the public_html of the web server (as it was trying
+             * to do before).
+             */
             $config = Zend_Registry::get('config');
             $path = $config->filepath->media . '/' . $path;
 
@@ -68,7 +72,14 @@ class Digitalus_Media {
                 //this is relative to the site root as this is the format that will be required for links and what not
                 $fullPath = Digitalus_Toolbox_String::stripLeading($base . '/', $path);
                 return $fullPath;
+            } else {
+Zend_Debug::dump($file);
+Zend_Debug::dump($file['tmp_name']);
+Zend_Debug::dump($path);
+                $e->add($view->getTranslation('An error occurred uploading the file' . ': ' . $file['name']));
             }
+        } else {
+            $e->add($view->getTranslation('This filetype is not allowed' . ': ' . $file['type']));
         }
     }
 
@@ -76,7 +87,7 @@ class Digitalus_Media {
     {
         $filepaths = array();
         if (is_array($files)) {
-            for ($i = 0; $i <= (count($files["size"]) - 1);$i++) {
+            for ($i = 0; $i <= (count($files['size']) - 1); $i++) {
 
                 $file = array(
                     'name'     => $files['name'][$i],
@@ -146,9 +157,10 @@ class Digitalus_Media {
 
     public static function testFilepath($filepath)
     {
+        $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
         //dont allow access outside the media folder
         if (strpos($filepath, './') || strpos($filepath, './')) {
-            throw new Zend_Exception('Illegal file access attempt. Operation cancelled!');
+            throw new Zend_Exception($view->getTranslation('Illegal file access attempt. Operation cancelled!'));
             return false;
         } else {
             return true;
@@ -160,14 +172,11 @@ class Digitalus_Media {
         $path = Digitalus_Toolbox_String::stripUnderscores($path);
 
         //make it impossible to get out of the media library
-        $path = str_replace('./','',$path);
-        $path = str_replace('../','',$path);
+        $path = str_replace('./', '', $path);
+        $path = str_replace('../', '', $path);
 
-        /*
-         * Update by Brad Seefeld on May 12, 2009
-         * Remove root path from path if it exists in path already.
-         */
-		$path = str_replace(self::rootDirectory(false), '', $path);
+        //remove root path from path if it exists in path already.
+        $path = str_replace(self::rootDirectory(false), '', $path);
 
         //remove the reference to media if it exists
         $pathParts = explode('/', $path);
@@ -176,13 +185,10 @@ class Digitalus_Media {
                 unset($pathParts[0]);
             }
 
-			/*
-			 * Update by Brad Seefeld on May 12, 2009
-			 * Remove any leading slash that may exist.
-			 */
+            //remove any leading slash that may exist.
             $partial = implode('/', $pathParts);
             if(substr($partial, 0, 1) == '/')
-            	$partial = substr($partial, 1);
+                $partial = substr($partial, 1);
 
             //add the media root
             $path = self::rootDirectory($relative) . '/' . $partial;

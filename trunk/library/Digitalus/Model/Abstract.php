@@ -1,5 +1,5 @@
 <?php
-abstract class Digitalus_Model_Abstract implements IteratorAggregate
+abstract class Digitalus_Model_Abstract extends Digitalus_Abstract implements IteratorAggregate
 {
     protected $_params = array();
     protected $_protectedParams = array();
@@ -25,7 +25,7 @@ abstract class Digitalus_Model_Abstract implements IteratorAggregate
         // For this to be a setSomething or getSomething, the name has to have
         // at least 4 chars as in, setX or getX
         if (strlen($method) < 4) {
-            throw new Exception('Method does not exist');
+            throw new Zend_Exception($this->view->getTranslation('Method does not exist'));
         }
         // Take first 3 chars to determine if this is a get or set
         $prefix = substr($method, 0, 3);
@@ -37,7 +37,7 @@ abstract class Digitalus_Model_Abstract implements IteratorAggregate
             if ($this->_hasProperty($suffix) && count($parameters) == 0) {
                 return $this->_params[$suffix];
             } else {
-                throw new Exception('Getter does not exist');
+                throw new Zend_Exception($this->view->getTranslation('Getter does not exist'));
             }
         }
 
@@ -45,7 +45,7 @@ abstract class Digitalus_Model_Abstract implements IteratorAggregate
             if ($this->_hasProperty($suffix) && count($parameters) == 1) {
                 $this->_params[$suffix] = $parameters[0];
             } else {
-                throw new Exception('Setter does not exist');
+                throw new Zend_Exception($this->view->getTranslation('Setter does not exist'));
             }
         }
     }

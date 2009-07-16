@@ -1,5 +1,5 @@
 <?php
-class Digitalus_Content_Form extends Digitalus_Form 
+class Digitalus_Content_Form extends Digitalus_Form
 {
     const PAGE_ACTION = '/admin/page/edit';
 
@@ -20,7 +20,7 @@ class Digitalus_Content_Form extends Digitalus_Form
 
         $version = $this->createElement('hidden', 'version');
         $version->setDecorators(array('ViewHelper'));
-        
+
         $submit = $this->createElement('submit', 'submit');
         $submit->setLabel('Save Changes');
         $submit->setDecorators(array('ViewHelper'));
@@ -30,9 +30,9 @@ class Digitalus_Content_Form extends Digitalus_Form
              ->addElement($name)
              ->addElement($version)
              ->addElement($submit);
-             
+
     }
-    
+
     public function loadFromTemplate($template)
     {
         $control = new Digitalus_Content_Control($this);

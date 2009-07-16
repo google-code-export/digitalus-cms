@@ -50,9 +50,9 @@ class Digitalus_View_Helper_Controls_RadioXmlDeclaration extends Zend_View_Helpe
     public function radioXmlDeclaration($name, $value, $attribs = null, $options = null, $listsep = "\n")
     {
         $options = array(
-            'always'  => 'Always',
-            'never'   => 'Never',
-            'browser' => 'Browser check',
+            'always'  => $this->view->getTranslation('Always'),
+            'never'   => $this->view->getTranslation('Never'),
+            'browser' => $this->view->getTranslation('By browser check'),
         );
         return $this->view->formRadio($name, $value, $attribs, $options, $listsep);
     }

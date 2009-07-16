@@ -134,7 +134,7 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
             Zend_Registry::set('Zend_Translate', $adapter);
 
             // Module translations (are NOT separated into  'back' and 'front')
-            if ($modules = self::getModules()) {
+            if ($modules = Digitalus_Module::getModules()) {
                 foreach ($modules as $module) {
                     $this->_addTranslation(APPLICATION_PATH . '/modules/' . $module . '/data/language/' . $languageFiles[$key] . '.csv', $key);
                 }
@@ -200,21 +200,6 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
         if (is_file($languagePath)) {
             $adapter = Zend_Registry::get('Zend_Translate');
             $adapter->addTranslation($languagePath, $lang);
-        }
-    }
-
-    /**
-     * Return an array with the existing extension modules
-     *
-     * @return array|false
-     */
-    public static function getModules()
-    {
-        $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
-        if (is_array($modules)) {
-            return $modules;
-        } else {
-            return false;
         }
     }
 }

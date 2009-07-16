@@ -1,11 +1,12 @@
 <?php
-class Digitalus_Module_Service
+class Digitalus_Module_Service extends Digitalus_Abstract
 {
     protected $_module;
     protected $_pathToModules = './application/modules';
     protected $_serviceFilename = 'service.php';
     protected $_serviceClassName = 'Service';
     protected $_service;
+
     public function __construct ($module)
     {
         $pathToModule = $this->_pathToModules . '/' . $module;
@@ -18,7 +19,7 @@ class Digitalus_Module_Service
             }
         }
         if (! is_object($this->_service)) {
-            throw new Zend_Exception('Unable to load service for ' . $module . ' module');
+            throw new Zend_Exception($this->view->getTranslation('Unable to load service for this module') . ': ' . $module);
         }
     }
     public function getService ()
