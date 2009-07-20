@@ -15,7 +15,7 @@ class Admin_Form_User extends Digitalus_Form
         // element options
         $firstName->setLabel($this->getView()->getTranslation('First Name'))
                   ->setRequired(true)
-                  ->setAttrib('size',40);
+                  ->setAttrib('size', 40);
         // add the element to the form
         $this->addElement($firstName);
 
@@ -24,7 +24,7 @@ class Admin_Form_User extends Digitalus_Form
         // element options
         $lastName->setLabel($this->getView()->getTranslation('Last Name'))
                  ->setRequired(true)
-                 ->setAttrib('size',40);
+                 ->setAttrib('size', 40);
         // add the element to the form
         $this->addElement($lastName);
 
@@ -33,7 +33,7 @@ class Admin_Form_User extends Digitalus_Form
         // element options
         $email->setLabel($this->getView()->getTranslation('Email Address'))
               ->setRequired(true)
-              ->setAttrib('size',50)
+              ->setAttrib('size', 50)
               ->addValidator('EmailAddress');
         // add the element to the form
         $this->addElement($email);
@@ -41,7 +41,7 @@ class Admin_Form_User extends Digitalus_Form
         // create new element
         $adminRole = $this->createElement('select', 'role');
         // element options
-        $adminRole->setLabel('Admin Role');
+        $adminRole->setLabel($this->getView()->getTranslation('Admin Role'));
         $adminRole->addMultiOptions(array(
             'admin'      => $this->getView()->getTranslation('Site Administrator'),
             'superadmin' => $this->getView()->getTranslation('Super Administrator')

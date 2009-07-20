@@ -1,6 +1,14 @@
-<?php
-$this->placeholder('formHeadline')->set($this->getTranslation('Create a Page'));
-?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Create a Page'));
+
+$this->jQuery()->onLoadCaptureStart();?>
+    $("#step1button").click(function() {
+        var parentId = $("#parent_id").val();
+        $("#step2").load('<?php echo $this->getBaseUrl();?>/admin/page/select-content-template/parent_id/' + parentId);
+        $("#step3").html('');
+        return false;
+    });<?php
+$this->jQuery()->onLoadCaptureEnd(); ?>
+
 <fieldset>
     <legend><?php echo $this->getTranslation('Create Page');?></legend>
     <form action="<?php echo $this->getBaseUrl();?>/admin/page/new" method="post">
@@ -19,11 +27,3 @@ $this->placeholder('formHeadline')->set($this->getTranslation('Create a Page'));
     <div id="step3"></div>
     </form>
 </fieldset>
-<?php $this->jQuery()->onLoadCaptureStart(); ?>
-    $("#step1button").click(function() {
-        var parentId = $("#parent_id").val();
-        $("#step2").load('<?php echo $this->getBaseUrl();?>/admin/page/select-content-template/parent_id/' + parentId);
-        $("#step3").html('');
-        return false;
-    });
-<?php $this->jQuery()->onLoadCaptureEnd(); ?>

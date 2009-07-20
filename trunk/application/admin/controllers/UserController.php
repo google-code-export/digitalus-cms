@@ -135,7 +135,7 @@ class Admin_UserController extends Zend_Controller_Action
             $resources = Digitalus_Filter_Post::raw('acl_resources');
             $id = Digitalus_Filter_Post::int('id');
             $u->updateAclResources($id, $resources);
-        } elseif (Digitalus_Filter_Post::has('admin_user_password')) {
+        } else if (Digitalus_Filter_Post::has('admin_user_password')) {
             $id = Digitalus_Filter_Post::int('id');
             $password = Digitalus_Filter_Post::get('newPassword');
             $passwordConfirm = Digitalus_Filter_Post::get('newConfirmPassword');

@@ -1,12 +1,12 @@
 <?php
 $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery.FCKEditor.pack.js');
-$this->jQuery()->onLoadCaptureStart()?>
-$('.fckeditor').fck({
-    path: '<?php echo $this->getBaseUrl() . '/scripts/fckeditor/';?>',
-    toolbar: 'Digitalus',
-    height: 300
-});
-<?php $this->jQuery()->onLoadCaptureEnd();
+$this->jQuery()->onLoadCaptureStart();?>
+    $('.fckeditor').fck({
+        path: '<?php echo $this->getBaseUrl() . '/scripts/fckeditor/';?>',
+        toolbar: 'Digitalus',
+        height: 300
+    });<?php
+$this->jQuery()->onLoadCaptureEnd();
 
 // get all of the controls and load them into groups
 $submitButton = $this->form->getElement('submit');

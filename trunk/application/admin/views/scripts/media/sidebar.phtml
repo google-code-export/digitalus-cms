@@ -1,19 +1,19 @@
-<?php $this->placeholder('sidebarHeadline')->set($this->getTranslation('Media'))?>
-<?php 
+<?php $this->placeholder('sidebarHeadline')->set($this->getTranslation('Media'));
+
 $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery.treeview.min.js');
 $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery.cookie.js');
-$this->jQuery()->onLoadCaptureStart()?>
+$this->jQuery()->onLoadCaptureStart();?>
     $("#fileTree").treeview({
         persist: "cookie",
         collapsed: true,
         unique: true
     });
-<?php $this->jQuery()->onLoadCaptureEnd()?>
+<?php $this->jQuery()->onLoadCaptureEnd();?>
 
 <div class='contentBrowser padding-10'>
 <p><?php echo $this->link('Media Root', '/admin/media', 'folder.png');?></p>
 <?php
-$browser = $this->RenderMediaBrowser($this->mediaFolder, 'admin/media/open-folder/folder', null);
+$browser = $this->renderMediaBrowser($this->mediaFolder, 'admin/media/open-folder/folder', null);
 if (empty($browser)) {
     echo '<p>' . $this->getTranslation('You do not have any media files on the server') . '</p>';
 } else {

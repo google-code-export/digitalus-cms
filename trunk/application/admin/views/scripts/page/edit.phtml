@@ -1,5 +1,5 @@
-<?php
-$this->placeholder('formHeadline')->set($this->getTranslation('Update Page'));
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Page'));
+
 $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/jquery.markitup.js');
 $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/sets/default/set.js');
 $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/sets/textile/set.js');
@@ -9,10 +9,10 @@ $this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/ski
 $this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/sets/textile/style.css');
 $this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/sets/html/style.css');
 //jquery block
-$this->jQuery()->onLoadCaptureStart()?>
-$(".wiki").markItUp(myWikiSettings);
-$(".html").markItUp(myHtmlSettings);
-<?php $this->jQuery()->onLoadCaptureEnd()?>
+$this->jQuery()->onLoadCaptureStart();?>
+    $(".wiki").markItUp(myWikiSettings);
+    $(".html").markItUp(myHtmlSettings);<?php
+$this->jQuery()->onLoadCaptureEnd();?>
 
 <?php echo $this->render('page/edit/content.phtml');?>
 

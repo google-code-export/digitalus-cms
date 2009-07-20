@@ -1,59 +1,57 @@
-<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Menu'))?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Menu'));
 
-<?php
 $iconSource = $this->getBaseUrl() . '/images/icons/';
-?>
+
+$this->jQuery()->onLoadCaptureStart();?>
+    <?php echo $this->JquerySortable('ul.sortable');?>
+    $(".visibility").click(function() {
+        var rowId = $(this).attr('id');
+        var val = $("#" + rowId + "_val").val();
+        if (val == 1) {
+            $(this).attr('src', "<?php echo $iconSource;?>lightbulb_off.png");
+            $("#" + rowId + "_val").val(0);
+        } else {
+            $(this).attr('src', "<?php echo $iconSource;?>lightbulb.png");
+            $("#" + rowId + "_val").val(1);
+        }
+    });<?php
+$this->jQuery()->onLoadCaptureEnd();?>
 
 <div class="formBox">
-<?php $this->jQuery()->onLoadCaptureStart()?>
-        <?php echo $this->JquerySortable('ul.sortable');?>
-        $(".visibility").click(function() {
-            var rowId = $(this).attr('id');
-            var val = $("#" + rowId + "_val").val();
-            if (val == 1) {
-                $(this).attr('src', "<?php echo $iconSource;?>lightbulb_off.png");
-                $("#" + rowId + "_val").val(0);
-            } else {
-                $(this).attr('src', "<?php echo $iconSource;?>lightbulb.png");
-                $("#" + rowId + "_val").val(1);
-            }
-        });
-<?php $this->jQuery()->onLoadCaptureEnd()?>
+    <form action='<?php echo $this->getBaseUrl(); ?>/admin/navigation/edit' method="post">
+        <fieldset>
+        <?php echo $this->formHidden('menuId', $this->menuId);?>
+            <ul class="sortable">
+            <?php
+            $m = new Model_Menu();
+            foreach ($this->menu as $item) {
+                $row = $this->formHidden('id[]', $item->id);
+                $row .= '<span class="default">(' . $item->name . ')</span> ';
+                $row .= $this->formText('label[]', $item->label) . ' ';
 
-<form action='<?php echo $this->getBaseUrl(); ?>/admin/navigation/edit' method="post">
-    <fieldset>
-    <?php echo $this->formHidden('menuId', $this->menuId);?>
-        <ul class="sortable">
-        <?php
-        $m = new Model_Menu();
-        foreach ($this->menu as $item) {
-            $row = $this->formHidden('id[]', $item->id);
-            $row .= '<span class="default">(' . $item->name . ')</span> ';
-            $row .= $this->formText('label[]', $item->label) . ' ';
+                //visibility
+                if ($item->show_on_menu == 1) {
+                    $eyeSource = 'lightbulb.png';
+                    $alt = 'on';
+                } else {
+                    $eyeSource = 'lightbulb_off.png';
+                    $alt = 'off';
+                }
 
-            //visibility
-            if ($item->show_on_menu == 1) {
-                $eyeSource = 'lightbulb.png';
-                $alt = 'on';
-            } else {
-                $eyeSource = 'lightbulb_off.png';
-                $alt = 'off';
+                $row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . '_val'));
+                $row .= " <img src='{$iconSource}{$eyeSource}' title='click to toggle visibility' class='visibility' id='visibility_{$item->id}' alt='{$alt}' />";
+                $row .= " <a href='" . $this->getBaseUrl() . "admin/page/open/id/{$item->id}' class='page rightLink'></a>";
+                if ($m->hasMenu($item->id))
+                {
+                    $row .= $this->link(null, '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
+                }
+                $rows[] = $row;
+                echo '<li class="sortableItem"><a href="#" class="handle"></a>' . $row . '</li>';
+                unset($row);
             }
-
-            $row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . '_val'));
-            $row .= " <img src='{$iconSource}{$eyeSource}' title='click to toggle visibility' class='visibility' id='visibility_{$item->id}' alt='{$alt}' />";
-            $row .= " <a href='" . $this->getBaseUrl() . "admin/page/open/id/{$item->id}' class='page rightLink'></a>";
-            if ($m->hasMenu($item->id))
-            {
-                $row .= $this->link(null, '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
-            }
-            $rows[] = $row;
-            echo '<li class="sortableItem"><a href="#" class="handle"></a>' . $row . '</li>';
-            unset($row);
-        }
-        ?>
-        </ul>
-        <p><?php echo $this->formSubmit('save', $this->getTranslation('Save Changes'));?></p>
-    </fieldset>
-</form>
+            ?>
+            </ul>
+            <p><?php echo $this->formSubmit('save', $this->getTranslation('Save Changes'));?></p>
+        </fieldset>
+    </form>
 </div>

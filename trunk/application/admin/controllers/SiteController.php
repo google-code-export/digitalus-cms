@@ -110,7 +110,7 @@ class Admin_SiteController extends Zend_Controller_Action
                 $this->view->lastCommand = Digitalus_Filter_Post::get('command');
                 if (Digitalus_Filter_Post::get('runCommand')) {
                    $results = Digitalus_Command::run(Digitalus_Filter_Post::get('command'));
-                } elseif (Digitalus_Filter_Post::get('getInfo')) {
+                } else if (Digitalus_Filter_Post::get('getInfo')) {
                     $results = Digitalus_Command::info(Digitalus_Filter_Post::get('command'));
                 } else {
                     $results = array('ERROR: invalid request');

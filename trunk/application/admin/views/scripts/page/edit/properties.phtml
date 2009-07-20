@@ -1,3 +1,18 @@
+<?php
+$this->jQuery()->onLoadCaptureStart();?>
+    $("a.remove").click(function() {
+        $(this).parent().remove();
+        return false;
+    });
+    $("a#addprop").click(function() {
+        $("#propertyList").append("<p class='propRow'><input type='text' name='key[]' /><input type='text' name='value[]' /><a href='#' class='remove'><?php echo $this->getTranslation('Remove');?></a></p>");
+        $("a.remove").click(function() {
+            $(this).parent().remove();
+        });
+        return false;
+    });<?php
+$this->jQuery()->onLoadCaptureEnd()?>
+
 <form action="<?php echo $this->getBaseUrl();?>/admin/page/update-properties" method="post" class="formBox" id='propertiesForm'>
 <?php echo $this->formHidden('page_id', $this->page->page->id);?>
     <p id='propLabels'>
@@ -32,17 +47,3 @@
     <p><?php echo $this->formSubmit('save', $this->getTranslation('Update properties'));?></p>
     <br class="clearBoth" />
 </form>
-
-<?php $this->jQuery()->onLoadCaptureStart()?>
-    $("a.remove").click(function() {
-        $(this).parent().remove();
-        return false;
-    });
-    $("a#addprop").click(function() {
-        $("#propertyList").append("<p class='propRow'><input type='text' name='key[]' /><input type='text' name='value[]' /><a href='#' class='remove'>Remove</a></p>");
-        $("a.remove").click(function() {
-            $(this).parent().remove();
-        });
-        return false;
-    });
-<?php $this->jQuery()->onLoadCaptureEnd()?>
