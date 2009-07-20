@@ -1,12 +1,11 @@
 <?php
 class Digitalus_Interface_Template
 {
-    
-    public function load($template) 
+    public function load($template)
     {
-        if(is_object($template)) {
+        if (is_object($template)) {
             return $template;
-        }elseif(file_exists($template)) {
+        } else if (file_exists($template)) {
             $form = new Digitalus_Content_Form();
             $view = $form->getView();
             $templateName = basename($template);
@@ -15,23 +14,23 @@ class Digitalus_Interface_Template
             $fileContents = $view->render($templateName);
             $cleanFile = preg_replace('/(<\?{1}[pP\s]{1}.+\?>)/', '', $fileContents);
             return simplexml_load_string($cleanFile);
-        }else{
+        } else {
             return simplexml_load_string($template);
         }
     }
-    
+
     public function getControls($template)
     {
         $template = $this->load($template);
         return $template->xpath('//digitalusControl');
     }
-    
+
     public function getForm($template, $formInstance = null, $content = null)
     {
-        if($formInstance == null) {$formInstance = new Digitalus_Content_Form();}
+        if ($formInstance == null) {$formInstance = new Digitalus_Content_Form();}
         $view = $formInstance->getView();
         $controls = $this->getControls($template);
-        if($controls) {
+        if ($controls) {
             foreach ($controls as $control) {
                 $attribs = $control->attributes();
                 $id = (string)$attribs['id'];
@@ -42,7 +41,7 @@ class Digitalus_Interface_Template
                 } else {
                     $required = false;
                 }
-            
+
                 if (isset($attribs['label'])) {
                     $label = (string)$attribs['label'];
                     unset($attribs['label']);
@@ -50,26 +49,26 @@ class Digitalus_Interface_Template
                     $label = $view->getTranslation($id);
                     $label = ucwords(str_replace('_', ' ', $label));
                 }
-                
-                
+
+
                 $control = $formInstance->createElement($type, $id, $attribs);
                 $control->setLabel($label);
                 $control->setRequired($required);
                 $control->setAttrib('rel', isset($attribs['group']) ? (string)$attribs['group'] : 'main');
-                if(isset($content[$id])) {
+                if (isset($content[$id])) {
                     $control->setValue($content['id']);
                 }
                 $formInstance->addElement($control);
-                
+
                 // set the display group
-               // $displayGroup = (isset($attribs['group']))? (string)$attribs['group'] : 'main';
-               // $formInstance->addDisplayGroup(array($control), $displayGroup);
-                
+                // $displayGroup = (isset($attribs['group']))? (string)$attribs['group'] : 'main';
+                // $formInstance->addDisplayGroup(array($control), $displayGroup);
+
             }
         }
         return $formInstance;
     }
-    
+
     public function getPageData($template, $page, $scope = 'public')
     {
         $config = Zend_Registry::get('config')->template;

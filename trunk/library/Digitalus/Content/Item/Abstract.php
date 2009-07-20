@@ -90,7 +90,7 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
         if (isset($this->id)) {
             $this->_pageModel->deletePage($this->id);
         } else {
-            throw new Zend_Exception($this->view->getTranslation('Unable to delete item; the item is empty!'));
+            throw new Zend_Exception($this->view->getTranslation('Unable to delete item - the item is empty!'));
         }
     }
 
@@ -104,7 +104,7 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
         if (isset($this->id)) {
             $this->_pageModel->deleteChildren($this->id);
         } else {
-            throw new Zend_Exception($this->view->getTranslation('Unable to delete item; the item is empty!'));
+            throw new Zend_Exception($this->view->getTranslation('Unable to delete item - the item is empty!'));
         }
     }
 
@@ -125,7 +125,7 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
                     $value = null;
                     if (isset($page->$property)) {
                         $value = $page->$property;
-                    }elseif (isset($content[$property])) {
+                    } elseif (isset($content[$property])) {
                         $value = $content[$property];
                     }
                 }

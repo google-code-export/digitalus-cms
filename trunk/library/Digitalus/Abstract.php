@@ -3,6 +3,11 @@ abstract class Digitalus_Abstract
 {
     public $view;
 
+    public function __construct()
+    {
+        $this->setView;
+    }
+
     public function getView()
     {
         return $this->view;

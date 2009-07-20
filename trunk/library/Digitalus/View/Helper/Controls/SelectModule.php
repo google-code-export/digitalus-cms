@@ -50,7 +50,7 @@ class Digitalus_View_Helper_Controls_SelectModule extends Zend_View_Helper_Abstr
                 $pages = Digitalus_Filesystem_File::getFilesByType('./application/modules/' . $module . '/views/scripts/public', 'phtml');
                 if (is_array($pages)) {
                     foreach ($pages as $page) {
-                        if(!strpos($page, '.form.')) {
+                        if (!strpos($page, '.form.')) {
                             $page = Digitalus_Toolbox_Regex::stripFileExtension($page);
                             $data[$module . '_' . $page] = $module . ' -> ' . $page;
                         }

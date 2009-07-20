@@ -6,13 +6,15 @@ class Digitalus_Content_Form extends Digitalus_Form
     public function init()
     {
         $front = Zend_Controller_Front::getInstance();
+
         $this->setAction($front->getBaseUrl() . self::PAGE_ACTION)
-                   ->setMethod('post');
+             ->setMethod('post');
         $this->addElementPrefixPath('Digitalus_Decorator', 'Digitalus/Form/Decorator', 'decorator');
         $this->addPrefixPath('Digitalus_Form_Element', 'Digitalus/Form/Element/', 'element');
+
         $name = $this->createElement('text', 'name');
         $name->setRequired(true)
-             ->setLabel('Page Name:');
+             ->setLabel($this->getView()->getTranslation('Page Name'));
 
         $page_id = $this->createElement('hidden', 'id');
         $page_id->setDecorators(array('ViewHelper'));
@@ -22,7 +24,7 @@ class Digitalus_Content_Form extends Digitalus_Form
         $version->setDecorators(array('ViewHelper'));
 
         $submit = $this->createElement('submit', 'submit');
-        $submit->setLabel('Save Changes');
+        $submit->setLabel($this->getView()->getTranslation('Save Changes'));
         $submit->setDecorators(array('ViewHelper'));
         $submit->setOrder(1000); // i would assume this is the end
 
