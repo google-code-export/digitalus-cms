@@ -1,16 +1,3 @@
-<?php
-$elementName = $this->element->getName();
-// make sure this only loads once for each element
-if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
-    $this->jQuery()->onLoadCaptureStart();?>
-    $('#<?php echo $elementName?>-module').change(function() {
-        var module = $(this).val();
-        $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
-    });<?php
-    $this->jQuery()->onLoadCaptureEnd();
-    Zend_Registry::set($elementName . 'Jquery', true);
-}?>
-
 <dt><?php
     echo $this->formLabel(
         $this->element->getName(),
@@ -39,6 +26,7 @@ if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
     if (!is_array($attr)) {
         $attr = null;
     }
+    $elementName = $this->element->getName();
     echo $this->SelectModule($elementName . '[module]', $module, $attr);?>
 </dd>
 
@@ -50,3 +38,13 @@ if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
     }?>
 </div><?php
 echo $this->formErrors($this->element->getMessages());
+// make sure this only loads once for each element
+if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
+    $this->jQuery()->onLoadCaptureStart();?>
+    $('#<?php echo $elementName?>-module').change(function() {
+        var module = $(this).val();
+        $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
+    });<?php
+    $this->jQuery()->onLoadCaptureEnd();
+    Zend_Registry::set($elementName . 'Jquery', true);
+}?>
