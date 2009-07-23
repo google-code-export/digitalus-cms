@@ -101,10 +101,10 @@ class Digitalus_Menu_Item {
     public function asHyperlink($id = null, $class = null, $currentId = null, $currentClass = null, $ignoreParents = false)
     {
         if (isset($id) && !empty($id)) {
-            $id = 'id="' . $id . '"';
+            $id = ' id="' . $id . '"';
         }
         if (isset($class) && !empty($class)) {
-            $class = 'class="' . $class . '"';
+            $class = ' class="' . $class . '"';
         }
         $cleanLink = Digitalus_Toolbox_String::addHyphens($this->link);
         $front = Zend_Controller_Front::getInstance();
@@ -117,7 +117,6 @@ class Digitalus_Menu_Item {
             $class[] = $currentClass;
             $class = implode(' ', $class);
         }
-        $class  = (isset($class) && !empty($class)) ? ' class="' . $class . '"' : null;
         return '<a href="' . $baseUrl . '/' . $cleanLink . '"' . $id . $class . '>' . $this->label . '</a>' . PHP_EOL;
     }
 }

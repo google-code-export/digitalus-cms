@@ -70,17 +70,17 @@ class Digitalus_View_Helper_Navigation_RenderMenu extends Zend_View_Helper_Abstr
                 $class = $item->isSelected() ? 'selected' : 'unselected';
 
                 if ($item->isSelected()){
-                    $class="selected";
+                    $class = 'selected';
                 } else {
-                    $class = "unselected";
+                    $class = 'unselected';
                 }
 
-                $menuItemId = $id . "_item_" . $item->id;
+                $menuItemId = $id . '_item_' . $item->id;
                 $menuItem .= $item->asHyperlink($menuItemId, $class);
                 if ($data->submenu != null) {
                     $menuItem .= $data->submenu;
                 }
-                $menuItem .= "</li>";
+                $menuItem .= '</li>';
 
                 $links[] = $menuItem;
                 unset($menuItem);
