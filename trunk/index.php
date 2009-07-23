@@ -31,11 +31,9 @@ if (file_exists('./install/install.php')) {
     $application = new Zend_Application(
         APPLICATION_ENV,
         APPLICATION_PATH . '/configs/application.ini'
-#        APPLICATION_PATH . '/data/config.xml'
     );
     // Bootstrap, and run application
     $application->bootstrap()
                 ->run();
-#Zend_Debug::dump($application);
 }
 ?>

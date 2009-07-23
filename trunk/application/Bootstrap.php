@@ -121,9 +121,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Get config resource
         $config = $this->getResource('config');
 
-#        $resource = $this->getPluginResource('db');
-#        $db = $resource->getDbAdapter();
-#        $db = $this->getResource('db');
         // Setup database
         $db = Zend_Db::factory($config->database->adapter, $config->database->toArray());
         $db->setFetchMode(Zend_Db::FETCH_OBJ);
