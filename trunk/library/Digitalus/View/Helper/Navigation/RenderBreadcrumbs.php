@@ -42,17 +42,19 @@ class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helpe
 {
     public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
     {
-        $parents = $this->view->pageObj->getParents();
+        $page = Digitalus_Builder::getPage();
+        $parents = $page->getParents();
         if (is_array($parents) && count($parents) > 0) {
             $path = null;
             foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
+                $label = Digitalus_Toolbox_Page::getLabel($parent);
                 $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
                 $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$parent->title}</a>";
+                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$label}</a>";
             }
         }
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$this->view->page->title}</a>";
+        $pageLabel = Digitalus_Toolbox_Page::getLabel($page->getData());
+        $arrLinks[] = "<a href='' class='breadcrumb last'>{$pageLabel}</a>";
 
         return implode($separator, $arrLinks);
     }
