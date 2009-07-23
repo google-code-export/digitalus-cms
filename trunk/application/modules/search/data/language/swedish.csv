@@ -17,3 +17,4 @@
 "did not return any results.";"gav inga resultat"
 "Please provide a keyword to search for!";"Ange ett sökort att söka efter!"
 "For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";"För att sökningsmodulen ska fungera korrekt, måste index katalogen vara skrivbar! Kontrollera behörigheterna i denna katalog:"
+# END

@@ -85,3 +85,4 @@
 "Too much files, maximum '%max%' are allowed but '%count%' are given";"Zu viele Dateien, höchstens '%max%' sind erlaubt, aber '%count%' wurden übergeben"
 "Too much words, maximum '%max%' are allowed but '%count%' were counted";"Zu viele Wörter, höchstens '%max%' sind erlaubt, aber '%count%' wurden gezählt"
 "Unknown error while uploading the file '%value%'";"Unbekannter Fehler beim Hochladen der Datei '%value%'"
+# END

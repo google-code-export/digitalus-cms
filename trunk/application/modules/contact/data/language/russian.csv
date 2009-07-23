@@ -1,4 +1,28 @@
-# Language File – MOD_CONTACT
+# Language File – MOD_BLOG
 # RUSSIAN
-# ----- contact module -----
+# ----- blog module -----
 "Digitalus CMS";"Digitalus CMS"
+"Blog";
+"blog";
+"Blog Module";
+"Create Blog";
+"Update Blog";
+"Add New Post";
+"Update Post";
+"There are no blogs to view!";
+"The blog module enables you to publish multiple blogs on your site.";
+"Create a new blog";
+"Current Blogs";
+"You do not have any blogs currently";
+"Blog Posts";
+"Blog Post";
+"This blog does not have any posts";
+"Update Post";
+"Back to";
+"Select the blog";
+"Written by";
+"on";
+"View All";
+"Blog Name";
+"Title";
+# END

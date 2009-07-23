@@ -7,6 +7,7 @@
 "polish";"Polonais"
 "russian";"Russe"
 "swedish";"Suédois"
+# admin section -- Auth --
 "Login";"Connexion"
 "You must enter a username.";"Vous devez entrer un nom d'utilisateur."
 "You must enter a password.";"Vous devez entrer un mot de passe."
@@ -14,6 +15,7 @@
 "Your password has been reset for security and sent to your email address";"Pour des raisons de sécurité, votre mot de passe a été réinitialisé et envoyé à votre adresse email"
 "Sorry, there was an error sending you your updated password.  Please contact us for more help.";"Désolé, une erreur est survenue lors de l'envoi de votre nouveau mot de passe. Veuillez nous contacter pour plus de renseignements."
 "Sorry, we could not locate your account. Please contact us to resolve this issue.";"Désolé, nous ne trouvons pas votre compte, Veuillez nous contacter pour résoudre ce problème."
+"Need Help?";"Besoin d'aide?"
 "If you are having trouble logging in please enter your email address below and we will send you your login credentials.";"Si vous avez des problèmes pour vous connecter, veuillez entrer votre adresse email plus bas et nous vous enverrons votre identifiant et mot de passe."
 "Reset Password";"Réinitialiser le mot de passe"
 "Administrator Login";"Connexion de l'administrateur"
@@ -21,6 +23,8 @@
 "Username";"Nom d'utilisateur"
 "Password";"Mot de passe"
 "Log In";"Connexion"
+# admin section -- Design --
+"Design";"Design"
 "Open";"Ouvrir"
 "Add to my bookmarks";"Ajouter à mes marque-pages"
 "Delete";"Supprimer"
@@ -32,18 +36,28 @@
 "Current Designs";"Designs en cours"
 "Tools";"Outils"
 "Preview Design";"Prévisualiser le design"
+"Who Uses This?";"Qui utilise ceci?"
 "These are the pages that use this design:";"Voici les pages qui utilisent ce design:"
 "No pages use this design currently.";"Aucune page n'utilise ce design pour l'instant."
 "Update Design";"Mise à jour du design"
 "Design details";"Détail du design"
+"This is the default site design";"Design par défaut du site"
+"Layout";"Layout"
+"Skin";"Skin"
+# admin section -- Error --
+"Sorry, you are not authorized to edit this resource!";
+# admin section -- Index --
 "Home";"Accueil"
 "Your bookmark was saved successfully.";"Votre marque-page a été sauvegardé avec succès."
+"My Content";
 "The following pages are the pages that you have recently created.";"Les pages suivantes sont les pages que vous avez récemment créées."
 "These are the modules that you are working with.";"Voici les modules avec lesquels vous êtes en train de travailler."
 "My Dashboard";"Mon tableau de bord"
 "My Account";"Mon compte"
 "First Name";"Prénom"
 "Last Name";"Nom"
+"Email";"Email"
+"Update Password?";"Mettre à jour le mot de passe?"
 "Confirm";"Confirmer"
 "Update My Account";"Mettre à jour mon compte"
 "My Bookmarks";"Mes marque-pages"
@@ -53,8 +67,12 @@
 "Save My Writeboard";"Sauvegarder mon tableau de notes"
 "Digitalus CMS is a community supported open source project. To learn more about the project check out";"Digitalus CMS est un projet open source communautaire. Pour en savoir plus sur ce projet, vous pouvez aller voir"
 "Digitalus Site";"Site Digitalus"
+"Wiki";"Wiki"
+"Forum";"Forum"
+# admin section -- Media --
 "Media";"Média"
 "Open Folder";"Ouvrir le dossier"
+"Options";"Options"
 "Media Manager";"Gestionnaire de média"
 "Create New Folder";"Créer un nouveau dossier"
 "Browse Folder";"Parcourir le dossier"
@@ -74,18 +92,25 @@
 "New Name";"Nouveau nom"
 "Select the files to upload";"Sélectionner les fichiers à uploader"
 "You do not have any media files on the server";"Vous n'avez aucun fichier de média sur le serveur"
+# admin section -- Module --
+"Modules";"Modules"
 "Download";"Télécharger"
 "CMS Modules";"Modules CMS"
 "Digitalus CMS uses a system of modules to add custom functionality to your site.";"Digitalus CMS utilise un système de modules pour ajouter des fonctionnalitées personnalisées à votre site."
 "Select the module page";"Sélectionner un module de page"
 "My Modules";"Mes Modules"
+# admin section -- Navigation --
+"Navigation";"Navigation"
 "Open Menu";"Ouvrir le menu"
 "Current Menu";"Menu en cours"
 "Update Menu";"Mise à jour du menu"
 "Save Changes";"Sauvegarder les changements"
 "Main Menu";"Menu principal"
+# admin section -- Page --
+"Pages";"Pages"
 "Sorry, there was an error adding your page";"Désolé, il y a eu une erreur lors de l'ajout de votre page"
 "Sorry, there was an error opening your page";"Désolé, il y a eu une erreur lors de l'ouverture de votre page"
+"Page";"Page"
 "Page Title";"Titre de la page"
 "Filename";"Nom du fichier"
 "Meta Description";"Description"
@@ -95,6 +120,13 @@
 "Step 3: Enter the name for your page";"Etape 3: Entrez le nom de votre page"
 "Page Name";"Nom de la page"
 "Create Page";"Créer une page"
+"Content";"Contenu"
+"Current design";"Design en cours"
+"Open design";"Ouvrir le design"
+"The design is not yet set for this page.";"Le design de cette page n'est pas encore défini."
+"Other designs";"Autres designs"
+"Make current";"Affecter"
+"Click the new parent page for this page to move it.";"Cliquer sur la page parente pour y déplacer cette page."
 "Page Options";"Options de Page"
 "Content Sections";"Sections de contenu"
 "Page Head and Meta Data";"Entête de page et méta données"
@@ -107,15 +139,9 @@
 "Update Page";"Mettre à jour une page"
 "Edit Meta Data";"Editer les méta données"
 "Edit Page Properties";"Editer les propriétés de page"
-"Current design";"Design en cours"
-"Open design";"Ouvrir le design"
-"The design is not yet set for this page.";"Le design de cette page n'est pas encore défini."
-"Other designs";"Autres designs"
-"Make current";"Affecter"
-"Click the new parent page for this page to move it.";"Cliquer sur la page parente pour y déplacer cette page."
+"Remove";"Supprimer"
 "Property";"Propriété"
 "Value";"Valeur"
-"Remove";"Supprimer"
 "Add a new property";"Ajouter une nouvelle propriété"
 "Update properties";"Mettre à jour les propriétés"
 "Update Related Content";"Mettre à jour le contenu associé"
@@ -127,9 +153,11 @@
 "Step 1: Select the parent section";"Etape 1: Sélectionnez la section parente"
 "Parent Page";"Page parente"
 "Next >>";"Suivant >>"
+"page_my_pages_intro";
 "Current Version";"Version en cours"
 "Available Versions";"Versions disponibles"
 "Default";"Défaut"
+"Step 2: What type of page would you like to create?";"Etape 2: Quel type de page voulez vous créer?"
 "Select a type";"Sélectionner un type"
 "You can not add any pages to this section.";"Vous ne pouvez pas ajouter de pages à cette section,"
 "Parent page";"Page parente"
@@ -137,22 +165,26 @@
 "Template";"Modèle"
 "Continue adding pages";"Continuer d'ajouter des pages"
 "Submit";"Envoyer"
+# admin section -- Site --
 "Site Settings";"Configurations du site"
+"Site";"Site"
 "Site Console";"Console du site"
 "About the Console";"A propos de la console"
 "The site console enables you to interact directly with the CMS core.";"La console du site vous permet d'intéragir directement avec le système interne du CMS."
 "It is for experienced administrators only.";"Ceci s'adresse seulement aux utilisateurs avancés."
 "Digitalus Console";"Console Digitalus"
+"Info";"Info"
 "Run Command";"Lancer la commande"
 "General";"Général"
-"Content";"Contenu"
 "Meta Data";"Méta Données"
 "Internationalization";"Internationalisation"
 "Mail";"Email"
+"Google";"Google"
 "Update Site Settings";"Mettre à jour les configurations du site"
 "General settings";"Configurations générales"
 "Site name";"Nom du site"
 "Title separator";"Séparateur de titre"
+"Status";"Status"
 "Site is online";"Site en ligne"
 "Update General Site Settings";"Mettre à jour les configurations générales du site"
 "Managing Content";"Gestion du contenu"
@@ -164,6 +196,7 @@
 "Update Content Settings";"Mettre à jour les configurations de contenu"
 "Default design";"Design par défaut"
 "Update Design Settings";"Mettre à jour les configurations du design"
+"XML declaration";
 "Doc Type";"Type de document"
 "Default charset";"Jeu de caractère par défaut"
 "Default timezone";"Zone temporelle par défaut"
@@ -174,7 +207,8 @@
 "Mail Settings";"Configurations de mail"
 "Default email address";"Adresse mail par défaut"
 "Default sender";"Expéditeur par défaut"
-"Use SMTP transport";"Utiliser le transport SMTP"
+"Transport";"Transport"
+"Use SMTP transport ";"Utiliser le transport SMTP"
 "SMTP host";"Hôte SMTP"
 "SMTP username";"Nom d'utilisateur SMTP"
 "SMTP password";"Mot de passe SMTP"
@@ -188,13 +222,16 @@
 "Create new user";"Créer un nouvel utilisateur"
 "Admin Users";"Administrateurs"
 "Open console";"Ouvrir la console"
+# admin section -- User --
 "Open User";"Ouvrir le compte de l'utilisateur"
 "User";"Utilisateur"
+"Create User";"Créer un utilisateur"
 "Create New User";"Créer un nouvel utilisateur"
 "General Information";"Informations générales"
 "User Options";"Options Utilisateur"
 "Account";"Compte"
 "Credentials";"Identifiant - Mot de passe"
+"Permissions";"Permissions"
 "Copy Permissions";"Copier les permissions"
 "If you have another user who already has the same permissions as this user you can copy that user's role.";"Si vous avez un autre utilisateur qui a déjà les mêmes permissions que cet utilisateur, vous pouvez copier le rôle de celui-ci."
 "Update User";"Mettre à jour l'utilisateur"
@@ -209,23 +246,53 @@
 "Update Password";"Mise à jour du mot de passe"
 "Site Administrator";"Administrateur du site"
 "Super Administrator";"Super Administrateur"
+# admin section -- View Helper --
+"Unable to locate skin folder";
 "Current User";"Utilisateur en cours"
 "Role";"Rôle"
 "Log Out";"Déconnexion"
 "Select One";"Sélectionner en un"
 "Select User";"Sélectionner l'utilisateur"
+"Always";
+"Never";
+"By browser check";
+"There are no pages in this module";"Il n'y a aucune page dans ce module"
 "Select a module";"Sélectionner un module"
 "There are no modules currently installed";"Aucun module n'est actuellement installé"
-"There are no pages in this module";"Il n'y a aucune page dans ce module"
 "First";"Premier"
 "Previous";"Précédent"
 "Next";"Suivant"
 "Last";"Dernier"
 "The following errors have occurred";"Les erreurs suivantes sont survenues"
 "Errors";"Erreurs"
+"Message";
 "Set Language";"Définir la langue"
 "You are reading this page in";"Vous lisez cette page en"
 "This page is also translated into";"Cette page est aussi traduite en"
+# admin section -- Misc –
 "Digitalus CMS";"Digitalus CMS"
-"Unable to delete item";"Element konnte nicht gelöscht werden"
+"Are you sure you want to delete this?";
+"Bookmark label:";
+"Your bookmark was successfully saved.";
+"Unable to delete item - the item is empty!";
+"Unable to cast type:";
+"to type:";
+"Unable to load content item";
+"An error occurred uploading the file";
+"This filetype is not allowed";
+"Illegal file access attempt. Operation cancelled!";
+"Method does not exist";
+"Getter does not exist";
+"Setter does not exist";
+"Unable to load service for this module";
+"Unable to set this protected property in Digitalus_Page";
 "You are here";"Vous êtes ici"
+"Headline";
+"Main";
+"Header";
+"Footer";
+"Sidebar";
+"Submenu";
+"More";
+"Module";
+# END

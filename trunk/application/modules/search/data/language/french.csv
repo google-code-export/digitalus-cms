@@ -17,3 +17,4 @@
 "did not return any results.";"n'a retourné aucun résultat."
 "Please provide a keyword to search for!";"Veuillez fournir un mot clé à rechercher!"
 "For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";"Pour que le module de recherche fonctionne correctement, le répertoire index doit être accessible en écriture! Veuillez vérifier les permissions sur ce répertoire:"
+# END
