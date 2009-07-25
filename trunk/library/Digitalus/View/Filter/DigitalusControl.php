@@ -15,7 +15,10 @@ class Zend_View_Filter_DigitalusControl extends Digitalus_Content_Filter
                     case 'fckeditor':
                         $xhtml = "<div id='{$attr['id']}_wrapper'>{$controlContent}</div>";
                         break;
-                    case 'text' || 'textarea':
+                    case 'text':
+                        $xhtml = $controlContent;
+                        break;
+                    case 'textarea':
                         $xhtml = $controlContent;
                         break;
                     case 'moduleSelector':
