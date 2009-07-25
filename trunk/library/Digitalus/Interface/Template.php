@@ -50,11 +50,13 @@ class Digitalus_Interface_Template
                     $label = ucwords(str_replace('_', ' ', $label));
                 }
 
-
-                $control = $formInstance->createElement($type, $id, $attribs);
+                $control = $formInstance->createElement($type, $id);
                 $control->setLabel($label);
                 $control->setRequired($required);
                 $control->setAttrib('rel', isset($attribs['group']) ? (string)$attribs['group'] : 'main');
+                foreach ($attribs as $attribute => $value) {
+                    $control->setAttrib($attribute, $value);
+                }
                 if (isset($content[$id])) {
                     $control->setValue($content['id']);
                 }
