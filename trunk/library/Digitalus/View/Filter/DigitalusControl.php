@@ -13,14 +13,19 @@ class Zend_View_Filter_DigitalusControl extends Digitalus_Content_Filter
                 $controlContent = $content[$attr['id']];
                 switch ($attr['type']) {
                     case 'fckeditor':
-                        return "<div id='{$attr['id']}_wrapper'>{$controlContent}</div>";
+                        $xhtml = "<div id='{$attr['id']}_wrapper'>{$controlContent}</div>";
                         break;
-                    case 'text':
-                        return $controlContent;
+                    case 'text' || 'textarea':
+                        $xhtml = $controlContent;
                         break;
                     case 'moduleSelector':
-                        return $this->view->renderModule($controlContent);
+                        $xhtml = $this->view->renderModule($controlContent);
                         break;
+                }
+                if($attr['tag'] && !empty($xhtml)) {
+                    return "<{$attr['tag']}>" . $xhtml . "</{$attr['tag']}>";
+                }else{
+                    return $xhtml;
                 }
             }
         }
