@@ -22,7 +22,7 @@ class Zend_View_Filter_DigitalusControl extends Digitalus_Content_Filter
                         $xhtml = $this->view->renderModule($controlContent);
                         break;
                 }
-                if($attr['tag'] && !empty($xhtml)) {
+                if(isset($attr['tag']) && !empty($xhtml)) {
                     return "<{$attr['tag']}>" . $xhtml . "</{$attr['tag']}>";
                 }else{
                     return $xhtml;
