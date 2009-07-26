@@ -156,15 +156,17 @@ class Admin_UserController extends Zend_Controller_Action
     public function updateMyAccountAction()
     {
         $u = new Model_User();
+        $user = $u->getCurrentUser();
+        $user->first_name = Digitalus_Filter_Post::get('first_name');
+        $user->last_name = Digitalus_Filter_Post::get('last_name');
+        $user->email = Digitalus_Filter_Post::get('email');
+        $user->save();
+        
         if (Digitalus_Filter_Post::int('update_password') === 1) {
-            $id = Digitalus_Filter_Post::int('id');
             $password = Digitalus_Filter_Post::get('password');
             $passwordConfirm = Digitalus_Filter_Post::get('confirmation');
-            $u->updatePassword($id, $password, true, $passwordConfirm);
+            $u->updatePassword($user->id, $password, true, $passwordConfirm);
         }
-
-        $user = $u->updateFromPost();
-        $id = $user->id;
 
         $url = 'admin/index';
         $this->_redirect($url);
