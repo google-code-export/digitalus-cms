@@ -1,0 +1,28 @@
+# Language File – MOD_BLOG
+# SPANISH
+# ----- blog module -----
+"Digitalus CMS";"Digitalus CMS"
+"Blog";"Blog"
+"blog";"Blog"
+"Blog Module";"Modulo de blog"
+"Create Blog";"Crear blog"
+"Update Blog";"Actualizar blog"
+"Add New Post";"Agregar nuevo Articulo"
+"Update Post";"Actualizar Articulo"
+"There are no blogs to view!";"No hay blogs para ver!"
+"The blog module enables you to publish multiple blogs on your site.";"El modulo de Blog te habilita a publicar Multiples blogs"
+"Create a new blog";"Crear un nuevo blog"
+"Current Blogs";"Blogs Actuales"
+"You do not have any blogs currently";"No tiene ningun blog actualmente"
+"Blog Posts";"Articulos"
+"Blog Post";"Articulo"
+"This blog does not have any posts";"Este blog no tiene ningun Articulo"
+"Update Post";"Actualizar Articulo"
+"Back to";"Volver a"
+"Select the blog";"Seleccione el Blog"
+"Written by";"Escrito por"
+"on";"sobre"
+"View All";"Ver Todos"
+"Blog Name";"Nombre del Blog"
+"Title";"Titulo"
+# END
