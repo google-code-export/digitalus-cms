@@ -5,7 +5,7 @@ $templateControl = $contentForm->getElement('content_template');
 $currentTemplate = !empty($this->page->page->content_template) ? $this->page->page->content_template : null;
 $templateControl->setValue($currentTemplate);
 ?>
-<form action='<?php echo $this->getBaseUrl()?>/admin/page/update-template' method='post'>
+<form action="<?php echo $this->getBaseUrl()?>/admin/page/update-template" method="post">
 <?php
     echo $this->formHidden('id', $this->pageId);
     echo $templateControl;

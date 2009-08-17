@@ -18,7 +18,7 @@ $this->jQuery()->onLoadCaptureStart();?>
 $this->jQuery()->onLoadCaptureEnd();?>
 
 <div class="formBox">
-    <form action='<?php echo $this->getBaseUrl(); ?>/admin/navigation/edit' method="post">
+    <form action="<?php echo $this->getBaseUrl(); ?>/admin/navigation/edit" method="post">
         <fieldset>
         <?php echo $this->formHidden('menuId', $this->menuId);?>
             <ul class="sortable">
@@ -39,10 +39,9 @@ $this->jQuery()->onLoadCaptureEnd();?>
                 }
 
                 $row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . '_val'));
-                $row .= " <img src='{$iconSource}{$eyeSource}' title='click to toggle visibility' class='visibility' id='visibility_{$item->id}' alt='{$alt}' />";
-                $row .= " <a href='" . $this->getBaseUrl() . "admin/page/open/id/{$item->id}' class='page rightLink'></a>";
-                if ($m->hasMenu($item->id))
-                {
+                $row .= ' <img src="' . $iconSource . $eyeSource . '" title="' . $this->getTranslation('click to toggle visibility') . '" class="visibility" id="visibility_' . $item->id . '" alt="' . $alt . '" />';
+                $row .= ' <a href="' . $this->getBaseUrl() . 'admin/page/open/id/' . $item->id . '" class="page rightLink"></a>';
+                if ($m->hasMenu($item->id)) {
                     $row .= $this->link(null, '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
                 }
                 $rows[] = $row;

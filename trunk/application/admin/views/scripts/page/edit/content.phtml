@@ -37,7 +37,7 @@ foreach ($displayGroups as $title => $group) {
     foreach ($group->getElements() as $element) {
         $content .= $element->render();
     }
-    $panes .= "<fieldset id='{$id}'><legend>{$title}</legend>{$content}<br />{$submitButton}</fieldset>";
+    $panes .= '<fieldset id="' . $id . '"><legend>' . $title . '</legend>' . $content . '<br />' . $submitButton . '</fieldset>';
 }
 
 $this->contentPanes = $ids;

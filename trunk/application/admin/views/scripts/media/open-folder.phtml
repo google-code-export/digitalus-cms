@@ -4,7 +4,7 @@
         $pathParts[] = $this->pathToMedia;
         if (is_array($this->folderPathParts)) {
             foreach ($this->folderPathParts as $path => $label) {
-                $pathParts[] = "<a href='{$this->getBaseUrl()}/admin/media/open-folder/folder/{$path}'>{$label}</a>";
+                $pathParts[] = '<a href="' . $this->getBaseUrl() . '/admin/media/open-folder/folder/' . $path . '">' . $label . '</a>';
             }
         }
     ?>
@@ -12,7 +12,7 @@
     <p><?php echo $this->getTranslation('Media Root'); ?><?php echo implode('/', $pathParts);?></p>
 </fieldset>
 
-<fieldset id='browse'>
+<fieldset id="browse">
     <legend><?php echo $this->getTranslation('Current folder contents');?></legend>
     <?php
         $data = array(
@@ -26,7 +26,7 @@
     ?>
 </fieldset>
 
-<fieldset id='upload'>
+<fieldset id="upload">
     <legend><?php echo $this->getTranslation('Upload Files');?></legend>
     <?php
         $data = array(
@@ -38,12 +38,12 @@
     ?>
 </fieldset>
 
-<fieldset id='subfolder'>
+<fieldset id="subfolder">
     <legend><?php echo $this->getTranslation('Create Subfolder');?></legend>
     <?php echo $this->render('media/partials/create-subfolder.phtml'); ?>
 </fieldset>
 
-<fieldset id='rename'>
+<fieldset id="rename">
     <legend><?php echo $this->getTranslation('Rename folder');?></legend>
     <?php
         $data = array(

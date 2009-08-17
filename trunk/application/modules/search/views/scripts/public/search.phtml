@@ -1,4 +1,5 @@
-<form action='<?php echo $this->getBaseUrl() . Digitalus_Uri::get();?>' method='post' id='searchForm'>
+<?php ?>
+<form action="<?php echo $this->getBaseUrl() . Digitalus_Uri::get();?>" method="post" id="searchForm">
 <fieldset>
     <legend><?php echo $this->getTranslation('Search Site')?></legend>
     <?php
@@ -26,7 +27,7 @@ if ($this->searchResults) { ?>
 <p><?php echo $this->getTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->getTranslation('returned') . ' ' . count($this->searchResults) . ' ' . $this->getTranslation('results.');?></p>
     <?php
     foreach ($this->searchResults as $result) {?>
-<a href='<?php echo $result->page_link; ?>'><h3><?php echo $result->page_title; ?></h3></a>
+<a href="<?php echo $result->page_link; ?>"><h3><?php echo $result->page_title; ?></h3></a>
 <p><?php echo $result->page_teaser; ?></p>
     <?php
     }

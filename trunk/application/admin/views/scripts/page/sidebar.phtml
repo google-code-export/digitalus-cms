@@ -7,8 +7,8 @@ $this->jQuery()->onLoadCaptureStart();?>
         persist: "cookie",
         collapsed: true,
         unique: true
-    });
-<?php $this->jQuery()->onLoadCaptureEnd();?>
-<div class='contentBrowser'>
-<?php echo $this->RenderFileBrowser(0, '/admin/page/edit/id/');?>
+    });<?php
+$this->jQuery()->onLoadCaptureEnd();?>
+<div class="contentBrowser"><?php
+    echo $this->renderFileBrowser(0, '/admin/page/edit/id/');?>
 </div>
