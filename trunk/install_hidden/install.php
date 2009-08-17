@@ -2,7 +2,6 @@
 set_include_path('.' . PATH_SEPARATOR . './library' . PATH_SEPARATOR . get_include_path());
 
 require_once 'Zend/Loader/Autoloader.php';
-#require_once 'Digitalus/Installer.php';
 
 // Set up autoload
 $loader = Zend_Loader_Autoloader::getInstance();
@@ -14,6 +13,27 @@ $installer = new Digitalus_Installer();
 // Set up view
 $view = new Zend_View();
 $view->setScriptPath('./install/views');
+
+// provide translations
+$validLanguages = array('english' => 'en', 'german' => 'de', 'french' => 'fr', 'polish' => 'pl', 'russian' => 'ru', 'swedish' => 'se');
+Zend_Registry::set('validLanguages', $validLanguages);
+
+if (isset($_GET['language']) && !empty($_GET['language'])) {
+    $language = $_GET['language'];
+}
+if (!in_array($language, array_keys($validLanguages))) {
+    $language = 'english';
+}
+Zend_Registry::set('language', $language);
+
+$adapter = new Zend_Translate(
+    'csv',
+    './application/data/language/back/' . $language . '.back.csv',
+    $validLanguages[$language]
+    );
+Zend_Registry::set('Zend_Translate', $adapter);
+
+$view->translate()->setLocale($validLanguages[$language]);
 
 if (!$installer->isInstalled()) {
     // Fetch the current step
