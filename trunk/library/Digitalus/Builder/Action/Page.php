@@ -29,7 +29,8 @@ class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
             $front = Zend_Controller_Front::getInstance();
             $response = $front->getResponse();
             $response->setRawHeader('HTTP/1.1 404 Not Found');
-            throw new Zend_Exception("The page you requested was not found.  Digitalus CMS could not locate the error page either.");
+            require_once 'Digitalus/Builder/Exception.php';
+            throw new Digitalus_Builder_Exception($this->view->getTranslation('The page you requested was not found. Digitalus CMS could not locate the error page either.'));
         }
     }
 

@@ -33,7 +33,7 @@ class Digitalus_Command_List extends Digitalus_Command_Abstract
             //clean up the list
             if ($command != 'Abstract.php' && $command != 'List.php') {
                 $cleanCommand = Digitalus_Toolbox_Regex::stripFileExtension($command);
-                $link = "<a class='loadCommand' href='#' title='" . $cleanCommand . "'>" . $cleanCommand . "</a>";
+                $link = '<a class="loadCommand" href="#" title="' . $cleanCommand . '">' . $cleanCommand . '</a>';
                 $this->log($link);
             }
         }
@@ -45,6 +45,6 @@ class Digitalus_Command_List extends Digitalus_Command_Abstract
      */
     public function info()
     {
-        $this->log('The list command lists all of the available functions.  Double click a function to open it.');
+        $this->log($this->view->getTranslation('The list command lists all of the available functions. Double click a function to open it.'));
     }
 }

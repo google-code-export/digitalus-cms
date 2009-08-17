@@ -51,11 +51,11 @@ class  Digitalus_View_Helper_Admin_CurrentAdminUser extends Zend_View_Helper_Abs
         $user = $u->getCurrentUser();
 
         if ($user) {
-            $xhtml = "<ul id='{$id}'>
-                    <li>" . $this->view->getTranslation('Current User') . ": {$user->first_name}  {$user->last_name}</li>
-                    <li>" . $this->view->getTranslation('Role') . ": {$user->role}</li>
-                    <li><a href='{$this->view->getBaseUrl()}/admin/auth/logout/'>" . $this->view->getTranslation('Log Out') . "</a></li>
-                </ul>";
+            $xhtml = '<ul id="' . $id . '">
+                    <li>' . $this->view->getTranslation('Current User') . ': ' . $user->first_name . ' ' . $user->last_name . '</li>
+                    <li>' . $this->view->getTranslation('Role') . ': ' . $user->role . '</li>
+                    <li><a href="' . $this->view->getBaseUrl() . '/admin/auth/logout/">' . $this->view->getTranslation('Log Out') . '</a></li>
+                </ul>';
             return $xhtml;
         } else {
             return false;

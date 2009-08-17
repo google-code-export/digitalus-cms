@@ -70,7 +70,7 @@ class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstrac
             } else {
                 $attributes = null;
             }
-            return "<img width='{$width}' heigth='{$height}' src='{$src}' {$attributes}/>";
+            return '<img width="' . $width . '" height="' . $height . '" src="' . $src . '" ' . $attributes . ' />';
         }
     }
 }

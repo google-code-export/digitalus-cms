@@ -160,7 +160,8 @@ Zend_Debug::dump($path);
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
         //dont allow access outside the media folder
         if (strpos($filepath, './') || strpos($filepath, './')) {
-            throw new Zend_Exception($view->getTranslation('Illegal file access attempt. Operation cancelled!'));
+            require_once 'Digitalus/Media/Exception.php';
+            throw new Digitalus_Media_Exception($view->getTranslation('Illegal file access attempt. Operation cancelled!'));
             return false;
         } else {
             return true;

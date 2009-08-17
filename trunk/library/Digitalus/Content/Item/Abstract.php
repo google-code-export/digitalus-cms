@@ -90,7 +90,8 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
         if (isset($this->id)) {
             $this->_pageModel->deletePage($this->id);
         } else {
-            throw new Zend_Exception($this->view->getTranslation('Unable to delete item - the item is empty!'));
+            require_once 'Digitalus/Content/Exception.php';
+            throw new Digitalus_Content_Exception($this->view->getTranslation('Unable to delete item - the item is empty!'));
         }
     }
 
@@ -104,7 +105,8 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
         if (isset($this->id)) {
             $this->_pageModel->deleteChildren($this->id);
         } else {
-            throw new Zend_Exception($this->view->getTranslation('Unable to delete item - the item is empty!'));
+            require_once 'Digitalus/Content/Exception.php';
+            throw new Digitalus_Content_Exception($this->view->getTranslation('Unable to delete item - the item is empty!'));
         }
     }
 
@@ -116,7 +118,8 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
             $content = $data->content;
             //validate namespace
             if ($page->namespace != $this->_namespace && $this->_validateNamespace == true) {
-                throw new Zend_Exception($this->view->getTranslation('Unable to cast type:') . $page->namespace . ' ' . $this->view->getTranslation('to type:') . $this->_namespace);
+                require_once 'Digitalus/Content/Exception.php';
+                throw new Digitalus_Content_Exception($this->view->getTranslation('Unable to cast type:') . $page->namespace . ' ' . $this->view->getTranslation('to type:') . $this->_namespace);
             }
             foreach ($properties as $property) {
                 // try to call the setter method
@@ -132,7 +135,8 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
                 $this->$property = $value;
             }
         } else {
-            throw new Zend_Exception($this->view->getTranslation('Unable to load content item'));
+            require_once 'Digitalus/Content/Exception.php';
+            throw new Digitalus_Content_Exception($this->view->getTranslation('Unable to load content item'));
         }
     }
 

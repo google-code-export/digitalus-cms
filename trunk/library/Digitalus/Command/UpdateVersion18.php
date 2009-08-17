@@ -50,9 +50,9 @@ class Digitalus_Command_UpdateVersion18 extends Digitalus_Command_Abstract
     {
         $result = $this->_updateTemplateReferences();
         if (!$result) {
-            $this->log('ERROR: could not update content template references.');
+            $this->log($this->view->getTranslation('ERROR: could not update content template references.'));
         } else {
-            $this->log('Content template references updated OK.');
+            $this->log($this->view->getTranslation('Content template references updated OK.'));
         }
     }
 
@@ -62,8 +62,8 @@ class Digitalus_Command_UpdateVersion18 extends Digitalus_Command_Abstract
      */
     public function info()
     {
-        $this->log('The Update Version 18 command will update your database from version 1.5 to 1.8');
-        $this->log('Params: none');
+        $this->log($this->view->getTranslation('The Update Version 18 command will update your database from version 1.5 to 1.8'));
+        $this->log($this->view->getTranslation('Params: none'));
     }
 
     private function _updateTemplateReferences()

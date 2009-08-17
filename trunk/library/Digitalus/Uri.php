@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -89,7 +88,7 @@ class Digitalus_Uri
     {
         return $this->_uri;
     }
-    
+
 
     /**
      * cleans the uri
@@ -161,7 +160,7 @@ class Digitalus_Uri
         $paramsString = null;
         if(is_array($params)){
              foreach ($params as $k => $v) {
-                 $paramsString .= '/' . $k . '/' . $v;   
+                 $paramsString .= '/' . $k . '/' . $v;
              }
         }
 
@@ -169,8 +168,8 @@ class Digitalus_Uri
             $uriString .= '/p' . $paramsString;
         }
         return $uriString;
-        
+
     }
-    
-    
+
+
 }

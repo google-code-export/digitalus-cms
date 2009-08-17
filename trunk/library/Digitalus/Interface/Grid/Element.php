@@ -16,27 +16,27 @@ class Digitalus_Interface_Grid_Element extends Digitalus_Interface_Grid_Abstract
         $this->attr = $attr;
         $this->content = new Digitalus_Interface_Grid_ContentWrapper($id);
     }
-    
+
     public function setContent($content)
     {
-    	$this->content->content = $content;
+        $this->content->content = $content;
     }
-    
+
     public function getElement($id)
     {
-    	if($this->id == $id) {
-    		return $this;
-    	}else{
-    		if(count($this->children) > 0) {
-    			foreach($this->children as $child) {
-    				$result = $child->getElement($id);
-    				if(is_object($result)) {
-    					return $result;
-    				}
-    			}
-    		}
-    	}
-    	return false;
+        if ($this->id == $id) {
+            return $this;
+        } else {
+            if (count($this->children) > 0) {
+                foreach($this->children as $child) {
+                    $result = $child->getElement($id);
+                    if (is_object($result)) {
+                        return $result;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public function addElement ($id, $columns = null, $attr = array())
@@ -66,11 +66,11 @@ class Digitalus_Interface_Grid_Element extends Digitalus_Interface_Grid_Abstract
         }
         $class = $this->makeClass();
         if (!empty($class)) {
-            $classString = "class='{$class}'";
+            $classString = 'class="' . $class . '"';
         } else {
             $classString = null;
         }
-        $xhtml  = "<div id='{$this->id}' {$classString}>" . PHP_EOL;
+        $xhtml  = '<div id="' . $this->id . '" ' . $classString . '>' . PHP_EOL;
         $xhtml .= $content . PHP_EOL;
         $xhtml .= '</div>' . PHP_EOL;
         if ($this->getAttribute(self::CLEAR)) {
@@ -98,9 +98,9 @@ class Digitalus_Interface_Grid_Element extends Digitalus_Interface_Grid_Abstract
             //There are might be exceptions
             //$this->setAttribute(self::CLEAR, true);
         }
-        
+
         $elementClass = $this->getAttribute('class');
-        if($elementClass) {
+        if ($elementClass) {
             $class[] = $elementClass;
         }
 

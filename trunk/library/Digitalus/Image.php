@@ -68,7 +68,7 @@ class Digitalus_Resource_Image extends Digitalus_Resource
      * @var array
      */
     protected $_imageQuality = array(
-        "png"   =>  9,
+        'png'   =>  9,
         'jpeg'  =>  90,
         'gif'   =>  90
     );
@@ -173,7 +173,7 @@ class Digitalus_Resource_Image extends Digitalus_Resource
 
             // now write the resized image to disk.
             $newPath = str_replace($fName, $append . $fName, $path);
-            $imageFunction = "image" . $this->fileType;
+            $imageFunction = 'image' . $this->fileType;
 
             $imageFunction($tmp,$newPath, $this->_imageQuality[$this->fileType]);
 
@@ -181,7 +181,8 @@ class Digitalus_Resource_Image extends Digitalus_Resource
             imagedestroy($tmp); // NOTE: PHP will clean up the temp file it created when the request
             return $newPath;
         } else {
-            die("Could not open image file");
+            require_once 'Digitalus/Image/Exception.php';
+            throw new Digitalus_Image_Exception('Could not open image file');
         }
     }
 

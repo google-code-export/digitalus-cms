@@ -52,12 +52,12 @@ class Digitalus_View_Helper_Cms_Scripts extends Zend_View_Helper_Abstract
         $config = Zend_Registry::get('config');
 
         //build xhtml
-        $xhtml = "\n<!--Beginning of scripts-->\n";
+        $xhtml = PHP_EOL . '<!--Beginning of scripts-->' . PHP_EOL;
         foreach ($files as $file) {
             $path = '/' . $config->filepath->script . '/' . $file;
-            $xhtml .= "\t<script type='text/javascript' src='{$path}'></script> \n";
+            $xhtml .= "\t" . '<script type="text/javascript" src="' . $path . '"></script>' . PHP_EOL;
         }
-        $xhtml .= "<!--End of scripts-->\n";
+        $xhtml .= '<!--End of scripts-->' . PHP_EOL;
         return $xhtml;
     }
 }

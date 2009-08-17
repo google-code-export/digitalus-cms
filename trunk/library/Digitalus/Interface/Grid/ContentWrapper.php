@@ -12,15 +12,15 @@ class Digitalus_Interface_Grid_ContentWrapper extends Digitalus_Interface_Grid_A
     public function render()
     {
         $contentKey = $this->parentId . '_content';
-    	if($this->content == null) {
-	        //load the content from the placeholder
-	        $this->loadView();
-	        $this->content = $this->view->placeholder($contentKey)->toString();
-    	}
+        if($this->content == null) {
+            //load the content from the placeholder
+            $this->loadView();
+            $this->content = $this->view->placeholder($contentKey)->toString();
+        }
 
         //Only need a nested container if there is content there
         if (!empty($this->content)) {
-            return "<div id='{$contentKey}' class='innerContent'>{$this->content}</div>";
+            return '<div id="' . $contentKey . '" class="innerContent">' . $this->content . '</div>';
         } else {
             return null;
         }

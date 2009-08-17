@@ -15,34 +15,34 @@ class Digitalus_Interface_Grid extends Digitalus_Interface_Grid_Abstract {
 
     public function __construct($id = null, $columns = null, $attr = array())
     {
-    	if($id != null) {
+        if ($id != null) {
             $this->id = $id;
-    	}
-    	if($columns != null) {
+        }
+        if ($columns != null) {
             $this->columns = $columns;
-    	}
-    	
+        }
+
         $this->_loadStyles();
         $grid = new Digitalus_Interface_Grid_Element($id . '_wrapper');
         $this->grid = $grid;
         $this->init();
-        
+
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         if (null === $viewRenderer->view) {
             $viewRenderer->initView();
         }
-        $this->view = $viewRenderer->view;        
+        $this->view = $viewRenderer->view;
     }
-    
+
     static function load($grid, $id)
     {
-    	require_once self::PATH_TO_GRIDS . '/' . $grid . '.php';
-    	return new $grid($id);
+        require_once self::PATH_TO_GRIDS . '/' . $grid . '.php';
+        return new $grid($id);
     }
-    
+
     public function getElement($id)
     {
-    	return $this->grid->getElement($id);
+        return $this->grid->getElement($id);
     }
 
     public function addElement($id, $columns, $attr = array())
@@ -52,9 +52,9 @@ class Digitalus_Interface_Grid extends Digitalus_Interface_Grid_Abstract {
 
     public function render()
     {
-        $xhtml = "<div id='{$this->id}' class='{$this->containerClass}_{$this->columns}'>";
+        $xhtml  = '<div id="' . $this->id . '" class="' . $this->containerClass . '_' . $this->columns . '">';
         $xhtml .= $this->grid->render();
-        $xhtml .= "</div>" . PHP_EOL;
+        $xhtml .= '</div>' . PHP_EOL;
         return $xhtml;
     }
 
@@ -67,7 +67,5 @@ class Digitalus_Interface_Grid extends Digitalus_Interface_Grid_Abstract {
             $this->view->headLink()->prependStylesheet($baseUrl . '/' . $styleSheet);
         }
     }
-    
-    
 }
 ?>

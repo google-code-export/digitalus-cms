@@ -44,7 +44,8 @@ class Digitalus_Page extends Digitalus_Model_Abstract
     public function setParam($key, $value, $protected = false)
     {
         if ($this->_isProtected($key)) {
-            throw new Zend_Exception($this->view->getTranslation('Unable to set this protected property in Digitalus_Page') . ': ' . $key);
+            require_once 'Digitalus/Page/Exception.php';
+            throw new Digitalus_Page_Exception($this->view->getTranslation('Unable to set this protected property in Digitalus_Page') . ': ' . $key);
         } else {
             $this->_params[$key] = $value;
             if ($protected == true) {

@@ -161,7 +161,7 @@ class Digitalus_Resource_Image extends Digitalus_Resource
         // Create an Image from it so we can do the resize
         $upload = $this->_openImage($path);
         if ($upload) {
-            // Capture the original size of the image
+            // Capture the original size of the imagedie
             $width = imagesx($this->_image);
             $height = imagesy($this->_image);
 
@@ -173,7 +173,7 @@ class Digitalus_Resource_Image extends Digitalus_Resource
 
             // now write the resized image to disk.
             $newPath = str_replace($fName, $append . $fName, $path);
-            $imageFunction = "image" . $this->fileType;
+            $imageFunction = 'image' . $this->fileType;
 
             $imageFunction($tmp,$newPath, $this->_imageQuality[$this->fileType]);
 
@@ -181,7 +181,8 @@ class Digitalus_Resource_Image extends Digitalus_Resource
             imagedestroy($tmp); // NOTE: PHP will clean up the temp file it created when the request
             return $newPath;
         } else {
-            die("Could not open image file");
+            require_once 'Digitalus/Resource/Exception.php';
+            throw new Digitalus_Resource_Exception('Could not open image file');
         }
     }
 

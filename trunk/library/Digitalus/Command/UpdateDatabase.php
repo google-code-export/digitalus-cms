@@ -50,21 +50,21 @@ class Digitalus_Command_UpdateDatabase extends Digitalus_Command_Abstract
     {
         $result = $this->_createPages();
         if (!$result) {
-            $this->log("ERROR: Could not create pages table.");
+            $this->log($this->view->getTranslation('ERROR: Could not create pages table.'));
         } else {
-            $this->log("pages table created OK.");
+            $this->log($this->view->getTranslation('pages table created OK.'));
 
             $result = $this->_createContentModules();
             if (!$result) {
-                $this->log("ERROR: Could not create content_nodes table.");
+                $this->log($this->view->getTranslation('ERROR: Could not create content_nodes table.'));
             } else {
-                $this->log("content_nodes table created OK.");
+                $this->log($this->view->getTranslation('content_nodes table created OK.'));
 
                 $result = $this->_transferData();
                 if ($result == 0) {
-                    $this->log("There are no content pages to migrate.");
+                    $this->log($this->view->getTranslation('There are no content pages to migrate.'));
                 } else {
-                    $this->log($result . " pages have been migrated successfully.");
+                    $this->log($result . ' ' . $this->view->getTranslation('pages have been migrated successfully.'));
                 }
             }
         }
@@ -77,8 +77,8 @@ class Digitalus_Command_UpdateDatabase extends Digitalus_Command_Abstract
      */
     public function info()
     {
-        $this->log("The Update Database command will update your database from verion 1.0.x to 1.5.x.");
-        $this->log("Params: none");
+        $this->log($this->view->getTranslation('The Update Database command will update your database from version 1.0.x to 1.5.x.'));
+        $this->log($this->view->getTranslation('Params: none'));
     }
 
     private function _createPages()

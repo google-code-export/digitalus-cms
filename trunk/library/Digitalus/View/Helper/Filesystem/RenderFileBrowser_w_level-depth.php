@@ -67,15 +67,15 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
                     $submenu = false;
                 }
                 $linkId = Digitalus_Toolbox_String::addUnderscores($menu->path, true);
-                $links[] = "<li class='menuItem'><a href='/admin/page/open/id/{$child->id}' class='{$class}' id='page-{$child->id}'>{$label}</a>" . $submenu . '</li>';
+                $links[] = '<li class="menuItem"><a href="/admin/page/open/id/' . $child->id . '" class="' . $class . '" id="page-' . $child->id . '">' . $label . '</a>' . $submenu . '</li>';
             }
         }
 
         if (is_array($links)) {
             if ($level == 0) {
-                $strId = "id='{$id}'";
+                $strId = 'id="' . $id . '"';
             }
-            return  "<ul {$strId}>" . implode(null, $links) . '</ul>';
+            return  '<ul ' . $strId . '>' . implode(null, $links) . '</ul>';
         }
     }
 }

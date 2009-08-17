@@ -20,7 +20,7 @@
  * @version    $Id: Abstract.php Tue Dec 25 19:55:23 EST 2007 19:55:23 forrest lyman $
  */
 
-abstract class Digitalus_Command_Abstract
+abstract class Digitalus_Command_Abstract extends Digitalus_Abstract
 {
     protected $_log = array();
 
@@ -31,7 +31,7 @@ abstract class Digitalus_Command_Abstract
      */
     public function run()
     {
-        $this->log('Invalid command');
+        $this->log($this->view->getTranslation('Invalid command'));
     }
 
     /**

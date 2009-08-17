@@ -61,10 +61,10 @@ class Digitalus_View_Helper_Interface_Link extends Zend_View_Helper_Abstract
         }
 
         if ($target != null) {
-            $target = "target='{$target}'";
+            $target = 'target="' . $target . '"';
         }
 
-        $linkParts[] = "<a href='{$cleanLink}' class='{$class}' $target>";
+        $linkParts[] = '<a href="' . $cleanLink . '" class="' . $class .'" ' . $target . '>';
 
         if (null !== $icon) {
             $linkParts[] = $this->getIcon($icon, $label);
@@ -110,6 +110,6 @@ class Digitalus_View_Helper_Interface_Link extends Zend_View_Helper_Abstract
         $this->iconPath = $config->filepath->icons;
         $iconPath = $this->iconPath;
         $iconPath = $this->addBaseUrl($iconPath . '/' . $icon);
-        return "<img src='/{$iconPath}' alt='" . htmlspecialchars($alt) . "' class='icon' />";
+        return '<img src="/' . $iconPath . '" alt="' . htmlspecialchars($alt) . '" class="icon" />';
     }
 }

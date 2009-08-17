@@ -53,24 +53,24 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
     {
         if (isset($params['moduleName'])) {
             $module = $params['moduleName'];
-            $this->log('Validating module directory');
+            $this->log($this->view->getTranslation('Validating module directory'));
             if (is_dir($this->_pathToModules . '/' . $module)) {
-                $this->log("Module exists.  Installing...");
+                $this->log($this->view->getTranslation('Module exists. Installing ...'));
                 //default to the module name for the label
                 if (isset($params['label'])) {
                     $label = $params['label'];
                 } else {
                     $label = $module;
                 }
-                $sql = "INSERT INTO acl_resources (label, controller, admin_section) VALUES ";
+                $sql  = "INSERT INTO acl_resources (label, controller, admin_section) VALUES ";
                 $sql .= "('{$label}', '{$module}', 'module')";
                 $this->_db->query($sql);
-                $this->log("Module installed");
+                $this->log($this->view->getTranslation('Module installed'));
             } else {
-                $this->log("ERROR: Could not load module directory");
+                $this->log($this->view->getTranslation('ERROR: Could not load module directory'));
             }
         } else {
-            $this->log("ERROR: Invalid request");
+            $this->log($this->view->getTranslation('ERROR: Invalid request'));
         }
 
     }
@@ -81,8 +81,8 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
      */
     public function info()
     {
-        $this->log("The install module command will install a module in the database if the module is installed properly.");
-        $this->log("Params: moduleName (string), label (string, optional)");
+        $this->log($this->view->getTranslation('The install module command will install a module in the database if the module is installed properly.'));
+        $this->log($this->view->getTranslation('Params: moduleName (string), label (string, optional)');
     }
 
     /**
@@ -94,7 +94,7 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
      */
     private function _load($node = false, $parentId = 0)
     {
-        $this->log('loading page nodes');
+        $this->log($this->view->getTranslation('loading page nodes'));
         if (!$node) {
             $node = $this->_xml;
         }
@@ -127,7 +127,7 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
 
         if ($exists) {
             //the page already exists
-            $this->log("ignoring " . $page . ', page already exists in this location');
+            $this->log($this->view->getTranslation('ignoring') . ' ' . $page . ', ' . $this->view->getTranslation('page already exists in this location'));
             return $exists->id;
         } else {
             $data = array(
@@ -137,10 +137,10 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
                 'parent_id' => $parentId
             );
             if ($this->_db->insert('content', $data)) {
-                $this->log("inserting " . $page);
+                $this->log($this->view->getTranslation('inserting') . ' ' . $page);
                 return $this->_db->lastInsertId();
             } else {
-                $this->log("ERROR: an error occured inserting " . $page);
+                $this->log($this->view->getTranslation('ERROR: an error occured inserting') . ' ' . $page);
                 return $parentId;
             }
         }

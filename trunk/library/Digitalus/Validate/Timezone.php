@@ -12,13 +12,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id:$
- * @category   Digitalus core
- * @package    Digitalus_Validate
- * @link       http://www.digitaluscms.com
- * @since      Release 1.8.0
+ * @author      LowTower - lowtower@gmx.de
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id:$
+ * @category    Digitalus core
+ * @package     Digitalus_Validate
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.8.0
  */
 
 /**
@@ -29,11 +30,11 @@ require_once 'Zend/Validate/Abstract.php';
 /**
  * Validator for the timezone
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    Release: @package_version@
- * @link       http://www.digitaluscms.com
- * @since      Release 1.8.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.8.0
  */
 class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
 {
@@ -57,7 +58,7 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
         }
 
         if (1 < func_num_args()) {
-            trigger_error('Multiple arguments to constructor are deprecated in favor of options array', E_USER_NOTICE);
+            trigger_error('Multiple arguments to constructor are deprecated in favour of options array', E_USER_NOTICE);
             $case   = func_get_arg(1);
             $strict = func_get_arg(2);
             $this->setCase($case);
@@ -69,7 +70,7 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
                 $this->setRegion($options['region']);
                 unset($options['region']);
             }
-           if (isset($options['strict'])) {
+            if (isset($options['strict'])) {
                 $this->setStrict($options['strict']);
                 unset($options['strict']);
             }
@@ -138,7 +139,8 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
             }
         } else {
             if ('Deprecated' == $region && true == $strict) {
-                throw new Zend_Exception('The deprecated timezones are not valid in strict mode!');
+                require_once 'Digitalus/Validate/Exception.php';
+                throw new Digitalus_Validate_Exception('The deprecated timezones are not valid in strict mode!');
             } else {
                 foreach ($timezones[$region] as $timezone) {
                     $validTimezones[$timezone] = $timezone;
@@ -160,7 +162,8 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
         if (isset($region)) {
             if (self::isValidRegion($region, $strict)) {
                 if ('Deprecated' == $region && true == $strict) {
-                    throw new Zend_Exception('The deprecated timezones are not valid in strict mode!');
+                    require_once 'Digitalus/Validate/Exception.php';
+                    throw new Digitalus_Validate_Exception('The deprecated timezones are not valid in strict mode!');
                 }
                 $timezones = self::getTimezones(null, $strict);
                 return $timezones[$region];

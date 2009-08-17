@@ -49,7 +49,7 @@ class  Digitalus_View_Helper_Admin_UsersModuleLinks extends Zend_View_Helper_Abs
         $modules = $u->getCurrentUsersModules();
         if ($modules) {
             foreach ($modules as $module) {
-                    $moduleLinks[] = "<a href='/mod_{$module}/index' class='{$module}'>{$module}</a>";
+                    $moduleLinks[] = '<a href="/mod_' . $module . '/index" class="' . $module . '">' . $module . '</a>';
             }
         }
         if (is_array($moduleLinks)) {

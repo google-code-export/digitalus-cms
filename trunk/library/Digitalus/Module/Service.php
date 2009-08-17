@@ -19,7 +19,8 @@ class Digitalus_Module_Service extends Digitalus_Abstract
             }
         }
         if (! is_object($this->_service)) {
-            throw new Zend_Exception($this->view->getTranslation('Unable to load service for this module') . ': ' . $module);
+            require_once 'Digitalus/Module/Exception.php';
+            throw new Digitalus_Module_Exception($this->view->getTranslation('Unable to load service for this module') . ': ' . $module);
         }
     }
     public function getService ()

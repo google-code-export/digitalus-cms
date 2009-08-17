@@ -66,7 +66,7 @@ class Digitalus_View_Helper_Navigation_RenderMenu extends Zend_View_Helper_Abstr
                     $data->submenu = null;
                 }
 
-                $menuItem = "<li id='{$id}_item_wrapper_{$item->id}' class='menuItem'>";
+                $menuItem = '<li id="' . $id . '_item_wrapper_' . $item->id . '" class="menuItem">';
                 $class = $item->isSelected() ? 'selected' : 'unselected';
 
                 if ($item->isSelected()){
@@ -88,7 +88,7 @@ class Digitalus_View_Helper_Navigation_RenderMenu extends Zend_View_Helper_Abstr
         }
 
         if (count($links) > 0) {
-            return  "<ul id='{$id}'>" . implode(null, $links) . '</ul>';
+            return  '<ul id="' . $id . '">' . implode(null, $links) . '</ul>';
         } else {
             return null;
         }

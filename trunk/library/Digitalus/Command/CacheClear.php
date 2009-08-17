@@ -40,13 +40,13 @@ class Digitalus_Command_CacheClear extends Digitalus_Command_Abstract
             $cache = Zend_Registry::get('cache');
             if (isset($params['key'])) {
                 $cache->clean($params['key']);
-                $this->log("Cache cleared Key = " . $params['key']);
+                $this->log($this->view->getTranslation('Cache cleared Key') . ' = ' . $params['key']);
             } else {
                 $cache->clean(Zend_Cache::CLEANING_MODE_ALL);
-                $this->log("Cache cleared");
+                $this->log($this->view->getTranslation('Cache cleared'));
             }
         } else {
-            $this->log("Error: Cache is not registered");
+            $this->log($this->view->getTranslation('Error: Cache is not registered'));
         }
 
     }
@@ -57,7 +57,7 @@ class Digitalus_Command_CacheClear extends Digitalus_Command_Abstract
      */
     public function info()
     {
-        $this->log("The cache clear function will either clear a specified key or all cache files if a key is not specified.");
-        $this->log("Params: key (string, optional)");
+        $this->log($this->view->getTranslation('The cache clear function will either clear a specified key or all cache files if a key is not specified.'));
+        $this->log($this->view->getTranslation('Params: key (string, optional)'));
     }
 }

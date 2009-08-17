@@ -47,15 +47,16 @@ class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helpe
         if (is_array($parents) && count($parents) > 0) {
             $path = null;
             foreach ($parents as $parent) {
-                $label = Digitalus_Toolbox_Page::getLabel($parent);
+                $label = $this->view->pageObj->getLabel($parent);
                 $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
                 $path .= $link;
-                $arrLinks[] = "<a href='{$path}' class='breadcrumb'>{$label}</a>";
+                $arrLinks[] = '<a href="' . $path . '" class="breadcrumb">' . $label . '</a>';
             }
         }
         $pageLabel = Digitalus_Toolbox_Page::getLabel($page->getData());
-        $arrLinks[] = "<a href='' class='breadcrumb last'>{$pageLabel}</a>";
+        $arrLinks[] = '<a href="" class="breadcrumb last">' . $pageLabel . '</a>';
 
         return implode($separator, $arrLinks);
     }
 }
+?>

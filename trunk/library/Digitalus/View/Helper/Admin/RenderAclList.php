@@ -47,7 +47,7 @@ class Digitalus_View_Helper_Admin_RenderAclList extends Zend_View_Helper_Abstrac
         $acl = new Digitalus_Acl();
         $resources = $acl->getResourceList();
 
-        $xhtml = "<ul id='{$id}'>";
+        $xhtml = '<ul id="' . $id} . '">';
 
         foreach ($resources as $module => $resources) {
             if (!is_array($resources)) {
@@ -65,7 +65,7 @@ class Digitalus_View_Helper_Admin_RenderAclList extends Zend_View_Helper_Abstrac
                         $xhtml .= '<ul>';
                         foreach ($actions as $action) {
                             $key = $module . '_' . $controller . '_' . $action;
-                            $xhtml .= "<li class='action'>" . $this->view->formCheckbox("acl_resources[{$key}]", $this->hasPermision($key, $usersPermissions)) . $action . '</li>';
+                            $xhtml .= '<li class="action">' . $this->view->formCheckbox("acl_resources[{$key}]", $this->hasPermision($key, $usersPermissions)) . $action . '</li>';
                         }
                         $xhtml .= '</ul>';
                     }

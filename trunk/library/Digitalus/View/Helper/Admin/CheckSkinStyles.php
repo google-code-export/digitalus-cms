@@ -74,7 +74,8 @@ class Digitalus_View_Helper_Admin_CheckSkinStyles extends Zend_View_Helper_Abstr
                 }
             }
         } else {
-            throw new Zend_Acl_Exception($this->view->getTranslation('Unable to locate skin folder'));
+            require_once 'Digitalus/View/Exception.php';
+            throw new Digitalus_View_Exception($this->view->getTranslation('Unable to locate skin folder'));
         }
         return implode(null, $xhtml);
     }

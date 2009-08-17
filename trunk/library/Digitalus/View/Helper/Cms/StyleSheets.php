@@ -53,16 +53,16 @@ class Digitalus_View_Helper_Cms_StyleSheets extends Zend_View_Helper_Abstract
         $config = Zend_Registry::get('config');
 
         //build xhtml
-        $xhtml = "\n<!--Begining of style sheets-->\n";
+        $xhtml = PHP_EOL . '<!--Begining of style sheets-->' . PHP_EOL;
         foreach ($files as $file) {
             if ($default) {
                 $path = '/' . $config->filepath->style . '/' . $file;
             } else {
                 $path = $file;
             }
-            $xhtml .= "\t<link rel='stylesheet' type='text/css' media='screen' href='{$path}' /> \n";
+            $xhtml .= "\t" . '<link rel="stylesheet" type="text/css" media="screen" href="' . $path . '" />' . PHP_EOL;
         }
-        $xhtml .= "<!--End of style sheets-->\n";
+        $xhtml .= '<!--End of style sheets-->' . PHP_EOL;
         return $xhtml;
     }
 }

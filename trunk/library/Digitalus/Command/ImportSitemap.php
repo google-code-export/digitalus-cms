@@ -58,11 +58,11 @@ class Digitalus_Command_ImportSitemap extends Digitalus_Command_Abstract
      */
     public function run()
     {
-        $this->log('starting import process');
+        $this->log($this->view->getTranslation('starting import process'));
         if ($this->_xml = simplexml_load_file(self::PATH_TO_SITEMAP)) {
            $this->_load();
         } else {
-            $this->log("ERROR: error loading sitemap file");
+            $this->log($this->view->getTranslation('ERROR: error loading sitemap file'));
         }
     }
 
@@ -72,7 +72,7 @@ class Digitalus_Command_ImportSitemap extends Digitalus_Command_Abstract
      */
     public function info()
     {
-        $this->log("The import sitemap command will import an xml sitemap.  This file should be located in application/data/ and be named sitemap.xml.");
+        $this->log($this->view->getTranslation('The import sitemap command will import an xml sitemap. This file should be located in application/data/ and be named sitemap.xml.'));
     }
 
     /**
@@ -84,7 +84,7 @@ class Digitalus_Command_ImportSitemap extends Digitalus_Command_Abstract
      */
     private function _load($node = false, $parentId = 0)
     {
-        $this->log('loading page nodes');
+        $this->log($this->view->getTranslation('loading page nodes'));
         if (!$node) {
             $node = $this->_xml;
         }
@@ -117,7 +117,7 @@ class Digitalus_Command_ImportSitemap extends Digitalus_Command_Abstract
 
         if ($exists) {
             //the page already exists
-            $this->log("ignoring " . $page . ', page already exists in this location');
+            $this->log($this->view->getTranslation('ignoring') . ' ' . $page . ', ' . $this->view->getTranslation('page already exists in this location'));
             return $exists->id;
         } else {
             $data = array(
@@ -127,10 +127,10 @@ class Digitalus_Command_ImportSitemap extends Digitalus_Command_Abstract
                 'parent_id' => $parentId
             );
             if ($this->_db->insert('content', $data)) {
-                $this->log("inserting " . $page);
+                $this->log($this->view->getTranslation('inserting') . ' ' . $page);
                 return $this->_db->lastInsertId();
             } else {
-                $this->log("ERROR: an error occured inserting " . $page);
+                $this->log($this->view->getTranslation('ERROR: an error occured inserting') . ' ' . $page);
                 return $parentId;
             }
         }

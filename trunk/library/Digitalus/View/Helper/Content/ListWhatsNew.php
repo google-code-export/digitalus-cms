@@ -50,7 +50,7 @@ class Digitalus_View_Helper_Content_ListWhatsNew extends Zend_View_Helper_Abstra
         if ($newStories) {
             foreach ($newStories as $story) {
                 $link = Digitalus_Toolbox_String::addHyphens($this->view->realPath($story->id));
-                $data[] = "<a href='{$link}'>" . $this->view->pageObj->getLabel($story) . '</a>';
+                $data[] = '<a href="' . $link . '">' . $this->view->pageObj->getLabel($story) . '</a>';
             }
             if (is_array($data)) {
                 return $this->view->htmlList($data);
