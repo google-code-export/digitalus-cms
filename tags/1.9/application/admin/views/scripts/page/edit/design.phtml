@@ -1,0 +1,28 @@
+<h3><?php echo $this->getTranslation('Current design');?></h3>
+<?php if ($this->design->getValue('id') > 0) {?>
+<p class="rightLinks">
+<?php echo $this->link('Open design', '/admin/design/update/id/' . $this->design->getValue('id'), 'layout_edit.png');?>
+</p>
+<h4><?php echo $this->getTranslation($this->design->getValue('name'));?></h4>
+<p><?php echo $this->getTranslation($this->design->getValue('notes'));?></p>
+<?php } else { ?>
+<p><?php echo $this->getTranslation('The design is not yet set for this page.')?></p>
+<?php }?>
+
+<h3><?php echo $this->getTranslation('Other designs');?></h3>
+<?php
+$designs = $this->design->listDesigns();
+if ($designs) {
+    foreach ($designs as $design) {
+        if ($design->id != $this->design->getValue('id')) {
+?>
+<h4><?php echo $this->getTranslation($design->name);?></h4>
+<p><?php echo $this->getTranslation($design->notes);?></p>
+<ul>
+    <li><?php echo $this->link('Open design', '/admin/design/update/id/' . $design->id, 'layout_edit.png');?></li>
+    <li><?php echo $this->link('Make current', '/admin/page/update-design/id/' . $this->page->page->id . '/design/' . $design->id, 'layout_link.png');?></li>
+</ul><?php
+        }
+    }
+}
+?>

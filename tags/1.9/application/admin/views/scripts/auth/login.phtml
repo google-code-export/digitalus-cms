@@ -1,0 +1,12 @@
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Administrator Login'));?>
+<p class="padding-10"><?php echo $this->getTranslation('Please enter your username (this is your email address) and password to get started.');?></p>
+<fieldset>
+    <form action="<?php echo $this->getBaseUrl();?>/admin/auth/login" method="post">
+	<?php
+    	echo $this->formHidden('uri', $this->uri);
+	    echo $this->FormRow($this->getTranslation('Username'), $this->FormText('adminUsername', $this->username));
+    	echo $this->FormRow($this->getTranslation('Password'), $this->FormPassword('adminPassword'));
+	    echo $this->FormRow('&nbsp;', $this->FormSubmit('submit', $this->getTranslation('Log In')));
+	?>
+	</form>
+</fieldset>

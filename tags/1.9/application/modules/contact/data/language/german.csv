@@ -1,0 +1,28 @@
+# Language File – MOD_BLOG
+# GERMAN
+# ----- blog module -----
+"Digitalus CMS";"Digitalus CMS"
+"Blog";"Tagebuch"
+"blog";"Tagebuch"
+"Blog Module";"Tagebuch-Modul"
+"Create Blog";"Tagebuch erstellen"
+"Update Blog";"Tagebuch aktualisieren"
+"Add New Post";"Füge neuen Eintrag hinzu"
+"Update Post";"Eintrag aktualisieren"
+"There are no blogs to view!";"Es gibt momentan keine Tagebücher"
+"The blog module enables you to publish multiple blogs on your site.";"Das Tagebuch-Modul ermöglicht es, mehrere Tagebücher auf Ihren Seiten zu veröffentlichen."
+"Create a new blog";"Neues Tagebuch erzeugen"
+"Current Blogs";"Aktuelle Tagebücher"
+"You do not have any blogs currently";"Es gibt momentan keine Tagebücher"
+"Blog Posts";"Tagebuch Einträge"
+"Blog Post";"Tagebuch Eintrag"
+"This blog does not have any posts";"Dieses Tagebuch enthält keine Einträge"
+"Update Post";"Eintrag aktualisieren"
+"Back to";"zurück zu"
+"Select the blog";"Wähle Tagebuch aus"
+"Written by";"Geschrieben von"
+"on";"am"
+"View All";"Alle ansehen"
+"Blog Name";"Name des Tagebuchs"
+"Title";"Titel"
+# END

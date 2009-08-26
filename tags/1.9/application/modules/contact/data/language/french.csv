@@ -1,0 +1,28 @@
+# Language File – MOD_BLOG
+# FRENCH
+# ----- blog module -----
+"Digitalus CMS";"Digitalus CMS"
+"Blog";"Blog"
+"blog";"Blog"
+"Blog Module";"Module de blog"
+"Create Blog";"Créer le blog"
+"Update Blog";"Mettre à jour le blog"
+"Add New Post";"Ajouter un nouvel article"
+"Update Post";"Mettre à jour l'article"
+"There are no blogs to view!";"Il n'y a pas de blog à voir!"
+"The blog module enables you to publish multiple blogs on your site.";"Le module de blog vous permet de publier plusieurs blogs sur votre site."
+"Create a new blog";"Créer un nouveau blog"
+"Current Blogs";"Blogs actuels"
+"You do not have any blogs currently";"Vous n'avez aucun blog pour le moment"
+"Blog Posts";"Articles"
+"Blog Post";"Article"
+"This blog does not have any posts";"Ce blog n'a pas d'articles"
+"Update Post";"Mettre à jour l'article"
+"Back to";"Retour vers"
+"Select the blog";"Sélectionner le blog"
+"Written by";"Ecrit par"
+"on";"le"
+"View All";"Voir tout"
+"Blog Name";"Nom du blog"
+"Title";"Titre"
+# END

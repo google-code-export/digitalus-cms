@@ -1,0 +1,37 @@
+/* CSS Document */
+.spreadsheet{
+border-left:#252F48 1px solid;
+border-top:#252F48 1px solid;
+margin:5px;
+}
+
+.spreadsheet th{
+    height: 30px;
+    padding:10px 20px 10px 20px;
+    color:#D7DCF2;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background: url(../images/assets/mainNavBg.png) repeat-x;
+}
+
+.spreadsheet th, .spreadsheet td{
+padding:2px 10px 2px 10px;
+}
+
+.spreadsheet th{
+border-right:#252F48 1px solid;
+border-bottom:#252F48 1px solid;
+background-color:#999;
+}
+.spreadsheet td{
+height:24px;
+border-right:#252F48 1px solid;
+border-bottom:#252F48 1px solid;
+font-size:11px;
+}
+
+.oddRow{
+background-color:#f5f5f5;
+}

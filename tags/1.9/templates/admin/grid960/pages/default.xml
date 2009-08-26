@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<design>
+	<name>default</name>
+	<layout>default.phtml</layout>
+	<styles>
+		<stylesheet>960-grid.css</stylesheet>
+		<stylesheet>layout.css</stylesheet>
+		<stylesheet>text.css</stylesheet>
+		<stylesheet>nav.css</stylesheet>
+		<stylesheet>style.css</stylesheet>
+		<stylesheet>form.css</stylesheet>
+		<import>styles/datePicker.css</import>
+		<import>styles/adminForms.css</import>
+		<import>styles/filetree.css</import>
+		<import>styles/menutree.css</import>
+		<import>styles/jquery.treeview.css</import>
+		<import>styles/spreadsheet.css</import>
+		<import>styles/sortable.css</import>
+		<import>styles/ThickBox.css</import>
+	</styles>
+</design>

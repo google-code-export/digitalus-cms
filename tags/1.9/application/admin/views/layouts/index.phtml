@@ -1,0 +1,63 @@
+<?php
+// first load the template
+$adminTemplateConfig = Zend_Registry::get('config')->template->default->admin;
+$this->loadTemplate('admin',$adminTemplateConfig->template, $adminTemplateConfig->page);
+
+$this->placeholder('charset')->set('utf-8');
+echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' . PHP_EOL;
+echo $this->doctype() . PHP_EOL;
+?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>
+    <?php echo $this->getTranslation('Digitalus CMS') . $this->escape($this->title); ?>
+</title>
+<?php
+echo $this->layout()->pageHead;
+
+// the loadTemplate() helper loads all of the stylesheets now
+
+echo $this->headLink();
+
+$this->jQuery()->onLoadCaptureStart();?>
+    $("#adminMenu li a[class!='selected']").each(function() {
+        $(this).hover(
+            function() {
+                $(this).addClass("hover");
+            },
+            function() {
+                $(this).removeClass("hover");
+            }
+        );
+    });
+    $(".message_box").bind("click", function() {
+        $(this).fadeOut("slow");
+    });
+    $('a.delete').bind('click', function() {
+        var answer = confirm('<?php echo $this->getTranslation('Are you sure you want to delete this?');?>');
+        if (!answer) {return false;}
+    });
+    $('a.add_to_my_bookmarks').click(function() {
+        var label = prompt('<?php echo $this->getTranslation('Bookmark label:');?>');
+        if (label) {
+            var url = $(this).attr('href');
+            url += '/label/' + label;
+            if (jQuery.get(url)) {
+                alert('<?php echo $this->getTranslation('Your bookmark was successfully saved.');?>');
+            }
+        }
+        return false;
+    });
+
+    $('.spreadsheet tr:odd').addClass('oddRow');<?php
+$this->jQuery()->onLoadCaptureEnd();?>
+
+</head>
+
+<body>
+    <?php
+        echo $this->layout()->template;
+        echo $this->jQuery();
+    ?>
+</body>
+</html>

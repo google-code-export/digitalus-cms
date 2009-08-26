@@ -1,0 +1,14 @@
+<?php if ($this->messages) { ?>
+    <h3><?php echo $this->translate('Successfully completed tasks');?></h3>
+    <p><?php echo $this->translate('The following tasks were successfully completed:');?></p>
+    <ul><?php echo $this->partialLoop('partials/message.phtml', $this->messages); } ?></ul>
+
+<?php if ($this->warnings) { ?>
+    <h3><?php echo $this->translate('Warnings');?></h3>
+    <p><?php echo $this->translate('The following items are not quite right, and should be fixed at some point:');?></p>
+    <ul><?php echo $this->partialLoop('partials/warning.phtml', $this->warnings); } ?></ul>
+
+<?php if ($this->errors) { ?>
+    <h3><?php echo $this->translate('Errors');?></h3>
+    <p><?php echo $this->translate('The following errors have occurred, and will need to be fixed prior to installation:');?></p>
+    <ul><?php echo $this->partialLoop('partials/error.phtml', $this->errors); } ?></ul>
