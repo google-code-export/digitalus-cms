@@ -62,7 +62,7 @@ font-weight:bold;
 }
 
 label.required{
-	color:#cc0000;
+    color:#cc0000;
 }
 
 #main form dd{
@@ -109,12 +109,12 @@ height:250px;
 margin-bottom:10px;
 }
 
-#centerPane label{
-clear:both;
-display:block;
-padding:5px;
-margin:0 0 5px 0;
-font-weight:bold;
+#centerPane label {
+    clear: both;
+    display: block;
+    padding: 0px 5px;
+    margin: 0 0 5px 0;
+    font-weight: bold;
 }
 
 #centerPane label span{
@@ -330,16 +330,16 @@ background:#D9E9FF;
 }
 
 #form fieldset.skin label{
-	display:block;
-	width:220px;
-	float:left;
-	clear:none;
-	margin:5px;
-	padding:0;
+    display:block;
+    width:220px;
+    float:left;
+    clear:none;
+    margin:5px;
+    padding:0;
 }
 
 #form fieldset.skin label input{
-	margin:0 10px 0 0;
+    margin:0 10px 0 0;
 }
 
 .column input[type='text'], .column input[type='submit'], .column textarea, .column select{
@@ -384,28 +384,28 @@ margin:0 10px 0 0;
 
 #centerPane label span#multi_upload_wrap_labels{
 
-		text-align:left;
-	width:400px;
-	font-weight:normal;
+        text-align:left;
+    width:400px;
+    font-weight:normal;
 }
 
 #centerPane label span#multi_upload_wrap_labels span{
-	float:left;
-		text-align:left;
-	width:400px;
-	font-weight:normal;
+    float:left;
+        text-align:left;
+    width:400px;
+    font-weight:normal;
 }
 .test{
-		text-align:left;
-	width:400px;
-	font-weight:normal;
-	display:inline;
-	padding:0;
-	margin:0;
+        text-align:left;
+    width:400px;
+    font-weight:normal;
+    display:inline;
+    padding:0;
+    margin:0;
 }
 .inlineButton{
-	padding:0 5px;
-	margin:0 0 0 5px;
+    padding:0 5px;
+    margin:0 0 0 5px;
 }
 
 .dev{
@@ -429,86 +429,85 @@ margin-bottom:20px;
 }
 
 .html, .wiki, .css{
-	width:450px;
+    width:450px;
 }
 
 a.link img.icon{
-	border:none;
-	margin:0 10px 0 0;
+    border:none;
+    margin:0 10px 0 0;
 }
 
 .column a, #form a{
-	text-decoration:none;
-	color:#000;
-	height:1.5em;
+    text-decoration:none;
+    color:#000;
+    height:1.5em;
 
 }
 #form a:hover, .column a:hover{
-	color:#5D86BD;
+    color:#5D86BD;
 }
 
 .column ul, #form ul{
-	list-style:none;
-	padding:5px;
+    list-style:none;
+    padding:5px;
 }
 
 .column ul li a,#form ul li a{
-	text-decoration:none;
-	color:#000;
+    text-decoration:none;
+    color:#000;
 }
 
 .column a:hover img, #form a:hover img{
-	opacity:.8;
+    opacity:.8;
 }
 
 .notice{
-	border:#ff0000 2px dashed;
-	padding:10px;
-	margin:10px;
-	color:#666;
+    border:#ff0000 2px dashed;
+    padding:10px;
+    margin:10px;
+    color:#666;
 }
 
 .contentBrowser{
 }
 
 a.handle{
-	background: url('../../../images/icons/text_linespacing.png') no-repeat;
+    background: url('../../../images/icons/text_linespacing.png') no-repeat;
 }
 
 .default{
-	color:#999;
-	font-style:italic;
-	width:150px;
-	display:block;
-	float:left;
+    color:#999;
+    font-style:italic;
+    width:150px;
+    display:block;
+    float:left;
 }
 
 h4 img{
-	margin-right:10px;
+    margin-right:10px;
 }
 
 #form a img{
-	border:none;
-	margin-right:10px;
+    border:none;
+    margin-right:10px;
 }
 
 .folderWrapper, .fileWrapper{
-	padding:5px;
+    padding:5px;
 }
 
 #errorWrapper{
-	width:	500px;
-	overflow:auto;
-	border:1px solid #ccc;
-	margin:10px;
-	padding:5px;
+    width:  500px;
+    overflow:auto;
+    border:1px solid #ccc;
+    margin:10px;
+    padding:5px;
 }
 div.wysiwyg{
-	margin-bottom:25px;
+    margin-bottom:25px;
 }
 
 ul.errors{
-	max-width:320px;
-	color:#cc0000;
+    max-width:320px;
+    color:#cc0000;
 }
-

@@ -1,31 +1,31 @@
 <div id="page">
     <div id="header">
         <?php
-           echo $this->CurrentAdminUser();
-           echo $this->RenderAdminMenu();
+           echo $this->currentAdminUser();
+           echo $this->renderAdminMenu();
        ?>
     </div>
     <div id="pageShadow">
         <div id="pageInner" class="clearFix">
             <div id="sidebar" class="column">
-                    <?php echo $this->RenderSidebar();?>
+                    <?php echo $this->renderSidebar();?>
             </div>
             <div id="centerPane">
                 <div id="toolbar">
                    <?php
-                       echo $this->RenderLinks($this->toolbarLinks, 'rightLinks');
-                       echo $this->RenderLinks($this->breadcrumbs, 'breadcrumbs', $this->getTranslation('You are here') . ': ', null, ' > ');
+                       echo $this->renderLinks($this->toolbarLinks, 'rightLinks');
+                       echo $this->renderLinks($this->breadcrumbs, 'breadcrumbs', $this->getTranslation('You are here') . ': ', null, ' > ');
                    ?>
                 </div>
                 <div id="main">
                     <h2 class="top"><?php echo $this->placeholder('formHeadline');?></h2>
                     <div id="form">
-                        <?php echo $this->RenderAlert();?>
-                        <?php echo $this->layout()->form ?>
+                        <?php echo $this->renderAlert();?>
+                        <?php echo $this->layout()->form;?>
                     </div>
                 </div>
                 <div id="options" class="column">
-                    <?php echo $this->RenderOptions();?>
+                    <?php echo $this->renderOptions();?>
                 </div>
             </div>
         </div>
