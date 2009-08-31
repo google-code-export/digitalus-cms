@@ -131,14 +131,14 @@ class Digitalus_Validate_IdenticalField extends Zend_Validate_Abstract {
     if (empty($field)) {
       $this->_error(self::MISSING_FIELD_NAME);
       return false;
-    } elseif (!isset($context[$field])) {
+    } else if (!isset($context[$field])) {
       $this->_error(self::INVALID_FIELD_NAME);
       return false;
-    } elseif (is_array($context)) {
+    } else if (is_array($context)) {
       if ($value == $context[$field]) {
         return true;
       }
-    } elseif (is_string($context) && ($value == $context)) {
+    } else if (is_string($context) && ($value == $context)) {
       return true;
     }
     $this->_error(self::NOT_MATCH);

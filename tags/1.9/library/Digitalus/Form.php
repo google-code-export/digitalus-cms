@@ -128,7 +128,8 @@ class Digitalus_Form extends Zend_Form
     {
         $instance = $this->_getInstance();
         $session = $this->_getSession();
-        $session->validInstances[$instance] = true;
+#        $session->validInstances->$instance = true;
+        $session->validInstances = array($instance => true);
         return $instance;
     }
 

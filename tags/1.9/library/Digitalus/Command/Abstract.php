@@ -29,7 +29,7 @@ abstract class Digitalus_Command_Abstract extends Digitalus_Abstract
      * extends this it is seen as an error
      *
      */
-    public function run()
+    public function run($params = null)
     {
         $this->log($this->view->getTranslation('Invalid command'));
     }

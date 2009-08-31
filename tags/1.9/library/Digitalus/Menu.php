@@ -27,12 +27,11 @@ class Digitalus_Menu {
         $children = $page->getChildren($this->_parentId);
         if ($children != null && $children->count() > 0) {
             foreach ($children as $child) {
-                if ($child->show_on_menu == 1) {
+                if ($child->show_on_menu == 1 && $child->publish_level == 1) {
                     $this->items[] = new Digitalus_Menu_Item($child);
                 }
             }
         }
     }
 }
-
 ?>

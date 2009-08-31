@@ -49,6 +49,7 @@ class Digitalus_Command_ImportSitemap extends Digitalus_Command_Abstract
     public function __construct()
     {
         $this->_db = Zend_Db_Table::getDefaultAdapter();
+        parent::__construct();
     }
 
     /**
@@ -56,7 +57,7 @@ class Digitalus_Command_ImportSitemap extends Digitalus_Command_Abstract
      * if successfull then initiate the import process
      *
      */
-    public function run()
+    public function run($params = null)
     {
         $this->log($this->view->getTranslation('starting import process'));
         if ($this->_xml = simplexml_load_file(self::PATH_TO_SITEMAP)) {

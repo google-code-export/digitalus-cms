@@ -47,7 +47,7 @@ class Digitalus_View_Helper_Admin_RenderAclList extends Zend_View_Helper_Abstrac
         $acl = new Digitalus_Acl();
         $resources = $acl->getResourceList();
 
-        $xhtml = '<ul id="' . $id} . '">';
+        $xhtml = '<ul id="' . $id . '">';
 
         foreach ($resources as $module => $resources) {
             if (!is_array($resources)) {

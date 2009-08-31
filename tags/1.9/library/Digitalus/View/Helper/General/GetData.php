@@ -49,7 +49,7 @@ class Digitalus_View_Helper_General_GetData extends Zend_View_Helper_Abstract
             if (isset($dataSet[$field])) {
                 return $dataSet[$field];
             }
-        } elseif (is_object($dataSet)) {
+        } else if (is_object($dataSet)) {
             if (isset($dataSet->$field)) {
                 return $dataSet->$field;
             }

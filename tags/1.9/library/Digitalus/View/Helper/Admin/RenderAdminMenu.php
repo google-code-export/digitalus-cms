@@ -124,7 +124,7 @@ class Digitalus_View_Helper_Admin_RenderAdminMenu extends Zend_View_Helper_Abstr
         if ($this->currentUser) {
             if ($this->currentUser->role == Model_User::SUPERUSER_ROLE) {
                 return true;
-            } elseif ($this->userModel->queryPermissions($tab)) {
+            } else if ($this->userModel->queryPermissions($tab)) {
                 return true;
             }
         }

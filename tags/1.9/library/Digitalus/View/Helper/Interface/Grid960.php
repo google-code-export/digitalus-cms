@@ -144,7 +144,7 @@ class Digitalus_View_Helper_Interface_Grid960 extends Zend_View_Helper_Abstract
 
         if ($first == true) {
             $class[] = 'alpha';
-        } elseif ($last == true) {
+        } else if ($last == true) {
             $class[] = 'omega';
         }
 

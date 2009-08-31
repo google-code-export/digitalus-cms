@@ -6,6 +6,8 @@ abstract class Digitalus_Builder_Abstract extends Digitalus_Abstract
 
     public function __construct(Digitalus_Page $page = null, $attributes = array(), $persistPage = true)
     {
+        parent::__construct();
+
         if ($page == null) {
             $page = new Digitalus_Page();
         }

@@ -29,17 +29,16 @@ class Digitalus_Media_Filetype {
 
     public function isType($mimeType)
     {
-        if(is_object($this->mime)) {
-            if(in_array($mimeType, $this->mime->type->toArray())) {
+        if (is_object($this->mime)) {
+            if (in_array($mimeType, $this->mime->type->toArray())) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }elseif ($mimeType == $this->mime) {
+        } else if ($mimeType == $this->mime) {
             return true;
         }
         return false;
     }
 }
-
 ?>

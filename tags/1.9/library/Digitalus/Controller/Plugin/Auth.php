@@ -84,7 +84,7 @@ class Digitalus_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 
         if ($this->_acl->has($actionLevel)) {
             $resource = $actionLevel;
-        } elseif ($this->_acl->has($controllerLevel)) {
+        } else if ($this->_acl->has($controllerLevel)) {
             $resource = $controllerLevel;
         } else {
             $resource = $moduleLevel;

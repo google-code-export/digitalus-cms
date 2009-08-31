@@ -26,7 +26,7 @@ class Digitalus_Command_List extends Digitalus_Command_Abstract
      * display all of the current commands
      *
      */
-    public function run()
+    public function run($params = null)
     {
         $commands = Digitalus_Filesystem_File::getFilesByType(Digitalus_Command::PATH_TO_COMMANDS, 'php');
         foreach ($commands as $command) {

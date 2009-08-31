@@ -28,13 +28,14 @@ class Digitalus_Command_CacheClear extends Digitalus_Command_Abstract
      */
     public function __construct()
     {
+        parent::__construct();
     }
 
     /**
-     *clears the cache
+     * clears the cache
      * if the param key is set it will only clear the specified one
      */
-    public function run($params)
+    public function run($params = null)
     {
         if (Zend_Registry::isRegistered('cache')) {
             $cache = Zend_Registry::get('cache');

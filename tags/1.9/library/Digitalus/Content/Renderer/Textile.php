@@ -219,7 +219,7 @@ class Digitalus_Content_Renderer_Textile
     public $pnct;
     public $rel;
     public $fn;
-    
+
     public $shelf = array();
     public $restricted = false;
     public $noimage = false;
@@ -227,12 +227,12 @@ class Digitalus_Content_Renderer_Textile
     public $url_schemes = array();
     public $glyph = array();
     public $hu = '';
-    
+
     public $ver = '2.0.0';
     public $rev = '$Rev: 216 $';
 
 // -------------------------------------------------------------
-    function __construct()
+    public function __construct()
     {
         $this->hlgn = "(?:\<(?!>)|(?<!<)\>|\<\>|\=|[()]+(?! ))";
         $this->vlgn = "[\-^~]";
@@ -275,7 +275,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function TextileThis($text, $lite='', $encode='', $noimage='', $strict='', $rel='')
+    public function TextileThis($text, $lite='', $encode='', $noimage='', $strict='', $rel='')
     {
         if ($rel)
            $this->rel = ' rel="'.$rel.'" ';
@@ -308,7 +308,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function TextileRestricted($text, $lite=1, $noimage=1, $rel='nofollow')
+    public function TextileRestricted($text, $lite=1, $noimage=1, $rel='nofollow')
     {
         $this->restricted = true;
         $this->lite = $lite;
@@ -338,7 +338,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function pba($in, $element = "") // "parse block attributes"
+    public function pba($in, $element = "") // "parse block attributes"
     {
         $style = '';
         $class = '';
@@ -410,7 +410,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function hasRawText($text)
+    public function hasRawText($text)
     {
         // checks whether the text has text not already enclosed by a block tag
         $r = trim(preg_replace('@<(p|blockquote|div|form|table|ul|ol|pre|h\d)[^>]*?>.*</\1>@s', '', trim($text)));
@@ -419,7 +419,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function table($text)
+    public function table($text)
     {
         $text = $text . "\n\n";
         return preg_replace_callback("/^(?:table(_?{$this->s}{$this->a}{$this->c})\. ?\n)?^({$this->a}{$this->c}\.? ?\|.*\|)\n\n/smU",
@@ -427,7 +427,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function fTable($matches)
+    public function fTable($matches)
     {
         $tatts = $this->pba($matches[1], 'table');
 
@@ -458,17 +458,17 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function lists($text)
+    public function lists($text)
     {
         return preg_replace_callback("/^([#*]+$this->c .*)$(?![^#*])/smU", array(&$this, "fList"), $text);
     }
 
 // -------------------------------------------------------------
-    function fList($m)
+    public function fList($m)
     {
         $text = explode("\n", $m[0]);
         foreach($text as $num => $line) {
-            $nextline = isset($text[$num+1]) ? $text[$num+1] : false; 
+            $nextline = isset($text[$num+1]) ? $text[$num+1] : false;
             if (preg_match("/^([#*]+)($this->a$this->c) (.*)$/s", $line, $m)) {
                 list(, $tl, $atts, $content) = $m;
                 $nl = '';
@@ -500,26 +500,26 @@ class Digitalus_Content_Renderer_Textile
 
 
 // -------------------------------------------------------------
-    function lT($in)
+    public function lT($in)
     {
         return preg_match("/^#+/", $in) ? 'o' : 'u';
     }
 
 // -------------------------------------------------------------
-    function doPBr($in)
+    public function doPBr($in)
     {
         return preg_replace_callback('@<(p)([^>]*?)>(.*)(</\1>)@s', array(&$this, 'doBr'), $in);
     }
 
 // -------------------------------------------------------------
-    function doBr($m)
+    public function doBr($m)
     {
         $content = preg_replace("@(.+)(?<!<br>|<br />)\n(?![#*\s|])@", '$1<br />', $m[3]);
         return '<'.$m[1].$m[2].'>'.$content.$m[4];
     }
 
 // -------------------------------------------------------------
-    function block($text)
+    public function block($text)
     {
         $find = $this->btag;
         $tre = join('|', $find);
@@ -585,7 +585,7 @@ class Digitalus_Content_Renderer_Textile
 
 
 // -------------------------------------------------------------
-    function fBlock($m)
+    public function fBlock($m)
     {
         // $this->dump($m);
         list(, $tag, $atts, $ext, $cite, $content) = $m;
@@ -609,29 +609,25 @@ class Digitalus_Content_Renderer_Textile
             $o2 = "\t\t<p$atts>";
             $c2 = "</p>";
             $c1 = "\n\t</blockquote>";
-        }
-        elseif ($tag == 'bc') {
+        } else if ($tag == 'bc') {
             $o1 = "<pre$atts>";
             $o2 = "<code$atts>";
             $c2 = "</code>";
             $c1 = "</pre>";
             $content = $this->shelve($this->encode_html(rtrim($content, "\n")."\n"));
-        }
-        elseif ($tag == 'notextile') {
+        } else if ($tag == 'notextile') {
             $content = $this->shelve($content);
             $o1 = $o2 = '';
             $c1 = $c2 = '';
-        }
-        elseif ($tag == 'pre') {
+        } else if ($tag == 'pre') {
             $content = $this->shelve($this->encode_html(rtrim($content, "\n")."\n"));
             $o1 = "<pre$atts>";
             $o2 = $c2 = '';
             $c1 = "</pre>";
-        }
-        else {
+        } else {
             $o2 = "\t<$tag$atts>";
             $c2 = "</$tag>";
-          }
+        }
 
         $content = $this->graf($content);
 
@@ -639,7 +635,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function graf($text)
+    public function graf($text)
     {
         // handle normal paragraph text
         if (!$this->lite) {
@@ -663,7 +659,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function span($text)
+    public function span($text)
     {
         $qtags = array('\*\*','\*','\?\?','-','__','_','%','\+','~','\^');
         $pnct = ".,\"'?!;:";
@@ -684,7 +680,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function fSpan($m)
+    public function fSpan($m)
     {
         $qtags = array(
             '*'  => 'strong',
@@ -713,7 +709,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function links($text)
+    public function links($text)
     {
         return preg_replace_callback('/
             (?:^|(?<=[\s>.$pnct\(])|([{[])) # $pre
@@ -731,7 +727,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function fLink($m)
+    public function fLink($m)
     {
         list(, $pre, $atts, $text, $title, $url, $slash, $post) = $m;
 
@@ -756,14 +752,14 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function getRefs($text)
+    public function getRefs($text)
     {
         return preg_replace_callback("/(?<=^|\s)\[(.+)\]((?:http:\/\/|\/)\S+)(?=\s|$)/U",
             array(&$this, "refs"), $text);
     }
 
 // -------------------------------------------------------------
-    function refs($m)
+    public function refs($m)
     {
         list(, $flag, $url) = $m;
         $this->urlrefs[$flag] = $url;
@@ -771,13 +767,13 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function checkRefs($text)
+    public function checkRefs($text)
     {
         return (isset($this->urlrefs[$text])) ? $this->urlrefs[$text] : $text;
     }
 
 // -------------------------------------------------------------
-    function relURL($url)
+    public function relURL($url)
     {
         $parts = parse_url($url);
         if ((empty($parts['scheme']) or @$parts['scheme'] == 'http') and
@@ -791,7 +787,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function image($text)
+    public function image($text)
     {
         return preg_replace_callback("/
             (?:[[{])?          # pre
@@ -809,7 +805,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function fImage($m)
+    public function fImage($m)
     {
         list(, $algn, $atts, $url) = $m;
         $atts  = $this->pba($atts);
@@ -834,7 +830,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function code($text)
+    public function code($text)
     {
         $text = $this->doSpecial($text, '<code>', '</code>', 'fCode');
         $text = $this->doSpecial($text, '@', '@', 'fCode');
@@ -843,7 +839,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function fCode($m)
+    public function fCode($m)
     {
       @list(, $before, $text, $after) = $m;
       if ($this->restricted)
@@ -854,7 +850,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function fPre($m)
+    public function fPre($m)
     {
       @list(, $before, $text, $after) = $m;
       if ($this->restricted)
@@ -864,7 +860,7 @@ class Digitalus_Content_Renderer_Textile
             return $before.'<pre>'.$this->shelve($this->encode_html($text)).'</pre>'.$after;
     }
 // -------------------------------------------------------------
-    function shelve($val)
+    public function shelve($val)
     {
         $i = uniqid(rand());
         $this->shelf[$i] = $val;
@@ -872,7 +868,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function retrieve($text)
+    public function retrieve($text)
     {
         if (is_array($this->shelf))
             do {
@@ -885,23 +881,23 @@ class Digitalus_Content_Renderer_Textile
 
 // -------------------------------------------------------------
 // NOTE: deprecated
-    function incomingEntities($text)
+    public function incomingEntities($text)
     {
         return preg_replace("/&(?![#a-z0-9]+;)/i", "x%x%", $text);
     }
 
 // -------------------------------------------------------------
 // NOTE: deprecated
-    function encodeEntities($text)
+    public function encodeEntities($text)
     {
-        return (function_exists('mb_encode_numericentity'))
+        return (public function_exists('mb_encode_numericentity'))
         ?    $this->encode_high($text)
         :    htmlentities($text, ENT_NOQUOTES, "utf-8");
     }
 
 // -------------------------------------------------------------
 // NOTE: deprecated
-    function fixEntities($text)
+    public function fixEntities($text)
     {
         /*  de-entify any remaining angle brackets or ampersands */
         return str_replace(array("&gt;", "&lt;", "&amp;"),
@@ -909,7 +905,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function cleanWhiteSpace($text)
+    public function cleanWhiteSpace($text)
     {
         $out = str_replace("\r\n", "\n", $text);
         $out = preg_replace("/\n{3,}/", "\n\n", $out);
@@ -919,14 +915,14 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function doSpecial($text, $start, $end, $method='fSpecial')
+    public function doSpecial($text, $start, $end, $method='fSpecial')
     {
       return preg_replace_callback('/(^|\s|[[({>])'.preg_quote($start, '/').'(.*?)'.preg_quote($end, '/').'(\s|$|[\])}])?/ms',
             array(&$this, $method), $text);
     }
 
 // -------------------------------------------------------------
-    function fSpecial($m)
+    public function fSpecial($m)
     {
         // A special block like notextile or code
       @list(, $before, $text, $after) = $m;
@@ -934,7 +930,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function noTextile($text)
+    public function noTextile($text)
     {
          $text = $this->doSpecial($text, '<notextile>', '</notextile>', 'fTextile');
          return $this->doSpecial($text, '==', '==', 'fTextile');
@@ -942,7 +938,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function fTextile($m)
+    public function fTextile($m)
     {
         @list(, $before, $notextile, $after) = $m;
         #$notextile = str_replace(array_keys($modifiers), array_values($modifiers), $notextile);
@@ -950,14 +946,14 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function footnoteRef($text)
+    public function footnoteRef($text)
     {
         return preg_replace('/\b\[([0-9]+)\](\s)?/Ue',
             '$this->footnoteID(\'\1\',\'\2\')', $text);
     }
 
 // -------------------------------------------------------------
-    function footnoteID($id, $t)
+    public function footnoteID($id, $t)
     {
         if (empty($this->fn[$id]))
             $this->fn[$id] = uniqid(rand());
@@ -966,7 +962,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function glyphs($text)
+    public function glyphs($text)
     {
         // fix: hackish
         $text = preg_replace('/"\z/', "\" ", $text);
@@ -1021,7 +1017,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function iAlign($in)
+    public function iAlign($in)
     {
         $vals = array(
             '<' => 'left',
@@ -1031,7 +1027,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function hAlign($in)
+    public function hAlign($in)
     {
         $vals = array(
             '<'  => 'left',
@@ -1042,7 +1038,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function vAlign($in)
+    public function vAlign($in)
     {
         $vals = array(
             '^' => 'top',
@@ -1053,21 +1049,21 @@ class Digitalus_Content_Renderer_Textile
 
 // -------------------------------------------------------------
 // NOTE: deprecated
-    function encode_high($text, $charset = "UTF-8")
+    public function encode_high($text, $charset = "UTF-8")
     {
         return mb_encode_numericentity($text, $this->cmap(), $charset);
     }
 
 // -------------------------------------------------------------
 // NOTE: deprecated
-    function decode_high($text, $charset = "UTF-8")
+    public function decode_high($text, $charset = "UTF-8")
     {
         return mb_decode_numericentity($text, $this->cmap(), $charset);
     }
 
 // -------------------------------------------------------------
 // NOTE: deprecated
-    function cmap()
+    public function cmap()
     {
         $f = 0xffff;
         $cmap = array(
@@ -1076,7 +1072,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function encode_html($str, $quotes=1)
+    public function encode_html($str, $quotes=1)
     {
         $a = array(
             '&' => '&#38;',
@@ -1092,7 +1088,7 @@ class Digitalus_Content_Renderer_Textile
     }
 
 // -------------------------------------------------------------
-    function textile_popup_help($name, $helpvar, $windowW, $windowH)
+    public function textile_popup_help($name, $helpvar, $windowW, $windowH)
     {
         return ' <a target="_blank" href="http://www.textpattern.com/help/?item=' . $helpvar . '" onclick="window.open(this.href, \'popupwindow\', \'width=' . $windowW . ',height=' . $windowH . ',scrollbars,resizable\'); return false;">' . $name . '</a><br />';
 
@@ -1101,7 +1097,7 @@ class Digitalus_Content_Renderer_Textile
 
 // -------------------------------------------------------------
 // NOTE: deprecated
-    function txtgps($thing)
+    public function txtgps($thing)
     {
         if (isset($_POST[$thing])) {
             if (get_magic_quotes_gpc()) {
@@ -1118,7 +1114,7 @@ class Digitalus_Content_Renderer_Textile
 
 // -------------------------------------------------------------
 // NOTE: deprecated
-    function dump()
+    public function dump()
     {
         foreach (func_get_args() as $a)
             echo "\n<pre>",(is_array($a)) ? print_r($a) : $a, "</pre>\n";
@@ -1126,7 +1122,7 @@ class Digitalus_Content_Renderer_Textile
 
 // -------------------------------------------------------------
 
-    function blockLite($text)
+    public function blockLite($text)
     {
         $this->btag = array('bq', 'p');
         return $this->block($text."\n\n");

@@ -1,6 +1,6 @@
 <?php
 /**
- * IsAllowed helper
+ * RenderPublishedPagesList helper
  *
  * LICENSE
  *
@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @author      Forrest Lyman
+ * @author      LowTower - lowtower@gmx.de
  * @category    Digitalus
  * @package     Digitalus_View
  * @subpackage  Helper
@@ -20,7 +20,7 @@
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id:$
  * @link        http://www.digitaluscms.com
- * @since       Release 1.5.0
+ * @since       Release 1.9.0
  */
 
 /**
@@ -29,40 +29,35 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * IsAllowed helper
+ * RenderPublishedPagesList helper
  *
- * @author      Forrest Lyman
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
- * @since       Release 1.5.0
+ * @since       Release 1.9.0
  */
-class  Digitalus_View_Helper_Admin_IsAllowed extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Admin_RenderPublishedPagesList extends Zend_View_Helper_Abstract
 {
-    /**
-     * comments
-     */
-    public function isAllowed($output, $module, $controller = null, $action = null)
+    public function renderPublishedPagesList($publishLevel = null, $id = 'pagesList', $order = null, $limit = null, $offset = null)
     {
-        $role = 'admin';
-        $acl = Zend_Registry::get('acl');
-        //go from more specific to less specific
-        $moduleLevel = $module;
-        $controllerLevel = $moduleLevel . '_' . $controller;
-        $actionLevel = $controllerLevel . '_' . $action;
+        $mdlPage = new Model_Page();
+        $pages = $mdlPage->getPagesByPublishState($publishLevel, $order, $limit, $offset);
 
-        if (null != $action && $acl->has($actionLevel)) {
-            $resource = $actionLevel;
-        } else if (null != $controller && $acl->has($controllerLevel)) {
-            $resource = $controllerLevel;
-        } else {
-            $resource = $moduleLevel;
-        }
-        if ($acl->has($resource)) {
-            if ($acl->isAllowed($role, $resource)) {
-                return $output;
+        if (is_array($pages)) {
+            $xhtml = '<ul id="' . $id . '">';
+
+            foreach ($pages as $pageId) {
+                $page = new Model_Page();
+                $title = $page->getPageTitle($pageId);
+
+                $xhtml .= '<li class="page">' . $this->view->link($title, '/admin/page/edit/id/' . $pageId, 'page.png') . '</li>'. PHP_EOL;
             }
+            $xhtml .= '</ul>' . PHP_EOL;
+
+            return $xhtml;
         }
+        return null;
     }
 }

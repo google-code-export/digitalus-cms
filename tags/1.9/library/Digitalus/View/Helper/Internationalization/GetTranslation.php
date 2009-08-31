@@ -60,7 +60,7 @@ class Digitalus_View_Helper_Internationalization_GetTranslation extends Zend_Vie
         $currentLanguage = $this->view->getCurrentLanguage();
         if ($locale != null) {
             $this->view->translate()->setLocale($locale);
-        } elseif ($moduleName != 'admin' && $adapter->isAvailable($currentLanguage)) {
+        } else if ($moduleName != 'admin' && $adapter->isAvailable($currentLanguage)) {
             $this->view->translate()->setLocale($currentLanguage);
         }
         return $this->view->translate($key);

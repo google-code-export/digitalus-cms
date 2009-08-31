@@ -1,6 +1,7 @@
 <?php
 
-class Digitalus_Menu_Item {
+class Digitalus_Menu_Item
+{
     protected $_innerItem;
     public $id;
     public $label;
@@ -13,13 +14,14 @@ class Digitalus_Menu_Item {
      *
      * @param   object  $item   A Zend_Db_Table_Row object
      */
-    public function __construct(Zend_Db_Table_Row $item) {
+    public function __construct(Zend_Db_Table_Row $item)
+    {
         $this->_innerItem = $item;
         $this->label = Digitalus_Toolbox_Page::getLabel($item);
-        $this->link = Digitalus_Toolbox_Page::getUrl($item);
-        $this->id = $this->_innerItem->id;
+        $this->link  = Digitalus_Toolbox_Page::getUrl($item);
+        $this->id    = $this->_innerItem->id;
 
-        if ($item->show_on_menu) {
+        if ($item->show_on_menu && $item->publish_level == 1) {
             $this->visible = true;
         } else {
             $this->visible = false;
@@ -45,7 +47,7 @@ class Digitalus_Menu_Item {
         $currentPageId = $currentPage->getId();
         if ($this->id == $currentPageId) {
             return true;
-        } elseif ($ignoreParents == false) {
+        } else if ($ignoreParents == false) {
             $page = new Model_Page();
             $parents = $page->getParents($currentPageId);
             if (is_array($parents)) {

@@ -128,7 +128,7 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
                     $value = null;
                     if (isset($page->$property)) {
                         $value = $page->$property;
-                    } elseif (isset($content[$property])) {
+                    } else if (isset($content[$property])) {
                         $value = $content[$property];
                     }
                 }

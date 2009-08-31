@@ -43,13 +43,14 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
     public function __construct()
     {
         $this->_db = Zend_Db_Table::getDefaultAdapter();
+        parent::__construct();
     }
 
     /**
      * validate that the module exists.  if it does then add it to the db (acl_resources)
      *
      */
-    public function run($params)
+    public function run($params = null)
     {
         if (isset($params['moduleName'])) {
             $module = $params['moduleName'];

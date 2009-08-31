@@ -37,6 +37,7 @@ class Digitalus_Command_UpdateDatabase extends Digitalus_Command_Abstract
     public function __construct()
     {
         $this->_db = Zend_Db_Table::getDefaultAdapter();
+        parent::__construct();
     }
 
     /**
@@ -46,7 +47,7 @@ class Digitalus_Command_UpdateDatabase extends Digitalus_Command_Abstract
      * migrate content table rows to pages / content_nodes
      *
      */
-    public function run($params)
+    public function run($params = null)
     {
         $result = $this->_createPages();
         if (!$result) {

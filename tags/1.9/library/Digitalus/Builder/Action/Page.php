@@ -30,7 +30,7 @@ class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
             $response = $front->getResponse();
             $response->setRawHeader('HTTP/1.1 404 Not Found');
             require_once 'Digitalus/Builder/Exception.php';
-            throw new Digitalus_Builder_Exception($this->view->getTranslation('The page you requested was not found. Digitalus CMS could not locate the error page either.'));
+            throw new Digitalus_Builder_Exception($this->getView()->getTranslation('The page you requested was not found. Digitalus CMS could not locate the error page either.'));
         }
     }
 
@@ -61,7 +61,6 @@ class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
         } else {
             $this->_page->setLanguage(Digitalus_Language::getLanguage());
         }
-
     }
 
     public function setAvailableLanguages()
