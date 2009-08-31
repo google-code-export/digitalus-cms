@@ -10,7 +10,7 @@
 // -------------------------------------------------------------------
 // Feel free to add more tags
 // -------------------------------------------------------------------
-myWikiSettings = {
+mySettings = {
 	previewParserPath:	'', // path to your Textile parser
 	onShiftEnter:		{keepDefault:false, replaceWith:'\n\n'},
 	markupSet: [
@@ -32,7 +32,7 @@ myWikiSettings = {
 		{name:'Picture', replaceWith:'![![Source:!:http://]!]([![Alternative text]!])!'}, 
 		{name:'Link', openWith:'"', closeWith:'([![Title]!])":[![Link:!:http://]!]', placeHolder:'Your text to link here...' },
 		{separator:'---------------' },
-		{name:'Quotes', openWith:'bq(!(([![Class]!])!)). '},
+		{name:'Quotes', openWith:'bq(!(([![Class]!]))!). '},
 		{name:'Code', openWith:'@', closeWith:'@'},
 		{separator:'---------------' },
 		{name:'Preview', call:'preview', className:'preview'}
