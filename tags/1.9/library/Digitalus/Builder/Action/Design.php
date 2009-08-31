@@ -48,7 +48,6 @@ class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
         $view = $this->_page->getView();
         $view->setFilterPath('Digitalus/View/Filter');
         $view->addFilter('digitalusControl');
-        $view->addFilter('digitalusImage');
         $view->addFilter('digitalusModule');
         $view->addFilter('digitalusPartial');
         $view->addFilter('digitalusNavigation');
