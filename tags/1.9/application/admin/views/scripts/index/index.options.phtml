@@ -1,12 +1,10 @@
-<?php
-$this->placeholder('optionsHeadline')->Set($this->translate('My Content'));
-echo $this->RenderText('The following pages are the pages that you have recently created.', 'p class="padding-10"');
-?>
-<?php
-if ($this->pages) {
-    ?>
-    <ul class="padding-10">
-    <?php foreach ($this->pages as $page) {
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('My Content'));
+
+echo $this->renderText('The following pages are the pages that you have recently created.', 'p class="padding-10"');
+
+if ($this->pages) { ?>
+    <ul class="padding-10"><?php
+    foreach ($this->pages as $page) {
         if (isset($page->label) && !empty($page->label)) {
             $label = $page->label;
         } else {
@@ -14,10 +12,17 @@ if ($this->pages) {
         } ?>
         <li class="page">
             <?php echo $this->link($label, '/admin/page/edit/id/' . $page->id, 'page_white_text.png');?>
-        </li>
-    <?php } ?>
-    </ul>
-<?php }
+        </li><?php
+    } ?>
+    </ul><?php
+}
 
-echo $this->RenderText('These are the modules that you are working with.', 'p class="padding-10"');
+echo $this->renderText('These are the modules that you are working with.', 'p class="padding-10"');
 echo $this->render('./module/partials/my-modules.phtml');
+
+$mdlPage = new Model_Page();
+$list = $this->renderPublishedPagesList();
+if ($list != null) {
+    echo $this->renderText('These pages have not been published yet.', 'p class="padding-10"');
+    echo $list;
+}

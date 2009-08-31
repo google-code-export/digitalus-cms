@@ -1,7 +1,7 @@
 <pageBuilder>
-	<request class='Page' method='appendUriParams' />
-	<request class='Page' method='setBaseUrl' />
-	<request class='Page' method='setPointer' />
-	<request class='Page' method='setLanguage' />
-	<request class='Page' method='setAvailableLanguages' />
+    <request class='Page' method='appendUriParams' />
+    <request class='Page' method='setBaseUrl' />
+    <request class='Page' method='setPointer' />
+    <request class='Page' method='setLanguage' />
+    <request class='Page' method='setAvailableLanguages' />
 </pageBuilder>

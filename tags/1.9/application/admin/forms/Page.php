@@ -8,28 +8,29 @@ class Admin_Form_Page extends Digitalus_Form
         $this->addElement($id);
 
         $name = $this->createElement('text', 'page_name');
-        $name->addFilter('StripTags');
-        $name->setRequired(true);
-        $name->setLabel($this->getView()->getTranslation('Page Name'));
-        $name->setAttrib('size', 50);
-        $name->setOrder(0);
+        $name->addFilter('StripTags')
+             ->setRequired(true)
+             ->setLabel($this->getView()->getTranslation('Page Name'))
+             ->setAttrib('size', 50)
+             ->setOrder(0);
         $this->addElement($name);
 
         $parentId = $this->createElement('select', 'parent_id');
-        $parentId->setLabel($this->getView()->getTranslation('Parent page') . ':');
+        $parentId->setLabel($this->getView()->getTranslation('Parent page') . ':')
+                 ->addMultiOption(0, $this->getView()->getTranslation('Site Root'))
+                 ->setOrder(1);
         $mdlIndex = new Model_Page();
         $index = $mdlIndex->getIndex(0, 'name');
-        $parentId->addMultiOption(0, $this->getView()->getTranslation('Site Root'));
         if (is_array($index)) {
             foreach ($index as $id => $page) {
                 $parentId->addMultiOption($id, $page);
             }
         }
-        $parentId->setOrder(1);
         $this->addElement($parentId);
 
         $contentTemplate = $this->createElement('select','content_template');
-        $contentTemplate->setLabel($this->getView()->getTranslation('Template') . ':');
+        $contentTemplate->setLabel($this->getView()->getTranslation('Template') . ':')
+                        ->setOrder(2);
 
         $templateConfig = Zend_Registry::get('config')->template;
         $templates = Digitalus_Filesystem_Dir::getDirectories(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public');
@@ -38,17 +39,22 @@ class Admin_Form_Page extends Digitalus_Form
             if (is_array($designs)) {
                 foreach ($designs as $design) {
                     $design = Digitalus_Toolbox_Regex::stripFileExtension($design);
-                    $contentTemplate->addMultiOption($template . '_' . $design, $template . ' / ' . $design);
+                    $contentTemplate->addMultiOption($template . '_' . $design, $this->getView()->getTranslation($template) . ' / ' . $this->getView()->getTranslation($design));
                 }
             }
         }
-        $contentTemplate->setOrder(2);
         $this->addElement($contentTemplate);
 
         $continue = $this->createElement('checkbox', 'continue_adding_pages');
-        $continue->setLabel($this->getView()->getTranslation('Continue adding pages') . '?');
-        $continue->setOrder(3);
+        $continue->setLabel($this->getView()->getTranslation('Continue adding pages') . '?')
+                 ->setOrder(3);
         $this->addElement($continue);
+
+        $publish = $this->createElement('checkbox', 'publish_pages');
+        $publish->setLabel($this->getView()->getTranslation('Publish page instantly') . '?')
+                ->setOrder(4);
+        $this->addElement($publish);
+
 
         $submit = $this->createElement('submit', $this->getView()->getTranslation('Submit'));
         $submit->setOrder(1000);

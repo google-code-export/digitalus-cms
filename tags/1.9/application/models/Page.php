@@ -8,7 +8,15 @@ class Model_Page extends Digitalus_Db_Table
     protected $_defaultTemplate = 'default';
     protected $_defaultPageName = 'New Page';
     protected $_ignoredFields = array('update', 'version'); //these are the fields that are not saved as nodes
-    
+
+    const PUBLISH_ID   =  1;
+    const UNPUBLISH_ID = 11;
+    const ARCHIVE_ID   = 21;
+
+    const PUBLISH_STATUS   = 'published';
+    const UNPUBLISH_STATUS = 'unpublished';
+    const ARCHIVE_STATUS   = 'archived';
+
     public function getContent($uri, $version = null)
     {
         if ($version == null) {
@@ -30,10 +38,10 @@ class Model_Page extends Digitalus_Db_Table
             $select = $this->select();
             $select->where('author_id = ?', $currentUser->id);
             $select->where('namespace = ?', $this->_namespace);
-            if($order != null) {
+            if ($order != null) {
                 $select->order($order);
             }
-            if($limit != null) {
+            if ($limit != null) {
                 $select->limit($limit);
             }
             $pages = $this->fetchAll($select);
@@ -47,7 +55,7 @@ class Model_Page extends Digitalus_Db_Table
         }
     }
 
-    public function createPage($pageName, $parentId = 0, $contentTemplate = null, $showOnMenu = null)
+    public function createPage($pageName, $parentId = 0, $contentTemplate = null, $showOnMenu = null, $publishPage = null)
     {
         if (empty($pageName)) {
             $pageName = $this->_defaultPageName;
@@ -68,6 +76,21 @@ class Model_Page extends Digitalus_Db_Table
             $makeMenuLinks = $settings->get('add_menu_links');
         }
 
+        // get current time to ensure create and publish date are exactly the same
+        $time = time();
+
+        if ($publishPage == null) {
+            $settings = new Model_SiteSettings();
+            $publishPage = $settings->get('publish_pages');
+        }
+        if ($publishPage == true) {
+            $publishDate  = $time;
+            $publishLevel = PUBLISH_ID;
+        } else {
+            $publishDate  = 'NULL';
+            $publishLevel = UNPUBLISH_ID;
+        }
+
         $u = new Model_User();
         $user = $u->getCurrentUser();
         if ($user) {
@@ -79,7 +102,9 @@ class Model_Page extends Digitalus_Db_Table
         //first create the new page
         $data = array(
             'namespace'        => $this->_namespace,
-            'create_date'      => time(),
+            'create_date'      => $time,
+            'publish_date'     => $publishDate,
+            'publish_level'    => $publishLevel,
             'author_id'        => $userId,
             'name'             => $pageName,
             'content_template' => $contentTemplate,
@@ -197,7 +222,7 @@ class Model_Page extends Digitalus_Db_Table
     /**
      * returns the content type of the selected page
      *
-     * @param int $pageId
+     * @param  int $pageId
      * @return string
      */
     public function getcontentTemplate($pageId)
@@ -264,7 +289,7 @@ class Model_Page extends Digitalus_Db_Table
             return false;
         }
     }
-    
+
     public function setContentTemplate($pageId, $template)
     {
         $page = $this->find($pageId)->current();
@@ -297,8 +322,8 @@ class Model_Page extends Digitalus_Db_Table
     /**
      * this function sets the related pages for a given page
      *
-     * @param int $pageId
-     * @param array $relatedPages
+     * @param  int $pageId
+     * @param  array $relatedPages
      * @return boolean
      */
     public function setRelatedPages($pageId, $relatedPages)
@@ -316,8 +341,8 @@ class Model_Page extends Digitalus_Db_Table
      * this function returns an array of the ids of the pages which are related to $pageId
      * if asObject is set to true it will return a rowset instead
      *
-     * @param int $pageId
-     * @param boolean $asObject
+     * @param  int $pageId
+     * @param  boolean $asObject
      * @return mixex
      */
     public function getRelatedPages($pageId, $asObject = false)
@@ -337,8 +362,14 @@ class Model_Page extends Digitalus_Db_Table
         }
     }
 
-    // the following functions handle the site tree
-
+    /**
+     * Fetch pointer action
+     *
+     * The following function handle the site tree
+     *
+     * @param  string  $uri
+     * @return string  $page
+     */
     public function fetchPointer($uri)
     {
         $settings = new Model_SiteSettings();
@@ -353,9 +384,9 @@ class Model_Page extends Digitalus_Db_Table
                 $id = $this->_fetchPointer($uri);
             }
 
-            //test the pointer
+            //test the pointer - also against publishing state
             $row = $this->find($id)->current();
-            if ($row) {
+            if ($row && $this->isPublished($row->id) == self::PUBLISH_ID) {
                return $row->id;
             } else {
                 return $this->get404Page();
@@ -368,12 +399,12 @@ class Model_Page extends Digitalus_Db_Table
      * you can pass it a page id (integer) or a page object
      * you can optionally pass it an array of where clauses
      *
-     * @param mixed  $page
-     * @param array  $where
-     * @param string $order
-     * @param string $limit
-     * @param string $offset
-     * @return zend_db_rowset
+     * @param  mixed  $page
+     * @param  array  $where
+     * @param  string $order
+     * @param  string $limit
+     * @param  string $offset
+     * @return Zend_Db_Table_Rowset
      */
     public function getChildren($page, $where = array(), $order = null, $limit = null, $offset = null)
     {
@@ -409,8 +440,8 @@ class Model_Page extends Digitalus_Db_Table
      * this function returns the parent of the selected page
      * you can pass it a page id (integer) or a page object
      *
-     * @param mixed $page
-     * @return zend_db_row
+     * @param  mixed $page
+     * @return Zend_Db_Table_Rowset
      */
     public function getParent($page)
     {
@@ -422,7 +453,7 @@ class Model_Page extends Digitalus_Db_Table
     /**
      * this function returns an array of the parents of the current page
      *
-     * @param mixed $page
+     * @param  mixed $page
      * @return unknown
      */
     public function getParents($page)
@@ -440,8 +471,8 @@ class Model_Page extends Digitalus_Db_Table
     /**
      * this function tests whether the page is a child of another page
      *
-     * @param mixed $page
-     * @param mixed $parent
+     * @param  mixed $page
+     * @param  mixed $parent
      * @return boolean
      */
     public function isChildOf($page, $parent)
@@ -463,8 +494,8 @@ class Model_Page extends Digitalus_Db_Table
     /**
      * this function tests whether the page is a parent of the other page
      *
-     * @param mixed $page
-     * @param mixed $parent
+     * @param  mixed $page
+     * @param  mixed $parent
      * @return boolean
      */
     public function isParentOf($page, $child)
@@ -485,7 +516,7 @@ class Model_Page extends Digitalus_Db_Table
     /**
      * this function tests whether the page has children
      *
-     * @param mixed $page
+     * @param  mixed $page
      * @return boolean
      */
     public function hasChildren($page)
@@ -506,9 +537,9 @@ class Model_Page extends Digitalus_Db_Table
      * you can pass it a page id (integer) or a page object
      * you can optionally pass it an array of where clauses
      *
-     * @param mixed $page
-     * @param array $where
-     * @return zend_db_rowset
+     * @param  mixed $page
+     * @param  array $where
+     * @return Zend_Db_Table_Rowset
      */
     public function getSiblings($page, $where = array())
     {
@@ -539,7 +570,7 @@ class Model_Page extends Digitalus_Db_Table
      * if you pass the optional parentId the index will start with this page
      * if not it will index the whole site
      *
-     * @param integer $parentId
+     * @param int $parentId
      */
     private function _indexPages($parentId = 0, $path = null, $pathSeparator = '/', $order = null)
     {
@@ -592,7 +623,6 @@ class Model_Page extends Digitalus_Db_Table
            $where[] = $this->_db->quoteInto('parent_id = ?', $this->_getPageId($page));
            $this->delete($where);
         }
-
     }
 
     /**
@@ -619,9 +649,9 @@ class Model_Page extends Digitalus_Db_Table
         $this->update($data, $where);
     }
 
-    public function select()
+    public function select($withFromPart = self::SELECT_WITHOUT_FROM_PART)
     {
-        $select = parent::select();
+        $select = parent::select($withFromPart);
         $select->where('namespace = ?', $this->_namespace);
         return $select;
     }
@@ -674,7 +704,7 @@ class Model_Page extends Digitalus_Db_Table
      * if page is an object then this returns its id property
      * otherwise it returns its integer value
      *
-     * @param mixed $page
+     * @param  mixed $page
      * @return unknown
      */
     private function _getPageId($page)
@@ -702,7 +732,7 @@ class Model_Page extends Digitalus_Db_Table
     /**
      * returns the last (highest) position of the children of a page
      *
-     * @param int $parentId
+     * @param  int $parentId
      * @return int
      */
     private function _getLastPosition($parentId)
@@ -753,6 +783,133 @@ class Model_Page extends Digitalus_Db_Table
             } else {
                 return null;
             }
+        }
+    }
+
+    /**
+     * Publish page action
+     *
+     * publish_level can either be:
+     *  self::PUBLISH_ID   - published
+     *  self::UNPUBLISH_ID - unpublished
+     *  self__ARCHIVE_ID   - archived
+     *
+     * @param  int    $pageId  Id of the current page
+     * @param  string  $action  action to perform, either 'archive', 'unpublish' or 'publish'
+     * @return boolean
+     */
+    public function publishPage($pageId, $action = null)
+    {
+        $page = $this->find($pageId)->current();
+        if ($page) {
+            switch (trim($action)) {
+                case 'archive':
+                    $data['archive_date']  = time();
+                    $data['publish_level'] = self::ARCHIVE_ID;
+                    break;
+                case 'unpublish':
+#                    $data['publish_date']  = 'NULL';
+                    $data['publish_level'] = self::UNPUBLISH_ID;
+                    break;
+                case 'publish':
+                default:
+                    $data['publish_date']  = time();
+                    $data['publish_level'] = self::PUBLISH_ID;
+                    break;
+            }
+            $where[] = $this->_db->quoteInto('id = ?', $pageId);
+            $this->update($data, $where);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Get publishing dates
+     *
+     * Get publishing dates of a given page
+     *
+     * @param  int  $pageId  Id of the page to retrieve the publishing dates
+     * @return array         An array of the publishing dates or null
+     */
+    public function getPublishDates($pageId)
+    {
+        $currentPage = $this->find($pageId)->current();
+        if ($currentPage) {
+            return array(
+                'create_date'   => $currentPage->create_date,
+                'publish_date'  => $currentPage->publish_date,
+                'archive_date'  => $currentPage->archive_date,
+                'publish_level' => $currentPage->publish_level,
+            );
+        }
+        return null;
+    }
+
+    /**
+     * IsPublished action
+     *
+     * Check whether page is published
+     *
+     * @param  int  $pageId  Id of the page to check
+     * @return boolean       Returns true if the page is published
+     */
+    public function isPublished($pageId)
+    {
+        $currentPage = $this->find($pageId)->current();
+        if ($currentPage && self::PUBLISH_ID === (int)$currentPage->publish_level) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Get publishing Level
+     *
+     * Retrieve the publishing level for a given page id
+     *
+     * @param  int  $pageId  Id of the page to retrieve the publishing level
+     * @return int|boolean   Returns the publishing level or false if the page doesn't exist
+     */
+    public function getPublishLevel($pageId)
+    {
+        $currentPage = $this->find($pageId)->current();
+        if ($currentPage) {
+            return $currentPage->publish_level;
+        }
+        return false;
+    }
+
+    /**
+     * Get pages by publishing state
+     *
+     * Retrieve all pages that have not been published yet
+     *
+     * @param  string  $level  Publishing state to retrieve pages for
+     * @return Zend_Db_Table_Rowset|null  An object containing pages with given publishing state
+     */
+    public function getPagesByPublishState($level = null, $order = null, $limit = null, $offset = null)
+    {
+        if ($level == null) {
+            $level = self::UNPUBLISH_ID;
+        }
+
+        if ($order == null) {
+            $order = 'id ASC';
+        }
+
+        $where[] = $this->_db->quoteInto('publish_level = ?', (int)$level);
+
+        $result = $this->fetchAll($where, $order, $limit, $offset);
+        if ($result->count() > 0) {
+            $pageIds = array();
+            foreach ($result as $page) {
+                $pageIds[] = $page->id;
+            }
+            return $pageIds;
+        } else {
+            return null;
         }
     }
 }

@@ -17,19 +17,23 @@
     <?php
         echo $this->formRow(
             $this->getTranslation('Home Page'),
-            $this->SelectPage('setting[home_page]', $this->settings->home_page)
+            $this->selectPage('setting[home_page]', $this->settings->home_page)
         );
         echo $this->formRow(
             $this->getTranslation('404 Page'),
-            $this->SelectPage('setting[page_not_found]', $this->settings->page_not_found)
+            $this->selectPage('setting[page_not_found]', $this->settings->page_not_found)
         );
         echo $this->formRow(
             $this->getTranslation('Site Offline Page'),
-            $this->SelectPage('setting[offline_page]', $this->settings->offline_page)
+            $this->selectPage('setting[offline_page]', $this->settings->offline_page)
         );
         echo $this->formRow($this->getTranslation('Menu links'),
             $this->formCheckbox('setting[add_menu_links]', intval($this->settings->add_menu_links)) . ' ' .
             $this->getTranslation('Automatically add menu links')
+        );
+        echo $this->formRow($this->getTranslation('Publish Pages'),
+            $this->formCheckbox('setting[publish_pages]', intval($this->settings->publish_pages)) . ' ' .
+            $this->getTranslation('Automatically publish pages on creation')
         );
         echo $this->formRow('&nbsp;', $this->formSubmit('content', $this->getTranslation('Update Content Settings')));
     ?>

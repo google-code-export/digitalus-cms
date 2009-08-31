@@ -1,20 +1,6 @@
 <?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Page'));
 
-$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/jquery.markitup.js');
-$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/sets/default/set.js');
-$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/sets/textile/set.js');
-$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/sets/html/set.js');
-
-$this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/skins/markitup/style.css');
-$this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/sets/textile/style.css');
-$this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/sets/html/style.css');
-//jquery block
-$this->jQuery()->onLoadCaptureStart();?>
-    $(".wiki").markItUp(myWikiSettings);
-    $(".html").markItUp(myHtmlSettings);<?php
-$this->jQuery()->onLoadCaptureEnd();?>
-
-<?php echo $this->render('page/edit/content.phtml');?>
+echo $this->render('page/edit/content.phtml');?>
 
 <fieldset id="meta">
     <legend><?php echo $this->getTranslation('Edit Meta Data');?></legend>
@@ -49,3 +35,7 @@ this is not going to make it in the beta version
     <?php echo $this->render('page/edit/move.phtml');?>
 </fieldset>
 
+<fieldset id="publish">
+    <legend><?php echo $this->getTranslation('Publish / Archive Page');?></legend>
+    <?php echo $this->render('page/edit/publish.phtml');?>
+</fieldset>

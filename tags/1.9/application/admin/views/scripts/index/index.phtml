@@ -1,6 +1,4 @@
-<?php
-$this->placeholder('formHeadline')->set($this->getTranslation('My Dashboard'));
-?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('My Dashboard')); ?>
 
 <form action="<?php echo $this->getBaseUrl();?>/admin/user/update-my-account" method="post">
     <fieldset class="formColumn">
@@ -10,18 +8,17 @@ $this->placeholder('formHeadline')->set($this->getTranslation('My Dashboard'));
             $u = new Model_User();
             $user = $u->getCurrentUser();
             echo '<dt>' . $this->formHidden('id', $user->id) . '</dt>';
-            echo $this->FormRow($this->getTranslation('First Name'), $this->formText('first_name' , $this->identity->first_name));
-            echo $this->FormRow($this->getTranslation('Last Name'), $this->formText('last_name', $this->identity->last_name));
-            echo $this->FormRow($this->getTranslation('Email'), $this->formText('email', $this->identity->email));
-            echo $this->FormRow($this->formCheckbox('update_password'), $this->getTranslation('Update Password?'));
-            echo $this->FormRow($this->getTranslation('Password'), $this->formPassword('password'));
-            echo $this->FormRow($this->getTranslation('Confirm'), $this->formPassword('confirmation'));
+            echo $this->formRow($this->getTranslation('First Name'), $this->formText('first_name' , $this->identity->first_name));
+            echo $this->formRow($this->getTranslation('Last Name'), $this->formText('last_name', $this->identity->last_name));
+            echo $this->formRow($this->getTranslation('Email'), $this->formText('email', $this->identity->email));
+            echo $this->formRow($this->formCheckbox('update_password'), $this->getTranslation('Update Password?'));
+            echo $this->formRow($this->getTranslation('Password'), $this->formPassword('password'));
+            echo $this->formRow($this->getTranslation('Confirm'), $this->formPassword('confirmation'));
             echo $this->formSubmit('submit',$this->getTranslation('Update My Account'));
         ?>
         </dl>
     </fieldset>
 </form>
-
 
 <fieldset class="formColumn">
     <legend><?php echo $this->getTranslation('My Bookmarks');?></legend>
@@ -58,5 +55,3 @@ $this->placeholder('formHeadline')->set($this->getTranslation('My Dashboard'));
             ?>
     </fieldset>
 </form>
-
-

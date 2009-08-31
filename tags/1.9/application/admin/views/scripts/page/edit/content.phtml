@@ -1,21 +1,18 @@
 <?php
-$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery.FCKEditor.pack.js');
-$this->jQuery()->onLoadCaptureStart();?>
-    $('.fckeditor').fck({
-        path: '<?php echo $this->getBaseUrl() . '/scripts/fckeditor/';?>',
-        toolbar: 'Digitalus',
-        height: 300
-    });<?php
-$this->jQuery()->onLoadCaptureEnd();
+$controls = $this->form->getElements();
+
+// load javascript Html editors
+$this->loadEditors($controls);
+
+/* ************************************************************************** */
 
 // get all of the controls and load them into groups
 $submitButton = $this->form->getElement('submit');
 $this->form->removeElement('submit');
-$controls = $this->form->getElements();
 foreach ($controls as $control) {
     $rel = $control->getAttrib('rel');
     $group = (!empty($rel) ? $rel : 'main');
-    $groups[$group][] = $control->getName();;
+    $groups[$group][] = $control->getName();
 }
 $this->form->addDisplayGroup($groups['main'], 'main', 'main items');
 unset($groups['main']);

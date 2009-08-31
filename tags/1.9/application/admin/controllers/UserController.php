@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id:$
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id:$
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
  */
 
 /** Zend_Controller_Action */
@@ -25,13 +25,15 @@ require_once 'Zend/Controller/Action.php';
 /**
  * Admin User Conroller of Digitalus CMS
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   Digitalus CMS
- * @package    Digitalus_CMS_Controllers
- * @version    $Id: UserController.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Controllers
+ * @version     $Id: UserController.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
+ * @uses        Admin_Form_User
+ * @uses        Model_User
  */
 class Admin_UserController extends Zend_Controller_Action
 {
@@ -161,7 +163,7 @@ class Admin_UserController extends Zend_Controller_Action
         $user->last_name = Digitalus_Filter_Post::get('last_name');
         $user->email = Digitalus_Filter_Post::get('email');
         $user->save();
-        
+
         if (Digitalus_Filter_Post::int('update_password') === 1) {
             $password = Digitalus_Filter_Post::get('password');
             $passwordConfirm = Digitalus_Filter_Post::get('confirmation');

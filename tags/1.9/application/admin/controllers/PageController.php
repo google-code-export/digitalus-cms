@@ -38,6 +38,7 @@ class Admin_PageController extends Zend_Controller_Action
     const META_ACTION = '/admin/page/update-meta-data';
     const PROPERTY_ACTION = '/admin/page/properties';
     const RELATED_ACTION = '/admin/page/related-data';
+    const PUBLISH_ACTION = '/admin/page/publish';
 
     /**
      * Initialize the action
@@ -71,14 +72,14 @@ class Admin_PageController extends Zend_Controller_Action
     public function newAction()
     {
         $frmPage = new Admin_Form_Page();
-        if($this->_request->isPost()) {
-            if($frmPage->isValid($_POST)) {
+        if ($this->_request->isPost()) {
+            if ($frmPage->isValid($_POST)) {
                 $this->_setCreateOptions($frmPage->getValue('parent_id'), $frmPage->getElement('continue_adding_pages')->isChecked(), $frmPage->getValue('content_template'));
                 $page = new Model_Page();
                 $newPage = $page->createPage($frmPage->getValue('page_name'), $frmPage->getValue('parent_id'), $frmPage->getValue('content_template'));
 
                 if ($newPage) {
-                    if($frmPage->getElement('continue_adding_pages')->isChecked()) {
+                    if ($frmPage->getElement('continue_adding_pages')->isChecked()) {
                         $url = 'admin/page/new';
                     } else {
                         $url = 'admin/page/edit/id/' . $newPage->id;
@@ -90,14 +91,15 @@ class Admin_PageController extends Zend_Controller_Action
                         $this->view->getTranslation('Sorry, there was an error adding your page')
                     );
                 }
-                $formVaues = $this->_getCreateOptions();
+                $formValues = $this->_getCreateOptions();
                 $this->_redirect($url);
             }
         } else {
-            $formVaues = $this->_getCreateOptions();
-            $frmPage->getElement('parent_id')->setValue($formVaues->parent_id);
-            $frmPage->getElement('continue_adding_pages')->setValue($formVaues->continue);
-            $frmPage->getElement('content_template')->setValue($formVaues->content_template);
+            $formValues = $this->_getCreateOptions();
+            $frmPage->getElement('parent_id')->setValue($formValues->parent_id);
+            $frmPage->getElement('continue_adding_pages')->setValue($formValues->continue);
+            $frmPage->getElement('publish_pages')->setValue($formValues->publish);
+            $frmPage->getElement('content_template')->setValue($formValues->content_template);
         }
 
         $frmPage->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/new');
@@ -111,15 +113,14 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function editAction()
     {
-
         $page = new Model_Page();
-        $pageId = $this->_request->getParam('id',0);
+        $pageId = $this->_request->getParam('id', 0);
         $version = $this->_request->getParam('version', $page->getDefaultVersion());
         $currentPage = $page->open($pageId, $version);
-        
+
         // load the template and form
         $template = $page->getTemplate($pageId);
-        
+
         // @todo: refactor this into some sort of helper function
         $templateParts = explode('_', $template);
         $currentTemplate = $templateParts[0];
@@ -128,7 +129,7 @@ class Admin_PageController extends Zend_Controller_Action
         $templateConfig = new Zend_Config_Xml($templatePath . '/pages/' . $currentTemplatePage . '.xml');
         $pageTemplate = new Digitalus_Interface_Template();
         $form = $pageTemplate->getForm($templatePath . '/layouts/' . $templateConfig->layout);
-        
+
         $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/edit');
 
         if (!is_object($currentPage)) {
@@ -190,7 +191,6 @@ class Admin_PageController extends Zend_Controller_Action
             . '/url/admin_page_edit_id_' . $pageId
             . '/label/' . $this->view->getTranslation('Page') . ':' . $currentPage->page->name;
         $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
-
     }
 
     /**
@@ -224,7 +224,6 @@ class Admin_PageController extends Zend_Controller_Action
                 $mdlMetaData->set($form->getValues(), $id);
             }
         }
-
         $this->_redirect('admin/page/edit/id/' . $id);
     }
 
@@ -308,6 +307,23 @@ class Admin_PageController extends Zend_Controller_Action
         $parentId = $this->_request->getParam('parent');
         $mdlPage->movePage($id, $parentId);
         $this->_redirect('admin/page/edit/id/' . $id);
+    }
+
+    /**
+     * Publish page action
+     *
+     * @return void
+     */
+    public function publishAction()
+    {
+        if ($this->_request->isPost()) {
+            $action = Digitalus_Filter_Post::text('publish');
+            $id = $this->_request->getParam('id');
+
+            $mdlPage = new Model_Page();
+            $mdlPage->publishPage($id, $action);
+            $this->_redirect('admin/page/edit/id/' . $id);
+        }
     }
 
     /**
@@ -411,6 +427,38 @@ class Admin_PageController extends Zend_Controller_Action
              ->addElement($metaKeywords)
              ->addElement($searchTags)
              ->addElement('submit', 'update', array('label' => $this->view->getTranslation('Update Meta Data')))
+             ->addElement($pageId);
+
+        //set data
+        if (is_array($data)) {
+            $form->populate($data);
+        }
+
+        return $form;
+    }
+
+    /**
+     * Get publish form
+     *
+     * @param  string $data
+     * @return Zend_Form
+     */
+    public function getForm($data)
+    {
+        $form = new Zend_Form();
+        $form->setAction($this->getFrontController()->getBaseUrl() . self::PUBLISH_ACTION )
+             ->setMethod('post');
+
+        $pageId = $form->createElement('hidden', 'page_id');
+        $pageId->addFilter('int');
+
+        $publishRadio = $form->createElement('radio', 'publish');
+        $publishRadio->setLabel($this->view->getTranslation('Publish or Archive Page') . ':')
+                     ->setAttrib('class', 'med');
+
+        // Add elements to form:
+        $form->addElement($publishRadio)
+             ->addElement('submit', 'update', array('label' => $this->view->getTranslation('Publish or Archive')))
              ->addElement($pageId);
 
         //set data

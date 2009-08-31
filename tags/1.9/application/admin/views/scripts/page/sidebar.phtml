@@ -1,7 +1,7 @@
 <?php $this->placeholder('sidebarHeadline')->set($this->getTranslation('Pages'));
 
-$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery.treeview.min.js');
-$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery.cookie.js');
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/jquery.treeview.min.js');
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/jquery.cookie.js');
 $this->jQuery()->onLoadCaptureStart();?>
     $("#fileTree").treeview({
         persist: "cookie",

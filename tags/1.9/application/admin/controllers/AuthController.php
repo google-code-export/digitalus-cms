@@ -83,7 +83,7 @@ class Admin_AuthController extends Zend_Controller_Action
                     if ($uri == '' || $uri == 'admin/auth/login') {
                         $uri = 'admin';
                     }
-                     $this->_redirect($uri);
+                    $this->_redirect($uri);
                 } else {
                     $e = new Digitalus_View_Error();
                     $e->add($this->view->getTranslation('The username or password you entered was not correct.'));
@@ -144,12 +144,12 @@ class Admin_AuthController extends Zend_Controller_Action
                     $m = new Digitalus_View_Message();
                     $m->add(
                         $this->view->getTranslation('Your password has been reset for security and sent to your email address')
-                       );
+                    );
                 } else {
                     $e = new Digitalus_View_Error();
                     $e->add(
                         $this->view->getTranslation('Sorry, there was an error sending you your updated password.  Please contact us for more help.')
-                       );
+                    );
                 }
             } else {
                 $e = new Digitalus_View_Error();
@@ -157,7 +157,7 @@ class Admin_AuthController extends Zend_Controller_Action
                     $this->view->getTranslation('Sorry, we could not locate your account. Please contact us to resolve this issue.')
                 );
             }
-            $url =  'admin/auth/login';
+            $url = 'admin/auth/login';
             $this->_redirect($url);
          }
     }

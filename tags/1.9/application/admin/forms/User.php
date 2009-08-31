@@ -7,8 +7,6 @@ class Admin_Form_User extends Digitalus_Form
         $id = $this->createElement('hidden', 'id');
         // element options
         $id->setDecorators(array('ViewHelper'));
-        // add the element to the form
-        $this->addElement($id);
 
         // create new element
         $firstName = $this->createElement('text', 'first_name');
@@ -16,8 +14,6 @@ class Admin_Form_User extends Digitalus_Form
         $firstName->setLabel($this->getView()->getTranslation('First Name'))
                   ->setRequired(true)
                   ->setAttrib('size', 40);
-        // add the element to the form
-        $this->addElement($firstName);
 
         // create new element
         $lastName = $this->createElement('text', 'last_name');
@@ -25,8 +21,6 @@ class Admin_Form_User extends Digitalus_Form
         $lastName->setLabel($this->getView()->getTranslation('Last Name'))
                  ->setRequired(true)
                  ->setAttrib('size', 40);
-        // add the element to the form
-        $this->addElement($lastName);
 
         // create new element
         $email = $this->createElement('text', 'email');
@@ -35,8 +29,6 @@ class Admin_Form_User extends Digitalus_Form
               ->setRequired(true)
               ->setAttrib('size', 50)
               ->addValidator('EmailAddress');
-        // add the element to the form
-        $this->addElement($email);
 
         // create new element
         $adminRole = $this->createElement('select', 'role');
@@ -47,21 +39,14 @@ class Admin_Form_User extends Digitalus_Form
             'superadmin' => $this->getView()->getTranslation('Super Administrator')
         ));
 
-        // add the element to the form
-        $this->addElement($adminRole);
-
         $updatePassword = $this->createElement('checkbox','update_password');
         $updatePassword->setLabel($this->getView()->getTranslation('Update Password?'));
-        $this->addElement($updatePassword);
-
 
         // create new element
         $password = $this->createElement('password', 'password');
         // element options
         $password->setLabel($this->getView()->getTranslation('Password'));
         $password->setRequired(true);
-        // add the element to the form
-        $this->addElement($password);
 
         // create new element
         $passwordConfirm = $this->createElement('password', 'password_confirm');
@@ -70,9 +55,19 @@ class Admin_Form_User extends Digitalus_Form
                         ->addValidator(new Digitalus_Validate_IdenticalField('password'))
                         ->setRequired(true);
 
-        // add the element to the form
-        $this->addElement($passwordConfirm);
-        $submit = $this->addElement('submit', 'submit', array('label' => $this->getView()->getTranslation('Submit')));
+        $submit = $this->createElement('submit', 'submit');
+        $submit->setLabel($this->getView()->getTranslation('Submit'));
+
+        // add the elements to the form
+        $this->addElement($id)
+             ->addElement($firstName)
+             ->addElement($lastName)
+             ->addElement($email)
+             ->addElement($adminRole)
+             ->addElement($updatePassword)
+             ->addElement($password)
+             ->addElement($passwordConfirm)
+             ->addElement($submit);
     }
 }
 ?>
