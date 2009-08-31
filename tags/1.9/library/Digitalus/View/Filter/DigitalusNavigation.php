@@ -57,7 +57,7 @@ class Zend_View_Filter_DigitalusNavigation extends Digitalus_Content_Filter
                     return $this->view->renderMenu($parentId, $levels, null, $id);
                     break;
                 case 'submenu':
-                    return $this->view->renderSubmenu($levels,$id);
+                    return $this->view->renderSubmenu($levels, $id);
                     break;
                 case 'breadcrumbs':
                     return $this->view->renderBreadcrumbs($separator, $root);

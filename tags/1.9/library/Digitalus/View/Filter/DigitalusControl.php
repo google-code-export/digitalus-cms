@@ -52,6 +52,10 @@ class Zend_View_Filter_DigitalusControl extends Digitalus_Content_Filter
                 $controlContent = $content[$attr['id']];
                 switch ($attr['type']) {
                     case 'fckeditor':
+                    case 'markitup':
+                    case 'tinymce':
+                    case 'wymeditor':
+                    case 'wysiwyg':
                         $xhtml = '<div id="' . $attr['id'] . '_wrapper">' . $controlContent . '</div>';
                         break;
                     case 'text':
@@ -60,6 +64,11 @@ class Zend_View_Filter_DigitalusControl extends Digitalus_Content_Filter
                         break;
                     case 'moduleSelector':
                         $xhtml = $this->view->renderModule($controlContent);
+                        break;
+                    case 'image':
+                        $config = Zend_Registry::get('config');
+                        $mediaFolder = $config->filepath->media;
+                        $xhtml = $this->view->renderImage($controlContent);
                         break;
                 }
                 if (isset($attr['tag']) && !empty($xhtml)) {

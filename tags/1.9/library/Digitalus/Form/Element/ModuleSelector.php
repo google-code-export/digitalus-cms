@@ -1,16 +1,14 @@
 <?php
+require_once ('Digitalus/Form/Element/Xml.php');
 
-require_once ('Zend/Form/Element.php');
-
-class Digitalus_Form_Element_ModuleSelector extends Digitalus_Form_Element_Xml  {
-
+class Digitalus_Form_Element_ModuleSelector extends Digitalus_Form_Element_Xml
+{
     public function init()
     {
-        $this->setDecorators(array(array("ViewScript", array(
-            'viewScript'    => 'module/partials/load-module.phtml',
-            'class'    =>    'partial'
+        $this->setDecorators(array(array('ViewScript', array(
+            'viewScript' => 'module/partials/load-module.phtml',
+            'class'      => 'partial'
         ))));
     }
 }
-
 ?>
