@@ -218,9 +218,9 @@ class Digitalus_Installer_Database
             "INSERT INTO `content_nodes` VALUES (10, 'page_3', 'teaser', 'en', null, '');",
             "INSERT INTO `content_nodes` VALUES (11, 'page_3', 'content', 'en', null, 'Sorry, our site is currently offline for maintenance.');",
             "INSERT INTO `data` VALUES (1, 'site_settings', '<?xml version=\"1.0\"?>\n<settings><name>Digitalus CMS Site</name><online>1</online><addMenuLinks>0</addMenuLinks><default_locale/><default_language>en</default_language><default_charset>utf-8</default_charset><default_timezone>America/Los_Angeles</default_timezone><default_date_format/><default_currency_format/><default_email/><default_email_sender/><use_smtp_mail>0</use_smtp_mail><smtp_host/><smtp_username/><smtp_password/><google_tracking/><google_verify/><title_separator> - </title_separator><add_menu_links>1</add_menu_links><publish_pages>0</publish_pages><doc_type>XHTML1_TRANSITIONAL</doc_type><home_page>1</home_page><page_not_found>2</page_not_found><offline_page>3</offline_page><meta_description/><meta_keywords/><xml_declaration/></settings>\n');",
-            "INSERT INTO `pages` VALUES (1, 1, '1231952304', null, null, null, 'Home', '', 'content', 'default_default', null, 0, 2, 1, 1, null);",
-            "INSERT INTO `pages` VALUES (2, 1, '1234630372', null, null, null, '404 Page', '', 'content', 'default_default', null, 0, 0, null, 0, null);",
-            "INSERT INTO `pages` VALUES (3, 1, '1234630436', null, null, null, 'Site Offline', '', 'content', 'default_default', null, 0, 1, null, 0, null);"
+            "INSERT INTO `pages` VALUES (1, 1, '" . time() ."', '" . time() ."', null, 1, 'Home', '', 'content', 'default_default', null, 0, 2, 1, 1, null);",
+            "INSERT INTO `pages` VALUES (2, 1, '" . time() ."', '" . time() ."', null, 1, '404 Page', '', 'content', 'default_default', null, 0, 0, null, 0, null);",
+            "INSERT INTO `pages` VALUES (3, 1, '" . time() ."', '" . time() ."', null, 1, 'Site Offline', '', 'content', 'default_default', null, 0, 1, null, 0, null);"
         );
         foreach ($queries as $query) {
             $this->_db->query($query);
