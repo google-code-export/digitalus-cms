@@ -11,7 +11,7 @@ class Digitalus_Installer_Database
             'host'     => $host,
             'username' => $username,
             'password' => $password,
-            'dbname'   => $name
+            'dbname'   => $name,
             'prefix'   => $prefix
         );
         $this->_db = Zend_Db::factory($adapter, $this->_config);
