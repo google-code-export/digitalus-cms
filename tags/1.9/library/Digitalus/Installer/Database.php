@@ -221,25 +221,25 @@ class Digitalus_Installer_Database
 
     private function _populate()
     {
-        $table = $this->_getTableName('content_nodes');
+        $content_nodes = $this->_getTableName('content_nodes');
+        $data = $this->_getTableName('data');
+        $pages = $this->_getTableName('pages');
         $queries = array(
-            "INSERT INTO `" . $table . "` VALUES (1, 'page_1', 'content', null, null, 'Welcome to Digitalus CMS');",
-            "INSERT INTO `" . $table . "` VALUES (2, 'page_1', 'tagline', 'en', null, 'About Digitalus');",
-            "INSERT INTO `" . $table . "` VALUES (3, 'page_1', 'content', 'en', null, 'Congratulations! You have successfully installed Digitalus CMS.<br>To get started why don\'t you log in and change this page:<br><ol><li>Log in to site administration with the username and password you set up in the installer.</li><li>Go to the pages section.</li><li>Click on the Home page on the left sidebar.</li><li>Now update it and click update page!</li></ol>If you have any questions here are some helpful links:<br><ul><li><a href=\"http://forum.digitaluscms.com\">Digitalus Forum</a></li><li><a href=\"http://wiki.digitaluscms.com\">Digitalus Documentation</a><br></li></ul>');",
-            "INSERT INTO `" . $table . "` VALUES (4, 'page_1', 'headline', 'en', null, 'Digitalus CMS');",
-            "INSERT INTO `" . $table . "` VALUES (5, 'page_1', 'teaser', 'en', null, '');",
-            "INSERT INTO `" . $table . "` VALUES (6, 'page_2', 'headline', 'en', null, 'HTTP/1.1 404 Not Found');",
-            "INSERT INTO `" . $table . "` VALUES (7, 'page_2', 'teaser', 'en', null, '');",
-            "INSERT INTO `" . $table . "` VALUES (8, 'page_2', 'content', 'en', null, 'Sorry, the page you are looking for has moved or been renamed.');",
-            "INSERT INTO `" . $table . "` VALUES (9, 'page_3', 'headline', 'en', null, 'Site Offline');",
-            "INSERT INTO `" . $table . "` VALUES (10, 'page_3', 'teaser', 'en', null, '');",
-            "INSERT INTO `" . $table . "` VALUES (11, 'page_3', 'content', 'en', null, 'Sorry, our site is currently offline for maintenance.');",
-        $table = $this->_getTableName('data');
-            "INSERT INTO `" . $table . "` VALUES (1, 'site_settings', '<?xml version=\"1.0\"?>\n<settings><name>Digitalus CMS Site</name><online>1</online><addMenuLinks>0</addMenuLinks><default_locale/><default_language>en</default_language><default_charset>utf-8</default_charset><default_timezone>America/Los_Angeles</default_timezone><default_date_format/><default_currency_format/><default_email/><default_email_sender/><use_smtp_mail>0</use_smtp_mail><smtp_host/><smtp_username/><smtp_password/><google_tracking/><google_verify/><title_separator> - </title_separator><add_menu_links>1</add_menu_links><publish_pages>0</publish_pages><doc_type>XHTML1_TRANSITIONAL</doc_type><home_page>1</home_page><page_not_found>2</page_not_found><offline_page>3</offline_page><meta_description/><meta_keywords/><xml_declaration/></settings>\n');",
-        $table = $this->_getTableName('pages');
-            "INSERT INTO `" . $table . "` VALUES (1, 1, '" . time() ."', '" . time() ."', null, 1, 'Home', '', 'content', 'default_default', null, 0, 2, 1, 1, null);",
-            "INSERT INTO `" . $table . "` VALUES (2, 1, '" . time() ."', '" . time() ."', null, 1, '404 Page', '', 'content', 'default_default', null, 0, 0, null, 0, null);",
-            "INSERT INTO `" . $table . "` VALUES (3, 1, '" . time() ."', '" . time() ."', null, 1, 'Site Offline', '', 'content', 'default_default', null, 0, 1, null, 0, null);"
+            "INSERT INTO `" . $content_nodes . "` VALUES (1, 'page_1', 'content', null, null, 'Welcome to Digitalus CMS');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (2, 'page_1', 'tagline', 'en', null, 'About Digitalus');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (3, 'page_1', 'content', 'en', null, 'Congratulations! You have successfully installed Digitalus CMS.<br>To get started why don\'t you log in and change this page:<br><ol><li>Log in to site administration with the username and password you set up in the installer.</li><li>Go to the pages section.</li><li>Click on the Home page on the left sidebar.</li><li>Now update it and click update page!</li></ol>If you have any questions here are some helpful links:<br><ul><li><a href=\"http://forum.digitaluscms.com\">Digitalus Forum</a></li><li><a href=\"http://wiki.digitaluscms.com\">Digitalus Documentation</a><br></li></ul>');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (4, 'page_1', 'headline', 'en', null, 'Digitalus CMS');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (5, 'page_1', 'teaser', 'en', null, '');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (6, 'page_2', 'headline', 'en', null, 'HTTP/1.1 404 Not Found');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (7, 'page_2', 'teaser', 'en', null, '');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (8, 'page_2', 'content', 'en', null, 'Sorry, the page you are looking for has moved or been renamed.');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (9, 'page_3', 'headline', 'en', null, 'Site Offline');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (10, 'page_3', 'teaser', 'en', null, '');",
+            "INSERT INTO `" . $content_nodes . "` VALUES (11, 'page_3', 'content', 'en', null, 'Sorry, our site is currently offline for maintenance.');",
+            "INSERT INTO `" . $data . "` VALUES (1, 'site_settings', '<?xml version=\"1.0\"?>\n<settings><name>Digitalus CMS Site</name><online>1</online><addMenuLinks>0</addMenuLinks><default_locale/><default_language>en</default_language><default_charset>utf-8</default_charset><default_timezone>America/Los_Angeles</default_timezone><default_date_format/><default_currency_format/><default_email/><default_email_sender/><use_smtp_mail>0</use_smtp_mail><smtp_host/><smtp_username/><smtp_password/><google_tracking/><google_verify/><title_separator> - </title_separator><add_menu_links>1</add_menu_links><publish_pages>0</publish_pages><doc_type>XHTML1_TRANSITIONAL</doc_type><home_page>1</home_page><page_not_found>2</page_not_found><offline_page>3</offline_page><meta_description/><meta_keywords/><xml_declaration/></settings>\n');",
+            "INSERT INTO `" . $pages . "` VALUES (1, 1, '" . time() ."', '" . time() ."', null, 1, 'Home', '', 'content', 'default_default', null, 0, 2, 1, 1, null);",
+            "INSERT INTO `" . $pages . "` VALUES (2, 1, '" . time() ."', '" . time() ."', null, 1, '404 Page', '', 'content', 'default_default', null, 0, 0, null, 0, null);",
+            "INSERT INTO `" . $pages . "` VALUES (3, 1, '" . time() ."', '" . time() ."', null, 1, 'Site Offline', '', 'content', 'default_default', null, 0, 1, null, 0, null);"
         );
         foreach ($queries as $query) {
             $this->_db->query($query);
