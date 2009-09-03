@@ -63,12 +63,11 @@ class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstrac
             $width = round($srcWidth * $percentage);
             $height = round($srcHeight * $percentage);
 
+            $attributes = null;
             if ($attribs) {
                 foreach ($attribs as $k => $v) {
                     $attributes .= $k . "='" . $v . "' ";
                 }
-            } else {
-                $attributes = null;
             }
             return '<img width="' . $width . '" height="' . $height . '" src="' . $src . '" ' . $attributes . ' />';
         }

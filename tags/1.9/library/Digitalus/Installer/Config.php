@@ -56,12 +56,13 @@ class Digitalus_Installer_Config
         $this->save();
     }
 
-    public function setDbConnection($name, $host, $username, $password)
+    public function setDbConnection($name, $host, $username, $password, $prefix = '')
     {
         $this->_innerData->production->database->host = $host;
         $this->_innerData->production->database->username = $username;
         $this->_innerData->production->database->password = $password;
         $this->_innerData->production->database->dbname = $name;
+        $this->_innerData->production->database->prefix = $prefix;
         $this->save();
     }
 
@@ -95,5 +96,4 @@ class Digitalus_Installer_Config
         $this->_innerData->asXml(self::PATH_TO_CONFIG);
     }
 }
-
 ?>

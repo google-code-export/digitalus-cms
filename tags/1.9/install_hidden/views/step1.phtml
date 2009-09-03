@@ -48,6 +48,11 @@
         <?php echo $this->formPassword('db_password')?>
         <br class="clear" />
     </div>
+    <div class="formRow">
+        <label><?php echo $this->translate('Database Table Prefix') . ':';?></label>
+        <?php echo $this->formText('db_prefix', $this->data['db_prefix'])?>
+        <br class="clear" />
+    </div>
 
     <h2><?php echo $this->translate('Install CMS');?></h2>
     <p><?php echo $this->translate('Please double check all of the information on this page. If everything looks right then click <b>Install Now</b> to install Digitalus CMS');?></p>

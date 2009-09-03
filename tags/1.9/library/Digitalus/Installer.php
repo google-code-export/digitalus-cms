@@ -141,7 +141,7 @@ class Digitalus_Installer
         }
     }
 
-    public function setDbConnection($name, $host, $username, $password)
+    public function setDbConnection($name, $host, $username, $password, $prefix = '')
     {
         $dbError = false;
         if (empty($name)) {
@@ -158,8 +158,8 @@ class Digitalus_Installer
         }
 
         if (!$dbError) {
-            $connection = $this->_db->connect($name, $host, $username, $password, $this->_config->getDbAdapterKey());
-            $this->_config->setDbConnection($name, $host, $username, $password);
+            $connection = $this->_db->connect($name, $host, $username, $password, $prefix, $this->_config->getDbAdapterKey());
+            $this->_config->setDbConnection($name, $host, $username, $password, $prefix);
             return $connection;
         } else {
             return false;

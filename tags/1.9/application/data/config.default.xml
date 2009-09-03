@@ -10,6 +10,7 @@
             <username></username>
             <password></password>
             <dbname></dbname>
+            <prefix></prefix>
         </database>
         <template>
             <pathToTemplates>templates</pathToTemplates>
