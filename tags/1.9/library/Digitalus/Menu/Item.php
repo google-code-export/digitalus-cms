@@ -122,4 +122,3 @@ class Digitalus_Menu_Item
         return '<a href="' . $baseUrl . '/' . $cleanLink . '"' . $id . $class . '>' . $this->label . '</a>' . PHP_EOL;
     }
 }
-?>

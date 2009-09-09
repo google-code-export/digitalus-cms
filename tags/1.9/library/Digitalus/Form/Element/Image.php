@@ -11,4 +11,3 @@ class Digitalus_Form_Element_Image extends Digitalus_Form_Element_Xml
 #        ))));
     }
 }
-?>

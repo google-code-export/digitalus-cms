@@ -10,5 +10,3 @@ class Digitalus_Toolbox_Data {
         }
     }
 }
-
-?>

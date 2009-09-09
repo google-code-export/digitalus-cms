@@ -32,4 +32,3 @@ class Show_Form extends Digitalus_Form
              ->addElement($submit);
     }
 }
-?>

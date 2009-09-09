@@ -205,4 +205,3 @@ Zend_Debug::dump($path);
         return APPLICATION_PATH . '/../' . $config->filepath->media;
     }
 }
-?>

@@ -26,4 +26,3 @@ class Digitalus_Interface_Grid_ContentWrapper extends Digitalus_Interface_Grid_A
         }
     }
 }
-?>

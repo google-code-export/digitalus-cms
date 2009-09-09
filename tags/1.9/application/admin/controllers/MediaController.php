@@ -230,4 +230,3 @@ class Admin_MediaController extends Zend_Controller_Action
         $this->_forward('open-folder');
     }
 }
-?>

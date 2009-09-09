@@ -14,4 +14,3 @@ abstract class Search_Adapter_Abstract
         $this->_pages[] = new Search_Adapter_Page($path, $title, $teaser, $content, $searchTags);
     }
 }
-?>

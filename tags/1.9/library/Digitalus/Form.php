@@ -186,4 +186,3 @@ class Digitalus_Form extends Zend_Form
         $this->setTranslator($translator);
     }
 }
-?>

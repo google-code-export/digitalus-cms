@@ -96,4 +96,3 @@ class Digitalus_Installer_Config
         $this->_innerData->asXml(self::PATH_TO_CONFIG);
     }
 }
-?>

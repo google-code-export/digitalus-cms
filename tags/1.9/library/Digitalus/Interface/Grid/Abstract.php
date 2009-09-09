@@ -8,7 +8,7 @@ abstract class Digitalus_Interface_Grid_Abstract
     const BEFORE = 'before';
     const AFTER = 'after';
     const CLEAR = 'clear';
-    
+
     public function init(){}
 
     public function loadView()
@@ -22,4 +22,3 @@ abstract class Digitalus_Interface_Grid_Abstract
     }
 
 }
-?>

@@ -68,4 +68,3 @@ class Digitalus_Interface_Grid extends Digitalus_Interface_Grid_Abstract {
         }
     }
 }
-?>

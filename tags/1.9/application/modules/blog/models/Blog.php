@@ -35,4 +35,3 @@ class Blog_Blog extends Model_Page
         }
     }
 }
-?>

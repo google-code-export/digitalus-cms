@@ -1130,5 +1130,3 @@ class Digitalus_Content_Renderer_Textile
 
 
 } // end class
-
-?>

@@ -15,4 +15,3 @@ abstract class Digitalus_Module_Service_Abstract
         }
     }
 }
-?>

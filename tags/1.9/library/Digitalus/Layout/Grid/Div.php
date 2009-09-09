@@ -23,5 +23,3 @@ abstract class Digitalus_Layout_Grid_Div {
     }
 
 }
-
-?>

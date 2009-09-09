@@ -33,4 +33,3 @@ if(strlen($html) > 0) {
 
 echo ('0');
 }
-?>

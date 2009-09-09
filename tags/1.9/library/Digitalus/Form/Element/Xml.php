@@ -28,4 +28,3 @@ class Digitalus_Form_Element_Xml extends Zend_Form_Element
         return $this->getValue(false);
     }
 }
-?>

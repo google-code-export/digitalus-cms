@@ -66,4 +66,3 @@ class Slide_Form extends Digitalus_Form
              ->addElement($submit);
     }
 }
-?>

@@ -77,4 +77,3 @@ class Digitalus_Interface_Template
         return $this->load(BASE_PATH . '/' . $config->pathToTemplates . '/' . $scope . '/' . $template . '/pages/' . $page . '.xml');
     }
 }
-?>

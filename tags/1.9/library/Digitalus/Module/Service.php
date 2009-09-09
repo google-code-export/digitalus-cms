@@ -33,4 +33,3 @@ class Digitalus_Module_Service extends Digitalus_Abstract
         return $service->getService();
     }
 }
-?>

@@ -22,5 +22,3 @@ class Digitalus_Module_Property {
         return null;
     }
 }
-
-?>

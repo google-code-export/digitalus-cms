@@ -33,5 +33,3 @@ class Digitalus_Media_File {
     }
 
 }
-
-?>

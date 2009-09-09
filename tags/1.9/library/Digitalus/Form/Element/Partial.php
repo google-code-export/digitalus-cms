@@ -19,5 +19,3 @@ class Digitalus_Form_Element_Partial extends Digitalus_Form_Element_Xml  {
         $this->partial = $script;
     }
 }
-
-?>

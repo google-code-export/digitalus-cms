@@ -47,5 +47,3 @@ class Digitalus_Layout_Grid {
     }
 
 }
-
-?>

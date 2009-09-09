@@ -262,4 +262,3 @@ class Digitalus_Installer
         }
     }
 }
-?>

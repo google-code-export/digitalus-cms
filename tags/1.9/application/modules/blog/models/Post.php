@@ -70,4 +70,3 @@ class Blog_Post extends Model_Page
         $this->edit($data);
     }
 }
-?>

@@ -41,4 +41,3 @@ class Digitalus_Media_Filetype {
         return false;
     }
 }
-?>

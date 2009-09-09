@@ -21,4 +21,3 @@ class Blog_Form extends Zend_Form
              ->addElement($submit);
     }
 }
-?>

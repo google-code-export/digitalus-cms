@@ -165,7 +165,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $siteSettings = $this->getResource('siteSettings');
 
         // Set default locale
-        setlocale(LC_ALL, $config->language->defaultLocale);
         $locale = new Zend_Locale($config->language->defaultLocale);
 
         // Set default timezone
@@ -240,4 +239,3 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         }
     }
 }
-?>

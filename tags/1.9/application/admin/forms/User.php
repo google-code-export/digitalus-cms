@@ -70,4 +70,3 @@ class Admin_Form_User extends Digitalus_Form
              ->addElement($submit);
     }
 }
-?>

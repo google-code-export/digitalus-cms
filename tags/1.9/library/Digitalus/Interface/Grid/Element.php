@@ -127,4 +127,3 @@ class Digitalus_Interface_Grid_Element extends Digitalus_Interface_Grid_Abstract
         }
     }
 }
-?>

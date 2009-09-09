@@ -1,5 +1,5 @@
 <?php
-class Digitalus_Form_Element_Fckeditor extends Zend_Form_Element_Textarea 
+class Digitalus_Form_Element_Fckeditor extends Zend_Form_Element_Textarea
 {
     public function init()
     {
@@ -7,4 +7,3 @@ class Digitalus_Form_Element_Fckeditor extends Zend_Form_Element_Textarea
         $this->setDecorators(array('Composite'));
     }
 }
-?>

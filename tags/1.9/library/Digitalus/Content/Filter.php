@@ -27,4 +27,3 @@ class Digitalus_Content_Filter
         }
     }
 }
-?>

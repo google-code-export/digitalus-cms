@@ -34,4 +34,3 @@ class Digitalus_Menu {
         }
     }
 }
-?>

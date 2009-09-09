@@ -56,4 +56,3 @@ class Admin_UtilController extends Zend_Controller_Action
     }
 
 }
-?>

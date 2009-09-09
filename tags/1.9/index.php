@@ -36,4 +36,3 @@ if (file_exists('./install/install.php')) {
     $application->bootstrap()
                 ->run();
 }
-?>

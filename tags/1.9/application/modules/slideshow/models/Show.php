@@ -36,4 +36,3 @@ class Slideshow_Show extends Model_Page
         }
     }
 }
-?>

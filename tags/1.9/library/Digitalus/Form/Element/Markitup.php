@@ -7,4 +7,3 @@ class Digitalus_Form_Element_Markitup extends Zend_Form_Element_Textarea
         $this->setDecorators(array('Composite'));
     }
 }
-?>

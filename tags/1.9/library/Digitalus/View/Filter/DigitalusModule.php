@@ -52,4 +52,3 @@ class Zend_View_Filter_DigitalusModule extends Digitalus_Content_Filter
         return null;
     }
 }
-?>

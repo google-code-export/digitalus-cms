@@ -30,4 +30,3 @@ if (version_compare(phpversion(), '5', '<')) {
 } else {
     include_once('fckeditor_php5.php');
 }
-?>

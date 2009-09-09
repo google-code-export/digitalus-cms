@@ -1,5 +1,5 @@
 <?php
-class Digitalus_View_Helper_DigitalusTag extends Zend_View_Helper_Abstract 
+class Digitalus_View_Helper_DigitalusTag extends Zend_View_Helper_Abstract
 {
     public function digitalusTag($tag, $id, $attr = array())
     {
@@ -12,4 +12,3 @@ class Digitalus_View_Helper_DigitalusTag extends Zend_View_Helper_Abstract
         return  $xhtml;
     }
 }
-?>

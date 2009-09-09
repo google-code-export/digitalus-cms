@@ -45,5 +45,3 @@ class Digitalus_Language {
         return new Zend_Session_Namespace('currentLanguage');
     }
 }
-
-?>

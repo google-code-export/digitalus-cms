@@ -61,4 +61,3 @@ class Admin_Form_Page extends Digitalus_Form
         $this->addElement($submit);
     }
 }
-?>

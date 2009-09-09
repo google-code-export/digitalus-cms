@@ -59,4 +59,3 @@ class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helpe
         return implode($separator, $arrLinks);
     }
 }
-?>

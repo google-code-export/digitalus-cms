@@ -122,4 +122,3 @@ class Slideshow_Slide extends Model_Page
     }
 
 }
-?>

@@ -56,4 +56,3 @@ class Digitalus_Installer_Environment
         }
     }
 }
-?>

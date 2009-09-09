@@ -11,4 +11,3 @@ class Digitalus_Form_Element_ModuleSelector extends Digitalus_Form_Element_Xml
         ))));
     }
 }
-?>

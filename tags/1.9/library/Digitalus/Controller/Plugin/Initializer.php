@@ -129,7 +129,8 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
             $adapter = new Zend_Translate(
                 'csv',
                 $config->language->path . '/' . $end . '/' . $languageFiles[$key] . '.' . $end . '.csv',
-                $key
+                $key,
+                array('disableNotices' => true)
             );
             Zend_Registry::set('Zend_Translate', $adapter);
 
@@ -203,4 +204,3 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
         }
     }
 }
-?>

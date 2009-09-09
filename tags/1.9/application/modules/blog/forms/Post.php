@@ -33,4 +33,3 @@ class Post_Form extends Zend_Form
              ->addElement($submit);
     }
 }
-?>

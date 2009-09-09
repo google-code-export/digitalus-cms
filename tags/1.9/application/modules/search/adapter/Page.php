@@ -35,4 +35,3 @@ class Search_Adapter_Page
         $this->_charset = $settings->get('default_charset');
     }
 }
-?>

@@ -23,4 +23,3 @@ class Digitalus_Module_Service_Response
         return $this->_response->asXml();
     }
 }
-?>
