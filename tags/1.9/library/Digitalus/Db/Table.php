@@ -28,19 +28,21 @@ class Digitalus_Db_Table extends Zend_Db_Table_Abstract
 
     public function __construct($config = array())
     {
-        $this->_getTableName($this->_name);
+        $this->_name = self::getTableName($this->_name);
         parent::__construct($config);
     }
 
-    protected function _getTableName($table)
+    public static function getTableName($tableName, $prefix = null)
     {
-        $registry = Zend_Registry::getInstance();
-        $config = $registry->get('config');
+        if (!isset($prefix) || empty($prefix)) {
+            $registry = Zend_Registry::getInstance();
+            $config = $registry->get('config');
+            $prefix = $config->database->prefix;
+        }
 
-        $prefix = trim($config->database->prefix);
-        $this->_name = $prefix . $this->_name;
+        $name = $prefix . $tableName;
 
-        return $this->_name;
+        return $name;
     }
 
     public function insertFromPost()

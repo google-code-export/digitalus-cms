@@ -3,6 +3,12 @@ class Model_Reference extends Zend_Db_Table_Abstract
 {
     protected $_name = 'references';
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_name = Digitalus_Db_Table::getTableName($this->_name);
+    }
+
     /**
      * validates the relationship, then inserts it
      *

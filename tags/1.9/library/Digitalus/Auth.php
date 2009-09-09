@@ -57,28 +57,25 @@ class Digitalus_Auth
      *
      * @var string
      */
-    protected  $_userTable = "users";
+    protected  $_userTable = 'users';
 
     /**
      * the indentity column
      *
      * @var string
      */
-    protected  $_identityColumn = "email";
+    protected  $_identityColumn = 'email';
 
     /**
      * the credential column
      *
      * @var string
      */
-    protected  $_credentialColumn = "password";
-    
-    const USER_NAMESPACE = 'adminUser';
-    
-    protected $_resultRowColumns = array('id', 'user_group_id', 'first_name', 'last_name', 'email', 'role', 'acl_resources');
-    
-    
+    protected  $_credentialColumn = 'password';
 
+    const USER_NAMESPACE = 'adminUser';
+
+    protected $_resultRowColumns = array('id', 'user_group_id', 'first_name', 'last_name', 'email', 'role', 'acl_resources');
 
     /**
      * build the login request
@@ -88,19 +85,29 @@ class Digitalus_Auth
      */
     public function __construct($username = null, $password = null)
     {
-        //set up the db authentication
+        // set up the db authentication
         // zend auth uses FETCH_ASSOC for the fetchmode
         $this->_dbAdapter = clone (Zend_Db_Table::getDefaultAdapter());
-        $this->_dbAdapter->setFetchMode(zend_db::FETCH_ASSOC );
+        $this->_dbAdapter->setFetchMode(ZEND_DB::FETCH_ASSOC);
 
-        $this->_authAdapter = new Zend_Auth_Adapter_DbTable($this->_dbAdapter, $this->_userTable, $this->_identityColumn, $this->_credentialColumn);
+        $this->_authAdapter = new Zend_Auth_Adapter_DbTable($this->_dbAdapter, $this->_getTableName($this->_userTable), $this->_identityColumn, $this->_credentialColumn);
 
         $this->_username = $username;
         $this->_password = md5($password);
 
-        //set up storage
+        // set up storage
         // @todo: i can not get zend to persist the identities for some reason .. figure out why
         $this->_storage = new Zend_Session_Namespace(self::USER_NAMESPACE);
+    }
+
+    protected function _getTableName($table)
+    {
+        $registry = Zend_Registry::getInstance();
+        $config = $registry->get('config');
+
+        $prefix = trim($config->database->prefix);
+
+        return $prefix . $table;
     }
 
     /**

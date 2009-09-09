@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * Digitalus CMS
  *
@@ -29,6 +27,12 @@ class Model_AccessLog extends Zend_Db_Table_Abstract
      * @var string
      */
     protected $_name = 'access_log';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_name = Digitalus_Db_Table::getTableName($this->_name);
+    }
 
     /**
      * inserts the currenta user id, uri, ip address, and date to the cms access log

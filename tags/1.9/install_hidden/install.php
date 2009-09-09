@@ -20,6 +20,12 @@ Zend_Registry::set('validLanguages', $validLanguages);
 
 if (isset($_GET['language']) && !empty($_GET['language'])) {
     $language = $_GET['language'];
+    $locale = new Zend_Locale($validLanguages[$language]);
+} else {
+    $locale = new Zend_Locale();
+    $lang = $locale->getLanguage();
+    $languages = array_flip($validLanguages);
+    $language = $languages[$lang];
 }
 if (!in_array($language, array_keys($validLanguages))) {
     $language = 'english';
@@ -29,11 +35,13 @@ Zend_Registry::set('language', $language);
 $adapter = new Zend_Translate(
     'csv',
     './application/data/language/back/' . $language . '.back.csv',
-    $validLanguages[$language]
+    $validLanguages[$language],
+    array('disableNotices' => true)
     );
 Zend_Registry::set('Zend_Translate', $adapter);
 
-$view->translate()->setLocale($validLanguages[$language]);
+#$view->translate()->setLocale($validLanguages[$language]);
+$view->translate()->setLocale($locale);
 
 if (!$installer->isInstalled()) {
     // Fetch the current step
@@ -62,7 +70,8 @@ if (!$installer->isInstalled()) {
                     $_POST['db_name'],
                     $_POST['db_host'],
                     $_POST['db_username'],
-                    $_POST['db_password']
+                    $_POST['db_password'],
+                    $_POST['db_prefix']
                 );
                 $dbTested = $installer->testDb();
                 if ($dbTested) {
@@ -89,5 +98,3 @@ if (!$installer->isInstalled()) {
 }
 $view->messages = $installer->getMessages();
 echo $view->render('page.phtml');
-
-?>

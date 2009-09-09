@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * Digitalus CMS
  *
@@ -29,6 +27,12 @@ class Model_ErrorLog extends Zend_Db_Table_Abstract
      * @var string
      */
     protected $_name = 'error_log';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_name = Digitalus_Db_Table::getTableName($this->_name);
+    }
 
     /**
      * logs the current request in the 404 error log

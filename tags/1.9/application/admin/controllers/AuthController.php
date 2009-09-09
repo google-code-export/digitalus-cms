@@ -75,7 +75,6 @@ class Admin_AuthController extends Zend_Controller_Action
                 $e->add($this->view->getTranslation('You must enter a password.'));
             }
 
-
             if (!$e->hasErrors()) {
                 $auth = new Digitalus_Auth($username, $password);
                 $result = $auth->authenticate();

@@ -29,4 +29,11 @@ class Model_Person extends Zend_Db_Table_Abstract
      * @var string
      */
     protected $_name = 'people';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_name = Digitalus_Db_Table::getTableName($this->_name);
+    }
+
 }
