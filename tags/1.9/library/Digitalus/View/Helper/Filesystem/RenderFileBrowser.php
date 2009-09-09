@@ -40,7 +40,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helper_Abstract
 {
-    public function renderFileBrowser($parentId, $link, $basePath = null, $level = 0, $id = 'fileTree', $withRoot = false)
+    public function renderFileBrowser($parentId, $link, $basePath = null, $level = 0, $id = 'fileTree', $withRoot = false, $current = null, $exclude = null)
     {
         $links = array();
         $tree = new Model_Page();
@@ -55,24 +55,31 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
         foreach ($children as $child) {
             if ($tree->hasChildren($child)) {
                 $newLevel = $level + 1;
-                $submenu = $this->view->renderFileBrowser($child->id, $link, $basePath, $newLevel);
+                $submenu = $this->view->renderFileBrowser($child->id, $link, $basePath, $newLevel, null, null, $current);
                 $icon = 'folder.png';
             } else {
-                $icon = 'page_white_text.png';
+                if ($child->id == $current) {
+                    $icon = 'page_white_gear.png';
+                } else {
+                    $icon = 'page_white_text.png';
+                }
                 $submenu = false;
             }
-
             if (isset($child->label) && !empty($child->label)) {
                 $label = $child->label;
             } else {
                 $label = $child->name;
             }
-            $links[] = '<li class="menuItem">' . $this->view->link($label, $link . $child->id, $icon) . $submenu . '</li>';
+            if ($child->id == $exclude) {
+                $links[] = '<li class="menuItem"><img class="icon" style="margin-right: 10px" alt="' . $label . '" src="/images/icons/' . $icon . '"/>' . $label . $submenu . '</li>';
+            } else {
+                $links[] = '<li class="menuItem">' . $this->view->link($label, $link . $child->id, $icon) . $submenu . '</li>';
+            }
         }
 
         if (is_array($links)) {
             if ($level == 0) {
-                $strId = "id='{$id}'";
+                $strId = 'id="' . $id . '"';
             } else {
                 $strId = null;
             }
