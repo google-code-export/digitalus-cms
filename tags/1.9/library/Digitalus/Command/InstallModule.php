@@ -63,7 +63,7 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
                 } else {
                     $label = $module;
                 }
-                $sql  = "INSERT INTO acl_resources (label, controller, admin_section) VALUES ";
+                $sql  = "INSERT INTO " . Digitalus_Db_Table::getTableName('acl_resources') . " (label, controller, admin_section) VALUES ";
                 $sql .= "('{$label}', '{$module}', 'module')";
                 $this->_db->query($sql);
                 $this->log($this->view->getTranslation('Module installed'));
@@ -123,7 +123,7 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
         if (!$parentId > 0) {
             $parentId = 0;
         }
-        $sql = "SELECT id FROM content WHERE title = '{$page}' AND content_type = 'page' AND parent_id = " . $parentId;
+        $sql = "SELECT id FROM " . Digitalus_Db_Table::getTableName('content') . " WHERE title = '{$page}' AND content_type = 'page' AND parent_id = " . $parentId;
         $exists = $this->_db->fetchRow($sql);
 
         if ($exists) {
@@ -137,7 +137,7 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
                 'label' =>  $page,
                 'parent_id' => $parentId
             );
-            if ($this->_db->insert('content', $data)) {
+            if ($this->_db->insert(Digitalus_Db_Table::getTableName('content'), $data)) {
                 $this->log($this->view->getTranslation('inserting') . ' ' . $page);
                 return $this->_db->lastInsertId();
             } else {

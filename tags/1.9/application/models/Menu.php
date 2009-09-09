@@ -4,7 +4,7 @@ class Model_Menu extends Model_Page
     public function getMenus()
     {
         //todo: figure out how to do this with a pure select object
-        $sql = 'SELECT DISTINCT parent_id FROM pages';
+        $sql = 'SELECT DISTINCT parent_id FROM ' . Digitalus_Db_Table::getTableName('pages');
         $result = $this->_db->fetchAll($sql);
         if ($result) {
             foreach ($result as $row) {

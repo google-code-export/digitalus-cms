@@ -72,7 +72,7 @@ class Model_ErrorLog extends Zend_Db_Table_Abstract
     {
         $sql = "
             SELECT id, referer, uri, FROM_UNIXTIME(date_time) AS date_time
-            FROM error_log
+            FROM " . Digitalus_Db_Table::getTableName('error_log') . "
             ORDER BY date_time DESC";
         return $this->_db->fetchAll($sql);
     }

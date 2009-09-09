@@ -105,6 +105,18 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
         // Get a Zend_Cache_Core object
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
+
+        // Set cache for Zend_Db_Table
+        Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
+
+        $classFileIncCache = BASE_PATH . '/cache/pluginLoaderCache.php';
+        if (file_exists($classFileIncCache)) {
+            include_once $classFileIncCache;
+        }
+        if ('production' == APPLICATION_ENV) {
+            Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
+        }
+
         Zend_Registry::set('cache', $cache);
         // Return it, so that it can be stored by the bootstrap
         return $cache;
