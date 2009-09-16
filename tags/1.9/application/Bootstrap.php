@@ -96,26 +96,28 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         // Cache options
         $frontendOptions = array(
-           'lifetime' => 1200,                      // Cache lifetime of 20 minutes
-           'automatic_serialization' => true,
+            'lifetime' => 1200,                      // Cache lifetime of 20 minutes
+            'automatic_serialization' => true,
         );
+        // DON'T cache in a development environment
+        if ('development' == APPLICATION_ENV) {
+            $frontendOptions['caching'] = false;
+        } else {
+            // enable Plugin Loader Cache - see ZF reference chapter 30.4.4.
+            $classFileIncCache = $backendOptions['cache_dir'] . 'pluginLoaderCache.php';
+            if (file_exists($classFileIncCache)) {
+                include_once $classFileIncCache;
+            }
+            Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
+        }
         $backendOptions = array(
-            'lifetime' => 3600,                     // Cache lifetime of 1 hour
             'cache_dir' => BASE_PATH . '/cache/',   // Directory where to put the cache files
         );
         // Get a Zend_Cache_Core object
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
 
-        // Set cache for Zend_Db_Table
+        // Set cache for Zend_Db_Table - see ZF reference chapter 15.5.12.
         Zend_Db_Table_Abstract::setDefaultMetadataCache($cache);
-
-        $classFileIncCache = BASE_PATH . '/cache/pluginLoaderCache.php';
-        if (file_exists($classFileIncCache)) {
-            include_once $classFileIncCache;
-        }
-        if ('production' == APPLICATION_ENV) {
-            Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
-        }
 
         Zend_Registry::set('cache', $cache);
         // Return it, so that it can be stored by the bootstrap
