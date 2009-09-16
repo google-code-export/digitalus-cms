@@ -12,28 +12,28 @@ class Mod_Contact_PublicController extends Zend_Controller_Action
 
         $name = $form->createElement('text', 'name');
         $name->setLabel($this->view->getTranslation('Your Name') . ': ');
-        $name->setRequired(TRUE);
+        $name->setRequired(true);
         $name->addFilter('StripTags');
         $name->addErrorMessage($this->view->getTranslation('Your name is required!'));
-        $name->setAttrib('size',30);
+        $name->setAttrib('size', 30);
 
         $email = $form->createElement('text', 'email');
         $email->setLabel($this->view->getTranslation('Your Email') . ': ');
-        $email->setRequired(TRUE);
+        $email->setRequired(true);
         $email->addValidator('EmailAddress');
         $email->addErrorMessage($this->view->getTranslation('Invalid email address!'));
-        $email->setAttrib('size',30);
+        $email->setAttrib('size', 30);
 
         $subject = $form->createElement('text', 'subject');
         $subject->setLabel($this->view->getTranslation('Subject') . ': ');
-        $subject->setRequired(TRUE);
+        $subject->setRequired(true);
         $subject->addFilter('StripTags');
         $subject->addErrorMessage($this->view->getTranslation('The subject is required!'));
         $subject->setAttrib('size', 40);
 
         $message = $form->createElement('textarea', 'message');
         $message->setLabel($this->view->getTranslation('Message') . ': ');
-        $message->setRequired(TRUE);
+        $message->setRequired(true);
         $message->addErrorMessage($this->view->getTranslation('The message is required!'));
         $message->setAttrib('cols', 35);
         $message->setAttrib('rows', 10);

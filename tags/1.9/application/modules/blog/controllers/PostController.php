@@ -28,7 +28,7 @@ class Mod_Blog_PostController extends Zend_Controller_Action
             $this->_forward('edit');
         } else {
             $blogId = $_POST['blog_id'];
-            if($blogId > 0) {
+            if ($blogId > 0) {
                 $this->_request->setParam('id', $blogId);
                 $this->_forward('edit', 'blog');
             } else {
@@ -42,7 +42,7 @@ class Mod_Blog_PostController extends Zend_Controller_Action
         $form = new Post_Form();
         $mdlBlog = new Blog_Blog();
         $mdlPost = new Blog_Post();
-        if ($this->_request->isPost() && $form->isValid($_POST)){
+        if ($this->_request->isPost() && $form->isValid($_POST)) {
             $values = $form->getValues();
             $blog = $mdlPost->updatePost(
                 $values['id'],

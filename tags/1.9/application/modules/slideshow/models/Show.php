@@ -29,9 +29,9 @@ class Slideshow_Show extends Model_Page
         $select->where('namespace = ?', $this->_namespace);
         $select->order('name');
         $result = $this->fetchAll($select);
-        if($result->count() > 0) {
+        if ($result->count() > 0) {
             return $result;
-        }else{
+        } else {
             return null;
         }
     }

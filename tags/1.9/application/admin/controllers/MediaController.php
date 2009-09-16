@@ -12,26 +12,28 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id:$
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id:$
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
  */
 
-/** Zend_Controller_Action */
+/**
+ * @see Zend_Controller_Action
+ */
 require_once 'Zend/Controller/Action.php';
 
 /**
- * Admin Media Conroller of Digitalus CMS
+ * Admin Media Controller of Digitalus CMS
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   Digitalus CMS
- * @package    Digitalus_CMS_Controllers
- * @version    Release: @package_version@
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Controllers
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
  */
 class Admin_MediaController extends Zend_Controller_Action
 {
@@ -71,7 +73,8 @@ class Admin_MediaController extends Zend_Controller_Action
      *
      * @return void
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $this->_forward('open-folder');
     }
 

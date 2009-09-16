@@ -12,30 +12,35 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id:$
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id:$
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
  */
 
-/** Zend_Controller_Action */
+/**
+ * @see Zend_Controller_Action
+ */
 require_once 'Zend/Controller/Action.php';
 
 /**
- * Admin Index Conroller of Digitalus CMS
+ * Admin Index Controller of Digitalus CMS
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   Digitalus CMS
- * @package    Digitalus_CMS_Controllers
- * @version    $Id: IndexController.php Mon Dec 24 20:50:29 EST 2007 20:50:29 forrest lyman $
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Controllers
+ * @version     $Id: IndexController.php Mon Dec 24 20:50:29 EST 2007 20:50:29 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
+ * @uses        Model_Note
+ * @uses        Model_Bookmark
+ * @uses        Model_Page
+ * @uses        Model_User
  */
 class Admin_IndexController extends Zend_Controller_Action
 {
-
     /**
      * Initialize the action
      *
@@ -91,7 +96,7 @@ class Admin_IndexController extends Zend_Controller_Action
         $label = $this->_request->getParam('label', $url);
         // the bookmark links are set up so if you dont have js enabled it will just use a default value for you
         // this makes it pass an array as the label if you do set it, so we need to fetch the last item if it is an array
-        if(is_array($label)) {
+        if (is_array($label)) {
             $label = array_pop($label);
         }
         $bookmark = new Model_Bookmark();

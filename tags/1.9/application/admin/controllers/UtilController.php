@@ -12,26 +12,28 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id:$
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id:$
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
  */
 
-/** Zend_Controller_Action */
+/**
+ * @see Zend_Controller_Action
+ */
 require_once 'Zend/Controller/Action.php';
 
 /**
- * Admin Util Conroller of Digitalus CMS
+ * Admin Util Controller of Digitalus CMS
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   Digitalus CMS
- * @package    Digitalus_CMS_Controllers
- * @version    $Id:
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Controllers
+ * @version     $Id:
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
  */
 class Admin_UtilController extends Zend_Controller_Action
 {
@@ -51,7 +53,7 @@ class Admin_UtilController extends Zend_Controller_Action
             $data->post = $_POST;
             $this->view->data = $data;
         } else {
-            throw new Zend_Exception('Invalid placeholder passed');
+            throw new Zend_Exception($this->view->getTranslation('Invalid placeholder passed'));
         }
     }
 

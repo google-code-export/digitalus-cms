@@ -56,7 +56,8 @@ class Model_Menu extends Model_Page
         return '#';
     }
 
-    public function updateMenuItems($ids, $labels, $visibility) {
+    public function updateMenuItems($ids, $labels, $visibility)
+    {
         if (is_array($ids)) {
             for ($i = 0; $i <= (count($ids) - 1); $i++) {
                 $this->updateMenuItem($ids[$i], $labels[$i], $visibility[$i], $i);

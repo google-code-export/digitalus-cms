@@ -41,9 +41,9 @@ echo $this->SelectModule($elementName . "[module]", $module, $attr);
     }
 ?>
 </div>
-<?php 
+<?php
 // make sure this only loads once for each element
-if(!Zend_Registry::isRegistered($elementName . 'Jquery')) {
+if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
 $this->jQuery()->onLoadCaptureStart() ?>
     $('#<?php echo $elementName?>').change(function(){
         var module = $(this).val();

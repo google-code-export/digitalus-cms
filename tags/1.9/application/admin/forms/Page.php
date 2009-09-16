@@ -28,7 +28,7 @@ class Admin_Form_Page extends Digitalus_Form
         }
         $this->addElement($parentId);
 
-        $contentTemplate = $this->createElement('select','content_template');
+        $contentTemplate = $this->createElement('select', 'content_template');
         $contentTemplate->setLabel($this->getView()->getTranslation('Template') . ':')
                         ->setOrder(2);
 

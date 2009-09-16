@@ -39,7 +39,7 @@ class Admin_Form_User extends Digitalus_Form
             'superadmin' => $this->getView()->getTranslation('Super Administrator')
         ));
 
-        $updatePassword = $this->createElement('checkbox','update_password');
+        $updatePassword = $this->createElement('checkbox', 'update_password');
         $updatePassword->setLabel($this->getView()->getTranslation('Update Password?'));
 
         // create new element

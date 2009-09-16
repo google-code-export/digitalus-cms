@@ -35,7 +35,7 @@ class Mod_Blog_BlogController extends Zend_Controller_Action
     {
         $form = new Blog_Form();
         $mdlBlog = new Blog_Blog();
-        if ($this->_request->isPost() && $form->isValid($_POST) && $this->_request->getParam('isInsert') != true){
+        if ($this->_request->isPost() && $form->isValid($_POST) && $this->_request->getParam('isInsert') != true) {
             $values = $form->getValues();
             $blog = $mdlBlog->updateBlog($values['id'], $values['name']);
             $blog = $blog->page; //the update blog function returns the results of open

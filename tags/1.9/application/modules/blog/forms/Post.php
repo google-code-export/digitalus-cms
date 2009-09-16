@@ -1,7 +1,8 @@
 <?php
 class Post_Form extends Zend_Form
 {
-    public function __construct($options = null) {
+    public function __construct($options = null)
+    {
         parent::__construct($options);
 
         $view = $this->getView();

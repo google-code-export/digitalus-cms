@@ -33,7 +33,7 @@ class Mod_Slideshow_SlideController extends Zend_Controller_Action
                 $this->_request->setParam('id', $showId);
                 $this->_forward('edit', 'show');
             } else {
-                $this->_forward('index','index');
+                $this->_forward('index', 'index');
             }
         }
     }
@@ -130,6 +130,6 @@ class Mod_Slideshow_SlideController extends Zend_Controller_Action
         $slide = $mdlSlide->openSlide($id);
         $mdlSlide->deletePageById($id);
         $this->_request->setParam('id', $slide->showId);
-        $this->_forward('edit','show');
+        $this->_forward('edit', 'show');
     }
 }

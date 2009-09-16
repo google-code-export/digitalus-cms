@@ -19,11 +19,13 @@
  * @since       Release 1.0.0
  */
 
-/** Zend_Controller_Action */
+/**
+ * @see Zend_Controller_Action
+ */
 require_once 'Zend/Controller/Action.php';
 
 /**
- * Admin User Conroller of Digitalus CMS
+ * Admin User Controller of Digitalus CMS
  *
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
@@ -105,10 +107,10 @@ class Admin_UserController extends Zend_Controller_Action
         $form->removeElement('update_password');
         $mdlUser = new Model_User();
         $form->setModel($mdlUser);
-        if($form->isSubmitted()) {
+        if ($form->isSubmitted()) {
             $password = $form->getValue('password');
             $result = $form->create(array('password' => md5($password)));
-            if($result) {
+            if ($result) {
                 $this->_redirect('admin/user/open/id/' . $result->id);
             }
         }

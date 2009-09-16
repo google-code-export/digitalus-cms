@@ -1,6 +1,4 @@
 <?php
-
-
 /**
  * Digitalus CMS
  *
@@ -14,16 +12,17 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package    Digitalus_CMS_Models
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: User.php Mon Dec 24 20:38:38 EST 2007 20:38:38 forrest lyman $
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Models
+ * @copyright   Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: User.php Mon Dec 24 20:38:38 EST 2007 20:38:38 forrest lyman $
  */
 
 class Model_User extends Digitalus_Db_Table
 {
     const SUPERUSER_ROLE = 'superadmin';
+
     /**
      * table name
      *
@@ -169,6 +168,12 @@ class Model_User extends Digitalus_Db_Table
     public function getUserByUsername($userName)
     {
         $where[] = $this->_db->quoteInto('email = ?', $userName);
+        return $this->fetchRow($where);
+    }
+
+    public function getUserByOpenId($openId)
+    {
+        $where[] = $this->_db->quoteInto('openid = ?', $openId);
         return $this->fetchRow($where);
     }
 

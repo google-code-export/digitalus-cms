@@ -27,7 +27,7 @@ class Mod_Slideshow_ShowController extends Zend_Controller_Action
             $this->_request->setParam('isInsert', true);
             $this->_forward('edit');
         } else {
-            $this->_forward('index','index');
+            $this->_forward('index', 'index');
         }
     }
 
@@ -35,7 +35,7 @@ class Mod_Slideshow_ShowController extends Zend_Controller_Action
     {
         $form = new Show_Form();
         $mdlShow = new Slideshow_Show();
-        if ($this->_request->isPost() && $form->isValid($_POST) && $this->_request->getParam('isInsert') != true){
+        if ($this->_request->isPost() && $form->isValid($_POST) && $this->_request->getParam('isInsert') != true) {
             $values = $form->getValues();
             $results = $mdlShow->updateShow($values['id'], $values['name'], $values['description']);
             $show = $results->page;
@@ -78,7 +78,7 @@ class Mod_Slideshow_ShowController extends Zend_Controller_Action
         $id = $this->_request->getParam('id');
         $mdlShow = new Slideshow_Show();
         $mdlShow->deleteShow($id);
-        $this->_forward('index','index');
+        $this->_forward('index', 'index');
     }
 
 }

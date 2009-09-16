@@ -12,26 +12,31 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id:$
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id:$
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
  */
 
-/** Zend_Controller_Action */
+/**
+ * @see Zend_Controller_Action
+ */
 require_once 'Zend/Controller/Action.php';
 
 /**
- * Admin Page Conroller of Digitalus CMS
+ * Admin Page Controller of Digitalus CMS
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   Digitalus CMS
- * @package    Digitalus_CMS_Controllers
- * @version    $Id: PageController.php Tue Dec 25 19:38:20 EST 2007 19:38:20 forrest lyman $
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Controllers
+ * @version     $Id: PageController.php Tue Dec 25 19:38:20 EST 2007 19:38:20 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
+ * @uses        Model_Page
+ * @uses        Model_MetaDate
+ * @uses        Model_Properties
  */
 class Admin_PageController extends Zend_Controller_Action
 {
@@ -285,7 +290,7 @@ class Admin_PageController extends Zend_Controller_Action
         $pageId = Digitalus_Filter_Post::int('page_id');
         foreach ($_POST as $k => $v) {
             if (substr($k, 0, 5) == 'file_' && $v == 1) {
-                $relatedFiles[] = str_replace('file_', '',$k);
+                $relatedFiles[] = str_replace('file_', '', $k);
             }
         }
         if (is_array($relatedFiles)) {

@@ -28,7 +28,7 @@ class Zend_View_Helper_SelectBlog
             return $this->view->getTranslation('There are no blogs to view!');
         } else {
             $options[] = $this->view->getTranslation('Select One');
-            foreach($blogs as $blog) {
+            foreach ($blogs as $blog) {
                 $options[$blog->id] = $blog->name;
             }
             return $this->view->formSelect($name, $value, null, $options);
