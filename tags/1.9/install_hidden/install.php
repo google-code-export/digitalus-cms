@@ -71,7 +71,8 @@ if (!$installer->isInstalled()) {
                     $_POST['db_host'],
                     $_POST['db_username'],
                     $_POST['db_password'],
-                    $_POST['db_prefix']
+                    $_POST['db_prefix'],
+                    $_POST['db_adapter']
                 );
                 $dbTested = $installer->testDb();
                 if ($dbTested) {
