@@ -4,8 +4,10 @@
 "english";"Anglais"
 "french";"Français"
 "german";"Allemand"
+"italian";"Italien"
 "polish";"Polonais"
 "russian";"Russe"
+"spanish";"Espagnol"
 "swedish";"Suédois"
 # admin section -- Auth --
 "Login";"Connexion"
@@ -45,13 +47,14 @@
 "Layout";"Layout"
 "Skin";"Skin"
 # admin section -- Error --
-"Sorry, you are not authorized to edit this resource!";
+"Sorry, you are not authorized to edit this resource!";"Désolé, vous n'êtes pas autorisé à modifier cette ressource!"
 # admin section -- Index --
 "Home";"Accueil"
 "Your bookmark was saved successfully.";"Votre marque-page a été sauvegardé avec succès."
-"My Content";
+"My Content";"Mon contenu"
 "The following pages are the pages that you have recently created.";"Les pages suivantes sont les pages que vous avez récemment créées."
 "These are the modules that you are working with.";"Voici les modules avec lesquels vous êtes en train de travailler."
+"These pages have not been published yet.";
 "My Dashboard";"Mon tableau de bord"
 "My Account";"Mon compte"
 "First Name";"Prénom"
@@ -104,6 +107,7 @@
 "Open Menu";"Ouvrir le menu"
 "Current Menu";"Menu en cours"
 "Update Menu";"Mise à jour du menu"
+"click to toggle visibility";"Cliquez pour changer la visibilité"
 "Save Changes";"Sauvegarder les changements"
 "Main Menu";"Menu principal"
 # admin section -- Page --
@@ -117,16 +121,11 @@
 "Meta Keywords";"Mots clés"
 "Search Tags";"Tags servant à la recherche"
 "Update Meta Data";"Mettre à jour les méta données"
+"Publish or Archive Page";
+"Publish or Archive";
 "Step 3: Enter the name for your page";"Etape 3: Entrez le nom de votre page"
 "Page Name";"Nom de la page"
 "Create Page";"Créer une page"
-"Content";"Contenu"
-"Current design";"Design en cours"
-"Open design";"Ouvrir le design"
-"The design is not yet set for this page.";"Le design de cette page n'est pas encore défini."
-"Other designs";"Autres designs"
-"Make current";"Affecter"
-"Click the new parent page for this page to move it.";"Cliquer sur la page parente pour y déplacer cette page."
 "Page Options";"Options de Page"
 "Content Sections";"Sections de contenu"
 "Page Head and Meta Data";"Entête de page et méta données"
@@ -135,15 +134,33 @@
 "Related Content";"Contenu associé"
 "Content Template";"Modèle de contenu"
 "Move Page";"Déplacer la page"
+"Publish / Archive";
 "Page Versions";"versions de page"
 "Update Page";"Mettre à jour une page"
 "Edit Meta Data";"Editer les méta données"
 "Edit Page Properties";"Editer les propriétés de page"
+"Publish / Archive Page";
+"Content";"Contenu"
+"Current design";"Design en cours"
+"Open design";"Ouvrir le design"
+"The design is not yet set for this page.";"Le design de cette page n'est pas encore défini."
+"Other designs";"Autres designs"
+"Make current";"Affecter"
+"Click the new parent page for this page to move it.";"Cliquer sur la page parente pour y déplacer cette page."
 "Remove";"Supprimer"
 "Property";"Propriété"
 "Value";"Valeur"
 "Add a new property";"Ajouter une nouvelle propriété"
 "Update properties";"Mettre à jour les propriétés"
+"Publish";
+"Unpublish";
+"Archive";
+"The following pages have not been published yet!";
+"Change the status of this page.";
+"This page was published on";
+"This page was archived on";
+"This page";
+"Change publishing state";
 "Update Related Content";"Mettre à jour le contenu associé"
 "Select the template for this page";"Sélectionner le modèle pour cette page"
 "Update Content Template";"Mettre à jour le modèle de contenu"
@@ -153,7 +170,6 @@
 "Step 1: Select the parent section";"Etape 1: Sélectionnez la section parente"
 "Parent Page";"Page parente"
 "Next >>";"Suivant >>"
-"page_my_pages_intro";
 "Current Version";"Version en cours"
 "Available Versions";"Versions disponibles"
 "Default";"Défaut"
@@ -164,6 +180,7 @@
 "Site Root";"Racine du site"
 "Template";"Modèle"
 "Continue adding pages";"Continuer d'ajouter des pages"
+"Publish page instantly";
 "Submit";"Envoyer"
 # admin section -- Site --
 "Site Settings";"Configurations du site"
@@ -193,10 +210,12 @@
 "Site Offline Page";"Page indiquant que le site est hors ligne"
 "Menu links";"Menu de liens"
 "Automatically add menu links";"Ajout automatique de menu de liens"
+"Publish Pages";
+"Automatically publish pages on creation";
 "Update Content Settings";"Mettre à jour les configurations de contenu"
 "Default design";"Design par défaut"
 "Update Design Settings";"Mettre à jour les configurations du design"
-"XML declaration";
+"XML declaration";"Déclaration XML"
 "Doc Type";"Type de document"
 "Default charset";"Jeu de caractère par défaut"
 "Default timezone";"Zone temporelle par défaut"
@@ -247,52 +266,142 @@
 "Site Administrator";"Administrateur du site"
 "Super Administrator";"Super Administrateur"
 # admin section -- View Helper --
-"Unable to locate skin folder";
+"Unable to locate skin folder";"Impossible de trouver le dossier de skins"
 "Current User";"Utilisateur en cours"
 "Role";"Rôle"
 "Log Out";"Déconnexion"
 "Select One";"Sélectionner en un"
 "Select User";"Sélectionner l'utilisateur"
-"Always";
-"Never";
-"By browser check";
-"There are no pages in this module";"Il n'y a aucune page dans ce module"
+"Always";"Toujours"
+"Never";"Jamais"
+"By browser check";"Par la vérification de navigateur"
 "Select a module";"Sélectionner un module"
 "There are no modules currently installed";"Aucun module n'est actuellement installé"
+"There are no pages in this module";"Il n'y a aucune page dans ce module"
 "First";"Premier"
 "Previous";"Précédent"
 "Next";"Suivant"
 "Last";"Dernier"
 "The following errors have occurred";"Les erreurs suivantes sont survenues"
 "Errors";"Erreurs"
-"Message";
+"Message";"Message"
 "Set Language";"Définir la langue"
 "You are reading this page in";"Vous lisez cette page en"
 "This page is also translated into";"Cette page est aussi traduite en"
+# admin section – Install --
+"Digitalus CMS Installer";"Installateur de Digitalus CMS"
+"Available Languages:";"Langues disponibles:"
+"Results";"Résultats"
+"For help installing Digitalus CMS check out our site";"Si vous avez besoin d'aide à l'installation de Digitalus CMS, vous pouvez vous rendre sur notre site"
+"Successfully completed tasks";"Tâches complétées avec succès"
+"The following tasks were successfully completed:";"Les tâches suivantes ont été complétées avec succès:"
+"Warnings";"Mises en garde"
+"The following items are not quite right, and should be fixed at some point:";"Les éléments suivants ne sont pas tout à fait bons, et doivent être mieux déterminés:"
+"The following errors have occurred, and will need to be fixed prior to installation:";"Les erreurs suivantes se sont produites, et devront être résolues avant l'installation:"
+"Your server is properly configured to host the Digitalus CMS efficiently and securely!";"Votre serveur est bien configuré pour accueillir Digitalus CMS de manière efficace et sécurisée"
+"Site Admin Account";"Compte de l'administrateur du site"
+"Digitalus CMS uses your email address as the username for the CMS, because it is unique and easy to remember. You can enter what ever you like for a password, but bear in mind that your site is only as secure as this password!";"Digitalus CMS utilise votre adresse email comme nom d'utilisateur pour le CMS, parce qu'il est unique et facile à se rappeler. Vous pouvez entrer ce que vous voulez comme mot de passe, mais gardez à l'esprit que la sécurité de votre site dépend de ce mot de passe!"
+"Database Connection Information";"Informations sur la connexion à la base de données"
+"Now you need to set up the database connection. If you are unsure about this contact your hosting provider.";"Il vous faut maintenant définir la connexion à la base de données. Si vous êtes incertain sur cette manipulation, contactez votre hébergeur."
+"Database Adapter";
+"Database Table Prefix";
+"Database Name";"Nom de la base de données"
+"Database Host";"Hôte de la base de données"
+"Database Username";"Utilisateur de la base de données"
+"Database Password";"Mot de passe de la base de données"
+"Install CMS";"Installer le CMS"
+"Please double check all of the information on this page. If everything looks right then click <b>Install Now</b> to install Digitalus CMS";"Veuillez revérifier toutes les informations sur cette page. Si tout semble juste, alors cliquez sur <b>Installer maintenant</b> pour installer Digitalus CMS"
+"Install Now";"Installer maintenant"
+"Installation Successfull!";"Installation réussie!"
+"Digitalus CMS was successfully installed on your domain.";"Digitalus CMS a été installé avec succès sur votre domaine."
+"Before you use it you must completely delete the <strong>install</strong> folder, as in this screenshot:</p>";"Avant de l'utiliser, vous devez supprimer le dossier <strong>install</strong>, comme sur cette copie d'écran:</p>"
+"Once that folder is deleted Digitalus will automatically load when you visit this domain.";"Une fois que ce dossier est supprimé Digitalus sera chargé automatiquement quand vous visiterez ce domaine."
+"Digitalus CMS is already installed";"Digitalus CMS est déjà installé"
+"Could not load config file (";"Impossible de charger le fichier de configuration ("
+"Could not write to config file (";"Impossible d'écrire dans le fichier de configuration ("
+"Successfully loaded and tested site configuration";"La configuration du site a été chargée et testée avec succès"
+"PHP Version: <b>";"La version de PHP: <b>"
+"Checked PHP version...OK!";"Vérification de la version PHP...OK!"
+"Could not write to cache directory  (";"Impossible d'écrire dans le dossier de cache ("
+"Checked cache directory...OK!";"Dossier de cache vérifié...OK!"
+"Could not write to media directory  (";"Impossible d'écrire dans le dossier de media ("
+"Checked media directory...OK!";"Dossier de media vérifié...OK!"
+"Could not write to trash directory  (";"Impossible d'écrire dans la corbeille ("
+"Checked trash directory...OK!";"Corbeille vérifiée...OK!"
+"Checked server environment...OK!";"Environnement serveur vérifié...OK!"
+"Your first name is required";"Votre prénom est requis"
+"Your last name is required";"Votre nom est requis"
+"A valid email address is required";"Une adresse email valide est requise"
+"Your password is required";"Votre mot de passe est requis"
+"Your database name is required";"Le nom de votre base de données est requis"
+"Your database host is required";"L'hôte de votre base de données est requis"
+"Your database username is required";"Le nom d'utilisateur de votre base de données est requis"
+"The target database is not empty";"La base de données cible est vide"
+"Unable to write to target database";"Impossible d'écrire dans la base de données cible"
+"Database passed tests and is ready to install";"La base de données a passée les tests et est prête à être installée"
+"The database was successfully installed";"La base de données a été installée avec succès"
+"An error occured installing the database";"Une erreur est survenue lors de l'installation de la base de données"
+"Your admin account was successfully created";"Votre compte d'administrateur a été créé avec succès"
 # admin section -- Misc –
 "Digitalus CMS";"Digitalus CMS"
-"Are you sure you want to delete this?";
-"Bookmark label:";
-"Your bookmark was successfully saved.";
-"Unable to delete item - the item is empty!";
-"Unable to cast type:";
-"to type:";
-"Unable to load content item";
-"An error occurred uploading the file";
-"This filetype is not allowed";
-"Illegal file access attempt. Operation cancelled!";
-"Method does not exist";
-"Getter does not exist";
-"Setter does not exist";
-"Unable to load service for this module";
-"Unable to set this protected property in Digitalus_Page";
+"Are you sure you want to delete this?";"Etes vous sûr de vouloir supprimer ceci?"
+"Bookmark label:";"Intitulé de favoris"
+"Your bookmark was successfully saved.";"Votre favori a été sauvegardé avec succès."
+"Sorry, we could not find the page you requested";
+"Application Error";
+"The page you requested was not found. Digitalus CMS could not locate the error page either.";"La page que vous demandez n'a pas été trouvée. Digitalus CMS ne peut pas non plus trouver la page d'erreur."
+"Invalid command";"Commande non valide"
+"Cache cleared Key";"Clé de nettoyage du cache"
+"Cache cleared";"Cache nettoyé"
+"Error: Cache is not registered";"Erreur: Le cache n'est pas enregistré"
+"The cache clear function will either clear a specified key or all cache files if a key is not specified.";"La fonction de nettoyage du cache va soit supprimer une clé spécifique, soit tous les fichiers de cache si une clé n'est pas spécifiée."
+"Params: key (string, optional)";"Paramètres: key (string, facultatif)"
+"starting import process";"démarrage du processus d'importation"
+"ERROR: error loading sitemap file";"ERREUR: erreur lors du chargement du fichier sitemap"
+"The import sitemap command will import an xml sitemap. This file should be located in application/data/ and be named sitemap.xml.";"La commande d'importation du sitemap importera un fichier xml de sitemap. Ce fichier devrait être situé dans application/data/ et être nommé sitemap.xml."
+"loading page nodes";"chargement des noeuds de page"
+"ignoring";"passage outre"
+"page already exists in this location";"la page existe déjà à cet endroit"
+"inserting";"insertion"
+"ERROR: an error occured inserting";"ERREUR: une erreur est apparue lors de l'insertion"
+"Validating module directory";"Validation du dossier de module"
+"Module exists. Installing ...";"Le module existe. Installation ..."
+"Module installed";"Module installé"
+"ERROR: Could not load module directory";"ERREUR: impossible de charger le dossier de module"
+"ERROR: Invalid request";"ERREUR: requête non valide"
+"The install module command will install a module in the database if the module is installed properly.";"La commande du module d'installation installera un module dans la base de données si le module est installé correctement."
+"Params: moduleName (string), label (string, optional)";"Paramètres: moduleName (string), label (string, facultatif)"
+"The list command lists all of the available functions. Double click a function to open it.";"La commande de liste répertorie toutes les fonctions disponibles. Double clique une fonction pour l'ouvrir."
+"ERROR: Could not create pages table.";"ERREUR: Impossible de créer la table 'pages'."
+"pages table created OK.";"la table 'pages' a été créée ok."
+"ERROR: Could not create content_nodes table.";"ERREUR: Impossible de créer la table 'content_nodes'."
+"content_nodes table created OK.";"la table 'content_nodes' a été créée ok."
+"There are no content pages to migrate.";"Il n'y a pas de pages de contenu à transférer."
+"pages have been migrated successfully.";"les pages ont été transférées avec succès."
+"The Update Database command will update your database from version 1.0.x to 1.5.x.";"La commande de mise à jour de la base de données mettra à jour votre base de données de la version 1.0.x à 1.5.x."
+"Params: none";"Paramètres: aucun"
+"ERROR: could not update content template references.";"ERREUR: impossible de mettre à jour les références de modèle de contenu."
+"Content template references updated OK.";"Références de modèle de contenu mises à jour OK."
+"The Update Version 18 command will update your database from version 1.5 to 1.8";"La commande de mise à jour de version 18 mettra à jour votre base de données de la version 1.5 à 1.8"
+"Unable to delete item - the item is empty!";"Impossible de supprimer l'élément – l'élément est vide!"
+"Unable to cast type:";"Impossible de modifier le type"
+"to type:";"de type:"
+"Unable to load content item";"Impossible de charger l'élément de contenu"
+"An error occurred uploading the file";"Une erreur est survenue lors de l'envoi du fichier"
+"This filetype is not allowed";"Ce type de fichier n'est pas permis"
+"Illegal file access attempt. Operation cancelled!";"Tentative illégale d'accès aux fichiers. Operation annulée!"
+"Method does not exist";"La méthode n'existe pas"
+"Getter does not exist";"La méthode 'get' n'existe pas"
+"Setter does not exist";"La méthode 'set' n'existe pas"
+"Unable to load service for this module";"Impossible de charger le service pour ce module"
+"Unable to set this protected property in Digitalus_Page";"Impossible de définir cette propriété protégée dans Digitalus_Page"
 "You are here";"Vous êtes ici"
-"Headline";
-"Main";
-"Header";
-"Footer";
-"Sidebar";
-"Submenu";
-"More";
-"Module";
+"Headline";"Gros titre"
+"Main";"Principal"
+"Header";"Entête de page"
+"Footer";"Pied de page"
+"Sidebar";"Barre latérale"
+"Submenu";"Sous-menu"
+"More";"Plus"
+"Module";"Module"
 # END
