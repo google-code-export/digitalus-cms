@@ -6,9 +6,8 @@ class Digitalus_Installer_Environment
     const PATH_TO_MEDIA = './media';
     const PATH_TO_TRASH = './trash';
 
-    public function __construct() {
-
-    }
+    public function __construct()
+    {}
 
     public function checkPhpVersion($requiredVersion)
     {

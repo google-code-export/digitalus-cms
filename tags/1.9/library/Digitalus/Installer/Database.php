@@ -4,14 +4,15 @@ class Digitalus_Installer_Database
     protected $_config = array();
     protected $_db;
 
-    public function connect($name, $host, $username, $password, $prefix, $adapter)
+    public function connect($name, $host, $username, $password, $prefix, $adapter = 'Pdo_Mysql')
     {
         $this->_config = array(
             'host'     => $host,
             'username' => $username,
             'password' => $password,
             'dbname'   => $name,
-            'prefix'   => $prefix
+            'prefix'   => $prefix,
+            'adapter'  => $adapter,
         );
         $this->_db = Zend_Db::factory($adapter, $this->_config);
         $this->_db->query("SET NAMES 'utf8'");
@@ -207,6 +208,7 @@ class Digitalus_Installer_Database
           `first_name` varchar(45) NOT null default '',
           `last_name` varchar(45) NOT null default '',
           `email` varchar(100) NOT null default '',
+          `openid` varchar(100) NOT null default '',
           `password` text NOT null,
           `role` varchar(45) NOT null default 'admin',
           `acl_resources` text,

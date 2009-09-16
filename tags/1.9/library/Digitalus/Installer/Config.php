@@ -56,13 +56,14 @@ class Digitalus_Installer_Config
         $this->save();
     }
 
-    public function setDbConnection($name, $host, $username, $password, $prefix = '')
+    public function setDbConnection($name, $host, $username, $password, $prefix = '', $adapter = 'Pdo_Mysql')
     {
-        $this->_innerData->production->database->host = $host;
+        $this->_innerData->production->database->host     = $host;
         $this->_innerData->production->database->username = $username;
         $this->_innerData->production->database->password = $password;
-        $this->_innerData->production->database->dbname = $name;
-        $this->_innerData->production->database->prefix = $prefix;
+        $this->_innerData->production->database->dbname   = $name;
+        $this->_innerData->production->database->prefix   = $prefix;
+        $this->_innerData->production->database->adapter  = $adapter;
         $this->save();
     }
 
