@@ -59,7 +59,7 @@ class Digitalus_View_Helper_Internationalization_LanguageForm extends Zend_View_
 
         $currentLanguage = Digitalus_Language::getLanguage();
 
-        $languageSelector = $this->view->selectLanguage('language',$currentLanguage);
+        $languageSelector = $this->view->selectLanguage('language', $currentLanguage);
         $xhtml  = '<form action="' . $this->view->moduleAction() . '" method="post">';
         $xhtml .= '<p>' . $languageSelector . '</p>';
         $xhtml .= '<p>' . $this->view->formSubmit('setLang', $this->view->getTranslation('Set Language')) . '</p>';

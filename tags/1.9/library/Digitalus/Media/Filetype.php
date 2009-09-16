@@ -1,13 +1,12 @@
 <?php
-
-class Digitalus_Media_Filetype {
+class Digitalus_Media_Filetype
+{
     public $key;
     public $type;
     public $mime;
 
-    public function __construct() {
-
-    }
+    public function __construct()
+    {}
 
     public static function load($filepath)
     {

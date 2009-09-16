@@ -145,7 +145,7 @@ class Digitalus_Filesystem_Dir
      * @param bool $verbose
      * @return bool
      */
-    public static function deleteRecursive($target,$verbose=false)
+    public static function deleteRecursive($target, $verbose=false)
     {
         $exceptions=array('.','..');
         if (!$sourcedir=@opendir($target)) {
@@ -155,10 +155,10 @@ class Digitalus_Filesystem_Dir
             return false;
         }
         while (false!==($sibling=readdir($sourcedir))) {
-            if (!in_array($sibling,$exceptions)) {
-                $object=str_replace('//','/',$target.'/'.$sibling);
+            if (!in_array($sibling, $exceptions)) {
+                $object=str_replace('//','/', $target . '/' . $sibling);
                 if ($verbose)
-                    echo 'Processing: <strong>'.$object."</strong><br />\n";
+                    echo 'Processing: <strong>' . $object . "</strong><br />\n";
                 if (is_dir($object))
                     Digitalus_Filesystem_Dir::deleteRecursive($object);
                 if (is_file($object)) {

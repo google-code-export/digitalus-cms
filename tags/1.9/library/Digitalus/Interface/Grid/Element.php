@@ -28,7 +28,7 @@ class Digitalus_Interface_Grid_Element extends Digitalus_Interface_Grid_Abstract
             return $this;
         } else {
             if (count($this->children) > 0) {
-                foreach($this->children as $child) {
+                foreach ($this->children as $child) {
                     $result = $child->getElement($id);
                     if (is_object($result)) {
                         return $result;

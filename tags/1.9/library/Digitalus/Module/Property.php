@@ -1,10 +1,8 @@
 <?php
-
-class Digitalus_Module_Property {
-
-    public function __construct() {
-
-    }
+class Digitalus_Module_Property
+{
+    public function __construct()
+    {}
 
     public static function load($module)
     {

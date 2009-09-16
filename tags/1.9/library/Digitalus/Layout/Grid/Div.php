@@ -1,6 +1,6 @@
 <?php
-
-abstract class Digitalus_Layout_Grid_Div {
+abstract class Digitalus_Layout_Grid_Div
+{
     protected $_children = array();
     protected $_types = array(
         'unit' => 'Unit',
@@ -13,9 +13,8 @@ abstract class Digitalus_Layout_Grid_Div {
     /**
      *
      */
-    public function __construct() {
-
-    }
+    public function __construct()
+    {}
 
     public function addUnit($cols, $before = 0, $after = 0)
     {

@@ -44,14 +44,14 @@ class Digitalus_Toolbox_Regex
 	$regexp = "|\.\w{1,5}$|";
 	$new = preg_replace($regexp, "", $string);
 	$suf = substr($string, strlen($new)+1);
-	if($asArray == true) {
+	if ($asArray == true) {
 	    return array('location' => $new, 'suffix' => $suf);
-	}else{
+ } else {
 	    return $new; // use this return for standard Digitalus setup
 	}
-        
+
     }
-    
+
 
     /**
      * returns the html between the the body tags
@@ -88,7 +88,7 @@ class Digitalus_Toolbox_Regex
      */
     public static function stripMultipleSpaces($string)
     {
-        return trim(preg_replace('/\s+/', ' ',$string));
+        return trim(preg_replace('/\s+/', ' ', $string));
     }
 
     /**

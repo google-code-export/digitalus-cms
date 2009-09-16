@@ -100,7 +100,8 @@ class Digitalus_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Ab
         }
     }
 
-    private function _isAdminPage($request) {
+    private function _isAdminPage($request)
+    {
         if ($this->module != 'public' && $this->controller != 'public' && !$request->isXmlHttpRequest()) {
             return true;
         }

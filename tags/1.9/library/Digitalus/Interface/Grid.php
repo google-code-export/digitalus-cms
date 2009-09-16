@@ -1,6 +1,6 @@
 <?php
-
-class Digitalus_Interface_Grid extends Digitalus_Interface_Grid_Abstract {
+class Digitalus_Interface_Grid extends Digitalus_Interface_Grid_Abstract
+{
     public $containerClass = 'container';
     const PATH_TO_GRIDS = './application/public/views/grids';
     public $id;

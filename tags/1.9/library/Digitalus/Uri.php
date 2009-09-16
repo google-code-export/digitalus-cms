@@ -149,22 +149,22 @@ class Digitalus_Uri
             $uriString = $uri->getAbsolute();
         }
         $params = array();
-        if($stripParams == false) {
+        if ($stripParams == false) {
             $params = $uri->getParams();
         }
-        if(is_array($addParams)) {
+        if (is_array($addParams)) {
             foreach ($addParams as $k => $v) {
                 $params[$k] = $v;
             }
         }
         $paramsString = null;
-        if(is_array($params)){
+        if (is_array($params)) {
              foreach ($params as $k => $v) {
                  $paramsString .= '/' . $k . '/' . $v;
              }
         }
 
-        if($paramsString != null) {
+        if ($paramsString != null) {
             $uriString .= '/p' . $paramsString;
         }
         return $uriString;

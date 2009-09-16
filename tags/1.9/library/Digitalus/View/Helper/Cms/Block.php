@@ -49,7 +49,7 @@ class Digitalus_View_Helper_Cms_Block extends Zend_View_Helper_Abstract
     public function block($request, $params = null)
     {
         //process the block request
-        $requestArray = explode('_',$request);
+        $requestArray = explode('_', $request);
         $module = $requestArray[0];
         $controller = $requestArray[1];
         $action = $requestArray[2];

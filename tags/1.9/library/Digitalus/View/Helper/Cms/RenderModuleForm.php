@@ -43,7 +43,8 @@ class Zend_View_Helper_RenderModuleForm extends Zend_View_Helper_Abstract
     /**
      * comments
      */
-    public function renderModuleForm($module, $action, $parameters){
+    public function renderModuleForm($module, $action, $parameters)
+    {
         $dir      = './application/modules/' . $module . '/views/scripts';
         $helpers  = './application/modules/' . $module . '/views/helpers';
         $path     = '/public/' . $action . '.form.phtml';

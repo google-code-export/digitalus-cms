@@ -16,7 +16,8 @@ class Digitalus_Installer
     protected $_username;
     protected $_password;
 
-    public function __construct() {
+    public function __construct()
+    {
         // We want the installer to manage its own warnings
         error_reporting(E_ERROR);
         $this->_db = new Digitalus_Installer_Database();
@@ -141,7 +142,7 @@ class Digitalus_Installer
         }
     }
 
-    public function setDbConnection($name, $host, $username, $password, $prefix = '')
+    public function setDbConnection($name, $host, $username, $password, $prefix = '', $adapter = 'Pdo_Mysql')
     {
         $dbError = false;
         if (empty($name)) {
@@ -158,8 +159,8 @@ class Digitalus_Installer
         }
 
         if (!$dbError) {
-            $connection = $this->_db->connect($name, $host, $username, $password, $prefix, $this->_config->getDbAdapterKey());
-            $this->_config->setDbConnection($name, $host, $username, $password, $prefix);
+            $connection = $this->_db->connect($name, $host, $username, $password, $prefix, $adapter);
+            $this->_config->setDbConnection($name, $host, $username, $password, $prefix, $adapter);
             return $connection;
         } else {
             return false;

@@ -94,7 +94,8 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
      * @param  boolean $strict If validation is done in strict mode
      * @return boolean
      */
-    public static function isValidRegion($region, $strict = true) {
+    public static function isValidRegion($region, $strict = true)
+    {
         if (in_array($region, self::getRegions($strict))) {
             return true;
         }

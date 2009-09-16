@@ -64,7 +64,7 @@ class Digitalus_View_Helper_Interface_GetIconByFileType extends Zend_View_Helper
     public function getIcon($file)
     {
         $filetype = Digitalus_Media_Filetype::load($file);
-        if($filetype != null) {
+        if ($filetype != null) {
             $type = $filetype->key;
 
             if (isset($this->icons->$type)) {

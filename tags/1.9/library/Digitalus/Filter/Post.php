@@ -31,8 +31,9 @@ class Digitalus_Filter_Post
     {
         $filter = new Zend_Filter_StripTags();
         $post = self::toObject();
-        return trim($filter->filter($post->$key));
-
+        if (isset($_POST[$key])) {
+            return trim($filter->filter($post->$key));
+        }
     }
 
     /**
@@ -71,7 +72,8 @@ class Digitalus_Filter_Post
      * @param string $key
      * @return bool
      */
-    public static function has($key) {
+    public static function has($key)
+    {
         if (isset($_POST[$key])) {
             return true;
         }

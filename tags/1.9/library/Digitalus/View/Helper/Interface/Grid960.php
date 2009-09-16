@@ -55,7 +55,7 @@ class Digitalus_View_Helper_Interface_Grid960 extends Zend_View_Helper_Abstract
     {
         $div = '<div />';
         $this->container = simplexml_load_string($div);
-        $class = $this->makeClass($columns,$this->containerClass, $before, $after, false, false);
+        $class = $this->makeClass($columns, $this->containerClass, $before, $after, false, false);
         $this->container->addAttribute('class', $class);
         $this->container->addAttribute('id', 'wrapper');
         return $this;

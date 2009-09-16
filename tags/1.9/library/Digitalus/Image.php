@@ -166,16 +166,16 @@ class Digitalus_Resource_Image extends Digitalus_Resource
             $height = imagesy($this->_image);
 
             $newheight=$height * ($newwidth/$width);
-            $tmp=imagecreatetruecolor($newwidth,$newheight);
+            $tmp=imagecreatetruecolor($newwidth, $newheight);
             // this line actually does the image resizing, copying from the original
             // image into the $tmp image
-            imagecopyresampled($tmp,$this->_image,0,0,0,0,$newwidth,$newheight,$width,$height);
+            imagecopyresampled($tmp, $this->_image, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
             // now write the resized image to disk.
             $newPath = str_replace($fName, $append . $fName, $path);
             $imageFunction = 'image' . $this->fileType;
 
-            $imageFunction($tmp,$newPath, $this->_imageQuality[$this->fileType]);
+            $imageFunction($tmp, $newPath, $this->_imageQuality[$this->fileType]);
 
             imagedestroy($this->_image);
             imagedestroy($tmp); // NOTE: PHP will clean up the temp file it created when the request

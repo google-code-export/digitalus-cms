@@ -69,7 +69,7 @@ class Digitalus_View_Helper_Navigation_RenderMenu extends Zend_View_Helper_Abstr
                 $menuItem = '<li id="' . $id . '_item_wrapper_' . $item->id . '" class="menuItem">';
                 $class = $item->isSelected() ? 'selected' : 'unselected';
 
-                if ($item->isSelected()){
+                if ($item->isSelected()) {
                     $class = 'selected';
                 } else {
                     $class = 'unselected';

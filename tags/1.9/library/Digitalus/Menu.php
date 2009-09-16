@@ -1,6 +1,6 @@
 <?php
-
-class Digitalus_Menu {
+class Digitalus_Menu
+{
     public $items = null;
     protected  $_parentId;
 
@@ -12,7 +12,8 @@ class Digitalus_Menu {
      * @param int $parentId
      * @param int $levels
      */
-    public function __construct($parentId = 0) {
+    public function __construct($parentId = 0)
+    {
         $this->_parentId = $parentId;
         $this->_load();
     }

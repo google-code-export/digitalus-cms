@@ -7,6 +7,7 @@ class Digitalus_Interface_Template
             return $template;
         } else if (file_exists($template)) {
             $form = new Digitalus_Content_Form();
+
             $view = $form->getView();
             $templateName = basename($template);
             $layoutPath = Digitalus_Toolbox_String::getParentFromPath($template);
@@ -27,7 +28,9 @@ class Digitalus_Interface_Template
 
     public function getForm($template, $formInstance = null, $content = null)
     {
-        if ($formInstance == null) {$formInstance = new Digitalus_Content_Form();}
+        if ($formInstance == null) {
+            $formInstance = new Digitalus_Content_Form();
+        }
         $view = $formInstance->getView();
         $controls = $this->getControls($template);
         if ($controls) {

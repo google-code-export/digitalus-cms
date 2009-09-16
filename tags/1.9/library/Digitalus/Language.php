@@ -1,12 +1,12 @@
 <?php
-
 /**
  * this class is used to differentiate between the front end language and back end
  * this functionality should be revisited
  * @todo refactor this class to use Zend_Translate
  *
  */
-class Digitalus_Language {
+class Digitalus_Language
+{
     const SESSION_KEY  = 'currentLanguage';
     const LANGUAGE_KEY = 'current';
 

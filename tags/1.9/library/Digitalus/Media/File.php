@@ -1,6 +1,6 @@
 <?php
-
-class Digitalus_Media_File {
+class Digitalus_Media_File
+{
     public $name;
     public $path;
     public $type;
@@ -8,7 +8,8 @@ class Digitalus_Media_File {
     public $fullPath;
     public $exists = false;
 
-    public function __construct($path, $basePath = './', $baseUrl = '/') {
+    public function __construct($path, $basePath = './', $baseUrl = '/')
+    {
         $this->name = basename($path);
         $this->path = $path;
 

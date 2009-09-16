@@ -188,7 +188,7 @@ Zend_Debug::dump($path);
 
             //remove any leading slash that may exist.
             $partial = implode('/', $pathParts);
-            if(substr($partial, 0, 1) == '/')
+            if (substr($partial, 0, 1) == '/')
                 $partial = substr($partial, 1);
 
             //add the media root

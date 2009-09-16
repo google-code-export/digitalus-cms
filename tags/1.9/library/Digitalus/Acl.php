@@ -58,7 +58,7 @@ class Digitalus_Acl extends Zend_Acl
                 //clear the resource list items
                 $resourceListItems = null;
 
-                $path = str_replace('controllers', 'acl.xml',$path);
+                $path = str_replace('controllers', 'acl.xml', $path);
 
                 //load the module resource
                 $this->add(new Zend_Acl_Resource($module));
@@ -101,7 +101,8 @@ class Digitalus_Acl extends Zend_Acl
         return $this->resourceList;
     }
 
-    public function loadCurrentUsersPermissions() {
+    public function loadCurrentUsersPermissions()
+    {
         $user = new Model_User();
         $permissions = $user->getCurrentUsersAclResources();
 
@@ -109,9 +110,9 @@ class Digitalus_Acl extends Zend_Acl
             foreach ($permissions as $key => $value) {
                 if ($this->has($key)) {
                     if ($value == 1) {
-                        $this->allow('admin',$key);
+                        $this->allow('admin', $key);
                     } else {
-                        $this->deny('admin',$key);
+                        $this->deny('admin', $key);
                     }
                 }
             }

@@ -45,7 +45,7 @@ class Digitalus_View_Message
     {
         $m = new Zend_Session_Namespace('message');
         if (isset($this->_message)) {
-            Zend_Registry::set('message',$this->_message);
+            Zend_Registry::set('message', $this->_message);
             $m->message = $this->_message;
         } else {
             unset($m->message);

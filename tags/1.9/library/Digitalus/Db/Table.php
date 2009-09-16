@@ -32,19 +32,6 @@ class Digitalus_Db_Table extends Zend_Db_Table_Abstract
         parent::__construct($config);
     }
 
-    public static function getTableName($tableName, $prefix = null)
-    {
-        if (!isset($prefix) || empty($prefix)) {
-            $registry = Zend_Registry::getInstance();
-            $config = $registry->get('config');
-            $prefix = $config->database->prefix;
-        }
-
-        $name = $prefix . $tableName;
-
-        return $name;
-    }
-
     public function insertFromPost()
     {
         $this->_loadPost();
@@ -328,7 +315,31 @@ class Digitalus_Db_Table extends Zend_Db_Table_Abstract
      */
     private function _getNiceName($field)
     {
-        return str_replace('_', ' ',$field);
+        return str_replace('_', ' ', $field);
+    }
+
+    /**
+     * returns a string containing a table name and a prefix
+     *
+     * @param  string  $tableName  Given "raw" table name
+     * @param  string  $prefix     Optionally given table prefix
+     * @param  string  $separator  Optionally given separator
+     * @return string  modified table name
+     */
+    public static function getTableName($tableName, $prefix = null, $separator = '')
+    {
+        if (!isset($prefix) || empty($prefix)) {
+            $registry = Zend_Registry::getInstance();
+            if ($registry->isRegistered('config') && $config = $registry->get('config')) {
+                $prefix = $config->database->prefix;
+            } else {
+                $prefix = '';
+            }
+        }
+
+        $name = $prefix . $separator . $tableName;
+
+        return (string) $name;
     }
 
 }

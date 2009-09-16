@@ -88,7 +88,8 @@ class Digitalus_File
      * @param array $types
      * @return boolean
      */
-    public static function validateFiletype($key, $types) {
+    public static function validateFiletype($key, $types)
+    {
         if ($_FILES[$key]) {
             $fileType = $_FILES[$key]['type'];
             if (in_array($fileType, $types)) {

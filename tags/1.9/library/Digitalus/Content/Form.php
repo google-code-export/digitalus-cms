@@ -32,7 +32,6 @@ class Digitalus_Content_Form extends Digitalus_Form
              ->addElement($name)
              ->addElement($version)
              ->addElement($submit);
-
     }
 
     public function loadFromTemplate($template)

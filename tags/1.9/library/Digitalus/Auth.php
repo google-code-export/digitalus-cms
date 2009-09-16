@@ -90,7 +90,7 @@ class Digitalus_Auth
         $this->_dbAdapter = clone (Zend_Db_Table::getDefaultAdapter());
         $this->_dbAdapter->setFetchMode(ZEND_DB::FETCH_ASSOC);
 
-        $this->_authAdapter = new Zend_Auth_Adapter_DbTable($this->_dbAdapter, $this->_getTableName($this->_userTable), $this->_identityColumn, $this->_credentialColumn);
+        $this->_authAdapter = new Zend_Auth_Adapter_DbTable($this->_dbAdapter, Digitalus_Db_Table::getTableName($this->_userTable), $this->_identityColumn, $this->_credentialColumn);
 
         $this->_username = $username;
         $this->_password = md5($password);
@@ -98,16 +98,6 @@ class Digitalus_Auth
         // set up storage
         // @todo: i can not get zend to persist the identities for some reason .. figure out why
         $this->_storage = new Zend_Session_Namespace(self::USER_NAMESPACE);
-    }
-
-    protected function _getTableName($table)
-    {
-        $registry = Zend_Registry::getInstance();
-        $config = $registry->get('config');
-
-        $prefix = trim($config->database->prefix);
-
-        return $prefix . $table;
     }
 
     /**

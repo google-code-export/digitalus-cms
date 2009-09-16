@@ -68,7 +68,7 @@ class Digitalus_View_Helper_Jquery_AccordionContainer extends ZendX_JQuery_View_
         }
         if (isset($this->_panes[$id])) {
             $html = "";
-            foreach($this->_panes[$id] AS $element) {
+            foreach ($this->_panes[$id] AS $element) {
                 $html .= sprintf($this->_elementHtmlTemplate, $element['name'], $element['content']). PHP_EOL;
             }
             if (count($params) > 0) {

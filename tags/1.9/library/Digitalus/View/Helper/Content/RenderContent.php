@@ -51,7 +51,7 @@ class Digitalus_View_Helper_Content_RenderContent extends Zend_View_Helper_Abstr
 
         $xhtml = '';
 
-        if ($wordCount > 0){
+        if ($wordCount > 0) {
           $xhtml .= $this->view->truncateText($content->$block, $wordCount);
         } else {
           $xhtml .= $content->$block;

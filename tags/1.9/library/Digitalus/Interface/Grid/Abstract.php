@@ -9,7 +9,8 @@ abstract class Digitalus_Interface_Grid_Abstract
     const AFTER = 'after';
     const CLEAR = 'clear';
 
-    public function init(){}
+    public function init()
+    {}
 
     public function loadView()
     {
