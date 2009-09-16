@@ -12,30 +12,33 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id:$
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id:$
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
  */
 
-/** Zend_Controller_Action */
+/**
+ * @see Zend_Controller_Action
+ */
 require_once 'Zend/Controller/Action.php';
 
 /**
- * Admin Auth Conroller of Digitalus CMS
+ * Admin Auth Controller of Digitalus CMS
  *
- * @copyright  Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   Digitalus CMS
- * @package    Digitalus_CMS_Controllers
- * @version    $Id: AuthController.php Mon Dec 24 20:48:35 EST 2007 20:48:35 forrest lyman $
- * @link       http://www.digitaluscms.com
- * @since      Release 1.0.0
+ * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Controllers
+ * @version     $Id: AuthController.php Mon Dec 24 20:48:35 EST 2007 20:48:35 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.0.0
+ * @uses        Admin_Form_Login
+ * @uses        Admin_Form_OpenId
  */
 class Admin_AuthController extends Zend_Controller_Action
 {
-
     /**
      * Initialize the action
      *
@@ -55,48 +58,86 @@ class Admin_AuthController extends Zend_Controller_Action
      * if it has then it validates the data
      * if it is sound then it runs the Digitalus_Auth_Adapter function
      * to authorise the request
-     * on success it redirect to the admin home page
+     * on success it redirects to the admin home page
      *
      * @return void
      */
     public function loginAction()
     {
-        if ($this->_request->isPost()) {
+        $form = new Admin_Form_Login();
+
+        if ($this->_request->isPost() && $form->isValid($_POST)) {
             $uri = Digitalus_Filter_Post::get('uri');
-            $username = Digitalus_Filter_Post::get('adminUsername');
-            $password = Digitalus_Filter_Post::raw('adminPassword');
+            $username = $form->getValue('adminUsername');
+            $password = $form->getValue('adminPassword');
 
-            $e = new Digitalus_View_Error();
-
-            if ($username == '') {
-                $e->add($this->view->getTranslation('You must enter a username.'));
-            }
-            if ($password == '') {
-                $e->add($this->view->getTranslation('You must enter a password.'));
-            }
-
-            if (!$e->hasErrors()) {
-                $auth = new Digitalus_Auth($username, $password);
-                $result = $auth->authenticate();
-                if ($result) {
-                    if ($uri == '' || $uri == 'admin/auth/login') {
-                        $uri = 'admin';
-                    }
-                    $this->_redirect($uri);
-                } else {
-                    $e = new Digitalus_View_Error();
-                    $e->add($this->view->getTranslation('The username or password you entered was not correct.'));
+            $auth = new Digitalus_Auth($username, $password);
+            $result = $auth->authenticate();
+            if ($result) {
+                if ($uri == '' || $uri == 'admin/auth/login') {
+                    $uri = 'admin';
                 }
+                $this->_redirect($uri);
+            } else {
+                $e = new Digitalus_View_Error();
+                $e->add($this->view->getTranslation('The username or password you entered was not correct.'));
             }
             $this->view->uri = $uri;
         } else {
             $this->view->uri = Digitalus_Uri::get();
         }
-
+        $this->view->form = $form;
     }
 
     /**
-     * Login action
+     * OpenID Login action
+     *
+     * @return void
+     */
+    public function openidAction()
+    {
+        $form = new Admin_Form_OpenId();
+
+        $this->view->status = '';
+#        if (($this->_request->isPost()
+        if (($this->_request->isPost() && $form->isValid($_POST)
+             && $form->getValue('openid_action') == $this->view->getTranslation('Login')
+             && $form->getValue('openid_identifier') !== '') ||
+            ($this->_request->isPost() && $this->_request->getPost('openid_mode') !== null) ||
+            (!$this->_request->isPost() && $this->_request->getQuery('openid_mode') != null)
+           ) {
+            $auth = Zend_Auth::getInstance();
+            $openidStorage = new Zend_OpenId_Consumer_Storage_File(BASE_PATH . '/cache/');
+            $result = $auth->authenticate(
+                new Zend_Auth_Adapter_OpenId($form->getValue('openid_identifier'), $openidStorage)
+            );
+            if ($result->isValid()) {
+                $storage = new Zend_Session_Namespace(Digitalus_Auth::USER_NAMESPACE);
+                $userMdl = new Model_User();
+Zend_Debug::dump($_POST['zend_openid']['identity']);
+                $user = $userMdl->getUserByOpenId('http://timo.fehsenfeld.meinguter.name');
+                $storage->user = $user;
+
+                $this->_redirect('admin/auth/openid');
+            } else {
+                $auth->clearIdentity();
+                foreach ($result->getMessages() as $message) {
+                    $this->view->status .= $message . '<br>' . PHP_EOL;
+                }
+            }
+        }
+        $this->view->form = $form;
+
+#        $this->render();
+Zend_Debug::dump($_SESSION);
+Zend_Debug::dump($_POST);
+Zend_Debug::dump($_GET);
+
+echo 'STATUS: ' . $this->view->status . '<br />';
+    }
+
+    /**
+     * Logout action
      *
      * kills the authorized user object
      * then redirects to the main index page
@@ -106,6 +147,7 @@ class Admin_AuthController extends Zend_Controller_Action
     public function logoutAction()
     {
         Digitalus_Auth::destroy();
+        Zend_Auth::getInstance()->clearIdentity();
         $this->_redirect('/');
     }
 
@@ -147,7 +189,7 @@ class Admin_AuthController extends Zend_Controller_Action
                 } else {
                     $e = new Digitalus_View_Error();
                     $e->add(
-                        $this->view->getTranslation('Sorry, there was an error sending you your updated password.  Please contact us for more help.')
+                        $this->view->getTranslation('Sorry, there was an error sending you your updated password. Please contact us for more help.')
                     );
                 }
             } else {
@@ -158,7 +200,7 @@ class Admin_AuthController extends Zend_Controller_Action
             }
             $url = 'admin/auth/login';
             $this->_redirect($url);
-         }
+        }
     }
 
 }
