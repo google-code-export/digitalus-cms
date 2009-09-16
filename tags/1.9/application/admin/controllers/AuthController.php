@@ -114,8 +114,7 @@ class Admin_AuthController extends Zend_Controller_Action
             if ($result->isValid()) {
                 $storage = new Zend_Session_Namespace(Digitalus_Auth::USER_NAMESPACE);
                 $userMdl = new Model_User();
-Zend_Debug::dump($_POST['zend_openid']['identity']);
-                $user = $userMdl->getUserByOpenId('http://timo.fehsenfeld.meinguter.name');
+                $user = $userMdl->getUserByOpenId($_SESSION['zend_openid']['identity']);
                 $storage->user = $user;
 
                 $this->_redirect('admin/auth/openid');
@@ -129,9 +128,9 @@ Zend_Debug::dump($_POST['zend_openid']['identity']);
         $this->view->form = $form;
 
 #        $this->render();
-Zend_Debug::dump($_SESSION);
-Zend_Debug::dump($_POST);
-Zend_Debug::dump($_GET);
+#Zend_Debug::dump($_SESSION);
+#Zend_Debug::dump($_POST);
+#Zend_Debug::dump($_GET);
 
 echo 'STATUS: ' . $this->view->status . '<br />';
     }
