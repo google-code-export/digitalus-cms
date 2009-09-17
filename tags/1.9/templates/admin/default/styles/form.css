@@ -432,9 +432,9 @@ margin-bottom:20px;
     width:450px;
 }
 
-a.link img.icon{
-    border:none;
-    margin:0 10px 0 0;
+img.icon, a.link img.icon {
+    border: none;
+    margin: 0 10px;
 }
 
 .column a, #form a{

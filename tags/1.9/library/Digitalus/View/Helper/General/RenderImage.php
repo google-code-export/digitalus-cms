@@ -78,7 +78,7 @@ class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstrac
                     $attributes .= $k . "='" . $v . "' ";
                 }
             }
-            return '<img style="' . $width . $height . '" src="' . $src . '" ' . $attributes . ' />';
+            return '<img class="icon" style="' . $width . $height . '" src="' . $src . '" ' . $attributes . ' />';
         }
     }
 }

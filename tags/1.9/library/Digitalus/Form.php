@@ -164,12 +164,7 @@ class Digitalus_Form extends Zend_Form
             // Get site config
             $config = Zend_Registry::get('config');
 
-            $language = $settings->get('admin_language');
-            if (!empty($language)) {
-                $key = $language;
-            } else {
-                $key = $config->language->defaultLocale;
-            }
+            $key = $this->getView()->getAdminLanguage();
             $languageFiles = $config->language->translations->toArray();
             $languagePath  = $config->language->path . '/form/' . $languageFiles[$key] . '.form.csv';
 
