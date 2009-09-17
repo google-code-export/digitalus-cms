@@ -511,3 +511,9 @@ ul.errors{
     max-width:320px;
     color:#cc0000;
 }
+
+ul.form-errors {
+    margin: 0 5px 10px;
+    background-color: #ffdddd;
+    border: 1px solid #cc0000;
+}
