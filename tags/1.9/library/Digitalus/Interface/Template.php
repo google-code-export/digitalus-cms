@@ -7,7 +7,6 @@ class Digitalus_Interface_Template
             return $template;
         } else if (file_exists($template)) {
             $form = new Digitalus_Content_Form();
-
             $view = $form->getView();
             $templateName = basename($template);
             $layoutPath = Digitalus_Toolbox_String::getParentFromPath($template);
@@ -46,11 +45,10 @@ class Digitalus_Interface_Template
                 }
 
                 if (isset($attribs['label'])) {
-                    $label = (string)$attribs['label'];
+                    $label = (string)$view->getTranslation($attribs['label']);
                     unset($attribs['label']);
                 } else {
-                    $label = $view->getTranslation($id);
-                    $label = ucwords(str_replace('_', ' ', $label));
+                    $label = $view->getTranslation(ucwords(str_replace('_', ' ', $id)));
                 }
 
                 $control = $formInstance->createElement($type, $id);

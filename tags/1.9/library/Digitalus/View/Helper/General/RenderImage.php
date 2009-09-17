@@ -43,7 +43,7 @@ class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstrac
     /**
      * comments
      */
-    public function renderImage($src, $height, $width, $attribs = false)
+    public function renderImage($src, $height = '', $width = '', $attribs = array())
     {
         $absPath = BASE_PATH . $src;
         if ($src != '' && is_file($absPath)) {
@@ -51,25 +51,34 @@ class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstrac
             $srcHeight = $imageSize[0];
             $srcWidth = $imageSize[1];
 
+            $percentage = 1.0;
             //if the height is greater than the width then adjust by the height
             //otherwise adjust by the width
-            if ($srcHeight > $srcWidth) {
+            if ((isset($height) && !empty($height)) && $srcHeight > $srcWidth) {
                 $percentage = $height / $srcHeight;
-            } else {
+            } elseif ((isset($width) && !empty($width))) {
                 $percentage = $width / $srcWidth;
             }
 
-            //gets the new value and applies the percentage, then rounds the value
-            $width = round($srcWidth * $percentage);
-            $height = round($srcHeight * $percentage);
+            if (isset($height) && !empty($height)) {
+                $height = 'height:' . round($srcHeight * $percentage) . 'px; ';
+            } else {
+                $height = '';
+            }
+            if (isset($width) && !empty($width)) {
+                //gets the new value and applies the percentage, then rounds the value
+                $width = 'width:' . round($srcWidth * $percentage) . 'px; ';
+            } else {
+                $width = '';
+            }
 
             $attributes = null;
-            if ($attribs) {
+            if (is_array($attribs)) {
                 foreach ($attribs as $k => $v) {
                     $attributes .= $k . "='" . $v . "' ";
                 }
             }
-            return '<img width="' . $width . '" height="' . $height . '" src="' . $src . '" ' . $attributes . ' />';
+            return '<img style="' . $width . $height . '" src="' . $src . '" ' . $attributes . ' />';
         }
     }
 }

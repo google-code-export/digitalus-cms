@@ -99,7 +99,6 @@ class Admin_AuthController extends Zend_Controller_Action
         $form = new Admin_Form_OpenId();
 
         $this->view->status = '';
-#        if (($this->_request->isPost()
         if (($this->_request->isPost() && $form->isValid($_POST)
              && $form->getValue('openid_action') == $this->view->getTranslation('Login')
              && $form->getValue('openid_identifier') !== '') ||
@@ -131,8 +130,7 @@ class Admin_AuthController extends Zend_Controller_Action
 #Zend_Debug::dump($_SESSION);
 #Zend_Debug::dump($_POST);
 #Zend_Debug::dump($_GET);
-
-echo 'STATUS: ' . $this->view->status . '<br />';
+#echo 'STATUS: ' . $this->view->status . '<br />';
     }
 
     /**
