@@ -17,6 +17,12 @@ class Model_Page extends Digitalus_Db_Table
     const UNPUBLISH_STATUS = 'unpublished';
     const ARCHIVE_STATUS   = 'archived';
 
+    protected $_statusTemplates = array(
+        self::PUBLISH_ID   => 'published',
+        self::UNPUBLISH_ID => 'unpublished',
+        self::ARCHIVE_ID   => 'archived',
+    );
+
     public function getContent($uri, $version = null)
     {
         if ($version == null) {
@@ -79,16 +85,16 @@ class Model_Page extends Digitalus_Db_Table
         // get current time to ensure create and publish date are exactly the same
         $time = time();
 
-        if ($publishPage == null) {
+        if ($publishPage === null) {
             $settings = new Model_SiteSettings();
             $publishPage = $settings->get('publish_pages');
         }
         if ($publishPage == true) {
             $publishDate  = $time;
-            $publishLevel = PUBLISH_ID;
+            $publishLevel = self::PUBLISH_ID;
         } else {
             $publishDate  = 'NULL';
-            $publishLevel = UNPUBLISH_ID;
+            $publishLevel = self::UNPUBLISH_ID;
         }
 
         $u = new Model_User();
@@ -876,7 +882,8 @@ class Model_Page extends Digitalus_Db_Table
     {
         $currentPage = $this->find($pageId)->current();
         if ($currentPage) {
-            return $currentPage->publish_level;
+            $publishStatus = $this->getStatusTemplates();
+            return $publishStatus[$currentPage->publish_level];
         }
         return false;
     }
@@ -912,4 +919,15 @@ class Model_Page extends Digitalus_Db_Table
             return null;
         }
     }
+
+    /**
+     * Returns the status templates
+     *
+     * @return array
+     */
+    public function getStatusTemplates()
+    {
+        return $this->_statusTemplates;
+    }
+
 }

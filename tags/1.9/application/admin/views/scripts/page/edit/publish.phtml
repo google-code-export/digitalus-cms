@@ -6,22 +6,21 @@ $radioOptions = array(
 );
 
 $mdlPage = new Model_Page();
-$list = $this->renderPublishedPagesList();
+$list = $this->renderPublishedPagesList(Model_Page::UNPUBLISH_ID);
 if ($list != null) {
     echo '<p>' . $this->getTranslation('The following pages have not been published yet!') . '</p>';
     echo $list;
-}?>
+}
 
-<p><?php echo $this->getTranslation('Change the status of this page.');?></p>
+echo '<p>' . $this->getTranslation('Change the status of this page.') . '</p>';
 
-<?php if ($mdlPage->isPublished($this->pageId)): ?>
-    <p><?php echo $this->getTranslation('This page was published on');?> : <?php echo $this->renderDate($this->publishDates['publish_date']);?></p>
-<?php endif; ?>
-<?php if ($mdlPage->getPublishLevel($this->pageId) === Model_Page::ARCHIVE_ID): ?>
-    <p><?php echo $this->getTranslation('This page was archived on');?> : <?php echo $this->renderDate($this->publishDates['archive_date']);?></p>
-<?php endif; ?>
-
-<p><?php echo $this->getTranslation("This page's status is");?>: <?php echo $mdlPage->getPublishLevel($this->pageId);?></p>
+if ($mdlPage->isPublished($this->pageId)) {
+    echo '<p>' . $this->getTranslation('This page was published on') . ': ' . $this->renderDate($this->publishDates['publish_date']) . '</p>';
+}
+if ($mdlPage->getPublishLevel($this->pageId) === Model_Page::ARCHIVE_ID) {
+    echo '<p>' . $this->getTranslation('This page was archived on') . ': ' . $this->renderDate($this->publishDates['archive_date']) . '</p>';
+}
+echo '<p>' . $this->getTranslation('The status of this page is') . ': ' . $this->getTranslation($mdlPage->getPublishLevel($this->pageId)) . '</p>';?>
 
 <form action="<?php echo $this->getBaseUrl()?>/admin/page/publish" method="post">
     <p class="propRow"><?php

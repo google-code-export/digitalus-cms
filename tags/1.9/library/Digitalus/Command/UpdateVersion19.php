@@ -86,6 +86,8 @@ class Digitalus_Command_UpdateVersion19 extends Digitalus_Command_Abstract
     private function _updateTemplateReferences()
     {
         $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ADD `openid` VARCHAR(100) NOT NULL AFTER `email`");
+        $this->_db->query("UPDATE " . Digitalus_Db_Table::getTableName('pages') . " SET `publish_level` = '1' WHERE `publish_level` = 0");
+
         return true;
     }
 }

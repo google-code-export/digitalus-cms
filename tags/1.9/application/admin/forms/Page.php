@@ -50,11 +50,15 @@ class Admin_Form_Page extends Digitalus_Form
                  ->setOrder(3);
         $this->addElement($continue);
 
+        $showOnMenu = $this->createElement('checkbox', 'show_on_menu');
+        $showOnMenu->setLabel($this->getView()->getTranslation('Show Page on menu') . '?')
+                ->setOrder(4);
+        $this->addElement($showOnMenu);
+
         $publish = $this->createElement('checkbox', 'publish_pages');
         $publish->setLabel($this->getView()->getTranslation('Publish page instantly') . '?')
-                ->setOrder(4);
+                ->setOrder(5);
         $this->addElement($publish);
-
 
         $submit = $this->createElement('submit', $this->getView()->getTranslation('Submit'));
         $submit->setOrder(1000);

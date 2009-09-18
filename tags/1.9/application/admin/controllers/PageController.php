@@ -79,9 +79,18 @@ class Admin_PageController extends Zend_Controller_Action
         $frmPage = new Admin_Form_Page();
         if ($this->_request->isPost()) {
             if ($frmPage->isValid($_POST)) {
-                $this->_setCreateOptions($frmPage->getValue('parent_id'), $frmPage->getElement('continue_adding_pages')->isChecked(), $frmPage->getValue('content_template'));
+                $this->_setCreateOptions($frmPage->getValue('parent_id'),
+                                         $frmPage->getElement('continue_adding_pages')->isChecked(),
+                                         $frmPage->getValue('content_template'),
+                                         $frmPage->getElement('show_on_menu')->isChecked(),
+                                         $frmPage->getElement('publish_pages')->isChecked());
                 $page = new Model_Page();
-                $newPage = $page->createPage($frmPage->getValue('page_name'), $frmPage->getValue('parent_id'), $frmPage->getValue('content_template'));
+
+                $newPage = $page->createPage($frmPage->getValue('page_name'),
+                                             $frmPage->getValue('parent_id'),
+                                             $frmPage->getValue('content_template'),
+                                             $frmPage->getElement('show_on_menu')->isChecked(),
+                                             $frmPage->getElement('publish_pages')->isChecked());
 
                 if ($newPage) {
                     if ($frmPage->getElement('continue_adding_pages')->isChecked()) {
@@ -103,7 +112,8 @@ class Admin_PageController extends Zend_Controller_Action
             $formValues = $this->_getCreateOptions();
             $frmPage->getElement('parent_id')->setValue($formValues->parent_id);
             $frmPage->getElement('continue_adding_pages')->setValue($formValues->continue);
-            $frmPage->getElement('publish_pages')->setValue($formValues->publish);
+            $frmPage->getElement('publish_pages')->setValue($formValues->publish_pages);
+            $frmPage->getElement('show_on_menu')->setValue($formValues->show_on_menu);
             $frmPage->getElement('content_template')->setValue($formValues->content_template);
         }
 
@@ -481,12 +491,14 @@ class Admin_PageController extends Zend_Controller_Action
      * @param  string $contentType
      * @return void
      */
-    protected function _setCreateOptions($parentId, $continue = false, $contentTemplate = false)
+    protected function _setCreateOptions($parentId, $continue = false, $contentTemplate = false, $showOnMenu = false, $publishPages = false)
     {
         $session = $this->_getCreateOptions();
         $session->continue = $continue;
         $session->parent_id = $parentId;
         $session->content_template = $contentTemplate;
+        $session->show_on_menu = $showOnMenu;
+        $session->publish_pages = $publishPages;
     }
 
     /**
