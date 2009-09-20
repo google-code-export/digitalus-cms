@@ -168,7 +168,6 @@ class Model_Page extends Digitalus_Db_Table
 
     public function edit($pageArray)
     {
-        Zend_Debug::dump($pageArray);
         $pageId = isset($pageArray['id']) ? $pageArray['id'] : $pageArray['page_id'];
         if (!$pageId) {
             throw new Zend_Exception('Invalid Page: No key found for id');
