@@ -165,17 +165,16 @@ class Digitalus_Form extends Zend_Form
             $config = Zend_Registry::get('config');
 
             $key = $this->getView()->getAdminLanguage();
-            $languageFiles = $config->language->translations->toArray();
-            $languagePath  = $config->language->path . '/form/' . $languageFiles[$key] . '.form.csv';
-
-            if (is_file($languagePath)) {
-                $translator = new Zend_Translate(
-                    'csv',
-                    $languagePath,
-                    $key
-                );
-            } else {
-                $translator = null;
+            $translator = null;
+            if(!empty($key)) {
+                $languageFiles = $config->language->translations->toArray();    
+                if (is_file($languagePath)) {
+                    $translator = new Zend_Translate(
+                        'csv',
+                        $languagePath,
+                        $key
+                    );
+                }
             }
         }
         $this->setTranslator($translator);
