@@ -104,6 +104,17 @@ class Digitalus_Form extends Zend_Form
         }
         return $this->_model->find($id)->current();
     }
+    
+    public function validatePost()
+    {
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+        if($request->isPost()) {
+            if($this->isValid($_POST)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public function isSubmitted()
     {
@@ -142,6 +153,7 @@ class Digitalus_Form extends Zend_Form
     protected function _isValidInstance($instance)
     {
         $session = $this->_getSession();
+        Zend_Debug::dump($session->validInstances);
         if (isset($session->validInstances[$instance]) && $session->validInstances[$instance] === true) {
             return true;
         } else {

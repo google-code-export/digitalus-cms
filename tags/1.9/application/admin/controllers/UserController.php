@@ -107,7 +107,7 @@ class Admin_UserController extends Zend_Controller_Action
         $form->removeElement('update_password');
         $mdlUser = new Model_User();
         $form->setModel($mdlUser);
-        if ($form->isSubmitted()) {
+        if ($form->validatePost()) {
             $password = $form->getValue('password');
             $result = $form->create(array('password' => md5($password)));
             if ($result) {
