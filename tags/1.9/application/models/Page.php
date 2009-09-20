@@ -168,6 +168,7 @@ class Model_Page extends Digitalus_Db_Table
 
     public function edit($pageArray)
     {
+        Zend_Debug::dump($pageArray);
         $pageId = isset($pageArray['id']) ? $pageArray['id'] : $pageArray['page_id'];
         if (!$pageId) {
             throw new Zend_Exception('Invalid Page: No key found for id');
@@ -809,15 +810,15 @@ class Model_Page extends Digitalus_Db_Table
         $page = $this->find($pageId)->current();
         if ($page) {
             switch (trim($action)) {
-                case 'archive':
+                case 'archived':
                     $data['archive_date']  = time();
                     $data['publish_level'] = self::ARCHIVE_ID;
                     break;
-                case 'unpublish':
+                case 'unpublished':
 #                    $data['publish_date']  = 'NULL';
                     $data['publish_level'] = self::UNPUBLISH_ID;
                     break;
-                case 'publish':
+                case 'published':
                 default:
                     $data['publish_date']  = time();
                     $data['publish_level'] = self::PUBLISH_ID;

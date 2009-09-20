@@ -1,8 +1,8 @@
 <?php
 $radioOptions = array(
-    'publish'   => $this->getTranslation('Publish'),
-    'unpublish' => $this->getTranslation('Unpublish'),
-    'archive'   => $this->getTranslation('Archive'),
+    'published'   => $this->getTranslation('Publish'),
+    'unpublished' => $this->getTranslation('Unpublish'),
+    'archived'   => $this->getTranslation('Archive'),
 );
 
 $mdlPage = new Model_Page();
@@ -24,7 +24,7 @@ echo '<p>' . $this->getTranslation('The status of this page is') . ': ' . $this-
 
 <form action="<?php echo $this->getBaseUrl()?>/admin/page/publish" method="post">
     <p class="propRow"><?php
-        echo $this->formRadio('publish', null, null, $radioOptions, PHP_EOL);
+        echo $this->formRadio('publish', $mdlPage->getPublishLevel($this->pageId), null, $radioOptions, PHP_EOL);
         echo $this->formSubmit('publishSubmit', $this->getTranslation('Change publishing state'));
         echo $this->formHidden('id', $this->pageId);?>
     </p>
