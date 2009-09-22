@@ -104,7 +104,7 @@ class Digitalus_Form extends Zend_Form
         }
         return $this->_model->find($id)->current();
     }
-    
+
     public function validatePost()
     {
         $request = Zend_Controller_Front::getInstance()->getRequest();
@@ -179,7 +179,8 @@ class Digitalus_Form extends Zend_Form
             $key = $this->getView()->getAdminLanguage();
             $translator = null;
             if(!empty($key)) {
-                $languageFiles = $config->language->translations->toArray();    
+                $languageFiles = $config->language->translations->toArray();
+                $languagePath  = $config->language->path . '/form/' . $languageFiles[$key] . '.form.csv';
                 if (is_file($languagePath)) {
                     $translator = new Zend_Translate(
                         'csv',
