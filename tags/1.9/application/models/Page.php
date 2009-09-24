@@ -18,9 +18,9 @@ class Model_Page extends Digitalus_Db_Table
     const ARCHIVE_STATUS   = 'archived';
 
     protected $_statusTemplates = array(
-        self::PUBLISH_ID   => 'published',
-        self::UNPUBLISH_ID => 'unpublished',
-        self::ARCHIVE_ID   => 'archived',
+        self::PUBLISH_ID   => self::PUBLISH_STATUS,
+        self::UNPUBLISH_ID => self::UNPUBLISH_STATUS,
+        self::ARCHIVE_ID   => self::ARCHIVE_STATUS,
     );
 
     public function getContent($uri, $version = null)

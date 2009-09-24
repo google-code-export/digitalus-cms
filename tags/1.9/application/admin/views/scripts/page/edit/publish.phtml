@@ -1,8 +1,8 @@
 <?php
 $radioOptions = array(
-    'published'   => $this->getTranslation('Publish'),
-    'unpublished' => $this->getTranslation('Unpublish'),
-    'archived'   => $this->getTranslation('Archive'),
+    Model_Page::PUBLISH_ID       => $this->getTranslation('Publish'),
+    Model_Page::UNPUBLISH_STATUS => $this->getTranslation('Unpublish'),
+    Model_Page::ARCHIVE_STATUS   => $this->getTranslation('Archive'),
 );
 
 $mdlPage = new Model_Page();
@@ -22,6 +22,7 @@ if ($mdlPage->getPublishLevel($this->pageId) === Model_Page::ARCHIVE_ID) {
 }
 echo '<p>' . $this->getTranslation('The status of this page is') . ': ' . $this->getTranslation($mdlPage->getPublishLevel($this->pageId)) . '</p>';?>
 
+<br />
 <form action="<?php echo $this->getBaseUrl()?>/admin/page/publish" method="post">
     <p class="propRow"><?php
         echo $this->formRadio('publish', $mdlPage->getPublishLevel($this->pageId), null, $radioOptions, PHP_EOL);
