@@ -472,7 +472,7 @@ img.icon, a.link img.icon {
 }
 
 a.handle{
-    background: url('../../../images/icons/text_linespacing.png') no-repeat;
+    background: url('../../../../images/icons/text_linespacing.png') no-repeat;
 }
 
 .default{
