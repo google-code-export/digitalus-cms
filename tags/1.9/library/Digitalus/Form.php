@@ -153,7 +153,6 @@ class Digitalus_Form extends Zend_Form
     protected function _isValidInstance($instance)
     {
         $session = $this->_getSession();
-        Zend_Debug::dump($session->validInstances);
         if (isset($session->validInstances[$instance]) && $session->validInstances[$instance] === true) {
             return true;
         } else {
