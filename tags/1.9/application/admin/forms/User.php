@@ -31,6 +31,12 @@ class Admin_Form_User extends Digitalus_Form
               ->addValidator('EmailAddress');
 
         // create new element
+        $openid = $this->createElement('text', 'openid');
+        // element options
+        $openid->setLabel($this->getView()->getTranslation('OpenId'))
+               ->setAttrib('size', 50);
+
+        // create new element
         $adminRole = $this->createElement('select', 'role');
         // element options
         $adminRole->setLabel($this->getView()->getTranslation('Admin Role'));
@@ -63,10 +69,26 @@ class Admin_Form_User extends Digitalus_Form
              ->addElement($firstName)
              ->addElement($lastName)
              ->addElement($email)
+             ->addElement($openid)
              ->addElement($adminRole)
              ->addElement($updatePassword)
              ->addElement($password)
              ->addElement($passwordConfirm)
-             ->addElement($submit);
+             ->addElement($submit)
+             ->addDisplayGroup(array('form_instance', 'id', 'first_name', 'last_name',
+                                     'email', 'openid', 'role', 'update_password',
+                                     'update_password', 'password', 'password_confirm', 'submit'),
+                                     'admin_form',
+                                     array('legend' => $this->getView()->getTranslation('Account Information')));
+
+        $this->setDecorators(array(
+            'FormElements',
+            'Form',
+        ));
+
+        $this->setDisplayGroupDecorators(array(
+            'FormElements',
+            'Fieldset',
+        ));
     }
 }

@@ -1,40 +1,22 @@
-<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update User'))?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update User'));
 
-<form id="general" action="<?php echo $this->getBaseUrl();?>/admin/user/edit" method="post">
+echo $this->form;?>
+
+<form id="permissions" action="<?php echo $this->getBaseUrl();?>/admin/user/open/id/<?php echo $this->user->id;?>" method="post">
     <fieldset>
-        <legend><?php echo $this->getTranslation('Account Information');?></legend>
-        <?php
-        $data = new Digitalus_Data_Storage();
-        $user = $data->get();
-        echo $this->formHidden('id',$this->user->id);
-            echo $this->FormRow($this->getTranslation('First Name'), $this->FormText('first_name', $this->user->first_name));
-            echo $this->FormRow($this->getTranslation('Last Name'), $this->FormText('last_name', $this->user->last_name));
-            echo $this->FormRow($this->getTranslation('Email Address'), $this->FormText('email', $this->user->email));
-            echo $this->FormRow($this->getTranslation('Admin Role'), $this->SelectAdminRole('role', $this->user->role));
-            echo $this->FormRow('&nbsp;', $this->FormSubmit('update', $this->getTranslation('Update Account')));
-        ?>
+        <legend><?php echo $this->getTranslation('User Permissions');?></legend><?php
+            echo $this->formHidden('id', $this->user->id);
+            echo $this->renderAclList($this->userPermissions);
+            echo $this->formSubmit('update_permissions', $this->getTranslation('Update Permissions'));?>
     </fieldset>
 </form>
 
-<form id="permissions" action="<?php echo $this->getBaseUrl();?>/admin/user/edit" method="post">
+<form id="password" action="<?php echo $this->getBaseUrl();?>/admin/user/open/id/<?php echo $this->user->id;?>" method="post">
     <fieldset>
-        <legend><?php echo $this->getTranslation('User Permissions');?></legend>
-        <?php
-            echo $this->formHidden('id',$this->user->id);
-            echo $this->RenderAclList($this->userPermissions);
-            echo $this->FormSubmit('update_permissions', $this->getTranslation('Update Permissions'));
-        ?>
-    </fieldset>
-</form>
-
-<form id="password" action="<?php echo $this->getBaseUrl();?>/admin/user/edit" method="post">
-    <fieldset>
-        <legend><?php echo $this->getTranslation('Login Credentials');?></legend>
-        <?php
-            echo $this->formHidden('id',$this->user->id);
-            echo $this->FormRow($this->getTranslation('Password'), $this->FormPassword('newPassword'));
-            echo $this->FormRow($this->getTranslation('Confirm Password'), $this->FormPassword('newConfirmPassword'));
-            echo $this->FormRow('&nbsp;', $this->FormSubmit('admin_user_password', $this->getTranslation('Update Password')));
-        ?>
+        <legend><?php echo $this->getTranslation('Login Credentials');?></legend><?php
+            echo $this->formHidden('id', $this->user->id);
+            echo $this->formRow($this->getTranslation('Password'), $this->formPassword('newPassword'));
+            echo $this->formRow($this->getTranslation('Confirm Password'), $this->formPassword('newConfirmPassword'));
+            echo $this->formRow('&nbsp;', $this->formSubmit('admin_user_password', $this->getTranslation('Update Password')));?>
     </fieldset>
 </form>
