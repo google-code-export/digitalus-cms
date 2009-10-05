@@ -5,5 +5,6 @@ class Digitalus_Form_Element_Markitup extends Zend_Form_Element_Textarea
     {
         $this->setAttrib('class', 'markItUp');
         $this->setDecorators(array('Composite'));
+        $this->addFilter('StripSlashes');
     }
 }

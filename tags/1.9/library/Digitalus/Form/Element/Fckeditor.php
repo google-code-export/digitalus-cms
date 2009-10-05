@@ -5,5 +5,6 @@ class Digitalus_Form_Element_Fckeditor extends Zend_Form_Element_Textarea
     {
         $this->setAttrib('class', 'fckeditor');
         $this->setDecorators(array('Composite'));
+        $this->addFilter('StripSlashes');
     }
 }
