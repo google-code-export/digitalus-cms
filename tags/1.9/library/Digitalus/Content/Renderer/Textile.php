@@ -890,7 +890,7 @@ class Digitalus_Content_Renderer_Textile
 // NOTE: deprecated
     public function encodeEntities($text)
     {
-        return (public function_exists('mb_encode_numericentity'))
+        return (function_exists('mb_encode_numericentity'))
         ?    $this->encode_high($text)
         :    htmlentities($text, ENT_NOQUOTES, "utf-8");
     }
