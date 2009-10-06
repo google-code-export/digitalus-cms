@@ -106,6 +106,18 @@ class Digitalus_Form extends Zend_Form
         return $this->_model->find($id)->current();
     }
 
+    public function validatePost()
+    {
+        $request = Zend_Controller_Front::getInstance()->getRequest();
+        if($request->isPost()) {
+            if($this->isValid($_POST)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public function isSubmitted()
     {
         if (Digitalus_Filter_Post::has('form_instance')) {
@@ -165,25 +177,21 @@ class Digitalus_Form extends Zend_Form
             // Get site config
             $config = Zend_Registry::get('config');
 
-            $language = $settings->get('admin_language');
-            if (!empty($language)) {
-                $key = $language;
-            } else {
-                $key = $config->language->defaultLocale;
-            }
-            $languageFiles = $config->language->translations->toArray();
-            $languagePath  = $config->language->path . '/form/' . $languageFiles[$key] . '.form.csv';
-
-            if (is_file($languagePath)) {
-                $translator = new Zend_Translate(
-                    'csv',
-                    $languagePath,
-                    $key
-                );
-            } else {
-                $translator = null;
+            $key = $this->getView()->getAdminLanguage();
+            $translator = null;
+            if (!empty($key)) {
+                $languageFiles = $config->language->translations->toArray();
+                $languagePath  = $config->language->path . '/form/' . $languageFiles[$key] . '.form.csv';
+                if (is_file($languagePath)) {
+                    $translator = new Zend_Translate(
+                        'csv',
+                        $languagePath,
+                        $key
+                    );
+                }
             }
         }
         $this->setTranslator($translator);
     }
+
 }
