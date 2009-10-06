@@ -130,7 +130,6 @@ class Admin_UserController extends Zend_Controller_Action
     public function createAction()
     {
         $form = new Admin_Form_User();
-        $form->removeElement('update_password');
         $mdlUser = new Model_User();
         $form->setModel($mdlUser);
         if ($form->validatePost()) {
