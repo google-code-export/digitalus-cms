@@ -73,9 +73,6 @@ class Digitalus_Media
                 $fullPath = Digitalus_Toolbox_String::stripLeading($base . '/', $path);
                 return $fullPath;
             } else {
-Zend_Debug::dump($file);
-Zend_Debug::dump($file['tmp_name']);
-Zend_Debug::dump($path);
                 $e->add($view->getTranslation('An error occurred uploading the file' . ': ' . $file['name']));
             }
         } else {

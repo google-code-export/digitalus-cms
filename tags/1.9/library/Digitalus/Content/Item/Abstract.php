@@ -60,7 +60,6 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
     protected function _update()
     {
         $data = $this->toArray();
-        Zend_Debug::dump($data);
         $data['page_id'] = $this->id;
         unset($data['id']);
         $this->_pageModel->edit($data);
