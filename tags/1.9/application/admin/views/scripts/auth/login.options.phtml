@@ -1,6 +1,15 @@
-<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('OpenID Login'));?>
 <?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Need Help?'));?>
 
+<p class="padding-10"><?php echo $this->getTranslation('If you are having trouble logging in please enter your email address below and we will send you your login credentials.');?></p>
+<form class="padding-10" action="/admin/auth/reset-password" method="post"><?php
+    echo $this->formText('email', $this->email);
+    echo $this->formSubmit('reminder', $this->getTranslation('Reset Password'));?>
+</form>
+<br />
+<hr />
+<br />
+
+<?php echo $this->renderText('OpenID Login', 'h2');?>
 <p>
     <?php echo $this->getTranslation('Digitalus CMS gives You the possibilty to use Your existing OpenID to login to the administrator area.');?>
     <br />
@@ -9,11 +18,3 @@
         <?php echo $this->getTranslation('OpenID Login');?>
     </a>
 </p>
-<hr />
-<p class="padding-10"><?php echo $this->getTranslation('If you are having trouble logging in please enter your email address below and we will send you your login credentials.');?></p>
-<form class="padding-10" action="/admin/auth/reset-password" method="post">
-<?php
-    echo $this->formText('email', $this->email);
-    echo $this->formSubmit('reminder', $this->getTranslation('Reset Password'));
-?>
-</form>

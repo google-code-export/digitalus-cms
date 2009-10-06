@@ -116,7 +116,7 @@ class Admin_AuthController extends Zend_Controller_Action
                 $user = $userMdl->getUserByOpenId($_SESSION['zend_openid']['identity']);
                 $storage->user = $user;
 
-                $this->_redirect('admin/auth/openid');
+                $this->_redirect('admin');
             } else {
                 $auth->clearIdentity();
                 foreach ($result->getMessages() as $message) {
@@ -125,12 +125,6 @@ class Admin_AuthController extends Zend_Controller_Action
             }
         }
         $this->view->form = $form;
-
-#        $this->render();
-#Zend_Debug::dump($_SESSION);
-#Zend_Debug::dump($_POST);
-#Zend_Debug::dump($_GET);
-#echo 'STATUS: ' . $this->view->status . '<br />';
     }
 
     /**
