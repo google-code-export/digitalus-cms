@@ -52,7 +52,7 @@ class Digitalus_View_Helper_Controls_SelectModule extends Zend_View_Helper_Abstr
                     foreach ($pages as $page) {
                         if (!strpos($page, '.form.')) {
                             $page = Digitalus_Toolbox_Regex::stripFileExtension($page);
-                            $data[$module . '_' . $page] = $module . ' -> ' . $page;
+                            $data[$module . '_' . $page] = $this->view->getTranslation($module) . ' -> ' . $page;
                         }
                     }
                 }
