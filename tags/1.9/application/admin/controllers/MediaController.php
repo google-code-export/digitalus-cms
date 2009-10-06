@@ -126,7 +126,7 @@ class Admin_MediaController extends Zend_Controller_Action
     /**
      * Create Folder Action
      *
-     * @throws Zend_Exception
+     * @throws Digitalus_Exception
      * @return void
      */
     public function createFolderAction()
@@ -135,7 +135,7 @@ class Admin_MediaController extends Zend_Controller_Action
         $newFolder  = Digitalus_Filter_Post::get('folder_name');
         //dont allow access outside the media folder
         if (strpos($baseFolder, './') || strpos($newFolder, './')) {
-            throw new Zend_Exception('Illegal file access attempt. Operation cancelled!');
+            throw new Digitalus_Exception($this->view->getTranslation('Illegal file access attempt. Operation cancelled!'));
         }
 
         $forwardPath = $baseFolder;

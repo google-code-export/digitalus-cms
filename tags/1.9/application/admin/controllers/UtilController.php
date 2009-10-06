@@ -40,7 +40,7 @@ class Admin_UtilController extends Zend_Controller_Action
     /**
      * Render partial action
      *
-     * @throws Zend_Exception
+     * @throws Digitalus_Exception
      * @return void
      */
     public function renderPartialAction()
@@ -53,7 +53,7 @@ class Admin_UtilController extends Zend_Controller_Action
             $data->post = $_POST;
             $this->view->data = $data;
         } else {
-            throw new Zend_Exception($this->view->getTranslation('Invalid placeholder passed'));
+            throw new Digitalus_Exception($this->view->getTranslation('Invalid placeholder passed'));
         }
     }
 

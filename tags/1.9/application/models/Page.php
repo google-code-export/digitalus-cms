@@ -57,7 +57,7 @@ class Model_Page extends Digitalus_Db_Table
                 return null;
             }
         } else {
-            throw new Zend_Exception('There is no user logged in currently');
+            throw new Digitalus_Exception($this->view->getTranslation('There is no user logged in currently'));
         }
     }
 
@@ -170,7 +170,7 @@ class Model_Page extends Digitalus_Db_Table
     {
         $pageId = isset($pageArray['id']) ? $pageArray['id'] : $pageArray['page_id'];
         if (!$pageId) {
-            throw new Zend_Exception('Invalid Page: No key found for id');
+            throw new Digitalus_Exception($this->view->getTranslation('Invalid Page: No key found for id'));
         } else {
             unset($pageArray['page_id']);
             $name = $pageArray['name'];
@@ -179,7 +179,7 @@ class Model_Page extends Digitalus_Db_Table
             //save the page details
             $currentPage = $this->find($pageId)->current();
             if (!$currentPage) {
-                throw new Zend_Exception('Could not load page');
+                throw new Digitalus_Exception($this->view->getTranslation('Could not load page'));
             } else {
                 $currentPage->name = $name;
                 $currentPage->save();
