@@ -2,6 +2,8 @@
 # RUSSIAN
 # ----- search module -----
 "Digitalus CMS";"Digitalus CMS"
+"Site Search";
+# admin section -- Index --
 "Search";
 "The search index was rebuilt successfully!";
 "Rebuild search";

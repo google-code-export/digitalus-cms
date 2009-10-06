@@ -2,6 +2,8 @@
 # SWEDISH
 # ----- search module -----
 "Digitalus CMS";"Digitalus CMS"
+"Site Search";
+# admin section -- Index --
 "Search";"Sök"
 "The search index was rebuilt successfully!";"Uppdateringen av sökindexet lyckades!"
 "Rebuild search";"Uppdatera sökindexet"

@@ -2,6 +2,8 @@
 # GERMAN
 # ----- search module -----
 "Digitalus CMS";"Digitalus CMS"
+"Site Search";"Seitensuche"
+# admin section -- Index --
 "Search";"Suche"
 "The search index was rebuilt successfully!";"Der Suchindex wurde erfolgreich erneuert"
 "Rebuild search";"Suchindex erneuern"

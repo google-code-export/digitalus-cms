@@ -1,17 +1,19 @@
-# Language File – MOD_SEARCH
-# SPANISH
+# Language File – MOD_SEARCH";"
+# SPANISH";"
 # ----- search module -----
-"Digitalus CMS";""
+"Digitalus CMS"
+"Site Search";
+# admin section -- Index --
 "Search";"Buscar"
-"The search index was rebuilt successfully!";"El index del buscador ha sido rearmado satisfactoriamente!"
-"Rebuild search";"Rearmar index de buscador"
+"The search index was rebuilt successfully!";"El índice del buscador ha sido rearmado exitósamente!"
+"Rebuild search";"Rearmar buscador"
 "Search Module";"Módulo de búsqueda"
 "The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.";"El módulo de busqueda utiliza el Lucene search Engine."
 "Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.";"Rearmar el index puede ser una tarea exhaustiva para el procesador por esto es que no se hace de manera automatica, eventualmente a medida que modifica el sitio puede realizarla."
-"The search form does not have any user defined settings.";
+"The search form does not have any user defined settings.";"El formulario de búsqueda no tiene ninguna configuración definida por el usuario."
 "Search Site";"Buscar en el sitio"
-"Keywords";"Keywords"
-"Your search for";"Buscaste por"
+"Keywords";"Palabras clave"
+"Your search for";"Su búsqueda de"
 "returned";"devuelto"
 "results.";"resultados."
 "did not return any results.";"no devolvió ningún resultado"

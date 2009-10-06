@@ -2,6 +2,8 @@
 # FRENCH
 # ----- search module -----
 "Digitalus CMS";"Digitalus CMS"
+"Site Search";
+# admin section -- Index --
 "Search";"Recherche"
 "The search index was rebuilt successfully!";"L'index de recherche a été régénérer avec succès!"
 "Rebuild search";"Régénérer l'index de recherche"

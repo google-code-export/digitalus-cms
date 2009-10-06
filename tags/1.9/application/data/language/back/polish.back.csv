@@ -11,20 +11,21 @@
 "swedish";
 # admin section -- Auth --
 "Login";"Zaloguj"
-"You must enter a username.";
-"You must enter a password.";
 "The username or password you entered was not correct.";
 "Your password has been reset for security and sent to your email address";
-"Sorry, there was an error sending you your updated password.  Please contact us for more help.";
+"Sorry, there was an error sending you your updated password. Please contact us for more help.";
 "Sorry, we could not locate your account. Please contact us to resolve this issue.";
+"OpenID Login";
 "Need Help?";
+"Digitalus CMS gives You the possibilty to use Your existing OpenID to login to the administrator area.";
 "If you are having trouble logging in please enter your email address below and we will send you your login credentials.";"Jeśli masz problemy z zalogowaniem się prosimy o wprowadzenie twójego adresu email. Wyślemy nań dane rejestracyjne."
 "Reset Password";"Reset hasła"
 "Administrator Login";"Logowanie Administratora"
 "Please enter your username (this is your email address) and password to get started.";"Wprowadź nazwę użytkownika (twój adres email) oraz hasło aby rozpocząć pracę."
-"Username";"Nazwa użytkownika"
-"Password";"Hasło"
-"Log In";"Zaloguj"
+"Standard Login";
+"Return to the standard login using Your username and password.";
+"Administrator OpenID Login";
+"Please enter your OpenID. You will be redirected to Your OpenId provider to authorize.";
 # admin section -- Design --
 "Design";"Wygląd"
 "Open";
@@ -61,6 +62,7 @@
 "Last Name";"Nazwisko"
 "Email";"Email"
 "Update Password?";"Uaktualnić hasło?"
+"Password";"Hasło"
 "Confirm";"Potwierdź"
 "Update My Account";"Uaktualnienie konta"
 "My Bookmarks";"Moje zakładki"
@@ -159,7 +161,7 @@
 "Change the status of this page.";
 "This page was published on";
 "This page was archived on";
-"This page";
+"The status of this page is";
 "Change publishing state";
 "Update Related Content";
 "Select the template for this page";
@@ -180,12 +182,14 @@
 "Site Root";"Korzeń strony"
 "Template";
 "Continue adding pages";
+"Show Page on menu";
 "Publish page instantly";
 "Submit";
 # admin section -- Site --
 "Site Settings";"Ustawienia strony"
 "Site";
 "Site Console";"Konsola strony"
+"Digitalus CMS Test Message";
 "About the Console";"O konsoli"
 "The site console enables you to interact directly with the CMS core.";"Ta konsola pozwala na bezpośrednie zarządzanie kodem CMS."
 "It is for experienced administrators only.";"Jest przeznaczona wyłącznie dla doświadczonych administratorów."
@@ -242,6 +246,7 @@
 "Admin Users";"Administratorzy"
 "Open console";"Otwórz konsolę"
 # admin section -- User --
+"Update Account";
 "Open User";"Otwórz użytkownika"
 "User";"Użytkownik"
 "Create User";"Stwórz użytkownika"
@@ -254,17 +259,19 @@
 "Copy Permissions";
 "If you have another user who already has the same permissions as this user you can copy that user's role.";"Jeśli jest już użytkownik posiadający takie uprawnienia jest ten użytkownik, możesz skopiować rolę tego użytkownika."
 "Update User";"Uaktualnij użytkownika"
-"Account Information";
-"Email Address";"Adres email"
-"Admin Role";"Rola administracyjna"
-"Update Account";
 "User Permissions";"Uprawnienia użytkownika"
 "Update Permissions";"Uaktualnij uprawnienia"
 "Login Credentials";
 "Confirm Password";
 "Update Password";
+"Email Address";"Adres email"
+"OpenID";
+"Admin Role";"Rola administracyjna"
 "Site Administrator";"Administrator strony"
 "Super Administrator";"Super Administrator"
+"Account Information";
+# admin section – Util --
+"Invalid placeholder passed";
 # admin section -- View Helper --
 "Unable to locate skin folder";
 "Current User";"Aktualny użytkownik"
@@ -342,7 +349,12 @@
 "The database was successfully installed";
 "An error occured installing the database";
 "Your admin account was successfully created";
+"There was an error creating your admin account";
 # admin section -- Misc –
+"Username";"Nazwa użytkownika"
+"You must enter a username.";
+"You must enter a password.";
+"You must enter a valid OpenID.";
 "Digitalus CMS";"Digitalus CMS"
 "Are you sure you want to delete this?";
 "Bookmark label:";
@@ -383,6 +395,7 @@
 "ERROR: could not update content template references.";
 "Content template references updated OK.";
 "The Update Version 18 command will update your database from version 1.5 to 1.8";
+"The Update Version 19 command will update your database from version 1.8 to 1.9";
 "Unable to delete item - the item is empty!";
 "Unable to cast type:";
 "to type:";

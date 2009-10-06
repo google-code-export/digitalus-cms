@@ -11,20 +11,21 @@
 "swedish";
 # admin section -- Auth --
 "Login";"Login"
-"You must enter a username.";"Du måste ange ett användarnamn."
-"You must enter a password.";"Du måste ange ett lösenord."
 "The username or password you entered was not correct.";"Användarnamnet eller lösenordet du angav var inte korrekt."
 "Your password has been reset for security and sent to your email address";"Ditt lösenord har återställts av säkerhetsskäl och har skickats till din e-postadress."
-"Sorry, there was an error sending you your updated password.  Please contact us for more help.";"Ursäkta, det blev ett fel att skicka ditt uppdaterade lösenord. Var snäll och kontakta oss för mer hjälp."
+"Sorry, there was an error sending you your updated password. Please contact us for more help.";"Ursäkta, det blev ett fel att skicka ditt uppdaterade lösenord. Var snäll och kontakta oss för mer hjälp."
 "Sorry, we could not locate your account. Please contact us to resolve this issue.";"Tyvärr kunde vi inte hitta ditt konto. Vänligen kontakta oss för att lösa problemet."
+"OpenID Login";
 "Need Help?";
+"Digitalus CMS gives You the possibilty to use Your existing OpenID to login to the administrator area.";
 "If you are having trouble logging in please enter your email address below and we will send you your login credentials.";"Om du har problem med att logga in så ange din e-postadress nedan så skickar vi dina inloggningsuppgifter."
 "Reset Password";"Återställ lösenord"
 "Administrator Login";"Administration inloggning"
 "Please enter your username (this is your email address) and password to get started.";"Ange ditt användarnamn (detta är din e-postadress) och lösenord för att komma ogång."
-"Username";"Användarnamn"
-"Password";"Lösenord"
-"Log In";"Logga In"
+"Standard Login";
+"Return to the standard login using Your username and password.";
+"Administrator OpenID Login";
+"Please enter your OpenID. You will be redirected to Your OpenId provider to authorize.";
 # admin section -- Design --
 "Design";"Design"
 "Open";
@@ -61,6 +62,7 @@
 "Last Name";"Efternamn"
 "Email";"E-post"
 "Update Password?";"Uppdatera lösenordet?"
+"Password";"Lösenord"
 "Confirm";"Bekräfta lösenord"
 "Update My Account";"Uppdatera mitt konto"
 "My Bookmarks";"Mina Bokmärken"
@@ -159,7 +161,7 @@
 "Change the status of this page.";
 "This page was published on";
 "This page was archived on";
-"This page";
+"The status of this page is";
 "Change publishing state";
 "Update Related Content";
 "Select the template for this page";
@@ -180,12 +182,14 @@
 "Site Root";"Sid Rot"
 "Template";
 "Continue adding pages";"Fortsätt lägg till sidor"
+"Show Page on menu";
 "Publish page instantly";
 "Submit";"Skicka"
 # admin section -- Site --
 "Site Settings";"Webbplats Inställningar"
 "Site";
 "Site Console";"Webbplats konsol"
+"Digitalus CMS Test Message";
 "About the Console";"Om konsolen"
 "The site console enables you to interact directly with the CMS core.";"Konsolen gör att nu kan interagera direkt med CMS kärnan."
 "It is for experienced administrators only.";"Endast för erfarna administratörer."
@@ -242,6 +246,7 @@
 "Admin Users";"Administratörsanvändare"
 "Open console";"Öppna konsol"
 # admin section -- User --
+"Update Account";"Uppdatera konto"
 "Open User";"Öppna Användare"
 "User";"Användare"
 "Create User";"Skapa Användare"
@@ -254,17 +259,19 @@
 "Copy Permissions";
 "If you have another user who already has the same permissions as this user you can copy that user's role.";"Om du har en annan användare som redan har samma behörihet som användaren kan du kopiera användarens roll."
 "Update User";"Uppdatera Användare"
-"Account Information";"Konto information"
-"Email Address";"E-post Adress"
-"Admin Role";"Administratörs Roll"
-"Update Account";"Uppdatera konto"
 "User Permissions";"Användarrättigheter"
 "Update Permissions";"Uppdatera användarrättigheter"
 "Login Credentials";"Inloggningsuppgifter"
 "Confirm Password";
 "Update Password";"Uppdatera lösenord"
+"Email Address";"E-post Adress"
+"OpenID";
+"Admin Role";"Administratörs Roll"
 "Site Administrator";"Webbplats administratör"
 "Super Administrator";"Super administratör"
+"Account Information";"Konto information"
+# admin section – Util --
+"Invalid placeholder passed";
 # admin section -- View Helper --
 "Unable to locate skin folder";
 "Current User";"Nuvarande användare"
@@ -342,7 +349,12 @@
 "The database was successfully installed";
 "An error occured installing the database";
 "Your admin account was successfully created";
+"There was an error creating your admin account";
 # admin section -- Misc –
+"Username";"Användarnamn"
+"You must enter a username.";"Du måste ange ett användarnamn."
+"You must enter a password.";"Du måste ange ett lösenord."
+"You must enter a valid OpenID.";
 "Digitalus CMS";"Digitalus CMS"
 "Are you sure you want to delete this?";
 "Bookmark label:";
@@ -383,6 +395,7 @@
 "ERROR: could not update content template references.";
 "Content template references updated OK.";
 "The Update Version 18 command will update your database from version 1.5 to 1.8";
+"The Update Version 19 command will update your database from version 1.8 to 1.9";
 "Unable to delete item - the item is empty!";
 "Unable to cast type:";
 "to type:";
