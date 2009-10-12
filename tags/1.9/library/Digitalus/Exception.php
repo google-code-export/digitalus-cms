@@ -23,12 +23,18 @@
  */
 
 /**
+ * @see Zend_Registry
+ */
+require_once 'Zend/Registry.php';
+
+/**
  * Digitalus Exception
  *
  * @category    Digitalus
  * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @uses        Zend_Registry
  */
 class Digitalus_Exception extends Zend_Exception
 {}

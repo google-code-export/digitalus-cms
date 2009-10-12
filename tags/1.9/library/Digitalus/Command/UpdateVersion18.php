@@ -69,9 +69,14 @@ class Digitalus_Command_UpdateVersion18 extends Digitalus_Command_Abstract
 
     private function _updateTemplateReferences()
     {
-        $this->_db->query("UPDATE pages SET content_template = 'block' WHERE content_template LIKE 'block_%'");
-        $this->_db->query("UPDATE pages SET content_template = 'module' WHERE content_template LIKE 'module_%'");
-        $this->_db->query("UPDATE pages SET content_template = 'default' WHERE content_template NOT IN ('block','module')");
+        $this->_db->query("UPDATE `"      . Digitalus_Db_Table::getTableName('pages') . "` SET `content_template` = 'block' WHERE `content_template` LIKE 'block_%'");
+        $this->_db->query("UPDATE `"      . Digitalus_Db_Table::getTableName('pages') . "` SET `content_template` = 'module' WHERE `content_template` LIKE 'module_%'");
+        $this->_db->query("UPDATE `"      . Digitalus_Db_Table::getTableName('pages') . "` SET `content_template` = 'default' WHERE `content_template` NOT IN ('block','module')");
+        $this->_db->query("UPDATE `"      . Digitalus_Db_Table::getTableName('pages') . "` SET `content_template` = 'default_default' WHERE `namespace` = 'content' AND `content_template` = 'default'");
+        $this->_db->query("UPDATE `"      . Digitalus_Db_Table::getTableName('pages') . "` SET `content_template` = 'default_default' WHERE `namespace` = 'content' AND `content_template` = 'module'");
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('pages') . "` ADD `publish_date` INT(11) NOT NULL AFTER `create_date`");
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('pages') . "` ADD `archive_date` INT(11) NOT NULL AFTER `publish_date`");
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('pages') . "` ADD `publish_level` INT(11) NOT NULL AFTER `archive_date`");
         return true;
     }
 }
