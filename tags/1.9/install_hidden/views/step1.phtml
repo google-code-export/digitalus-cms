@@ -29,12 +29,7 @@
     <p><?php echo $this->translate('Now you need to set up the database connection. If you are unsure about this contact your hosting provider.');?></p>
 
     <?php
-    $dbAdapters = array('Pdo_Ibm' => 'Pdo_Ibm', 'Pdo_Mysql' => 'Pdo_Mysql',
-                        'Pdo_Mssql' => 'Pdo_Mssql', 'Pdo_Oci' => 'Pdo_Oci',
-                        'Pdo_Pgsql' => 'Pdo_Pgsql', 'Pdo_Sqlite' => 'Pdo_Sqlite',
-                        'Sqlsrv' => 'Sqlsrv', 'Db2' => 'Db2',
-                        'Mysqli' => 'Mysqli', 'Oracle' => 'Oracle'
-                       );
+    $dbAdapters = Digitalus_Installer_Database::getAllowedAdapters();
     if (isset($this->data['db_adapter']) && !empty($this->data['db_adapter'])) {
         $adapter = $this->data['db_adapter'];
     } else {

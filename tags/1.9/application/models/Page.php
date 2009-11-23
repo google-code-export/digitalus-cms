@@ -268,15 +268,14 @@ class Model_Page extends Digitalus_Db_Table
 
     public function deletePageById($pageId)
     {
-
         $this->_flushCache();
-        $where[] = $this->_db->quoteInto('id = ?', $pageId);
+        $where[] = $this->_db->quoteInto('id = ? OR parent_id = ?', $pageId, 'INTEGER');
         $this->delete($where);
 
         //delete content nodes
         unset($where);
         $mdlNodes = new Model_ContentNode();
-        $where[] = $this->_db->quoteInto('parent_id = ?', 'page_' . $pageId);
+        $where[] = $this->_db->quoteInto('parent_id = ?', 'page_' . $pageId, 'INTEGER');
         $mdlNodes->delete($where);
 
         //delete meta data

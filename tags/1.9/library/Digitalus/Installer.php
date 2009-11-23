@@ -157,6 +157,14 @@ class Digitalus_Installer
             $this->addError('Your database username is required');
             $dbError = true;
         }
+        if (!empty($prefix) && !Zend_Validate::is($prefix, 'Regex', '[a-z][A-Z][0-9]_')) {
+            $this->addError('For the prefix only alphabetic and digit characters and underscore are allowed');
+            $dbError = true;
+        }
+        if (!Zend_Validate::is($adapter, 'InArray', $adapters = Digitalus_Installer_Database::getAllowedAdapters())) {
+            $this->addError('Only the following database adapters are supported: ' . implode(', ', $adapters));
+            $dbError = true;
+        }
 
         if (!$dbError) {
             $connection = $this->_db->connect($name, $host, $username, $password, $prefix, $adapter);

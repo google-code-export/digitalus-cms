@@ -3,6 +3,7 @@ class Digitalus_Installer_Database
 {
     protected $_config = array();
     protected $_db;
+    protected $_allowedAdapters = array();
 
     public function connect($name, $host, $username, $password, $prefix, $adapter = 'Pdo_Mysql')
     {
@@ -266,5 +267,16 @@ class Digitalus_Installer_Database
         if (in_array($table, $tables)) {
             return true;
         }
+    }
+
+    public static function getAllowedAdapters()
+    {
+        return array('Pdo_Ibm'   => 'Pdo_Ibm',   'Pdo_Mysql'  => 'Pdo_Mysql',
+                     'Pdo_Mssql' => 'Pdo_Mssql', 'Pdo_Oci'    => 'Pdo_Oci',
+                     'Pdo_Pgsql' => 'Pdo_Pgsql', 'Pdo_Sqlite' => 'Pdo_Sqlite',
+                     'Sqlsrv'    => 'Sqlsrv',    'Db2'        => 'Db2',
+                     'Mysqli'    => 'Mysqli',    'Oracle'     => 'Oracle'
+        );
+
     }
 }
