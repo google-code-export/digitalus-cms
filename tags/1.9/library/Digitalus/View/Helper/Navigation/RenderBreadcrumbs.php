@@ -40,21 +40,40 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = ' > ', $siteRoot = 'Home')
+    public function renderBreadcrumbs($separator = '', $siteRoot = 'Home')
     {
+        if (!isset($separator) || empty($separator)) {
+            $separator = ' > ';
+        }
+        $arrLabel = array();
+        $arrPath  = array();
+        $arrLinks = array();
         $page = Digitalus_Builder::getPage();
         $parents = $page->getParents();
         if (is_array($parents) && count($parents) > 0) {
-            $path = null;
+            $path = '';
             foreach ($parents as $parent) {
-                $label = $this->view->pageObj->getLabel($parent);
-                $link = '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $path .= $link;
-                $arrLinks[] = '<a href="' . $path . '" class="breadcrumb">' . $label . '</a>';
+                $arrLabel[] = Digitalus_Toolbox_Page::getLabel($parent);
+            }
+            $arrLabel = array_reverse($arrLabel);
+            $startPath = '';
+            $i = 0;
+            foreach ($arrLabel as $label) {
+                if ($i > 0) {
+                    $startPath = $arrPath[$i - 1];
+                }
+                $arrPath[$i] = $startPath . '/' . Digitalus_Toolbox_String::addHyphens($label);
+                $i++;
+            }
+            $i = 0;
+            foreach ($arrLabel as $label) {
+                $arrLinks[] = '<a href="' . $this->view->getBaseUrl() . $arrPath[$i] . '" class="breadcrumb">' . $arrLabel[$i] . '</a>';
+                $i++;
             }
         }
+
         $pageLabel = Digitalus_Toolbox_Page::getLabel($page->getData());
-        $arrLinks[] = '<a href="" class="breadcrumb last">' . $pageLabel . '</a>';
+        $arrLinks[] = '<span class="breadcrumb last">' . $pageLabel . '</span>';
 
         return implode($separator, $arrLinks);
     }
