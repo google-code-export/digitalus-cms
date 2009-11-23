@@ -1,8 +1,4 @@
 <?php
-ini_set('display_startup_errors', 1);
-ini_set('display_errors', 1);
-error_reporting(E_ALL | E_STRICT);
-
 if (file_exists('./install/install.php')) {
     // Start installation if the file "install.php" exists in the directory "install"
     require './install/install.php';
