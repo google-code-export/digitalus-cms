@@ -35,6 +35,8 @@ class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
                         $style = $view->getBaseUrl() . '/' . $style;
                     }
                     $view->headLink()->appendStylesheet($style);
+                } elseif (is_object($attr) && isset($attr['media'])) {
+                    $view->headLink()->appendStylesheet($templatePath . '/styles/' . (string)$style, (string)$attr['media']);
                 } else {
                    $view->headLink()->appendStylesheet($templatePath . '/styles/' . (string)$style);
                 }
