@@ -66,8 +66,15 @@ class Mod_Slideshow_SlideController extends Zend_Controller_Action
                 $imagePath   = $form->image->getFileName();
                 $previewPath = $form->image_preview->getFileName();
                 // some servers set different permissions, so set them explicitly here
-                if (!empty($imagePath)) { chmod($imagePath, 0644); }
-                if (!empty($previewPath)) { chmod($previewPath, 0644); }
+                if (!empty($imagePath)) {
+                    chmod($imagePath, 0644);
+                }
+                if (!empty($previewPath)) {
+                    chmod($previewPath, 0644);
+                }
+                // replace windows path separator
+                $previewPath = str_replace("\\", PATH_SEPARATOR, $previewPath);
+                $imagePath   = str_replace("\\", PATH_SEPARATOR, $imagePath);
 
                 $slide = $mdlSlide->updateSlide(
                     $values['id'],
@@ -102,7 +109,7 @@ class Mod_Slideshow_SlideController extends Zend_Controller_Action
         $this->view->breadcrumbs[$show->name] = $this->view->getBaseUrl() . '/mod_slideshow/show/edit/id/' . $show->id;
         $this->view->breadcrumbs[$slide->title] = $this->view->getBaseUrl() . '/mod_slideshow/slide/edit/id/' . $slide->id;
         $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/mod_slideshow/slide/edit/id/' . $slide->id;
-        $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/mod_slideshow/slide/delete/id/' . $slide->id;
+        $this->view->toolbarLinks['Delete'] = $this->view->getBaseUrl() . '/mod_slideshow/slide/delete/id/' . $slide->id;
     }
 
     public function reorderAction()

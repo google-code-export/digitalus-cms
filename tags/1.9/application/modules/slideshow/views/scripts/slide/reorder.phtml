@@ -6,20 +6,20 @@ $this->jQuery()->onLoadCaptureStart();
     echo $this->JquerySortable('ul.sortable');
 $this->jQuery()->onLoadCaptureEnd();
 
-if ($this->slides) { ?>
+if ($this->slides) {?>
 <fieldset>
     <legend><?php echo $this->getTranslation('Slides');?></legend>
     <p><?php echo $this->getTranslation('To change the order a slide is displayed in click the drag icon next to the item and move the item up or down.') . PHP_EOL .
     $this->getTranslation('Then click Done Reordering Slides to save your changes.');?></p>
-    <form action="<?php echo $this->baseUrl;?>/mod_slideshow/slide/reorder" method="post">
-        <?php echo $this->formHidden('show', $this->show->id);?>
-        <ul class="sortable">
-        <?php foreach ($this->slides as $slide) { ?>
+    <form action="<?php echo $this->getBaseUrl();?>/mod_slideshow/slide/reorder" method="post"><?php
+        echo $this->formHidden('show', $this->show->id);?>
+        <ul class="sortable"><?php
+            foreach ($this->slides as $slide) {?>
             <li class="sortableItem">
-                <a href="#" class="handle"><img src="<?php echo $iconSource;?>" /></a>
-                <?php echo $this->formHidden('id[]', $slide->id) . ' ' . $slide->title;?>
-            </li>
-        <?php } ?>
+                <a href="#" class="handle"><img src="<?php echo $iconSource;?>" /></a><?php
+                    echo $this->formHidden('id[]', $slide->id) . ' ' . $slide->title;?>
+            </li><?php
+            }?>
         </ul>
         <p><?php echo $this->formSubmit('reorder', $this->getTranslation('Done Reordering Slides'));?></p>
     </form><?php

@@ -1,7 +1,6 @@
 <?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Slide Options'));?>
-<p>
-<?php
-$path = '/mod_slideshow/show/edit/id/' . $this->show->id;
-$link = $this->getTranslation('Back to') . ' ' . $this->show->name . ' ' . $this->getTranslation('slideshow');
-echo $this->link($link, $path, 'arrow_left.png');?>
+<p><?php
+    $path = '/mod_slideshow/show/edit/id/' . $this->show->id;
+    $link = $this->getTranslation('Back to') . ' ' . $this->show->name . ' ' . $this->getTranslation('slideshow');
+    echo $this->link($link, $path, 'arrow_left.png');?>
 </p>

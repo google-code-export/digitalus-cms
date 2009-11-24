@@ -44,7 +44,7 @@ class Mod_Slideshow_ShowController extends Zend_Controller_Action
             $show = $mdlShow->find($id)->current();
             $form->populate($show->toArray());
         }
-        $form->setAction('/mod_slideshow/show/edit');
+        $form->setAction($this->getFrontController()->getBaseUrl() . '/mod_slideshow/show/edit');
         $submit = $form->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Update Slideshow'));
 
@@ -62,7 +62,7 @@ class Mod_Slideshow_ShowController extends Zend_Controller_Action
         $slideForm->removeElement('caption');
         $slideFormValues['show_id'] = $show->id;
         $slideForm->populate($slideFormValues);
-        $slideForm->setAction('/mod_slideshow/slide/create');
+        $slideForm->setAction($this->getFrontController()->getBaseUrl() . '/mod_slideshow/slide/create');
         $submit = $slideForm->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Add New Slide'));
         $this->view->slideForm = $slideForm;
