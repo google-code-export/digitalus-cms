@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+ul#menu, ul#subnav, ul#subnav ul {
+    list-style: none;
+}
+
+ul#menu {
+    padding: 7px 20px 0 20px;
+    margin: 0;
+}
+
+ul#menu li {
+    display: inline;
+    margin: 0 10px;
+}
+
+ul#menu li a {
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    color: #f5f5f5;
+}
+
+ul#menu li a: hover {
+    text-decoration: underline;
+    color: #ccc;
+}
+
+ul#menu li a.selected {
+    color: #fff;
+}
+
+ul#subnav {
+    padding: 10px;
+}
+
+ul#subnav li {
+    padding: 2px 0;
+    margin: 0 5px;
+}
+
+ul#subnav a {
+    text-decoration: none;
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
+ul#subnav a: hover {
+    text-decoration: underline;
+    color: #ccc;
+}
+
+ul#subnav a.selected {
+    color: #fff;
+}
+
+ul#subnav ul {
+    padding: 5px;
+    margin: 0;
+}
+
+ul#subnav ul a {
+    font-weight: normal;
+}

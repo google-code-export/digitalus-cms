@@ -1,0 +1,40 @@
+<?php ?>
+<div id='page' class='container_12'>
+    <div id='page_wrapper' >
+        <div id='header' class='grid_12'>
+            <div id='header_logo' class='grid_6 alpha'>
+                <digitalusControl type='fckeditor' id='header_logo' cols='60' rows='4' group='header' />
+            </div>
+            <div id='header_top' class='grid_6 omega'>
+                <digitalusControl type='fckeditor' id='header_top' cols='60' rows='4' group='header' />
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div id='inner_page_wrapper' class='grid_10 alpha omega prefix_1 suffix_1'>
+            <div id='page_body' class='grid_10 alpha omega'>
+                <div id='nav' class='grid_10 alpha omega'>
+                    <digitalusNavigation id='menu' type='menu' levels='1' />
+                </div>
+                <div class="clear"></div>
+                <div id='main_image' class='grid_10 alpha omega'>
+                    <digitalusControl type='fckeditor' id='content_top' cols='60' rows='4' group='main' />
+                </div>
+                <div class="clear"></div>
+                <div id='main_content' class='grid_6 alpha'>
+                    <h1><digitalusControl type='text' id='headline' required='true' size='50' group='main' /></h1>
+                    <digitalusControl type='fckeditor' id='content' required='true' cols='60' rows='4' group='main' />
+                    <digitalusControl type='moduleSelector' id='module' group='main' />
+                </div>
+                <div id='sidebar_content' class='grid_4 omega'>
+                    <h2><digitalusControl type='text' id='sidebar_headline' size='50' group='sidebar' /></h2>
+                    <digitalusControl type='fckeditor' id='sidebar_top' cols='60' rows='4' group='sidebar' />
+                    <digitalusNavigation id='subnav' type='submenu' levels='2' />
+                    <digitalusControl type='fckeditor' id='sidebar_bottom' cols='60' rows='4' group='sidebar' />
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
