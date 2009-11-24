@@ -1,4 +1,8 @@
 <?php
+ini_set('display_startup_errors', 1);
+ini_set('display_errors', 1);
+error_reporting(E_ALL | E_STRICT);
+
 set_include_path('.' . PATH_SEPARATOR . './library' . PATH_SEPARATOR . get_include_path());
 
 require_once 'Zend/Loader/Autoloader.php';
@@ -74,6 +78,7 @@ if (!$installer->isInstalled()) {
                     $_POST['db_prefix'],
                     $_POST['db_adapter']
                 );
+
                 $dbTested = $installer->testDb();
                 if ($dbTested) {
                     $installer->installDb();
