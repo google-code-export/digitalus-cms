@@ -157,12 +157,19 @@ class Digitalus_Installer
             $this->addError('Your database username is required');
             $dbError = true;
         }
-        if (!empty($prefix) && !Zend_Validate::is($prefix, 'Regex', '[a-z][A-Z][0-9]_')) {
-            $this->addError('For the prefix only alphabetic and digit characters and underscore are allowed');
+        if (empty($password)) {
+            $this->addError('Your database password is required');
             $dbError = true;
         }
-        if (!Zend_Validate::is($adapter, 'InArray', $adapters = Digitalus_Installer_Database::getAllowedAdapters())) {
+        $adapters = Digitalus_Installer_Database::getAllowedAdapters();
+        $validator = new Zend_Validate_InArray($adapters);
+        if (!$validator->isValid($adapter)) {
             $this->addError('Only the following database adapters are supported: ' . implode(', ', $adapters));
+            $dbError = true;
+        }
+        $validator = new Zend_Validate_Regex('#^[a-zA-Z0-9_]{0,12}$#');
+        if (!empty($prefix) && !$validator->isValid($prefix)) {
+            $this->addError('For the table prefix a maximum of 12 only alphabetic and digit characters and underscore are allowed');
             $dbError = true;
         }
 

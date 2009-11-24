@@ -277,6 +277,5 @@ class Digitalus_Installer_Database
                      'Sqlsrv'    => 'Sqlsrv',    'Db2'        => 'Db2',
                      'Mysqli'    => 'Mysqli',    'Oracle'     => 'Oracle'
         );
-
     }
 }
