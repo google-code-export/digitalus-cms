@@ -99,6 +99,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'lifetime' => 1200,                      // Cache lifetime of 20 minutes
             'automatic_serialization' => true,
         );
+        $backendOptions = array(
+            'cache_dir' => BASE_PATH . '/cache/',   // Directory where to put the cache files
+        );
         // DON'T cache in a development environment
         if ('development' == APPLICATION_ENV) {
             $frontendOptions['caching'] = false;
@@ -110,9 +113,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             }
             Zend_Loader_PluginLoader::setIncludeFileCache($classFileIncCache);
         }
-        $backendOptions = array(
-            'cache_dir' => BASE_PATH . '/cache/',   // Directory where to put the cache files
-        );
         // Get a Zend_Cache_Core object
         $cache = Zend_Cache::factory('Core', 'File', $frontendOptions, $backendOptions);
 
