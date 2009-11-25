@@ -43,10 +43,11 @@ class  Digitalus_View_Helper_Admin_IsAllowed extends Zend_View_Helper_Abstract
     /**
      * comments
      */
-    public function isAllowed($output, $module, $controller = null, $action = null)
+    public function isAllowed($module, $controller = null, $action = null)
     {
-        $role = 'admin';
-        $acl = Zend_Registry::get('acl');
+        $acl = new Digitalus_Acl();
+        $mdlUser = new model_User();
+        $user = $mdlUser->getCurrentUser();
         //go from more specific to less specific
         $moduleLevel = $module;
         $controllerLevel = $moduleLevel . '_' . $controller;
@@ -60,9 +61,10 @@ class  Digitalus_View_Helper_Admin_IsAllowed extends Zend_View_Helper_Abstract
             $resource = $moduleLevel;
         }
         if ($acl->has($resource)) {
-            if ($acl->isAllowed($role, $resource)) {
-                return $output;
+            if ($acl->isAllowed($user->role, $resource)) {
+                return true;
             }
         }
+        return false;
     }
 }

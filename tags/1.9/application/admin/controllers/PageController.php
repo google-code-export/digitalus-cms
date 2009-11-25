@@ -76,24 +76,27 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function newAction()
     {
-        $frmPage = new Admin_Form_Page();
+        $formPage = new Admin_Form_Page();
+        if (!$this->view->isAllowed('admin', 'page', 'publish')) {
+            $formPage->getElement('publish_pages')->setAttrib('disabled', 'disabled');
+        }
         if ($this->_request->isPost()) {
-            if ($frmPage->isValid($_POST)) {
-                $this->_setCreateOptions($frmPage->getValue('parent_id'),
-                                         $frmPage->getElement('continue_adding_pages')->isChecked(),
-                                         $frmPage->getValue('content_template'),
-                                         $frmPage->getElement('show_on_menu')->isChecked(),
-                                         $frmPage->getElement('publish_pages')->isChecked());
+            if ($formPage->isValid($_POST)) {
+                $this->_setCreateOptions($formPage->getValue('parent_id'),
+                                         $formPage->getElement('continue_adding_pages')->isChecked(),
+                                         $formPage->getValue('content_template'),
+                                         $formPage->getElement('show_on_menu')->isChecked(),
+                                         $formPage->getElement('publish_pages')->isChecked());
                 $page = new Model_Page();
 
-                $newPage = $page->createPage($frmPage->getValue('page_name'),
-                                             $frmPage->getValue('parent_id'),
-                                             $frmPage->getValue('content_template'),
-                                             $frmPage->getElement('show_on_menu')->isChecked(),
-                                             $frmPage->getElement('publish_pages')->isChecked());
+                $newPage = $page->createPage($formPage->getValue('page_name'),
+                                             $formPage->getValue('parent_id'),
+                                             $formPage->getValue('content_template'),
+                                             $formPage->getElement('show_on_menu')->isChecked(),
+                                             $formPage->getElement('publish_pages')->isChecked());
 
                 if ($newPage) {
-                    if ($frmPage->getElement('continue_adding_pages')->isChecked()) {
+                    if ($formPage->getElement('continue_adding_pages')->isChecked()) {
                         $url = 'admin/page/new';
                     } else {
                         $url = 'admin/page/edit/id/' . $newPage->id;
@@ -110,15 +113,15 @@ class Admin_PageController extends Zend_Controller_Action
             }
         } else {
             $formValues = $this->_getCreateOptions();
-            $frmPage->getElement('parent_id')->setValue($formValues->parent_id);
-            $frmPage->getElement('continue_adding_pages')->setValue($formValues->continue);
-            $frmPage->getElement('publish_pages')->setValue($formValues->publish_pages);
-            $frmPage->getElement('show_on_menu')->setValue($formValues->show_on_menu);
-            $frmPage->getElement('content_template')->setValue($formValues->content_template);
+            $formPage->getElement('parent_id')->setValue($formValues->parent_id);
+            $formPage->getElement('continue_adding_pages')->setValue($formValues->continue);
+            $formPage->getElement('publish_pages')->setValue($formValues->publish_pages);
+            $formPage->getElement('show_on_menu')->setValue($formValues->show_on_menu);
+            $formPage->getElement('content_template')->setValue($formValues->content_template);
         }
 
-        $frmPage->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/new');
-        $this->view->form = $frmPage;
+        $formPage->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/new');
+        $this->view->form = $formPage;
     }
 
     /**

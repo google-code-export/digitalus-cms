@@ -19,6 +19,7 @@
         <action>move</action>
         <action>select-content-template</action>
         <action>create-page-form</action>
+        <action>publish</action>
     </controller>
     <controller name="navigation">
         <action>index</action>

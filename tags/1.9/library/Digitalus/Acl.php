@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -23,7 +22,8 @@
 class Digitalus_Acl extends Zend_Acl
 {
 
-    protected $resourceList; //the resources list is the public array and is not used internally
+    protected $_resourceList; //the resources list is the public array and is not used internally
+
     /**
      * load the acl resources and set up permissions
      *
@@ -91,14 +91,14 @@ class Digitalus_Acl extends Zend_Acl
                     }
                 }
 
-                $this->resourceList[$module] = $resourceListItems;
+                $this->_resourceList[$module] = $resourceListItems;
             }
         }
     }
 
     public function getResourceList()
     {
-        return $this->resourceList;
+        return $this->_resourceList;
     }
 
     public function loadCurrentUsersPermissions()
