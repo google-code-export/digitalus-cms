@@ -1,0 +1,20 @@
+# Language File – MOD_SEARCH
+# SWEDISH
+# ----- search module -----
+"Digitalus CMS";"Digitalus CMS"
+"Search";"Sök"
+"The search index was rebuilt successfully!";"Uppdateringen av sökindexet lyckades!"
+"Rebuild search";"Uppdatera sökindexet"
+"Search Module";"Sökmodul"
+"The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.";"Sökmodulen använder Lucene sökmotor för att bygga upp frågor och sökindex på din webbplats."
+"Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.";"Uppdateringen av sökindexet är mycket processorkrävande. Digitalus uppdaterar inte om den varje gång du uppdaterar din webbplats. När du uppdaterat din webbplats öppna denna modul och klicka på Återbygg sökindex länken för att uppdatera sökindex."
+"The search form does not have any user defined settings.";"Sökformuläret har inga användardefinerade inställningar."
+"Search Site";"Sök Webbplats"
+"Keywords";"Nyckelord"
+"Your search for";"Du sökte efter"
+"returned";"retunera"
+"results.";"resultat"
+"did not return any results.";"gav inga resultat"
+"Please provide a keyword to search for!";"Ange ett sökort att söka efter!"
+"For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";"För att sökningsmodulen ska fungera korrekt, måste index katalogen vara skrivbar! Kontrollera behörigheterna i denna katalog:"
+# END

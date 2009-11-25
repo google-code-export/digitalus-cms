@@ -1,0 +1,55 @@
+<p><?php $this->translate('Your server is properly configured to host the Digitalus CMS efficiently and securely!');?></p>
+
+<form action="index.php?step=2&amp;language=<?php echo Zend_Registry::get('language');?>" method="post">
+    <h2><?php echo $this->translate('Site Admin Account');?></h2>
+    <p><?php echo $this->translate('Digitalus CMS uses your email address as the username for the CMS, because it is unique and easy to remember. You can enter what ever you like for a password, but bear in mind that your site is only as secure as this password!');?></p>
+
+    <div class="formRow">
+        <label><?php echo $this->translate('First Name') . ':';?></label>
+        <?php echo $this->formText('first_name', $this->data['first_name'])?>
+        <br class="clear" />
+    </div>
+    <div class="formRow">
+        <label><?php echo $this->translate('Last Name') . ':';?></label>
+        <?php echo $this->formText('last_name', $this->data['last_name'])?>
+        <br class="clear" />
+    </div>
+    <div class="formRow">
+        <label><?php echo $this->translate('Email Address') . ':';?></label>
+        <?php echo $this->formText('email', $this->data['email'])?>
+        <br class="clear" />
+    </div>
+    <div class="formRow">
+        <label><?php echo $this->translate('Password') . ':';?></label>
+        <?php echo $this->formPassword('account_password')?>
+        <br class="clear" />
+    </div>
+
+    <h2><?php echo $this->translate('Database Connection Information');?></h2>
+    <p><?php echo $this->translate('Now you need to set up the database connection. If you are unsure about this contact your hosting provider.');?></p>
+
+    <div class="formRow">
+        <label><?php echo $this->translate('Database Name') . ':';?></label>
+        <?php echo $this->formText('db_name', $this->data['db_name'])?>
+        <br class="clear" />
+    </div>
+    <div class="formRow">
+        <label><?php echo $this->translate('Database Host') . ':';?></label>
+        <?php echo $this->formText('db_host', $this->data['db_host'])?>
+        <br class="clear" />
+    </div>
+    <div class="formRow">
+        <label><?php echo $this->translate('Database Username') . ':';?></label>
+        <?php echo $this->formText('db_username', $this->data['db_username'])?>
+        <br class="clear" />
+    </div>
+    <div class="formRow">
+        <label><?php echo $this->translate('Database Password') . ':';?></label>
+        <?php echo $this->formPassword('db_password')?>
+        <br class="clear" />
+    </div>
+
+    <h2><?php echo $this->translate('Install CMS');?></h2>
+    <p><?php echo $this->translate('Please double check all of the information on this page. If everything looks right then click <b>Install Now</b> to install Digitalus CMS');?></p>
+    <p><?php echo $this->formSubmit('install', $this->translate('Install Now'));?></p>
+</form>

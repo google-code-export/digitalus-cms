@@ -1,0 +1,20 @@
+# Language File – MOD_SEARCH
+# GERMAN
+# ----- search module -----
+"Digitalus CMS";"Digitalus CMS"
+"Search";"Suche"
+"The search index was rebuilt successfully!";"Der Suchindex wurde erfolgreich erneuert"
+"Rebuild search";"Suchindex erneuern"
+"Search Module";"Such-Modul"
+"The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.";"Das Such-Modul verwendet die Lucene Such-Maschine, um Suchindizes auf Ihren Seiten zu erzeugen, zu verwalten und abzufragen."
+"Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.";"Es ist sehr rechenintensiv den Suchindex zu erneuern. Daher wird er nicht automatisch bei jeder Aktualisierung der Webseite erneuert. Wenn Sie Ihre Webseite aktualisieren, gehen Sie zu diesem Modul und aktivieren Sie den ""Suchindex erneuern"" Link."
+"The search form does not have any user defined settings.";"Das Such-Formular hat keine Benutzer-definierten Einstellungen."
+"Search Site";"Such-Seite"
+"Keywords";"Stichwörter"
+"Your search for";"Ihre Suche nach"
+"returned";"ergab"
+"results.";"Ergebnisse."
+"did not return any results.";"ergab keine Ergebnisse."
+"Please provide a keyword to search for!";"Bitte geben Sie einen Suchbegriff ein!"
+"For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";"Damit das Such-Modul einwandfrei funktioniert, muss das Index-Verzeichnis beschreibbar sein. Überprüfen Sie die Schreibrechte diese Verzeichnisses:"
+# END

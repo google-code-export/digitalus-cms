@@ -1,0 +1,16 @@
+/* CSS Document */
+.sortableItem{
+clear:both;
+}
+
+a.handle{
+display:block;
+float:left;
+width:24px;
+height:24px;
+cursor:move;
+}
+
+.sortableItem input{
+
+}

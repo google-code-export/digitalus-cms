@@ -1,0 +1,298 @@
+# Language File – BACKEND
+# SWEDISH
+# languages
+"english";"Engelska"
+"french";"Franska"
+"german";"Tyska"
+"polish";"Polska"
+"russian";"Ryska"
+"swedish";
+# admin section -- Auth --
+"Login";"Login"
+"You must enter a username.";"Du måste ange ett användarnamn."
+"You must enter a password.";"Du måste ange ett lösenord."
+"The username or password you entered was not correct.";"Användarnamnet eller lösenordet du angav var inte korrekt."
+"Your password has been reset for security and sent to your email address";"Ditt lösenord har återställts av säkerhetsskäl och har skickats till din e-postadress."
+"Sorry, there was an error sending you your updated password.  Please contact us for more help.";"Ursäkta, det blev ett fel att skicka ditt uppdaterade lösenord. Var snäll och kontakta oss för mer hjälp."
+"Sorry, we could not locate your account. Please contact us to resolve this issue.";"Tyvärr kunde vi inte hitta ditt konto. Vänligen kontakta oss för att lösa problemet."
+"Need Help?";
+"If you are having trouble logging in please enter your email address below and we will send you your login credentials.";"Om du har problem med att logga in så ange din e-postadress nedan så skickar vi dina inloggningsuppgifter."
+"Reset Password";"Återställ lösenord"
+"Administrator Login";"Administration inloggning"
+"Please enter your username (this is your email address) and password to get started.";"Ange ditt användarnamn (detta är din e-postadress) och lösenord för att komma ogång."
+"Username";"Användarnamn"
+"Password";"Lösenord"
+"Log In";"Logga In"
+# admin section -- Design --
+"Design";"Design"
+"Open";
+"Add to my bookmarks";"Lägg till i mina bokmärken"
+"Delete";
+"Design Options";"Design alternativ"
+"Create a new design";"Skapa en ny design"
+"Design Name";"Design Namn"
+"Design Notes";"Design anteckning"
+"Create Design";"Skapa Design"
+"Current Designs";"Nuvarande Designer"
+"Tools";"Verktyg"
+"Preview Design";"Förhandsvisa Design"
+"Who Uses This?";"Vem använder detta?"
+"These are the pages that use this design:";"De här webbplatserna använder den här designen:"
+"No pages use this design currently.";"Ingen sida använder den här designen."
+"Update Design";"Uppdatera Design"
+"Design details";"Design detaljer"
+"This is the default site design";"Det här är sidans standard design"
+"Layout";"Layout"
+"Skin";"Skinn"
+# admin section -- Error --
+"Sorry, you are not authorized to edit this resource!";
+# admin section -- Index --
+"Home";"Hem"
+"Your bookmark was saved successfully.";"Ditt bokmärke har sparats."
+"My Content";
+"The following pages are the pages that you have recently created.";"Följande sidor har du nyligen skapat."
+"These are the modules that you are working with.";"De här modulerna arbetar du med."
+"My Dashboard";"Min Anslagstavla"
+"My Account";"Mitt Konto"
+"First Name";"Förnamn"
+"Last Name";"Efternamn"
+"Email";"E-post"
+"Update Password?";"Uppdatera lösenordet?"
+"Confirm";"Bekräfta lösenord"
+"Update My Account";"Uppdatera mitt konto"
+"My Bookmarks";"Mina Bokmärken"
+"You do not have any bookmarks.";"Du har inga bokmärken"
+"My Writeboard";"Min Skrivtavla"
+"The writeboard is a personal spot for you to keep notes about your site.";"Skrivtavlan är en egen plats för att föra antäckningar"
+"Save My Writeboard";"Spara Min Skrivtavla"
+"Digitalus CMS is a community supported open source project. To learn more about the project check out";"Digitalus CMS är en gemenskap som stöds open source projekt. Om du vill veta mer om projektet kolla in"
+"Digitalus Site";"Digitalus Webbplats"
+"Wiki";"Wiki"
+"Forum";"Forum"
+# admin section -- Media --
+"Media";"Media"
+"Open Folder";"Öppna Mapp"
+"Options";"Val"
+"Media Manager";"Media hanterare"
+"Create New Folder";"Skapa Ny Mapp"
+"Browse Folder";"Bläddra Mapp"
+"Upload Media";"Ladda upp Media"
+"Create Subfolder";"Skapa Undermapp"
+"Rename Folder";"Byt namn på Mapp"
+"Current Folder";"Nuvarande Mapp"
+"Media Root";"Media Rot"
+"Current folder contents";"Nyvarande mappinnehåll"
+"Upload Files";"Ladda upp Filer"
+"Rename folder";"Byt namn på mapp"
+"Folder Name";"Mappnamn"
+"Create Folder";"Skapa Mapp"
+"Subfolders";"Undermappar"
+"Full path";"Fullständig sökväg"
+"Files";"Filer"
+"New Name";"Nytt Namn"
+"Select the files to upload";"Välj filer att ladda upp"
+"You do not have any media files on the server";"Det finns inga media filer på servern"
+# admin section -- Module --
+"Modules";"Modul"
+"Download";
+"CMS Modules";"CMS Moduler"
+"Digitalus CMS uses a system of modules to add custom functionality to your site.";"Digitalus CMS använder ett system av moduler för att lägga till egna funktioner till din webbplats."
+"Select the module page";"Välj en modulsida"
+"My Modules";"Mina Moduler"
+# admin section -- Navigation --
+"Navigation";"Navigation"
+"Open Menu";"Öppna Meny"
+"Current Menu";
+"Update Menu";"Uppdatera Meny"
+"Save Changes";"Spara ändringar"
+"Main Menu";"Huvudmeny"
+# admin section -- Page --
+"Pages";"Sidor"
+"Sorry, there was an error adding your page";"Ursäkta, det blev ett fel att lägga till din sida"
+"Sorry, there was an error opening your page";
+"Page";"Sida"
+"Page Title";"Sidans Titel"
+"Filename";"Filnamn"
+"Meta Description";"Meta Beskrivning"
+"Meta Keywords";"Meta Nyckelord"
+"Search Tags";"Sök Taggar"
+"Update Meta Data";"Uppdatera Page Meta Data"
+"Step 3: Enter the name for your page";"Steg 3: Ange sidans namn"
+"Page Name";"Sidnamn"
+"Create Page";"Skapa Sida"
+"Content";"Innehåll"
+"Current design";"Nuvarande design"
+"Open design";"Öppna design"
+"The design is not yet set for this page.";"Designen är ännu inte satt för den här sidan."
+"Other designs";"Andra designer"
+"Make current";"Gör nuvarande"
+"Click the new parent page for this page to move it.";"Klicka på en föräldersida för att flytta den här sidan dit"
+"Page Options";"Sid Val"
+"Content Sections";
+"Page Head and Meta Data";"Sidhuvud och Meta Data"
+"Properties";"Egenskaper"
+"Attachments";
+"Related Content";
+"Content Template";"Mallinnehåll"
+"Move Page";"Flytta sida"
+"Page Versions";"Sid Versioner"
+"Update Page";"Uppdatera Sida"
+"Edit Meta Data";"Ändra Meta Data"
+"Edit Page Properties";"Ändra Sidegenskaper"
+"Remove";"Ta bort"
+"Property";"Egenskap"
+"Value";"Värde"
+"Add a new property";"Lägg till ny egenskap"
+"Update properties";"Uppdatera egenskaper"
+"Update Related Content";
+"Select the template for this page";
+"Update Content Template";"Uppdatera mallinnehåll"
+"My Pages";"Mina Sidor"
+"Create a Page";"Skapa en Sida"
+"To create a new page...";"För att skapa en ny sida..."
+"Step 1: Select the parent section";"Steg 1: Välj förälder avsnitt"
+"Parent Page";"Förälder Sida"
+"Next >>";"Nästa >>"
+"page_my_pages_intro";
+"Current Version";"Nuvarande version"
+"Available Versions";"Tillgängliga versioner"
+"Default";"standard"
+"Step 2: What type of page would you like to create?";"Steg 2: Vilken typ av sida vill du skapa?"
+"Select a type";"Välj en typ"
+"You can not add any pages to this section.";
+"Parent page";"Förälder sida"
+"Site Root";"Sid Rot"
+"Template";
+"Continue adding pages";"Fortsätt lägg till sidor"
+"Submit";"Skicka"
+# admin section -- Site --
+"Site Settings";"Webbplats Inställningar"
+"Site";
+"Site Console";"Webbplats konsol"
+"About the Console";"Om konsolen"
+"The site console enables you to interact directly with the CMS core.";"Konsolen gör att nu kan interagera direkt med CMS kärnan."
+"It is for experienced administrators only.";"Endast för erfarna administratörer."
+"Digitalus Console";"Digitalus Console"
+"Info";"Info"
+"Run Command";"Kör Kommando"
+"General";"Allmän"
+"Meta Data";"Meta Data"
+"Internationalization";"Internationalisera"
+"Mail";
+"Google";"Google"
+"Update Site Settings";"Uppdatera Webbplats Inställningar"
+"General settings";"Allmäna Inställningar"
+"Site name";"Webbplats namn"
+"Title separator";"Titel separator"
+"Status";"Status"
+"Site is online";"Webbplats är online"
+"Update General Site Settings";"Uppdatera Allmäna Sid Inställningar"
+"Managing Content";"Hantera Innehåll"
+"Home Page";"Start Sida"
+"404 Page";"404 Sida"
+"Site Offline Page";"Webbplats Offline Sida"
+"Menu links";"Meny länkar"
+"Automatically add menu links";"Lägg till menylänkar automatiskt"
+"Update Content Settings";"Uppdatera Innehålls Inställningar"
+"Default design";
+"Update Design Settings";
+"XML declaration";
+"Doc Type";"Dokumenttyp"
+"Default charset";"Standard teckenkodning"
+"Default timezone";"Standard tidszon"
+"Update Page Meta Data";"Uppdatera Page Meta Data"
+"Default language";"Standard språk"
+"Admin language";"Administrations språk"
+"Update Internationalization Settings";"Uppdatera Internationalisering Inställningar"
+"Mail Settings";"Mail inställningar"
+"Default email address";"Standard e-post adress"
+"Default sender";"Standard avsändaren"
+"Transport";"Trafik"
+"Use SMTP transport ";"Använd SMTP trafik"
+"SMTP host";"SMTP värd"
+"SMTP username";"SMTP användarnamn"
+"SMTP password";"SMTP lösenort"
+"Update Mail Settings";"Uppdatera Mail Inställningar"
+"Send test message";"Skicka test meddelande"
+"Google Integration";"Google-integration"
+"Verification code";"Verifieringskod"
+"Tracking code";"Spårningskod"
+"Update Google Settings";"Uppdatera Google Inställningar"
+"The site sections is where you manage your site.";"Webbplatsavsnitt är där du hanterar din webbplats"
+"Create new user";"Skapa ny användare"
+"Admin Users";"Administratörsanvändare"
+"Open console";"Öppna konsol"
+# admin section -- User --
+"Open User";"Öppna Användare"
+"User";"Användare"
+"Create User";"Skapa Användare"
+"Create New User";"Skapa Ny Användare"
+"General Information";"Allmän information"
+"User Options";"Användarval"
+"Account";"Konto information"
+"Credentials";"Uppgifter"
+"Permissions";"Rättigheter"
+"Copy Permissions";
+"If you have another user who already has the same permissions as this user you can copy that user's role.";"Om du har en annan användare som redan har samma behörihet som användaren kan du kopiera användarens roll."
+"Update User";"Uppdatera Användare"
+"Account Information";"Konto information"
+"Email Address";"E-post Adress"
+"Admin Role";"Administratörs Roll"
+"Update Account";"Uppdatera konto"
+"User Permissions";"Användarrättigheter"
+"Update Permissions";"Uppdatera användarrättigheter"
+"Login Credentials";"Inloggningsuppgifter"
+"Confirm Password";
+"Update Password";"Uppdatera lösenord"
+"Site Administrator";"Webbplats administratör"
+"Super Administrator";"Super administratör"
+# admin section -- View Helper --
+"Unable to locate skin folder";
+"Current User";"Nuvarande användare"
+"Role";"Roll"
+"Log Out";"Logga Ut"
+"Select One";"Välj en"
+"Select User";"Markera användare"
+"Always";
+"Never";
+"By browser check";
+"There are no pages in this module";
+"Select a module";"Välj en modul"
+"There are no modules currently installed";
+"First";
+"Previous";
+"Next";
+"Last";
+"The following errors have occurred";"Följande fel har uppstått"
+"Errors";"Fel"
+"Message";
+"Set Language";
+"You are reading this page in";"Du läser den här sidan i"
+"This page is also translated into";"Den här sidan är också översatt till"
+# admin section -- Misc –
+"Digitalus CMS";"Digitalus CMS"
+"Are you sure you want to delete this?";
+"Bookmark label:";
+"Your bookmark was successfully saved.";
+"Unable to delete item - the item is empty!";
+"Unable to cast type:";
+"to type:";
+"Unable to load content item";
+"An error occurred uploading the file";
+"This filetype is not allowed";
+"Illegal file access attempt. Operation cancelled!";
+"Method does not exist";
+"Getter does not exist";
+"Setter does not exist";
+"Unable to load service for this module";
+"Unable to set this protected property in Digitalus_Page";
+"You are here";"Du är här"
+"Headline";
+"Main";
+"Header";
+"Footer";
+"Sidebar";
+"Submenu";
+"More";
+"Module";
+# END

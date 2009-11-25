@@ -1,0 +1,25 @@
+<?php
+$user = new Model_User();
+$modules = $user->getCurrentUsersModules();
+
+if (is_array($modules)) {
+
+    echo '<ul class="padding-10">';
+    foreach ($modules as $module) {
+        $key = 'mod_' . $module;
+        $props = Digitalus_Module_Property::load($key);
+        if ($props != null && !empty($props->icon)) {
+            $icon = $props->icon;
+        } else {
+            $icon = 'application_form.png';
+        }
+        if ($props != null && !empty($props->label)) {
+            $label = $props->label;
+        } else {
+            $label = $module;
+        }
+
+        echo '<li>' . $this->link($label, '/' . $key, $icon) . '</li>';
+    }
+    echo '</ul>';
+}

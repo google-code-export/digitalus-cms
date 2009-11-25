@@ -1,0 +1,111 @@
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Site Settings'));?>
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='site'>
+    <fieldset>
+        <legend><?php echo $this->getTranslation('General settings');?></legend>
+        <?php
+            echo $this->formRow($this->getTranslation('Site name'), $this->formText('setting[name]', $this->settings->name));
+            echo $this->formRow($this->getTranslation('Title separator'), $this->formText('setting[title_separator]', $this->settings->title_separator, array('class' => 'med')));
+            echo $this->formRow($this->getTranslation('Status'), $this->formCheckbox('setting[online]', intval($this->settings->online)) . ' ' . $this->getTranslation('Site is online'));
+            echo $this->formRow('&nbsp;', $this->formSubmit('site', $this->getTranslation('Update General Site Settings')));
+        ?>
+    </fieldset>
+</form>
+
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='content'>
+    <fieldset>
+        <legend><?php echo $this->getTranslation('Managing Content');?></legend>
+    <?php
+        echo $this->formRow(
+            $this->getTranslation('Home Page'),
+            $this->SelectPage('setting[home_page]', $this->settings->home_page)
+        );
+        echo $this->formRow(
+            $this->getTranslation('404 Page'),
+            $this->SelectPage('setting[page_not_found]', $this->settings->page_not_found)
+        );
+        echo $this->formRow(
+            $this->getTranslation('Site Offline Page'),
+            $this->SelectPage('setting[offline_page]', $this->settings->offline_page)
+        );
+        echo $this->formRow($this->getTranslation('Menu links'),
+            $this->formCheckbox('setting[add_menu_links]', intval($this->settings->add_menu_links)) . ' ' .
+            $this->getTranslation('Automatically add menu links')
+        );
+        echo $this->formRow('&nbsp;', $this->formSubmit('content', $this->getTranslation('Update Content Settings')));
+    ?>
+    </fieldset>
+</form>
+
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='design'>
+    <fieldset>
+        <legend><?php echo $this->getTranslation('Design');?></legend>
+    <?php
+        $designConfig = Zend_Registry::get('config')->template->default->public;
+        $currentDesign = isset($this->settings->default_design) ? $this->settings->default_design : $designConfig->template . '_' . $designConfig->page;
+
+        echo $this->formRow($this->getTranslation('Default design'), $this->selectDesign('setting[default_design]', $currentDesign));
+        echo $this->formRow('&nbsp;', $this->formSubmit('design', $this->getTranslation('Update Design Settings')));
+    ?>
+    </fieldset>
+</form>
+
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='meta'>
+    <fieldset>
+        <legend><?php echo $this->getTranslation('Meta Data');?></legend>
+    <?php
+        echo $this->formRow($this->getTranslation('XML declaration'), $this->radioXmlDeclaration('setting[xml_declaration]', $this->settings->xml_declaration));
+        echo $this->formRow($this->getTranslation('Doc Type'), $this->selectDoctype('setting[doc_type]', $this->settings->doc_type));
+        echo $this->formRow($this->getTranslation('Default charset'), $this->formText('setting[default_charset]', $this->settings->default_charset));
+        echo $this->formRow($this->getTranslation('Default timezone'), $this->selectTimezone('setting[default_timezone]', $this->settings->default_timezone));
+        echo $this->formRow('&nbsp;', $this->formSubmit('meta', $this->getTranslation('Update Page Meta Data')));
+    ?>
+    </fieldset>
+</form>
+
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='international'>
+    <fieldset>
+        <legend><?php echo $this->getTranslation('Internationalization');?></legend>
+    <?php
+        echo $this->formRow($this->getTranslation('Default language'), $this->selectLanguage('setting[default_language]', $this->settings->default_language));
+        // the admin language should default to the setting in config
+        if (isset($this->settings->admin_language)) {
+            $adminLanguage = $this->settings->admin_language;
+        } else {
+           $config = Zend_Registry::get('config');
+           $adminLanguage = $config->language->defaultLocale;
+        }
+
+        echo $this->formRow($this->getTranslation('Admin language'), $this->selectLanguage('setting[admin_language]', $adminLanguage));
+        echo $this->formRow('&nbsp;', $this->formSubmit('language', $this->getTranslation('Update Internationalization Settings')));
+    ?>
+    </fieldset>
+</form>
+
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='mail'>
+    <fieldset>
+        <legend><?php echo $this->getTranslation('Mail Settings');?></legend>
+    <?php
+        echo $this->formRow($this->getTranslation('Default email address'), $this->formText('setting[default_email]', $this->settings->default_email));
+        echo $this->formRow($this->getTranslation('Default sender'), $this->formText('setting[default_email_sender]', $this->settings->default_email_sender));
+        echo $this->formRow(
+            $this->getTranslation('Transport'),
+            $this->formCheckbox('setting[use_smtp_mail]', intval($this->settings->use_smtp_mail)) . ' ' . $this->getTranslation('Use SMTP transport '));
+        echo $this->formRow($this->getTranslation('SMTP host'), $this->formText('setting[smtp_host]', $this->settings->smtp_host));
+        echo $this->formRow($this->getTranslation('SMTP username'), $this->formText('setting[smtp_username]', $this->settings->smtp_username));
+        echo $this->formRow($this->getTranslation('SMTP password'), $this->formPassword('setting[smtp_password]', $this->settings->smtp_password));
+        echo $this->formRow('&nbsp;', $this->formSubmit('mail', $this->getTranslation('Update Mail Settings')));
+        echo $this->formRow('&nbsp;', $this->link($this->getTranslation('Send test message'), '/admin/site/mail-test', 'email_go.png'));
+    ?>
+    </fieldset>
+</form>
+
+<form action="<?php echo $this->getBaseUrl(); ?>/admin/site/edit" method="post" id='google'>
+    <fieldset>
+        <legend><?php echo $this->getTranslation('Google Integration');?></legend>
+    <?php
+        echo $this->formRow($this->getTranslation('Verification code'), $this->formTextarea('setting[google_verify]', $this->settings->google_verify, array('class' => 'med')));
+        echo $this->formRow($this->getTranslation('Tracking code'), $this->formTextarea('setting[google_tracking]', $this->settings->google_tracking, array('class' => 'med')));
+        echo $this->formRow('&nbsp;', $this->formSubmit('google', $this->getTranslation('Update Google Settings')));
+    ?>
+    </fieldset>
+</form>

@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="./install/install.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><?php echo $this->translate('Digitalus CMS Installer');?></title>
+</head>
+
+<body>
+    <div id='wrapper'>
+        <h1><?php echo $this->translate('Digitalus CMS Installer');?></h1>
+        <div id="languages"><?php
+            echo $this->translate('Available Languages:');?>
+            <ul><?php
+                foreach (Zend_Registry::get('validLanguages') as $language => $key) {
+                    echo '<li><a href ="?language=' . $language . '">' . $this->translate($language) . '</a></li>' . PHP_EOL;
+                }?>
+            </ul>
+        </div>
+        <h2><?php echo $this->translate('Results');?></h2>
+        <?php
+            echo $this->partial('partials/compositeMessage.phtml', $this->messages);
+            echo $this->placeholder('form');
+        ?>
+        <div id="footer">
+            <p><a href="http://digitaluscms.com"><img src="./images/logo.png" /></a></p>
+            <p><?php echo $this->translate('For help installing Digitalus CMS check out our site');?>: <a href="http://digitaluscms.com">http://digitaluscms.com</a></p>
+        </div>
+    </div>
+</body>
+</html>

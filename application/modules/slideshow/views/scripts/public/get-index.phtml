@@ -1,0 +1,7 @@
+<?php
+    $i = 1;
+    foreach ($this->slides as $slide) {
+        $slides[] = '<a href="' . Digitalus_Uri::get(false, false, array('slide' => $i)) . '">' . $slide->title . '</a>';
+        $i++;
+    }
+    echo $this->htmlList($slides, null, null, false);

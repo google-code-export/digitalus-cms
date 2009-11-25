@@ -1,0 +1,5 @@
+<?php
+echo $this->formRow(
+    $this->getTranslation('Select the slideshow') . ':',
+    $this->selectSlideshow($this->element . '[show]', $this->getData('show', $this->data->get))
+);
