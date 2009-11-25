@@ -1,0 +1,9 @@
+<?php $this->placeholder("optionsHeadline")->set($this->getTranslation('Options'))?>
+<?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/idTabs.js');?>
+
+<ul class="idTabs padding-10">
+    <li><?php echo $this->link('Browse Folder',    '#browse',    'folder_explore.png')?></li>
+    <li><?php echo $this->link('Upload Media',     '#upload',    'page_white_get.png')?></li>
+    <li><?php echo $this->link('Create Subfolder', '#subfolder', 'folder_add.png')?></li>
+    <li><?php echo $this->link('Rename Folder',    '#rename',    'folder_edit.png')?></li>
+</ul>

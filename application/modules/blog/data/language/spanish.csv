@@ -1,0 +1,40 @@
+# Language File – MOD_BLOG";"
+# SPANISH";"
+# ----- blog module -----
+"Digitalus CMS"
+"Contact Form";
+# admin section -- Blog --
+"Modules";
+"Blog";"Blog"
+"Update Blog";"Actualizar blog"
+"Add New Post";"Agregar nuevo Articulo"
+"Delete";
+"Blog Posts";"Articulos"
+"This blog does not have any posts";"Este blog no tiene ningun Articulo"
+"Blog Name";
+# admin section -- Index --
+"Create Blog";"Crear blog"
+"My Blogs";
+"You do not have any blogs currently";"No tiene ningun blog actualmente"
+"Blog Module";"Modulo de blog"
+"The blog module enables you to publish multiple blogs on your site.";"El modulo de Blog te habilita a publicar Multiples blogs"
+"Create a new blog";"Crear un nuevo blog"
+# admin section -- Post –
+"Update Post";"Actualizar Articulo"
+"Blog Post";"Articulo"
+"Back to";"Volver a"
+"blog";"Blog"
+"Title";
+"Teaser";
+"Content";
+# admin section -- Public --
+"Select the blog";"Seleccione el Blog"
+"Current Blogs";"Blogs Actuales"
+"Update Post";"Actualizar Articulo"
+"There are no blogs to view!";"No hay blogs para ver!"
+"Written by";"Escrito por"
+"on";"sobre"
+"View All";"Ver Todos"
+"Blog Name";"Nombre del Blog"
+"Title";"Titulo"
+# END

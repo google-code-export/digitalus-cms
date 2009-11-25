@@ -1,0 +1,41 @@
+<?php
+$config = Zend_Registry::get('config');
+$siteVersions = $config->language->translations;
+$version = $this->currentVersion;?>
+
+<p class="padding-10"><?php echo $this->getTranslation('Current Version') . ': ';?>
+    <strong><?php
+        echo $this->getTranslation($siteVersions->$version);?>
+    </strong>
+</p>
+<p><?php
+
+if ($siteVersions) {
+    echo $this->getTranslation('Available Versions') . ':';
+}
+
+if ($siteVersions) {?>
+    <ul class="padding-10"><?php
+    $pageMdl = new Model_Page();
+    $pageVersions = $pageMdl->getVersions($this->pageId);
+    $defaultVersion = $pageMdl->getDefaultVersion();
+
+    foreach ($siteVersions as $key => $version) {
+        $version = $this->getTranslation($version);
+        if (isset($pageVersions[$key])) {
+            $icon = 'flag_green.png';
+        } else {
+            $icon = 'flag_red.png';
+        }
+        if ($key == $defaultVersion) {
+            $version = '<strong>' . $version . '</strong>';
+            $version .= ' (' . $this->getTranslation('Default') . ')';
+        }
+        echo '<li>' .
+                    $this->link($version, '/admin/page/edit/id/' . $this->pageId . '/version/' . $key, $icon) .
+                    $this->renderImage('/images/icons/flags/' . $key . '.png') .
+             '</li>';
+    }?>
+    </ul><?php
+}?>
+</p>

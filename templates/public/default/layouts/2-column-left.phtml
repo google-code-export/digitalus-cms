@@ -1,0 +1,52 @@
+<div id='page' class='container_16'>
+    <div id='page_wrapper' >
+        <div id='header' class='grid_16'>
+            <div id='header_logo' class='grid_10 alpha'>
+                <div class='innerContent'>
+                    <a href='http://digitaluscms.com'><img src='<?php echo $this->getBaseUrl()?>/images/logo.png' alt='Powered by Digitalus CMS' /></a>
+                </div>
+            </div>
+            <div id='header_top' class='grid_6 omega'></div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div id='nav' class='grid_16'>
+            <div class='innerContent'>
+                <digitalusNavigation id='menu' type='menu' levels='1' />
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div id='body' class='grid_16'>
+        <div id='content' class='grid_13 alpha'>
+            <div class='innerContent'>
+                <div class='pageContent'>
+                    <digitalusNavigation id='breadcrumb' type='breadcrumbs' />
+                    <h1>
+                        <digitalusControl type='text' id='headline' required='true' size='50' group='main' />
+                    </h1>
+                    <div class='contentWrapper'>
+                         <digitalusControl type='fckeditor' id='content' required='true' cols='60' rows='4' group='main' />
+                    </div>
+                    <div class="module">
+                        <digitalusControl type='moduleSelector' id='module' group='more' />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id='sidebar_right' class='grid_3 omega'>
+            <div class='innerContent'>
+                <digitalusNavigation id='subnav' type='submenu' levels='2' />
+                    <div class='contentWrapper'>
+                         <digitalusControl type='fckeditor' id='sidebar_content' cols='60' rows='4' group='more' />
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div id='footer' class='grid_16'>
+            <div class='innerContent'><p>Powered by <a href='http://digitaluscms.com'>Digitalus CMS</a>!</p></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

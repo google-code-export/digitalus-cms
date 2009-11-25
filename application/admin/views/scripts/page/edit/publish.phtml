@@ -1,0 +1,32 @@
+<?php
+$radioOptions = array(
+    Model_Page::PUBLISH_ID       => $this->getTranslation('Publish'),
+    Model_Page::UNPUBLISH_STATUS => $this->getTranslation('Unpublish'),
+    Model_Page::ARCHIVE_STATUS   => $this->getTranslation('Archive'),
+);
+
+$mdlPage = new Model_Page();
+$list = $this->renderPublishedPagesList(Model_Page::UNPUBLISH_ID);
+if ($list != null) {
+    echo '<p>' . $this->getTranslation('The following pages have not been published yet!') . '</p>';
+    echo $list;
+}
+
+echo '<p>' . $this->getTranslation('Change the status of this page.') . '</p>';
+
+if ($mdlPage->isPublished($this->pageId)) {
+    echo '<p>' . $this->getTranslation('This page was published on') . ': ' . $this->renderDate($this->publishDates['publish_date']) . '</p>';
+}
+if ($mdlPage->getPublishLevel($this->pageId) === Model_Page::ARCHIVE_ID) {
+    echo '<p>' . $this->getTranslation('This page was archived on') . ': ' . $this->renderDate($this->publishDates['archive_date']) . '</p>';
+}
+echo '<p>' . $this->getTranslation('The status of this page is') . ': ' . $this->getTranslation($mdlPage->getPublishLevel($this->pageId)) . '</p>';?>
+
+<br />
+<form action="<?php echo $this->getBaseUrl()?>/admin/page/publish" method="post">
+    <p class="propRow"><?php
+        echo $this->formRadio('publish', $mdlPage->getPublishLevel($this->pageId), null, $radioOptions, PHP_EOL);
+        echo $this->formSubmit('publishSubmit', $this->getTranslation('Change publishing state'));
+        echo $this->formHidden('id', $this->pageId);?>
+    </p>
+</form>

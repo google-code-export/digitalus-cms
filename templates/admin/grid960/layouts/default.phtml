@@ -1,0 +1,48 @@
+<?php 
+	$grid = new Digitalus_Interface_Grid('page', 16);
+	
+	$header = $grid->addElement('header', 16);
+		$logo = $header->addElement('header_logo', 13);
+    	$logo->setAttribute('first', true);
+    	$top = $header->addElement('header_top',3);
+    	$top->setAttribute('last', true);
+	$header->setAttribute('clear', true);
+	
+	
+	
+	#$body = $grid->addElement('body', 16);
+    	$sidebarLeft = $grid->addElement('sidebar_left', 4);
+    	
+    	$breadcrumb = $grid->addElement('breadcrumbs_block', 12);
+    	$breadcrumb->setAttribute('last', true);
+    	
+    	$content = $grid->addElement('main_content', 9);
+		$sidebarRight = $grid->addElement('sidebar_right', 3);
+    	$sidebarRight->setAttribute('last', true);
+	#$body->setAttribute('clear', true);
+	
+	$footer = $grid->addElement('footer', 16);
+	$footer->setAttribute('clear', true);
+	
+	//Set Content
+	$this->placeholder('header_logo_content')->set(
+    	"<div class='site-logo'></div>".$this->RenderAdminMenu()
+	);
+	$this->placeholder('header_top_content')->set(
+    	$this->CurrentAdminUser()
+	);
+	$this->placeholder('breadcrumbs_block_content')->set(
+    	$this->RenderLinks($this->toolbarLinks, 'rightLinks').$this->RenderLinks($this->breadcrumbs, 'breadcrumbs', $this->GetTranslation('You are here') . ': ', null, ' > ')
+	);
+	$this->placeholder('sidebar_left_content')->set(
+    	$this->RenderSidebar()
+	);
+	$this->placeholder('main_content_content')->set(
+    	'<h2 class="top">'.$this->placeholder('formHeadline').'</h2><div id="form">'.$this->RenderAlert().$this->layout()->form.'</div>'
+	);
+	$this->placeholder('sidebar_right_content')->set(
+    	$this->RenderOptions()
+	);
+	
+	echo $grid->render();
+?>

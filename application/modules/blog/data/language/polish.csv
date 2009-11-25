@@ -1,0 +1,40 @@
+# Language File – MOD_BLOG
+# POLISH
+# ----- blog module -----
+"Digitalus CMS";"Digitalus CMS"
+"Contact Form";
+# admin section -- Blog --
+"Modules";
+"Blog";
+"Update Blog";
+"Add New Post";
+"Delete";
+"Blog Posts";
+"This blog does not have any posts";
+"Blog Name";
+# admin section -- Index --
+"Create Blog";
+"My Blogs";
+"You do not have any blogs currently";
+"Blog Module";
+"The blog module enables you to publish multiple blogs on your site.";
+"Create a new blog";
+# admin section -- Post –
+"Update Post";
+"Blog Post";
+"Back to";
+"blog";
+"Title";
+"Teaser";
+"Content";
+# admin section -- Public --
+"Select the blog";
+"Current Blogs";
+"Update Post";
+"There are no blogs to view!";
+"Written by";
+"on";
+"View All";
+"Blog Name";
+"Title";
+# END

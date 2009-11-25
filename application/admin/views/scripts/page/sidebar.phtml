@@ -1,0 +1,14 @@
+<?php $this->placeholder('sidebarHeadline')->set($this->getTranslation('Pages'));
+
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/jquery.treeview.min.js');
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/jquery.cookie.js');
+$this->jQuery()->onLoadCaptureStart();?>
+    $("#fileTree").treeview({
+        persist: "cookie",
+        collapsed: true,
+        unique: true
+    });<?php
+$this->jQuery()->onLoadCaptureEnd();?>
+<div class="contentBrowser"><?php
+    echo $this->renderFileBrowser(0, '/admin/page/edit/id/', null, 0, 'fileTree', false, $this->pageId);?>
+</div>

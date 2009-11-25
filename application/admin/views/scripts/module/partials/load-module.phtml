@@ -1,0 +1,56 @@
+<dt>
+    <?php
+    echo $this->formLabel(
+        $this->element->getName(),
+        $this->element->getLabel()
+    );
+    ?>
+</dt>
+<dd class="<?php echo $this->class;?>">
+<?php
+$elementName = $this->element->getName();
+$values = $this->element->getXml();
+
+//load values as url parameters
+if ($values && (string)$values->module != '0') {
+    foreach ($values as $k => $v) {
+        $params[$k] = $v;
+        $params[] = $k;
+        $params[] = $v;
+    }
+    $paramsString = implode('/', $params) . '/';
+    $module = $values->module;
+} else {
+    $module = null;
+    $paramsString = null;
+}
+
+$attr = $this->element->getAttribs();
+if (!is_array($attr)) {
+    $attr = null;
+}
+echo $this->SelectModule($elementName . "[module]", $module, $attr);
+?>
+</dd>
+<div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper">
+<?php
+    if (isset($values->module)) {
+        $params['element'] = $elementName;
+        $params['moduleKey'] = $values->module;
+        echo $this->action('render-form', 'module', 'admin', $params);
+    }
+?>
+</div>
+<?php
+// make sure this only loads once for each element
+if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
+$this->jQuery()->onLoadCaptureStart() ?>
+    $('#<?php echo $elementName?>').change(function(){
+        var module = $(this).val();
+        $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
+    });
+<?php $this->jQuery()->onLoadCaptureEnd();
+Zend_Registry::set($elementName . 'Jquery', true);
+}
+echo $this->formErrors($this->element->getMessages());
+?>

@@ -1,0 +1,48 @@
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Design'));
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/jquery.markitup.js');
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/jquery.markitup.js');
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/sets/default/set.js');
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/markitup/sets/css/set.js');
+
+$this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/skins/markitup/style.css');
+$this->headLink()->appendStylesheet($this->getBaseUrl() . '/scripts/markitup/sets/css/style.css');
+//jquery block
+$this->jQuery()->onloadCaptureStart();
+?>
+
+$(".css").markItUp(mySettings);
+<?php $this->jQuery()->onloadCaptureEnd();?>
+
+<form action="<?php echo $this->getBaseUrl();?>/admin/design/update" method="post">
+<fieldset>
+    <legend><?php echo $this->getTranslation('Design details');?></legend>
+    <dl>
+        <?php echo '<dt>' . $this->formHidden('id', $this->design->getValue('id')) . '</dt>';?>
+        <?php
+        echo $this->FormRow(
+            $this->getTranslation('Design Name'), $this->FormText('name',$this->design->getValue('name'))
+        );
+        echo $this->FormRow(
+            '&nbsp;', $this->formCheckbox('is_default', intval($this->design->getValue('is_default')), null, array(1,0)) . ' ' . $this->getTranslation('This is the default site design')
+        );
+        echo $this->FormRow(
+            $this->getTranslation('Layout'), $this->selectLayout('layout', $this->design->getLayout())
+        );
+
+        // get the current skin
+        $currentSkin = $this->design->getSkin();
+        echo $this->FormRow(
+            $this->getTranslation('Skin'), $this->selectSkin('skin', $this->design->getSkin())
+        );
+
+        echo $this->FormRow(
+            $this->getTranslation('Design Notes'), $this->FormTextarea('notes',$this->design->getValue('notes'), array('class' => 'med'))
+        );
+        echo '<dt>' . $this->FormTextarea('inline_styles', $this->design->getValue('inline_styles'), array('class' => 'css')) . '</dt>';
+        echo $this->FormRow(
+            '&nbsp;', $this->FormSubmit('site', $this->getTranslation('Update Design'))
+        );
+        ?>
+    </dl>
+</fieldset>
+</form>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<configdata>
+    <Digitalus>
+        <constants>
+            <version>1.0</version>
+        </constants>
+        <database>
+            <adapter>PDO_MYSQL</adapter>
+            <host>localhost</host>
+            <username></username>
+            <password></password>
+            <dbname></dbname>
+        </database>
+        <design>
+            <defaultTemplate>wireframe</defaultTemplate>
+            <defaultLayout>default</defaultLayout>
+            <adminTemplate>admin</adminTemplate>
+        </design>
+        <filepath>
+            <template>templates/public</template>
+            <script>public/scripts</script>
+            <style>public/styles</style>
+            <image>public/images</image>
+        </filepath>
+    </Digitalus>
+    <testing extends='Digitalus'>
+        <database>
+            <adapter>PDO_MYSQL</adapter>
+            <host>localhost</host>
+            <username>root</username>
+            <password></password>
+            <dbname>digitalus_cms</dbname>
+        </database>
+    </testing>
+</configdata>

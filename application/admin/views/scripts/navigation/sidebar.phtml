@@ -1,0 +1,14 @@
+<?php $this->placeholder('sidebarHeadline')->set($this->getTranslation('Navigation'));
+
+$mdlMenu = new Model_Menu();
+$menus = $mdlMenu->getMenus();?>
+
+<ul class="padding-10">
+    <li><?php echo $this->link('Main Menu', '/admin/navigation/open/id/0', 'text_list_bullets.png');?></li><?php
+    if ($menus) {
+        foreach ($menus as $menu) {
+            $label = $mdlMenu->getLabel($menu);?>
+            <li><?php echo $this->link($label, '/admin/navigation/open/id/' . $menu->id, 'text_list_bullets.png');?></li><?php
+        }
+    } ?>
+</ul>

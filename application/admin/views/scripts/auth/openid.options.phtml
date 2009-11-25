@@ -1,0 +1,7 @@
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('OpenID Login'));?>
+
+<p><?php
+    echo $this->getTranslation('Return to the standard login using Your username and password.');
+    echo $this->link($this->getTranslation('Standard Login'), $this->getBaseUrl() . '/admin/auth/login', 'key_go.png');?>
+
+</p>

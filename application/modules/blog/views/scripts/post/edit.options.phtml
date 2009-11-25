@@ -1,0 +1,12 @@
+<?php
+$this->placeholder('optionsHeadline')->set($this->getTranslation('Blog Post'));?>
+
+<p class="padding-10"><?php
+$path = '/mod_blog/blog/edit/id/' . $this->blog->id;
+$link = $this->getTranslation('Back to') . ' ' . $this->getTranslation('blog') . ': "<em>' . $this->blog->name . '"</em>';
+echo $this->link($link, $path, 'arrow_left.png');?>
+<a href='?>'>
+
+</a>
+</p>
+

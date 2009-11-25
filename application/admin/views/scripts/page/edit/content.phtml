@@ -1,0 +1,54 @@
+<?php
+$controls = $this->form->getElements();
+
+// load javascript Html editors
+$this->loadEditors($controls);
+
+/* ************************************************************************** */
+
+// get all of the controls and load them into groups
+$submitButton = $this->form->getElement('submit');
+$this->form->removeElement('submit');
+foreach ($controls as $control) {
+    $rel = $control->getAttrib('rel');
+    $group = (!empty($rel) ? $rel : 'main');
+    $groups[$group][] = $control->getName();
+}
+// create "main" display group
+$this->form->addDisplayGroup($groups['main'], 'main', 'main items');
+unset($groups['main']);
+
+// create other display groups
+if (is_array($groups)) {
+    foreach ($groups as $key => $controls) {
+        $this->form->addDisplayGroup($controls, $key);
+    }
+}
+
+$this->form->setAction($this->form->getAction())
+           ->setMethod('post')
+           ->setAttrib('enctype', 'multipart/form-data')
+           ->setDecorators(array(
+                'FormElements',
+                'Form',
+                array('FormErrors', array('placement' => 'prepend'))
+           ))
+            ->setDisplayGroupDecorators(array(
+                'FormElements',
+                'Fieldset'
+           ));
+
+$displayGroups = $this->form->getDisplayGroups();
+// loop throgh display groups and add submit button
+foreach ($displayGroups as $title => $group) {
+    $id = $title . '_content_pane';
+    $title = $this->getTranslation(ucwords($title)) . ' ' . $this->getTranslation('Content');
+    $ids[$id] = $title;
+    $group->setName($id)
+          ->setAttrib('id', $id)
+          ->setLegend($title)
+          ->addElement($submitButton);
+}
+
+$this->contentPanes = $ids;
+echo $this->form;
