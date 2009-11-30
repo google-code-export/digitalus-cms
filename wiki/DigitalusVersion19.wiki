@@ -1,4 +1,4 @@
-#labels Featured
+#labels Featured,Phase-Deploy
 = Introduction =
 In version 1.9 of the Digitalus CMS there have been some small changes in the database structure.
 This requires an update of the databases.
