@@ -1,0 +1,25 @@
+#summary One-sentence summary of this page.
+#labels Featured
+
+= Introduction =
+In version 1.9 of the Digitalus CMS there have been some small changes in the database structure.
+This requires an update of the databases.
+
+= Upgrading from version 1.8 =
+If You want to upgrade Your installation from version 1.8 to 1.9, please perform the following steps:
+  * make a backup copy of both - all Your files and Your databases
+  * Downlaod the zip file of Digitalus v1.9
+  * unzip the zip file and copy the contents in Your installation path (Your old Digitalus CMS contents will be overwritten, but *not* the configuration file)
+  * start Your webserver and log in into the admin area
+  * Go to "site"
+  * go to "open console" (on the left side)
+  * type in the *_UpdateVersion19_* command (case-sensitive !!)
+  * push the *_Info_* button to get a note about what's happening
+  * push the *_run command_* button to run the command and update the databases
+  * done
+
+= Upgrading from version 1.5 =
+If You upgrade from version 1.5, first run the command *_UpdateVersion18_* and then *_UpdateVersion19_*.
+
+= Upgrading from older versions =
+If You upgrade from a version prior to version 1.5, first run the command *_UpdateDatabase_* and then the commands above.
