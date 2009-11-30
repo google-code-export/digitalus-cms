@@ -6,17 +6,22 @@ $this->loadTemplate('admin',$adminTemplateConfig->template, $adminTemplateConfig
 $this->placeholder('charset')->set('utf-8');
 echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' . PHP_EOL;
 echo $this->doctype() . PHP_EOL;
-?>
+
+$contentLanguage = $this->getAdminLanguage();
+$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=' . $this->placeholder('charset'))
+                 ->appendHttpEquiv('Content-Language', $contentLanguage);?>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>
-    <?php echo $this->getTranslation('Digitalus CMS') . $this->escape($this->title); ?>
-</title>
-<?php
+    <?php echo $this->getTranslation('Digitalus CMS') . $this->escape($this->title) . PHP_EOL;?>
+</title><?php
+
 echo $this->layout()->pageHead;
 
 // the loadTemplate() helper loads all of the stylesheets now
 
+echo $this->headMeta() . PHP_EOL;
 echo $this->headLink();
 
 $this->jQuery()->onLoadCaptureStart();?>
@@ -54,10 +59,8 @@ $this->jQuery()->onLoadCaptureEnd();?>
 
 </head>
 
-<body>
-    <?php
-        echo $this->layout()->template;
-        echo $this->jQuery();
-    ?>
+<body><?php
+    echo $this->layout()->template;
+    echo $this->jQuery();?>
 </body>
 </html>
