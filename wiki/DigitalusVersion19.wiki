@@ -1,6 +1,4 @@
 #labels Featured
-#Steps to perform when upgrading to version 1.9
-
 = Introduction =
 In version 1.9 of the Digitalus CMS there have been some small changes in the database structure.
 This requires an update of the databases.
