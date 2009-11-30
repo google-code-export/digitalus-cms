@@ -45,7 +45,7 @@ class Digitalus_Interface_Template
                 }
 
                 if (isset($attribs['label'])) {
-                    $label = (string)$view->getTranslation($attribs['label']);
+                    $label = $view->getTranslation((string)$attribs['label']);
                     unset($attribs['label']);
                 } else {
                     $label = $view->getTranslation(ucwords(str_replace('_', ' ', $id)));
