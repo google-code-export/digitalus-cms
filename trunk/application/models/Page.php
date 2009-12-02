@@ -275,7 +275,7 @@ class Model_Page extends Digitalus_Db_Table
         //delete content nodes
         unset($where);
         $mdlNodes = new Model_ContentNode();
-        $where[] = $this->_db->quoteInto('parent_id = ?', 'page_' . $pageId, 'INTEGER');
+        $where[] = $this->_db->quoteInto('parent_id = ?', 'page_' . $pageId, 'STRING');
         $mdlNodes->delete($where);
 
         //delete meta data
