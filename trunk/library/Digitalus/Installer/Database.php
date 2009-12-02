@@ -14,10 +14,22 @@ class Digitalus_Installer_Database
             'dbname'   => $name,
             'prefix'   => $prefix,
             'adapter'  => $adapter,
+            'charset'  => 'utf8',
         );
-        $this->_db = Zend_Db::factory($adapter, $this->_config);
-        $this->_db->query("SET NAMES 'utf8'");
-        $this->_db->query("SET CHARACTER SET 'utf8'");
+
+        // have a try
+        try {
+            $this->_db = Zend_Db::factory($adapter, $this->_config);
+            $this->_db->getConnection();
+            $this->_db->query("SET NAMES 'utf8'");
+            $this->_db->query("SET CHARACTER SET 'utf8'");
+        } catch (Zend_Db_Adapter_Exception $e) {
+            echo 'Connection could not be established! Please check Your database credentials!' . PHP_EOL;
+            if ('production' != APPLICATION_ENV) {
+                echo 'Caught exception:' . PHP_EOL, $e->getMessage() . ' in '. $e->getFile().', line: '. $e->getLine() . '.', PHP_EOL;
+            }
+        }
+        return true;
     }
 
     public function isEmpty()

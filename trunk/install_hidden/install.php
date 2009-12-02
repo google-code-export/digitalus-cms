@@ -70,7 +70,7 @@ if (!$installer->isInstalled()) {
                 $_POST['account_password']
             );
             if ($result) {
-                $installer->setDbConnection(
+                $connection = $installer->setDbConnection(
                     $_POST['db_name'],
                     $_POST['db_host'],
                     $_POST['db_username'],
@@ -78,12 +78,13 @@ if (!$installer->isInstalled()) {
                     $_POST['db_prefix'],
                     $_POST['db_adapter']
                 );
-
-                $dbTested = $installer->testDb();
-                if ($dbTested) {
-                    $installer->installDb();
-                    $installer->saveAdminUser();
-                    $installer->finalize();
+                if ($connection) {
+                    $dbTested = $installer->testDb();
+                    if ($dbTested) {
+                        $installer->installDb();
+                        $installer->saveAdminUser();
+                        $installer->finalize();
+                    }
                 }
             }
 
