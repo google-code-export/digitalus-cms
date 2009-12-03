@@ -129,7 +129,6 @@ class Model_ContentNode extends Digitalus_Db_Table
 
         $row = $this->fetchRow($where);
 
-
         if ($row) {
             $row->content = $content;
             $row->save();
