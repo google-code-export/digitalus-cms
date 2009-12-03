@@ -165,6 +165,20 @@ class Model_User extends Digitalus_Db_Table
         return false;
     }
 
+    public function getUserById($id, $format = null)
+    {
+        $where[] = $this->_db->quoteInto('id = ?', $id, 'INTEGER');
+        $user = $this->fetchRow($where);
+        switch ((string)strtolower($format)) {
+            case 'firstname':
+                return $user->first_name;
+            case 'lastname':
+                return $user->last_name;
+            default:
+                return $user->first_name . ' ' . $user->last_name;
+        }
+    }
+
     public function getUserByUsername($userName)
     {
         $where[] = $this->_db->quoteInto('email = ?', $userName);
