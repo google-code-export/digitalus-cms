@@ -55,7 +55,7 @@ class Digitalus_View_Helper_General_Pagination extends Zend_View_Helper_Abstract
                 } else {
                     $class = '';
                 }
-                $directLinks .= '<a href="' . $baseUrl . '/page/' . $i . '" class="' . $class '">' . $i . '</a>';
+                $directLinks .= '<a href="' . $baseUrl . '/page/' . $i . '" class="' . $class . '">' . $i . '</a>';
             }
             //first page
             $xhtml = '<a href="' . $baseUrl . '/page/1">&lt;&lt; ' . $this->view->getTranslation('First') . '</a>';

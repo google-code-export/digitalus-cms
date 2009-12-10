@@ -83,7 +83,7 @@ class Digitalus_Command_InstallModule extends Digitalus_Command_Abstract
     public function info()
     {
         $this->log($this->view->getTranslation('The install module command will install a module in the database if the module is installed properly.'));
-        $this->log($this->view->getTranslation('Params: moduleName (string), label (string, optional)');
+        $this->log($this->view->getTranslation('Params: moduleName (string), label (string, optional)'));
     }
 
     /**
