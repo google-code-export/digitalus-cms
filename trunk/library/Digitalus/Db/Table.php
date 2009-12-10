@@ -14,7 +14,7 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
+ * @package    Digitalus_Core_Library
  * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: Table.php Tue Dec 25 20:37:43 EST 2007 20:37:43 forrest lyman $
@@ -22,14 +22,34 @@
 
 class Digitalus_Db_Table extends Zend_Db_Table_Abstract
 {
+    public    $view;
     protected $_data;
     protected $_errors;
     private   $_action;
 
     public function __construct($config = array())
     {
+        $this->setView();
         $this->_name = self::getTableName($this->_name);
         parent::__construct($config);
+    }
+
+    public function getView()
+    {
+        return $this->view;
+    }
+
+    public function setView(Zend_View $view = null)
+    {
+        if ($view == null) {
+            $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+            if (null === $viewRenderer->view) {
+                $viewRenderer->initView();
+            }
+            $this->view = $viewRenderer->view;
+        } else {
+            $this->view = $view;
+        }
     }
 
     public function insertFromPost()
