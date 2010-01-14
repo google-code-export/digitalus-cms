@@ -89,7 +89,7 @@ class Digitalus_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Ab
                     }
                 }
                 $locale = $config->language->defaultLocale;
-                $translate->setLocale($locale);
+#                $translate->setLocale($locale);
                 $translate->setCache(Zend_Registry::get('cache'));
                 $this->view->translate = $translate;
 
