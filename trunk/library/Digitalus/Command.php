@@ -22,7 +22,7 @@
 
 class Digitalus_Command
 {
-    const PATH_TO_COMMANDS = '../library/Digitalus/Command';
+    const PATH_TO_COMMANDS = '/library/Digitalus/Command';
 
     /**
      * load the command
