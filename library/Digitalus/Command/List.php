@@ -31,7 +31,7 @@ class Digitalus_Command_List extends Digitalus_Command_Abstract
         $commands = Digitalus_Filesystem_File::getFilesByType(BASE_PATH . Digitalus_Command::PATH_TO_COMMANDS, 'php');
         foreach ($commands as $command) {
             //clean up the list
-            if ($command != 'Abstract.php' && $command != 'List.php') {
+            if ($command != 'Abstract.php' && $command != 'List.php' && $command != 'Exception.php') {
                 $cleanCommand = Digitalus_Toolbox_Regex::stripFileExtension($command);
                 $link = '<a class="loadCommand" href="#" title="' . $cleanCommand . '">' . $cleanCommand . '</a>';
                 $this->log($link);
