@@ -28,7 +28,7 @@ class Digitalus_Command_List extends Digitalus_Command_Abstract
      */
     public function run($params = null)
     {
-        $commands = Digitalus_Filesystem_File::getFilesByType(Digitalus_Command::PATH_TO_COMMANDS, 'php');
+        $commands = Digitalus_Filesystem_File::getFilesByType(BASE_PATH . Digitalus_Command::PATH_TO_COMMANDS, 'php');
         foreach ($commands as $command) {
             //clean up the list
             if ($command != 'Abstract.php' && $command != 'List.php') {
