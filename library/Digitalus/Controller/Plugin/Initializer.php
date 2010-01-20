@@ -175,9 +175,9 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
 
                 // add helpers
                 $this->view->addHelperPath('ZendX/JQuery/View/Helper', 'ZendX_JQuery_View_Helper');
-                $this->view->jQuery()->setLocalPath($this->view->getBaseUrl()   . '/scripts/jquery/jquery-1.3.2.min.js');
-                $this->view->jQuery()->setUiLocalPath($this->view->getBaseUrl() . '/scripts/jquery/jquery-ui-1.7.custom.min.js');
-                $this->view->jQuery()->addStylesheet($this->view->getBaseUrl()  . '/scripts/jquery/ui-theme/jquery-ui-1.7.1.custom.css');
+                $this->view->jQuery()->setLocalPath($this->view->getBaseUrl()   . '/scripts/jquery/jquery-1.4.min.js');
+                $this->view->jQuery()->setUiLocalPath($this->view->getBaseUrl() . '/scripts/jquery/jquery-ui-1.7.2.custom.min.js');
+                $this->view->jQuery()->addStylesheet($this->view->getBaseUrl()  . '/scripts/jquery/ui-theme/jquery-ui-1.7.2.custom.css');
                 $this->view->jQuery()->enable();
                 $this->view->jQUery()->uiEnable();
 
