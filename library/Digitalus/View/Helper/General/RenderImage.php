@@ -43,8 +43,12 @@ class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstrac
     /**
      * comments
      */
-    public function renderImage($src, $height = '', $width = '', $attribs = array())
+    public function renderImage($src, $height = '', $width = '', $attribs = array('class' => 'icon'))
     {
+        if (!Zend_Validate::is($src, 'File_Extension', array('jpg', 'jpeg', 'gif', 'png'))) {
+            return '<span>' . $src . '</span>';
+        }
+
         $absPath = BASE_PATH . '/' . $src;
         if ($src != '' && is_file($absPath)) {
             $imageSize = getimagesize($absPath);
@@ -78,7 +82,7 @@ class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstrac
                     $attributes .= $k . "='" . $v . "' ";
                 }
             }
-            return '<img class="icon" style="' . $width . $height . '" src="' . $this->view->getBaseUrl() . '/' . $src . '" ' . $attributes . ' />';
+            return '<img style="' . $width . $height . '" src="' . $this->view->getBaseUrl() . '/' . $src . '" ' . $attributes . ' />';
         }
     }
 }
