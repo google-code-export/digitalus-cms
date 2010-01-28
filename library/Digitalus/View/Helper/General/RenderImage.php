@@ -45,11 +45,12 @@ class Digitalus_View_Helper_General_RenderImage extends Zend_View_Helper_Abstrac
      */
     public function renderImage($src, $height = '', $width = '', $attribs = array('class' => 'icon'))
     {
-        if (!Zend_Validate::is($src, 'File_Extension', array('jpg', 'jpeg', 'gif', 'png'))) {
+        $absPath = BASE_PATH . '/' . $src;
+        $validator = new Zend_Validate_File_Extension(array('jpg', 'jpeg', 'gif', 'png'));
+        if (!is_file($absPath) || !$validator->isValid($src)) {
             return '<span>' . $src . '</span>';
         }
 
-        $absPath = BASE_PATH . '/' . $src;
         if ($src != '' && is_file($absPath)) {
             $imageSize = getimagesize($absPath);
             $srcHeight = $imageSize[0];
