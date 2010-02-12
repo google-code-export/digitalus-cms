@@ -121,7 +121,7 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
             $module     = $this->_request->getModuleName();
             $controller = $this->_request->getControllerName();
             // Add translation file depending on current module ('public' or 'admin')
-            if ('public' == $module && 'public' == $controller) {
+            if ('public' == $module || 'public' == $controller) {
                 $end = 'front';
             } else {
                 $end = 'back';
