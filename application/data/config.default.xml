@@ -11,6 +11,8 @@
             <password></password>
             <dbname></dbname>
             <prefix></prefix>
+            <port></port>
+            <charset></charset>
         </database>
         <template>
             <pathToTemplates>templates</pathToTemplates>
