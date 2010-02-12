@@ -60,6 +60,7 @@ class Zend_View_Filter_DigitalusControl extends Digitalus_Content_Filter
                         break;
                     case 'text':
                     case 'textarea':
+                    default:
                         $xhtml = $controlContent;
                         break;
                     case 'moduleSelector':
