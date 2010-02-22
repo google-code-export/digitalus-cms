@@ -12,7 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id:$
  * @link        http://www.digitaluscms.com
@@ -27,7 +27,7 @@ require_once 'Zend/Controller/Action.php';
 /**
  * Admin Site Controller of Digitalus CMS
  *
- * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_CMS_Controllers
@@ -79,6 +79,25 @@ class Admin_SiteController extends Zend_Controller_Action
         $s = new Model_SiteSettings();
         foreach ($settings as $k => $v) {
             $s->set($k, $v);
+/* *****************************************************************************
+ * TODO: check allowed charsets for MySQL => VALIDATOR ??
+            if ('default_charset' == $k) {
+                $v = str_replace('-', '', $v);
+                $mdlConfig = new Digitalus_Installer_Config();
+                $mdlConfig->loadFile();
+                $config = $mdlConfig->get();
+                $config->production->database->charset = $v;
+                $mdlConfig->save();
+            }
+ * *****************************************************************************
+ * TODO: add Validators for all site meta data => consider using Zend_Form
+            if ('default_timezone' == $k) {
+                $validator = new Digitalus_Validate_Timezone();
+                $_SESSION['timezone0'] = Zend_Debug::dump($v);
+                $_SESSION['timezone1'] = Zend_Debug::dump($validator->isValid($v));
+            }
+ * *****************************************************************************
+ */
         }
         $s->save();
         $this->_redirect('admin/site');
