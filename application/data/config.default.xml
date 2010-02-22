@@ -2,7 +2,7 @@
 <configdata>
     <production>
         <constants>
-            <version>1.9</version>
+            <version>1.10</version>
         </constants>
         <database>
             <adapter>PDO_MYSQL</adapter>
