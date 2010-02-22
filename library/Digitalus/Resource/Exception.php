@@ -15,7 +15,7 @@
  * @author      LowTower - lowtower@gmx.de
  * @category    Digitalus
  * @package     Digitalus
- * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id:$
  * @link        http://www.digitaluscms.com
@@ -27,7 +27,7 @@
  *
  * @category    Digitalus
  * @package     Digitalus
- * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  */
 class Digitalus_Resource_Exception extends Digitalus_Exception
