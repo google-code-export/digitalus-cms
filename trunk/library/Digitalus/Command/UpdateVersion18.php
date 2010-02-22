@@ -15,7 +15,7 @@
  *
  * @category   Digitalus CMS
  * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: UpdateDatabase.php Mon Aug 18 EST 2008 19:57:20 forrest lyman $
  */

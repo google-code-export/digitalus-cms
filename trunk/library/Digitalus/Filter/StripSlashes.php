@@ -13,7 +13,7 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      LowTower - lowtower@gmx.de
- * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_Core_Library
@@ -31,7 +31,7 @@ require_once 'Zend/Filter/Interface.php';
  * Magic Quotes Filter
  *
  * @author      LowTower - lowtower@gmx.de
- * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_Filter
