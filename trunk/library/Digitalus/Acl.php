@@ -30,6 +30,7 @@ class Digitalus_Acl extends Zend_Acl
      */
     public function __construct()
     {
+        $this->addRole(new Zend_Acl_Role('guest'));
         $this->addRole(new Zend_Acl_Role('admin'));
         $this->addRole(new Zend_Acl_Role('superadmin'));
 
@@ -42,9 +43,11 @@ class Digitalus_Acl extends Zend_Acl
         //everybody
         $this->allow(null, 'admin_auth');
 
+        //deny the guests access to everything
+        $this->deny('guest');
+
         //grant the super admin access to everything
         $this->allow('superadmin');
-
     }
 
     public function loadResources()
