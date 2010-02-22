@@ -13,11 +13,13 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: Auth.php Tue Dec 25 21:40:32 EST 2007 21:40:32 forrest lyman $
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus_Core_Library
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id$
+ * @link        http://www.digitaluscms.com
  */
 
 class Digitalus_Auth
@@ -75,7 +77,7 @@ class Digitalus_Auth
 
     const USER_NAMESPACE = 'adminUser';
 
-    protected $_resultRowColumns = array('id', 'user_group_id', 'first_name', 'last_name', 'email', 'role', 'acl_resources');
+    protected $_resultRowColumns = array('id', 'user_group_id', 'username', 'first_name', 'last_name', 'email', 'role', 'acl_resources');
 
     /**
      * build the login request
@@ -90,10 +92,16 @@ class Digitalus_Auth
         $this->_dbAdapter = clone (Zend_Db_Table::getDefaultAdapter());
         $this->_dbAdapter->setFetchMode(ZEND_DB::FETCH_ASSOC);
 
-        $this->_authAdapter = new Zend_Auth_Adapter_DbTable($this->_dbAdapter, Digitalus_Db_Table::getTableName($this->_userTable), $this->_identityColumn, $this->_credentialColumn);
-
         $this->_username = $username;
-        $this->_password = md5($password);
+        $this->_password = $password;
+
+        $this->_authAdapter = new Zend_Auth_Adapter_DbTable(
+            $this->_dbAdapter,
+            Digitalus_Db_Table::getTableName($this->_userTable),
+            $this->_identityColumn,
+            $this->_credentialColumn,
+            "MD5(?) AND active = TRUE"      // MD5() the password and only authenticate if user is active
+        );
 
         // set up storage
         // @todo: i can not get zend to persist the identities for some reason .. figure out why

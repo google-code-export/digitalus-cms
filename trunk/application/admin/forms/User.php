@@ -79,6 +79,11 @@ class Admin_Form_User extends Digitalus_Form
                ->setAttrib('size', 50);
 
         // create new element
+        $active = $this->createElement('checkbox', 'active');
+        // element options
+        $active->setLabel($this->getView()->getTranslation('Activated'));
+
+        // create new element
         $adminRole = $this->createElement('select', 'role');
         // element options
         $adminRole->setLabel($this->getView()->getTranslation('Admin Role'));
@@ -109,12 +114,13 @@ class Admin_Form_User extends Digitalus_Form
              ->addElement($lastName)
              ->addElement($email)
              ->addElement($openid)
+             ->addElement($active)
              ->addElement($adminRole)
              ->addElement($password)
              ->addElement($passwordConfirm)
              ->addElement($submit)
              ->addDisplayGroup(array('form_instance', 'id', 'first_name', 'last_name',
-                                     'email', 'openid', 'role', 'update_password',
+                                     'email', 'openid', 'active', 'role', 'update_password',
                                      'update_password', 'password', 'password_confirm', 'submit'),
                                      'admin_form',
                                      array('legend' => $this->getView()->getTranslation('Account Information')));

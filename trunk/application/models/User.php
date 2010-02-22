@@ -215,4 +215,64 @@ class Model_User extends Digitalus_Db_Table
         return $toUser->save();
     }
 
+    /**
+     * This function checks if a user already exists
+     *
+     * @param  string  $userName  The username to check for
+     * @return boolean
+     */
+    public function userExists($userName)
+    {
+        $userName = strtolower($userName);
+
+        $where[] = $this->_db->quoteInto('LOWER(username) = ?', $userName);
+        $result = $this->fetchAll($where, null, 1);
+        if ($result->count() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * This function checks if a user has already been activated
+     *
+     * @param  int $userId The user id to check
+     * @return boolean
+     */
+    public function isActive($userId)
+    {
+        $where[] = $this->_db->quoteInto('id = ?', $userId, 'INTEGER');
+        $where[] = $this->_db->quoteInto('active = ?', 1, 'TINYINT');
+        $result = $this->fetchAll($where, null, 1);
+        if ($result->count() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * This function activates a user
+     *
+     * @param  int $userId The user id to activate
+     * @return int Number of rows updated
+     */
+    public function activate($userId)
+    {
+        $data['active'] = 1;
+        $where[] = $this->_db->quoteInto('id = ?', $userId, 'INTEGER');
+        return $this->update($data, $where);
+    }
+
+    /**
+     * This function deactivates a user
+     *
+     * @param  int $userId The user id to deactivate
+     * @return int Number of rows updated
+     */
+    public function deactivate($userId)
+    {
+        $data['active'] = 0;
+        $where[] = $this->_db->quoteInto('id = ?', $userId, 'INTEGER');
+        return $this->update($data, $where);
+    }
 }
