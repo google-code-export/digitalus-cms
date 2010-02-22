@@ -14,7 +14,7 @@
  *
  * @category   Digitalus CMS
  * @package    Digitalus_CMS_Models
- * @copyright  Copyright (c) 2007 - 2008,  Digitalus Media USA (digitalus-media.com)
+ * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
  * @version    $Id: ErrorLog.php Sun Dec 23 11:00:10 EST 2007 11:00:10 forrest lyman $
  */
