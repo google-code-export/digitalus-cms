@@ -15,7 +15,7 @@
  * @author      Lowtower - lowtower@gmx.de
  * @category    Digitalus CMS
  * @package     Digitalus_Core_Library
- * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id$
  * @link        http://www.digitaluscms.com
@@ -28,10 +28,10 @@
 require_once 'Digitalus/Command/Abstract.php';
 
 /**
- * Update v1.9 helper
+ * Update v1.10 helper
  *
  * @author      Lowtower - lowtower@gmx.de
- * @copyright   Copyright (c) 2007 - 2009,  Digitalus Media USA (digitalus-media.com)
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
