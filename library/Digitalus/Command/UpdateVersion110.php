@@ -23,11 +23,6 @@
  */
 
 /**
- * @see Digitalus_Command_Abstract
- */
-require_once 'Digitalus/Command/Abstract.php';
-
-/**
  * Update v1.10 helper
  *
  * @author      Lowtower - lowtower@gmx.de
@@ -85,6 +80,8 @@ class Digitalus_Command_UpdateVersion110 extends Digitalus_Command_Abstract
 
     private function _updateTemplateReferences()
     {
+        // change type of content_nodes.content to 'MEDIUMTEXT'''
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('content_nodes') . "` CHANGE `content` `content` MEDIUMTEXT");
         // insert field 'username' and give user(1) the username 'administrator'
         $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ADD `username` VARCHAR(20) NOT NULL AFTER `id`");
         $this->_db->query("UPDATE `" . Digitalus_Db_Table::getTableName('users') . "` SET `username` = 'administrator' WHERE `id` = 1");
