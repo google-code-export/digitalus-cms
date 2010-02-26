@@ -23,9 +23,17 @@ class Digitalus_Language
         $key = self::LANGUAGE_KEY;
         $currentLang = $session->$key;
         if (empty($currentLang)) {
-            $config = Zend_Registry::get('config');
-            $locale = $config->language->defaultLocale;
-            $currentLang = $locale;
+            $siteSettings = new Model_SiteSettings;
+            $currentLang = $siteSettings->get('default_language');
+            if (empty($currentLang)) {
+                $config = Zend_Registry::get('config');
+                $currentLang = $config->language->defaultLocale;
+            }
+            if (empty($currentLang)) {
+                $locale = new Zend_Locale();
+                $currentLang = $locale->getLanguage();
+            }
+            self::setLanguage($currentLang);
         }
         return $currentLang;
     }
@@ -42,6 +50,6 @@ class Digitalus_Language
 
     public static function getSession()
     {
-        return new Zend_Session_Namespace('currentLanguage');
+        return new Zend_Session_Namespace(self::SESSION_KEY);
     }
 }
