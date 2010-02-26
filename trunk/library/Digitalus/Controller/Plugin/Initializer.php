@@ -105,42 +105,42 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
         // Get site config
         $config = Zend_Registry::get('config');
 
-        $language = $settings->get('admin_language');
-        if (!empty($language)) {
-            $key = $language;
-        } else {
-            $key = $config->language->defaultLocale;
-        }
 
         $languageFiles = $config->language->translations->toArray();
-#        if (!$this->_request->isXmlHttpRequest()) {
-            // Get cache object
-            $cache = Zend_Registry::get('cache');
-            Zend_Translate::setCache($cache);
 
-            $module     = $this->_request->getModuleName();
-            $controller = $this->_request->getControllerName();
-            // Add translation file depending on current module ('public' or 'admin')
-            if ('public' == $module || 'public' == $controller) {
-                $end = 'front';
-            } else {
-                $end = 'back';
-            }
-            $adapter = new Zend_Translate(
-                'csv',
-                $config->language->path . '/' . $end . '/' . $languageFiles[$key] . '.' . $end . '.csv',
-                $key,
-                array('disableNotices' => true)
-            );
-            Zend_Registry::set('Zend_Translate', $adapter);
+        // Get cache object
+        $cache = Zend_Registry::get('cache');
+        Zend_Translate::setCache($cache);
+        $module     = $this->_request->getModuleName();
+        $controller = $this->_request->getControllerName();
+        // Add translation file depending on current module ('public' or 'admin')
+        $end = 'back';
+        if ('public' == $module || 'public' == $controller) {
+            $end = 'front';
+            $key = Digitalus_Language::getLanguage();
+        } else {
+            $key = Digitalus_Language::getAdminLanguage();
+        }
+        // always load english translation file
+        $adapter = new Zend_Translate(
+            'csv',
+            $csvPath = $config->language->path . '/' . $end . '/' . $languageFiles['en'] . '.' . $end . '.csv',
+            $key,
+            array('disableNotices' => true)
+        );
+        Zend_Registry::set('Zend_Translate', $adapter);
 
-            // Module translations (are NOT separated into  'back' and 'front')
-            if ($modules = Digitalus_Module::getModules()) {
-                foreach ($modules as $module) {
-                    $this->_addTranslation(APPLICATION_PATH . '/modules/' . $module . '/data/language/' . $languageFiles[$key] . '.csv', $key);
-                }
+        $csvPath = $config->language->path . '/' . $end . '/' . $languageFiles[$key] . '.' . $end . '.csv';
+        if (is_file($csvPath) && 'en' != $key) {
+                $this->_addTranslation($csvPath, $key);
+        }
+
+        // Module translations (are NOT separated into  'back' and 'front')
+        if ($modules = Digitalus_Module::getModules()) {
+            foreach ($modules as $module) {
+                $this->_addTranslation(APPLICATION_PATH . '/modules/' . $module . '/data/language/' . $languageFiles[$key] . '.csv', $key);
             }
- #       }
+        }
         return $adapter;
     }
 
