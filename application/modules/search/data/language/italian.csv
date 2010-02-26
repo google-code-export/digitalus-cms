@@ -2,21 +2,21 @@
 # ITALIAN
 # ----- search module -----
 "Digitalus CMS";"Digitalus CMS"
-"Site Search";
+"Site Search";"Cerca nel sito"
 # admin section -- Index --
-"Search";
-"The search index was rebuilt successfully!";
-"Rebuild search";
-"Search Module";
-"The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.";
-"Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.";
-"The search form does not have any user defined settings.";
-"Search Site";
-"Keywords";
-"Your search for";
-"returned";
-"results.";
-"did not return any results.";
-"Please provide a keyword to search for!";
-"For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";
+"Search";"Cerca"
+"The search index was rebuilt successfully!";"L'indice di ricerca è stato ricostruito con successo!"
+"Rebuild search";"Ricostruisci ricerca"
+"Search Module";"Modulo di ricerca"
+"The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.";"Il modulo di ricerca utilizza Lucene per creare gestire ed interrogare indici di ricerca sul tuo sito."
+"Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.";"Ricostruire l'indice di ricerca è un'operazione molto pesante per il processore, quindi Digitalus non lo ricostruisce ogni volta che aggiorni il tuo sito. Quando aggiorni il sito apri questo modulo e clicca “Ricostruisci ricerca“."
+"The search form does not have any user defined settings.";"Questo modulo di ricerca non ha alcuna impostazione definita dall'utente."
+"Search Site";"Cerca nel sito"
+"Keywords";"Parole chiave"
+"Your search for";"La tua ricerca di"
+"returned";"ha riportato"
+"results.";"risultati."
+"did not return any results.";"non ha riportato alcun risultato."
+"Please provide a keyword to search for!";"Inserire una parola chiave da cercare!"
+"For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";"Perché il modulo di ricerca funzioni correttamente, la directory dell'indice deve essere scrivibile, controlla i permessi della seguente directory:"
 # END

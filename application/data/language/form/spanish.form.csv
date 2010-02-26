@@ -1,5 +1,5 @@
-# Language File – ZEND_FORM";"
-# SPANISH";"
+# Language File – ZEND_FORM
+# SPANISH
 # Zend – Validate –
 "Digitalus CMS"
 "'%hostname%' does not appear to have a valid MX record for the email address '%value%'";
