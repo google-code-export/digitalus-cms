@@ -37,7 +37,6 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
- * @uses        Model_SiteSettings
  */
 class Digitalus_View_Helper_Internationalization_GetAdminLanguage extends Zend_View_Helper_Abstract
 {
@@ -48,7 +47,6 @@ class Digitalus_View_Helper_Internationalization_GetAdminLanguage extends Zend_V
      */
     public function getAdminLanguage()
     {
-        $siteSettings = new Model_SiteSettings;
-        return $siteSettings->get('admin_language');
+        return Digitalus_Language::getAdminLanguage();
     }
 }

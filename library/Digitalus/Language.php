@@ -38,6 +38,24 @@ class Digitalus_Language
         return $currentLang;
     }
 
+    public static function getAdminLanguage()
+    {
+        $siteSettings = new Model_SiteSettings;
+        $adminLang = $siteSettings->get('admin_language');
+        if (empty($adminLang)) {
+            $config = Zend_Registry::get('config');
+            $adminLang = $config->language->defaultLocale;
+        }
+        if (empty($adminLang)) {
+            $locale = new Zend_Locale();
+            $adminLang = $locale->getLanguage();
+        }
+        if (empty($adminLang)) {
+            throw new Digitalus_Language_Exception('No administrator language found!');
+        }
+        return $adminLang;
+    }
+
     public static function getFullName($locale)
     {
         $config = Zend_Registry::get('config');
