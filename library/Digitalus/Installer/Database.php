@@ -104,11 +104,13 @@ class Digitalus_Installer_Database
     public function insertAdminUser($firstName, $lastName, $username, $password)
     {
         $data = array(
+            'active'     => 1,
+            'username'   => 'administrator'
             'first_name' => $firstName,
             'last_name'  => $lastName,
             'email'      => $username,
             'password'   => md5($password),
-            'role'       => 'superadmin'
+            'role'       => 'superadmin',
         );
         $table = 'users';
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
@@ -125,7 +127,7 @@ class Digitalus_Installer_Database
               `node` varchar(100) default null,
               `version` varchar(100) default null,
               `content_type` varchar(100) default null,
-              `content` text,
+              `content` mediumtext,
               PRIMARY KEY  (`id`),
               KEY `NODE_TO_PAGE` (`parent_id`),
               KEY `NODE_KEYS` (`node`)
@@ -218,6 +220,8 @@ class Digitalus_Installer_Database
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
         $sql = "CREATE TABLE `" . $table . "` (
           `id` int(10) unsigned NOT null auto_increment,
+          `active` TINYINT(1) NOT NULL DEFAULT '0',
+          `username` VARCHAR(20) NOT null,
           `first_name` varchar(45) NOT null default '',
           `last_name` varchar(45) NOT null default '',
           `email` varchar(100) NOT null default '',
