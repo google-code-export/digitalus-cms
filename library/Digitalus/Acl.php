@@ -30,9 +30,9 @@ class Digitalus_Acl extends Zend_Acl
      */
     public function __construct()
     {
-        $this->addRole(new Zend_Acl_Role('guest'));
-        $this->addRole(new Zend_Acl_Role('admin'));
         $this->addRole(new Zend_Acl_Role('superadmin'));
+        $this->addRole(new Zend_Acl_Role('admin'));
+        $this->addRole(new Zend_Acl_Role('guest'));
 
         $this->loadResources();
         $this->loadCurrentUsersPermissions();
