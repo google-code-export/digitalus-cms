@@ -1,0 +1,40 @@
+# Language File – MOD_BLOG
+# HUNGARIAN
+# ----- blog module -----
+"Digitalus CMS";
+"Contact Form";"Kapcsolat űrlap";
+# admin section -- Blog --
+"Modules";"Modulok";
+"Blog";"Blog bejegyzés";
+"Update Blog";"Blog frissítése";
+"Add New Post";"Új bejegyzés";
+"Delete";"Töröl";
+"Blog Posts";"Blogbejegyzések";
+"This blog does not have any posts";"A blogban nincs bejezés";
+"Blog Name";"Blog neve";
+# admin section -- Index --
+"Create Blog";"Blog létrehozása";
+"My Blogs";"Blogjaim";
+"You do not have any blogs currently";"Még nincs bloggja";
+"Blog Module";"Blog modul";
+"The blog module enables you to publish multiple blogs on your site.";"A blog modulban – bloggolhatsz";
+"Create a new blog";"Új blogg létrehozása";
+# admin section -- Post --
+"Update Post";"Bejegyzés frissítése";
+"Blog Post";"Blog bejegyzés";
+"Back to";"Vissza";
+"blog";"blog";
+"Title";"Cím";
+"Teaser";"Csuszka";
+"Content";"Tartalom";
+# admin section -- Public --
+"Select the blog";"Válassza ki a blogot";
+"Current Blogs";"Aktális blog";
+"Update Post";"Bejegyzés frissítése";
+"There are no blogs to view!";"Nincs megtekinthető blog";
+"Written by";"Szerző";
+"on";"Bejegyzés frissítése";
+"View All";"Mindet megtekint";
+"Blog Name";"Blog neve";
+"Title";"Cím";
+# END

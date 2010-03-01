@@ -1,0 +1,46 @@
+# Language File – MOD_SLIDESHOW
+# HUNGARIAN
+# ----- slideshow module -----
+"Digitalus CMS"
+"Slideshow";"Diavetítő"
+# admin section -- Index --
+"Create Slideshow";"Diasorozat létrehozása"
+"Current Shows";"Meglévő sorozatok"
+"You do not have any slideshows currently";"Még nincs diasotrozat"
+"Slideshow Module";"Diavetítő modul"
+"About";"További infók"
+"The slideshow module enables you to publish slideshows on your site.";"A diavatítő modullal diasorozatokat helyezhet el oldalán"
+"These slideshows consist of slides which each contain a picture, a title, and description. You can sort these slides to display in any order.";"A diák 1-1 képből, címből és leírásból állnak, ezek alapán rendezhetőek"
+"Create a new slideshow";"Új diasorozat léterhozása"
+"Select the slideshow";"Válassza ki a diasorozatot"
+"image";"kép"
+"Slide";"Dia"
+"of";"ból/ből"
+# admin section -- Show --
+"Update Slideshow";"Diasorozat frissítése"
+"Add New Slide";"Uj dia hozzáadása"
+"Current Slides";"Aktuális diák"
+"Reorder Slides";"Diák sorrendjének módosítása"
+"This show does not have any slides";
+"Update Show";"Sorozat módosítása"
+"Slideshow Name";"Sorozat neve"
+"Description";"Leírás"
+# admin section -- Slide --
+"Update Slide";"Dia módosítása"
+"Slide Options";"dia beállításai"
+"slideshow";"Diasorozat"
+"Slides";"Diák "
+"To change the order a slide is displayed in click the drag icon next to the item and move the item up or down.";"Egy dia sorrendjének módosításához kattintson a mellette lévő ikonra és mozgassa a diát a kívánt irányba (le/fel)"
+"Then click Done Reordering Slides to save your changes.";"Ezután kattintson a Diák újrarendezése befejezve-re"
+"Done Reordering Slides";"Diák újrarendezése befejezve"
+"Current Image";"Aktuális kép"
+"Image Preview (scaled)";"Kép előnézete"
+"Image";"Kép előnézete"
+"Caption";"Megjegyzés"
+"There are no slideshows to view!";"Nincs megtekinthető diasorozat"
+"Select One";"Válasszon egyet"
+"Title";"Cím"
+"Written by";"Szerző"
+"on";"be"
+"View All";"Az összes megtekintése"
+# END
