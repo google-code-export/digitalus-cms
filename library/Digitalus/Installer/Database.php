@@ -105,7 +105,7 @@ class Digitalus_Installer_Database
     {
         $data = array(
             'active'     => 1,
-            'username'   => 'administrator'
+            'username'   => 'administrator',
             'first_name' => $firstName,
             'last_name'  => $lastName,
             'email'      => $username,
