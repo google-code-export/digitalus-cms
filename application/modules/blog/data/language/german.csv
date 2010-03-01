@@ -1,40 +1,40 @@
 # Language File – MOD_BLOG
 # GERMAN
 # ----- blog module -----
-"Digitalus CMS";"Digitalus CMS";
-"Contact Form";"Kontakt Formular";
+"Digitalus CMS";"Digitalus CMS"
+"Contact Form";"Kontakt Formular"
 # admin section -- Blog --
-"Modules";"Module";
-"Blog";"Tagebuch";
-"Update Blog";"Tagebuch aktualisieren";
-"Add New Post";"Füge neuen Eintrag hinzu";
-"Delete";"Löschen";
-"Blog Posts";"Tagebuch Einträge";
-"This blog does not have any posts";"Dieses Tagebuch enthält keine Einträge";
-"Blog Name";"Tagebuch Name";
+"Modules";"Module"
+"Blog";"Tagebuch"
+"Update Blog";"Tagebuch aktualisieren"
+"Add New Post";"Füge neuen Eintrag hinzu"
+"Delete";"Löschen"
+"Blog Posts";"Tagebuch Einträge"
+"This blog does not have any posts";"Dieses Tagebuch enthält keine Einträge"
+"Blog Name";"Tagebuch Name"
 # admin section -- Index --
-"Create Blog";"Tagebuch erstellen";
-"My Blogs";"Meine Tagebücher";
-"You do not have any blogs currently";"Es gibt momentan keine Tagebücher";
-"Blog Module";"Tagebuch-Modul";
-"The blog module enables you to publish multiple blogs on your site.";"Das Tagebuch-Modul ermöglicht es, mehrere Tagebücher auf Ihren Seiten zu veröffentlichen.";
-"Create a new blog";"Neues Tagebuch erzeugen";
+"Create Blog";"Tagebuch erstellen"
+"My Blogs";"Meine Tagebücher"
+"You do not have any blogs currently";"Es gibt momentan keine Tagebücher"
+"Blog Module";"Tagebuch-Modul"
+"The blog module enables you to publish multiple blogs on your site.";"Das Tagebuch-Modul ermöglicht es, mehrere Tagebücher auf Ihren Seiten zu veröffentlichen."
+"Create a new blog";"Neues Tagebuch erzeugen"
 # admin section -- Post --
-"Update Post";"Eintrag aktualisieren";
-"Blog Post";"Tagebuch Eintrag";
-"Back to";"zurück zu";
-"blog";"Tagebuch";
-"Title";"Titel";
-"Teaser";"Appetithappen";
-"Content";"Inhalt";
+"Update Post";"Eintrag aktualisieren"
+"Blog Post";"Tagebuch Eintrag"
+"Back to";"zurück zu"
+"blog";"Tagebuch"
+"Title";"Titel"
+"Teaser";"Appetithappen"
+"Content";"Inhalt"
 # admin section -- Public --
-"Select the blog";"Wähle Tagebuch aus";
-"Current Blogs";"Aktuelle Tagebücher";
-"Update Post";"Eintrag aktualisieren";
-"There are no blogs to view!";"Es gibt momentan keine Tagebücher";
-"Written by";"Geschrieben von";
-"on";"am";
-"View All";"Alle ansehen";
-"Blog Name";"Name des Tagebuchs";
-"Title";"Titel";
+"Select the blog";"Wähle Tagebuch aus"
+"Current Blogs";"Aktuelle Tagebücher"
+"Update Post";"Eintrag aktualisieren"
+"There are no blogs to view!";"Es gibt momentan keine Tagebücher"
+"Written by";"Geschrieben von"
+"on";"am"
+"View All";"Alle ansehen"
+"Blog Name";"Name des Tagebuchs"
+"Title";"Titel"
 # END

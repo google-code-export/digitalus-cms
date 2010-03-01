@@ -1,40 +1,40 @@
 # Language File – MOD_BLOG
 # ITALIAN
 # ----- blog module -----
-"Digitalus CMS";"Digitalus CMS";
-"Contact Form";"Modulo di contatto";
+"Digitalus CMS";"Digitalus CMS"
+"Contact Form";"Modulo di contatto"
 # admin section -- Blog --
-"Modules";"Moduli";
-"Blog";"Blog";
-"Update Blog";"Aggiorna blog";
-"Add New Post";"Aggiungi un nuovo post";
-"Delete";"Elimina";
-"Blog Posts";"Post del blog";
-"This blog does not have any posts";"Questo blog non ha nessun post";
-"Blog Name";"Nome del blog";
+"Modules";"Moduli"
+"Blog";"Blog"
+"Update Blog";"Aggiorna blog"
+"Add New Post";"Aggiungi un nuovo post"
+"Delete";"Elimina"
+"Blog Posts";"Post del blog"
+"This blog does not have any posts";"Questo blog non ha nessun post"
+"Blog Name";"Nome del blog"
 # admin section -- Index --
-"Create Blog";"Crea blog";
-"My Blogs";"I miei blog";
-"You do not have any blogs currently";"Non hai nessun blog attualmente";
-"Blog Module";"Modulo blog";
-"The blog module enables you to publish multiple blogs on your site.";"Il modulo blog ti permette di pubblicare blog multipli sul tuo sito.";
-"Create a new blog";;
+"Create Blog";"Crea blog"
+"My Blogs";"I miei blog"
+"You do not have any blogs currently";"Non hai nessun blog attualmente"
+"Blog Module";"Modulo blog"
+"The blog module enables you to publish multiple blogs on your site.";"Il modulo blog ti permette di pubblicare blog multipli sul tuo sito."
+"Create a new blog";
 # admin section -- Post --
-"Update Post";"Aggiorna post";
-"Blog Post";"Post del blog";
-"Back to";"Torna a ";
-"blog";"blog";
-"Title";"Titolo";
-"Teaser";;
-"Content";"Contenuto";
+"Update Post";"Aggiorna post"
+"Blog Post";"Post del blog"
+"Back to";"Torna a "
+"blog";"blog"
+"Title";"Titolo"
+"Teaser";
+"Content";"Contenuto"
 # admin section -- Public --
-"Select the blog";"Seleziona il blog";
-"Current Blogs";"Blog correnti";
-"Update Post";"Aggiorna post";
-"There are no blogs to view!";"Non ci sono blog da visualizzare!";
-"Written by";"Scritto da";
-"on";;
-"View All";"Visualizza tutti";
-"Blog Name";"Nome del blog";
-"Title";"Titolo";
+"Select the blog";"Seleziona il blog"
+"Current Blogs";"Blog correnti"
+"Update Post";"Aggiorna post"
+"There are no blogs to view!";"Non ci sono blog da visualizzare!"
+"Written by";"Scritto da"
+"on";
+"View All";"Visualizza tutti"
+"Blog Name";"Nome del blog"
+"Title";"Titolo"
 # END
