@@ -1,0 +1,31 @@
+# Language File – MOD_CONTACT
+# HUNGARIAN
+# ----- contact module -----
+"Digitalus CMS"
+"Contact Form";"Kapcsolat"
+# admin section – Contact --
+"Contact";"Kapcsolat"
+"Module";"Modul"
+"Options";"Beállítások"
+"The contact module enables you to publish contact forms on your site.";"Kontaktformot az oldalra !"
+"You can set the following options on the contact form:";"A következő elemeket tudja beállítani"
+"Recipient";"Címzett"
+"who you want to receive the messages";"ki kapja az üzenetet"
+"Recipient's email";"címzett email címe"
+"the recipient's email address";"címzett email címe"
+"Your Name";"az Ön neve"
+"Your name is required!";"A nevét meg kell adnia"
+"Your Email";"Az Ön email címe"
+"Invalid email address!";"Hibás email cím"
+"Subject";"Téma"
+"The subject is required!";"A téma megadása kötelező"
+"Message";"Üzenet"
+"The message is required!";"Az üzenet nem lehet üres"
+"Please verify you're a human";"Kérjük igazolja hogy ön húsvér ember"
+"Send Message";"Üzenet küldése"
+"Enter the recipients email:";"címzett email címe"
+"Thanks for contacting us!";"Megkeresésést köszönjük"
+"Your message was successfully sent and we will reply promptly.";"Üzenetét sikeresen elküldtük, hamarosan megkeressük Önt!"
+"New message from";"Új üzenet"
+"Sent on";"Elküldve"
+# END

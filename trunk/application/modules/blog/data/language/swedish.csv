@@ -1,40 +1,40 @@
 # Language File – MOD_BLOG
 # SWEDISH
 # ----- blog module -----
-"Digitalus CMS";"Digitalus CMS"
-"Contact Form";
+"Digitalus CMS";"Digitalus CMS";
+"Contact Form";;
 # admin section -- Blog --
-"Modules";
-"Blog";"Blogg"
-"Update Blog";"Uppdatera Blogg"
-"Add New Post";"Skapa Ny Post"
-"Delete";
-"Blog Posts";"Blogg Poster"
-"This blog does not have any posts";"Den här bloggen har inga poster"
-"Blog Name";
+"Modules";;
+"Blog";"Blogg";
+"Update Blog";"Uppdatera Blogg";
+"Add New Post";"Skapa Ny Post";
+"Delete";;
+"Blog Posts";"Blogg Poster";
+"This blog does not have any posts";"Den här bloggen har inga poster";
+"Blog Name";;
 # admin section -- Index --
-"Create Blog";"Skapa Blogg"
-"My Blogs";
-"You do not have any blogs currently";"Det finns inga bloggar än"
-"Blog Module";"Blogg Modul"
-"The blog module enables you to publish multiple blogs on your site.";"Bloggmodulen ger dig möjlighet att publicera flera bloggar på din webbplats."
-"Create a new blog";"Skapa en ny blogg"
-# admin section -- Post –
-"Update Post";"Uppdatera Post"
-"Blog Post";"Blogg Post"
-"Back to";"Tillbaka till"
-"blog";"blogg"
-"Title";
-"Teaser";
-"Content";
+"Create Blog";"Skapa Blogg";
+"My Blogs";;
+"You do not have any blogs currently";"Det finns inga bloggar än";
+"Blog Module";"Blogg Modul";
+"The blog module enables you to publish multiple blogs on your site.";"Bloggmodulen ger dig möjlighet att publicera flera bloggar på din webbplats.";
+"Create a new blog";"Skapa en ny blogg";
+# admin section -- Post --
+"Update Post";"Uppdatera Post";
+"Blog Post";"Blogg Post";
+"Back to";"Tillbaka till";
+"blog";"blogg";
+"Title";;
+"Teaser";;
+"Content";;
 # admin section -- Public --
-"Select the blog";"Välj blogg"
-"Current Blogs";"Aktuella bloggar"
-"Update Post";"Uppdatera Post"
-"There are no blogs to view!";"Det finns inga bloggar att visa!"
-"Written by";"Skrivet av"
-"on";"på"
-"View All";"Visa alla"
-"Blog Name";"Blogg namn"
-"Title";"Titel"
+"Select the blog";"Välj blogg";
+"Current Blogs";"Aktuella bloggar";
+"Update Post";"Uppdatera Post";
+"There are no blogs to view!";"Det finns inga bloggar att visa!";
+"Written by";"Skrivet av";
+"on";"på";
+"View All";"Visa alla";
+"Blog Name";"Blogg namn";
+"Title";"Titel";
 # END
