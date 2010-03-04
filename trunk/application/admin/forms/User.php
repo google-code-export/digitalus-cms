@@ -34,6 +34,7 @@ require_once 'Digitalus/Form.php';
  * @version     $Id:$
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
+ * @uses        Model_User
  */
 class Admin_Form_User extends Digitalus_Form
 {
@@ -44,72 +45,134 @@ class Admin_Form_User extends Digitalus_Form
      */
     public function init()
     {
-        // create new element
-        $id = $this->createElement('hidden', 'id');
-        // element options
-        $id->setDecorators(array('ViewHelper'));
+        $view = $this->getView();
 
         // create new element
-        $firstName = $this->createElement('text', 'first_name');
-        // element options
-        $firstName->setLabel($this->getView()->getTranslation('First Name'))
-                  ->setRequired(true)
-                  ->setAttrib('size', 40);
-
-        // create new element
-        $lastName = $this->createElement('text', 'last_name');
-        // element options
-        $lastName->setLabel($this->getView()->getTranslation('Last Name'))
-                 ->setRequired(true)
-                 ->setAttrib('size', 40);
-
-        // create new element
-        $email = $this->createElement('text', 'email');
-        // element options
-        $email->setLabel($this->getView()->getTranslation('Email Address'))
-              ->setRequired(true)
-              ->setAttrib('size', 50)
-              ->addValidator('EmailAddress')
-              ->setErrorMessages(array($this->getView()->getTranslation('A valid email address is required')));
-
-        // create new element
-        $openid = $this->createElement('text', 'openid');
-        // element options
-        $openid->setLabel($this->getView()->getTranslation('OpenID'))
-               ->setAttrib('size', 50);
-
-        // create new element
-        $active = $this->createElement('checkbox', 'active');
-        // element options
-        $active->setLabel($this->getView()->getTranslation('Activated'));
-
-        // create new element
-        $adminRole = $this->createElement('select', 'role');
-        // element options
-        $adminRole->setLabel($this->getView()->getTranslation('Admin Role'));
-        $adminRole->addMultiOptions(array(
-            'admin'      => $this->getView()->getTranslation('Site Administrator'),
-            'superadmin' => $this->getView()->getTranslation('Super Administrator')
+        $id = $this->createElement('hidden', 'id', array(
+            'decorators'    => array('ViewHelper')
         ));
 
         // create new element
-        $password = $this->createElement('password', 'password');
-        // element options
-        $password->setLabel($this->getView()->getTranslation('Password'));
-        $password->setRequired(true);
+        $userName = $this->createElement('text', 'username', array(
+            'label'         => $view->getTranslation('Username'),
+            'required'      => true,
+            'filters'       => array('StringTrim'),
+            'validators'    => array(
+                array('NotEmpty', true),
+                array('StringLength', true, array(4, 20)),
+                array('Regex', true, array(
+                    'pattern'  => Model_User::USERNAME_REGEX,
+                    'messages' => array('regexNotMatch' => Model_User::USERNAME_REGEX_NOTMATCH),
+                )),
+            ),
+            'attribs'       => array('size' => 40),
+        ));
 
         // create new element
-        $passwordConfirm = $this->createElement('password', 'password_confirm');
-        // element options
-        $passwordConfirm->setLabel($this->getView()->getTranslation('Confirm Password'))
-                        ->addValidator(new Digitalus_Validate_IdenticalField('password'))
-                        ->setRequired(true);
+        $firstName = $this->createElement('text', 'first_name', array(
+            'label'         => $view->getTranslation('First name'),
+            'required'      => true,
+            'filters'       => array('StringTrim'),
+            'validators'    => array(
+                array('NotEmpty', true),
+                array('StringLength', true, array(4, 40)),
+                array('Regex', true, array(
+                    'pattern'  => Model_User::USERNAME_REGEX,
+                    'messages' => array('regexNotMatch' => Model_User::USERNAME_REGEX_NOTMATCH),
+                )),
+            ),
+            'attribs'       => array('size' => 40),
+        ));
 
-        $submit = $this->createElement('submit', 'submit');
-        $submit->setLabel($this->getView()->getTranslation('Submit'));
+        // create new element
+        $lastName = $this->createElement('text', 'last_name', array(
+            'label'         => $view->getTranslation('Last name'),
+            'required'      => true,
+            'filters'       => array('StringTrim'),
+            'validators'    => array(
+                array('NotEmpty', true),
+                array('StringLength', true, array(4, 40)),
+                array('Regex', true, array(
+                    'pattern'  => Model_User::USERNAME_REGEX,
+                    'messages' => array('regexNotMatch' => Model_User::USERNAME_REGEX_NOTMATCH),
+                )),
+            ),
+            'attribs'       => array('size' => 40),
+        ));
+
+        // create new element
+        $email = $this->createElement('text', 'email', array(
+            'label'         => $view->getTranslation('Email address'),
+            'required'      => true,
+            'filters'       => array('StringTrim'),
+            'validators'    => array('EmailAddress'),
+            'attribs'       => array('size' => 50),
+            'errorMessages' => array('A valid email address is required'),
+        ));
+
+        // create new element
+        $openid = $this->createElement('text', 'openid', array(
+            'label'         => $view->getTranslation('OpenID'),
+            'filters'       => array('StringTrim'),
+            'attribs'       => array('size' => 50),
+            'errorMessages' => array('Please provide a valid OpenId!'),
+        ));
+
+        // create new element
+        $active = $this->createElement('checkbox', 'active', array(
+            'label'         => $view->getTranslation('Activated'),
+        ));
+
+        // create new element
+        $adminRole = $this->createElement('select', 'role', array(
+            'label'         => $view->getTranslation('Admin Role'),
+            'multiOptions'  => array(
+                'admin'      => $view->getTranslation('Site Administrator'),
+                'superadmin' => $view->getTranslation('Super Administrator')
+            ),
+        ));
+
+        // create new element
+        $password = $this->createElement('password', 'password', array(
+            'label'         => $view->getTranslation('Password'),
+            'required'      => true,
+            'filters'       => array('StringTrim'),
+            'attribs'       => array('size' => 50),
+        ));
+
+        // create new element
+        $passwordConfirm = $this->createElement('password', 'password_confirm', array(
+            'label'         => $view->getTranslation('Confirm Password'),
+            'required'      => true,
+            'filters'       => array('StringTrim'),
+            'attribs'       => array('size' => 50),
+            'validators'    => array(
+                array('IdenticalField', true, 'password'),
+            )
+        ));
+
+        $captcha = $this->createElement('captcha', 'captcha', array(
+            'label'         => $view->getTranslation("Please verify you're a human"),
+            'required'      => true,
+            'filters'       => array('StringTrim'),
+            'captcha' => array(
+                'captcha' => 'Figlet',
+                'wordLen' => 6,
+                'timeout' => 300,
+                'height'  => 100,
+                'width'   => 260,
+            ),
+            'errorMessages' => array('Please type in the correct code from the captcha!'),
+        ));
+
+        $submit = $this->createElement('submit', 'submitAdminUserForm', array(
+            'label'         => $view->getTranslation('Submit'),
+            'attribs'       => array('class' => 'submit'),
+        ));
 
         // add the elements to the form
         $this->addElement($id)
+             ->addElement($userName)
              ->addElement($firstName)
              ->addElement($lastName)
              ->addElement($email)
@@ -118,12 +181,13 @@ class Admin_Form_User extends Digitalus_Form
              ->addElement($adminRole)
              ->addElement($password)
              ->addElement($passwordConfirm)
+             ->addElement($captcha)
              ->addElement($submit)
-             ->addDisplayGroup(array('form_instance', 'id', 'first_name', 'last_name',
-                                     'email', 'openid', 'active', 'role', 'update_password',
-                                     'update_password', 'password', 'password_confirm', 'submit'),
+             ->addDisplayGroup(array('form_instance', 'id', 'username', 'first_name', 'last_name',
+                                     'email', 'openid', 'active', 'role',
+                                     'password', 'password_confirm', 'captcha', 'submitAdminUserForm'),
                                      'admin_form',
-                                     array('legend' => $this->getView()->getTranslation('Account Information')));
+                                     array('legend' => $view->getTranslation('Account Information')));
 
         $this->setDecorators(array(
             'FormElements',

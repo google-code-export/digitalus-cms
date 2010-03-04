@@ -34,6 +34,7 @@ require_once 'Digitalus/Form.php';
  * @version     $Id:$
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
+ * @uses        Model_Page
  */
 class Admin_Form_Page extends Digitalus_Form
 {
@@ -44,35 +45,53 @@ class Admin_Form_Page extends Digitalus_Form
      */
     public function init()
     {
-        $id = $this->createElement('hidden', 'id');
-        $id->setDecorators(array('ViewHelper'));
+        $view = $this->getView();
+
+        // create new element
+        $id = $this->createElement('hidden', 'id', array(
+            'decorators'    => array('ViewHelper')
+        ));
         $this->addElement($id);
 
-        $name = $this->createElement('text', 'page_name');
-        $name->addFilter('StripTags')
-             ->setRequired(true)
-             ->setLabel($this->getView()->getTranslation('Page Name'))
-             ->setAttrib('size', 50)
-             ->setOrder(0);
+        // create new element
+        $name = $this->createElement('text', 'page_name', array(
+            'label'         => $view->getTranslation('Page Name'),
+            'required'      => true,
+            'filters'       => array('StringTrim', 'StripTags'),
+            'validators'    => array(
+                array('NotEmpty', true),
+                array('Regex', true, array(
+                    'pattern'  => Model_Page::PAGE_NAME_REGEX,
+                    'messages' => array('regexNotMatch' => Model_Page::PAGE_NAME_REGEX_NOTMATCH),
+                )),
+            ),
+            'attribs'       => array('size' => 50),
+            'order'         => 0,
+        ));
         $this->addElement($name);
 
-        $parentId = $this->createElement('select', 'parent_id');
-        $parentId->setLabel($this->getView()->getTranslation('Parent page') . ':')
-                 ->addMultiOption(0, $this->getView()->getTranslation('Site Root'))
-                 ->setOrder(1);
+        // add options for parent page
+        $multiOptions = array(
+            0 => $view->getTranslation('Site Root')
+        );
         $mdlIndex = new Model_Page();
         $index = $mdlIndex->getIndex(0, 'name');
         if (is_array($index)) {
             foreach ($index as $id => $page) {
-                $parentId->addMultiOption($id, $page);
+                $multiOptions[$id] =  $page;
             }
         }
+        // create new element
+        $parentId = $this->createElement('select', 'parent_id', array(
+            'label'         => $view->getTranslation('Parent page') . ':',
+            'multiOptions'  => $multiOptions,
+            'order'         => 1,
+#            'errorMessages' => array('At least four and a maximum of twenty alphanumeric characters are allowed!'),
+        ));
         $this->addElement($parentId);
 
-        $contentTemplate = $this->createElement('select', 'content_template');
-        $contentTemplate->setLabel($this->getView()->getTranslation('Template') . ':')
-                        ->setOrder(2);
-
+        // add options for template
+        $multiOptions = array();
         $templateConfig = Zend_Registry::get('config')->template;
         $templates = Digitalus_Filesystem_Dir::getDirectories(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public');
         foreach ($templates as $template) {
@@ -80,29 +99,45 @@ class Admin_Form_Page extends Digitalus_Form
             if (is_array($designs)) {
                 foreach ($designs as $design) {
                     $design = Digitalus_Toolbox_Regex::stripFileExtension($design);
-                    $contentTemplate->addMultiOption($template . '_' . $design, $this->getView()->getTranslation($template) . ' / ' . $this->getView()->getTranslation($design));
+                    $multiOptions[$template . '_' . $design] = $view->getTranslation($template) . ' / ' . $view->getTranslation($design);
                 }
             }
         }
+        // create new element
+        $contentTemplate = $this->createElement('select', 'content_template', array(
+            'label'         => $view->getTranslation('Template') . ':',
+            'multiOptions'  => $multiOptions,
+            'order'         => 2,
+        ));
         $this->addElement($contentTemplate);
 
-        $continue = $this->createElement('checkbox', 'continue_adding_pages');
-        $continue->setLabel($this->getView()->getTranslation('Continue adding pages') . '?')
-                 ->setOrder(3);
+        // create new element
+        $continue = $this->createElement('checkbox', 'continue_adding_pages', array(
+            'label'         => $view->getTranslation('Continue adding pages') . '?',
+            'order'         => 3,
+        ));
         $this->addElement($continue);
 
-        $showOnMenu = $this->createElement('checkbox', 'show_on_menu');
-        $showOnMenu->setLabel($this->getView()->getTranslation('Show Page on menu') . '?')
-                ->setOrder(4);
+        // create new element
+        $showOnMenu = $this->createElement('checkbox', 'show_on_menu', array(
+            'label'         => $view->getTranslation('Show Page on menu') . '?',
+            'order'         => 4,
+        ));
         $this->addElement($showOnMenu);
 
-        $publish = $this->createElement('checkbox', 'publish_pages');
-        $publish->setLabel($this->getView()->getTranslation('Publish page instantly') . '?')
-                ->setOrder(5);
+        // create new element
+        $publish = $this->createElement('checkbox', 'publish_pages', array(
+            'label'         => $view->getTranslation('Publish page instantly') . '?',
+            'order'         => 5,
+        ));
         $this->addElement($publish);
 
-        $submit = $this->createElement('submit', $this->getView()->getTranslation('Submit'));
-        $submit->setOrder(1000);
+        // create new element
+        $submit = $this->createElement('submit', 'submitPageForm', array(
+            'label'         => $view->getTranslation('Submit'),
+            'attribs'       => array('class' => 'submit'),
+            'order'         => 1000,
+        ));
         $this->addElement($submit);
     }
 }
