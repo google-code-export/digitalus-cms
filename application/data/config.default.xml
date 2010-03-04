@@ -77,7 +77,7 @@
             </zip>
         </filetypes>
         <language>
-          <path>./application/data/language</path>
+          <path>./application/data/languages</path>
           <defaultLocale>en</defaultLocale>
           <translations>
               <en>english</en>
