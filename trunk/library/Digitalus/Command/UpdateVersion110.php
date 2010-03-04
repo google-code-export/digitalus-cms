@@ -80,11 +80,20 @@ class Digitalus_Command_UpdateVersion110 extends Digitalus_Command_Abstract
 
     private function _updateTemplateReferences()
     {
-        // change type of content_nodes.content to 'MEDIUMTEXT'''
+        // change type of pages.publish_level, pages.is_home_page and pages.show_on_menu to TINYINT
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('pages') . "`"
+                         . " CHANGE `publish_level` `publish_level` TINYINT(2) NULL DEFAULT NULL,"
+                         . " CHANGE `is_home_page`  `is_home_page`  TINYINT(1) NULL DEFAULT NULL,"
+                         . " CHANGE `show_on_menu`  `show_on_menu`  TINYINT(1) NULL DEFAULT NULL");
+        // change type of content_nodes.content to 'MEDIUMTEXT'
         $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('content_nodes') . "` CHANGE `content` `content` MEDIUMTEXT");
-        // insert field 'username' and give user(1) the username 'administrator'
-        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ADD `username` VARCHAR(20) NOT NULL AFTER `id`");
-        $this->_db->query("UPDATE `" . Digitalus_Db_Table::getTableName('users') . "` SET `username` = 'administrator' WHERE `id` = 1");
+        // change type tables to InnoDB
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('traffic_log') . "` ENGINE=InnoDB");
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ENGINE=InnoDB");
+        // insert field 'username', copy 'email' to 'username' and give user(1) the username 'administrator'
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ADD `username` VARCHAR(30) NOT NULL AFTER `id`");
+        $this->_db->query("UPDATE `" . Digitalus_Db_Table::getTableName('users') . "` SET `username` = `email`");
+        $this->_db->query("UPDATE `" . Digitalus_Db_Table::getTableName('users') . "` SET `username` = 'administrator' WHERE `id` = 1 AND `role` = 'superadmin'");
         // insert field 'active' and set all existing users active
         $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ADD `active` TINYINT(1) NOT NULL DEFAULT '0' AFTER `id`");
         $this->_db->query("UPDATE `" . Digitalus_Db_Table::getTableName('users') . "` SET `active` = '1'");
