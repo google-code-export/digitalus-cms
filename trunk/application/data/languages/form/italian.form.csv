@@ -1,6 +1,6 @@
-# Language File – ZEND_FORM
+# Language File -- ZEND_FORM
 # ITALIAN
-# Zend – Validate –
+# Zend -- Validate --
 "Digitalus CMS";"Digitalus CMS"
 "'%hostname%' does not appear to have a valid MX record for the email address '%value%'";
 "'%hostname%' is not a valid hostname for email address '%value%'";
@@ -8,16 +8,16 @@
 "'%localPart%' not matched against dot-atom format";
 "'%localPart%' not matched against quoted-string format";
 "'%value%' appears to be a DNS hostname but cannot extract TLD part";
-"'%value%' appears to be a DNS hostname but cannot match TLD against known list";
 "'%value%' appears to be a DNS hostname but cannot match against hostname schema for TLD '%tld%'";
+"'%value%' appears to be a DNS hostname but cannot match TLD against known list";
 "'%value%' appears to be a DNS hostname but contains a dash (-) in an invalid position";
 "'%value%' appears to be a DNS hostname but the given punycode notation cannot be decoded";
 "'%value%' appears to be a local network name but local network names are not allowed";
 "'%value%' appears to be an IP address, but IP addresses are not allowed";
 "'%value%' contains not only digit characters";
 "'%value%' does not appear to be a float";
-"'%value%' does not appear to be a valid IP address";
 "'%value%' does not appear to be a valid date";
+"'%value%' does not appear to be a valid IP address";
 "'%value%' does not appear to be a valid local network name";
 "'%value%' does not appear to be an integer";
 "'%value%' does not fit given date format";
@@ -85,4 +85,58 @@
 "Too much files, maximum '%max%' are allowed but '%count%' are given";
 "Too much words, maximum '%max%' are allowed but '%count%' were counted";
 "Unknown error while uploading the file '%value%'";
+"A crc32 hash could not be evaluated for the given file";
+"A hash could not be evaluated for the given file";
+"A md5 hash could not be evaluated for the given file";
+"A sha1 hash could not be evaluated for the given file";
+"All files in sum should have a minimum size of '%min%' but '%size%' were detected";
+"Failure within the callback, exception returned";
+"File '%value%' can not be read";
+"File '%value%' can't be written";
+"File '%value%' could not be found";
+"File '%value%' does not exist";
+"File '%value%' does not match the given crc32 hashes";
+"File '%value%' does not match the given hashes";
+"File '%value%' does not match the given md5 hashes";
+"File '%value%' does not match the given sha1 hashes";
+"File '%value%' exceeds the defined form size";
+"File '%value%' exceeds the defined ini size";
+"File '%value%' exists";
+"File '%value%' has a false extension";
+"File '%value%' has a false mimetype of '%type%'";
+"File '%value%' is no image, '%type%' detected";
+"File '%value%' is not compressed, '%type%' detected";
+"File '%value%' was illegally uploaded. This could be a possible attack";
+"File '%value%' was not found";
+"File '%value%' was not uploaded";
+"File '%value%' was only partially uploaded";
+"Invalid type given, value should be a string";
+"Invalid type given, value should be float, string, array, boolean or integer";
+"Invalid type given, value should be float, string, or integer";
+"Invalid type given, value should be string or integer";
+"Invalid type given, value should be string";
+"Invalid type given, value should be string, integer or float";
+"Invalid type given, value should be string, integer, array or Zend_Date";
+"Luhn algorithm (mod-10 checksum) failed on '%value%'";
+"Maximum allowed height for image '%value%' should be '%maxheight%' but '%height%' detected";
+"Maximum allowed size for file '%value%' is '%max%' but '%size%' detected";
+"Maximum allowed width for image '%value%' should be '%maxwidth%' but '%width%' detected";
+"Minimum expected height for image '%value%' should be '%minheight%' but '%height%' detected";
+"Minimum expected size for file '%value%' is '%min%' but '%size%' detected";
+"Minimum expected width for image '%value%' should be '%minwidth%' but '%width%' detected";
+"No temporary directory was found for file '%value%'";
+"One or more files can not be read";
+"The mimetype of file '%value%' could not be detected";
+"The mimetype of file '%value%' could not been detected";
+"The service returned a failure while validating '%value%'";
+"The size of image '%value%' could not be detected";
+"The token '%token%' does not match the given token '%value%'";
+"Too few files, minimum '%min%' are expected but '%count%' are given";
+"Too less words, minimum '%min%' are expected but '%count%' were counted";
+"Too many files, maximum '%max%' are allowed but '%count%' are given";
+"Too much words, maximum '%max%' are allowed but '%count%' were counted";
+"Unknown country within the IBAN '%value%'";
+"Unknown error while uploading file '%value%'";
+"Validation of '%value%' has been failed by the service";
+"Value is required and can't be empty";
 # END
