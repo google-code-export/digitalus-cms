@@ -8,7 +8,7 @@ class Digitalus_Module_Property
     {
         $front = Zend_Controller_Front::getInstance();
         $modules = $front->getParam('cmsModules');
-        $filepath = $front->getParam("pathToModules");
+        $filepath = $front->getParam('pathToModules');
 
         if (isset($modules[$module])) {
             $propertiesFile = $filepath . '/' . $modules[$module] . '/properties.xml';

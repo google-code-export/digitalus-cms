@@ -1,10 +1,10 @@
-<?php
-$this->placeholder('optionsHeadline')->set($this->getTranslation('My Pages'));
-if ($this->pages) {
-    ?>
-    <ul class="padding-10">
-    <?php foreach ($this->pages as $page) { ?>
-        <li class="page"><a href="<?php echo $this->getBaseUrl();?>/admin/page/open/id/<?php echo $page->id;?>" title="<?php echo $this->RenderDate($page->create_date);?>"><?php echo $page->title;?></a></li>
-    <?php } ?>
-    </ul>
-<?php } ?>
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('My Pages'));
+
+$mdlPage = new Model_Page();
+$list = $this->renderPublishedPagesList(Model_Page::UNPUBLISH_ID);
+if ($list != null) {
+    echo '<p>'
+           . $this->getTranslation('The following pages have not been published yet!')
+           . $list
+       . '</p>';
+}?>

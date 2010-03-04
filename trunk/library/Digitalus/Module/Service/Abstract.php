@@ -6,7 +6,7 @@ abstract class Digitalus_Module_Service_Abstract
     {
         $this->_response = new Digitalus_Module_Service_Response();
     }
-    public function getResponse ($asXml = false)
+    public function getResponse($asXml = false)
     {
         if ($asXml === true) {
             return $this->_response->asXml();

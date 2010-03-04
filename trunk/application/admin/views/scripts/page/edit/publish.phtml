@@ -6,11 +6,6 @@ $radioOptions = array(
 );
 
 $mdlPage = new Model_Page();
-$list = $this->renderPublishedPagesList(Model_Page::UNPUBLISH_ID);
-if ($list != null) {
-    echo '<p>' . $this->getTranslation('The following pages have not been published yet!') . '</p>';
-    echo $list;
-}
 
 echo '<p>' . $this->getTranslation('Change the status of this page.') . '</p>';
 
