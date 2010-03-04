@@ -108,7 +108,10 @@ class Digitalus_Menu_Item
         if (isset($class) && !empty($class)) {
             $class = ' class="' . $class . '"';
         }
-        $cleanLink = Digitalus_Toolbox_String::addHyphens($this->link);
+#        $cleanLink = Digitalus_Toolbox_String::addHyphens($this->link);
+        $cleanLink = str_replace(' ', '_', trim($this->link));
+
+
         $front = Zend_Controller_Front::getInstance();
         $baseUrl = $front->getBaseUrl();
         if (isset($currentId) && !empty($currentId) && $this->isSelected($ignoreParents)) {

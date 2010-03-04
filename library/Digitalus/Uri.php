@@ -30,7 +30,7 @@ class Digitalus_Uri
      *
      * @var string
      */
-    const REGISTRY_KEY = "Digitalus_URI";
+    const REGISTRY_KEY = 'Digitalus_URI';
     protected $_uri;
     protected $_params;
     protected $_base;
@@ -109,13 +109,14 @@ class Digitalus_Uri
                 $this->_params = Digitalus_Toolbox_Array::makeHashFromArray($splitPaths[1]);
             }
         }
-        return Digitalus_Toolbox_String::stripHyphens($uri);
+#        return Digitalus_Toolbox_String::stripHyphens($uri);
+        return str_replace(' ', '_', trim($uri));
     }
 
     public function getParams()
     {
         if (is_array($this->_params)) {
-             return $this->_params;
+            return $this->_params;
         }
         return false;
     }
