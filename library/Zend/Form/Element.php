@@ -2068,7 +2068,7 @@ class Zend_Form_Element implements Zend_Validate_Interface
         }
 
         $messages = false;
-        if (isset($validator['options']['messages'])) {
+        if (is_array($validator['options']) && isset($validator['options']['messages'])) {
             $messages = $validator['options']['messages'];
             unset($validator['options']['messages']);
         }

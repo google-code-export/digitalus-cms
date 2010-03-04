@@ -9,6 +9,9 @@ class Model_Page extends Digitalus_Db_Table
     protected $_defaultPageName = 'New Page';
     protected $_ignoredFields = array('update', 'version'); //these are the fields that are not saved as nodes
 
+    const PAGE_NAME_REGEX = '/^[a-zA-Z0-9- ]*$/';
+    const PAGE_NAME_REGEX_NOTMATCH = 'Please only use alphanumeric characters, hyphens and empty space!';
+
     const PUBLISH_ID   =  1;
     const UNPUBLISH_ID = 11;
     const ARCHIVE_ID   = 21;
@@ -783,7 +786,7 @@ class Model_Page extends Digitalus_Db_Table
     private function _getPageByLabel($label, $parent = 0)
     {
         if ($label != 'p') {
-            $where[] = $this->_db->quoteInto('(label = ? OR name = ?)', $label);
+            $where[] = $this->_db->quoteInto('(label = ? OR name = ?)', str_replace('_', ' ' , trim($label)));
             $where[] = $this->_db->quoteInto('parent_id = ?', $parent);
             $page = $this->fetchRow($where);
             if ($page) {

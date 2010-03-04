@@ -35,7 +35,7 @@ require_once 'Zend/Controller/Action.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  * @uses        Model_Page
- * @uses        Model_MetaDate
+ * @uses        Model_MetaData
  * @uses        Model_Properties
  */
 class Admin_PageController extends Zend_Controller_Action
@@ -404,54 +404,14 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function getMetaForm($data)
     {
-        $form = new Zend_Form();
+        $form = new Admin_Form_PageMetaData();
         $form->setAction($this->getFrontController()->getBaseUrl() . self::META_ACTION )
              ->setMethod('post');
-
-        $pageId = $form->createElement('hidden', 'page_id');
-        $pageId->addFilter('int');
-
-        $pageTitle = $form->createElement('text', 'page_title');
-        $pageTitle->setLabel($this->view->getTranslation('Page Title') . ':')
-                  ->addFilter('stripTags')
-                  ->setAttrib('class', 'med');
-
-        $filename = $form->createElement('text', 'filename');
-        $filename->setLabel($this->view->getTranslation('Filename') . ':')
-                 ->addFilter('stripTags')
-                 ->setAttrib('class', 'med');
-
-        $metaDescription = $form->createElement('textarea', 'meta_description');
-        $metaDescription->setLabel($this->view->getTranslation('Meta Description') . ':')
-                        ->addFilter('stripTags')
-                        ->setAttrib('class', 'med_short');
-
-
-        $metaKeywords = $form->createElement('textarea', 'keywords');
-        $metaKeywords->setLabel($this->view->getTranslation('Meta Keywords') . ':')
-                     ->addFilter('stripTags')
-                     ->setAttrib('class', 'med_short');
-
-
-        $searchTags = $form->createElement('textarea', 'search_tags');
-        $searchTags->setLabel($this->view->getTranslation('Search Tags') . ':')
-                   ->addFilter('stripTags')
-                   ->setAttrib('class', 'med_short');
-
-        // Add elements to form:
-        $form->addElement($pageTitle)
-             ->addElement($filename)
-             ->addElement($metaDescription)
-             ->addElement($metaKeywords)
-             ->addElement($searchTags)
-             ->addElement('submit', 'update', array('label' => $this->view->getTranslation('Update Meta Data')))
-             ->addElement($pageId);
 
         //set data
         if (is_array($data)) {
             $form->populate($data);
         }
-
         return $form;
     }
 

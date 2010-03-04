@@ -1,4 +1,40 @@
 <?php
+/**
+ * Digitalus CMS
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
+ *
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id:$
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5.0
+ */
+
+/**
+ * @see Zend_Form
+ */
+require_once 'Zend/Form.php';
+
+/**
+ * Digitalus Form
+ *
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Admin
+ * @version     $Id:$
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5.0
+ */
 class Digitalus_Form extends Zend_Form
 {
     protected $_model;
@@ -7,10 +43,14 @@ class Digitalus_Form extends Zend_Form
 
     public function __construct($translator = null)
     {
-        $this->setMethod('post');
-        $this->addElementPrefixPath('Digitalus_Decorator', 'Digitalus/Form/Decorator', 'decorator');
-        $this->addElementPrefixPath('Digitalus_Filter', 'Digitalus/Filter/', 'filter');
-        $this->addPrefixPath('Digitalus_Form_Element', 'Digitalus/Form/Element/', 'element');
+        $this->setMethod('post')
+             ->addElementPrefixPaths(array(
+                array('prefix' => 'Digitalus_Decorator', 'path' => 'Digitalus/Form/Decorator', 'type' => 'decorator'),
+                array('prefix' => 'Digitalus_Filter',    'path' => 'Digitalus/Filter/',        'type' => 'filter'),
+                array('prefix' => 'Digitalus_Validate',  'path' => 'Digitalus/Validate',       'type' => 'validate'),
+             ))
+             ->addPrefixPath('Digitalus_Form_Element', 'Digitalus/Form/Element/', 'element');
+
         $this->_setTranslator($translator);
         parent::__construct();
 
@@ -109,8 +149,8 @@ class Digitalus_Form extends Zend_Form
     public function validatePost()
     {
         $request = Zend_Controller_Front::getInstance()->getRequest();
-        if($request->isPost()) {
-            if($this->isValid($_POST)) {
+        if ($request->isPost()) {
+            if ($this->isValid($_POST)) {
                 return true;
             }
         }
@@ -168,30 +208,32 @@ class Digitalus_Form extends Zend_Form
         $session->validInstances[$instance] = false;
     }
 
-    protected function _setTranslator($translator = null)
+    protected function _setTranslator($adapter = null)
     {
-        if (empty($translator)) {
-            // Get site settings
-            $settings = Zend_Registry::get('siteSettings');
+        if (empty($adapter)) {
+            $adapter = Zend_Registry::get('Zend_Translate');
 
-            // Get site config
-            $config = Zend_Registry::get('config');
-
-            $key = $this->getView()->getAdminLanguage();
-            $translator = null;
+            $request    = Zend_Controller_Front::getInstance()->getRequest();
+            $module     = $request->getModuleName();
+            $controller = $request->getControllerName();
+            // Add translation file depending on current module ('public' or 'admin')
+            if ('public' == $module || 'public' == $controller) {
+                $key = Digitalus_Language::getLanguage();
+            } else {
+                $key = Digitalus_Language::getAdminLanguage();
+            }
             if (!empty($key)) {
+                // Get site config
+                $config = Zend_Registry::get('config');
+
                 $languageFiles = $config->language->translations->toArray();
                 $languagePath  = $config->language->path . '/form/' . $languageFiles[$key] . '.form.csv';
                 if (is_file($languagePath)) {
-                    $translator = new Zend_Translate(
-                        'csv',
-                        $languagePath,
-                        $key
-                    );
+                    $adapter->addTranslation($languagePath, $key);
                 }
             }
+        } else {
+            self::setDefaultTranslator($adapter);
         }
-        $this->setTranslator($translator);
     }
-
 }

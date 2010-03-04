@@ -23,12 +23,31 @@ class Model_User extends Digitalus_Db_Table
 {
     const SUPERUSER_ROLE = 'superadmin';
 
+    const USERNAME_REGEX = '/^[0-9a-zA-ZäöüÄÖÜß`\'´ ]*$/u';
+    const USERNAME_REGEX_NOTMATCH = 'Please only use the following characters: 0-9a-zA-ZäöüÄÖÜß`\'´ and empty space!';
+
     /**
      * table name
      *
      * @var string
      */
     protected $_name = 'users';
+
+    public function createUser($userName, $firstName, $lastName, $email, $password, $active = 0, $role = 'guest')
+    {
+        $data = array(
+            'active'     => $active,
+            'username'   => $userName,
+            'first_name' => $firstName,
+            'last_name'  => $lastName,
+            'email'      => $email,
+            'password'   => md5($password),
+            'role'       => $role,
+        );
+        if (!$this->userExists($userName)) {
+            return $this->insert($data);
+        }
+    }
 
     public function updatePassword($id, $password, $confirmationRequire = true, $confirmation = null)
     {
@@ -165,10 +184,9 @@ class Model_User extends Digitalus_Db_Table
         return false;
     }
 
-    public function getUserById($id, $format = null)
+    public function getUserFullNameById($id, $format = null)
     {
-        $where[] = $this->_db->quoteInto('id = ?', $id, 'INTEGER');
-        $user = $this->fetchRow($where);
+        $user = $this->getUserById($id);
         switch ((string)strtolower($format)) {
             case 'firstname':
                 return $user->first_name;
@@ -179,7 +197,19 @@ class Model_User extends Digitalus_Db_Table
         }
     }
 
+    public function getUserById($id)
+    {
+        $where[] = $this->_db->quoteInto('id = ?', $id, 'INTEGER');
+        return $this->fetchRow($where);
+    }
+
     public function getUserByUsername($userName)
+    {
+        $where[] = $this->_db->quoteInto('username = ?', $userName);
+        return $this->fetchRow($where);
+    }
+
+    public function getUserByEmail($email)
     {
         $where[] = $this->_db->quoteInto('email = ?', $userName);
         return $this->fetchRow($where);
@@ -221,11 +251,18 @@ class Model_User extends Digitalus_Db_Table
      * @param  string  $userName  The username to check for
      * @return boolean
      */
-    public function userExists($userName)
+    public function userExists($userName, $exclude = null)
     {
         $userName = strtolower($userName);
+        $exclude = explode(', ', $exclude);
 
         $where[] = $this->_db->quoteInto('LOWER(username) = ?', $userName);
+        foreach ($exclude as $exclusion) {
+            $exclusion = trim($exclusion);
+            if (isset($exclusion) && !empty($exclusion) && '' != $exclusion) {
+                $where[] = $this->_db->quoteInto('LOWER(username) != ?', $exclusion);
+            }
+        }
         $result = $this->fetchAll($where, null, 1);
         if ($result->count() > 0) {
             return true;

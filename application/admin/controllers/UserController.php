@@ -71,20 +71,26 @@ class Admin_UserController extends Zend_Controller_Action
      */
     public function openAction()
     {
-        $id = $this->_request->getParam('id', 0);
+        $id = (int)$this->_request->getParam('id', 0);
         $form = new Admin_Form_User();
+        $u = new Model_User();
+        $exclude = $u->getUserById($id);
+        $userName = $form->getElement('username');
+        $userName->addValidators(array(
+            array('UsernameExists', true, array('exclude' => $exclude->username)),
+        ));
         $form->removeElement('password');
         $form->removeElement('password_confirm');
-        $form->setModel(new Model_User());
+        $form->removeElement('captcha');
+        $form->setModel($u);
         $form->populateFromModel($id);
         $form->setAttribs(array('id' => 'general'));
-        $submit = $form->getElement('submit');
+        $submit = $form->getElement('submitAdminUserForm');
         $submit->setAttribs(array('id' => 'update', 'name' => 'update'));
         $submit->setLabel($this->view->getTranslation('Update Account'));
         $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/user/open/id/' . $id);
 
         if ($id > 0) {
-            $u = new Model_User();
             $row = $u->find($id)->current();
             $this->view->user = $row;
             $this->view->userPermissions = $u->getAclResources($row);
@@ -130,8 +136,14 @@ class Admin_UserController extends Zend_Controller_Action
     public function createAction()
     {
         $form = new Admin_Form_User();
-        $mdlUser = new Model_User();
-        $form->setModel($mdlUser);
+        $form->removeElement('captcha');
+        $userName = $form->getElement('username');
+        $userName->addValidators(array(
+            array('UsernameExists', true),
+        ));
+Zend_Debug::dump(Zend_Registry::get('Zend_Translate'));
+        $u = new Model_User();
+        $form->setModel($u);
         if ($form->validatePost()) {
             $password = $form->getValue('password');
             $result = $form->create(array('password' => md5($password)));
