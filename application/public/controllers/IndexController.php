@@ -5,17 +5,17 @@
  */
 class IndexController extends Zend_Controller_Action
 {
-	public $page;
-	
-	public function init()
-	{
-	}
-	
+    public $page;
+
+    public function init()
+    {
+    }
+
     public function indexAction()
     {
         // create the new page object
         $this->page = Digitalus_Builder::loadPage(null, 'initialize.xml');
-        
+
         // load the data
         Digitalus_Builder::loadPage(null, 'load_data.xml', $this->page);
 
@@ -26,5 +26,3 @@ class IndexController extends Zend_Controller_Action
         $this->view->layout()->page = $this->page->getParam('xhtml');
     }
 }
-
-

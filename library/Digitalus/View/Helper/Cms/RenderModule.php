@@ -38,6 +38,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  * @uses        viewHelper Digitalus_View_Helper_LoadModule
+ * @uses        Digitalus_Uri
  */
 class Digitalus_View_Helper_Cms_RenderModule extends Zend_View_Helper_Abstract
 {
@@ -63,13 +64,45 @@ class Digitalus_View_Helper_Cms_RenderModule extends Zend_View_Helper_Abstract
 
                 if (is_array($moduleParts) && count($moduleParts) == 2) {
                     $name = $moduleParts[0];
-                    $action = $moduleParts[1];
+                    $action = $this->_getAction($moduleParts);
                     return $this->view->loadModule($name, $action, $params);
                 }
             }
-
-        } else {
-            return null;
         }
+        return null;
+    }
+
+    protected function _getAction($moduleParts)
+    {
+        // Check whether uri params are given and set the action respectively
+        $uri = new Digitalus_Uri();
+        $uriParams = $uri->getParams();
+        $name   = strtolower($moduleParts[0]);
+        $action = strtolower($uriParams['a']);
+        if (isset($action) && !empty($action) && '' != $action && $this->_actionExists($name, $action)) {
+            return $action;
+        }
+        return $moduleParts[1];
+    }
+
+    protected function _actionExists($moduleName, $action)
+    {
+        // action must only contain alphanumeric characters
+        if (!Zend_Validate::is($action, 'Alnum')) {
+            /**
+             * @see Digitalus_View_Exception
+             */
+            require_once 'Digitalus/View/Exception.php';
+            throw new Digitalus_View_Exception('only alphanumeric characters are allowed for the action');
+        }
+        // include PublicController to check whether the action exist
+        // TODO: check if necessary
+        require_once APPLICATION_PATH . '/modules/' . $moduleName . '/controllers/' . 'PublicController.php';
+        $className  = 'Mod_' . ucfirst($moduleName) . '_PublicController';
+        $actionName = strtolower($action) . 'Action';
+        if (method_exists($className, $actionName)) {
+            return true;
+        }
+        return false;
     }
 }
