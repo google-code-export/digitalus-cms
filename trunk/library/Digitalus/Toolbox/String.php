@@ -32,10 +32,10 @@ class Digitalus_Toolbox_String
     public static function random($length = 8)
     {
         // start with a blank string
-        $string = "";
+        $string = '';
 
         // define possible characters
-        $possible = "0123456789abcdfghjkmnpqrstvwxyz";
+        $possible = '0123456789abcdfghjkmnpqrstvwxyz';
 
         // set up a counter
         $i = 0;
@@ -88,7 +88,7 @@ class Digitalus_Toolbox_String
      */
     public static function addUnderscores($string, $relative = false)
     {
-        $string = str_replace("_", "[UNDERSCORE]", $string);
+        $string = str_replace('_', '[UNDERSCORE]', $string);
         return str_replace('/', '_', trim($string));
     }
 
@@ -106,7 +106,7 @@ class Digitalus_Toolbox_String
         if ($relative) {
             $string = Digitalus_Toolbox_String::stripLeading('/', $string);
         }
-        $string = str_replace("[UNDERSCORE]", "_", $string);
+        $string = str_replace('[UNDERSCORE]', '_', $string);
         return $string;
     }
 
@@ -153,7 +153,7 @@ class Digitalus_Toolbox_String
         $parts = explode('/', $path);
         return array_pop($parts);
     }
-    
+
     public static function truncateText($text, $count = 25, $stripTags = true)
     {
         if ($stripTags) {
