@@ -1,5 +1,7 @@
 #labels Phase-Deploy
 = Introduction =
+*_Version 1.10 is currently being developed in SVN_*
+
 In version 1.10 of the Digitalus CMS there have been some significant changes in the database structure, especially regarding the database _user_.
 This requires an update of the databases.
 
