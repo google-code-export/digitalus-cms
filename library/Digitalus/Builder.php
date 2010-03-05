@@ -1,7 +1,7 @@
 <?php
 class Digitalus_Builder
 {
-    const PATH_TO_BUILDERS = './application/data/builders';
+    const PATH_TO_BUILDERS = './application/admin/data/builders';
     const BASE_CLASSNAME   = 'Digitalus_Builder_Action_';
 
     public static function loadPage($uri = null, $buildStack = null, Digitalus_Page $page = null, Zend_View $view = null, $persist = null)

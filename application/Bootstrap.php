@@ -78,7 +78,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initConfig()
     {
         // Retrieve configuration from file
-        $config = new Zend_Config_Xml(APPLICATION_PATH . '/data/config.xml', APPLICATION_ENV);
+        $config = new Zend_Config_Xml(APPLICATION_PATH . '/admin/data/config.xml', APPLICATION_ENV);
 
         // Add config to the registry so it is available sitewide
         $registry = Zend_Registry::getInstance();

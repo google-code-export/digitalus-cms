@@ -26,7 +26,7 @@ class Digitalus_Command_ImportSitemap extends Digitalus_Command_Abstract
      * the filepath to the sitemap.xml file
      *
      */
-    const PATH_TO_SITEMAP = "./application/data/sitemap.xml";
+    const PATH_TO_SITEMAP = './application/admin/data/sitemap.xml';
 
     /**
      * db adapter
@@ -73,7 +73,7 @@ class Digitalus_Command_ImportSitemap extends Digitalus_Command_Abstract
      */
     public function info()
     {
-        $this->log($this->view->getTranslation('The import sitemap command will import an xml sitemap. This file should be located in application/data/ and be named sitemap.xml.'));
+        $this->log($this->view->getTranslation('The import sitemap command will import an xml sitemap. This file should be located in application/admin/data/ and be named sitemap.xml.'));
     }
 
     /**

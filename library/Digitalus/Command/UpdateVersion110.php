@@ -97,9 +97,15 @@ class Digitalus_Command_UpdateVersion110 extends Digitalus_Command_Abstract
          */
         // change type of pages.publish_level, pages.is_home_page and pages.show_on_menu to ENUM/TINYINT
         $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('pages') . "`"
-                         . " CHANGE `publish_level` `publish_level` ENUM('1', '11', '21') NULL DEFAULT '11',"
-                         . " CHANGE `is_home_page`  `is_home_page`  TINYINT(1) NULL DEFAULT '0',"
-                         . " CHANGE `show_on_menu`  `show_on_menu`  TINYINT(1) NULL DEFAULT '0'");
+                        . " CHANGE `publish_level` `publish_level` ENUM('1', '11', '21') NULL DEFAULT '11',"
+                        . " CHANGE `is_home_page`  `is_home_page`  TINYINT(1) NULL DEFAULT '0',"
+                        . " CHANGE `show_on_menu`  `show_on_menu`  TINYINT(1) NULL DEFAULT '0'");
+        // change type to match column 'id' of db 'users'
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('pages') . "`"
+                        . " CHANGE `author_id` `author_id` INT(10) UNSIGNED NOT NULL");
+        // add foreign key 'author_id' referencing column 'id' of db 'users'
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('pages') . "`"
+                        . " ADD FOREIGN KEY (`author_id`) REFERENCES `" . Digitalus_Db_Table::getTableName('users') . "`(`id`) ON UPDATE CASCADE ON DELETE CASCADE");
 
         /**
          * changes to table `content_nodes`
