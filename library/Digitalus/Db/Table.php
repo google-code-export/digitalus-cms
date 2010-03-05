@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -13,13 +12,25 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package    Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: Table.php Tue Dec 25 20:37:43 EST 2007 20:37:43 forrest lyman $
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Models
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Page.php Mon Dec 24 20:38:38 EST 2007 20:38:38 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5
  */
 
+/**
+ * Digitalus DB Table
+ *
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5
+ * @uses        Model_ContentNode
+ */
 class Digitalus_Db_Table extends Zend_Db_Table_Abstract
 {
     public    $view;
@@ -356,10 +367,46 @@ class Digitalus_Db_Table extends Zend_Db_Table_Abstract
                 $prefix = '';
             }
         }
-
         $name = $prefix . $separator . $tableName;
 
         return (string) $name;
+    }
+
+    /**
+     * checks whether a given table exists
+     * returns a table description for a given tableName
+     *
+     * @param  string  $tableName  Given table name
+     * @return boolean|array  table description or false if table doesn't exist
+     */
+    public static function tableExists($tableName)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        try {
+            $tableDescription = $db->describeTable($tableName);
+        } catch (Zend_Db_Statement_Exception $e) {
+            return false;
+        }
+        return $tableDescription;
+    }
+
+    /**
+     * checks whether a given column exists in a given table
+     *
+     * @param  string  $tableName  Given table name
+     * @param  string  $columnName Given column name
+     * @return boolean
+     */
+    public static function columnExists($tableName, $columnName)
+    {
+        if ($tableDescription = self::tableExists($tableName)) {
+            if (!isset($tableDescription[$columnName]) || empty($tableDescription[$columnName])) {
+                return false;
+            }
+        } else {
+            throw new Digitalus_Db_Exception($this->view->getTranslation('The given table doesn\'t exist') . ':' . $tableName);
+        }
+        return true;
     }
 
 }
