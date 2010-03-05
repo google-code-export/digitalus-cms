@@ -1,14 +1,12 @@
-<p><?php echo $this->getTranslation('Select the template for this page')?> ...</p>
-<?php
+<p><?php echo $this->getTranslation('Select the template for this page')?> ...</p><?php
+
 $contentForm = new Admin_Form_Page();
 $templateControl = $contentForm->getElement('content_template');
 $currentTemplate = !empty($this->page->page->content_template) ? $this->page->page->content_template : null;
-$templateControl->setValue($currentTemplate);
-?>
-<form action="<?php echo $this->getBaseUrl()?>/admin/page/update-template" method="post">
-<?php
+$templateControl->setValue($currentTemplate);?>
+
+<form action="<?php echo $this->getBaseUrl();?>/admin/page/update-template" method="post"><?php
     echo $this->formHidden('id', $this->pageId);
     echo $templateControl;
-    echo $this->formSubmit('updateContentTemplate', $this->getTranslation('Update Content Template'));
-?>
+    echo $this->formSubmit('updateContentTemplate', $this->getTranslation('Update Content Template'));?>
 </form>
