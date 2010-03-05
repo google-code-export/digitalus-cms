@@ -1,0 +1,420 @@
+# Language File – BACKEND
+# RUSSIAN
+# languages
+"english";
+"french";
+"german";
+"italian";
+"polish";
+"russian";
+"spanish";
+"swedish";
+# admin section -- Auth --
+"Login";"На главную"
+"The username or password you entered was not correct.";
+"Your password has been reset for security and sent to your email address";
+"Sorry, there was an error sending you your updated password. Please contact us for more help.";
+"Sorry, we could not locate your account. Please contact us to resolve this issue.";
+"OpenID Login";
+"Need Help?";
+"Digitalus CMS gives You the possibilty to use Your existing OpenID to login to the administrator area.";
+"If you are having trouble logging in please enter your email address below and we will send you your login credentials.";"Если у вас проблемы с входом, пожалуйста, введите ваш e-mail ниже и мы вам вышлем ваши данные для логина."
+"Reset Password";"Переустановить пароль"
+"Administrator Login";
+"Please enter your username (this is your email address) and password to get started.";"Пожалуйста введите свое имя пользователя (это ваш e-mail) и пароль для того чтоб начать"
+"Standard Login";
+"Return to the standard login using Your username and password.";
+"Administrator OpenID Login";
+"Please enter your OpenID. You will be redirected to Your OpenId provider to authorize.";
+# admin section -- Design --
+"Design";"Дизайн"
+"Open";
+"Add to my bookmarks";"Добавить в закладки"
+"Delete";
+"Design Options";"Опции дизайна"
+"Create a new design";"Создать новый дизайн"
+"Design Name";"Название дизайна"
+"Design Notes";"Заметки дизайна"
+"Create Design";"Создать дизайн"
+"Current Designs";"Текущие дизайны"
+"Tools";
+"Preview Design";
+"Who Uses This?";"Кто использует?"
+"These are the pages that use this design:";"Есть страницы которые используют этот дизайн:"
+"No pages use this design currently.";
+"Update Design";"Обновить дизайн"
+"Design details";"Детали дизайна"
+"This is the default site design";"Это дизайн сайта по умолчанию"
+"Layout";"Layout"
+"Skin";
+# admin section -- Error --
+"Sorry, you are not authorized to edit this resource!";
+# admin section -- Index --
+"Home";"На главную"
+"Your bookmark was saved successfully.";
+"My Content";
+"The following pages are the pages that you have recently created.";"Следующие страницы – те, которые вы недавно создали."
+"These are the modules that you are working with.";
+"These pages have not been published yet.";
+"My Dashboard";"Мое рабочее место"
+"My Account";"Моя учетная запись"
+"First Name";"Имя"
+"Last Name";"Фамилия"
+"Email";"Email"
+"Update Password?";"Обновить пароль?"
+"Password";"Пароль"
+"Confirm";"Подтвердить"
+"Update My Account";"Обновить учетную запись"
+"My Bookmarks";"Мои закладки"
+"You do not have any bookmarks.";"У вас нет закладок"
+"My Writeboard";"Моя доска"
+"The writeboard is a personal spot for you to keep notes about your site.";"Доска – это личное место, где можно хранить заметки о вашем сайте"
+"Save My Writeboard";"Сохранить мою доску"
+"Digitalus CMS is a community supported open source project. To learn more about the project check out";"Digitalus CMS – открытый поддерживаемый сообществом проект. Чтобы узнать больше о проекте, посетите"
+"Digitalus Site";"Сайт Digitalus"
+"Wiki";"Вики"
+"Forum";"Форум"
+# admin section -- Media --
+"Media";"Медиа"
+"Open Folder";"Открыть папку"
+"Options";"Опции"
+"Media Manager";"Менеджер медиа"
+"Create New Folder";"Создать новую папку"
+"Browse Folder";"Браузер файлов"
+"Upload Media";"Загрузить медиа"
+"Create Subfolder";"Создать подпапку"
+"Rename Folder";"Переименовать папку"
+"Current Folder";"Текущая папка"
+"Media Root";"Корень медиа"
+"Current folder contents";"Содержимое текущей папки"
+"Upload Files";"Загрузить файлы"
+"Rename folder";"Переименовать папку"
+"Folder Name";"Имя папки"
+"Create Folder";"Создать папку"
+"Subfolders";"Подпапки"
+"Full path";"Полный путь"
+"Files";"Файлы"
+"New Name";"Новое имя"
+"Select the files to upload";"Выберите файлы для загрузки"
+"You do not have any media files on the server";"У вас нет никаких медиа на сервере"
+# admin section -- Module --
+"Modules";"Модули"
+"Download";
+"CMS Modules";"Модули CMS"
+"Digitalus CMS uses a system of modules to add custom functionality to your site.";"Digitalus CMS использует систему модулей для добавления кастомизированной функциональности для вашего сайта."
+"Select the module page";"Выбрать страницу модуля"
+"My Modules";"Мои модули:"
+# admin section -- Navigation --
+"Navigation";"Навигация"
+"Open Menu";"Открыть меню"
+"Current Menu";
+"Update Menu";"Обновить меню"
+"click to toggle visibility";
+"Save Changes";"Сохранить"
+"Main Menu";"Главное меню"
+# admin section -- Page --
+"Pages";"Страницы"
+"Sorry, there was an error adding your page";
+"Sorry, there was an error opening your page";
+"Page";"Страница"
+"Page Title";"Название страницы"
+"Filename";"Имя файла"
+"Meta Description";"Meta Description"
+"Meta Keywords";"Meta Keywords"
+"Search Tags";"Search Tags"
+"Update Meta Data";
+"Publish or Archive Page";
+"Publish or Archive";
+"Step 3: Enter the name for your page";"Шаг3: Введите имя вашей страницы"
+"Page Name";"Имя страницы"
+"Create Page";"Создать страницу"
+"Page Options";"Опции страницы"
+"Content Sections";
+"Page Head and Meta Data";"Заголовок страницы и мета-данные"
+"Properties";"Свойства"
+"Attachments";
+"Related Content";
+"Content Template";
+"Move Page";"Переместить страницу"
+"Publish / Archive";
+"Page Versions";"Версии страницы"
+"Update Page";"Обновить страницу"
+"Edit Meta Data";"Редактировать мета-данные"
+"Edit Page Properties";"Редактировать свойства страницы"
+"Publish / Archive Page";
+"Content";
+"Current design";"Текущий дизайн"
+"Open design";"Открыть дизайн"
+"The design is not yet set for this page.";"Дизайн для этой страницы еще не установлен"
+"Other designs";"Другие дизайны"
+"Make current";"Сделать текущей"
+"Click the new parent page for this page to move it.";"Кликнуть но новой родительской странице для этой страницы чтобы перенести ее"
+"Remove";"Удалить"
+"Property";"Свойство"
+"Value";"Значение"
+"Add a new property";"Добавить новое свойство"
+"Update properties";"Обновить свойства"
+"Publish";
+"Unpublish";
+"Archive";
+"The following pages have not been published yet!";
+"Change the status of this page.";
+"This page was published on";
+"This page was archived on";
+"The status of this page is";
+"Change publishing state";
+"Update Related Content";
+"Select the template for this page";
+"Update Content Template";
+"My Pages";"Мои страницы"
+"Create a Page";"Создать страницу"
+"To create a new page...";"Чтобы создать новую страницу..."
+"Step 1: Select the parent section";"Шаг 1: Выберите родительскую секцию"
+"Parent Page";"Родительская страница"
+"Next >>";"Дальше >>"
+"Current Version";"Текущая версия"
+"Available Versions";"Доступные версии"
+"Default";"Значение по умолчанию"
+"Step 2: What type of page would you like to create?";"Шаг 2: Какой тип страницы вы бы хотели создать?"
+"Select a type";"Выберите тип"
+"You can not add any pages to this section.";
+"Parent page";
+"Site Root";"Корень сайта"
+"Template";
+"Continue adding pages";
+"Show Page on menu";
+"Publish page instantly";
+"Submit";
+# admin section -- Site --
+"Site Settings";"Настройки сайта"
+"Site";
+"Site Console";"Консоль сайта"
+"Digitalus CMS Test Message";
+"About the Console";"О консоли"
+"The site console enables you to interact directly with the CMS core.";"Эта консоль сайта позвоняет вам напрямую взаимодействовать с ядром системы."
+"It is for experienced administrators only.";"Это только для опытных администраторов."
+"Digitalus Console";"Настройки сайта"
+"Info";"Информация"
+"Run Command";
+"General";"Общие"
+"Meta Data";
+"Internationalization";"Интернационализация"
+"Mail";
+"Google";"Google"
+"Update Site Settings";
+"General settings";"Общие настройки"
+"Site name";"Имя сайта"
+"Title separator";
+"Status";"Статус"
+"Site is online";"Сайт онлайн"
+"Update General Site Settings";"Обновить общие настройки сайта"
+"Managing Content";"Управление содержимым"
+"Home Page";"Главная"
+"404 Page";"Ошибка 404"
+"Site Offline Page";
+"Menu links";"Ссылки меню"
+"Automatically add menu links";"Автоматически добавлять ссылки в меню"
+"Publish Pages";
+"Automatically publish pages on creation";
+"Update Content Settings";"Обновить настройки содержимого"
+"Default design";
+"Update Design Settings";
+"XML declaration";
+"Doc Type";
+"Default charset";"Кодировка по умолчанию"
+"Default timezone";
+"Update Page Meta Data";
+"Default language";"Язык по умолчанию"
+"Admin language";
+"Update Internationalization Settings";"Обновить настройки интернационализации"
+"Mail Settings";"Настройки почты"
+"Default email address";"E-mail по умолчанию"
+"Default sender";"Отправитель по умолчанию"
+"Transport";"Транспорт"
+"Use SMTP transport ";"Использовать SMTP"
+"SMTP host";"SMTP хост"
+"SMTP username";"Имя пользователя для SMTP"
+"SMTP password";"Пароль для SMTP"
+"Update Mail Settings";"Обновить настройки почты"
+"Send test message";
+"Google Integration";"Интеграция с Google"
+"Verification code";"Код подтверждения (Verification code)"
+"Tracking code";"Код отслеживания (Tracking code)"
+"Update Google Settings";"Обновить настройки Google"
+"The site sections is where you manage your site.";"Секции сайта – это то место, где вы управляете сайтом"
+"Create new user";"Создать нового пользователя"
+"Admin Users";"Администраторы"
+"Open console";"Открыть консоль"
+# admin section -- User --
+"Update Account";
+"Open User";
+"User";"Пользователь"
+"Create User";"Создать нового пользователя"
+"Create New User";"Создать нового пользователя"
+"General Information";
+"User Options";
+"Account";
+"Credentials";"Пароль"
+"Permissions";"Настройки доступа"
+"Copy Permissions";
+"If you have another user who already has the same permissions as this user you can copy that user's role.";"Если у вас есть другой пользователь с такими же настройками доступа как и у этого пользователя, вы можете скопировать роль этого пользователя"
+"Update User";"Обновить пользователя"
+"User Permissions";
+"Update Permissions";
+"Login Credentials";
+"Confirm Password";
+"Update Password";
+"Email Address";"E-mail адрес"
+"OpenID";
+"Admin Role";"Роль администратора"
+"Site Administrator";
+"Super Administrator";
+"Account Information";
+# admin section – Util --
+"Invalid placeholder passed";
+# admin section -- View Helper --
+"Unable to locate skin folder";
+"Current User";"Пользователь"
+"Role";"Роль"
+"Log Out";"Выйти"
+"Select One";"Выберите один"
+"Select User";
+"Always";
+"Never";
+"By browser check";
+"Select a module";"Выбрать модуль"
+"There are no modules currently installed";
+"There are no pages in this module";
+"First";
+"Previous";
+"Next";
+"Last";
+"The following errors have occurred";
+"Errors";
+"Message";
+"Set Language";
+"You are reading this page in";"Вы читаете эту страницу в "
+"This page is also translated into";"Эта страница также переведена на "
+# admin section – Install --
+"Digitalus CMS Installer";
+"Available Languages:";
+"Results";
+"For help installing Digitalus CMS check out our site";
+"Successfully completed tasks";
+"The following tasks were successfully completed:";
+"Warnings";
+"The following items are not quite right, and should be fixed at some point:";
+"The following errors have occurred, and will need to be fixed prior to installation:";
+"Your server is properly configured to host the Digitalus CMS efficiently and securely!";
+"Site Admin Account";
+"Digitalus CMS uses your email address as the username for the CMS, because it is unique and easy to remember. You can enter what ever you like for a password, but bear in mind that your site is only as secure as this password!";
+"Database Connection Information";
+"Now you need to set up the database connection. If you are unsure about this contact your hosting provider.";
+"Database Adapter";
+"Database Table Prefix";
+"Database Name";
+"Database Host";
+"Database Username";
+"Database Password";
+"Install CMS";
+"Please double check all of the information on this page. If everything looks right then click <b>Install Now</b> to install Digitalus CMS";
+"Install Now";
+"Installation Successfull!";
+"Digitalus CMS was successfully installed on your domain.";
+"Before you use it you must completely delete the <strong>install</strong> folder, as in this screenshot:</p>";
+"Once that folder is deleted Digitalus will automatically load when you visit this domain.";
+"Digitalus CMS is already installed";
+"Could not load config file (";
+"Could not write to config file (";
+"Successfully loaded and tested site configuration";
+"PHP Version: <b>";
+"Checked PHP version...OK!";
+"Could not write to cache directory  (";
+"Checked cache directory...OK!";
+"Could not write to media directory  (";
+"Checked media directory...OK!";
+"Could not write to trash directory  (";
+"Checked trash directory...OK!";
+"Checked server environment...OK!";
+"Your first name is required";
+"Your last name is required";
+"A valid email address is required";
+"Your password is required";
+"Your database name is required";
+"Your database host is required";
+"Your database username is required";
+"The target database is not empty";
+"Unable to write to target database";
+"Database passed tests and is ready to install";
+"The database was successfully installed";
+"An error occured installing the database";
+"Your admin account was successfully created";
+"There was an error creating your admin account";
+# admin section -- Misc –
+"Username";"Имя пользователя"
+"You must enter a username.";
+"You must enter a password.";
+"You must enter a valid OpenID.";
+"Digitalus CMS";"Digitalus CMS"
+"Are you sure you want to delete this?";
+"Bookmark label:";
+"Your bookmark was successfully saved.";
+"Sorry, we could not find the page you requested";
+"Application Error";
+"The page you requested was not found. Digitalus CMS could not locate the error page either.";
+"Invalid command";
+"Cache cleared Key";
+"Cache cleared";
+"Error: Cache is not registered";
+"The cache clear function will either clear a specified key or all cache files if a key is not specified.";
+"Params: key (string, optional)";
+"starting import process";
+"ERROR: error loading sitemap file";
+"The import sitemap command will import an xml sitemap. This file should be located in application/data/ and be named sitemap.xml.";
+"loading page nodes";
+"ignoring";
+"page already exists in this location";
+"inserting";
+"ERROR: an error occured inserting";
+"Validating module directory";
+"Module exists. Installing ...";
+"Module installed";
+"ERROR: Could not load module directory";
+"ERROR: Invalid request";
+"The install module command will install a module in the database if the module is installed properly.";
+"Params: moduleName (string), label (string, optional)";
+"The list command lists all of the available functions. Double click a function to open it.";
+"ERROR: Could not create pages table.";
+"pages table created OK.";
+"ERROR: Could not create content_nodes table.";
+"content_nodes table created OK.";
+"There are no content pages to migrate.";
+"pages have been migrated successfully.";
+"The Update Database command will update your database from version 1.0.x to 1.5.x.";
+"Params: none";
+"ERROR: could not update content template references.";
+"Content template references updated OK.";
+"The Update Version 18 command will update your database from version 1.5 to 1.8";
+"The Update Version 19 command will update your database from version 1.8 to 1.9";
+"Unable to delete item - the item is empty!";
+"Unable to cast type:";
+"to type:";
+"Unable to load content item";
+"An error occurred uploading the file";
+"This filetype is not allowed";
+"Illegal file access attempt. Operation cancelled!";
+"Method does not exist";
+"Getter does not exist";
+"Setter does not exist";
+"Unable to load service for this module";
+"Unable to set this protected property in Digitalus_Page";
+"You are here";"Вы здесь"
+"Headline";
+"Main";
+"Header";
+"Footer";
+"Sidebar";
+"Submenu";
+"More";
+"Module";
+# END
