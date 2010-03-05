@@ -23,6 +23,10 @@
  */
 
 /**
+ * @see Digitalus_Command_Abstract
+ */
+
+/**
  * Update v1.10 helper
  *
  * @author      Lowtower - lowtower@gmx.de
@@ -62,9 +66,9 @@ class Digitalus_Command_UpdateVersion110 extends Digitalus_Command_Abstract
     {
         $result = $this->_updateTemplateReferences();
         if (!$result) {
-            $this->log($this->view->getTranslation('ERROR: could not update content template references.'));
+            $this->log($this->view->getTranslation('ERROR: could not update database.'));
         } else {
-            $this->log($this->view->getTranslation('Content template references updated OK.'));
+            $this->log($this->view->getTranslation('Databases successfully updated!'));
         }
     }
 
@@ -75,27 +79,55 @@ class Digitalus_Command_UpdateVersion110 extends Digitalus_Command_Abstract
     public function info()
     {
         $this->log($this->view->getTranslation('The Update Version 110 command will update your database from version 1.9 to 1.10'));
+        $this->log($this->view->getTranslation('Significant changes have been made to the database structure.'));
+        $this->log($this->view->getTranslation('Please be sure to make a backup copy of Your databases BEFORE updating!'));
         $this->log($this->view->getTranslation('Params: none'));
     }
 
     private function _updateTemplateReferences()
     {
-        // change type of pages.publish_level, pages.is_home_page and pages.show_on_menu to TINYINT
-        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('pages') . "`"
-                         . " CHANGE `publish_level` `publish_level` TINYINT(2) NULL DEFAULT NULL,"
-                         . " CHANGE `is_home_page`  `is_home_page`  TINYINT(1) NULL DEFAULT NULL,"
-                         . " CHANGE `show_on_menu`  `show_on_menu`  TINYINT(1) NULL DEFAULT NULL");
-        // change type of content_nodes.content to 'MEDIUMTEXT'
-        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('content_nodes') . "` CHANGE `content` `content` MEDIUMTEXT");
+        /**
+         * changes to table `traffic_log`
+         */
         // change type tables to InnoDB
         $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('traffic_log') . "` ENGINE=InnoDB");
+
+        /**
+         * changes to table `pages`
+         */
+        // change type of pages.publish_level, pages.is_home_page and pages.show_on_menu to ENUM/TINYINT
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('pages') . "`"
+                         . " CHANGE `publish_level` `publish_level` ENUM('1', '11', '21') NULL DEFAULT '11',"
+                         . " CHANGE `is_home_page`  `is_home_page`  TINYINT(1) NULL DEFAULT '0',"
+                         . " CHANGE `show_on_menu`  `show_on_menu`  TINYINT(1) NULL DEFAULT '0'");
+
+        /**
+         * changes to table `content_nodes`
+         */
+        // change type of content_nodes.content to 'MEDIUMTEXT'
+        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('content_nodes') . "` CHANGE `content` `content` MEDIUMTEXT");
+        // insert field 'parent_type'
+        if (!Digitalus_Db_Table::columnExists(Digitalus_Db_Table::getTableName('content_nodes'), 'parent_type')) {
+            $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('content_nodes') . "` ADD `parent_type` ENUM('pages', 'users') NOT NULL AFTER `parent_id`");
+        }
+
+        /**
+         * changes to table `users`
+         */
+        // change type tables to InnoDB
         $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ENGINE=InnoDB");
+
         // insert field 'username', copy 'email' to 'username' and give user(1) the username 'administrator'
-        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ADD `username` VARCHAR(30) NOT NULL AFTER `id`");
+        if (!Digitalus_Db_Table::columnExists(Digitalus_Db_Table::getTableName('users'), 'username')) {
+            $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ADD `username` VARCHAR(30) NOT NULL AFTER `id`");
+        }
         $this->_db->query("UPDATE `" . Digitalus_Db_Table::getTableName('users') . "` SET `username` = `email`");
         $this->_db->query("UPDATE `" . Digitalus_Db_Table::getTableName('users') . "` SET `username` = 'administrator' WHERE `id` = 1 AND `role` = 'superadmin'");
+
         // insert field 'active' and set all existing users active
-        $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ADD `active` TINYINT(1) NOT NULL DEFAULT '0' AFTER `id`");
+        if (!Digitalus_Db_Table::columnExists(Digitalus_Db_Table::getTableName('users'), 'username')) {
+            $this->_db->query("ALTER TABLE `" . Digitalus_Db_Table::getTableName('users') . "` ADD `active` TINYINT(1) NOT NULL DEFAULT '0' AFTER `id`");
+        }
         $this->_db->query("UPDATE `" . Digitalus_Db_Table::getTableName('users') . "` SET `active` = '1'");
 
         return true;
