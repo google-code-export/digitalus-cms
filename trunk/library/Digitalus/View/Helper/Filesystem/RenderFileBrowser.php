@@ -71,7 +71,11 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
                 $label = $child->name;
             }
             if ($child->id == $exclude) {
-                $links[] = '<li class="menuItem"><img class="icon" style="margin-right: 10px" alt="' . $label . '" src="/images/icons/' . $icon . '"/>' . $label . $submenu . '</li>';
+                $links[] = '<li class="menuItem">'
+                         . '<img class="icon" style="margin-right: 10px" alt="' . $label . '" '
+                         . 'src="' . $this->view->getBaseUrl() . '/images/icons/' . $icon . '"/>'
+                         . $label . $submenu
+                         . '</li>';
             } else {
                 $links[] = '<li class="menuItem">' . $this->view->link($label, $link . $child->id, $icon) . $submenu . '</li>';
             }
@@ -99,10 +103,10 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
         $pageId  = $request->getParam('id', 0);
 
         $siteRoot = '<li class="menuItem" style="background-image: none; padding: 0px;">'
-                  . '<a class="link" href="/admin/page/move/id/' . $pageId . '/parent/0">'
-                  . '<img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="' . $this->view->getBaseUrl() . '/images/icons/folder.png"/>'
-                  . $this->view->getTranslation('Site Root')
-                  . '</a>'
+                  . '  <a class="link" href="' . $this->view->getBaseUrl() . '/admin/page/move/id/' . $pageId . '/parent/0">'
+                  . '    <img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="' . $this->view->getBaseUrl() . '/images/icons/folder.png"/>'
+                  . '    ' . $this->view->getTranslation('Site Root')
+                  . '  </a>'
                   . '</li>';
 
         return $siteRoot;
