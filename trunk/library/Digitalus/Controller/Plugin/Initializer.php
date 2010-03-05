@@ -14,7 +14,7 @@
  *
  * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version     $Id$
  * @link       http://www.digitaluscms.com
  * @since      Release 1.8.0
  */
@@ -138,7 +138,7 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
         // Module translations (are NOT separated into  'back' and 'front')
         if ($modules = Digitalus_Module::getModules()) {
             foreach ($modules as $module) {
-                $this->_addTranslation(APPLICATION_PATH . '/modules/' . $module . '/data/language/' . $languageFiles[$key] . '.csv', $key);
+                $this->_addTranslation(APPLICATION_PATH . '/modules/' . $module . '/data/languages/' . $languageFiles[$key] . '.csv', $key);
             }
         }
         return $adapter;
