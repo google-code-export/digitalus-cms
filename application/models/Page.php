@@ -1,15 +1,62 @@
 <?php
-require_once 'application/models/ContentNode.php';
+/**
+ * Digitalus CMS
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
+ *
+ * @category    Digitalus CMS
+ * @package     Digitalus_CMS_Models
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Page.php Mon Dec 24 20:38:38 EST 2007 20:38:38 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5
+ */
 
+/**
+ * @see Model_ContentNode
+ */
+require_once APPLICATION_PATH . '/models/ContentNode.php';
+
+/**
+ * @see Digitalus_Db_Table
+ */
+require_once 'Digitalus/Db/Table.php';
+
+/**
+ * Page model
+ *
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5
+ * @uses        Model_ContentNode
+ */
 class Model_Page extends Digitalus_Db_Table
 {
     protected $_name = 'pages';
     protected $_namespace = 'content';
     protected $_defaultTemplate = 'default';
     protected $_defaultPageName = 'New Page';
-    protected $_ignoredFields = array('update', 'version'); //these are the fields that are not saved as nodes
+    protected $_ignoredFields = array('update', 'version');     // these are the fields that are not saved as nodes
 
+    /**
+     * the regex that the pageName will be checked against
+     * underscores must NOT be allowed because empty spaces are replaced with underscores
+     */
     const PAGE_NAME_REGEX = '/^[a-zA-Z0-9- ]*$/';
+    /**
+     * this is the error message that will be displayed if the pageName doesn't match the regex
+     */
     const PAGE_NAME_REGEX_NOTMATCH = 'Please only use alphanumeric characters, hyphens and empty space!';
 
     const PUBLISH_ID   =  1;
