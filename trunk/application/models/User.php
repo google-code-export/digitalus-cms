@@ -17,13 +17,39 @@
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: User.php Mon Dec 24 20:38:38 EST 2007 20:38:38 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5
  */
 
+/**
+ * @see Digitalus_Db_Table
+ */
+require_once 'Digitalus/Db/Table.php';
+
+/**
+ * User model
+ *
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5
+ */
 class Model_User extends Digitalus_Db_Table
 {
+    /**
+     * The role of the superuser
+     */
     const SUPERUSER_ROLE = 'superadmin';
 
+    /**
+     * the regex that the userName will be checked against
+     */
     const USERNAME_REGEX = '/^[0-9a-zA-ZäöüÄÖÜß`\'´ ]*$/u';
+
+    /**
+     * this is the error message that will be displayed if the userName doesn't match the regex
+     */
     const USERNAME_REGEX_NOTMATCH = 'Please only use the following characters: 0-9a-zA-ZäöüÄÖÜß`\'´ and empty space!';
 
     /**
