@@ -27,7 +27,7 @@ if (file_exists('./install/install.php')) {
     // Create application
     $application = new Zend_Application(
         APPLICATION_ENV,
-        APPLICATION_PATH . '/configs/application.ini'
+        APPLICATION_PATH . '/admin/configs/application.ini'
     );
     // Bootstrap, and run application
     $application->bootstrap()
