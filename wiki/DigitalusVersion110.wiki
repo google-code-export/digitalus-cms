@@ -5,7 +5,7 @@
 In version 1.10 of the Digitalus CMS there have been some significant changes in the database structure, especially regarding the database _user_.
 This requires an update of the databases.
 
-= Significant changes and new Features =
+= Significant changes and new features =
 To clean up the directory structure, the _data_ and _configs_ directories have been moved into the _admin_ module directory.
 
 The _language_ directory has been renamed to _languages_ with a trailing _s_. This also affects the modules. Modules' translation files have to reside in a directory called _languages_.
