@@ -5,12 +5,16 @@
 In version 1.10 of the Digitalus CMS there have been some significant changes in the database structure, especially regarding the database _user_.
 This requires an update of the databases.
 
-= New Features =
-In version 1.10 some changes to the model _user_ have been made. It is now possible (and required) to define a username for each user.
-Users can now be (de)activated.
-This comes  along with a registration module to register new users via the frontend.
+= Significant changes and new Features =
+To clean up the directory structure, the _data_ and _configs_ directories have been moved into the _admin_ module directory.
 
-In modules until v1.10 it was only possible to assign a frontend action (PublicController) to a page. Now, it's possible to define the action Name via a url parameter. Simply add _/p/a/ACTIONNAME_ to the url and the action ACTIONNAME will be performed.
+The _language_ directory has been renamed to _languages_ with a trailing _s_. This also affects the modules. Modules' translation files have to reside in a directory called _languages_.
+
+In version 1.10 some changes to the model _user_ have been made. It is now possible (and required) to define a username for each user. In a first step, the email address is copied to use as username.
+Users can now be (de)activated.
+This comes along with a registration module to register new users via the frontend.
+
+In modules until v1.10 it was only possible to assign a frontend action (PublicController) to a page. Now it's possible to define the action name via a url parameter. Simply add _/p/a/ACTIONNAME_ to the url and the action _ACTIONNAME_ will be performed.
 
 = Upgrading from version 1.9 =
 If You want to upgrade Your installation from version 1.9 to 1.10, please perform the following steps:
