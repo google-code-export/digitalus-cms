@@ -10,14 +10,6 @@ To clean up the directory structure, the _data_ and _configs_ directories have b
 
 The _language_ directory has been renamed to _languages_ with a trailing _s_. This also affects the modules. Modules' translation files have to reside in a directory called _languages_.
 
-Please adjust the language path in Your config.xml as follows:
-{{{
-<language>
-    <path>./application/admin/data/languages</path>
-    ...
-</language>
-}}}
-
 In version 1.10 some changes to the model _user_ have been made. It is now possible (and required) to define a username for each user. In a first step, the email address is copied to use as username.
 Users can now be (de)activated.
 This comes along with a registration module to register new users via the frontend.
@@ -29,12 +21,19 @@ If You want to upgrade Your installation from version 1.9 to 1.10, please perfor
   * make a backup copy of both - all Your files and Your databases
   * Download the zip file of Digitalus v1.10
   * start Your webserver and log in into the admin area
-  * unzip the zip file and copy the contents in Your installation path (Your old Digitalus CMS contents will be overwritten, but *not* the configuration file)
   * Go to *_site_*
   * go to *_open console_* (on the left side)
+  * unzip the zip file and copy the contents in Your installation path (Your old Digitalus CMS contents will be overwritten, but *not* the configuration file)
   * type in the *_UpdateVersion110_* command (case-sensitive !!)
   * push the *_Info_* button to get a note about what's happening
   * push the *_run command_* button to run the command and update the databases
+  * adjust the language path in Your config.xml as follows:
+{{{
+<language>
+    <path>./application/admin/data/languages</path>
+    ...
+</language>
+}}}
   * done
 
 = Upgrading from older versions =
