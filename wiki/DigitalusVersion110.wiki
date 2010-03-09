@@ -10,6 +10,14 @@ To clean up the directory structure, the _data_ and _configs_ directories have b
 
 The _language_ directory has been renamed to _languages_ with a trailing _s_. This also affects the modules. Modules' translation files have to reside in a directory called _languages_.
 
+Please adjust the language path in Your config.xml as follows:
+{{{
+<language>
+    <path>./application/admin/data/languages</path>
+    ...
+</language>
+}}}
+
 In version 1.10 some changes to the model _user_ have been made. It is now possible (and required) to define a username for each user. In a first step, the email address is copied to use as username.
 Users can now be (de)activated.
 This comes along with a registration module to register new users via the frontend.
