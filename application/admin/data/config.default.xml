@@ -11,8 +11,10 @@
             <password></password>
             <dbname></dbname>
             <prefix></prefix>
+<!--
             <port></port>
             <charset></charset>
+-->
         </database>
         <template>
             <pathToTemplates>templates</pathToTemplates>
@@ -43,7 +45,7 @@
             <script>./scripts</script>
             <style>./styles</style>
             <image>./images</image>
-            <icons>images/icons</icons>
+            <icons>images/icons/silk</icons>
             <adminViews>./application/admin/views/scripts</adminViews>
         </filepath>
          <filetypes>
