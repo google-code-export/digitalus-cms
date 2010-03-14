@@ -38,7 +38,7 @@ Zend_Registry::set('language', $language);
 
 $adapter = new Zend_Translate(
     'csv',
-    './application/admin/data/language/back/' . $language . '.back.csv',
+    './application/admin/data/languages/back/' . $language . '.back.csv',
     $validLanguages[$language],
     array('disableNotices' => true)
     );
