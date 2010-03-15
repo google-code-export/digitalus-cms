@@ -16,7 +16,6 @@ if (file_exists('./install/install.php')) {
 } else {
     // Set include path to Zend (and other) libraries
     set_include_path(BASE_PATH . '/library' .
-        PATH_SEPARATOR . APPLICATION_PATH . '/models' .
         PATH_SEPARATOR . get_include_path() .
         PATH_SEPARATOR . '.'
     );
