@@ -52,7 +52,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     'namespace' => 'Admin_Form_',
                 ),
                 'model' => array(
-                    'path'      => 'models/',
+                    'path'      => 'admin/models/',
                     'namespace' => 'Model_'
                 ),
             ),
