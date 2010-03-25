@@ -6,6 +6,8 @@ In version 1.10 of the Digitalus CMS have been made some significant changes in 
 This requires an update of the databases. To achieve this, both an SQL file and a Digitalus Command are provided.
 
 = Significant changes and new features =
+Update of the zend Framework to version 1.10.2
+
 To clean up the directory structure, the _data_ and _configs_ directories have been moved into the _admin_ module directory.
 
 The _models_ directory has also been moved into the _admin_ module directory.
@@ -20,23 +22,39 @@ In modules until v1.10 it was only possible to assign a frontend action (PublicC
 
 Each page now has form fields for _label_ and _headline_. This makes it possible to add not only different page content for each language, but from now on also page labels. These labels appear in the menu respectively in breadcrumbs. This makes the menu fully translatable (a common user request).
 
-= Upgrading from version 1.9 =
+=Upgrading from version 1.9=
+==Using Digitalus_Command==
 If You want to upgrade Your installation from version 1.9 to 1.10, please perform the following steps:
   * make a backup copy of both - all Your files and Your databases
-  * Download the zip file of Digitalus v1.10
+  * download the zip file of Digitalus v1.10
   * start Your webserver and log in into the admin area
-  * Go to *_site_*
+  * go to *_site_*
   * go to *_open console_* (on the left side)
   * unzip the zip file and copy the contents in Your installation path (Your old Digitalus CMS contents will be overwritten, but *not* the configuration file)
   * type in the *_UpdateVersion110_* command (case-sensitive !!)
   * push the *_Info_* button to get a note about what's happening
   * push the *_run command_* button to run the command and update the databases
+  * done
+
+==Using SQL file==
+When upgrading using the provided SQL file, please perform the following steps:
+  * make a backup copy of both - all Your files and Your databases
+  * download the zip file of Digitalus v1.10
+  * run the SQL file (in the directory _application/admin/data/sql/_) on Your server.
   * adjust the language path in Your config.xml as follows:
 {{{
 <language>
     <path>./application/admin/data/languages</path>
     ...
 </language>
+}}}
+  * adjust the icon path in Your config.xml as follows:
+{{{
+<filepath>
+    ...
+    <icons>images/icons/silk</icons>
+    ...
+</filepath>
 }}}
   * done
 
