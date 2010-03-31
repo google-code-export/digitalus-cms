@@ -36,6 +36,21 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
 class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
 {
     /**
+     * JQUERY_VERSION - constant to be used application wide
+     */
+    const JQUERY_VERSION = 'jquery-1.4.2.min.js';
+
+    /**
+     * JQUERY_UI_VERSION - constant to be used application wide
+     */
+    const JQUERY_UI_VERSION = 'jquery-ui-1.8.custom.min.js';
+
+    /**
+     * JQUERY_UI_THEME - constant to be used application wide
+     */
+    const JQUERY_UI_THEME = 'jquery-ui-1.8.custom.css';
+
+    /**
      * @var Zend_Controller_Front
      */
     protected $_front;
@@ -175,9 +190,9 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
 
                 // add helpers
                 $this->view->addHelperPath('ZendX/JQuery/View/Helper', 'ZendX_JQuery_View_Helper');
-                $this->view->jQuery()->setLocalPath($this->view->getBaseUrl()   . '/scripts/jquery/jquery-1.4.2.min.js');
-                $this->view->jQuery()->setUiLocalPath($this->view->getBaseUrl() . '/scripts/jquery/jquery-ui-1.7.2.custom.min.js');
-                $this->view->jQuery()->addStylesheet($this->view->getBaseUrl()  . '/scripts/jquery/ui-theme/jquery-ui-1.7.2.custom.css');
+                $this->view->jQuery()->setLocalPath($this->view->getBaseUrl()   . '/scripts/jquery/' . self::JQUERY_VERSION);
+                $this->view->jQuery()->setUiLocalPath($this->view->getBaseUrl() . '/scripts/jquery/' . self::JQUERY_UI_VERSION);
+                $this->view->jQuery()->addStylesheet($this->view->getBaseUrl()  . '/scripts/jquery/ui-theme/' . self::JQUERY_UI_THEME);
                 $this->view->jQuery()->enable();
                 $this->view->jQUery()->uiEnable();
 

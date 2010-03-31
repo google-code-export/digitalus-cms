@@ -51,9 +51,16 @@ class Digitalus_View_Helper_Content_SelectLanguage extends Zend_View_Helper_Abst
         $siteVersions = $config->language->translations;
 
         foreach ($siteVersions as $locale => $label) {
-            $data[$locale] = $this->view->getTranslation($label);
+            $options[$locale] = $this->view->getTranslation($label);
         }
-
-        return $this->view->formSelect($name, $value, $attribs, $data);
+        $form   = new Digitalus_Form();
+        $select = $form->createElement('select', $name, array(
+            'multiOptions'  => $options,
+            'value'         => $value,
+        ));
+        if (is_array($attribs)) {
+            $select->setAttribs($attribs);
+        }
+        return $select;
     }
 }

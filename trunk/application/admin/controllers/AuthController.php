@@ -14,7 +14,7 @@
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: AuthController.php Mon Dec 24 20:48:35 EST 2007 20:48:35 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  */
@@ -31,7 +31,7 @@ require_once 'Zend/Controller/Action.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_CMS_Controllers
- * @version     $Id: AuthController.php Mon Dec 24 20:48:35 EST 2007 20:48:35 forrest lyman $
+ * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  * @uses        Admin_Form_Login
@@ -65,11 +65,12 @@ class Admin_AuthController extends Zend_Controller_Action
     public function loginAction()
     {
         $form = new Admin_Form_Login();
+        $form->setAction($this->view->getBaseUrl() . '/admin/auth/login');
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
             $uri = Digitalus_Filter_Post::get('uri');
-            $username = $form->getValue('adminUsername');
-            $password = $form->getValue('adminPassword');
+            $username = Digitalus_Filter_Post::get('adminUsername');
+            $password = Digitalus_Filter_Post::get('adminPassword');
 
             $auth = new Digitalus_Auth($username, $password);
             $result = $auth->authenticate();
@@ -97,6 +98,7 @@ class Admin_AuthController extends Zend_Controller_Action
     public function openidAction()
     {
         $form = new Admin_Form_OpenId();
+        $form->setAction($this->view->getBaseUrl() . '/admin/auth/openid');
 
         $this->view->status = '';
         if (($this->_request->isPost() && $form->isValid($_POST)

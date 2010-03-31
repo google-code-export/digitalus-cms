@@ -1,11 +1,14 @@
 <?php
 class Model_Menu extends Model_Page
 {
+    protected $_menuColumns = array('id', 'parent_id', 'publish_level', 'name', 'label', 'position', 'is_home_page', 'show_on_menu');
+
     public function getMenus()
     {
-        //todo: figure out how to do this with a pure select object
-        $sql = 'SELECT DISTINCT parent_id FROM ' . Digitalus_Db_Table::getTableName('pages');
-        $result = $this->_db->fetchAll($sql);
+        $select = $this->select()
+            ->from($this->_name, array('parent_id'))
+            ->distinct();
+        $result = $this->fetchAll($select);
         if ($result) {
             foreach ($result as $row) {
                 $ids[] = $row->parent_id;
@@ -18,7 +21,7 @@ class Model_Menu extends Model_Page
     {
         $menu = array();
         $children = $this->getChildren($menuId);
-        if ($children->count() > 0) {
+        if (isset($children) && $children->count() > 0) {
             if ($asRowset == true) {
                 return $children;
             } else {
@@ -44,11 +47,7 @@ class Model_Menu extends Model_Page
         if (!is_object($page)) {
             $page = $this->find($page)->current();
         }
-        if (!empty($page->label)) {
-            return $page->label;
-        } else {
-            return $page->name;
-        }
+        return $this->getLabelById($page->id);
     }
 
     public function getUrl($page)
@@ -75,5 +74,42 @@ class Model_Menu extends Model_Page
             return $page->save();
         }
         return false;
+    }
+
+    /**
+     * this function returns the children of a selected page
+     * you can pass it a page id (integer) or a page object
+     * you can optionally pass it an array of where clauses
+     *
+     * @param  mixed  $page
+     * @param  array  $where
+     * @param  string $order
+     * @param  string $limit
+     * @param  string $offset
+     * @return Zend_Db_Table_Rowset
+     */
+    public function getChildren($page, $where = array(), $order = null, $limit = null, $offset = null)
+    {
+        $id = $this->_getPageId($page);
+
+        $orNull = '';
+        if (0 == $id) {
+            $orNull = ' OR parent_id IS NULL';
+        }
+        $where = $this->_db->quoteInto('parent_id = ?' . $orNull, $id);
+
+        if (empty($order) || '' == $order) {
+            $order = 'position ASC';
+        }
+
+        $select = $this->select()
+            ->from($this->_name, $this->_menuColumns)
+            ->where($where);
+
+        $result = $this->fetchAll($select, $order, $limit, $offset);
+        if ($result->count() > 0) {
+            return $result;
+        }
+        return null;
     }
 }

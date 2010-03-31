@@ -14,7 +14,7 @@
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: PageController.php Tue Dec 25 19:38:20 EST 2007 19:38:20 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  */
@@ -31,7 +31,7 @@ require_once 'Zend/Controller/Action.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_CMS_Controllers
- * @version     $Id: PageController.php Tue Dec 25 19:38:20 EST 2007 19:38:20 forrest lyman $
+ * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  * @uses        Model_Page
@@ -40,10 +40,10 @@ require_once 'Zend/Controller/Action.php';
  */
 class Admin_PageController extends Zend_Controller_Action
 {
-    const META_ACTION = '/admin/page/update-meta-data';
+    const META_ACTION     = '/admin/page/update-meta-data';
     const PROPERTY_ACTION = '/admin/page/properties';
-    const RELATED_ACTION = '/admin/page/related-data';
-    const PUBLISH_ACTION = '/admin/page/publish';
+    const RELATED_ACTION  = '/admin/page/related-data';
+    const PUBLISH_ACTION  = '/admin/page/publish';
 
     /**
      * Initialize the action
@@ -53,7 +53,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Pages') => $this->getFrontController()->getBaseUrl() . '/admin/page'
+           $this->view->getTranslation('Pages') => $this->view->getBaseUrl() . '/admin/page'
         );
     }
 
@@ -76,52 +76,55 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function newAction()
     {
-        $formPage = new Admin_Form_Page();
+        $pageForm = new Admin_Form_Page();
+        $pageForm->setAction($this->view->getBaseUrl() . '/admin/page/new');
+        $pageForm->setAttrib('class', $pageForm->getAttrib('class') . ' columnar');
+
+        $createPageGroup = $pageForm->getDisplayGroup('createPageGroup');
+        $createPageGroup->setLegend($this->view->getTranslation('Create Page'));
+
         if (!$this->view->isAllowed('admin', 'page', 'publish')) {
-            $formPage->getElement('publish_pages')->setAttrib('disabled', 'disabled');
+            $pageForm->getElement('publish_pages')->setAttrib('disabled', 'disabled');
         }
-        if ($this->_request->isPost()) {
-            if ($formPage->isValid($_POST)) {
-                $this->_setCreateOptions($formPage->getValue('parent_id'),
-                                         $formPage->getElement('continue_adding_pages')->isChecked(),
-                                         $formPage->getValue('content_template'),
-                                         $formPage->getElement('show_on_menu')->isChecked(),
-                                         $formPage->getElement('publish_pages')->isChecked());
-                $page = new Model_Page();
 
-                $newPage = $page->createPage($formPage->getValue('page_name'),
-                                             $formPage->getValue('parent_id'),
-                                             $formPage->getValue('content_template'),
-                                             $formPage->getElement('show_on_menu')->isChecked(),
-                                             $formPage->getElement('publish_pages')->isChecked());
+        if ($this->_request->isPost() && $pageForm->isValid($_POST)) {
+            $this->_setCreateOptions($pageForm->getValue('parent_id'),
+                                     $pageForm->getElement('continue_adding_pages')->isChecked(),
+                                     $pageForm->getValue('content_template'),
+                                     $pageForm->getElement('show_on_menu')->isChecked(),
+                                     $pageForm->getElement('publish_pages')->isChecked());
 
-                if ($newPage) {
-                    if ($formPage->getElement('continue_adding_pages')->isChecked()) {
-                        $url = 'admin/page/new';
-                    } else {
-                        $url = 'admin/page/edit/id/' . $newPage->id;
-                    }
+            $page = new Model_Page();
+            $newPage = $page->createPage($pageForm->getValue('page_name'),
+                                         $pageForm->getValue('parent_id'),
+                                         $pageForm->getValue('content_template'),
+                                         $pageForm->getElement('show_on_menu')->isChecked(),
+                                         $pageForm->getElement('publish_pages')->isChecked());
+
+            if ($newPage) {
+                if ($pageForm->getElement('continue_adding_pages')->isChecked()) {
+                    $url = 'admin/page/new';
                 } else {
-                    $url = 'admin/page';
-                    $e = new Digitalus_View_Error();
-                    $e->add(
-                        $this->view->getTranslation('Sorry, there was an error adding your page')
-                    );
+                    $url = 'admin/page/edit/id/' . $newPage->id;
                 }
-                $formValues = $this->_getCreateOptions();
-                $this->_redirect($url);
+            } else {
+                $url = 'admin/page';
+                $e = new Digitalus_View_Error();
+                $e->add(
+                    $this->view->getTranslation('Sorry, there was an error adding your page')
+                );
             }
+            $formValues = $this->_getCreateOptions();
+            $this->_redirect($url);
         } else {
             $formValues = $this->_getCreateOptions();
-            $formPage->getElement('parent_id')->setValue($formValues->parent_id);
-            $formPage->getElement('continue_adding_pages')->setValue($formValues->continue);
-            $formPage->getElement('publish_pages')->setValue($formValues->publish_pages);
-            $formPage->getElement('show_on_menu')->setValue($formValues->show_on_menu);
-            $formPage->getElement('content_template')->setValue($formValues->content_template);
+            $pageForm->getElement('parent_id')->setValue($formValues->parent_id);
+            $pageForm->getElement('continue_adding_pages')->setValue($formValues->continue);
+            $pageForm->getElement('publish_pages')->setValue($formValues->publish_pages);
+            $pageForm->getElement('show_on_menu')->setValue($formValues->show_on_menu);
+            $pageForm->getElement('content_template')->setValue($formValues->content_template);
         }
-
-        $formPage->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/new');
-        $this->view->form = $formPage;
+        $this->view->form = $pageForm;
     }
 
     /**
@@ -133,8 +136,8 @@ class Admin_PageController extends Zend_Controller_Action
     {
         $page = new Model_Page();
         $pageId = $this->_request->getParam('id', 0);
-        $version = $this->_request->getParam('version', $page->getDefaultVersion());
-        $currentPage = $page->open($pageId, $version);
+        $language = $this->_request->getParam('language', $page->getDefaultLanguage());
+        $currentPage = $page->open($pageId, $language);
 
         // load the template and form
         $template = $page->getTemplate($pageId);
@@ -146,9 +149,10 @@ class Admin_PageController extends Zend_Controller_Action
         $templatePath = BASE_PATH . '/templates/public/' . $currentTemplate;
         $templateConfig = new Zend_Config_Xml($templatePath . '/pages/' . $currentTemplatePage . '.xml');
         $pageTemplate = new Digitalus_Interface_Template();
-        $form = $pageTemplate->getForm($templatePath . '/layouts/' . $templateConfig->layout);
 
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/page/edit');
+        $form = $pageTemplate->getForm($templatePath . '/layouts/' . $templateConfig->layout);
+        $form->setAttrib('class', $form->getAttrib('class') . ' columnar');
+        $form->setAction($this->view->getBaseUrl() . '/admin/page/edit');
 
         if (!is_object($currentPage)) {
             $url = 'admin/page';
@@ -171,14 +175,13 @@ class Admin_PageController extends Zend_Controller_Action
             } else {
                 $data = array();
             }
-
-            $data['id'] = $pageId;
-            $data['name'] = $currentPage->page->name;
-            $data['version'] = $version;
+            $data['id']       = $pageId;
+            $data['name']     = $currentPage->page->name;
+            $data['language'] = $language;
             $form->populate($data);
         }
 
-        $this->view->currentVersion = $version;
+        $this->view->currentVersion = $language;
         $this->view->pageId = $pageId;
 
         //main content form
@@ -196,19 +199,19 @@ class Admin_PageController extends Zend_Controller_Action
         $this->view->properties = $mdlProperties->asArray($pageId);
 
         //related pages
-        $this->view->relatedPages = $page->getRelatedPages($pageId);
+//        $this->view->relatedPages = $page->getRelatedPages($pageId);
 
         if (isset($currentPage->page->label) && !empty($currentPage->page->label)) {
             $label = $currentPage->page->label;
         } else {
             $label = $currentPage->page->name;
         }
-        $this->view->breadcrumbs[$this->view->getTranslation('Open') . ': ' . $label] = $this->getFrontController()->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
+        $this->view->breadcrumbs[$this->view->getTranslation('Open') . ': ' . $label] = $this->view->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
         $this->view->toolbarLinks = array();
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_page_edit_id_' . $pageId
             . '/label/' . $this->view->getTranslation('Page') . ':' . $currentPage->page->name;
-        $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
+        $this->view->toolbarLinks['Delete'] = $this->view->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
     }
 
     /**
@@ -405,7 +408,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function getMetaForm($data)
     {
         $form = new Admin_Form_PageMetaData();
-        $form->setAction($this->getFrontController()->getBaseUrl() . self::META_ACTION )
+        $form->setAction($this->view->getBaseUrl() . self::META_ACTION )
              ->setMethod('post');
 
         //set data
@@ -424,7 +427,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function getForm($data)
     {
         $form = new Zend_Form();
-        $form->setAction($this->getFrontController()->getBaseUrl() . self::PUBLISH_ACTION )
+        $form->setAction($this->view->getBaseUrl() . self::PUBLISH_ACTION )
              ->setMethod('post');
 
         $pageId = $form->createElement('hidden', 'page_id');

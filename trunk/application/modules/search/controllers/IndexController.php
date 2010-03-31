@@ -45,10 +45,10 @@ class Mod_Search_IndexController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Modules') => $this->getFrontController()->getBaseUrl() . '/admin/module',
-           $this->view->getTranslation('Search') => $this->getFrontController()->getBaseUrl() . '/mod_search'
+           $this->view->getTranslation('Modules') => $this->view->getBaseUrl() . '/admin/module',
+           $this->view->getTranslation('Search') => $this->view->getBaseUrl() . '/mod_search'
         );
-        $this->view->toolbarLinks[$this->view->getTranslation('Add to my bookmarks')] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks[$this->view->getTranslation('Add to my bookmarks')] = $this->view->getBaseUrl() . '/admin/index/bookmark'
             . '/url/mod_search'
             . '/label/' . $this->view->getTranslation('Module') . ':' . $this->view->getTranslation('Search');
     }

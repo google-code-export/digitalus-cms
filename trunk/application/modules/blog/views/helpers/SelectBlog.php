@@ -10,6 +10,8 @@ require_once './application/modules/blog/models/Blog.php';
  * SelectBlog helper
  *
  * @uses viewHelper Zend_View_Helper
+ * @uses Digitalus_Form
+ * @uses model Blog_Blog
  */
 class Zend_View_Helper_SelectBlog
 {
@@ -31,7 +33,12 @@ class Zend_View_Helper_SelectBlog
             foreach ($blogs as $blog) {
                 $options[$blog->id] = $blog->name;
             }
-            return $this->view->formSelect($name, $value, null, $options);
+            $form = new Digitalus_Form();
+            $select = $form->createElement('select', $name, array(
+                'multiOptions' => $options,
+                'belongsTo'    => 'module',
+            ));
+            return $select;
         }
     }
     /**

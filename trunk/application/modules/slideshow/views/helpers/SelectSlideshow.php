@@ -11,6 +11,8 @@ require_once './application/modules/slideshow/models/Show.php';
  * selectSlideshow helper
  *
  * @uses viewHelper Zend_View_Helper
+ * @uses Digitalus_Form
+ * @uses model Shadowbox_Show
  */
 class Digitalus_View_Helper_SelectSlideshow extends Zend_View_Helper_Abstract
 {
@@ -28,7 +30,12 @@ class Digitalus_View_Helper_SelectSlideshow extends Zend_View_Helper_Abstract
             foreach ($shows as $show) {
                 $options[$show->id] = $show->name;
             }
-            return $this->view->formSelect($name, $value, null, $options);
+            $form = new Digitalus_Form();
+            $select = $form->createElement('select', $name, array(
+                'multiOptions' => $options,
+                'belongsTo'    => 'module',
+            ));
+            return $select;
         }
     }
 }

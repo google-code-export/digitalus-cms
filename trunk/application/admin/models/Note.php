@@ -1,54 +1,47 @@
 <?php
-class Model_Note extends Model_ContentNode
+class Model_Note extends Model_UserNode
 {
-    protected $_type = 'note';
-    protected $_namespace = 'user';
+    protected $_name = 'user_notes';
 
-    public function getUsersNotes($userId = null)
+    public function getUsersNotes($userName = null)
     {
-        $identity = Digitalus_Auth::getIdentity();
-        $userId = $identity->id;
-
-        if ($userId > 0) {
-            $where[] = $this->_db->quoteInto('parent_id = ?', $this->_namespace . '_' . $userId);
-            $where[] = $this->_db->quoteInto('node = ?', $this->_type);
-            $row = $this->fetchRow($where);
-            if ($row) {
-                return $row;
-            } else {
-                //the row does not exist.  create it
-                $data = array(
-                    'content'   => 'You have no notes to view',
-                    'node'      => $this->_type,
-                    'parent_id' => $this->_namespace . '_' . $userId
-                );
-                $this->insert($data);
-                return $this->find($this->_db->lastInsertId())->current();
-            }
+        if (empty($userName) || '' == $userName) {
+            $identity = Digitalus_Auth::getIdentity();
+            $userName = $identity->name;
+        }
+        $where[] = $this->_db->quoteInto('user_name = ?', $userName);
+        $row = $this->fetchRow($where);
+        if ($row) {
+            return $row;
+        } else {
+            //the row does not exist. create it
+            $data = array(
+                'user_name' => $userName,
+                'content'   => $this->view->getTranslation('You have no notes to view'),
+            );
+            $this->insert($data);
+            return $this->find($this->_db->lastInsertId())->current();
         }
     }
 
-    public function saveUsersNotes($notes, $userId = null)
+    public function saveUsersNotes($notes, $userName = null)
     {
-        $identity = Digitalus_Auth::getIdentity();
-        $userId = $identity->id;
-
-        if ($userId > 0) {
-            $where[] = $this->_db->quoteInto('parent_id = ?', $this->_namespace . '_' . $userId);
-            $where[] = $this->_db->quoteInto('node = ?', $this->_type);
-            $row = $this->fetchRow($where);
-            if ($row) {
-                $row->content = $notes;
-                $row->save();
-            } else {
-                //the row does not exist.  create it
-                $data = array(
-                    'content'   => $notes,
-                    'node'      => $this->_type,
-                    'parent_id' => $this->_namespace . '_' . $userId
-                );
-                $this->insert($data);
-            }
+        if (empty($userName) || '' == $userName) {
+            $identity = Digitalus_Auth::getIdentity();
+            $userName = $identity->name;
+        }
+        $where[] = $this->_db->quoteInto('user_name = ?', $userName);
+        $row = $this->fetchRow($where);
+        if ($row) {
+            $row->content = $notes;
+            $row->save();
+        } else {
+            //the row does not exist.  create it
+            $data = array(
+                'user_name' => $userName,
+                'content'   => $notes,
+            );
+            $this->insert($data);
         }
     }
 }

@@ -38,6 +38,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.8.0
  * @uses        viewHelper Digitalus_View_Helper_Controls
+ * @uses        Digitalus_Form
  */
 class Digitalus_View_Helper_Controls_RadioXmlDeclaration extends Zend_View_Helper_Abstract
 {
@@ -47,13 +48,22 @@ class Digitalus_View_Helper_Controls_RadioXmlDeclaration extends Zend_View_Helpe
      * @param   array   $attribs
      * @return  string  HTML radio input element
      */
-    public function radioXmlDeclaration($name, $value, $attribs = null, $options = null, $listsep = "\n")
+    public function radioXmlDeclaration($name, $value, $attribs = null, $options = null, $listSep = "\n")
     {
         $options = array(
             'always'  => $this->view->getTranslation('Always'),
             'never'   => $this->view->getTranslation('Never'),
             'browser' => $this->view->getTranslation('By browser check'),
         );
-        return $this->view->formRadio($name, $value, $attribs, $options, $listsep);
+        $form = new Digitalus_Form();
+        $radio = $form->createElement('radio', $name, array(
+            'multiOptions'  => $options,
+            'value'         => $value,
+            'listSep'       => $listSep,
+        ));
+        if (is_array($attribs)) {
+            $radio->setAttribs($attribs);
+        }
+        return $radio;
     }
 }

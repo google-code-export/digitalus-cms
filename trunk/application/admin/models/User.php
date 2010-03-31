@@ -43,14 +43,17 @@ class Model_User extends Digitalus_Db_Table
     const SUPERUSER_ROLE = 'superadmin';
 
     /**
+     * the maximum lenght for user names (must correspond to length in database)
+     */
+    const USERNAME_LENGTH = 100;
+    /**
      * the regex that the userName will be checked against
      */
-    const USERNAME_REGEX = '/^[0-9a-zA-ZäöüÄÖÜß`\'´ ]*$/u';
-
+    const USERNAME_REGEX = '/^[0-9\p{L}`\'´ ]*$/u';
     /**
      * this is the error message that will be displayed if the userName doesn't match the regex
      */
-    const USERNAME_REGEX_NOTMATCH = 'Please only use the following characters: 0-9a-zA-ZäöüÄÖÜß`\'´ and empty space!';
+    const USERNAME_REGEX_NOTMATCH = 'Please only use alphanumeric characters, `\'´ and empty space!';
 
     /**
      * table name
@@ -59,11 +62,13 @@ class Model_User extends Digitalus_Db_Table
      */
     protected $_name = 'users';
 
+    public $primaryIndex = 'name';
+
     public function createUser($userName, $firstName, $lastName, $email, $password, $active = 0, $role = 'guest')
     {
         $data = array(
             'active'     => $active,
-            'username'   => $userName,
+            'name'       => $userName,
             'first_name' => $firstName,
             'last_name'  => $lastName,
             'email'      => $email,
@@ -73,11 +78,12 @@ class Model_User extends Digitalus_Db_Table
         if (!$this->userExists($userName)) {
             return $this->insert($data);
         }
+        return false;
     }
 
-    public function updatePassword($id, $password, $confirmationRequire = true, $confirmation = null)
+    public function updatePassword($userName, $password, $confirmationRequire = true, $confirmation = null)
     {
-        $person = $this->find($id)->current();
+        $person = $this->find($userName)->current();
         if ($person) {
             if ($confirmationRequire == true) {
                 if ($confirmation != $password) {
@@ -93,10 +99,10 @@ class Model_User extends Digitalus_Db_Table
         }
     }
 
-    public function updateAclResources($userId, $resourceArray)
+    public function updateAclResources($userName, $resourceArray)
     {
         $data['acl_resources'] = serialize($resourceArray);
-        $where[] = $this->_db->quoteInto('id = ?', $userId);
+        $where[] = $this->_db->quoteInto('name = ?', $userName);
         return $this->update($data, $where);
     }
 
@@ -112,8 +118,8 @@ class Model_User extends Digitalus_Db_Table
     public function getCurrentUser()
     {
         $currentUser = Digitalus_Auth::getIdentity();
-        if ($currentUser) {
-            return $this->find($currentUser->id)->current();
+        if (!empty($currentUser) && isset($currentUser->name)) {
+            return $this->find($currentUser->name)->current();
         }
     }
 
@@ -121,7 +127,7 @@ class Model_User extends Digitalus_Db_Table
     public function getCurrentUsersAclResources()
     {
         $currentUser = $this->getCurrentUser();
-        if ($currentUser) {
+        if (!empty($currentUser)) {
             return $this->getAclResources($currentUser);
         }
     }
@@ -181,10 +187,10 @@ class Model_User extends Digitalus_Db_Table
      * @param integer $user
      * @return boolean
      */
-    public function queryPermissions($resource, $strict = false, $userId = null)
+    public function queryPermissions($resource, $strict = false, $userName = null)
     {
-        if ($userId !== null) {
-            $user = $this->find($userId)->current();
+        if ($userName !== null) {
+            $user = $this->find($userName)->current();
             if (!$user) {
                 return false;
             }
@@ -210,9 +216,9 @@ class Model_User extends Digitalus_Db_Table
         return false;
     }
 
-    public function getUserFullNameById($id, $format = null)
+    public function getUserFullNameByUsername($userName, $format = null)
     {
-        $user = $this->getUserById($id);
+        $user = $this->getUserByUsername($userName);
         switch ((string)strtolower($format)) {
             case 'firstname':
                 return $user->first_name;
@@ -223,15 +229,9 @@ class Model_User extends Digitalus_Db_Table
         }
     }
 
-    public function getUserById($id)
-    {
-        $where[] = $this->_db->quoteInto('id = ?', $id, 'INTEGER');
-        return $this->fetchRow($where);
-    }
-
     public function getUserByUsername($userName)
     {
-        $where[] = $this->_db->quoteInto('username = ?', $userName);
+        $where[] = $this->_db->quoteInto('name = ?', $userName);
         return $this->fetchRow($where);
     }
 
@@ -251,14 +251,14 @@ class Model_User extends Digitalus_Db_Table
      * @since 0.8.7
      *
      * returns a hash of the current users
-     * their id is the key and their first_name . ' ' . last_name is the value
+     * their name is the key and their first_name . ' ' . last_name is the value
      *
      */
     public function getUserNamesArray()
     {
         $users = $this->fetchAll();
         foreach ($users as $user) {
-            $usersArray[$user->id] = $user->first_name . ' ' . $user->last_name;
+            $usersArray[$user->name] = $user->first_name . ' ' . $user->last_name;
         }
         return $usersArray;
     }
@@ -274,19 +274,22 @@ class Model_User extends Digitalus_Db_Table
     /**
      * This function checks if a user already exists
      *
-     * @param  string  $userName  The username to check for
+     * @param  string  $userName  The name to check for
+     * @param  string  $exclude   Usernames to exclude from check
      * @return boolean
      */
     public function userExists($userName, $exclude = null)
     {
         $userName = strtolower($userName);
-        $exclude = explode(', ', $exclude);
+        if (!is_array($exclude)) {
+            $exclude = array($exclude);
+        }
 
-        $where[] = $this->_db->quoteInto('LOWER(username) = ?', $userName);
+        $where[] = $this->_db->quoteInto('LOWER(name) = ?', $userName);
         foreach ($exclude as $exclusion) {
             $exclusion = trim($exclusion);
             if (isset($exclusion) && !empty($exclusion) && '' != $exclusion) {
-                $where[] = $this->_db->quoteInto('LOWER(username) != ?', $exclusion);
+                $where[] = $this->_db->quoteInto('LOWER(name) != ?', $exclusion);
             }
         }
         $result = $this->fetchAll($where, null, 1);
@@ -297,14 +300,32 @@ class Model_User extends Digitalus_Db_Table
     }
 
     /**
-     * This function checks if a user has already been activated
+     * This function checks if a specified openId already exists
      *
-     * @param  int $userId The user id to check
+     * @param  string  $openId  The openId to check for
      * @return boolean
      */
-    public function isActive($userId)
+    public function openIdExists($openId)
     {
-        $where[] = $this->_db->quoteInto('id = ?', $userId, 'INTEGER');
+        $openId = strtolower($openId);
+
+        $where[] = $this->_db->quoteInto('LOWER(openid) = ?', $openId);
+        $result = $this->fetchAll($where, null, 1);
+        if ($result->count() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * This function checks if a user has already been activated
+     *
+     * @param  int $userName The name to check
+     * @return boolean
+     */
+    public function isActive($userName)
+    {
+        $where[] = $this->_db->quoteInto('name = ?', $userName);
         $where[] = $this->_db->quoteInto('active = ?', 1, 'TINYINT');
         $result = $this->fetchAll($where, null, 1);
         if ($result->count() > 0) {
@@ -316,26 +337,26 @@ class Model_User extends Digitalus_Db_Table
     /**
      * This function activates a user
      *
-     * @param  int $userId The user id to activate
+     * @param  int $userName The name to activate
      * @return int Number of rows updated
      */
-    public function activate($userId)
+    public function activate($userName)
     {
         $data['active'] = 1;
-        $where[] = $this->_db->quoteInto('id = ?', $userId, 'INTEGER');
+        $where[] = $this->_db->quoteInto('name = ?', $userName);
         return $this->update($data, $where);
     }
 
     /**
      * This function deactivates a user
      *
-     * @param  int $userId The user id to deactivate
+     * @param  int $userName The name to deactivate
      * @return int Number of rows updated
      */
-    public function deactivate($userId)
+    public function deactivate($userName)
     {
         $data['active'] = 0;
-        $where[] = $this->_db->quoteInto('id = ?', $userId, 'INTEGER');
+        $where[] = $this->_db->quoteInto('name = ?', $userName);
         return $this->update($data, $where);
     }
 }

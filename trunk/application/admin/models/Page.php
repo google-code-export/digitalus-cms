@@ -24,7 +24,7 @@
 /**
  * @see Model_ContentNode
  */
-require_once APPLICATION_PATH . '/models/ContentNode.php';
+require_once APPLICATION_PATH . '/admin/models/PageNode.php';
 
 /**
  * @see Digitalus_Db_Table
@@ -43,17 +43,22 @@ require_once 'Digitalus/Db/Table.php';
  */
 class Model_Page extends Digitalus_Db_Table
 {
-    protected $_name = 'pages';
-    protected $_namespace = 'content';
+    protected $_name            = 'pages';
+    protected $_namespace       = 'content';
     protected $_defaultTemplate = 'default';
     protected $_defaultPageName = 'New Page';
-    protected $_ignoredFields = array('update', 'version');     // these are the fields that are not saved as nodes
+    protected $_ignoredFields   = array('id', 'language', 'label', 'headline');   // these are the fields that are not saved as nodes
+    public    $primaryIndex     = 'id';
 
+    /**
+     * the maximum lenght for page names (must correspond to length in database)
+     */
+    const PAGE_NAME_LENGTH = 100;
     /**
      * the regex that the pageName will be checked against
      * underscores must NOT be allowed because empty spaces are replaced with underscores
      */
-    const PAGE_NAME_REGEX = '/^[a-zA-Z0-9- ]*$/';
+    const PAGE_NAME_REGEX = "/^[\p{L}0-9- .,;'!]*$/u";
     /**
      * this is the error message that will be displayed if the pageName doesn't match the regex
      */
@@ -73,17 +78,17 @@ class Model_Page extends Digitalus_Db_Table
         self::ARCHIVE_ID   => self::ARCHIVE_STATUS,
     );
 
-    public function getContent($uri, $version = null)
+    public function getContent($uri, $language = null)
     {
-        if ($version == null) {
-            $version = $this->getDefaultVersion();
+        if ($language == null) {
+            $language = $this->getDefaultLanguage();
         }
 
         $uriObj = new Digitalus_Uri($uri);
         $pointer = $this->fetchPointer($uriObj->toArray());
-        $node = new Model_ContentNode();
+        $pageNode = new Model_PageNode();
         //fetch the content nodes
-        return $node->fetchContentArray($pointer, null, null, $version);
+        return $pageNode->fetchContentArray($pointer, null, $language);
     }
 
     public function getCurrentUsersPages($order = null, $limit = null)
@@ -92,7 +97,7 @@ class Model_Page extends Digitalus_Db_Table
         $currentUser = $user->getCurrentUser();
         if ($currentUser) {
             $select = $this->select();
-            $select->where('author_id = ?', $currentUser->id);
+            $select->where('user_name = ?', $currentUser->name);
             $select->where('namespace = ?', $this->_namespace);
             if ($order != null) {
                 $select->order($order);
@@ -107,7 +112,7 @@ class Model_Page extends Digitalus_Db_Table
                 return null;
             }
         } else {
-            throw new Digitalus_Exception($this->getView()->getTranslation('There is no user logged in currently'));
+            throw new Digitalus_Exception($this->view->getTranslation('There is no user logged in currently'));
         }
     }
 
@@ -150,9 +155,9 @@ class Model_Page extends Digitalus_Db_Table
         $u = new Model_User();
         $user = $u->getCurrentUser();
         if ($user) {
-            $userId = $user->id;
+            $userName = $user->name;
         } else {
-            $userId = 0;
+            $userName = NULL;
         }
 
         //first create the new page
@@ -161,7 +166,7 @@ class Model_Page extends Digitalus_Db_Table
             'create_date'      => $time,
             'publish_date'     => $publishDate,
             'publish_level'    => $publishLevel,
-            'author_id'        => $userId,
+            'user_name'        => $userName,
             'name'             => $pageName,
             'content_template' => $contentTemplate,
             'parent_id'        => $parentId,
@@ -184,10 +189,10 @@ class Model_Page extends Digitalus_Db_Table
         }
     }
 
-    public function open($pageId, $version = null)
+    public function open($pageId, $language = null)
     {
-        if ($version == null) {
-            $version = $this->getDefaultVersion();
+        if ($language == null) {
+            $language = $this->getDefaultLanguage();
         }
 
         $currentPage = $this->find($pageId)->current();
@@ -195,16 +200,14 @@ class Model_Page extends Digitalus_Db_Table
             $page = new stdClass();
             $page->page = $currentPage;
 
-            $node = new Model_ContentNode();
-
+            $pageNode = new Model_PageNode();
             //fetch the content nodes
-            $page->content = $node->fetchContentArray($pageId, null, null, $version);
-            $page->defaultContent = $node->fetchContentArray($pageId, null, null, $this->getDefaultVersion());
+            $page->content = $pageNode->fetchContentArray($pageId, null, $language);
+            $page->defaultContent = $pageNode->fetchContentArray($pageId, null, $this->getDefaultLanguage());
 
             return $page;
-        } else {
-            return null;
         }
+        return null;
     }
 
     public function pageExists(Digitalus_Uri $uri)
@@ -220,7 +223,7 @@ class Model_Page extends Digitalus_Db_Table
     {
         $pageId = isset($pageArray['id']) ? $pageArray['id'] : $pageArray['page_id'];
         if (!$pageId) {
-            throw new Digitalus_Exception($this->getView()->getTranslation('Invalid Page: No key found for id'));
+            throw new Digitalus_Exception($this->view->getTranslation('Invalid Page: No key found for id'));
         } else {
             unset($pageArray['page_id']);
             $name = '';
@@ -232,32 +235,41 @@ class Model_Page extends Digitalus_Db_Table
             //save the page details
             $currentPage = $this->find($pageId)->current();
             if (!$currentPage) {
-                throw new Digitalus_Exception($this->getView()->getTranslation('Could not load page'));
+                throw new Digitalus_Exception($this->view->getTranslation('Could not load page'));
             } else {
                 $currentPage->name = $name;
                 $currentPage->save();
             }
 
-            //page version
-            if (isset($pageArray['version']) && !empty($pageArray['version'])) {
-                $version = $pageArray['version'];
+            //page language
+            if (isset($pageArray['language']) && !empty($pageArray['language'])) {
+                $language = $pageArray['language'];
             } else {
                 $siteSettings = new Model_SiteSettings();
-                $version = $this->getDefaultVersion();
+                $language = $this->getDefaultLanguage();
             }
-            //update the content
-            $contentNode = new Model_ContentNode();
+            // page label
+            $label = null;
+            if (isset($pageArray['label']) && !empty($pageArray['label'])) {
+                $label = $pageArray['label'];
+            }
+            // page headline
+            $headline = null;
+            if (isset($pageArray['headline']) && !empty($pageArray['headline'])) {
+                $headline = $pageArray['headline'];
+            }
 
+            //update the content
+            $pageNode = new Model_PageNode();
             if (count($pageArray) > 0) {
                 foreach ($pageArray as $node => $content) {
-                    if (!in_array($node, $this->_ignoredFields)) {
-                        $contentNode->set($pageId, $node, $content, $version);
+                    if (!in_array($node, $this->_ignoredFields) && !empty($content) && '' != $content) {
+                        $pageNode->set($pageId, $node, $content, $language, $label, $headline);
                     }
                 }
             }
-
             $this->_flushCache();
-            return $this->open($pageId, $version);
+            return $this->open($pageId, $language);
         }
     }
 
@@ -268,11 +280,11 @@ class Model_Page extends Digitalus_Db_Table
 
     public function getVersions($pageId)
     {
-        $node = new Model_ContentNode();
-        return $node->getVersions('page_' . $pageId);
+        $pageNode = new Model_PageNode();
+        return $pageNode->getVersions($pageId);
     }
 
-    public function getDefaultVersion()
+    public function getDefaultLanguage()
     {
         $settings = new Model_SiteSettings();
         return $settings->get('default_language');
@@ -326,10 +338,10 @@ class Model_Page extends Digitalus_Db_Table
         $this->delete($where);
 
         //delete content nodes
-        unset($where);
-        $mdlNodes = new Model_ContentNode();
-        $where[] = $this->_db->quoteInto('parent_id = ?', 'page_' . $pageId, 'STRING');
-        $mdlNodes->delete($where);
+#        unset($where);
+#        $mdlNodes = new Model_PageNode();
+#        $where[] = $this->_db->quoteInto('parent_id = ?', $pageId, 'INTEGER');
+#        $mdlNodes->delete($where);
 
         //delete meta data
         $mdlMeta = new Model_MetaData();
@@ -468,30 +480,32 @@ class Model_Page extends Digitalus_Db_Table
     {
         $id = $this->_getPageId($page);
 
-        $where[] = $this->_db->quoteInto('parent_id = ?', $id);
+        $orNull = '';
+        if (0 == $id) {
+            $orNull = ' OR parent_id IS NULL';
+        }
+        $where[] = $this->_db->quoteInto('parent_id = ?' . $orNull, $id);
 
-        if ($order == null) {
+        if (empty($order) || '' == $order) {
             $order = 'position ASC';
         }
 
         $result = $this->fetchAll($where, $order, $limit, $offset);
         if ($result->count() > 0) {
             return $result;
-        } else {
-            return null;
         }
+        return null;
     }
 
     public function getPages($treeItems)
     {
-         if ($treeItems->count() > 0) {
+        if ($treeItems->count() > 0) {
             foreach ($treeItems as $row) {
                 $arrIds[] = $row->id;
             }
             return $this->find($arrIds);
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -543,10 +557,8 @@ class Model_Page extends Digitalus_Db_Table
 
         if ($this->fetchRow($where)) {
             return true;
-        } else {
-            return false;
         }
-
+        return false;
     }
 
     /**
@@ -566,9 +578,8 @@ class Model_Page extends Digitalus_Db_Table
 
         if ($this->fetchRow($where)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -580,14 +591,12 @@ class Model_Page extends Digitalus_Db_Table
     public function hasChildren($page)
     {
         $pageId = $this->_getPageId($page);
-
         $where[] = $this->_db->quoteInto('parent_id = ?', $pageId);
 
         if ($this->fetchRow($where)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -629,6 +638,9 @@ class Model_Page extends Digitalus_Db_Table
      * if not it will index the whole site
      *
      * @param int $parentId
+     * @param string $path
+     * @param string $pathSeparator
+     * @param string $order
      */
     private function _indexPages($parentId = 0, $path = null, $pathSeparator = '/', $order = null)
     {
@@ -696,17 +708,6 @@ class Model_Page extends Digitalus_Db_Table
         $this->removeChildren($page);
     }
 
-    public function makeHomePage($pageId)
-    {
-        $data['is_home_page'] = 0;
-        $this->update($data);
-
-        unset($data);
-        $data['is_home_page'] = 1;
-        $where[] = $this->_db->quoteInto('id = ?', $pageId);
-        $this->update($data, $where);
-    }
-
     public function select($withFromPart = self::SELECT_WITHOUT_FROM_PART)
     {
         $select = parent::select($withFromPart);
@@ -714,13 +715,30 @@ class Model_Page extends Digitalus_Db_Table
         return $select;
     }
 
+    public function getLabelById($pageId, $language = null)
+    {
+        if ($language == null) {
+            $language = Digitalus_Language::getLanguage();
+        }
+
+        $pageNode = new Model_PageNode();
+        //fetch the content nodes
+        $info = $pageNode->fetchContentArray($pageId, 'label', $language);
+        if (isset($info['label']) && '' != $info['label']) {
+            return $info['label'];
+        } else {
+            $where[] = $this->_db->quoteInto('id = ?', $pageId);
+            $row = $this->fetchRow($where);
+            return $row->name;
+        }
+    }
+
     static function isHomePage($page)
     {
-        if (is_object($page) && $page->page->is_home_page == 1) {
+        if (is_object($page) && $this->getHomePage() == $page->id) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function getHomePage()
@@ -765,13 +783,12 @@ class Model_Page extends Digitalus_Db_Table
      * @param  mixed $page
      * @return unknown
      */
-    private function _getPageId($page)
+    protected function _getPageId($page)
     {
         if (is_object($page)) {
             return $page->id;
-        } else {
-            return intval($page);
         }
+        return intval($page);
     }
 
     /**
@@ -823,11 +840,9 @@ class Model_Page extends Digitalus_Db_Table
                 //set the parent id to the current pointer to traverse down the tree
                 $parent = $pointer;
             }
-
             return $pointer;
-        } else {
-            return $this->getHomePage();
         }
+        return $this->getHomePage();
     }
 
     private function _getPageByLabel($label, $parent = 0)
@@ -838,9 +853,8 @@ class Model_Page extends Digitalus_Db_Table
             $page = $this->fetchRow($where);
             if ($page) {
                 return $page->id;
-            } else {
-                return null;
             }
+            return null;
         }
     }
 
@@ -967,9 +981,8 @@ class Model_Page extends Digitalus_Db_Table
                 $pageIds[] = $page->id;
             }
             return $pageIds;
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**

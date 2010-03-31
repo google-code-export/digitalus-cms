@@ -13,7 +13,7 @@ $this->jQuery()->onLoadCaptureStart();?>
     });<?php
 $this->jQuery()->onLoadCaptureEnd()?>
 
-<form action="<?php echo $this->getBaseUrl();?>/admin/page/update-properties" method="post" class="formBox" id="propertiesForm">
+<form action="<?php echo $this->getBaseUrl();?>/admin/page/update-properties" method="post" class="yform formBox" id="propertiesForm">
 <?php echo $this->formHidden('page_id', $this->page->page->id);?>
     <p id="propLabels">
         <span><?php echo $this->getTranslation('Property');?></span>

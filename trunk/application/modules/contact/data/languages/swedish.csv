@@ -5,8 +5,8 @@
 "Contact Form";"Kontakt Formulär"
 # admin section – Contact --
 "Contact";"Kontakt"
-"Module";
-"Options";
+"Module"
+"Options"
 "The contact module enables you to publish contact forms on your site.";"Kontaktmodulen kan du publicera ett kontaktformulär på din webbplats."
 "You can set the following options on the contact form:";"Du kan ställa in följande alternativ om kontaktformulär:"
 "Recipient";"Mottagare"
@@ -19,7 +19,7 @@
 "Invalid email address!";"Din e-post är inte korrekt!"
 "Subject";"Ämne"
 "The subject is required!";"Ämne är obligatoriskt!"
-"Message";
+"Message"
 "The message is required!";"Meddelande är obligatoriskt!"
 "Please verify you're a human";"Kontrollera att du är mänsklig"
 "Send Message";"Skicka Meddelande"

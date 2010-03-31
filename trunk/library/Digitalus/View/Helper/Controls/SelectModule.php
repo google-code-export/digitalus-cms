@@ -43,24 +43,42 @@ class Digitalus_View_Helper_Controls_SelectModule extends Zend_View_Helper_Abstr
 {
     public function selectModule($name, $value, $attribs = null)
     {
-        $modules = Digitalus_Filesystem_Dir::getDirectories('./application/modules');
+        $options = array();
+        $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
         if (is_array($modules)) {
-            $data[] = $this->view->getTranslation('Select a module');
+            $options[] = $this->view->getTranslation('Select a module');
+            $options = array_merge($options, $this->_getModuleForms());
+            $attribs['multiple'] = false;
+            $form = new Digitalus_Form();
+            $select = $form->createElement('select', $name, array(
+                'multiOptions' => $options,
+                'belongsTo'    => 'module',
+            ));
+            return $select;
+        } else {
+            return $this->view->getTranslation('There are no modules currently installed');
+        }
+    }
+
+    protected function _getModuleForms()
+    {
+        $moduleForms = array();
+        $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
+        if (is_array($modules)) {
             foreach ($modules as $module) {
-                $pages = Digitalus_Filesystem_File::getFilesByType('./application/modules/' . $module . '/views/scripts/public', 'phtml');
+                $pages = Digitalus_Filesystem_File::getFilesByType(APPLICATION_PATH . '/modules/' . $module . '/views/scripts/public', 'phtml');
                 if (is_array($pages)) {
                     foreach ($pages as $page) {
-                        if (!strpos($page, '.form.')) {
+                        if (strpos($page, '.form.')) {
                             $page = Digitalus_Toolbox_Regex::stripFileExtension($page);
-                            $data[$module . '_' . $page] = $this->view->getTranslation($module) . ' -> ' . $page;
+                            $page = str_replace('.form', '', $page);
+                            $moduleForms[$module . '_' . $page] = $this->view->getTranslation($module) . ' -> ' . $page;
                         }
                     }
                 }
             }
-            $attribs['multiple'] = false;
-            return $this->view->formSelect($name, $value, $attribs, $data);
-        } else {
-            return $this->view->getTranslation('There are no modules currently installed');
+            return $moduleForms;
         }
+        return false;
     }
 }

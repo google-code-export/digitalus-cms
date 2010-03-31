@@ -26,16 +26,10 @@ if (is_array($groups)) {
 }
 
 $this->form->setAction($this->form->getAction())
-           ->setMethod('post')
-           ->setAttrib('enctype', 'multipart/form-data')
            ->setDecorators(array(
                 'FormElements',
                 'Form',
                 array('FormErrors', array('placement' => 'prepend'))
-           ))
-            ->setDisplayGroupDecorators(array(
-                'FormElements',
-                'Fieldset'
            ));
 
 $displayGroups = $this->form->getDisplayGroups();

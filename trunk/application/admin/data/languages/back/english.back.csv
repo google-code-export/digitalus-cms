@@ -1,5 +1,6 @@
 # Language File – BACKEND
 # ENGLISH
+"Digitalus CMS";"Digitalus CMS"
 # languages
 "english"
 "french"
@@ -231,8 +232,8 @@
 "Default email address"
 "Default sender"
 "Transport"
-"Use SMTP transport "
-"SMTP host"
+"Use SMTP transport""
+SMTP host"
 "SMTP username"
 "SMTP password"
 "Update Mail Settings"

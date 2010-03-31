@@ -45,37 +45,41 @@ class Admin_Form_PageMetaData extends Digitalus_Form
      */
     public function init()
     {
+        parent::init();
+
+        $view = $this->getView();
+
         $pageId = $this->createElement('hidden', 'page_id');
         $pageId->addFilter('int');
 
         $pageTitle = $this->createElement('text', 'page_title');
-        $pageTitle->setLabel($this->getView()->getTranslation('Page Title') . ':')
+        $pageTitle->setLabel($view->getTranslation('Page Title') . ':')
                   ->addFilter('StripTags')
                   ->setAttrib('class', 'med');
 
         $filename = $this->createElement('text', 'filename');
-        $filename->setLabel($this->getView()->getTranslation('Filename') . ':')
+        $filename->setLabel($view->getTranslation('Filename') . ':')
                  ->addFilter('StripTags')
                  ->setAttrib('class', 'med');
 
         $metaDescription = $this->createElement('textarea', 'meta_description');
-        $metaDescription->setLabel($this->getView()->getTranslation('Meta Description') . ':')
+        $metaDescription->setLabel($view->getTranslation('Meta Description') . ':')
                         ->addFilter('StripTags')
                         ->setAttrib('class', 'med_short');
 
 
         $metaKeywords = $this->createElement('textarea', 'keywords');
-        $metaKeywords->setLabel($this->getView()->getTranslation('Meta Keywords') . ':')
+        $metaKeywords->setLabel($view->getTranslation('Meta Keywords') . ':')
                      ->addFilter('StripTags')
                      ->setAttrib('class', 'med_short');
 
         $searchTags = $this->createElement('textarea', 'search_tags');
-        $searchTags->setLabel($this->getView()->getTranslation('Search Tags') . ':')
+        $searchTags->setLabel($view->getTranslation('Search Tags') . ':')
                    ->addFilter('StripTags')
                    ->setAttrib('class', 'med_short');
 
         $submit = $this->createElement('submit', 'update');
-        $submit->setLabel($this->getView()->getTranslation('Update Meta Data'));
+        $submit->setLabel($view->getTranslation('Update Meta Data'));
 
         // Add elements to form:
         $this->addElement($pageId)
@@ -85,5 +89,11 @@ class Admin_Form_PageMetaData extends Digitalus_Form
              ->addElement($metaKeywords)
              ->addElement($searchTags)
              ->addElement($submit);
+
+        $this->addDisplayGroup(
+            array('form_instance', 'id', 'page_title', 'filename', 'meta_description', 'keywords', 'search_tags', 'update'),
+            'updatePageMetaDataGroup',
+            array('legend' => $view->getTranslation('Edit Meta Data'))
+        );
     }
 }

@@ -16,33 +16,35 @@ class Digitalus_Installer_Config
     {
         if (file_exists(self::PATH_TO_CONFIG) && @simplexml_load_file(self::PATH_TO_CONFIG)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function isWritable()
     {
         if (!is_writeable(self::PATH_TO_CONFIG) && @!chmod(self::PATH_TO_CONFIG, 0666)) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
     public function loadFile()
     {
-        $this->_innerData = simplexml_load_file(self::PATH_TO_CONFIG);
+        $this->set(simplexml_load_file(self::PATH_TO_CONFIG));
         if ($this->_innerData) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function get()
     {
         return $this->_innerData;
+    }
+
+    public function set(SimpleXMLElement $xml)
+    {
+        $this->_innerData = $xml;
     }
 
     public function getInstallDate()
@@ -94,6 +96,10 @@ class Digitalus_Installer_Config
 
     public function save()
     {
-        $this->_innerData->asXml(self::PATH_TO_CONFIG);
+        if ($this->isWritable()) {
+            $this->_innerData->asXml(self::PATH_TO_CONFIG);
+            return true;
+        }
+        return false;
     }
 }

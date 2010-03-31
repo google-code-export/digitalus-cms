@@ -1,8 +1,7 @@
 <?php $this->placeholder('optionsHeadline')->set($this->getTranslation('My Content'));
 
-echo $this->renderText('The following pages are the pages that you have recently created.', 'p class="padding-10"');
-
-if ($this->pages) { ?>
+if ($this->pages) {
+    echo $this->renderText('The following pages are the pages that you have recently created.', 'p class="padding-10"');?>
     <ul class="padding-10"><?php
     foreach ($this->pages as $page) {
         if (isset($page->label) && !empty($page->label)) {

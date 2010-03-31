@@ -1,58 +1,50 @@
 <?php
-class Model_Bookmark extends Model_ContentNode
+class Model_Bookmark extends Model_UserNode
 {
-    protected $_type = 'bookmark';
+    protected $_name = 'user_bookmarks';
 
-    public function getUsersBookmarks($userId = null)
+    public function getUsersBookmarks($userName = null)
     {
-        $identity = Digitalus_Auth::getIdentity();
-        $userId = $identity->id;
-
-        if ($userId > 0) {
-            $where[] = $this->_db->quoteInto('parent_id = ?', $userId);
-            $where[] = $this->_db->quoteInto('content_type=?', $this->_type);
-            $order = 'node DESC';
-            $result = $this->fetchAll($where, $order);
-            if ($result->count() > 0) {
-                return $result;
-            }
+        if (empty($userName) || '' == $userName) {
+            $identity = Digitalus_Auth::getIdentity();
+            $userName = $identity->name;
+        }
+        $where[] = $this->_db->quoteInto('user_name = ?', $userName);
+        $order = 'label';
+        $result = $this->fetchAll($where, $order);
+        if ($result->count() > 0) {
+            return $result;
         }
     }
 
-    public function addUsersBookmark($label, $url, $userId = null)
+    public function addUsersBookmark($label, $url, $userName = null)
     {
-        $identity = Digitalus_Auth::getIdentity();
-        $userId = $identity->id;
-
-        if ($userId > 0) {
-            $where[] = $this->_db->quoteInto('parent_id = ?', $userId);
-            $where[] = $this->_db->quoteInto('node=?', $label);
-            $where[] = $this->_db->quoteInto('content_type=?', $this->_type);
-            $row = $this->fetchRow($where);
-            if (!$row) {
-                //the row does not exist.  create it
-                $data = array(
-                    'content'      => $url,
-                    'node'         => $label,
-                    'content_type' => $this->_type,
-                    'parent_id'    => $userId
-                );
-                $this->insert($data);
-            }
+        if (empty($userName) || '' == $userName) {
+            $identity = Digitalus_Auth::getIdentity();
+            $userName = $identity->name;
+        }
+        $where[] = $this->_db->quoteInto('user_name = ?', $userName);
+        $row = $this->fetchRow($where);
+        if (!$row) {
+            //the row does not exist. create it
+            $data = array(
+                'user_name' => $userName,
+                'label'     => $label,
+                'url'       => $url,
+            );
+            $this->insert($data);
         }
     }
 
     public function deleteBookmark($id)
     {
-        $identity = Digitalus_Auth::getIdentity();
-        $userId = $identity->id;
-
-        if ($userId > 0) {
-            $where[] = $this->_db->quoteInto('parent_id = ?', $userId);
-            $where[] = $this->_db->quoteInto('id=?', $id);
-            $where[] = $this->_db->quoteInto('content_type=?', $this->_type);
-            return $this->delete($where);
+        if (empty($userName) || '' == $userName) {
+            $identity = Digitalus_Auth::getIdentity();
+            $userName = $identity->name;
         }
+        $where[] = $this->_db->quoteInto('user_name = ?', $userName);
+        $where[] = $this->_db->quoteInto('id = ?', $id);
+        return $this->delete($where);
     }
 
 }

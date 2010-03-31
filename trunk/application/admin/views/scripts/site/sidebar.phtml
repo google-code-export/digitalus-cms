@@ -12,7 +12,7 @@ foreach ($users as $user) {
         $icon = 'user.png';
     }
 
-    $userArray[] = $this->link($user->first_name . ' ' . $user->last_name, '/admin/user/open/id/' . $user->id, $icon);
+    $userArray[] = $this->link($user->first_name . ' ' . $user->last_name, '/admin/user/open/username/' . $user->name, $icon);
 }
 $userArray[] = $this->link('Create new user', '/admin/user/create', 'user_add.png');
 ?>

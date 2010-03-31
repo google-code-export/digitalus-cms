@@ -2,33 +2,30 @@
 
 echo $this->render('page/edit/content.phtml');
 
-if ($this->isAllowed('admin', 'page', 'update-meta-data')) {?>
-<fieldset id="meta">
-    <legend><?php echo $this->getTranslation('Edit Meta Data');?></legend>
-    <?php echo $this->render('page/edit/meta.phtml');?>
-</fieldset><?php
+if ($this->isAllowed('admin', 'page', 'update-meta-data')) {
+    echo '<div id="meta">';
+    echo $this->render('page/edit/meta.phtml');
+    echo '</div>';
 }
-if ($this->isAllowed('admin', 'page', 'update-properties')) {?>
-<fieldset id="properties">
-    <legend><?php echo $this->getTranslation('Edit Page Properties');?></legend>
-    <?php echo $this->render('page/edit/properties.phtml');?>
-</fieldset><?php
+if ($this->isAllowed('admin', 'page', 'update-properties')) {
+    echo '<div id="properties">';
+    echo '<legend>' . $this->getTranslation('Edit Page Properties') . '</legend>';
+    echo $this->render('page/edit/properties.phtml');
+    echo '</div>';
 }
-if ($this->isAllowed('admin', 'page', 'update-template')) {?>
-<fieldset id="template">
-    <legend><?php echo $this->getTranslation('Content Template');?></legend>
-    <?php echo $this->render('page/edit/template.phtml');?>
-</fieldset><?php
+if ($this->isAllowed('admin', 'page', 'update-template')) {
+    echo '<div id="template">';
+    echo $this->render('page/edit/template.phtml');
+    echo '</div>';
 }
-if ($this->isAllowed('admin', 'page', 'move')) {?>
-<fieldset id="move">
-    <legend><?php echo $this->getTranslation('Move Page');?></legend>
-    <?php echo $this->render('page/edit/move.phtml');?>
-</fieldset><?php
+if ($this->isAllowed('admin', 'page', 'move')) {
+    echo '<div id="move">';
+    echo '<legend>' . $this->getTranslation('Move Page') . '</legend>';
+    echo $this->render('page/edit/move.phtml');
+    echo '</div>';
 }
-if ($this->isAllowed('admin', 'page', 'publish')) {?>
-<fieldset id="publish">
-    <legend><?php echo $this->getTranslation('Publish / Archive Page');?></legend>
-    <?php echo $this->render('page/edit/publish.phtml');?>
-</fieldset><?php
+if ($this->isAllowed('admin', 'page', 'publish')) {
+    echo '<div id="publish">';
+    echo $this->render('page/edit/publish.phtml');
+    echo '</div>';
 }

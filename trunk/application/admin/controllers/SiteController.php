@@ -46,7 +46,7 @@ class Admin_SiteController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Site Settings') => $this->getFrontController()->getBaseUrl() . '/admin/site'
+           $this->view->getTranslation('Site Settings') => $this->view->getBaseUrl() . '/admin/site'
         );
     }
 
@@ -59,9 +59,12 @@ class Admin_SiteController extends Zend_Controller_Action
      */
     public function indexAction()
     {
-        $settings = new Model_SiteSettings();
-        $this->view->settings = $settings->toObject();
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+        $form = new Admin_Form_Site();
+        $form->setAction($this->view->getBaseUrl() . '/admin/site/edit');
+
+        $this->view->form = $form;
+
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark'
             . '/url/admin_site'
             . '/label/' . $this->view->getTranslation('Site');
     }
@@ -75,10 +78,18 @@ class Admin_SiteController extends Zend_Controller_Action
      */
     public function editAction()
     {
-        $settings = Digitalus_Filter_Post::raw('setting');
-        $s = new Model_SiteSettings();
-        foreach ($settings as $k => $v) {
-            $s->set($k, $v);
+        $form = new Admin_Form_Site();
+        $form->setAction($this->view->getBaseUrl() . '/admin/site/edit');
+
+        if ($this->_request->isPost() && $form->isValid($_POST)) {
+            $settings = Digitalus_Filter_Post::raw('setting');
+            $s = new Model_SiteSettings();
+            foreach ($settings as $k => $v) {
+                $s->set($k, $v);
+/* *****************************************************************************
+ * TODO: remove redirector and validate form
+ * ****************************************************************************/
+
 /* *****************************************************************************
  * TODO: check allowed charsets for MySQL => VALIDATOR ??
             if ('default_charset' == $k) {
@@ -98,9 +109,11 @@ class Admin_SiteController extends Zend_Controller_Action
             }
  * *****************************************************************************
  */
+            }
+            $s->save();
+            $this->_redirect('admin/site');
         }
-        $s->save();
-        $this->_redirect('admin/site');
+        $this->view->form = $form;
     }
 
     /**
@@ -145,9 +158,9 @@ class Admin_SiteController extends Zend_Controller_Action
         }
 
         $breadcrumbLabel = $this->view->getTranslation('Site Console');
-        $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/site/console';
+        $this->view->breadcrumbs[$breadcrumbLabel] = $this->view->getBaseUrl() . '/admin/site/console';
         $this->view->toolbarLinks = array();
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_site_console';
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/admin_site_console';
 
     }
 

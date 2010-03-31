@@ -14,7 +14,7 @@
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: OpenId.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  */
@@ -31,7 +31,7 @@ require_once 'Digitalus/Form.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_CMS_Admin
- * @version     $Id:$
+ * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  */
@@ -44,29 +44,48 @@ class Admin_Form_OpenId extends Digitalus_Form
      */
     public function init()
     {
-        $this->setAction($this->getView()->getBaseUrl() . '/admin/auth/openid')
-             ->setMethod('post');
+        parent::init();
+
+        $view = $this->getView();
 
         // create new element
-        $id = $this->createElement('hidden', 'id');
-        // element options
-        $id->setDecorators(array('ViewHelper'));
+        $id = $this->createElement('hidden', 'id', array(
+            'decorators'    => array('ViewHelper')
+        ));
 
         // create new element
-        $openid = $this->createElement('text', 'openid_identifier');
-        // element options
-        $openid->setLabel($this->getView()->getTranslation('OpenID'))
-               ->setRequired(true)
-               ->setAttribs(array('size' => 50, 'class' => 'openid_login'))
-#               ->addValidator('Hostname', false, Zend_Validate_Hostname::ALLOW_DNS)
-               ->setErrorMessages(array($this->getView()->getTranslation('You must enter a valid OpenID.')));
+        $openid = $this->createElement('text', 'openid_identifier', array(
+            'label'         => $view->getTranslation('OpenID'),
+            'required'      => true,
+            'filters'       => array('StringTrim'),
+// @TODO: add validator for openids
+            'attribs'       => array('size'  => 50,
+                                     'class' => 'openid_login'),
+            'errorMessages' => array('You must enter a valid OpenID.'),
+        ));
 
-        $submit = $this->createElement('submit', 'openid_action');
-        $submit->setLabel($this->getView()->getTranslation('Login'));
+        $submit = $this->createElement('submit', 'openid_action', array(
+            'label'         => $view->getTranslation('Login'),
+            'attribs'       => array('class' => 'submit'),
+        ));
 
         // add the elements to the form
         $this->addElement($id)
              ->addElement($openid)
-             ->addElement($submit);
+             ->addElement($submit)
+             ->addDisplayGroup(array('form_instance', 'id', 'openid_identifier', 'openid_action'),
+                                     'adminOpenIdGroup',
+                                     array('legend' => $view->getTranslation('OpenID Login'))
+             );
+
+        $this->setDecorators(array(
+            'FormElements',
+            'Form',
+        ));
+
+        $this->setDisplayGroupDecorators(array(
+            'FormElements',
+            'Fieldset',
+        ));
     }
 }

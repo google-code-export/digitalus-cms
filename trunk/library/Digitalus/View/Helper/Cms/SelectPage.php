@@ -38,6 +38,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  * @uses        viewHelper Digitalus_View_Helper_GetTranslation
+ * @uses        Digitalus_Form
  */
 class Zend_View_Helper_SelectPage extends Zend_View_Helper_Abstract
 {
@@ -54,7 +55,13 @@ class Zend_View_Helper_SelectPage extends Zend_View_Helper_Abstract
                 $pages[$id] = $page;
             }
         }
-
-        return $this->view->formSelect($name, $value, $attribs, $pages);
+        $form   = new Digitalus_Form();
+        $select = $form->createElement('select', $name, array(
+            'multiOptions'  => $pages,
+        ));
+        if (is_array($attribs)) {
+            $select->setAttribs($attribs);
+        }
+        return $select;
     }
 }

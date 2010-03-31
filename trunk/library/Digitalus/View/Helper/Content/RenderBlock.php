@@ -45,7 +45,7 @@ class Digitalus_View_Helper_Content_RenderBlock extends Zend_View_Helper_Abstrac
         $mdlPage = new Model_Page();
         $uriObj = new Digitalus_Uri($path);
         $pointer = $mdlPage->fetchPointer($uriObj->toArray());
-        $pageObj = $mdlPage->open($pointer, $mdlPage->getDefaultVersion());
+        $pageObj = $mdlPage->open($pointer, $mdlPage->getDefaultLanguage());
         $namespace = $pageObj->page->namespace . '_' . $pointer;
         return $this->view->RenderContentTemplate($pageObj->page->content_template, $pageObj->content, $namespace);
     }

@@ -64,12 +64,30 @@ class Admin_IndexController extends Zend_Controller_Action
     {
         $notes = new Model_Note();
         $this->view->notes = $notes->getUsersNotes();
-        $bookmark = new Model_Bookmark();
-        $this->view->bookmarks = $bookmark->getUsersBookmarks();
         $content = new Model_Page();
-        $this->view->pages = $content->getCurrentUsersPages('create_date DESC', 10);
+        $this->view->pages = $content->getCurrentUsersPages('create_date DESC', 5);
         $user = new Model_User();
-        $this->view->identity = $user->getCurrentUser();
+        $identity = $user->getCurrentUser();
+
+        $form = new Admin_Form_User();
+        $form->removeElement('name');
+        $form->removeElement('openid');
+        $form->removeElement('active');
+        $form->removeElement('role');
+        $form->removeElement('captcha');
+        $form->setAction($this->view->getBaseUrl() . '/admin/user/update-my-account')
+             ->setAttrib('class', $form->getAttrib('class') . ' formColumn');
+        $firstName = $form->getElement('first_name');
+        $firstName->setValue($identity->first_name);
+        $lastName = $form->getElement('last_name');
+        $lastName->setValue($identity->last_name);
+        $email = $form->getElement('email');
+        $email->setValue($identity->email);
+        $submit = $form->getElement('submitAdminUserForm');
+        $submit->setLabel($this->view->getTranslation('Update My Account'));
+        $displayGroup = $form->getDisplayGroup('adminUserGroup');
+        $displayGroup->setLegend($this->view->getTranslation('My Account'));
+        $this->view->form = $form;
     }
 
     /**
@@ -92,7 +110,7 @@ class Admin_IndexController extends Zend_Controller_Action
      */
     public function bookmarkAction()
     {
-        $url = $this->_request->getParam('url');
+        $url   = $this->_request->getParam('url');
         $label = $this->_request->getParam('label', $url);
         // the bookmark links are set up so if you dont have js enabled it will just use a default value for you
         // this makes it pass an array as the label if you do set it, so we need to fetch the last item if it is an array

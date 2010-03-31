@@ -78,7 +78,9 @@ class Digitalus_View_Helper_Cms_RenderModule extends Zend_View_Helper_Abstract
         $uri = new Digitalus_Uri();
         $uriParams = $uri->getParams();
         $name   = strtolower($moduleParts[0]);
-        $action = strtolower($uriParams['a']);
+        if (isset($uriParams['a']) && !empty($uriParams['a'])) {
+            $action = strtolower($uriParams['a']);
+        }
         if (isset($action) && !empty($action) && '' != $action && $this->_actionExists($name, $action)) {
             return $action;
         }

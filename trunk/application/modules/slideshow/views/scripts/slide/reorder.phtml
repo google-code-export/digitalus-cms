@@ -1,7 +1,5 @@
 <?php $this->placeholder('formHeadline')->set($this->getTranslation('Reorder Slides'));
 
-$iconSource = $this->getBaseUrl() . '/images/icons/arrow_out.png';
-
 $this->jQuery()->onLoadCaptureStart();
     echo $this->JquerySortable('ul.sortable');
 $this->jQuery()->onLoadCaptureEnd();
@@ -15,9 +13,11 @@ if ($this->slides) {?>
         echo $this->formHidden('show', $this->show->id);?>
         <ul class="sortable"><?php
             foreach ($this->slides as $slide) {?>
-            <li class="sortableItem">
-                <a href="#" class="handle"><img src="<?php echo $iconSource;?>" /></a><?php
-                    echo $this->formHidden('id[]', $slide->id) . ' ' . $slide->title;?>
+            <li class="ui-state-default">
+                <span class="handle ui-icon ui-icon-arrowthick-2-n-s"></span><?php
+                    echo $this->formHidden('id[]', $slide->id)
+                       . ' ' . $slide->title
+                       . ' - ' . $slide->caption;?>
             </li><?php
             }?>
         </ul>

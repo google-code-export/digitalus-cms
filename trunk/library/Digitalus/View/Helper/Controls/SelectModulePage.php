@@ -43,7 +43,7 @@ class Digitalus_View_Helper_Controls_SelectModulePage extends Zend_View_Helper_A
 {
     public function selectModulePage($name, $module, $value, $attribs = null)
     {
-        $pages = Digitalus_Filesystem_File::getFilesByType('./application/modules/' . $module . '/views/scripts/public', 'phtml');
+        $pages = Digitalus_Filesystem_File::getFilesByType(APPLICATION_PATH . '/modules/' . $module . '/views/scripts/public', 'phtml');
         if (is_array($pages)) {
             $data[] = $this->view->getTranslation('Select One');
             foreach ($pages as $page) {

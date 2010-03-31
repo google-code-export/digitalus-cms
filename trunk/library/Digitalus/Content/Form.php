@@ -14,7 +14,7 @@
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: Form.php Tue Dec 25 19:38:20 EST 2007 19:38:20 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.8.0
  */
@@ -31,7 +31,7 @@ require_once 'Digitalus/Form.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_CMS_Admin
- * @version     $Id:$
+ * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.8.0
  * @uses        Model_Page
@@ -42,6 +42,8 @@ class Digitalus_Content_Form extends Digitalus_Form
 
     public function init()
     {
+        parent::init();
+
         $view = $this->getView();
 
         $front = Zend_Controller_Front::getInstance();
@@ -50,8 +52,9 @@ class Digitalus_Content_Form extends Digitalus_Form
 
         $page_id = $this->createElement('hidden', 'id', array(
             'required'      => true,
-            'decorators'    => array('ViewHelper')
         ));
+
+        $language = $this->createElement('hidden', 'language');
 
         $name = $this->createElement('text', 'name', array(
             'label'         => $view->getTranslation('Page Name'),
@@ -66,20 +69,27 @@ class Digitalus_Content_Form extends Digitalus_Form
             ),
         ));
 
-        $version = $this->createElement('hidden', 'version', array(
-            'decorators'    => array('ViewHelper'),
+        $label = $this->createElement('text', 'label', array(
+            'label'         => $view->getTranslation('Page Label'),
+            'filters'       => array('StringTrim'),
+        ));
+
+        $headline = $this->createElement('text', 'headline', array(
+            'label'         => $view->getTranslation('Page Headline'),
+            'filters'       => array('StringTrim'),
         ));
 
         $submit = $this->createElement('submit', 'submit', array(
             'label'         => $view->getTranslation('Save Changes'),
-            'decorators'    => array('ViewHelper'),
             'attribs'       => array('class' => 'submit'),
             'order'         => 1000,            // i would assume this is the end
         ));
 
         $this->addElement($page_id)
+             ->addElement($language)
              ->addElement($name)
-             ->addElement($version)
+             ->addElement($label)
+             ->addElement($headline)
              ->addElement($submit);
     }
 

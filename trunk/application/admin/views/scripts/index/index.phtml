@@ -1,57 +1,38 @@
-<?php $this->placeholder('formHeadline')->set($this->getTranslation('My Dashboard')); ?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('My Dashboard'));
 
-<form action="<?php echo $this->getBaseUrl();?>/admin/user/update-my-account" method="post">
-    <fieldset class="formColumn">
-        <legend><?php echo $this->getTranslation('My Account');?></legend>
-        <dl>
-        <?php
-            $u = new Model_User();
-            $user = $u->getCurrentUser();
-            echo '<dt>' . $this->formHidden('id', $user->id) . '</dt>';
-            echo $this->formRow($this->getTranslation('First Name'), $this->formText('first_name' , $this->identity->first_name));
-            echo $this->formRow($this->getTranslation('Last Name'), $this->formText('last_name', $this->identity->last_name));
-            echo $this->formRow($this->getTranslation('Email'), $this->formText('email', $this->identity->email));
-            echo $this->formRow($this->formCheckbox('update_password'), $this->getTranslation('Update Password?'));
-            echo $this->formRow($this->getTranslation('Password'), $this->formPassword('password'));
-            echo $this->formRow($this->getTranslation('Confirm'), $this->formPassword('confirmation'));
-            echo $this->formSubmit('submit',$this->getTranslation('Update My Account'));
-        ?>
-        </dl>
-    </fieldset>
-</form>
+$u = new Model_User();
+$user = $u->getCurrentUser();
 
-<fieldset class="formColumn">
-    <legend><?php echo $this->getTranslation('My Bookmarks');?></legend>
-    <?php if ($this->bookmarks) {
-        ?>
-    <ul>
-    <?php foreach ($this->bookmarks as $bookmark) {?>
-        <li><?php
-            echo $this->link(null, '/admin/index/delete-bookmark/id/' . $bookmark->id, 'link_delete.png', 'clear');
-            $content = $bookmark->content;
-            if (strpos($content, 'mod_') === 0) {
-                $content = str_replace('mod_', '', $content);
-                $content = Digitalus_Toolbox_String::stripUnderscores($content);
-                $content = 'mod_' . $content;
-            } else {
-                $content = Digitalus_Toolbox_String::stripUnderscores($content);
-            }
-            echo $this->link($bookmark->node, '/' . $content);
-        ?></li>
-    <?php } ?>
-    </ul>
-    <?php } else {
-            echo $this->getTranslation('You do not have any bookmarks.');
-    } ?>
-</fieldset>
+if ($this->isAllowed('admin', 'user', 'update-my-account')) {
+    echo $this->form;
+}
 
-<form action="<?php echo $this->getBaseUrl()?>/admin/index/notes" method="post" id="notes">
-    <fieldset class="clearBoth">
-        <legend><?php echo $this->getTranslation('My Writeboard');?></legend>
-        <p><?php echo $this->getTranslation('The writeboard is a personal spot for you to keep notes about your site.');?></p>
-            <?php
-                echo $this->formTextarea('content', $this->notes->content);
-                echo $this->formSubmit('submit',$this->getTranslation('Save My Writeboard'));
-            ?>
-    </fieldset>
-</form>
+echo '<fieldset class="formColumn">';
+echo '    <legend>' . $this->getTranslation('My Bookmarks') . '</legend>';
+echo $this->renderBookmarks();
+echo '</fieldset>';?>
+
+<br />
+<p class="clearBoth"><?php echo $this->getTranslation('The writeboard is a personal spot for you to keep notes about your site.');?></p><?php
+
+$writeBoardForm = new Digitalus_Form();
+$content = $writeBoardForm->createElement('textarea', 'content', array(
+    'value' => $this->notes->content,
+));
+$submit = $writeBoardForm->createElement('submit', 'submit', array(
+    'label' => $this->getTranslation('Save My Writeboard'),
+));
+$writeBoardForm->addElement($content)
+               ->addElement($submit);
+
+$writeBoardForm->setAction($this->getBaseUrl() . '/admin/index/notes')
+               ->addDisplayGroup(
+                    array('form_instance', 'content', 'submit'),
+                    'writeboardGroup',
+                    array(
+                        'legend'  => $this->getTranslation('My Writeboard'),
+                        'class'   => 'clear',
+                    )
+                )
+                ->setAttrib('id', 'notes');
+echo $writeBoardForm;

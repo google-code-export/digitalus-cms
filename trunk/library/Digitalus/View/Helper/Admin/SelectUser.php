@@ -18,7 +18,7 @@
  * @subpackage  Helper
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: SelectUser.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
@@ -50,8 +50,8 @@ class Digitalus_View_Helper_Admin_SelectUser extends Zend_View_Helper_Abstract
 
         if ($users->count() > 0) {
             foreach ($users as $user) {
-                if ($user->id != $currentUser) {
-                   $userArray[$user->id] = $user->first_name . ' ' . $user->last_name;
+                if ($user->name != $currentUser) {
+                   $userArray[$user->name] = $user->first_name . ' ' . $user->last_name;
                 }
             }
         }

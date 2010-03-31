@@ -4,27 +4,27 @@
         <div class="navigator">
             <span class="leftLinks"><?php
                 if ($this->pageLinks->first == null) {
-                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/resultset_first_disabled.png" alt="first slide" /></a>';
+                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_first_disabled.png" alt="first slide" /></a>';
                 } else {
-                    echo '<a href="' . $this->pageLinks->first . '"><img src="' . $this->getBaseUrl() . '/images/icons/resultset_first.png" alt="first slide" /></a>';
+                    echo '<a href="' . $this->pageLinks->first . '"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_first.png" alt="first slide" /></a>';
                 }
                 if ($this->pageLinks->previous == null) {
-                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/resultset_previous_disabled.png" alt="previous slide" /></a>';
+                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_previous_disabled.png" alt="previous slide" /></a>';
                 } else {
-                    echo '<a href="' . $this->pageLinks->previous . '"><img src="' . $this->getBaseUrl() . '/images/icons/resultset_previous.png" alt="previous slide" /></a>';
+                    echo '<a href="' . $this->pageLinks->previous . '"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_previous.png" alt="previous slide" /></a>';
                 }?>
             </span>
             <span class="imageTitle"><?php echo $this->slide->title;?></span>
             <span class="rightLinks"><?php
                 if ($this->pageLinks->next == null) {
-                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/resultset_next_disabled.png" alt="next slide" /></a>';
+                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_next_disabled.png" alt="next slide" /></a>';
                 } else {
-                    echo '<a href="' . $this->pageLinks->next . '"><img src="' . $this->getBaseUrl() . '/images/icons/resultset_next.png" alt="next slide" /></a>';
+                    echo '<a href="' . $this->pageLinks->next . '"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_next.png" alt="next slide" /></a>';
                 }
                 if ($this->pageLinks->last == null) {
-                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/resultset_last_disabled.png" alt="last slide" /></a>';
+                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_last_disabled.png" alt="last slide" /></a>';
                 } else {
-                    echo '<a href="' . $this->pageLinks->last . '"><img src="' . $this->getBaseUrl() . '/images/icons/resultset_last.png" alt="last slide" /></a>';
+                    echo '<a href="' . $this->pageLinks->last . '"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_last.png" alt="last slide" /></a>';
                 }?>
             </span>
             <br class="clear" />

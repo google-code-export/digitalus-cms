@@ -3,10 +3,26 @@
 $contentForm = new Admin_Form_Page();
 $templateControl = $contentForm->getElement('content_template');
 $currentTemplate = !empty($this->page->page->content_template) ? $this->page->page->content_template : null;
-$templateControl->setValue($currentTemplate);?>
+$templateControl->setValue($currentTemplate);
 
-<form action="<?php echo $this->getBaseUrl();?>/admin/page/update-template" method="post"><?php
-    echo $this->formHidden('id', $this->pageId);
-    echo $templateControl;
-    echo $this->formSubmit('updateContentTemplate', $this->getTranslation('Update Content Template'));?>
-</form>
+$form = new Digitalus_Form();
+
+$hidden = $form->createElement('hidden', 'id', array(
+    'value' => $this->pageId,
+));
+
+$submit = $form->createElement('submit', 'updateContentTemplate', array(
+    'label' => $this->getTranslation('Update Content Template'),
+));
+
+$form->addElement($hidden)
+     ->addElement($templateControl)
+     ->addElement($submit);
+
+$form->setAction($this->getBaseUrl() . '/admin/page/update-template')
+     ->addDisplayGroup(
+         array('form_instance', 'id', 'content_template', 'updateContentTemplate'),
+         'pageTemplateGroup',
+         array('legend' => 'Content Template')
+     );
+echo $form;

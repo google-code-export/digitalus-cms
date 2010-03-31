@@ -1,5 +1,8 @@
 <?php
-echo $this->formRow(
-    $this->getTranslation('Select the slideshow') . ':',
-    $this->selectSlideshow($this->element . '[show]', $this->getData('show', $this->data->get))
-);
+$select = $this->selectSlideshow('show', $this->getData('show', $this->data->get));
+if ($select instanceof Zend_Form_Element) {
+    $select->setLabel($this->getTranslation('Select a slideshow'))
+           ->setValue($this->getData('show', $this->data->get))
+           ->setBelongsTo('module');
+}
+echo $select;

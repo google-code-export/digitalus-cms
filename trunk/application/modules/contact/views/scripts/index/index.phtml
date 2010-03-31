@@ -1,7 +1,7 @@
-<?php $this->placeholder('formHeadline')->set($this->getTranslation('Contact Form'))?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Contact Form'));?>
 
 <p><?php echo $this->getTranslation('You can set the following options on the contact form:');?></p>
-<ul>
-    <li><b><?php echo $this->getTranslation('Recipient');?>:</b> <?php echo $this->getTranslation('who you want to receive the messages');?></li>
-    <li><b><?php echo $this->getTranslation('Recipient\'s email');?>:</b> <?php echo $this->getTranslation('the recipient\'s email address');?></li>
+<ul><?php
+    echo '<li><b>' . $this->getTranslation('Recipient') . ':</b> ' . $this->getTranslation('who you want to receive the messages') . '</li>' . PHP_EOL;
+    echo '<li><b>' . $this->getTranslation("Recipient's email") . ':</b> ' . $this->getTranslation("the recipient's email address") . '</li>' . PHP_EOL;?>
 </ul>

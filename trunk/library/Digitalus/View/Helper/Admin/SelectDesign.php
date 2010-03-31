@@ -36,6 +36,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
+ * @uses        Digitalus_Form
  * @since       Release 1.5.0
  */
 class Digitalus_View_Helper_Admin_SelectDesign extends Zend_View_Helper_Abstract
@@ -43,7 +44,7 @@ class Digitalus_View_Helper_Admin_SelectDesign extends Zend_View_Helper_Abstract
     /**
      *
      */
-    public function selectDesign($name, $value = null, $attr = null, $options = null)
+    public function selectDesign($name, $value = null, $attribs = null, $options = null)
     {
         $templateConfig = Zend_Registry::get('config')->template;
         $templates = Digitalus_Filesystem_Dir::getDirectories(BASE_PATH . '/' . $templateConfig->pathToTemplates . '/public');
@@ -56,6 +57,14 @@ class Digitalus_View_Helper_Admin_SelectDesign extends Zend_View_Helper_Abstract
                 }
             }
         }
-        return $this->view->formSelect($name, $value, $attr, $options);
+        $form   = new Digitalus_Form();
+        $select = $form->createElement('select', $name, array(
+            'multiOptions'  => $options,
+            'value'         => $value,
+        ));
+        if (is_array($attribs)) {
+            $select->setAttribs($attribs);
+        }
+        return $select;
     }
 }

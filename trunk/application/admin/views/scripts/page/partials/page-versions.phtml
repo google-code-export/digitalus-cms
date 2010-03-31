@@ -1,38 +1,38 @@
 <?php
 $config = Zend_Registry::get('config');
-$siteVersions = $config->language->translations;
-$version = $this->currentVersion;?>
+$siteLanguages = $config->language->translations;
+$language = $this->currentVersion;?>
 
 <p class="padding-10"><?php echo $this->getTranslation('Current Version') . ': ';?>
     <strong><?php
-        echo $this->getTranslation($siteVersions->$version);?>
+        echo $this->getTranslation($siteLanguages->$language);?>
     </strong>
 </p>
 <p><?php
 
-if ($siteVersions) {
-    echo $this->getTranslation('Available Versions') . ':';
+if ($siteLanguages) {
+    echo $this->getTranslation('Available Languages') . ':';
 }
 
-if ($siteVersions) {?>
+if ($siteLanguages) {?>
     <ul class="padding-10"><?php
     $pageMdl = new Model_Page();
     $pageVersions = $pageMdl->getVersions($this->pageId);
-    $defaultVersion = $pageMdl->getDefaultVersion();
+    $defaultVersion = $pageMdl->getDefaultLanguage();
 
-    foreach ($siteVersions as $key => $version) {
-        $version = $this->getTranslation($version);
+    foreach ($siteLanguages as $key => $language) {
+        $language = $this->getTranslation($language);
         if (isset($pageVersions[$key])) {
             $icon = 'flag_green.png';
         } else {
             $icon = 'flag_red.png';
         }
         if ($key == $defaultVersion) {
-            $version = '<strong>' . $version . '</strong>';
-            $version .= ' (' . $this->getTranslation('Default') . ')';
+            $language = '<strong>' . $language . '</strong>';
+            $language .= ' (' . $this->getTranslation('Default') . ')';
         }
         echo '<li>' .
-                    $this->link($version, '/admin/page/edit/id/' . $this->pageId . '/version/' . $key, $icon) .
+                    $this->link($language, '/admin/page/edit/id/' . $this->pageId . '/language/' . $key, $icon) .
                     $this->renderImage('images/icons/flags/' . $key . '.png') .
              '</li>';
     }?>
