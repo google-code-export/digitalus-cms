@@ -21,11 +21,11 @@
             <div class='innerContent'>
                 <div class='pageContent'>
                     <digitalusNavigation id='breadcrumb' type='breadcrumbs' />
-                    <h1>
+<!--                    <h1>
                         <digitalusControl type='text' id='headline' required='true' size='50' group='main' />
                     </h1>
-                    <div class='contentWrapper'>
-                         <digitalusControl type='fckeditor' id='content' required='true' cols='60' rows='4' group='main' />
+-->                    <div class='contentWrapper'>
+                        <digitalusControl type='fckeditor' id='content' required='true' cols='60' rows='4' group='main' />
                     </div>
                     <div class="module">
                         <digitalusControl type='moduleSelector' id='module' group='more' />
@@ -35,9 +35,9 @@
         </div>
         <div id='sidebar_right' class='grid_3 omega'>
             <div class='innerContent'>
-                <digitalusNavigation id='subnav' type='submenu' levels='2' />
+                <digitalusNavigation id='subnav' type='submenu' levels='5' currentLevel='2' />
                     <div class='contentWrapper'>
-                         <digitalusControl type='fckeditor' id='sidebar_content' cols='60' rows='4' group='more' />
+                        <digitalusControl type='fckeditor' id='sidebar_content' cols='60' rows='4' group='more' />
                     </div>
                 </div>
             </div>

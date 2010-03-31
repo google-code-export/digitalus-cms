@@ -14,7 +14,7 @@
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: Page.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  */
@@ -31,7 +31,7 @@ require_once 'Digitalus/Form.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_CMS_Admin
- * @version     $Id:$
+ * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  * @uses        Model_Page
@@ -45,6 +45,8 @@ class Admin_Form_Page extends Digitalus_Form
      */
     public function init()
     {
+        parent::init();
+
         $view = $this->getView();
 
         // create new element
@@ -60,6 +62,7 @@ class Admin_Form_Page extends Digitalus_Form
             'filters'       => array('StringTrim', 'StripTags'),
             'validators'    => array(
                 array('NotEmpty', true),
+                array('StringLength', true, array(4, Model_Page::PAGE_NAME_LENGTH)),
                 array('Regex', true, array(
                     'pattern'  => Model_Page::PAGE_NAME_REGEX,
                     'messages' => array('regexNotMatch' => Model_Page::PAGE_NAME_REGEX_NOTMATCH),
@@ -84,6 +87,7 @@ class Admin_Form_Page extends Digitalus_Form
         // create new element
         $parentId = $this->createElement('select', 'parent_id', array(
             'label'         => $view->getTranslation('Parent page') . ':',
+            'required'      => true,
             'multiOptions'  => $multiOptions,
             'order'         => 1,
 #            'errorMessages' => array('At least four and a maximum of twenty alphanumeric characters are allowed!'),
@@ -106,6 +110,7 @@ class Admin_Form_Page extends Digitalus_Form
         // create new element
         $contentTemplate = $this->createElement('select', 'content_template', array(
             'label'         => $view->getTranslation('Template') . ':',
+            'required'      => true,
             'multiOptions'  => $multiOptions,
             'order'         => 2,
         ));
@@ -139,5 +144,9 @@ class Admin_Form_Page extends Digitalus_Form
             'order'         => 1000,
         ));
         $this->addElement($submit);
+
+        $this->addDisplayGroup(
+            array('form_instance', 'id', 'page_name', 'parent_id', 'content_template', 'continue_adding_pages', 'show_on_menu', 'publish_pages', 'submitPageForm'),
+            'createPageGroup');
     }
 }

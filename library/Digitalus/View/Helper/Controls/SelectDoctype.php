@@ -38,15 +38,16 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  * @uses        viewHelper Digitalus_View_Helper_Controls
+ * @uses        Digitalus_Form
  */
 class Digitalus_View_Helper_Controls_SelectDoctype extends Zend_View_Helper_Abstract
 {
     /**
      *
      */
-    public function selectDoctype($name, $value, $attr = null)
+    public function selectDoctype($name, $value, $attribs = null)
     {
-        $data = array(
+        $options = array(
             'XHTML1_TRANSITIONAL' => 'XHTML1_TRANSITIONAL',
             'XHTML11'             => 'XHTML11',
             'XHTML1_STRICT'       => 'XHTML1_STRICT',
@@ -56,7 +57,14 @@ class Digitalus_View_Helper_Controls_SelectDoctype extends Zend_View_Helper_Abst
             'HTML4_LOOSE'         => 'HTML4_LOOSE',
             'HTML4_FRAMESET'      => 'HTML4_FRAMESET'
         );
-
-        return $this->view->formSelect($name, $value, $attr, $data);
+        $form = new Digitalus_Form();
+        $select = $form->createElement('select', $name, array(
+            'multiOptions'  => $options,
+            'value'         => $value,
+        ));
+        if (is_array($attribs)) {
+            $select->setAttribs($attribs);
+        }
+        return $select;
     }
 }

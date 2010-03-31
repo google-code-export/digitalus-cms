@@ -56,7 +56,7 @@ class Digitalus_View_Helper_Cms_RenderModuleScript extends Zend_View_Helper_Abst
                 $mdl->$k = $v;
             }
         }
-        $this->view->addScriptPath('./application/modules/' . $module . '/views/scripts/public');
+        $this->view->addScriptPath(APPLICATION_PATH . '/modules/' . $module . '/views/scripts/public');
         return $this->view->render($script . '.phtml');
     }
 }

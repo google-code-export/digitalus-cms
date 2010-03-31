@@ -1,18 +1,5 @@
-# Language File – MOD_CONTACT
-# GERMAN
-# ----- contact module -----
-"Digitalus CMS";"Digitalus CMS"
-"Contact Form";"Kontakt Formular"
-# admin section – Contact --
-"Contact";"Kontakt"
-"Module";"Modul"
-"Options";"Optionen"
-"The contact module enables you to publish contact forms on your site.";"Das Kontakt Modul ermöglicht es, Kontakt-Formulare auf Ihrer Webseite zu veröffentlichen"
-"You can set the following options on the contact form:";"Sie können folgende Optionen im Kontakt Formular setzen"
-"Recipient";"Empfänger"
-"who you want to receive the messages";"der die Emails empfangen soll"
-"Recipient's email";"Email-Adresse"
-"the recipient's email address";"die Email-Adresse des Empfängers"
+# ----- mod_contact -----
+"Contact Form2";"Kontakt Formular"
 "Your Name";"Ihr Name"
 "Your name is required!";"Ihr Name ist erforderlich!"
 "Your Email";"Ihre Email-Adresse"
@@ -23,9 +10,15 @@
 "The message is required!";"Die Nachricht ist erforderlich!"
 "Please verify you're a human";"Beweisen Sie, dass Sie ein Mensch sind"
 "Send Message";"Absenden"
-"Enter the recipients email:";"Bitte geben Sie die Email-Adresse des Empfängers ein:"
+"You can set the following options on the contact form:";"Sie können folgende Optionen im Kontakt Formular setzen"
+"Recipient";"Empfänger"
+"who you want to receive the messages";"der die Emails empfangen soll"
+"Recipient's email";"Email-Adresse"
+"the recipient's email address";"die Email-Adresse des Empfängers"
+"Contact Options";"Kontakt Optionen"
+"The contact module enables you to publish contact forms on your site.";"Das Kontakt Modul ermöglicht es, Kontakt-Formulare auf Ihrer Webseite zu veröffentlichen"
 "Thanks for contacting us!";"Vielen Dank für Ihre Kontakaufnahme!"
 "Your message was successfully sent and we will reply promptly.";"Ihre Nachricht wurde gesendet und wir werden schnellstmöglich antworten."
+"Enter the recipients email:";"Bitte geben Sie die Email-Adresse des Empfängers ein:"
 "New message from";"Neue Nachricht von"
 "Sent on";"gesendet am"
-# END

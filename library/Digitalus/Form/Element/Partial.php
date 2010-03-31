@@ -8,6 +8,7 @@ class Digitalus_Form_Element_Partial extends Digitalus_Form_Element_Xml
 
     public function init()
     {
+        parent::init();
         $this->setDecorators(array(array("ViewScript", array(
             'viewScript' => $this->partial,
             'class'      => 'partial'

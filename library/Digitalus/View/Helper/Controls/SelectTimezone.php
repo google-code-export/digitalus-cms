@@ -47,10 +47,18 @@ class Digitalus_View_Helper_Controls_SelectTimezone extends Zend_View_Helper_Abs
      * @param   array   $attr   attributes for the select tag
      * @return  string  HTML select element
      */
-    public function selectTimezone($name, $value, $attr = null)
+    public function selectTimezone($name, $value, $attribs = null)
     {
-        $data = Digitalus_Validate_Timezone::getValidTimezones(null, true);
+        $options = Digitalus_Validate_Timezone::getValidTimezones(null, true);
 
-        return $this->view->formSelect($name, $value, $attr, $data);
+        $form = new Digitalus_Form();
+        $select = $form->createElement('select', $name, array(
+            'multiOptions'  => $options,
+            'value'         => $value,
+        ));
+        if (is_array($attribs)) {
+            $select->setAttribs($attribs);
+        }
+        return $select;
     }
 }

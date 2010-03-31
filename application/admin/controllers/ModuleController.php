@@ -85,24 +85,23 @@ class Admin_ModuleController extends Zend_Controller_Action
      */
     public function renderFormAction()
     {
-        $module = $this->_request->getParam('moduleKey');
+        $module  = $this->_request->getParam('moduleKey');
         $element = $this->_request->getParam('element');
         if ($module != null) {
             $moduleParts = explode('_', $module);
             if (is_array($moduleParts) && count($moduleParts) == 2) {
                 $action = $moduleParts[1];
-                $name = $moduleParts[0];
+                $name   = $moduleParts[0];
 
                 $data = new stdClass();
-                $data->get = $this->_request->getParams();
+                $data->get  = $this->_request->getParams();
                 $data->post = $_POST;
-                $this->view->data = $data;
-
+                $this->view->data    = $data;
                 $this->view->element = $element;
 
-                $dir = APPLICATION_PATH . '/modules/' . $name . '/views/scripts';
-                $helpers = APPLICATION_PATH . '/modules/' . $name . '/views/helpers';
-                $path = '/public/' . $action . '.form.phtml';
+                $dir      = APPLICATION_PATH . '/modules/' . $name . '/views/scripts';
+                $helpers  = APPLICATION_PATH . '/modules/' . $name . '/views/helpers';
+                $path     = '/public/' . $action . '.form.phtml';
                 $fullPath = $dir . $path;
 
                 if (file_exists($fullPath)) {

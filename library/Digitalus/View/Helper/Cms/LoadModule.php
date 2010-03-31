@@ -46,7 +46,7 @@ class Zend_View_Helper_LoadModule extends Zend_View_Helper_Abstract
     public function loadModule($module, $action, $params = array())
     {
         //validate the module
-        $modules = Digitalus_Filesystem_Dir::getDirectories('./application/modules');
+        $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
 
         // @todo: validate the action as well
         if (in_array($module, $modules)) {

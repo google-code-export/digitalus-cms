@@ -1,8 +1,8 @@
 <?php
 class Digitalus_Menu
 {
-    public $items = null;
-    protected  $_parentId;
+    public    $pages = array();
+    protected $_parentId;
 
     /**
      * this function sets up then loads the menu
@@ -24,14 +24,17 @@ class Digitalus_Menu
      */
     protected function _load()
     {
-        $page = new Model_Page();
-        $children = $page->getChildren($this->_parentId);
+        $mdlMenu = new Model_Menu();
+        $children = $mdlMenu->getChildren($this->_parentId);
         if ($children != null && $children->count() > 0) {
             foreach ($children as $child) {
-                if ($child->show_on_menu == 1 && $child->publish_level == 1) {
-                    $this->items[] = new Digitalus_Menu_Item($child);
+                $item = new Digitalus_Menu_Item($child);
+                if ($item->isVisible()) {
+                    $this->pages[] = $item->page;
                 }
             }
+            $container = new Zend_Navigation($this->pages);
+            Zend_Registry::set('Zend_Navigation', $container);
         }
     }
 }

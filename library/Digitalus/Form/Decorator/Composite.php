@@ -1,5 +1,5 @@
 <?php
-class Digitalus_Decorator_Composite extends Zend_Form_Decorator_Abstract
+class Digitalus_Form_Decorator_Composite extends Zend_Form_Decorator_Abstract
 {
     public function buildLabel()
     {
@@ -12,7 +12,7 @@ class Digitalus_Decorator_Composite extends Zend_Form_Decorator_Abstract
         if ($element->isRequired()) {
             $attr['class'] = 'required';
         }
-        
+
         return $element->getView()
                        ->formLabel($element->getName(), $label, $attr);
     }

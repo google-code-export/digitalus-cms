@@ -309,7 +309,7 @@
 "Site Admin Account";"Webseiten Administrator Konto"
 "Digitalus CMS uses your email address as the username for the CMS, because it is unique and easy to remember. You can enter what ever you like for a password, but bear in mind that your site is only as secure as this password!";"Digitalus CMS verwendet Ihre Email-Adresse als Benutzername für das CMS, weil sie einzigartig und leicht zu merken ist. Sie können für das Passwort eingeben, was Sie möchten, aber denken Sie bitte daran, dass Ihre Webseite nur so sicher ist wie Ihr Passwort!"
 "Database Connection Information";"Datenbank Verbindungs-Informationen"
-"Now you need to set up the database connection. If you are unsure about this contact your hosting provider.";"Nun müssen Sie Ihre Datenbank-Verbinddung eingeben. Wenn Sie sich nicht sicher sind, wie die Daten lauten, kontaktieren Sie am besten Ihren Webhosting-Provider."
+"Now you need to set up the database connection. If you are unsure about this contact your hosting provider.";"Nun müssen Sie Ihre Datenbank-Verbindung eingeben. Wenn Sie sich nicht sicher sind, wie die Daten lauten, kontaktieren Sie am besten Ihren Webhosting-Provider."
 "Database Adapter";"Datenbank Adapter"
 "Database Table Prefix";"Datenbank Tabellenprefix"
 "Database Name";"Datenbank Name"

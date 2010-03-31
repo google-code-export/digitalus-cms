@@ -36,45 +36,26 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
+ * @uses        Digitalus_Menu
+ * @uses        View_Helper_Navigation
+ * @uses        View_Helper_Navigation_Breadcrumbs
  * @since       Release 1.5.0
  */
 class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
 {
-    public function renderBreadcrumbs($separator = '', $siteRoot = 'Home')
+    public function renderBreadcrumbs($separator = '', $siteRoot = 'Home', $maxDepth = null)
     {
-        if (!isset($separator) || empty($separator)) {
-            $separator = ' > ';
-        }
-        $arrLabel = array();
-        $arrPath  = array();
-        $arrLinks = array();
-        $page = Digitalus_Builder::getPage();
-        $parents = $page->getParents();
-        if (is_array($parents) && count($parents) > 0) {
-            $path = '';
-            foreach ($parents as $parent) {
-                $arrLabel[] = Digitalus_Toolbox_Page::getLabel($parent);
-            }
-            $arrLabel = array_reverse($arrLabel);
-            $startPath = '';
-            $i = 0;
-            foreach ($arrLabel as $label) {
-                if ($i > 0) {
-                    $startPath = $arrPath[$i - 1];
-                }
-                $arrPath[$i] = $startPath . '/' . Digitalus_Toolbox_String::addHyphens($label);
-                $i++;
-            }
-            $i = 0;
-            foreach ($arrLabel as $label) {
-                $arrLinks[] = '<a href="' . $this->view->getBaseUrl() . $arrPath[$i] . '" class="breadcrumb">' . $arrLabel[$i] . '</a>';
-                $i++;
-            }
-        }
+        // needed to register Navigation into Zend_Registry
+        $menu = new Digitalus_Menu();
 
-        $pageLabel = Digitalus_Toolbox_Page::getLabel($page->getData());
-        $arrLinks[] = '<span class="breadcrumb last">' . $pageLabel . '</span>';
-
-        return implode($separator, $arrLinks);
+        if ($maxDepth < 0) {
+            $maxDepth = null;
+        }
+        return $this->view->navigation()->breadcrumbs()
+            ->setLinkLast(false)
+            ->setMinDepth(null)
+            ->setMaxDepth($maxDepth)
+            ->setSeparator($separator)
+            ->render();
     }
 }

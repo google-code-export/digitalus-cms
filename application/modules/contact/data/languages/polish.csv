@@ -2,30 +2,30 @@
 # POLISH
 # ----- contact module -----
 "Digitalus CMS";"Digitalus CMS"
-"Contact Form";
+"Contact Form"
 # admin section – Contact --
-"Contact";
-"Module";
-"Options";
-"The contact module enables you to publish contact forms on your site.";
-"You can set the following options on the contact form:";
-"Recipient";
-"who you want to receive the messages";
-"Recipient's email";
-"the recipient's email address";
-"Your Name";
-"Your name is required!";
-"Your Email";
-"Invalid email address!";
-"Subject";
-"The subject is required!";
-"Message";
-"The message is required!";
-"Please verify you're a human";
-"Send Message";
-"Enter the recipients email:";
-"Thanks for contacting us!";
-"Your message was successfully sent and we will reply promptly.";
-"New message from";
-"Sent on";
+"Contact"
+"Module"
+"Options"
+"The contact module enables you to publish contact forms on your site."
+"You can set the following options on the contact form:"
+"Recipient"
+"who you want to receive the messages"
+"Recipient's email"
+"the recipient's email address"
+"Your Name"
+"Your name is required!"
+"Your Email"
+"Invalid email address!"
+"Subject"
+"The subject is required!"
+"Message"
+"The message is required!"
+"Please verify you're a human"
+"Send Message"
+"Enter the recipients email:"
+"Thanks for contacting us!"
+"Your message was successfully sent and we will reply promptly."
+"New message from"
+"Sent on"
 # END

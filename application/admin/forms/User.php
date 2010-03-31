@@ -14,7 +14,7 @@
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: User.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  */
@@ -31,7 +31,7 @@ require_once 'Digitalus/Form.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_CMS_Admin
- * @version     $Id:$
+ * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  * @uses        Model_User
@@ -45,6 +45,8 @@ class Admin_Form_User extends Digitalus_Form
      */
     public function init()
     {
+        parent::init();
+
         $view = $this->getView();
 
         // create new element
@@ -53,13 +55,14 @@ class Admin_Form_User extends Digitalus_Form
         ));
 
         // create new element
-        $userName = $this->createElement('text', 'username', array(
+        $userName = $this->createElement('text', 'name', array(
             'label'         => $view->getTranslation('Username'),
             'required'      => true,
             'filters'       => array('StringTrim'),
             'validators'    => array(
                 array('NotEmpty', true),
-                array('StringLength', true, array(4, 20)),
+                array('StringLength', true, array(4, Model_User::USERNAME_LENGTH)),
+                array('UsernameExists'),
                 array('Regex', true, array(
                     'pattern'  => Model_User::USERNAME_REGEX,
                     'messages' => array('regexNotMatch' => Model_User::USERNAME_REGEX_NOTMATCH),
@@ -114,13 +117,20 @@ class Admin_Form_User extends Digitalus_Form
         $openid = $this->createElement('text', 'openid', array(
             'label'         => $view->getTranslation('OpenID'),
             'filters'       => array('StringTrim'),
+            'validators'    => array('OpenIdExists'),
             'attribs'       => array('size' => 50),
-            'errorMessages' => array('Please provide a valid OpenId!'),
+        ));
+
+        // create new element
+        $updatePassword = $this->createElement('checkbox', 'update_password', array(
+            'label'         => $view->getTranslation('Update Password?'),
+            'checked'       => false,
         ));
 
         // create new element
         $active = $this->createElement('checkbox', 'active', array(
             'label'         => $view->getTranslation('Activated'),
+            'checked'       => true,
         ));
 
         // create new element
@@ -152,7 +162,7 @@ class Admin_Form_User extends Digitalus_Form
         ));
 
         $captcha = $this->createElement('captcha', 'captcha', array(
-            'label'         => $view->getTranslation("Please verify you're a human"),
+            'label'         => $view->getTranslation("Please verify you're a human!"),
             'required'      => true,
             'filters'       => array('StringTrim'),
             'captcha' => array(
@@ -171,23 +181,24 @@ class Admin_Form_User extends Digitalus_Form
         ));
 
         // add the elements to the form
-        $this->addElement($id)
-             ->addElement($userName)
+        $this->addElement($userName)
              ->addElement($firstName)
              ->addElement($lastName)
              ->addElement($email)
              ->addElement($openid)
+             ->addElement($updatePassword)
              ->addElement($active)
              ->addElement($adminRole)
              ->addElement($password)
              ->addElement($passwordConfirm)
              ->addElement($captcha)
              ->addElement($submit)
-             ->addDisplayGroup(array('form_instance', 'id', 'username', 'first_name', 'last_name',
-                                     'email', 'openid', 'active', 'role',
+             ->addDisplayGroup(array('form_instance', 'name', 'first_name', 'last_name',
+                                     'email', 'openid', 'update_password', 'active', 'role',
                                      'password', 'password_confirm', 'captcha', 'submitAdminUserForm'),
-                                     'admin_form',
-                                     array('legend' => $view->getTranslation('Account Information')));
+                                     'adminUserGroup',
+                                     array('legend' => $view->getTranslation('Account Information'))
+             );
 
         $this->setDecorators(array(
             'FormElements',

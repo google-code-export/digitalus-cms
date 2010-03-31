@@ -1,7 +1,7 @@
 <?php
 if (!$this->isSent) {
     echo $this->form;
-} else { ?>
-<h2><?php echo $this->getTranslation('Thanks for contacting us!');?></h2>
-<p><?php  echo $this->getTranslation('Your message was successfully sent and we will reply promptly.');?></p><?php
-} ?>
+} else {
+    echo '<h2>' . $this->getTranslation('Thanks for contacting us!') . '</h2>';
+    echo '<p>'  . $this->getTranslation('Your message was successfully sent and we will reply promptly.') . '</p>';
+}

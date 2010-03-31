@@ -66,7 +66,7 @@ class Digitalus_Auth
      *
      * @var string
      */
-    protected  $_identityColumn = 'email';
+    protected  $_identityColumn = 'name';
 
     /**
      * the credential column
@@ -77,7 +77,7 @@ class Digitalus_Auth
 
     const USER_NAMESPACE = 'adminUser';
 
-    protected $_resultRowColumns = array('id', 'user_group_id', 'username', 'first_name', 'last_name', 'email', 'role', 'acl_resources');
+    protected $_resultRowColumns = array('name', 'first_name', 'last_name', 'email', 'role', 'acl_resources');
 
     /**
      * build the login request
@@ -100,7 +100,7 @@ class Digitalus_Auth
             Digitalus_Db_Table::getTableName($this->_userTable),
             $this->_identityColumn,
             $this->_credentialColumn,
-            "MD5(?) AND active = TRUE"      // MD5() the password and only authenticate if user is active
+            "MD5(?) AND active = 1"       // MD5() the password and only authenticate if user is active
         );
 
         // set up storage

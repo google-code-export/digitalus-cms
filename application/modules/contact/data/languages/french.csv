@@ -6,7 +6,7 @@
 # admin section – Contact --
 "Contact";"Contact"
 "Module";"Module"
-"Options";
+"Options"
 "The contact module enables you to publish contact forms on your site.";"Le module de contact vous permet de publier des formulaire de contact sur votre site."
 "You can set the following options on the contact form:";"Vous pouvez définir les options suivantes sur le formulaire de contact:"
 "Recipient";"Destinataire"
@@ -19,7 +19,7 @@
 "Invalid email address!";"Adresse email invalide!"
 "Subject";"Sujet"
 "The subject is required!";"Le sujet est requis!"
-"Message";
+"Message"
 "The message is required!";"Le message est requis!"
 "Please verify you're a human";"Nous devons vérifier que vous êtes humain"
 "Send Message";"Envoyer"

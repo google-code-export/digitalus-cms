@@ -29,7 +29,6 @@
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5
- * @uses        Model_ContentNode
  */
 class Digitalus_Db_Table extends Zend_Db_Table_Abstract
 {

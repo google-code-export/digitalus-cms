@@ -2,7 +2,7 @@
 require_once ('Zend/Form/Element.php');
 class Digitalus_Form_Element_Xml extends Zend_Form_Element
 {
-    public function getValue ($toString = true)
+    public function getValue($toString = true)
     {
         $value = parent::getValue();
         if (is_array($value)) {

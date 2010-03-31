@@ -14,7 +14,7 @@
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: UserController.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  */
@@ -31,7 +31,7 @@ require_once 'Zend/Controller/Action.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_CMS_Controllers
- * @version     $Id: UserController.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
+ * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  * @uses        Admin_Form_User
@@ -47,7 +47,7 @@ class Admin_UserController extends Zend_Controller_Action
     public function init()
     {
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Site Settings') => $this->getFrontController()->getBaseUrl() . '/admin/site'
+           $this->view->getTranslation('Site Settings') => $this->view->getBaseUrl() . '/admin/site'
         );
     }
 
@@ -71,27 +71,27 @@ class Admin_UserController extends Zend_Controller_Action
      */
     public function openAction()
     {
-        $id = (int)$this->_request->getParam('id', 0);
+        $userName = $this->_request->getParam('username');
         $form = new Admin_Form_User();
         $u = new Model_User();
-        $exclude = $u->getUserById($id);
-        $userName = $form->getElement('username');
-        $userName->addValidators(array(
-            array('UsernameExists', true, array('exclude' => $exclude->username)),
+        $elmUserName = $form->getElement('name');
+        $elmUserName->addValidators(array(
+            array('UsernameExists', true, array('exclude' => $userName)),
         ));
+        $form->removeElement('update_password');
         $form->removeElement('password');
         $form->removeElement('password_confirm');
         $form->removeElement('captcha');
         $form->setModel($u);
-        $form->populateFromModel($id);
-        $form->setAttribs(array('id' => 'general'));
+        $form->populateFromModel($userName);
+        $form->setAttrib('id', 'general');
         $submit = $form->getElement('submitAdminUserForm');
         $submit->setAttribs(array('id' => 'update', 'name' => 'update'));
         $submit->setLabel($this->view->getTranslation('Update Account'));
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/user/open/id/' . $id);
+        $form->setAction($this->view->getBaseUrl() . '/admin/user/open/username/' . $userName);
 
-        if ($id > 0) {
-            $row = $u->find($id)->current();
+        if (!empty($userName) && '' != $userName) {
+            $row = $u->find($userName)->current();
             $this->view->user = $row;
             $this->view->userPermissions = $u->getAclResources($row);
         }
@@ -101,29 +101,29 @@ class Admin_UserController extends Zend_Controller_Action
             if (Digitalus_Filter_Post::has('update_permissions')) {
                 //update the users permissions
                 $resources = Digitalus_Filter_Post::raw('acl_resources');
-                $id = Digitalus_Filter_Post::int('id');
-                $u->updateAclResources($id, $resources);
+                $userName = Digitalus_Filter_Post::get('username');
+                $u->updateAclResources($userName, $resources);
             } else if (Digitalus_Filter_Post::has('admin_user_password')) {
-                $id = Digitalus_Filter_Post::int('id');
+                $userName = Digitalus_Filter_Post::get('username');
                 $password = Digitalus_Filter_Post::get('newPassword');
                 $passwordConfirm = Digitalus_Filter_Post::get('newConfirmPassword');
-                $u->updatePassword($id, $password, true, $passwordConfirm);
+                $u->updatePassword($userName, $password, true, $passwordConfirm);
             } else {
                 if ($form->isValid($_POST)) {
                     $user = $form->update();
-                    $id = $user->id;
+                    $userName = $user->name;
                 }
             }
         }
         $this->view->form = $form;
 
-        $breadcrumbLabel = $this->view->getTranslation('Open User') . ': ' . $this->view->user->first_name . ' ' . $this->view->user->last_name;
-        $this->view->breadcrumbs[$breadcrumbLabel] = $this->getFrontController()->getBaseUrl() . '/admin/user/open/id/' . $id;
+        $breadcrumbLabel = $this->view->getTranslation('Open User') . ': ' . $userName;
+        $this->view->breadcrumbs[$breadcrumbLabel] = $this->view->getBaseUrl() . '/admin/user/open/username/' . $userName;
         $this->view->toolbarLinks = array();
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
-            . '/url/admin_user_open_id_' . $id
-            . '/label/' . $this->view->getTranslation('User') . ':' . $this->view->user->first_name . '.' . $this->view->user->last_name;
-        $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/user/delete/id/' . $id;
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark'
+            . '/url/admin_user_open_username_' . $userName
+            . '/label/' . $this->view->getTranslation('User') . ':' . $userName;
+        $this->view->toolbarLinks['Delete'] = $this->view->getBaseUrl() . '/admin/user/delete/username/' . $userName;
     }
 
     /**
@@ -136,25 +136,22 @@ class Admin_UserController extends Zend_Controller_Action
     public function createAction()
     {
         $form = new Admin_Form_User();
+        $form->removeElement('update_password');
         $form->removeElement('captcha');
-        $userName = $form->getElement('username');
-        $userName->addValidators(array(
-            array('UsernameExists', true),
-        ));
-Zend_Debug::dump(Zend_Registry::get('Zend_Translate'));
         $u = new Model_User();
         $form->setModel($u);
         if ($form->validatePost()) {
             $password = $form->getValue('password');
-            $result = $form->create(array('password' => md5($password)));
+            $userName = $form->getValue('name');
+            $result   = $form->create(array('password' => md5($password)));
             if ($result) {
-                $this->_redirect('admin/user/open/id/' . $result->id);
+                $this->_redirect('admin/user/open/username/' . $userName);
             }
         }
-        $this->view->breadcrumbs['Create User'] = $this->getFrontController()->getBaseUrl() . '/admin/user/create';
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/admin/user/create');
+        $this->view->breadcrumbs['Create User'] = $this->view->getBaseUrl() . '/admin/user/create';
+        $form->setAction($this->view->getBaseUrl() . '/admin/user/create');
         $this->view->form = $form;
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/admin_user_create';
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/admin_user_create';
     }
 
     /**
@@ -173,10 +170,9 @@ Zend_Debug::dump(Zend_Registry::get('Zend_Translate'));
 
         if (Digitalus_Filter_Post::int('update_password') === 1) {
             $password = Digitalus_Filter_Post::get('password');
-            $passwordConfirm = Digitalus_Filter_Post::get('confirmation');
-            $u->updatePassword($user->id, $password, true, $passwordConfirm);
+            $passwordConfirm = Digitalus_Filter_Post::get('password_confirm');
+            $u->updatePassword($user->name, $password, true, $passwordConfirm);
         }
-
         $url = 'admin/index';
         $this->_redirect($url);
     }
@@ -188,14 +184,14 @@ Zend_Debug::dump(Zend_Registry::get('Zend_Translate'));
      */
     public function copyAclAction()
     {
-        $currentUser = Digitalus_Filter_Post::int('id');
-        $copyFrom = Digitalus_Filter_Post::int('user_id');
+        $currentUser = Digitalus_Filter_Post::get('name');
+        $copyFrom = Digitalus_Filter_Post::get('user_username');
 
-        if ($currentUser > 0 && $copyFrom > 0) {
+        if (!empty($currentUser) && !empty($copyFrom)) {
             $u = new Model_User();
             $u->copyPermissions($copyFrom, $currentUser);
         }
-        $url = 'admin/user/open/id/' . $currentUser;
+        $url = 'admin/user/open/username/' . $currentUser;
         $this->_redirect($url);
     }
 
@@ -208,9 +204,9 @@ Zend_Debug::dump(Zend_Registry::get('Zend_Translate'));
      */
     public function deleteAction()
     {
-       $id = $this->_request->getParam('id');
+       $userName = $this->_request->getParam('username');
        $u = new Model_User();
-       $u->delete('id = ' . $id);
+       $u->delete("name = '$userName'");
        $url = 'admin/site';
        $this->_redirect($url);
     }

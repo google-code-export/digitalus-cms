@@ -1,64 +1,64 @@
 @charset "UTF-8";
 
-ul#menu, ul#subnav, ul#subnav ul {
+ul.menu, .subnav, .subnav ul {
     list-style: none;
 }
 
-ul#menu {
+ul.menu {
     padding: 7px 20px 0 20px;
     margin: 0;
 }
 
-ul#menu li {
+ul.menu li {
     display: inline;
     margin: 0 10px;
 }
 
-ul#menu li a {
+ul.menu li a {
     font-weight: bold;
     text-decoration: none;
     font-size: 14px;
     color: #666;
 }
 
-ul#menu li a:hover {
+ul.menu li a:hover {
     text-decoration: underline;
     color: #333;
 }
 
-ul#menu li a.selected {
+ul.menu li.active a {
     color: #000;
 }
 
-ul#subnav {
+.subnav {
     padding: 25px 10px;
 }
 
-ul#subnav li {
+.subnav li {
     padding: 2px 0;
     margin: 0 5px;
 }
 
-ul#subnav a {
+.subnav a {
     text-decoration: none;
     color: #666;
     font-weight: bold;
 }
 
-ul#subnav a:hover {
+.subnav a:hover {
     text-decoration: underline;
     color: #333;
 }
 
-ul#subnav a.selected {
+.subnav li.active a {
     color: #000;
 }
 
-ul#subnav ul {
+.subnav ul {
     padding: 5px;
     margin: 0;
 }
 
-ul#subnav ul a {
+.subnav ul a {
     font-weight: normal;
 }

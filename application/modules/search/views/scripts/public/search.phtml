@@ -1,41 +1,12 @@
-<?php ?>
-<form action="<?php echo $this->getBaseUrl() . Digitalus_Uri::get();?>" method="post" id="searchForm">
-<fieldset>
-    <legend><?php echo $this->getTranslation('Search Site')?></legend>
-    <?php
-        if (isset($this->keywords)) {
-            $keywords = $this->keywords;
-        } else {
-            $keywords = null;
-        }
-
-        echo $this->formHidden('submitSearchForm', 1);
-        echo $this->FormRow(
-            $this->getTranslation('Keywords') . ': ',
-            $this->formText('keywords', $keywords, array('size' => 50))
-        );
-        echo $this->FormRow(
-            '&nbsp',
-            $this->formSubmit('search', $this->getTranslation('Search'))
-        );
-    ?>
-</fieldset>
-</form>
-
 <?php
-if ($this->searchResults) { ?>
-<p><?php echo $this->getTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->getTranslation('returned') . ' ' . count($this->searchResults) . ' ' . $this->getTranslation('results.');?></p>
-    <?php
+echo $this->form;
+
+if (!empty($this->searchResults)) {?>
+    <p><?php echo $this->getTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->getTranslation('returned') . ' ' . count($this->searchResults) . ' ' . $this->getTranslation('results.');?></p><?php
     foreach ($this->searchResults as $result) {?>
-<a href="<?php echo $result->page_link; ?>"><h3><?php echo $result->page_title; ?></h3></a>
-<p><?php echo $result->page_teaser; ?></p>
-    <?php
+        <a href="/<?php echo $result->page_link; ?>"><h3><?php echo $result->page_title; ?></h3></a>
+        <p><?php echo $result->page_teaser; ?></p><?php
     }
-} else if (isset($this->keywords) && !empty($this->keywords)) { ?>
-<p><?php echo $this->getTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->getTranslation('did not return any results.');?></p>
-<?php
-} else if (isset($_POST['submitSearchForm'])) { ?>
-<p><?php echo $this->getTranslation('Please provide a keyword to search for!');?></p>
-<?php
+} else if (isset($this->keywords) && !empty($this->keywords)) {?>
+    <p><?php echo $this->getTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->getTranslation('did not return any results.');?></p><?php
 }
-?>

@@ -1,56 +1,45 @@
-<dt>
-    <?php
-    echo $this->formLabel(
-        $this->element->getName(),
-        $this->element->getLabel()
-    );
-    ?>
-</dt>
-<dd class="<?php echo $this->class;?>">
 <?php
 $elementName = $this->element->getName();
-$values = $this->element->getXml();
+$values      = $this->element->getXml();
 
 //load values as url parameters
-if ($values && (string)$values->module != '0') {
+$module = null;
+$paramsString = null;
+if (isset($values) && !empty($values->module) && '' != $values->module) {
     foreach ($values as $k => $v) {
         $params[$k] = $v;
-        $params[] = $k;
-        $params[] = $v;
+#        $params[]   = $k;
+#        $params[]   = $v;
     }
     $paramsString = implode('/', $params) . '/';
     $module = $values->module;
-} else {
-    $module = null;
-    $paramsString = null;
 }
-
 $attr = $this->element->getAttribs();
 if (!is_array($attr)) {
     $attr = null;
 }
-echo $this->SelectModule($elementName . "[module]", $module, $attr);
-?>
-</dd>
-<div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper">
-<?php
+$select = $this->selectModule($elementName, $module, $attr);
+$select->setLabel($this->element->getLabel())
+       ->setAttrib('class', $this->class)
+       ->setValue($values->module);
+echo $select;?>
+
+<div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper"><?php
     if (isset($values->module)) {
-        $params['element'] = $elementName;
+        $params['element']   = $elementName;
         $params['moduleKey'] = $values->module;
         echo $this->action('render-form', 'module', 'admin', $params);
-    }
-?>
-</div>
-<?php
+    }?>
+</div><?php
+
 // make sure this only loads once for each element
 if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
-$this->jQuery()->onLoadCaptureStart() ?>
-    $('#<?php echo $elementName?>').change(function(){
-        var module = $(this).val();
-        $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName() ?>/moduleKey/' + module);
-    });
-<?php $this->jQuery()->onLoadCaptureEnd();
-Zend_Registry::set($elementName . 'Jquery', true);
+    $this->jQuery()->onLoadCaptureStart();?>
+        $('#<?php echo $select->getAttrib('id');?>').change(function(){
+            var module = $(this).val();
+            $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName();?>/moduleKey/' + module);
+        });<?php
+    $this->jQuery()->onLoadCaptureEnd();
+    Zend_Registry::set($elementName . 'Jquery', true);
 }
 echo $this->formErrors($this->element->getMessages());
-?>

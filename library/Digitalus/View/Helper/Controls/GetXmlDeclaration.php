@@ -68,16 +68,14 @@ class Digitalus_View_Helper_Controls_GetXmlDeclaration extends Zend_View_Helper_
         }
         // decide whether to return an xml declaration depending on the option
         switch (strtolower($option)) {
-            case 'never':
-                return null;
             case 'always':
                 return '<?xml version="1.0" encoding="' . $this->view->placeholder('charset') . '" ?>' . PHP_EOL;
             case 'browser':
                 if ($this->_userAgentAcceptsXhtml()) {
                     return $this->getXmlDeclaration('always');
-                } else {
-                    return $this->getXmlDeclaration('never');
                 }
+                return $this->getXmlDeclaration('never');
+            case 'never':
             default:
                 return null;
         }

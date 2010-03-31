@@ -57,9 +57,11 @@ class Digitalus_View_Helper_Jquery_JquerySortable extends Zend_View_Helper_Abstr
                         axis:           'vertically',
                         opacity:        0.4,
                         revert:         true,
-                        handle:         'a.handle'
+                        handle:         '.handle',
+                        placeholder:    'ui-state-highlight'
                     }
-                );";
+                );
+                $('$selector').disableSelection();" . PHP_EOL;
         return $xhtml;
     }
 }

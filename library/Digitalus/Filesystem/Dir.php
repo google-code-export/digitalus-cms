@@ -101,9 +101,10 @@ class Digitalus_Filesystem_Dir
      */
     public static function rename($source, $newName)
     {
-        if (is_dir($source)) {
+        if (is_dir($source) and is_writeable($source)) {
             return rename($source, $newName);
         }
+        return false;
     }
 
     /**

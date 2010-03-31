@@ -45,7 +45,7 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
         $links = array();
         $tree = new Model_Page();
 
-        $children = $tree->getChildren($parentId, null, 'name');
+        $children = $tree->getChildren($parentId);
 
         // add a link for site root
         if (isset($withRoot) && $withRoot == true) {
@@ -73,7 +73,7 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
             if ($child->id == $exclude) {
                 $links[] = '<li class="menuItem">'
                          . '<img class="icon" style="margin-right: 10px" alt="' . $label . '" '
-                         . 'src="' . $this->view->getBaseUrl() . '/images/icons/' . $icon . '"/>'
+                         . 'src="' . $this->view->getBaseUrl() . '/images/icons/silk/' . $icon . '"/>'
                          . $label . $submenu
                          . '</li>';
             } else {
@@ -104,7 +104,7 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
 
         $siteRoot = '<li class="menuItem" style="background-image: none; padding: 0px;">'
                   . '  <a class="link" href="' . $this->view->getBaseUrl() . '/admin/page/move/id/' . $pageId . '/parent/0">'
-                  . '    <img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="' . $this->view->getBaseUrl() . '/images/icons/folder.png"/>'
+                  . '    <img class="icon" alt="' . $this->view->getTranslation('Site Root') . '" src="' . $this->view->getBaseUrl() . '/images/icons/silk/folder.png"/>'
                   . '    ' . $this->view->getTranslation('Site Root')
                   . '  </a>'
                   . '</li>';

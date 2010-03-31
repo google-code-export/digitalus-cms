@@ -22,8 +22,8 @@ class Blog_Post extends Model_Page
     {
         $post = $this->find($postId)->current();
         if ($post) {
-            $mdlContentNode = new Model_ContentNode();
-            $content = $mdlContentNode->fetchContentArray($post->id, null, null, $this->getDefaultVersion());
+            $mdlContentNode = new Model_PageNode();
+            $content = $mdlContentNode->fetchContentArray($post->id, null, null, $this->getDefaultLanguage());
             $objPost = new stdClass();
             $objPost->id = $post->id;
             $objPost->title = $post->name;
@@ -41,13 +41,13 @@ class Blog_Post extends Model_Page
                 $objPost->content = null;
             }
             $mdlUser = new Model_User();
-            $author = $mdlUser->find($post->author_id)->current();
+            $author = $mdlUser->find($post->name)->current();
             if ($author) {
                 $objPost->author = $author->first_name . ' ' . $author->last_name;
             } else {
                 $objPost->author = null;
             }
-            $objPost->author_id = $post->author_id;
+            $objPost->name = $post->name;
             return $objPost;
         } else {
             return null;

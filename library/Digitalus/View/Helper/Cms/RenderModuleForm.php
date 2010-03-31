@@ -45,8 +45,8 @@ class Zend_View_Helper_RenderModuleForm extends Zend_View_Helper_Abstract
      */
     public function renderModuleForm($module, $action, $parameters)
     {
-        $dir      = './application/modules/' . $module . '/views/scripts';
-        $helpers  = './application/modules/' . $module . '/views/helpers';
+        $dir      = APPLICATION_PATH . '/modules/' . $module . '/views/scripts';
+        $helpers  = APPLICATION_PATH . '/modules/' . $module . '/views/helpers';
         $path     = '/public/' . $action . '.form.phtml';
         $fullPath = $dir . $path;
         if (file_exists($fullPath)) {

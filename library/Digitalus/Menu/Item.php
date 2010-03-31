@@ -2,12 +2,14 @@
 
 class Digitalus_Menu_Item
 {
-    protected $_innerItem;
+    public $view;
+    protected $_item;
     public $id;
-    public $label;
-    public $link;
-    public $visible;
+    public $active     = false;
+    public $visible    = false;
     public $hasSubmenu = false;
+
+    public $page;
 
     /**
      * Constructor
@@ -16,23 +18,92 @@ class Digitalus_Menu_Item
      */
     public function __construct(Zend_Db_Table_Row $item)
     {
-        $this->_innerItem = $item;
-        $this->label = Digitalus_Toolbox_Page::getLabel($item);
-        $this->link  = Digitalus_Toolbox_Page::getUrl($item);
-        $this->id    = $this->_innerItem->id;
+        $this->setView();
+        $this->_item = $item;
+        $this->id    = $this->_item->id;
+        $this->page = Zend_Navigation_Page::factory($this->_getPageAsArray());
+        $this->page->pages = $this->_getChildrenAsArray();
+    }
 
-        if ($item->show_on_menu && $item->publish_level == 1) {
+    public function isActive($item = null) {
+        if (empty($item)) {
+            $item = $this->_item;
+        }
+        $this->active = false;
+        $uri = new Digitalus_Uri();
+        $uriString = $uri->toString();
+        if ('/' . Digitalus_Toolbox_Page::getUrl($item) == $uriString ||
+            ($item->is_home_page == 1 && empty($uriString))) {
+            $this->active = true;
+        }
+        return $this->active;
+    }
+
+    public function isVisible($item = null) {
+        if (empty($item)) {
+            $item = $this->_item;
+        }
+        $this->visible = false;
+        if (1 == $item->publish_level && $item->show_on_menu) {
             $this->visible = true;
-        } else {
-            $this->visible = false;
         }
+        return $this->visible;
+    }
 
-        $page = new Model_Page();
-        if ($page->hasChildren($item)) {
-            $this->hasSubmenu = true;
-        } else {
-            $this->hasSubmenu = false;
+
+    /**
+     * Check whether current item has children
+     *
+     * @return  bool  Returns true if the current item has children, otherwise false
+     */
+    protected function _hasChildren()
+    {
+        $mdlMenu = new Model_Menu();
+        if ($mdlMenu->hasChildren($this->id)) {
+            return true;
         }
+        return false;
+    }
+
+    /**
+     * Get Page data as array
+     *
+     * @return  array  Returns an array of the page data, otherwise an empty array
+     */
+    protected function _getPageAsArray($item = null)
+    {
+        if (empty($item)) {
+            $item = $this->_item;
+        }
+        $this->page = array(
+            'active'    => $this->isActive($item),
+            'id'        => $item->id,
+            'label'     => Digitalus_Toolbox_Page::getLabel($item),
+            'title'     => Digitalus_Toolbox_Page::getLabel($item),
+            'uri'       => Digitalus_Toolbox_Page::getUrl($item),
+            'visible'   => $this->isVisible($item),
+            'class'     => 'menuItem',
+        );
+        return $this->page;
+    }
+
+    /**
+     * Add children if they exist
+     *
+     * @return  array  Returns an array of all children, otherwise an empty array
+     */
+    protected function _getChildrenAsArray()
+    {
+        $subPages = array();
+        if ($this->_hasChildren()) {
+            $mdlMenu = new Model_Menu();
+            $children = $mdlMenu->getChildren($this->id);
+            foreach ($children as $child) {
+                $page = new Digitalus_Menu_Item($child);
+                $subPages[] = $page->_getPageAsArray();
+            }
+        }
+        return $subPages;
     }
 
     /**
@@ -85,9 +156,9 @@ class Digitalus_Menu_Item
      *
      * @return  Zend_Db_Table_Row   Returns a Zend_Db_Table_Row object
      */
-    public function getInnerItem()
+    public function getItem()
     {
-        return $this->_innerItem;
+        return $this->_item;
     }
 
     /**
@@ -98,9 +169,10 @@ class Digitalus_Menu_Item
      * @param     string  $currentId     The CSS id for the <a> tag of the current link
      * @param     string  $currentClass  The CSS class for the <a> tag of the current link
      * @param     string  $ignoreParents Ignore the parent navigation items when setting CSS class or id
+     * @param     boolean $translate     Define whether labels should be translated
      * @return    string                 The string of the hyperlink <a> tag
      */
-    public function asHyperlink($id = null, $class = null, $currentId = null, $currentClass = null, $ignoreParents = false)
+    public function asHyperlink($id = null, $class = null, $currentId = null, $currentClass = null, $ignoreParents = false, $translate = false)
     {
         if (isset($id) && !empty($id)) {
             $id = ' id="' . $id . '"';
@@ -122,6 +194,30 @@ class Digitalus_Menu_Item
             $class[] = $currentClass;
             $class = implode(' ', $class);
         }
-        return '<a href="' . $baseUrl . '/' . $cleanLink . '"' . $id . $class . '>' . $this->label . '</a>' . PHP_EOL;
+        if (true == $translate) {
+            $this->setView();
+            $label = $this->view->getTranslation($this->label);
+        } else {
+            $label = $this->label;
+        }
+        return '<a href="' . $baseUrl . '/' . $cleanLink . '"' . $id . $class . '>' . $label . '</a>' . PHP_EOL;
+    }
+
+    public function getView()
+    {
+        return $this->view;
+    }
+
+    public function setView(Zend_View $view = null)
+    {
+        if ($view == null) {
+            $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
+            if (null === $viewRenderer->view) {
+                $viewRenderer->initView();
+            }
+            $this->view = $viewRenderer->view;
+        } else {
+            $this->view = $view;
+        }
     }
 }

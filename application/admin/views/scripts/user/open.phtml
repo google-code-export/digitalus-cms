@@ -2,19 +2,19 @@
 
 echo $this->form;?>
 
-<form id="permissions" action="<?php echo $this->getBaseUrl();?>/admin/user/open/id/<?php echo $this->user->id;?>" method="post">
+<form id="permissions" action="<?php echo $this->getBaseUrl();?>/admin/user/open/username/<?php echo $this->user->name;?>" method="post">
     <fieldset>
         <legend><?php echo $this->getTranslation('User Permissions');?></legend><?php
-            echo $this->formHidden('id', $this->user->id);
+            echo $this->formHidden('username', $this->user->name);
             echo $this->renderAclList($this->userPermissions);
             echo $this->formSubmit('update_permissions', $this->getTranslation('Update Permissions'));?>
     </fieldset>
 </form>
 
-<form id="password" action="<?php echo $this->getBaseUrl();?>/admin/user/open/id/<?php echo $this->user->id;?>" method="post">
+<form id="password" action="<?php echo $this->getBaseUrl();?>/admin/user/open/username/<?php echo $this->user->name;?>" method="post">
     <fieldset>
         <legend><?php echo $this->getTranslation('Login Credentials');?></legend><?php
-            echo $this->formHidden('id', $this->user->id);
+            echo $this->formHidden('username', $this->user->name);
             echo $this->formRow($this->getTranslation('Password'), $this->formPassword('newPassword'));
             echo $this->formRow($this->getTranslation('Confirm Password'), $this->formPassword('newConfirmPassword'));
             echo $this->formRow('&nbsp;', $this->formSubmit('admin_user_password', $this->getTranslation('Update Password')));?>

@@ -10,8 +10,8 @@
 <h3><?php echo $this->getTranslation('Copy Permissions');?></h3>
 <p class="padding-10"><?php echo $this->getTranslation('If you have another user who already has the same permissions as this user you can copy that user\'s role.');?></p>
 
-<form class="padding-10" action='<?php echo $this->getBaseUrl();?>/admin/user/copy-acl' method="post">
-    <?php echo $this->formHidden('id', $this->user->id);?>
-    <?php echo $this->selectUser('user_id', null, null, $this->user->id);?>
-    <?php echo $this->formSubmit('update', $this->getTranslation('Copy Permissions'));?>
+<form class="padding-10" action='<?php echo $this->getBaseUrl();?>/admin/user/copy-acl' method="post"><?php
+    echo $this->formHidden('name', $this->user->name);
+    echo $this->selectUser('user_username', null, null, $this->user->name);
+    echo $this->formSubmit('update', $this->getTranslation('Copy Permissions'));?>
 </form>

@@ -28,9 +28,8 @@ class Digitalus_Module
         }
         if (is_array($content) && isset($content[self::MODULE_KEY])) {
             return simplexml_load_string($content[self::MODULE_KEY]);
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -43,10 +42,31 @@ class Digitalus_Module
         $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
         if (is_array($modules)) {
             return $modules;
-        } else {
-            return false;
         }
+        return false;
     }
 
-
+    /**
+     * Checks whether a specific module is installed
+     *
+     * @param  string|array  $moduleNames
+     * @return boolean
+     */
+    public static function isInstalled($moduleNames)
+    {
+        if (is_array($moduleNames)) {
+            foreach ($moduleNames as $moduleName) {
+                if (!self::isInstalled($moduleName)) {
+                    return false;
+                }
+            }
+        } else {
+            $moduleName = strtolower($moduleNames);
+            $modules = self::getModules();
+            if (false == $modules || !in_array($moduleName, $modules)) {
+                return false;;
+            }
+        }
+        return true;
+    }
 }

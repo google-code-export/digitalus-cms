@@ -14,7 +14,7 @@
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: Form.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
@@ -31,32 +31,54 @@ require_once 'Zend/Form.php';
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
  * @package     Digitalus_CMS_Admin
- * @version     $Id:$
+ * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
 class Digitalus_Form extends Zend_Form
 {
+    const REQ_SUFFIX = '<sup title="This field is mandatory.">*</sup>';
+
+    const CSS_FRAMEWORK = 'yaml';       // either empty, yaml or blueprint --> respect their licenses!!
+
     protected $_model;
     protected $_columns;
     protected $_session = null;
+    protected $_primaryIndex = '';
+    protected $_standardDecorators = array(
+                'form' => array(
+                    'FormElements',
+                    'Form'
+                ),
+                'group' => array(
+                    'FormElements',
+                    'Fieldset'
+                )
+            );
 
-    public function __construct($translator = null)
+    protected $_errorClass = 'error';
+
+    public function init()
     {
-        $this->setMethod('post')
-             ->addElementPrefixPaths(array(
-                array('prefix' => 'Digitalus_Decorator', 'path' => 'Digitalus/Form/Decorator', 'type' => 'decorator'),
-                array('prefix' => 'Digitalus_Filter',    'path' => 'Digitalus/Filter/',        'type' => 'filter'),
-                array('prefix' => 'Digitalus_Validate',  'path' => 'Digitalus/Validate',       'type' => 'validate'),
-             ))
-             ->addPrefixPath('Digitalus_Form_Element', 'Digitalus/Form/Element/', 'element');
+        parent::init();
 
-        $this->_setTranslator($translator);
-        parent::__construct();
+        $this->setMethod('post')
+             ->setAttrib('accept-charset', 'UTF-8')
+             ->clearDecorators()
+             ->addPrefixPaths(array(
+                array('prefix' => 'Digitalus_Form_Decorator', 'path' => 'Digitalus/Form/Decorator', 'type' => 'decorator'),
+                array('prefix' => 'Digitalus_Form_Element',   'path' => 'Digitalus/Form/Element/',  'type' => 'element'),
+             ))
+             ->addElementPrefixPaths(array(
+                array('prefix' => 'Digitalus_Form_Decorator', 'path' => 'Digitalus/Form/Decorator', 'type' => 'decorator'),
+                array('prefix' => 'Digitalus_Filter',         'path' => 'Digitalus/Filter/',        'type' => 'filter'),
+                array('prefix' => 'Digitalus_Validate',       'path' => 'Digitalus/Validate',       'type' => 'validate'),
+             ));
+
+        $this->_setStandardDecorators();
 
         //set instance
         $instance = $this->_addInstance();
-
         $instanceElement = $this->createElement('hidden', 'form_instance');
         $instanceElement->setValue($instance)
                         ->removeDecorator('Label');
@@ -66,6 +88,7 @@ class Digitalus_Form extends Zend_Form
     public function setModel(Zend_Db_Table_Abstract $model)
     {
         $this->_model = $model;
+        $this->_setPrimaryIndex($this->_model->primaryIndex);
         $info = $model->info();
         $this->_columns = $info['cols'];
     }
@@ -86,7 +109,10 @@ class Digitalus_Form extends Zend_Form
      */
     public function create($valueOverride = array())
     {
-        $this->removeElement('id');
+        $elements = $this->getElements();
+        if (in_array('id', $elements)) {
+            $this->removeElement('id');
+        }
         if ($this->isValid($_POST)) {
             $row = $this->_model->createRow();
             $values = $this->getValues();
@@ -94,7 +120,8 @@ class Digitalus_Form extends Zend_Form
                $this->_setField($field, $value, $row, $valueOverride);
             }
             $row->save();
-            $row->id = Zend_Db_Table::getDefaultAdapter()->lastInsertId();
+            $primaryIndex = $this->_getPrimaryIndex();
+            $row->$primaryIndex = Zend_Db_Table::getDefaultAdapter()->lastInsertId();
             return $row;
         } else {
             return false;
@@ -111,7 +138,8 @@ class Digitalus_Form extends Zend_Form
     {
        if ($this->isValid($_POST)) {
             $values = $this->getValues();
-            $row = $this->_model->find($values['id'])->current();
+            $primaryIndex = $this->_getPrimaryIndex();
+            $row = $this->_model->find($values[$primaryIndex])->current();
             if ($row) {
                 foreach ($values as $field => $value) {
                     $this->_setField($field, $value, $row, $valueOverride);
@@ -235,5 +263,168 @@ class Digitalus_Form extends Zend_Form
         } else {
             self::setDefaultTranslator($adapter);
         }
+    }
+
+    protected function _setPrimaryIndex($primaryIndex)
+    {
+        $this->_primaryIndex = strtolower(trim($primaryIndex));
+    }
+
+    protected function _getPrimaryIndex()
+    {
+        return $this->_primaryIndex;
+    }
+
+    protected function _setDecorator(Zend_Form_Element $element)
+    {
+        $search  = array('submit', 'reset',  'checkbox', 'radio',    'textarea', 'password');
+        $replace = array('button', 'button', 'checkbox', 'checkbox', 'text',     'text');
+        $type = strtolower(str_replace('Zend_Form_Element_', '', $element->getType()));
+        $type = str_replace($search, $replace, $type);
+        if (key_exists($type, $this->_standardDecorators)) {
+            $element->setDecorators($this->_standardDecorators[$type]);
+
+            if (method_exists($element, 'hasErrors') && $element->hasErrors()) {
+                $decorator = $element->getDecorator('HtmlTag');
+                if (is_object($decorator)) {
+                    $decorator->setOption('class', $decorator->getOption('class') . ' ' . $this->_errorClass);
+                }
+            }
+        } else {
+            $element->loadDefaultDecorators();
+        }
+    }
+
+    /**
+     * Create an element
+     *
+     * Acts as a factory for creating elements. Elements created with this
+     * method will not be attached to the form, but will contain element
+     * settings as specified in the form object (including plugin loader
+     * prefix paths, default decorators, etc.).
+     *
+     * @param  string $type
+     * @param  string $name
+     * @param  array|Zend_Config $options
+     * @return Zend_Form_Element
+     */
+    public function createElement($type, $name, $options = null)
+    {
+        $this->_setStandardDecorators();
+        $element = parent::createElement($type, $name, $options);
+        if (key_exists($type, $this->_standardDecorators)) {
+            $element->setDecorators($this->_standardDecorators[$type]);
+
+            if (method_exists($element, 'hasErrors') && $element->hasErrors()) {
+                $decorator = $element->getDecorator('HtmlTag');
+                if (is_object($decorator)) {
+                    $decorator->setOption('class', $decorator->getOption('class') . ' ' . $this->_errorClass);
+                }
+            }
+        } else {
+            $element->loadDefaultDecorators();
+        }
+        return $element;
+    }
+
+    public function render(Zend_View_Interface $view = null)
+    {
+        $this->setDecorators($this->_standardDecorators['form']);
+        $this->setDisplayGroupDecorators($this->_standardDecorators['group']);
+        foreach ($this->getElements() as $element) {
+            $this->_setDecorator($element);
+        }
+        return parent::render($view);
+    }
+
+    protected function _setStandardDecorators()
+    {
+        $framework = strtolower(self::CSS_FRAMEWORK);
+        switch ($framework) {
+            case 'blueprint':
+            case 'yaml':
+                $method = '_set' . ucfirst(self::CSS_FRAMEWORK) . 'Decorators';
+                $this->$method();
+            case 'yaml':
+                $this->addAttribs(array('class' => 'yform'));
+                break;
+            default:
+        }
+    }
+
+    protected function _setBlueprintDecorators()
+    {
+        $this->_standardDecorators['text'] = array(
+            'ViewHelper',
+            array('Label',    array('requiredSuffix' => self::REQ_SUFFIX, 'escape' => false)),
+            array('MyErrors', array('placement' => 'prepend')),
+            array('HtmlTag',  array('tag' => 'p'))
+        );
+        $this->_standardDecorators['captcha'] = array(
+            array('Label',    array('requiredSuffix' => self::REQ_SUFFIX, 'escape' => false)),
+            array('MyErrors', array('placement' => 'prepend')),
+            array('HtmlTag',  array('tag' => 'p'))
+        );
+        $this->_standardDecorators['hidden'] = array(
+            'ViewHelper',
+            array('HtmlTag', array('tag' => 'p'))
+        );
+        $this->_standardDecorators['select'] = array(
+            'ViewHelper',
+            array('Label',    array('requiredSuffix' => self::REQ_SUFFIX, 'escape' => false)),
+            array('MyErrors', array('placement' => 'prepend')),
+            array('HtmlTag',  array('tag' => 'p'))
+        );
+        $this->_standardDecorators['checkbox'] = array(
+            'ViewHelper',
+            array('Label',       array('placement' => 'append', 'requiredSuffix' => self::REQ_SUFFIX, 'escape' => false)),
+            array('MyErrors',    array('placement' => 'prepend')),
+            array('Description', array('tag' => 'label', 'placement' => 'prepend', 'separator' => '<br />')),
+            array('HtmlTag',     array('tag' => 'p'))
+        );
+        $this->_standardDecorators['button'] = array(
+            'ViewHelper',
+            array('HtmlTag', array('tag' => 'p'))
+        );
+    }
+
+    protected function _setYamlDecorators()
+    {
+        $this->_standardDecorators['standard'] = array(
+            'ViewHelper',
+            'Errors',
+        );
+        $this->_standardDecorators['text'] = array(
+            'ViewHelper',
+            array('Label',    array('requiredSuffix' => self::REQ_SUFFIX, 'escape' => false)),
+            array('MyErrors', array('placement' => 'prepend')),
+            array('HtmlTag',  array('tag' => 'div', 'class' => 'type-text'))
+        );
+        $this->_standardDecorators['captcha'] = array(
+            array('Label',    array('requiredSuffix' => self::REQ_SUFFIX, 'escape' => false)),
+            array('MyErrors', array('placement' => 'prepend')),
+            array('HtmlTag',  array('tag' => 'div', 'class' => 'type-text'))
+        );
+        $this->_standardDecorators['hidden'] = array(
+            'ViewHelper',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'type-hidden'))
+        );
+        $this->_standardDecorators['select'] = array(
+            'ViewHelper',
+            array('Label',    array('requiredSuffix' => self::REQ_SUFFIX, 'escape' => false)),
+            array('MyErrors', array('placement' => 'prepend')),
+            array('HtmlTag',  array('tag' => 'div', 'class' => 'type-select'))
+        );
+        $this->_standardDecorators['checkbox'] = array(
+            'ViewHelper',
+            array('Label',       array('placement' => 'append', 'requiredSuffix' => self::REQ_SUFFIX, 'escape' => false)),
+            array('MyErrors',    array('placement' => 'prepend')),
+            array('Description', array('tag' => 'label', 'placement' => 'prepend', 'separator' => '<br />')),
+            array('HtmlTag',     array('tag' => 'div', 'class' => 'type-check'))
+        );
+        $this->_standardDecorators['button'] = array(
+            'ViewHelper',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'type-button'))
+        );
     }
 }

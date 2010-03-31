@@ -1,114 +1,116 @@
+@charset "UTF-8";
+
 /* CSS Document */
 label{
-clear:both;
+clear: both;
 }
 
 textarea.small{
-width:200px;
-height:50px;
+width: 200px;
+height: 50px;
 }
 
 textarea.med{
-width:320px;
-height:100px;
+width: 320px;
+height: 100px;
 }
 
 textarea.med_short{
-width:350px;
-height:50px;
+width: 350px;
+height: 50px;
 }
 textarea.med_tall{
-width:350px;
-height:200px;
+width: 350px;
+height: 200px;
 }
 
 textarea.large{
-width:450px;
-height:400px;
+width: 450px;
+height: 400px;
 }
 
 textarea.large_tall{
-width:450px;
-height:500px;
+width: 450px;
+height: 500px;
 }
 
 input.med{
-width:350px;
+width: 350px;
 }
 
 input.large{
-width:600px;
+width: 600px;
 }
 
 #form fieldset{
-padding:5px;
-border:#ccc 1px solid;
-margin:0 5px 10px 5px;
+padding: 5px;
+border: #ccc 1px solid;
+margin: 0 5px 10px 5px;
 }
 
 #form legend{
-color:#15428B;
-font-size:14px;
-font-weight:bold;
-padding:0 5px;
-margin:0 0 0 5px;
+color: #15428B;
+font-size: 14px;
+font-weight: bold;
+padding: 0 5px;
+margin: 0 0 0 5px;
 }
 
 #main form dt{
-clear:both;
-float:left;
-width:125px;
-font-weight:bold;
+clear: both;
+float: left;
+width: 125px;
+font-weight: bold;
 }
 
 label.required{
-    color:#cc0000;
+    color: #cc0000;
 }
 
 #main form dd{
-float:left;
-margin-bottom:10px;
+float: left;
+margin-bottom: 10px;
 }
 
 fieldset.formColumn{
-width:245px;
-float:left;
+width: 245px;
+float: left;
 }
 
 fieldset.formColumn p{
-margin:0 0 10px 0;
+margin: 0 0 10px 0;
 }
 
 .formTop{
-float:left;
-margin-bottom:5px;
+float: left;
+margin-bottom: 5px;
 }
 
 .formTop textarea{
-width:475px;
-height:50px;
+width: 475px;
+height: 50px;
 }
 
 .formLeft{
-margin-right:10px;
+margin-right: 10px;
 }
 
 .formLeft, .formRight{
-float:left;
-width:230px;
-margin-bottom:5px;
+float: left;
+width: 230px;
+margin-bottom: 5px;
 }
 
 .formLeft{
-clear:both;
+clear: both;
 }
 
 #fileContents{
-width:475px;
-height:250px;
-margin-bottom:10px;
+width: 475px;
+height: 250px;
+margin-bottom: 10px;
 }
-
+/*
 #centerPane label {
     clear: both;
     display: block;
@@ -116,163 +118,163 @@ margin-bottom:10px;
     margin: 0 0 5px 0;
     font-weight: bold;
 }
-
+*/
 #centerPane label span{
-display:block;
-float:left;
-width:120px;
-font-weight:bold;
-text-align:right;
-padding-right:20px;
+display: block;
+float: left;
+width: 120px;
+font-weight: bold;
+text-align: right;
+padding-right: 20px;
 }
 
 #centerPane .column label span{
-width:100px;
+width: 100px;
 }
 
 #centerPane label span.group{
-text-align:left;
+text-align: left;
 }
 
 #centerPane label span.group input{
-clear:both;
+clear: both;
 }
 
 #leftPane label{
-clear:both;
-display:block;
-padding:5px;
-margin:0 0 5px 0;
+clear: both;
+display: block;
+padding: 5px;
+margin: 0 0 5px 0;
 }
 
 #leftPane label span{
-display:block;
-font-weight:bold;
-color:#666;
+display: block;
+font-weight: bold;
+color: #666;
 }
 
 
 .formBox{
-padding:10px;
+padding: 10px;
 margin: 0 0 10px 0;
 }
 
 .formBox.tile{
-float:left;
-width:290px;
-margin-right:10px;
+float: left;
+width: 290px;
+margin-right: 10px;
 }
 
 #results{
-height:450px;
-overflow:auto;
-padding:10px;
-background-color:#000;
+height: 450px;
+overflow: auto;
+padding: 10px;
+background-color: #000;
 }
 
 #results h3{
-color:#FF9900;
-font-size:12px;
-background:none;
-border:none;
-padding:0;
-margin:0;
+color: #FF9900;
+font-size: 12px;
+background: none;
+border: none;
+padding: 0;
+margin: 0;
 }
 
 #results p{
-clear:both;
-font-size:11px;
-color:#fff;
+clear: both;
+font-size: 11px;
+color: #fff;
 }
 
 #results p.dateTime{
-float:right;
-clear:none;
-margin-left:50px;
-font-size:10px;
-font-style:italic;
-color:#ccc;
+float: right;
+clear: none;
+margin-left: 50px;
+font-size: 10px;
+font-style: italic;
+color: #ccc;
 }
 
 #form #results a{
-color:white;
+color: white;
 }
 
 #consoleCommand{
-padding:0 10px;
+padding: 0 10px;
 }
 
 #consoleCommand #command{
-width:360px;
+width: 360px;
 }
 
 form label.formRow em{
-font-weight:normal;
-font-size:11px;
-font-style:normal;
+font-weight: normal;
+font-size: 11px;
+font-style: normal;
 }
 
 span.group input{
-float:left;
-margin-right:10px;
+float: left;
+margin-right: 10px;
 }
 
 p.rightLink{
-text-align:right;
-padding-right:50px;
+text-align: right;
+padding-right: 50px;
 }
 
 #saveBox{
-position:fixed;
-z-index:1;
-top:25px;
-right:25px;
-background-color:#fff;
-border:#000 5px solid;
-padding:10px;
-width:200px;
+position: fixed;
+z-index: 1;
+top: 25px;
+right: 25px;
+background-color: #fff;
+border: #000 5px solid;
+padding: 10px;
+width: 200px;
 }
 
 div.imageWrapper{
-padding:5px 10px 15px 10px;
-border:#ccc 1px solid;
-margin:5px;
+padding: 5px 10px 15px 10px;
+border: #ccc 1px solid;
+margin: 5px;
 }
 
 div.imageWrapper img{
-float:left;
-width:120px;
-height:auto;
-margin:0 20px 0 20px;
+float: left;
+width: 120px;
+height: auto;
+margin: 0 20px 0 20px;
 }
 
 div.imageWrapper textarea{
-float:left;
-width:120px;
-height:50px;
+float: left;
+width: 120px;
+height: 50px;
 }
 
 #leftPane select{
-max-width:240px;
+max-width: 240px;
 }
 
 #centerPane select{
-max-width:350px;
+max-width: 350px;
 }
 
 form#notes textarea{
-width:510px;
-height:300px;
-margin:0 0 5px 0;
+width: 98%;
+height: 300px;
+margin: 0 0 5px 0;
 }
 
 #form input#submit{
-float:right;
+float: right;
 }
 
 
 #form input[type='text']{
-width:240px;
+width: 240px;
 }
 
 #form select{
@@ -280,156 +282,156 @@ width: 240px;
 }
 
 #form select option, #form input{
-padding:2px;
+padding: 2px;
 }
 
 #form .formRow input[type='submit']{
-float:none;
+float: none;
 }
 
 input[type='submit']{
-padding:0 10px;
+padding: 0 10px;
 }
 
 #centerPane .formColumn label span{
-width:60px;
-padding-right:10px;
+width: 60px;
+padding-right: 10px;
 }
 
 
 #centerPane .formColumn input[type='text'], #centerPane .formColumn input[type='password']{
-width:150px;
+width: 150px;
 }
 
 #aclList{
-padding-right:25px;
+padding-right: 25px;
 }
 
 #aclList, #aclList ul{
-list-style:none;
+list-style: none;
 }
 
 #aclList input{
-margin:0 10px 0 0;
+margin: 0 10px 0 0;
 }
 
 #aclList li{
-padding:5px;
-font-weight:bold;
-border:#5D86BD 1px solid;
+padding: 5px;
+font-weight: bold;
+border: #5D86BD 1px solid;
 }
 
 #aclList li.module{
-background:#A8C4EB;
+background: #A8C4EB;
 }
 #aclList li.controller{
-background:#BCD4F6;
+background: #BCD4F6;
 }
 #aclList li.action{
-background:#D9E9FF;
+background: #D9E9FF;
 }
 
 #form fieldset.skin label{
-    display:block;
-    width:220px;
-    float:left;
-    clear:none;
-    margin:5px;
-    padding:0;
+    display: block;
+    width: 220px;
+    float: left;
+    clear: none;
+    margin: 5px;
+    padding: 0;
 }
 
 #form fieldset.skin label input{
-    margin:0 10px 0 0;
+    margin: 0 10px 0 0;
 }
 
 .column input[type='text'], .column input[type='submit'], .column textarea, .column select{
-width:190px;
-margin:0 4px 5px 4px;
+width: 190px;
+margin: 0 4px 5px 4px;
 }
 
 .message_box{
-border-top:#666 1px dotted;
-border-bottom:#ccc 1px dotted;
-border-left:#ccc 1px dotted;
-border-right:#ccc 1px dotted;
-margin:10px 0 10px 0;
-background-color:#f5f5f5;
-padding:10px;
+border-top: #666 1px dotted;
+border-bottom: #ccc 1px dotted;
+border-left: #ccc 1px dotted;
+border-right: #ccc 1px dotted;
+margin: 10px 0 10px 0;
+background-color: #f5f5f5;
+padding: 10px;
 }
 
 #propLabels span{
-display:block;
-float:left;
-width:200px;
-font-weight:bold;
-margin:0 5px 0 0;
+display: block;
+float: left;
+width: 200px;
+font-weight: bold;
+margin: 0 5px 0 0;
 }
 
 #form #propertyList{
-clear:both;
+clear: both;
 }
 
 #form .propRow{
-margin:0 0 5px 0;
+margin: 0 0 5px 0;
 }
 
 #form .propRow input{
-width:200px;
-margin:0 5px 0 0;
+width: 200px;
+margin: 0 5px 0 0;
 }
 
 #fileChecklist input{
-margin:0 10px 0 0;
+margin: 0 10px 0 0;
 }
 
 #centerPane label span#multi_upload_wrap_labels{
 
-        text-align:left;
-    width:400px;
-    font-weight:normal;
+    text-align: left;
+    width: 400px;
+    font-weight: normal;
 }
 
 #centerPane label span#multi_upload_wrap_labels span{
-    float:left;
-        text-align:left;
-    width:400px;
-    font-weight:normal;
+    float: left;
+        text-align: left;
+    width: 400px;
+    font-weight: normal;
 }
 .test{
-        text-align:left;
-    width:400px;
-    font-weight:normal;
-    display:inline;
-    padding:0;
-    margin:0;
+        text-align: left;
+    width: 400px;
+    font-weight: normal;
+    display: inline;
+    padding: 0;
+    margin: 0;
 }
 .inlineButton{
-    padding:0 5px;
-    margin:0 0 0 5px;
+    padding: 0 5px;
+    margin: 0 0 0 5px;
 }
 
 .dev{
-background:#FFFF00;
-color:#990000;
-margin:5px;
-padding:5px;
-text-align:center;
+background: #FFFF00;
+color: #990000;
+margin: 5px;
+padding: 5px;
+text-align: center;
 }
 
 a.rightLink{
-float:right;
-margin-left:10px;
+float: right;
+margin-left: 10px;
 }
 
 .wysiwyg{
-clear:both;
-width:480px;
-height:300px;
-margin-bottom:20px;
+clear: both;
+width: 480px;
+height: 300px;
+margin-bottom: 20px;
 }
 
 .html, .wiki, .css{
-    width:450px;
+    width: 450px;
 }
 
 img.icon, a.link img.icon {
@@ -438,34 +440,34 @@ img.icon, a.link img.icon {
 }
 
 .column a, #form a{
-    text-decoration:none;
-    color:#000;
-    height:1.5em;
+    text-decoration: none;
+    color: #000;
+    height: 1.5em;
 
 }
-#form a:hover, .column a:hover{
-    color:#5D86BD;
+#form a: hover, .column a: hover{
+    color: #5D86BD;
 }
 
 .column ul, #form ul{
-    list-style:none;
-    padding:5px;
+    list-style: none;
+    padding: 5px;
 }
 
 .column ul li a,#form ul li a{
-    text-decoration:none;
-    color:#000;
+    text-decoration: none;
+    color: #000;
 }
 
-.column a:hover img, #form a:hover img{
-    opacity:.8;
+.column a: hover img, #form a: hover img{
+    opacity: .8;
 }
 
 .notice{
-    border:#ff0000 2px dashed;
-    padding:10px;
-    margin:10px;
-    color:#666;
+    border: #ff0000 2px dashed;
+    padding: 10px;
+    margin: 10px;
+    color: #666;
 }
 
 .contentBrowser{
@@ -476,40 +478,40 @@ a.handle{
 }
 
 .default{
-    color:#999;
-    font-style:italic;
-    width:150px;
-    display:block;
-    float:left;
+    color: #999;
+    font-style: italic;
+    width: 150px;
+    display: block;
+    float: left;
 }
 
 h4 img{
-    margin-right:10px;
+    margin-right: 10px;
 }
 
 #form a img{
-    border:none;
-    margin-right:10px;
+    border: none;
+    margin-right: 10px;
 }
 
 .folderWrapper, .fileWrapper{
-    padding:5px;
+    padding: 5px;
 }
 
 #errorWrapper{
     width:  500px;
-    overflow:auto;
-    border:1px solid #ccc;
-    margin:10px;
-    padding:5px;
+    overflow: auto;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 5px;
 }
 div.wysiwyg{
-    margin-bottom:25px;
+    margin-bottom: 25px;
 }
 
 ul.errors{
-    max-width:320px;
-    color:#cc0000;
+    max-width: 320px;
+    color: #cc0000;
 }
 
 ul.form-errors {

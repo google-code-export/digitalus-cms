@@ -57,8 +57,8 @@ class Slideshow_Slide extends Model_Page
     {
         $slide = $this->find($slideId)->current();
         if ($slide) {
-            $mdlContentNode = new Model_ContentNode();
-            $content = $mdlContentNode->fetchContentArray($slide->id, null, null, $this->getDefaultVersion());
+            $mdlContentNode = new Model_PageNode();
+            $content = $mdlContentNode->fetchContentArray($slide->id, null, null, $this->getDefaultLanguage());
             $objSlide = new stdClass();
             $objSlide->id = $slide->id;
             $objSlide->title = $slide->name;
