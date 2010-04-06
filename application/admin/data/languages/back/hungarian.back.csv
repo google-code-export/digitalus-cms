@@ -1,5 +1,6 @@
 # Language File – BACKEND
 # HUNGARIAN
+"Digitalus CMS";"Digitalus CMS"
 # languages
 "english";"angol"
 "french";"francia"
@@ -110,6 +111,7 @@
 "Current Menu";"Aktuális menü"
 "Update Menu";"Menü frissítése"
 "click to toggle visibility";"kattintson a láthatóság ki/be kapcsolásához"
+"open page";
 "Save Changes";"Változások mentése"
 "Main Menu";"Fóőmenü"
 # admin section -- Page --
@@ -139,6 +141,7 @@
 "Publish / Archive";"Publikál vagy archivál"
 "Page Versions";"Oldal verziói"
 "Update Page";"Oldal frissítése"
+"main items";
 "Edit Meta Data";"Meta adatok módosítása"
 "Edit Page Properties";"Oldal tulajdonságai"
 "Publish / Archive Page";"Publikál vagy archivál"
@@ -173,7 +176,7 @@
 "Parent Page";"Szülő oldal"
 "Next >>";"Következő>>"
 "Current Version";"Aktuális verzió"
-"Available Versions";"Elérhető verziók"
+"Available Languages";
 "Default";"Alapbeállítás"
 "Step 2: What type of page would you like to create?";"2.Lépés:milyen tipusu oldalt szeretne létrehozni"
 "Select a type";"Válasszon tipust"
@@ -394,12 +397,22 @@
 "Params: none";"Paraméterek: nincs ilyen"
 "ERROR: could not update content template references.";"elemek sablonreferenciának frissítése sikertelen"
 "Content template references updated OK.";"Tartalmi elemek sablonjainak referenciái sikeresen frissültek"
+"ERROR: could not update database.";
+"Databases successfully updated!";
+"ERROR: could not update config.";
+"Config successfully updated!";
 "The Update Version 18 command will update your database from version 1.5 to 1.8";"Az Update Version 19 parancs frissíti az adatbázis 1.5-ről 1.8 -ae"
 "The Update Version 19 command will update your database from version 1.8 to 1.9";"Az Update Version 19 parancs frissíti az adatbázis 1.8-ról 1.9 -re"
+"The Update Version 110 command will update your database from version 1.9 to 1.10";
+"Significant changes have been made to the database structure.";
+"Please be sure to make a backup copy of Your databases BEFORE updating!";
+"Page Label";
+"Page Headline";
 "Unable to delete item - the item is empty!";"Elem törlésekor hiba történt: az elem nem üres!"
 "Unable to cast type:";"tipus konverzió hibás"
 "to type:";"tipusra"
 "Unable to load content item";"Tartalmielem betöltésekor hiba történt"
+"The given table doesn't exist";
 "An error occurred uploading the file";"Hiba a fájl frissítésekor"
 "This filetype is not allowed";"Aez a fájltipus nem engedélyezett"
 "Illegal file access attempt. Operation cancelled!";"Nem engedélyezett fájhozzáférés kisérlet!"

@@ -1,5 +1,6 @@
 # Language File – BACKEND
 # ITALIAN
+"Digitalus CMS";"Digitalus CMS"
 # languages
 "english";"inglese"
 "french";"francese"
@@ -110,6 +111,7 @@
 "Current Menu";"Menu corrente"
 "Update Menu";"Aggiorna menu"
 "click to toggle visibility";
+"open page";
 "Save Changes";"Salva cambiamenti"
 "Main Menu";"Menu principale"
 # admin section -- Page --
@@ -139,6 +141,7 @@
 "Publish / Archive";
 "Page Versions";"Versioni della pagina"
 "Update Page";"Aggiorna pagina"
+"main items";
 "Edit Meta Data";"Modifica metadati"
 "Edit Page Properties";"Modifica proprietà della pagina"
 "Publish / Archive Page";
@@ -173,7 +176,7 @@
 "Parent Page";"Pagina madre"
 "Next >>";"Avanti >>"
 "Current Version";"Versione corrente"
-"Available Versions";"Versioni disponibili"
+"Available Languages";
 "Default";"Default"
 "Step 2: What type of page would you like to create?";"Passo 2: Che tipo di pagina vuoi creare?"
 "Select a type";"Seleziona un tipo"
@@ -394,12 +397,22 @@
 "Params: none";
 "ERROR: could not update content template references.";
 "Content template references updated OK.";
+"ERROR: could not update database.";
+"Databases successfully updated!";
+"ERROR: could not update config.";
+"Config successfully updated!";
 "The Update Version 18 command will update your database from version 1.5 to 1.8";
 "The Update Version 19 command will update your database from version 1.8 to 1.9";
+"The Update Version 110 command will update your database from version 1.9 to 1.10";
+"Significant changes have been made to the database structure.";
+"Please be sure to make a backup copy of Your databases BEFORE updating!";
+"Page Label";
+"Page Headline";
 "Unable to delete item - the item is empty!";"Impossibile eliminare elemento; l'elemento è vuoto!"
 "Unable to cast type:";"Impossibile effettuare il cast del tipo:"
 "to type:";"al tipo:"
 "Unable to load content item";"Impossibile caricare l'elemento corrente"
+"The given table doesn't exist";
 "An error occurred uploading the file";"Un errore è avvenuto nel caricamento del file"
 "This filetype is not allowed";"Questo tipo di file non è permesso"
 "Illegal file access attempt. Operation cancelled!";"Tentativo di accesso a file non autorizzato. Operazione annullata!"

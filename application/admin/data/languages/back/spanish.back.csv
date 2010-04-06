@@ -1,5 +1,6 @@
 # Language File – BACKEND
 # SPANISH
+"Digitalus CMS";"Digitalus CMS"
 # languages
 "english";"ingles"
 "french";"frances"
@@ -110,6 +111,7 @@
 "Current Menu";"Menú actual"
 "Update Menu";"Actualizar menú"
 "click to toggle visibility";"Clickear para mostrar/esconder"
+"open page";
 "Save Changes";"Guardar cambios"
 "Main Menu";"Menú principal"
 # admin section -- Page --
@@ -139,6 +141,7 @@
 "Publish / Archive";"Publicar / Archivar"
 "Page Versions";"Versiones de páginas"
 "Update Page";"Actualizar página"
+"main items";
 "Edit Meta Data";"Editar información Meta"
 "Edit Page Properties";"Editar propiedades de página"
 "Publish / Archive Page";"Publicar / Archivar pagina"
@@ -173,7 +176,7 @@
 "Parent Page";"Página padre"
 "Next >>";"Siguiente >>"
 "Current Version";"Versión actual"
-"Available Versions";"Version disponible"
+"Available Languages";
 "Default";"Predeterminado"
 "Step 2: What type of page would you like to create?";"Paso 2: ¿Que tipo de página deseas crear?"
 "Select a type";"Seleccionar tipo"
@@ -394,12 +397,22 @@
 "Params: none";
 "ERROR: could not update content template references.";
 "Content template references updated OK.";
+"ERROR: could not update database.";
+"Databases successfully updated!";
+"ERROR: could not update config.";
+"Config successfully updated!";
 "The Update Version 18 command will update your database from version 1.5 to 1.8";"El comando Update Version 18 actualizara tus datos de la versión 1.5 a la 1.8"
 "The Update Version 19 command will update your database from version 1.8 to 1.9";
+"The Update Version 110 command will update your database from version 1.9 to 1.10";
+"Significant changes have been made to the database structure.";
+"Please be sure to make a backup copy of Your databases BEFORE updating!";
+"Page Label";
+"Page Headline";
 "Unable to delete item - the item is empty!";"Imposible borrar ítem – el ítem esta vacio!"
 "Unable to cast type:";"Imposible emitir tipo:"
 "to type:";"Con el tipo:"
 "Unable to load content item";"Imposible cargar contenido del ítem"
+"The given table doesn't exist";
 "An error occurred uploading the file";"Un error ha ocurrido al cargar el archivo"
 "This filetype is not allowed";"Este tipo de archivo no esta permitido."
 "Illegal file access attempt. Operation cancelled!";"Intento ilegal de acceso a archivo. Operación cancelada!"

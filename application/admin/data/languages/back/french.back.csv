@@ -1,5 +1,6 @@
 # Language File – BACKEND
 # FRENCH
+"Digitalus CMS";"Digitalus CMS"
 # languages
 "english";"Anglais"
 "french";"Français"
@@ -110,6 +111,7 @@
 "Current Menu";"Menu en cours"
 "Update Menu";"Mise à jour du menu"
 "click to toggle visibility";"Cliquez pour changer la visibilité"
+"open page";
 "Save Changes";"Sauvegarder les changements"
 "Main Menu";"Menu principal"
 # admin section -- Page --
@@ -139,6 +141,7 @@
 "Publish / Archive";
 "Page Versions";"versions de page"
 "Update Page";"Mettre à jour une page"
+"main items";
 "Edit Meta Data";"Editer les méta données"
 "Edit Page Properties";"Editer les propriétés de page"
 "Publish / Archive Page";
@@ -173,7 +176,7 @@
 "Parent Page";"Page parente"
 "Next >>";"Suivant >>"
 "Current Version";"Version en cours"
-"Available Versions";"Versions disponibles"
+"Available Languages";
 "Default";"Défaut"
 "Step 2: What type of page would you like to create?";"Etape 2: Quel type de page voulez vous créer?"
 "Select a type";"Sélectionner un type"
@@ -394,12 +397,22 @@
 "Params: none";"Paramètres: aucun"
 "ERROR: could not update content template references.";"ERREUR: impossible de mettre à jour les références de modèle de contenu."
 "Content template references updated OK.";"Références de modèle de contenu mises à jour OK."
+"ERROR: could not update database.";
+"Databases successfully updated!";
+"ERROR: could not update config.";
+"Config successfully updated!";
 "The Update Version 18 command will update your database from version 1.5 to 1.8";"La commande de mise à jour de version 18 mettra à jour votre base de données de la version 1.5 à 1.8"
 "The Update Version 19 command will update your database from version 1.8 to 1.9";
+"The Update Version 110 command will update your database from version 1.9 to 1.10";
+"Significant changes have been made to the database structure.";
+"Please be sure to make a backup copy of Your databases BEFORE updating!";
+"Page Label";
+"Page Headline";
 "Unable to delete item - the item is empty!";"Impossible de supprimer l'élément – l'élément est vide!"
 "Unable to cast type:";"Impossible de modifier le type"
 "to type:";"de type:"
 "Unable to load content item";"Impossible de charger l'élément de contenu"
+"The given table doesn't exist";
 "An error occurred uploading the file";"Une erreur est survenue lors de l'envoi du fichier"
 "This filetype is not allowed";"Ce type de fichier n'est pas permis"
 "Illegal file access attempt. Operation cancelled!";"Tentative illégale d'accès aux fichiers. Operation annulée!"
