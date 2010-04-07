@@ -6,7 +6,9 @@ In version 1.10 of the Digitalus CMS have been made some significant changes in 
 This requires an update of the databases. To achieve this, both an SQL file and a Digitalus Command are provided.
 
 = Significant changes and new features =
-Update of the Zend Framework to version [http://framework.zend.com/releases/ZendFramework-1.10.2/ZendFramework-1.10.2-minimal.zip 1.10.2]
+Update of the Zend Framework to version [http://framework.zend.com/releases/ZendFramework-1.10.3/ZendFramework-1.10.3-minimal.zip 1.10.3]
+
+The navigation now makes use of Zend_Navigation - so does the Digitalus tag {{{<digitalusNavigation>}}} which simply forwards to the view helpers. {{{<digitalusNavigation>}}} supports all attributes that Zend_Navigation offers.
 
 To clean up the directory structure, the _data_ and _configs_ directories have been moved into the _admin_ module directory.
 
