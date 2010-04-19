@@ -49,7 +49,7 @@ class Digitalus_Validate_UsernameExists extends Zend_Validate_Abstract
      *
      * @var string
      */
-    protected $_exclude;
+    protected $_exclude = array();
 
     /**
      * Sets validator options
@@ -88,19 +88,16 @@ class Digitalus_Validate_UsernameExists extends Zend_Validate_Abstract
      * Sets the exclude option
      *
      * @param  array/string $name
-     * @throws Digitalus_Validate_Exception
      * @return Digitalus_Validate_UsernameExists Provides a fluent interface
      */
     public function setExclude($name = null)
     {
-        if (is_array($name)) {
-            $this->_exclude = implode(', ', $name);
+        if (!is_array($name)) {
+            $this->_exclude = array($name);
         } else {
             $this->_exclude = $name;
         }
-        return $this->_exclude;
     }
-
 
     public function isValid($value)
     {

@@ -35,15 +35,15 @@ class Model_AccessLog extends Zend_Db_Table_Abstract
     }
 
     /**
-     * inserts the currenta user id, uri, ip address, and date to the cms access log
+     * inserts the current user id, uri, ip address, and date to the cms access log
      *
      * @param int $userId
      */
     public function log($userId)
     {
-        $data['user_id'] = $userId;
-        $data['uri'] = $_SERVER['REQUEST_URI'];
-        $data['ip'] = $_SERVER['REMOTE_ADDR'];
+        $data['user_id']   = $userId;
+        $data['uri']       = $_SERVER['REQUEST_URI'];
+        $data['ip']        = $_SERVER['REMOTE_ADDR'];
         $data['date_time'] = time();
 
         $this->insert($data);

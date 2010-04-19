@@ -80,20 +80,16 @@ class Digitalus_Page extends Digitalus_Model_Abstract
     {
         if ($this->_hasProperty('language')) {
             return $this->getParam('language');
-        } else {
-            return null;
         }
-
+        return null;
     }
 
     public function getAvailableLanguages()
     {
         if ($this->_hasProperty('availableLanguages')) {
             return $this->getParam('availableLanguages');
-        } else {
-            return null;
         }
-
+        return null;
     }
 
     public function getContent($key = null, $useDefault = true)
@@ -107,13 +103,9 @@ class Digitalus_Page extends Digitalus_Model_Abstract
                 }
             }
         }
-
         if ($key !== null) {
             return $content->$key;
-        } else {
-            return $content;
         }
-
+        return $content;
     }
-
 }

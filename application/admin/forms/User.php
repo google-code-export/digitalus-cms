@@ -12,6 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: User.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
@@ -27,6 +28,7 @@ require_once 'Digitalus/Form.php';
 /**
  * Admin User Form
  *
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
@@ -50,9 +52,9 @@ class Admin_Form_User extends Digitalus_Form
         $view = $this->getView();
 
         // create new element
-        $id = $this->createElement('hidden', 'id', array(
-            'decorators'    => array('ViewHelper')
-        ));
+#        $id = $this->createElement('hidden', 'id', array(
+#            'decorators'    => array('ViewHelper')
+#        ));
 
         // create new element
         $userName = $this->createElement('text', 'name', array(
@@ -134,12 +136,9 @@ class Admin_Form_User extends Digitalus_Form
         ));
 
         // create new element
-        $adminRole = $this->createElement('select', 'role', array(
+        $adminRole = $view->selectGroup('role', null, null, null, 'superadmin', false);
+        $adminRole->setOptions(array(
             'label'         => $view->getTranslation('Admin Role'),
-            'multiOptions'  => array(
-                'admin'      => $view->getTranslation('Site Administrator'),
-                'superadmin' => $view->getTranslation('Super Administrator')
-            ),
         ));
 
         // create new element
@@ -162,7 +161,7 @@ class Admin_Form_User extends Digitalus_Form
         ));
 
         $captcha = $this->createElement('captcha', 'captcha', array(
-            'label'         => $view->getTranslation("Please verify you're a human!"),
+            'label'         => $view->getTranslation("Please verify you're a human!") . ':',
             'required'      => true,
             'filters'       => array('StringTrim'),
             'captcha' => array(

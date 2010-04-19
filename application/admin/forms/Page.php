@@ -12,6 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: Page.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
@@ -27,6 +28,7 @@ require_once 'Digitalus/Form.php';
 /**
  * Admin Page Form
  *
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
@@ -63,6 +65,7 @@ class Admin_Form_Page extends Digitalus_Form
             'validators'    => array(
                 array('NotEmpty', true),
                 array('StringLength', true, array(4, Model_Page::PAGE_NAME_LENGTH)),
+                array('PagenameExists'),
                 array('Regex', true, array(
                     'pattern'  => Model_Page::PAGE_NAME_REGEX,
                     'messages' => array('regexNotMatch' => Model_Page::PAGE_NAME_REGEX_NOTMATCH),

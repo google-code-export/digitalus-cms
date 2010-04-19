@@ -3,15 +3,17 @@ require_once './application/modules/slideshow/forms/Slide.php';
 require_once './application/modules/slideshow/models/Show.php';
 require_once './application/modules/slideshow/models/Slide.php';
 
-class Mod_Slideshow_SlideController extends Zend_Controller_Action
+class Mod_Slideshow_SlideController extends Digitalus_Controller_Action
 {
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Modules') => $this->view->getBaseUrl() . '/admin/module',
-           $this->view->getTranslation('Slideshow') => $this->view->getBaseUrl() . '/mod_slideshow'
+           $this->view->getTranslation('Modules') => $this->baseUrl . '/admin/module',
+           $this->view->getTranslation('Slideshow') => $this->baseUrl . '/mod_slideshow'
         );
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/mod_slideshow';
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark/url/mod_slideshow';
     }
 
     public function createAction()
@@ -94,7 +96,7 @@ class Mod_Slideshow_SlideController extends Zend_Controller_Action
         $slideArray['imagepath']   = $slide->imagePath;
         $slideArray['caption']     = $slide->caption;
 
-        $form->setAction($this->view->getBaseUrl() . '/mod_slideshow/slide/edit')
+        $form->setAction($this->baseUrl . '/mod_slideshow/slide/edit')
             ->populate($slideArray);
 
         $show = $mdlShow->find($slide->showId)->current();
@@ -106,10 +108,10 @@ class Mod_Slideshow_SlideController extends Zend_Controller_Action
         $this->view->show  = $show;
         $this->view->slide = $slide;
 
-        $this->view->breadcrumbs[$show->name] = $this->view->getBaseUrl() . '/mod_slideshow/show/edit/id/' . $show->id;
-        $this->view->breadcrumbs[$slide->title] = $this->view->getBaseUrl() . '/mod_slideshow/slide/edit/id/' . $slide->id;
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/mod_slideshow/slide/edit/id/' . $slide->id;
-        $this->view->toolbarLinks['Delete'] = $this->view->getBaseUrl() . '/mod_slideshow/slide/delete/id/' . $slide->id;
+        $this->view->breadcrumbs[$show->name] = $this->baseUrl . '/mod_slideshow/show/edit/id/' . $show->id;
+        $this->view->breadcrumbs[$slide->title] = $this->baseUrl . '/mod_slideshow/slide/edit/id/' . $slide->id;
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark/url/mod_slideshow/slide/edit/id/' . $slide->id;
+        $this->view->toolbarLinks['Delete'] = $this->baseUrl . '/mod_slideshow/slide/delete/id/' . $slide->id;
     }
 
     public function reorderAction()

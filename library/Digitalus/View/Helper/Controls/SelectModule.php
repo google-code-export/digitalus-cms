@@ -41,19 +41,23 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Digitalus_View_Helper_Controls_SelectModule extends Zend_View_Helper_Abstract
 {
-    public function selectModule($name, $value, $attribs = null)
+    public function selectModule($name, $value, $attribs = array())
     {
         $options = array();
         $modules = Digitalus_Filesystem_Dir::getDirectories(APPLICATION_PATH . '/modules');
         if (is_array($modules)) {
             $options[] = $this->view->getTranslation('Select a module');
             $options = array_merge($options, $this->_getModuleForms());
+
             $attribs['multiple'] = false;
             $form = new Digitalus_Form();
             $select = $form->createElement('select', $name, array(
-                'multiOptions' => $options,
-                'belongsTo'    => 'module',
+                'multiOptions'  => $options,
+                'value'         => $value,
             ));
+            if (is_array($attribs)) {
+                $select->setAttribs($attribs);
+            }
             return $select;
         } else {
             return $this->view->getTranslation('There are no modules currently installed');

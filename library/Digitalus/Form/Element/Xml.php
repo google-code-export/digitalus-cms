@@ -1,5 +1,6 @@
 <?php
 require_once ('Zend/Form/Element.php');
+
 class Digitalus_Form_Element_Xml extends Zend_Form_Element
 {
     public function getValue($toString = true)
@@ -10,8 +11,10 @@ class Digitalus_Form_Element_Xml extends Zend_Form_Element
             foreach ($value as $k => $v) {
                 $xml->$k = $v;
             }
-        } else {
+        } else if (!empty($value)) {
             $xml = simplexml_load_string($value);
+        } else {
+            return null;
         }
         if (is_object($xml)) {
             if ($toString) {
@@ -19,11 +22,10 @@ class Digitalus_Form_Element_Xml extends Zend_Form_Element
             } else {
                 return $xml;
             }
-        } else {
-            return null;
         }
+        return null;
     }
-    public function getXml ()
+    public function getXml()
     {
         return $this->getValue(false);
     }

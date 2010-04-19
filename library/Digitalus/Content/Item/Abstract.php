@@ -18,7 +18,6 @@ abstract class Digitalus_Content_Item_Abstract extends Digitalus_Abstract
     public $related_pages;
     public $parent_id;
     public $position;
-    public $is_home_page;
     public $show_on_menu;
     public $design;
 

@@ -1,7 +1,7 @@
 <?php
 require_once './application/modules/contact/forms/Contact.php';
 
-class Mod_Contact_PublicController extends Zend_Controller_Action
+class Mod_Contact_PublicController extends Digitalus_Controller_Action
 {
     public function contactFormAction()
     {

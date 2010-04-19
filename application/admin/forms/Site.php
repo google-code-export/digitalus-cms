@@ -12,6 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: Page.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
@@ -27,6 +28,7 @@ require_once 'Digitalus/Form.php';
 /**
  * Admin Site Form
  *
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
@@ -139,7 +141,7 @@ class Admin_Form_Site extends Digitalus_Form
          * DESIGN
          * ****************************************************************** */
         $designConfig = Zend_Registry::get('config')->template->default->public;
-        $currentDesign = isset($this->settings->default_design) ? $this->settings->default_design : $designConfig->template . '_' . $designConfig->page;
+        $currentDesign = isset($settings->default_design) ? $settings->default_design : $designConfig->template . '_' . $designConfig->page;
         $defaultDesign = $view->selectDesign('default_design', $currentDesign);
         $defaultDesign->setOptions(array(
             'label'         => $view->getTranslation('Default design'),
@@ -272,7 +274,7 @@ class Admin_Form_Site extends Digitalus_Form
         ));
         $mailTest = $this->createElement('AnyMarkup', 'mail_test', array(
             'value'         => $view->link($view->getTranslation('Send test message'), '/admin/site/mail-test', 'email_go.png'),
-            'decorators'    => $this->_standardDecorators['text'],
+            'decorators'    => $this->getStandardDecorator('text'),
         ));
         $mailSubmit = $this->createElement('submit', 'mail', array(
             'label'         => $view->getTranslation('Update Mail Settings'),

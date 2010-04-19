@@ -2,12 +2,14 @@
 require_once './application/modules/blog/models/Blog.php';
 require_once './application/modules/blog/models/Post.php';
 
-class Mod_Blog_PublicController extends Zend_Controller_Action
+class Mod_Blog_PublicController extends Digitalus_Controller_Action
 {
     public $moduleData;
 
     public function init()
     {
+        parent::init();
+
         $module = new Digitalus_Module();
         $this->moduleData = $module->getData();
     }
@@ -30,7 +32,7 @@ class Mod_Blog_PublicController extends Zend_Controller_Action
             }
         }
     }
-    
+
     public function sayHiAction()
     {}
 }

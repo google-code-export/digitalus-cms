@@ -9,7 +9,6 @@ if ($this->isAllowed('admin', 'page', 'update-meta-data')) {
 }
 if ($this->isAllowed('admin', 'page', 'update-properties')) {
     echo '<div id="properties">';
-    echo '<legend>' . $this->getTranslation('Edit Page Properties') . '</legend>';
     echo $this->render('page/edit/properties.phtml');
     echo '</div>';
 }
@@ -20,7 +19,6 @@ if ($this->isAllowed('admin', 'page', 'update-template')) {
 }
 if ($this->isAllowed('admin', 'page', 'move')) {
     echo '<div id="move">';
-    echo '<legend>' . $this->getTranslation('Move Page') . '</legend>';
     echo $this->render('page/edit/move.phtml');
     echo '</div>';
 }

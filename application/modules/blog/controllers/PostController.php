@@ -3,15 +3,17 @@ require_once './application/modules/blog/forms/Post.php';
 require_once './application/modules/blog/models/Blog.php';
 require_once './application/modules/blog/models/Post.php';
 
-class Mod_Blog_PostController extends Zend_Controller_Action
+class Mod_Blog_PostController extends Digitalus_Controller_Action
 {
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Modules') => $this->view->getBaseUrl() . '/admin/module',
-           $this->view->getTranslation('Blog') => $this->view->getBaseUrl() . '/mod_blog'
+           $this->view->getTranslation('Modules') => $this->baseUrl . '/admin/module',
+           $this->view->getTranslation('Blog')    => $this->baseUrl . '/mod_blog'
         );
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/mod_blog';
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark/url/mod_blog';
 
     }
 
@@ -63,7 +65,7 @@ class Mod_Blog_PostController extends Zend_Controller_Action
         }
         $blog = $mdlBlog->find($post->blogId)->current();
 
-        $form->setAction($this->view->getBaseUrl() . '/mod_blog/post/edit');
+        $form->setAction($this->baseUrl . '/mod_blog/post/edit');
         $submit = $form->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Update Post'));
 
@@ -71,9 +73,9 @@ class Mod_Blog_PostController extends Zend_Controller_Action
         $this->view->blog = $blog;
         $this->view->post = $post;
 
-        $this->view->breadcrumbs[$blog->name] = $this->view->getBaseUrl() . '/mod_blog/blog/edit/id/' . $blog->id;
-        $this->view->breadcrumbs[$post->title] = $this->view->getBaseUrl() . '/mod_blog/post/edit/id/' . $post->id;
-        $this->view->toolbarLinks['Delete'] = $this->view->getBaseUrl() . '/mod_blog/post/delete/id/' . $post->id;
+        $this->view->breadcrumbs[$blog->name] = $this->baseUrl . '/mod_blog/blog/edit/id/' . $blog->id;
+        $this->view->breadcrumbs[$post->title] = $this->baseUrl . '/mod_blog/post/edit/id/' . $post->id;
+        $this->view->toolbarLinks['Delete'] = $this->baseUrl . '/mod_blog/post/delete/id/' . $post->id;
 
     }
 

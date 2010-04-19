@@ -45,18 +45,18 @@ class Zend_View_Filter_DigitalusControl extends Digitalus_Content_Filter
 
     protected function _callback($matches)
     {
-        $attr = $this->getAttributes($matches[0]);
-        if (is_array($attr)) {
+        $attribs = $this->getAttributes($matches[0]);
+        if (is_array($attribs)) {
             $content = $this->page->getContent();
-            if (isset($content[$attr['id']])) {
-                $controlContent = $content[$attr['id']];
-                switch ($attr['type']) {
+            if (isset($content[$attribs['id']])) {
+                $controlContent = $content[$attribs['id']];
+                switch ($attribs['type']) {
                     case 'fckeditor':
                     case 'markitup':
                     case 'tinymce':
                     case 'wymeditor':
                     case 'wysiwyg':
-                        $xhtml = '<div id="' . $attr['id'] . '_wrapper">' . $controlContent . '</div>';
+                        $xhtml = '<div id="' . $attribs['id'] . '_wrapper">' . $controlContent . '</div>';
                         break;
                     case 'text':
                     case 'textarea':
@@ -72,8 +72,8 @@ class Zend_View_Filter_DigitalusControl extends Digitalus_Content_Filter
                         $xhtml = $this->view->renderImage($controlContent);
                         break;
                 }
-                if (isset($attr['tag']) && !empty($xhtml)) {
-                    return '<' . $attr['tag'] . '>' . $xhtml . '</' . $attr['tag'] . '>';
+                if (isset($attribs['tag']) && !empty($xhtml)) {
+                    return '<' . $attribs['tag'] . '>' . $xhtml . '</' . $attribs['tag'] . '>';
                 } else {
                     return $xhtml;
                 }

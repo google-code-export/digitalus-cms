@@ -39,22 +39,27 @@ class Digitalus_Form extends Zend_Form
 {
     const REQ_SUFFIX = '<sup title="This field is mandatory.">*</sup>';
 
-    const CSS_FRAMEWORK = 'yaml';       // either empty, yaml or blueprint --> respect their licenses!!
+    const CSS_FRAMEWORK = '';       // either empty, yaml or blueprint --> respect their licenses!!
 
     protected $_model;
     protected $_columns;
     protected $_session = null;
     protected $_primaryIndex = '';
     protected $_standardDecorators = array(
-                'form' => array(
-                    'FormElements',
-                    'Form'
-                ),
-                'group' => array(
-                    'FormElements',
-                    'Fieldset'
-                )
-            );
+        'form' => array(
+            'FormElements',
+            'Form'
+        ),
+        'group' => array(
+            'FormElements',
+            'Fieldset'
+        ),
+        'standard' => array(
+            'ViewHelper',
+            'Errors',
+            'Label',
+        ),
+    );
 
     protected $_errorClass = 'error';
 
@@ -79,9 +84,10 @@ class Digitalus_Form extends Zend_Form
 
         //set instance
         $instance = $this->_addInstance();
-        $instanceElement = $this->createElement('hidden', 'form_instance');
-        $instanceElement->setValue($instance)
-                        ->removeDecorator('Label');
+        $instanceElement = $this->createElement('hidden', 'form_instance', array(
+            'value'         => $instance,
+            'decorators'    => array('ViewHelper'),
+        ));
         $this->addElement($instanceElement);
     }
 
@@ -123,9 +129,8 @@ class Digitalus_Form extends Zend_Form
             $primaryIndex = $this->_getPrimaryIndex();
             $row->$primaryIndex = Zend_Db_Table::getDefaultAdapter()->lastInsertId();
             return $row;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -177,10 +182,8 @@ class Digitalus_Form extends Zend_Form
     public function validatePost()
     {
         $request = Zend_Controller_Front::getInstance()->getRequest();
-        if ($request->isPost()) {
-            if ($this->isValid($_POST)) {
-                return true;
-            }
+        if ($request->isPost() && $this->isValid($_POST)) {
+            return true;
         }
         return false;
     }
@@ -209,7 +212,6 @@ class Digitalus_Form extends Zend_Form
     {
         $instance = $this->_getInstance();
         $session = $this->_getSession();
-#        $session->validInstances->$instance = true;
         $session->validInstances = array($instance => true);
         return $instance;
     }
@@ -337,6 +339,15 @@ class Digitalus_Form extends Zend_Form
         return parent::render($view);
     }
 
+    public function getStandardDecorator($type)
+    {
+        $this->_setStandardDecorators();
+        if (isset($this->_standardDecorators[$type])) {
+            return $this->_standardDecorators[$type];
+        }
+        return array();
+    }
+
     protected function _setStandardDecorators()
     {
         $framework = strtolower(self::CSS_FRAMEWORK);
@@ -390,10 +401,6 @@ class Digitalus_Form extends Zend_Form
 
     protected function _setYamlDecorators()
     {
-        $this->_standardDecorators['standard'] = array(
-            'ViewHelper',
-            'Errors',
-        );
         $this->_standardDecorators['text'] = array(
             'ViewHelper',
             array('Label',    array('requiredSuffix' => self::REQ_SUFFIX, 'escape' => false)),

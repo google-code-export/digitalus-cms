@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin Index Controller of Digitalus CMS
@@ -39,7 +39,7 @@ require_once 'Zend/Controller/Action.php';
  * @uses        Model_Page
  * @uses        Model_User
  */
-class Admin_IndexController extends Zend_Controller_Action
+class Admin_IndexController extends Digitalus_Controller_Action
 {
     /**
      * Initialize the action
@@ -48,8 +48,10 @@ class Admin_IndexController extends Zend_Controller_Action
      */
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Home') => $this->getFrontController()->getBaseUrl() . '/admin'
+           $this->view->getTranslation('Home') => $this->baseUrl . '/admin'
         );
     }
 
@@ -75,8 +77,7 @@ class Admin_IndexController extends Zend_Controller_Action
         $form->removeElement('active');
         $form->removeElement('role');
         $form->removeElement('captcha');
-        $form->setAction($this->view->getBaseUrl() . '/admin/user/update-my-account')
-             ->setAttrib('class', $form->getAttrib('class') . ' formColumn');
+        $form->setAction($this->baseUrl . '/admin/user/update-my-account');
         $firstName = $form->getElement('first_name');
         $firstName->setValue($identity->first_name);
         $lastName = $form->getElement('last_name');
@@ -86,7 +87,8 @@ class Admin_IndexController extends Zend_Controller_Action
         $submit = $form->getElement('submitAdminUserForm');
         $submit->setLabel($this->view->getTranslation('Update My Account'));
         $displayGroup = $form->getDisplayGroup('adminUserGroup');
-        $displayGroup->setLegend($this->view->getTranslation('My Account'));
+        $displayGroup->setLegend($this->view->getTranslation('My Account'))
+                     ->setAttrib('class', 'formColumn');
         $this->view->form = $form;
     }
 

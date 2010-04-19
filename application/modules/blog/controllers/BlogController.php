@@ -4,15 +4,17 @@ require_once './application/modules/blog/forms/Post.php';
 require_once './application/modules/blog/models/Blog.php';
 require_once './application/modules/blog/models/Post.php';
 
-class Mod_Blog_BlogController extends Zend_Controller_Action
+class Mod_Blog_BlogController extends Digitalus_Controller_Action
 {
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Modules') => $this->view->getBaseUrl() . '/admin/module',
-           $this->view->getTranslation('Blog') => $this->view->getBaseUrl() . '/mod_blog'
+           $this->view->getTranslation('Modules') => $this->baseUrl . '/admin/module',
+           $this->view->getTranslation('Blog')    => $this->baseUrl . '/mod_blog'
         );
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/mod_blog';
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark/url/mod_blog';
 
     }
 
@@ -44,7 +46,7 @@ class Mod_Blog_BlogController extends Zend_Controller_Action
             $blog = $mdlBlog->find($id)->current();
             $form->populate($blog->toArray());
         }
-        $form->setAction($this->view->getBaseUrl() . '/mod_blog/blog/edit');
+        $form->setAction($this->baseUrl . '/mod_blog/blog/edit');
         $submit = $form->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Update Blog'));
 
@@ -56,12 +58,12 @@ class Mod_Blog_BlogController extends Zend_Controller_Action
         $postForm = new Post_Form();
         $postFormValues['blog_id'] = $blog->id;
         $postForm->populate($postFormValues);
-        $postForm->setAction($this->view->getBaseUrl() . '/mod_blog/post/create');
+        $postForm->setAction($this->baseUrl . '/mod_blog/post/create');
         $submit = $postForm->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Add New Post'));
         $this->view->postForm = $postForm;
-        $this->view->breadcrumbs[$blog->name] = $this->view->getBaseUrl() . '/mod_blog/blog/edit/id/' . $blog->id;
-        $this->view->toolbarLinks['Delete'] = $this->view->getBaseUrl() . '/mod_blog/blog/delete/id/' . $blog->id;
+        $this->view->breadcrumbs[$blog->name] = $this->baseUrl . '/mod_blog/blog/edit/id/' . $blog->id;
+        $this->view->toolbarLinks['Delete'] = $this->baseUrl . '/mod_blog/blog/delete/id/' . $blog->id;
 
     }
 

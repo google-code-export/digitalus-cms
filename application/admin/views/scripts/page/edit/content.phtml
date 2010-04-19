@@ -1,4 +1,7 @@
 <?php
+$submitButton = $this->form->getElement('submit');
+$this->form->removeElement('submit');
+
 $controls = $this->form->getElements();
 
 // load javascript Html editors
@@ -7,15 +10,17 @@ $this->loadEditors($controls);
 /* ************************************************************************** */
 
 // get all of the controls and load them into groups
-$submitButton = $this->form->getElement('submit');
-$this->form->removeElement('submit');
 foreach ($controls as $control) {
-    $rel = $control->getAttrib('rel');
+    $rel   = $control->getAttrib('rel');
     $group = (!empty($rel) ? $rel : 'main');
     $groups[$group][] = $control->getName();
 }
 // create "main" display group
-$this->form->addDisplayGroup($groups['main'], 'main', 'main items');
+$this->form->addDisplayGroup(
+    $groups['main'],
+    'main',
+    array('legend' => $this->getTranslation('main items'))
+);
 unset($groups['main']);
 
 // create other display groups
@@ -24,13 +29,6 @@ if (is_array($groups)) {
         $this->form->addDisplayGroup($controls, $key);
     }
 }
-
-$this->form->setAction($this->form->getAction())
-           ->setDecorators(array(
-                'FormElements',
-                'Form',
-                array('FormErrors', array('placement' => 'prepend'))
-           ));
 
 $displayGroups = $this->form->getDisplayGroups();
 // loop throgh display groups and add submit button

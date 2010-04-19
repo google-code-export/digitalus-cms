@@ -1,7 +1,7 @@
 <?php
 require_once 'Zend/Controller/Action.php';
 
-class ErrorController extends Zend_Controller_Action
+class ErrorController extends Digitalus_Controller_Action
 {
     /**
      * This action handles
@@ -28,5 +28,14 @@ class ErrorController extends Zend_Controller_Action
                 $this->view->message = $errors->exception;
                 break;
         }
+    }
+
+    /**
+     * No auth action
+     *
+     * @return void
+     */
+    public function noAuthAction()
+    {
     }
 }

@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin Util Controller of Digitalus CMS
@@ -35,7 +35,7 @@ require_once 'Zend/Controller/Action.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  */
-class Admin_UtilController extends Zend_Controller_Action
+class Admin_UtilController extends Digitalus_Controller_Action
 {
     /**
      * Render partial action
@@ -45,6 +45,8 @@ class Admin_UtilController extends Zend_Controller_Action
      */
     public function renderPartialAction()
     {
+        parent::init();
+
         $partial = $this->_request->getParam('partial');
         if ($partial != null) {
             $this->view->partialKey = Digitalus_Toolbox_String::stripUnderscores($partial);

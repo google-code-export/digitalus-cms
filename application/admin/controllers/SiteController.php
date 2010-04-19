@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin Site Controller of Digitalus CMS
@@ -36,7 +36,7 @@ require_once 'Zend/Controller/Action.php';
  * @since       Release 1.0.0
  * @uses        Model_SiteSettings
  */
-class Admin_SiteController extends Zend_Controller_Action
+class Admin_SiteController extends Digitalus_Controller_Action
 {
     /**
      * Initialize the action
@@ -45,8 +45,10 @@ class Admin_SiteController extends Zend_Controller_Action
      */
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Site Settings') => $this->view->getBaseUrl() . '/admin/site'
+           $this->view->getTranslation('Site Settings') => $this->baseUrl . '/admin/site'
         );
     }
 
@@ -60,11 +62,11 @@ class Admin_SiteController extends Zend_Controller_Action
     public function indexAction()
     {
         $form = new Admin_Form_Site();
-        $form->setAction($this->view->getBaseUrl() . '/admin/site/edit');
+        $form->setAction($this->baseUrl . '/admin/site/edit');
 
         $this->view->form = $form;
 
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark'
             . '/url/admin_site'
             . '/label/' . $this->view->getTranslation('Site');
     }
@@ -79,7 +81,7 @@ class Admin_SiteController extends Zend_Controller_Action
     public function editAction()
     {
         $form = new Admin_Form_Site();
-        $form->setAction($this->view->getBaseUrl() . '/admin/site/edit');
+        $form->setAction($this->baseUrl . '/admin/site/edit');
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
             $settings = Digitalus_Filter_Post::raw('setting');
@@ -158,9 +160,9 @@ class Admin_SiteController extends Zend_Controller_Action
         }
 
         $breadcrumbLabel = $this->view->getTranslation('Site Console');
-        $this->view->breadcrumbs[$breadcrumbLabel] = $this->view->getBaseUrl() . '/admin/site/console';
+        $this->view->breadcrumbs[$breadcrumbLabel] = $this->baseUrl . '/admin/site/console';
         $this->view->toolbarLinks = array();
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/admin_site_console';
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark/url/admin_site_console';
 
     }
 

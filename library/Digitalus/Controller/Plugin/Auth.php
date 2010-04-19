@@ -25,14 +25,14 @@ class Digitalus_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
     /**
      * the current user's identity
      *
-     * @var zend_db_row
+     * @var Zend_Db_Row
      */
     private $_identity;
 
     /**
      * the acl object
      *
-     * @var zend_acl
+     * @var Zend_Acl
      */
     private $_acl;
 
@@ -43,66 +43,98 @@ class Digitalus_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
      *
      * @var array
      */
-    private $_noacl = array('module' => 'admin',
-                             'controller' => 'error',
-                             'action' => 'no-auth');
+    private $_noAcl = array(
+        'admin' => array(
+            'module'     => 'admin',
+            'controller' => 'error',
+            'action'     => 'no-auth'
+        ),
+        'public' => array(
+            'module'     => 'public',
+            'controller' => 'index',
+            'action'     => 'login'
+        ),
+    );
 
     /**
-     * the page to direct to if there is not current user
+     * the page to direct to if there is no current user
      *
-     * @var unknown_type
+     * @var array
      */
-    private $_noauth = array('module' => 'admin',
-                             'controller' => 'auth',
-                             'action' => 'login');
-
+    private $_noAuth = array(
+        'admin' => array(
+            'module'     => 'admin',
+            'controller' => 'auth',
+            'action'     => 'login'
+        ),
+    );
 
     /**
      * validate the current user's request
      *
-     * @param zend_controller_request $request
+     * @param Zend_Controller_Request_Abstract $request
      */
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         $this->_identity = Digitalus_Auth::getIdentity();
-        $this->_acl = new Digitalus_Acl();
+        $this->_acl      = new Digitalus_Acl();
 
+        $role = Model_Group::GUEST_ROLE;
         if (!empty($this->_identity)) {
             $role = $this->_identity->role;
-        } else {
-            $role = null;
         }
+
+        $module     = $request->module;
         $controller = $request->controller;
-        $module = $request->module;
-        $controller = $controller;
-        $action = $request->action;
-
-        //go from more specific to less specific
-        $moduleLevel = $module;
-        $controllerLevel = $moduleLevel . '_' . $controller;
-        $actionLevel = $controllerLevel . '_' . $action;
-
-        if ($this->_acl->has($actionLevel)) {
-            $resource = $actionLevel;
-        } else if ($this->_acl->has($controllerLevel)) {
-            $resource = $controllerLevel;
-        } else {
-            $resource = $moduleLevel;
-        }
+        $action     = $request->action;
 
         if ($module != 'public' && $controller != 'public') {
+            //go from more specific to less specific
+            $moduleLevel     = $module;
+            $controllerLevel = $moduleLevel . '_' . $controller;
+            $actionLevel     = $controllerLevel . '_' . $action;
+
+            if ($this->_acl->has($actionLevel)) {
+                $resource = $actionLevel;
+            } else if ($this->_acl->has($controllerLevel)) {
+                $resource = $controllerLevel;
+            } else {
+                $resource = $moduleLevel;
+            }
+
             if ($this->_acl->has($resource) && !$this->_acl->isAllowed($role, $resource)) {
-                if (!$this->_identity) {
-                    $request->setModuleName($this->_noauth['module']);
-                    $request->setControllerName($this->_noauth['controller']);
-                    $request->setActionName($this->_noauth['action']);
+                if (!$this->_identity || Model_Group::GUEST_ROLE == $role) {
+                    $request->setModuleName($this->_noAuth['admin']['module']);
+                    $request->setControllerName($this->_noAuth['admin']['controller']);
+                    $request->setActionName($this->_noAuth['admin']['action']);
                     $request->setParam('authPage', 'login');
                 } else {
-                   $request->setModuleName($this->_noacl['module']);
-                   $request->setControllerName($this->_noacl['controller']);
-                   $request->setActionName($this->_noacl['action']);
+                   $request->setModuleName($this->_noAcl['admin']['module']);
+                   $request->setControllerName($this->_noAcl['admin']['controller']);
+                   $request->setActionName($this->_noAcl['admin']['action']);
                    $request->setParam('authPage', 'noauth');
                }
+            }
+        } else {
+            $resource = Digitalus_Toolbox_Page::getCurrentPageName();
+            // TODO: refactor into Toolbox String - replace underscores with empty spaces
+            $resource = strtolower(str_replace('_', ' ', $resource));
+            // only check Acl if page is NOT homepage
+            if (!empty($resource) && '' != $resource &&
+                    Digitalus_Toolbox_Page::getHomePageName() != $resource) {
+                if ($this->_acl->has($resource) && !$this->_acl->isAllowed($role, $resource)) {
+                    if (!$this->_identity || Model_Group::GUEST_ROLE != $role) {
+                        $request->setModuleName($this->_noAcl['public']['module']);
+                        $request->setControllerName($this->_noAcl['public']['controller']);
+                        $request->setActionName($this->_noAcl['public']['action']);
+                        $request->setParam('authPage', 'login');
+                    } else {
+                        $request->setModuleName($this->_noAcl['public']['module']);
+                        $request->setControllerName($this->_noAcl['public']['controller']);
+                        $request->setActionName($this->_noAcl['public']['action']);
+                        $request->setParam('authPage', 'noauth');
+                    }
+                }
             }
         }
     }

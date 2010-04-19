@@ -1,24 +1,26 @@
 /* CSS Document */
-h3 a{
-padding:0 0 0 25px;
+h3 a {
+    padding: 0 0 0 25px;
 }
 
-#redirectLabels span{
-display:block;
-float:left;
-font-weight:bold;
-margin-bottom:10px;
+#redirectLabels span {
+    display: block;
+    float: left;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
-#redirectLabels span, #redirectorList input{
-width:180px;
-margin-right:10px;
+#redirectLabels span, #redirectorList input {
+    width: 180px;
+    margin-right: 10px;
 }
 
-#redirectorList input.responseCode{
-width:50px;
+#redirectorList input.responseCode {
+    width: 50px;
 }
 
-div.element{
-margin-bottom:10px;
+div.element {
+    width: 100%;
+    margin-bottom: 10px;
+    float: left;
 }

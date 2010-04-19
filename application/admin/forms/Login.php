@@ -12,6 +12,7 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: Login.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
@@ -27,6 +28,7 @@ require_once 'Digitalus/Form.php';
 /**
  * Admin Login Form
  *
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
@@ -67,7 +69,7 @@ class Admin_Form_Login extends Digitalus_Form
                 )),
             ),
             'attribs'       => array('size' => 50),
-            'errorMessages' => array('You must enter a username.'),
+            'errorMessages' => array('You must enter a valid username.'),
         ));
 
         // create new element
@@ -75,7 +77,7 @@ class Admin_Form_Login extends Digitalus_Form
             'label'         => $view->getTranslation('Password'),
             'required'      => true,
             'filters'       => array('StringTrim'),
-            'errorMessages' => array('You must enter a password.'),
+            'errorMessages' => array('You must enter your password.'),
         ));
 
         $submit = $this->createElement('submit', 'submitAdminLogin', array(
@@ -88,9 +90,10 @@ class Admin_Form_Login extends Digitalus_Form
              ->addElement($userName)
              ->addElement($password)
              ->addElement($submit)
-             ->addDisplayGroup(array('form_instance', 'id', 'adminUsername', 'adminPassword', 'submitAdminLogin'),
-                                     'adminLoginGroup',
-                                     array('legend' => $view->getTranslation('Standard Login'))
+             ->addDisplayGroup(
+                 array('form_instance', 'id', 'adminUsername', 'adminPassword', 'submitAdminLogin'),
+                 'adminLoginGroup',
+                 array('legend' => $view->getTranslation('Standard Login'))
              );
 
         $this->setDecorators(array(

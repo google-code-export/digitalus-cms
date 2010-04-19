@@ -45,9 +45,9 @@ class Zend_View_Filter_DigitalusPartial extends Digitalus_Content_Filter
 
     protected function _callback($matches)
     {
-        $attr = $this->getAttributes($matches[0]);
-        if (is_array($attr)) {
-            return $this->view->render($attr['src']);
+        $attribs = $this->getAttributes($matches[0]);
+        if (is_array($attribs)) {
+            return $this->view->render($attribs['src']);
         }
         return null;
     }

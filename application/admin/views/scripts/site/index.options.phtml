@@ -1,11 +1,19 @@
 <?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Options'));?>
-<?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/idTabs.js');?>
-<ul class="idTabs padding-10">
-    <li><?php echo $this->link('General', '#fieldset-siteGroup', 'layout_content.png');?></li>
-    <li><?php echo $this->link('Content', '#fieldset-contentGroup', 'page_white_stack.png');?></li>
-    <li><?php echo $this->link('Design', '#fieldset-designGroup', 'palette.png');?></li>
-    <li><?php echo $this->link('Meta Data', '#fieldset-metaGroup', 'page_white_code.png');?></li>
-    <li><?php echo $this->link('Internationalization', '#fieldset-internationalGroup', 'world.png');?></li>
-    <li><?php echo $this->link('Mail', '#fieldset-mailGroup', 'email.png');?></li>
-    <li><?php echo $this->link('Google', '#fieldset-googleGroup', 'google.png');?></li>
-</ul>
+<?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/idTabs.js');
+
+$items = array(
+    0 => array('name' => 'General',              'id' =>'#fieldset-siteGroup',          'img' => 'layout_content.png'),
+    1 => array('name' => 'Content',              'id' =>'#fieldset-contentGroup',       'img' => 'page_white_stack.png'),
+    2 => array('name' => 'Design',               'id' =>'#fieldset-designGroup',        'img' => 'palette.png'),
+    3 => array('name' => 'Meta Data',            'id' =>'#fieldset-metaGroup',          'img' => 'page_white_code.png'),
+    4 => array('name' => 'Internationalization', 'id' =>'#fieldset-internationalGroup', 'img' => 'world.png'),
+    5 => array('name' => 'Mail',                 'id' =>'#fieldset-mailGroup',          'img' => 'email.png'),
+    6 => array('name' => 'Google',               'id' =>'#fieldset-googleGroup',        'img' => 'google.png'),
+);
+if ($this->isAllowed('admin', 'site', 'edit')) {?>
+    <ul class="idTabs padding-10"><?php
+        foreach ($items as $item) {
+            echo '<li>' . $this->link($item['name'], $item['id'], $item['img']) . '</li>';
+        }?>
+    </ul><?php
+}

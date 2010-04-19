@@ -60,8 +60,8 @@ class Model_UserNode extends Digitalus_Db_Table
     public function getVersions($userName)
     {
         $select = $this->select();
-        $select->distinct(true);
-        $select->where('user_name = ?', $userName);
+        $select->distinct(true)
+               ->where('user_name = ?', $userName);
         $result = $this->fetchAll($select);
         if ($result) {
             $config = Zend_Registry::get('config');

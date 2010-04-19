@@ -32,9 +32,8 @@ class Digitalus_Installer
         if (intval($this->_config->getInstallDate()) > 0) {
             $this->addError('Digitalus CMS is already installed');
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function loadConfig()
@@ -53,11 +52,11 @@ class Digitalus_Installer
             $configError = true;
         }
 
-        if (!$configError) {
+        if (!$configError && $this->_config->loadFile()) {
             $this->addMessage('Successfully loaded and tested site configuration');
+        } else {
+            $this->addError('Site configuration could not be loaded');
         }
-
-        $this->_config->loadFile();
     }
 
     public function testEnvironment()
@@ -137,9 +136,8 @@ class Digitalus_Installer
 
         if (!$userError) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function setDbConnection($name, $host, $username, $password, $prefix = '', $adapter = 'Pdo_Mysql')
@@ -167,7 +165,7 @@ class Digitalus_Installer
             $this->addError('Only the following database adapters are supported: ' . implode(', ', $adapters));
             $dbError = true;
         }
-        $validator = new Zend_Validate_Regex('#^[a-zA-Z0-9_]{0,12}$#');
+        $validator = new Zend_Validate_Regex(Digitalus_Installer_Database::DB_PREFIX_REGEX);
         if (!empty($prefix) && !$validator->isValid($prefix)) {
             $this->addError('For the table prefix a maximum of 12 only alphabetic and digit characters and underscore are allowed');
             $dbError = true;
@@ -177,9 +175,8 @@ class Digitalus_Installer
             $connection = $this->_db->connect($name, $host, $username, $password, $prefix, $adapter);
             $this->_config->setDbConnection($name, $host, $username, $password, $prefix, $adapter);
             return $connection;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function testDb()
@@ -273,8 +270,7 @@ class Digitalus_Installer
     {
         if (count($this->_errors) > 0) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 }

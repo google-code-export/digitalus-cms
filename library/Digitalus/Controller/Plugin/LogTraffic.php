@@ -26,7 +26,7 @@ class Digitalus_Controller_Plugin_LogTraffic extends Zend_Controller_Plugin_Abst
      * log the current request in the traffic log
      *
      */
-    public function preDispatch($request)
+    public function preDispatch (Zend_Controller_Request_Abstract $request)
     {
         $log = new Model_TrafficLog();
         $log->logHit();

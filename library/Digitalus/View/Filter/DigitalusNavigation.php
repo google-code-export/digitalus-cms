@@ -45,22 +45,20 @@ class Zend_View_Filter_DigitalusNavigation extends Digitalus_Content_Filter
 
     protected function _callback($matches)
     {
-        $attr = $this->getAttributes($matches[0]);
-        if (is_array($attr)) {
-            $id = $attr['id'];
-            $parentId = isset($attr['parent_id']) ? $attr['parent_id'] : 0;
-            $levels = isset($attr['levels']) ? $attr['levels'] : 1;
-            $separator = isset($attr['separator']) ? $attr['separator'] : null;
-            $root = isset($attr['root']) ? $attr['root'] : null;
-            switch ($attr['type']) {
+        $attribs = $this->getAttributes($matches[0]);
+        if (is_array($attribs)) {
+            $parentId  = isset($attribs['parent_id']) ? $attribs['parent_id'] : null;
+            $root      = isset($attribs['root'])      ? $attribs['root']      : null;
+            switch ($attribs['type']) {
                 case 'menu':
-                    return $this->view->renderMenu($parentId, $levels, null, $id);
+                default:
+                    return $this->view->renderMenu($parentId, $attribs);
                     break;
                 case 'submenu':
-                    return $this->view->renderSubmenu($levels, $id);
+                    return $this->view->renderSubmenu($attribs);
                     break;
                 case 'breadcrumbs':
-                    return $this->view->renderBreadcrumbs($separator, $root);
+                    return $this->view->renderBreadcrumbs($root, $attribs);
                     break;
             }
         }

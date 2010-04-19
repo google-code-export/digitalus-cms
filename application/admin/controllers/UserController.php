@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin User Controller of Digitalus CMS
@@ -35,9 +35,10 @@ require_once 'Zend/Controller/Action.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  * @uses        Admin_Form_User
+
  * @uses        Model_User
  */
-class Admin_UserController extends Zend_Controller_Action
+class Admin_UserController extends Digitalus_Controller_Action
 {
     /**
      * Initialize the action
@@ -46,8 +47,10 @@ class Admin_UserController extends Zend_Controller_Action
      */
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Site Settings') => $this->view->getBaseUrl() . '/admin/site'
+           $this->view->getTranslation('Site Settings') => $this->baseUrl . '/admin/site'
         );
     }
 
@@ -60,6 +63,7 @@ class Admin_UserController extends Zend_Controller_Action
      */
     public function indexAction()
     {
+        $this->_redirect('admin/user/create');
     }
 
     /**
@@ -88,42 +92,28 @@ class Admin_UserController extends Zend_Controller_Action
         $submit = $form->getElement('submitAdminUserForm');
         $submit->setAttribs(array('id' => 'update', 'name' => 'update'));
         $submit->setLabel($this->view->getTranslation('Update Account'));
-        $form->setAction($this->view->getBaseUrl() . '/admin/user/open/username/' . $userName);
+        $form->setAction($this->baseUrl . '/admin/user/open/username/' . $userName);
 
-        if (!empty($userName) && '' != $userName) {
-            $row = $u->find($userName)->current();
-            $this->view->user = $row;
-            $this->view->userPermissions = $u->getAclResources($row);
-        }
-
-        if ($this->_request->isPost()) {
+        if ($this->_request->isPost() && $form->isValid($_POST)) {
             $form->setModel($u);
-            if (Digitalus_Filter_Post::has('update_permissions')) {
-                //update the users permissions
-                $resources = Digitalus_Filter_Post::raw('acl_resources');
-                $userName = Digitalus_Filter_Post::get('username');
-                $u->updateAclResources($userName, $resources);
-            } else if (Digitalus_Filter_Post::has('admin_user_password')) {
+            if (Digitalus_Filter_Post::has('admin_user_password')) {
                 $userName = Digitalus_Filter_Post::get('username');
                 $password = Digitalus_Filter_Post::get('newPassword');
                 $passwordConfirm = Digitalus_Filter_Post::get('newConfirmPassword');
                 $u->updatePassword($userName, $password, true, $passwordConfirm);
-            } else {
-                if ($form->isValid($_POST)) {
-                    $user = $form->update();
-                    $userName = $user->name;
-                }
             }
+            $user = $form->update();
         }
-        $this->view->form = $form;
+        $this->view->userName = $userName;
+        $this->view->form     = $form;
 
         $breadcrumbLabel = $this->view->getTranslation('Open User') . ': ' . $userName;
-        $this->view->breadcrumbs[$breadcrumbLabel] = $this->view->getBaseUrl() . '/admin/user/open/username/' . $userName;
+        $this->view->breadcrumbs[$breadcrumbLabel] = $this->baseUrl . '/admin/user/open/username/' . $userName;
         $this->view->toolbarLinks = array();
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark'
             . '/url/admin_user_open_username_' . $userName
             . '/label/' . $this->view->getTranslation('User') . ':' . $userName;
-        $this->view->toolbarLinks['Delete'] = $this->view->getBaseUrl() . '/admin/user/delete/username/' . $userName;
+        $this->view->toolbarLinks['Delete'] = $this->baseUrl . '/admin/user/delete/username/' . $userName;
     }
 
     /**
@@ -148,10 +138,10 @@ class Admin_UserController extends Zend_Controller_Action
                 $this->_redirect('admin/user/open/username/' . $userName);
             }
         }
-        $this->view->breadcrumbs['Create User'] = $this->view->getBaseUrl() . '/admin/user/create';
-        $form->setAction($this->view->getBaseUrl() . '/admin/user/create');
+        $this->view->breadcrumbs['Create User'] = $this->baseUrl . '/admin/user/create';
+        $form->setAction($this->baseUrl . '/admin/user/create');
         $this->view->form = $form;
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark/url/admin_user_create';
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark/url/admin_user_create';
     }
 
     /**
@@ -164,34 +154,16 @@ class Admin_UserController extends Zend_Controller_Action
         $u = new Model_User();
         $user = $u->getCurrentUser();
         $user->first_name = Digitalus_Filter_Post::get('first_name');
-        $user->last_name = Digitalus_Filter_Post::get('last_name');
-        $user->email = Digitalus_Filter_Post::get('email');
+        $user->last_name  = Digitalus_Filter_Post::get('last_name');
+        $user->email      = Digitalus_Filter_Post::get('email');
         $user->save();
 
         if (Digitalus_Filter_Post::int('update_password') === 1) {
-            $password = Digitalus_Filter_Post::get('password');
+            $password        = Digitalus_Filter_Post::get('password');
             $passwordConfirm = Digitalus_Filter_Post::get('password_confirm');
             $u->updatePassword($user->name, $password, true, $passwordConfirm);
         }
         $url = 'admin/index';
-        $this->_redirect($url);
-    }
-
-    /**
-     * Copy ACL action
-     *
-     * @return void
-     */
-    public function copyAclAction()
-    {
-        $currentUser = Digitalus_Filter_Post::get('name');
-        $copyFrom = Digitalus_Filter_Post::get('user_username');
-
-        if (!empty($currentUser) && !empty($copyFrom)) {
-            $u = new Model_User();
-            $u->copyPermissions($copyFrom, $currentUser);
-        }
-        $url = 'admin/user/open/username/' . $currentUser;
         $this->_redirect($url);
     }
 

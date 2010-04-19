@@ -35,18 +35,18 @@ class Model_TrafficLog extends Digitalus_Db_Table
     public function logHit()
     {
         $date = new Zend_Date();
-        $data['timestamp'] = $date->get(zend_date::TIMESTAMP);
-        $data['day'] = $date->get(zend_date::WEEKDAY_DIGIT);
-        $data['week'] = $date->get(zend_date::WEEK);
-        $data['month'] = $date->get(zend_date::MONTH);
-        $data['year'] = $date->get(zend_date::YEAR);
-        $data['page'] = $_SERVER['REQUEST_URI'];
-        $data['ip'] = $_SERVER['REMOTE_ADDR'];
+        $data['timestamp'] = $date->get(Zend_Date::TIMESTAMP);
+        $data['day']       = $date->get(Zend_Date::WEEKDAY_DIGIT);
+        $data['week']      = $date->get(Zend_Date::WEEK);
+        $data['month']     = $date->get(Zend_Date::MONTH);
+        $data['year']      = $date->get(Zend_Date::YEAR);
+        $data['page']      = $_SERVER['REQUEST_URI'];
+        $data['ip']        = $_SERVER['REMOTE_ADDR'];
 
         //get the admin identity
         $user = Digitalus_Auth::getIdentity();
         if ($user) {
-          $data['user_id'] = $user->id;
+          $data['user_name'] = $user->name;
         }
 
         $this->insert($data);
@@ -60,20 +60,21 @@ class Model_TrafficLog extends Digitalus_Db_Table
     public function getLogByWeek()
     {
         $sql = "SELECT
-            COUNT(id) AS unique_hits,
-            traffic_log.week,
-            traffic_log.year
+                COUNT(id) AS unique_hits,
+                traffic_log.week,
+                traffic_log.year
             FROM
-            traffic_log
+                traffic_log
             WHERE
-            page NOT LIKE '/admin%'
+                page NOT LIKE '/admin%'
             AND
-            page NOT LIKE '/module%'
+                page NOT LIKE '/module%'
             GROUP BY
-            traffic_log.`year`,
-            traffic_log.`week`,
-            traffic_log.`ip`
-            ORDER BY year DESC, week DESC
+                traffic_log.`year`,
+                traffic_log.`week`,
+                traffic_log.`ip`
+            ORDER BY
+                year DESC, week DESC
             ";
 
         return $this->_db->fetchAll($sql);
@@ -87,27 +88,28 @@ class Model_TrafficLog extends Digitalus_Db_Table
     public function getLogByDay()
     {
         $date = new Zend_Date();
-        $week = $date->get(zend_date::WEEK);
-        $year = $date->get(zend_date::YEAR);
+        $week = $date->get(Zend_Date::WEEK);
+        $year = $date->get(Zend_Date::YEAR);
 
         $sql = "SELECT
-            COUNT(id) AS unique_hits,
-            traffic_log.day
+                COUNT(id) AS unique_hits,
+                traffic_log.day
             FROM
-            traffic_log
+                traffic_log
             WHERE
-            week = {$week}
+                week = {$week}
             AND
-            year = {$year}
+                year = {$year}
             AND
-            page NOT LIKE '/admin%'
+                page NOT LIKE '/admin%'
             AND
-            page NOT LIKE '/module%'
+                page NOT LIKE '/module%'
             GROUP BY
-            traffic_log.`year`,
-            traffic_log.`day`,
-            traffic_log.`ip`
-            ORDER BY year DESC, day DESC
+                traffic_log.`year`,
+                traffic_log.`day`,
+                traffic_log.`ip`
+            ORDER BY
+                year DESC, day DESC
             ";
 
         return $this->_db->fetchAll($sql);
@@ -121,16 +123,18 @@ class Model_TrafficLog extends Digitalus_Db_Table
     public function adminAccess($limit = 50)
     {
         $sql = "SELECT
-            users.first_name,
-            users.last_name,
-            users.role,
-            traffic_log.page,
-            traffic_log.ip,
+                users.first_name,
+                users.last_name,
+                users.role,
+                traffic_log.page,
+                traffic_log.ip,
             FROM_UNIXTIME(traffic_log.timestamp) as date
             FROM
-            traffic_log
-            Inner Join users ON traffic_log.user_id = users.id
-            ORDER BY timestamp DESC
+                traffic_log
+            INNER JOIN
+                users ON traffic_log.user_name = users.name
+            ORDER BY
+                timestamp DESC
             LIMIT {$limit}";
         return $this->_db->fetchAll($sql);
     }

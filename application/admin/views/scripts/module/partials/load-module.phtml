@@ -14,14 +14,16 @@ if (isset($values) && !empty($values->module) && '' != $values->module) {
     $paramsString = implode('/', $params) . '/';
     $module = $values->module;
 }
-$attr = $this->element->getAttribs();
-if (!is_array($attr)) {
-    $attr = null;
+$attribs = $this->element->getAttribs();
+if (!is_array($attribs)) {
+    $attribs = null;
 }
-$select = $this->selectModule($elementName, $module, $attr);
+$select = $this->selectModule($elementName, $module, $attribs);
 $select->setLabel($this->element->getLabel())
-       ->setAttrib('class', $this->class)
-       ->setValue($values->module);
+       ->setAttrib('class', $this->class);
+if (isset($values->module) && !empty($values->module)) {
+    $select->setValue($values->module);
+}
 echo $select;?>
 
 <div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper"><?php

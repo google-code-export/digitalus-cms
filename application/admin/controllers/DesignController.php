@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin Design Controller of Digitalus CMS
@@ -36,7 +36,7 @@ require_once 'Zend/Controller/Action.php';
  * @since       Release 1.0.0
  * @uses        Model_Design
  */
-class Admin_DesignController extends Zend_Controller_Action
+class Admin_DesignController extends Digitalus_Controller_Action
 {
     /**
      * Initialize the action
@@ -45,8 +45,10 @@ class Admin_DesignController extends Zend_Controller_Action
      */
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Design') => $this->getFrontController()->getBaseUrl() . '/admin/design'
+           $this->view->getTranslation('Design') => $this->baseUrl . '/admin/design'
         );
     }
 
@@ -61,7 +63,7 @@ class Admin_DesignController extends Zend_Controller_Action
         $this->view->designs = $mdlDesign->listDesigns();
 
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Design') => $this->getFrontController()->getBaseUrl() . '/admin/design'
+           $this->view->getTranslation('Design') => $this->baseUrl . '/admin/design'
         );
         $this->design = new stdClass();
     }
@@ -115,12 +117,12 @@ class Admin_DesignController extends Zend_Controller_Action
         $mdlPage = new Model_Page();
         $this->view->pages = $mdlPage->getPagesByDesign($id);
 
-        $this->view->breadcrumbs[$this->view->getTranslation('Open') . ': ' . $this->view->getTranslation($mdlDesign->getValue('name'))] = $this->getFrontController()->getBaseUrl() . '/admin/design/update/id/' . $id;
+        $this->view->breadcrumbs[$this->view->getTranslation('Open') . ': ' . $this->view->getTranslation($mdlDesign->getValue('name'))] = $this->baseUrl . '/admin/design/update/id/' . $id;
         $this->view->toolbarLinks = array();
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark'
             . '/url/admin_design_update_id_' . $id
             . '/label/' . $this->view->getTranslation('Design') . ':' . $mdlDesign->getValue('name');
-        $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/design/delete/id/' . $id;
+        $this->view->toolbarLinks['Delete'] = $this->baseUrl . '/admin/design/delete/id/' . $id;
 
 
         $this->view->design = $mdlDesign;

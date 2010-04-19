@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin Media Controller of Digitalus CMS
@@ -35,7 +35,7 @@ require_once 'Zend/Controller/Action.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  */
-class Admin_MediaController extends Zend_Controller_Action
+class Admin_MediaController extends Digitalus_Controller_Action
 {
     /**
      * @var string
@@ -59,12 +59,14 @@ class Admin_MediaController extends Zend_Controller_Action
      */
     public function init()
     {
+        parent::init();
+
         $config = Zend_Registry::get('config');
         $this->_pathToMedia = APPLICATION_PATH . '/../' . $config->filepath->media;
         $this->_mediaFolder = $config->filepath->media;
         $this->view->mediaFolder = $config->filepath->media;
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Media') => $this->getFrontController()->getBaseUrl() . '/admin/media'
+           $this->view->getTranslation('Media') => $this->baseUrl . '/admin/media'
         );
     }
 
@@ -112,14 +114,14 @@ class Admin_MediaController extends Zend_Controller_Action
         $this->view->mediaPath = $folder;
         $this->view->folders = Digitalus_Filesystem_Dir::getDirectories($this->_pathToMedia . '/' . $pathToFolder);
         $this->view->files = Digitalus_Filesystem_File::getFilesByType($this->_pathToMedia . '/' . $pathToFolder, false, false, true);
-        $this->view->breadcrumbs[$this->view->getTranslation('Open Folder') . ': ' . Digitalus_Toolbox_String::stripUnderscores($folder)] = $this->getFrontController()->getBaseUrl() . '/admin/media/open-folder/folder/' . $folder;
+        $this->view->breadcrumbs[$this->view->getTranslation('Open Folder') . ': ' . Digitalus_Toolbox_String::stripUnderscores($folder)] = $this->baseUrl . '/admin/media/open-folder/folder/' . $folder;
         $this->view->toolbarLinks = array();
 
         $tmpPath = Digitalus_Toolbox_String::addUnderscores($folder);
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark'
             . '/url/admin_media_open-folder_folder_' . $tmpPath
             . '/label/' . $this->view->getTranslation('Media') . ':' . $pathToFolder;
-        $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/admin/media/delete-folder/folder/' . $folder;
+        $this->view->toolbarLinks['Delete'] = $this->baseUrl . '/admin/media/delete-folder/folder/' . $folder;
 
     }
 

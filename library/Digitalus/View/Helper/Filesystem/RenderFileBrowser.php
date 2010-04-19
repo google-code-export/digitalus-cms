@@ -40,7 +40,9 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helper_Abstract
 {
-    public function renderFileBrowser($parentId, $link, $basePath = null, $level = 0, $id = 'fileTree', $withRoot = false, $current = null, $exclude = null)
+    public function renderFileBrowser($parentId, $link, $basePath = null, $level = 0,
+                                      $id = 'fileTree', $withRoot = false, $current = null,
+                                      $exclude = null)
     {
         $links = array();
         $tree = new Model_Page();
@@ -55,13 +57,15 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
         foreach ($children as $child) {
             if ($tree->hasChildren($child)) {
                 $newLevel = $level + 1;
-                $submenu = $this->view->renderFileBrowser($child->id, $link, $basePath, $newLevel, null, null, $current);
+                $submenu = $this->view->renderFileBrowser($child->id, $link, $basePath, $newLevel, null, null, $current, $exclude);
                 $icon = 'folder.png';
-            } else {
                 if ($child->id == $current) {
-                    $icon = 'page_white_gear.png';
-                } else {
-                    $icon = 'page_white_text.png';
+                    $icon = 'folder_wrench.png';
+                }
+            } else {
+                $icon = 'page_white_text.png';
+                if ($child->id == $current) {
+                    $icon = 'page_white_wrench.png';
                 }
                 $submenu = false;
             }
@@ -71,11 +75,7 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
                 $label = $child->name;
             }
             if ($child->id == $exclude) {
-                $links[] = '<li class="menuItem">'
-                         . '<img class="icon" style="margin-right: 10px" alt="' . $label . '" '
-                         . 'src="' . $this->view->getBaseUrl() . '/images/icons/silk/' . $icon . '"/>'
-                         . $label . $submenu
-                         . '</li>';
+                $links[] = $this->_getExcludeElement($label, $submenu, $icon);
             } else {
                 $links[] = '<li class="menuItem">' . $this->view->link($label, $link . $child->id, $icon) . $submenu . '</li>';
             }
@@ -110,5 +110,18 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
                   . '</li>';
 
         return $siteRoot;
+    }
+
+    /**
+     * Get exclude substitute element
+     *
+     * @return  string
+     */
+    protected function _getExcludeElement($label, $submenu, $icon)
+    {
+        return '<li class="menuItem">'
+             . '    <img class="icon" alt="' . $label . '" src="' . $this->view->getBaseUrl() . '/images/icons/silk/' . $icon . '"/>'
+             . $label . $submenu
+             . '</li>';
     }
 }

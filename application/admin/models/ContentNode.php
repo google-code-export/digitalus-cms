@@ -91,8 +91,8 @@ class Model_ContentNode extends Digitalus_Db_Table
     public function getVersions($parentId)
     {
         $select = $this->select();
-        $select->distinct(true);
-        $select->where('parent_id = ?', $parentId);
+        $select->distinct(true)
+               ->where('parent_id = ?', $parentId);
         $result = $this->fetchAll($select);
         if ($result) {
             $config = Zend_Registry::get('config');

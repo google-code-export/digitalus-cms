@@ -6,27 +6,24 @@ echo $this->doctype() . PHP_EOL;
 // set site-wide meta data
 $contentLanguage = Digitalus_Language::getLanguage();
 $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=' . $this->placeholder('charset'))
-                 ->appendHttpEquiv('Content-Language', $contentLanguage);
-?>
+                 ->appendHttpEquiv('Content-Style-Type', 'text/css')
+                 ->appendHttpEquiv('Content-Language', $contentLanguage);?>
+
 <html <?php echo $this->isXhtml();?>>
-    <head>
-        <?php
-            echo $this->placeholder('google_verify');
-            echo $this->headMeta() . PHP_EOL;
-            echo $this->headTitle() . PHP_EOL;
-            echo $this->headScript() . PHP_EOL;
-            echo $this->headLink();
-            echo $this->headStyle() . PHP_EOL;
-        ?>
-        <style type="text/css">
-            <?php echo $this->placeholder('inlineStyles'); ?>
+    <head><?php
+        echo $this->placeholder('google_verify');
+        echo $this->headMeta() . PHP_EOL;
+        echo $this->headTitle() . PHP_EOL;
+        echo $this->headScript() . PHP_EOL;
+        echo $this->headLink();
+        echo $this->headStyle() . PHP_EOL;?>
+        <style type="text/css"><?php
+            echo $this->placeholder('inlineStyles');?>
         </style>
     </head>
-    <body>
-        <?php
-            echo $this->layout()->page;
-            echo $this->placeholder('google_tracking');
-            echo $this->inlineScript() . PHP_EOL;
-        ?>
+    <body><?php
+        echo $this->layout()->page;
+        echo $this->placeholder('google_tracking');
+        echo $this->inlineScript() . PHP_EOL;?>
     </body>
 </html>

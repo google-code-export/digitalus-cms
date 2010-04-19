@@ -46,15 +46,26 @@ class Digitalus_View_Helper_Admin_SelectUser extends Zend_View_Helper_Abstract
         $u = new Model_User();
         $users = $u->fetchAll(null, 'first_name');
 
-        $userArray[] = $this->view->getTranslation('Select User');
+        $options[] = $this->view->getTranslation('Select User');
 
         if ($users->count() > 0) {
             foreach ($users as $user) {
                 if ($user->name != $currentUser) {
-                   $userArray[$user->name] = $user->first_name . ' ' . $user->last_name;
+                   $options[$user->name] = $user->first_name . ' ' . $user->last_name;
                 }
             }
         }
-        return $this->view->formSelect($name, $value, $attribs, $userArray);
+
+        $form   = new Digitalus_Form();
+        $select = $form->createElement('select', $name, array(
+            'multiOptions'  => $options,
+        ));
+        if (is_array($value)) {
+            $select->setValue($value);
+        }
+        if (is_array($attribs)) {
+            $select->setAttribs($attribs);
+        }
+        return $select;
     }
 }
