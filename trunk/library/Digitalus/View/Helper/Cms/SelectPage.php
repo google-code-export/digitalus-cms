@@ -47,17 +47,17 @@ class Zend_View_Helper_SelectPage extends Zend_View_Helper_Abstract
         $mdlIndex = new Model_Page();
         $index = $mdlIndex->getIndex(0, 'name');
 
-        $pages = array();
-        $pages[0] = $this->view->getTranslation('Site Root');
+        $options = array();
+        $options[0] = $this->view->getTranslation('Site Root');
 
         if (is_array($index)) {
             foreach ($index as $id => $page) {
-                $pages[$id] = $page;
+                $options[$id] = $page;
             }
         }
         $form   = new Digitalus_Form();
         $select = $form->createElement('select', $name, array(
-            'multiOptions'  => $pages,
+            'multiOptions'  => $options,
         ));
         if (is_array($attribs)) {
             $select->setAttribs($attribs);

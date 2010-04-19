@@ -1,25 +1,41 @@
 <?php $this->placeholder('sidebarHeadline')->set($this->getTranslation('Site'));?>
-<p class="padding-10"><?php echo $this->getTranslation('The site sections is where you manage your site.');?></p>
 
-<?php
-$u = new Model_User();
-$users = $u->fetchAll(null, 'first_name');
-foreach ($users as $user) {
-    //having a little fun at 1:04
-    if ($user->role == 'superadmin') {
-        $icon = 'user_suit.png';
-    } else {
-        $icon = 'user.png';
+<p class="padding-10"><?php echo $this->getTranslation('The site section is where you manage your site.');?></p><?php
+
+$mdlGroup = new Model_Group();
+// the superadmin role cannot be modified
+$groups = $mdlGroup->getGroupNamesArray('superadmin');
+
+$groupIcon = 'group.png';
+foreach ($groups as $group) {
+    $label = '';
+    if (isset($group['label']) && !empty($group['label'])) {
+        $label = ' (' . $group['label'] . ')';
     }
-
-    $userArray[] = $this->link($user->first_name . ' ' . $user->last_name, '/admin/user/open/username/' . $user->name, $icon);
+    $groupsArray[] = $this->link($group['name'] . $label, '/admin/group/open/groupname/' . $group['name'], $groupIcon);
 }
-$userArray[] = $this->link('Create new user', '/admin/user/create', 'user_add.png');
-?>
-<h3><?php echo $this->getTranslation('Admin Users');?></h3>
-<?php
-echo $this->HtmlList($userArray, null, array('class'=>'padding-10'), false);
-?>
+$groupsArray[] = $this->link('Create new group', '/admin/group/create', 'group_add.png');?>
+
+<h3><?php echo $this->getTranslation('User Groups');?></h3><?php
+echo $this->htmlList($groupsArray, null, array('class'=>'padding-10'), false);
+
+$mdlUser = new Model_User();
+$users = $mdlUser->getUsers('name, first_name, last_name, role');
+foreach ($users as $user) {
+    if (Model_Group::GUEST_ROLE != $user->name) {
+        if ($user->role == 'superadmin') {
+            $icon = 'user_suit.png';
+        } else {
+            $icon = 'user.png';
+        }
+        $usersArray[] = $this->link($user->name . ' (' . $user->first_name . ' ' . $user->last_name . ')', '/admin/user/open/username/' . $user->name, $icon);
+    }
+}
+$usersArray[] = $this->link('Create new user', '/admin/user/create', 'user_add.png');?>
+
+<h3><?php echo $this->getTranslation('Registered Users');?></h3><?php
+echo $this->htmlList($usersArray, null, array('class'=>'padding-10'), false);?>
+
 <h3><?php echo $this->getTranslation('Site Console');?></h3>
 <p class="padding-10"><?php echo $this->getTranslation('The site console enables you to interact directly with the CMS core.') . '<br /><strong>' . $this->getTranslation('It is for experienced administrators only.') . '</strong>';?></p>
 <p class="padding-10"><?php echo $this->link('Open console', '/admin/site/console', 'application_xp_terminal.png');?></p>

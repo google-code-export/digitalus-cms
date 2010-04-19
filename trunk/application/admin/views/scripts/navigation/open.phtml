@@ -15,41 +15,63 @@ $this->jQuery()->onLoadCaptureStart();
             $("#" + rowId + "_val").val(1);
         }
     });<?php
-$this->jQuery()->onLoadCaptureEnd();?>
+$this->jQuery()->onLoadCaptureEnd();
 
-<div class="formBox">
-    <form action="<?php echo $this->getBaseUrl(); ?>/admin/navigation/edit" method="post">
-        <fieldset>
-            <legend><?php echo $this->getTranslation('Menu Order');?></legend><?php
-            echo $this->formHidden('menuId', $this->menuId);?>
-            <ul class="sortable"><?php
-                $m = new Model_Menu();
-                foreach ($this->menu as $item) {
-                    $row  = $this->formHidden('id[]', $item->id);
-                    $row .= '<span class="default">(' . $item->name . ')</span> ';
-                    $row .= $this->formText('label[]', $item->label) . ' ';
+$list = '<ul class="sortable">';
+$mdlMenu = new Model_Menu();
+foreach ($this->menu as $item) {
+    $row  = $this->formHidden('id[]', $item->id);
+    $row .= '<span class="default">(' . $item->name . ')</span> ';
+#    $row .= $this->formText('label[]', $item->label) . ' ';
 
-                    //visibility
-                    if ($item->show_on_menu == 1) {
-                        $eyeSource = 'lightbulb.png';
-                        $alt = 'on';
-                    } else {
-                        $eyeSource = 'lightbulb_off.png';
-                        $alt = 'off';
-                    }
+    //visibility
+    if ($item->show_on_menu == 1) {
+        $eyeSource = 'lightbulb.png';
+        $alt = 'on';
+    } else {
+        $eyeSource = 'lightbulb_off.png';
+        $alt = 'off';
+    }
 
-                    $row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . '_val'));
-                    $row .= ' <img src="' . $iconSource . $eyeSource . '" title="' . $this->getTranslation('click to toggle visibility') . '" class="visibility" id="visibility_' . $item->id . '" alt="' . $alt . '" />';
-//                    $row .= ' <a href="' . $this->getBaseUrl() . 'admin/page/open/id/' . $item->id . '" class="page rightLink"></a>';
-                    if ($m->hasMenu($item->id)) {
-                        $row .= $this->link(null, '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
-                    }
-                    $rows[] = $row;
-                    echo '<li class="ui-state-default"><span class="handle ui-icon ui-icon-arrowthick-2-n-s"></span>' . $row . '</li>';
-                    unset($row);
-                }?>
-            </ul>
-            <p><?php echo $this->formSubmit('save', $this->getTranslation('Save Changes'));?></p>
-        </fieldset>
-    </form>
-</div>
+    $row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . '_val'));
+    $row .= ' <img src="' . $iconSource . $eyeSource . '" title="' . $this->getTranslation('click to toggle visibility') . '" class="icon visibility" id="visibility_' . $item->id . '" alt="' . $alt . '" />';
+    $row .= $this->link($this->getTranslation('open page'), '/admin/page/edit/id/' . $item->id, 'page_white_go.png', 'page', null, true);
+    if ($mdlMenu->hasMenu($item->id)) {
+        $row .= $this->link(null, '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
+    }
+    $rows[] = $row;
+    $list .= '<li class="ui-state-default sortableItem"><span class="handle ui-icon ui-icon-arrowthick-2-n-s"></span>' . $row . '</li>';
+    unset($row);
+}
+$list .= '</ul>';
+
+$form = new Digitalus_Form();
+$form->init();
+$form->setAction($this->getBaseUrl() . '/admin/navigation/edit');
+
+$menuId = $form->createElement('hidden', 'menuId', array(
+    'value'         => $this->menuId,
+    'decorators'    => array('ViewHelper'),
+));
+$sortableList = $form->createElement('AnyMarkup', 'sortableList', array(
+    'value'         => $list,
+    'decorators'    => array(
+        'ViewHelper',
+        array('HtmlTag', array('tag' => 'div'))
+    ),
+));
+$navigationSubmit = $form->createElement('submit', 'save', array(
+    'label'         => $this->getTranslation('Save Changes'),
+    'attribs'       => array('class' => 'submit'),
+    'decorators'    => array('ViewHelper'),
+));
+$form->addElement($menuId)
+     ->addElement($sortableList)
+     ->addElement($navigationSubmit);
+$group = $form->addDisplayGroup(
+    array('form_instance', 'menuId', 'sortableList', 'save'),
+    'navigationGroup',
+    array('legend' => $this->getTranslation('Menu Order'))
+);
+
+echo $form;

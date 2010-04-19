@@ -41,21 +41,27 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @uses        View_Helper_Navigation_Breadcrumbs
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Digitalus_View_Helper_Navigation_Abstract
 {
-    public function renderBreadcrumbs($separator = '', $siteRoot = 'Home', $maxDepth = null)
+    protected $_attribs = array(
+        'linkLast'          => false,
+        'maxDepth'          => 1,
+        'minDepth'          => 1,
+        'separator'         => ' &gt; ',
+    );
+
+    public function renderBreadcrumbs($siteRoot = 'Home', $attribs = array())
     {
+        $this->_setAttribs($attribs);
+
         // needed to register Navigation into Zend_Registry
         $menu = new Digitalus_Menu();
 
-        if ($maxDepth < 0) {
-            $maxDepth = null;
-        }
         return $this->view->navigation()->breadcrumbs()
-            ->setLinkLast(false)
-            ->setMinDepth(null)
-            ->setMaxDepth($maxDepth)
-            ->setSeparator($separator)
+            ->setLinkLast($this->_getAttrib('linkLast'))
+            ->setMaxDepth($this->_getAttrib('maxDepth'))
+            ->setMinDepth($this->_getAttrib('minDepth'))
+            ->setSeparator($this->_getAttrib('separator'))
             ->render();
     }
 }

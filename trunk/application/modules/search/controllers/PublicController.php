@@ -1,7 +1,7 @@
 <?php
 require_once APPLICATION_PATH . '/modules/search/forms/Search.php';
 
-class Mod_Search_PublicController extends Zend_Controller_Action
+class Mod_Search_PublicController extends Digitalus_Controller_Action
 {
     public function searchAction()
     {

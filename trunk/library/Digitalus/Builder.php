@@ -44,7 +44,7 @@ class Digitalus_Builder
 
         foreach ($stack as $action) {
             $attributes = $action->attributes();
-            $className = self::BASE_CLASSNAME  . (string)$attributes['class'];
+            $className  = self::BASE_CLASSNAME  . (string)$attributes['class'];
             $methodName = (string)$attributes['method'];
 
             if (isset($actions[$className])) {
@@ -63,9 +63,8 @@ class Digitalus_Builder
     {
         if (Zend_Registry::isRegistered('page')) {
             return Zend_Registry::get('page');
-        } else {
-            return null;
         }
+        return null;
     }
 
     public static function setPage(Digitalus_Page $page)

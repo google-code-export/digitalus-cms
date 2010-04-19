@@ -1,7 +1,7 @@
 <?php
 class Model_Menu extends Model_Page
 {
-    protected $_menuColumns = array('id', 'parent_id', 'publish_level', 'name', 'label', 'position', 'is_home_page', 'show_on_menu');
+    protected $_menuColumns = array('id', 'parent_id', 'publish_level', 'name', 'position', 'show_on_menu');
 
     public function getMenus()
     {
@@ -27,7 +27,7 @@ class Model_Menu extends Model_Page
             } else {
                 foreach ($children as $child) {
                     $value = $this->getUrl($child);
-                    $key = $this->getLabel($child);
+                    $key   = $this->getLabel($child);
                     $menu[$key] = $value;
                 }
             }
@@ -55,22 +55,21 @@ class Model_Menu extends Model_Page
         return '#';
     }
 
-    public function updateMenuItems($ids, $labels, $visibility)
+    public function updateMenuItems($ids, $visibility)
     {
         if (is_array($ids)) {
-            for ($i = 0; $i <= (count($ids) - 1); $i++) {
-                $this->updateMenuItem($ids[$i], $labels[$i], $visibility[$i], $i);
+            for ($i = 0; $i < count($ids); $i++) {
+                $this->updateMenuItem($ids[$i], $visibility[$i], $i);
             }
         }
     }
 
-    public function updateMenuItem($id, $label, $visibility, $position)
+    public function updateMenuItem($id, $visibility, $position)
     {
         $page = $this->find($id)->current();
         if ($page) {
-            $page->label = $label;
             $page->show_on_menu = $visibility;
-            $page->position = $position;
+            $page->position     = $position;
             return $page->save();
         }
         return false;
@@ -104,9 +103,11 @@ class Model_Menu extends Model_Page
 
         $select = $this->select()
             ->from($this->_name, $this->_menuColumns)
-            ->where($where);
+            ->where($where)
+            ->order($order)
+            ->limit($limit, $offset);
 
-        $result = $this->fetchAll($select, $order, $limit, $offset);
+        $result = $this->fetchAll($select);
         if ($result->count() > 0) {
             return $result;
         }

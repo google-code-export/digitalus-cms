@@ -32,11 +32,12 @@ class Digitalus_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Ab
     public $action;
 
     public $sections = array(
-        'index'         =>  'index',
-        'site'          =>  'site',
-        'user'          =>  'site',
-        'page'          =>  'page',
-        'module'        =>  'module'
+        'index'  =>  'index',
+        'site'   =>  'site',
+        'user'   =>  'site',
+        'group'  =>  'site',
+        'page'   =>  'page',
+        'module' =>  'module'
     );
     public $defaultSection = 'index';
 
@@ -49,9 +50,9 @@ class Digitalus_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Ab
     {
         if (!$request->isXmlHttpRequest()) {
             //load the module, controller, and action for reference
-            $this->module = $request->getModuleName();
+            $this->module     = $request->getModuleName();
             $this->controller = $request->getControllerName();
-            $this->action = $request->getActionName();
+            $this->action     = $request->getActionName();
 
             //load the section
             if (isset($this->sections[$this->controller])) {

@@ -43,8 +43,17 @@ class Zend_View_Helper_SelectAdminRole extends Zend_View_Helper_Abstract
 {
     public function selectAdminRole($name, $value, $attribs = false)
     {
-        $data['admin']      = $this->view->getTranslation('Site Administrator');
-        $data['superadmin'] = $this->view->getTranslation('Super Administrator');
-        return $this->view->formSelect($name, $value, $attribs, $data);
+        $options['admin']      = $this->view->getTranslation('Site Administrator');
+        $options['superadmin'] = $this->view->getTranslation('Super Administrator');
+
+        $form   = new Digitalus_Form();
+        $select = $form->createElement('select', $name, array(
+            'multiOptions'  => $options,
+            'value'         => $value,
+        ));
+        if (is_array($attribs)) {
+            $select->setAttribs($attribs);
+        }
+        return $select;
     }
 }

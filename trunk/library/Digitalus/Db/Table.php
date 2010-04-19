@@ -403,7 +403,7 @@ class Digitalus_Db_Table extends Zend_Db_Table_Abstract
                 return false;
             }
         } else {
-            throw new Digitalus_Db_Exception($this->view->getTranslation('The given table doesn\'t exist') . ':' . $tableName);
+            throw new Digitalus_Db_Exception($this->view->getTranslation("The given table doesn't exist") . ':' . $tableName);
         }
         return true;
     }

@@ -8,8 +8,9 @@ echo '<?xml version="1.0" encoding="' . $this->placeholder('charset') . '" ?>' .
 echo $this->doctype() . PHP_EOL;
 
 $contentLanguage = $this->getAdminLanguage();
-$this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=' . $this->placeholder('charset'))
-                 ->appendHttpEquiv('Content-Language', $contentLanguage);?>
+$this->headMeta()->appendHttpEquiv('Content-Type',       'text/html; charset=' . $this->placeholder('charset'))
+                 ->appendHttpEquiv('Content-Style-Type', 'text/css')
+                 ->appendHttpEquiv('Content-Language',    $contentLanguage);?>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
@@ -23,19 +24,6 @@ $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=' . $this
         echo $this->headLink();
 
         $this->jQuery()->onLoadCaptureStart();?>
-            $("#adminMenu li a[class!='selected']").each(function() {
-                $(this).hover(
-                    function() {
-                        $(this).addClass("hover");
-                    },
-                    function() {
-                        $(this).removeClass("hover");
-                    }
-                );
-            });
-            $(".message_box").bind("click", function() {
-                $(this).fadeOut("slow");
-            });
             $('a.delete').bind('click', function() {
                 var answer = confirm('<?php echo $this->getTranslation('Are you sure you want to delete this?') . ' ' . $this->getTranslation('Please be aware that dependent nodes might be deleted as well!');?>');
                 if (!answer) {return false;}
@@ -50,9 +38,7 @@ $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html; charset=' . $this
                     }
                 }
                 return false;
-            });
-
-            $('.spreadsheet tr:odd').addClass('oddRow');<?php
+            });<?php
         $this->jQuery()->onLoadCaptureEnd();
         echo PHP_EOL . $this->jQuery() . PHP_EOL;?>
     </head>

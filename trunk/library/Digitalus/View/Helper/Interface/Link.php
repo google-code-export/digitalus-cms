@@ -48,7 +48,7 @@ class Digitalus_View_Helper_Interface_Link extends Zend_View_Helper_Abstract
     /**
      *
      */
-    public function link($label, $link, $icon = null, $class = 'link', $target = null)
+    public function link($label, $link, $icon = null, $class = 'link', $target = null, $suppressLabel = false)
     {
         $this->link = Digitalus_Toolbox_String::stripLeading('/', $link);
         $this->baseUrl = Digitalus_Toolbox_String::stripLeading('/', $this->view->getBaseUrl());
@@ -69,7 +69,7 @@ class Digitalus_View_Helper_Interface_Link extends Zend_View_Helper_Abstract
         if (null !== $icon) {
             $linkParts[] = $this->getIcon($icon, $label);
         }
-        if (!empty($label)) {
+        if (!empty($label) && true != $suppressLabel) {
             $linkParts[] = $this->view->getTranslation((string)$label);
         }
         $linkParts[] = '</a>';
@@ -110,6 +110,6 @@ class Digitalus_View_Helper_Interface_Link extends Zend_View_Helper_Abstract
         $this->iconPath = $config->filepath->icons;
         $iconPath = $this->iconPath;
         $iconPath = $this->addBaseUrl($iconPath . '/' . $icon);
-        return '<img src="/' . $iconPath . '" alt="' . htmlspecialchars($alt) . '" class="icon" />';
+        return '<img src="/' . $iconPath . '" title="' . htmlspecialchars($alt) . '" alt="' . htmlspecialchars($alt) . '" class="icon" />';
     }
 }

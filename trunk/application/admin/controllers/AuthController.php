@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin Auth Controller of Digitalus CMS
@@ -37,7 +37,7 @@ require_once 'Zend/Controller/Action.php';
  * @uses        Admin_Form_Login
  * @uses        Admin_Form_OpenId
  */
-class Admin_AuthController extends Zend_Controller_Action
+class Admin_AuthController extends Digitalus_Controller_Action
 {
     /**
      * Initialize the action
@@ -46,8 +46,10 @@ class Admin_AuthController extends Zend_Controller_Action
      */
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Login') => $this->getFrontController()->getBaseUrl() . '/admin/auth/login'
+           $this->view->getTranslation('Login') => $this->baseUrl . '/admin/auth/login'
         );
     }
 
@@ -65,7 +67,7 @@ class Admin_AuthController extends Zend_Controller_Action
     public function loginAction()
     {
         $form = new Admin_Form_Login();
-        $form->setAction($this->view->getBaseUrl() . '/admin/auth/login');
+        $form->setAction($this->baseUrl . '/admin/auth/login');
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
             $uri = Digitalus_Filter_Post::get('uri');
@@ -98,7 +100,7 @@ class Admin_AuthController extends Zend_Controller_Action
     public function openidAction()
     {
         $form = new Admin_Form_OpenId();
-        $form->setAction($this->view->getBaseUrl() . '/admin/auth/openid');
+        $form->setAction($this->baseUrl . '/admin/auth/openid');
 
         $this->view->status = '';
         if (($this->_request->isPost() && $form->isValid($_POST)

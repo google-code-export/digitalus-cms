@@ -59,24 +59,32 @@ class Digitalus_Content_Form extends Digitalus_Form
         $name = $this->createElement('text', 'name', array(
             'label'         => $view->getTranslation('Page Name'),
             'required'      => true,
-            'filters'       => array('StringTrim'),
+            'filters'       => array('StringTrim', 'StripTags'),
             'validators'    => array(
                 array('NotEmpty', true),
+                array('StringLength', true, array(4, Model_Page::PAGE_NAME_LENGTH)),
+                array('PagenameExists'),
                 array('Regex', true, array(
                     'pattern'  => Model_Page::PAGE_NAME_REGEX,
                     'messages' => array('regexNotMatch' => Model_Page::PAGE_NAME_REGEX_NOTMATCH),
                 )),
             ),
+            'attribs'       => array('size' => 50),
+            'order'         => 1,
         ));
 
         $label = $this->createElement('text', 'label', array(
             'label'         => $view->getTranslation('Page Label'),
-            'filters'       => array('StringTrim'),
+            'filters'       => array('StringTrim', 'StripTags'),
+            'attribs'       => array('size' => 50),
+            'order'         => 2,
         ));
 
         $headline = $this->createElement('text', 'headline', array(
             'label'         => $view->getTranslation('Page Headline'),
-            'filters'       => array('StringTrim'),
+            'filters'       => array('StringTrim', 'StripTags'),
+            'attribs'       => array('size' => 50),
+            'order'         => 3,
         ));
 
         $submit = $this->createElement('submit', 'submit', array(

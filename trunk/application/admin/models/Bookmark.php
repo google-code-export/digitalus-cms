@@ -9,9 +9,10 @@ class Model_Bookmark extends Model_UserNode
             $identity = Digitalus_Auth::getIdentity();
             $userName = $identity->name;
         }
-        $where[] = $this->_db->quoteInto('user_name = ?', $userName);
-        $order = 'label';
-        $result = $this->fetchAll($where, $order);
+        $select = $this->select();
+        $select->where($this->_db->quoteInto('user_name = ?', $userName));
+        $select->order('label ASC');
+        $result = $this->fetchAll($select);
         if ($result->count() > 0) {
             return $result;
         }

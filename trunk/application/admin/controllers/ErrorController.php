@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin Error Controller of Digitalus CMS
@@ -35,7 +35,7 @@ require_once 'Zend/Controller/Action.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  */
-class Admin_ErrorController extends Zend_Controller_Action
+class Admin_ErrorController extends Digitalus_Controller_Action
 {
 
     /**

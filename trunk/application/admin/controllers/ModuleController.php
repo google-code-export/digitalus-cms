@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin Module Controller of Digitalus CMS
@@ -35,7 +35,7 @@ require_once 'Zend/Controller/Action.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.0.0
  */
-class Admin_ModuleController extends Zend_Controller_Action
+class Admin_ModuleController extends Digitalus_Controller_Action
 {
     /**
      * Initialize the action
@@ -44,8 +44,10 @@ class Admin_ModuleController extends Zend_Controller_Action
      */
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Modules') => $this->getFrontController()->getBaseUrl() . '/admin/module'
+           $this->view->getTranslation('Modules') => $this->baseUrl . '/admin/module'
         );
     }
 

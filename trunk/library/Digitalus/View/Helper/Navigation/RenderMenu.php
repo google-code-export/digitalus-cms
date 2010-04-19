@@ -41,20 +41,24 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @uses        View_Helper_Navigation
  * @uses        View_Helper_Navigation_Menu
  */
-class Digitalus_View_Helper_Navigation_RenderMenu extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_Navigation_RenderMenu extends Digitalus_View_Helper_Navigation_Abstract
 {
-    public function renderMenu($parentId = 0, $levels = 1, $currentLevel = 1, $class = 'menu')
+    protected $_attribs = array(
+        'indent'            => 4,
+        'maxDepth'          => 0,
+        'minDepth'          => 0,
+        'onlyActiveBranch'  => false,
+        'renderParents'     => true,
+        'ulClass'           => 'vlist',
+    );
+
+    public function renderMenu($parentId = 0, $attribs = array())
     {
         // needed to register Navigation into Zend_Registry
         $menu = new Digitalus_Menu($parentId);
 
-        return $this->view->navigation()->menu()->renderMenu(null, array(
-            'ulClass'           => $class,
-            'indent'            => 4,
-            'minDepth'          => null,
-            'maxDepth'          => $levels - 1,
-#            'onlyActiveBranch'  => false,
-#            'renderParents'     => false,
-        ));
+        $this->_setAttribs($attribs);
+
+        return $this->view->navigation()->menu()->renderMenu(null, $this->_getAttribs());
     }
 }

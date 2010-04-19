@@ -27,9 +27,16 @@
         <action>edit</action>
         <action>redirectors</action>
     </controller>
-    <controller name="user" >
+    <controller name="user">
         <action>index</action>
         <action>my-account</action>
+        <action>create</action>
+        <action>open</action>
+        <action>edit</action>
+        <action>delete</action>
+    </controller>
+    <controller name="group">
+        <action>index</action>
         <action>create</action>
         <action>open</action>
         <action>edit</action>

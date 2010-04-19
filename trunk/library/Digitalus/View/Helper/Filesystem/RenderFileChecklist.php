@@ -41,7 +41,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Digitalus_View_Helper_Filesystem_RenderFileChecklist extends Zend_View_Helper_Abstract
 {
-    public function renderFileChecklist($values = array(), $parentId, $level = 0, $id = 'fileChecklist')
+    public function renderFileChecklist($values = array(), $parentId, $level = 0, $class = 'fileChecklist', $icon = null)
     {
         $links = array();
         $page = new Model_Page();
@@ -49,32 +49,55 @@ class Digitalus_View_Helper_Filesystem_RenderFileChecklist extends Zend_View_Hel
         $children = $page->getChildren($parentId);
 
         foreach ($children as $child) {
+            $submenu = false;
             if ($page->hasChildren($child)) {
                 $newLevel = $level + 1;
-                $submenu = $this->view->renderFileChecklist($values, $child->id, $newLevel);
-            } else {
-                $submenu = false;
+                $submenu = $this->view->renderFileChecklist($values, $child->id, $newLevel, $class, $icon);
             }
 
-            if (in_array($child->id, $values)) {
+            // TODO: refactor into Toolbox String - replace empty spaces with underscores for element names only
+            $childName = strtolower(str_replace(' ', '_', $child->name));
+
+            $checked = 0;
+            if (in_array($childName, $values)) {
                 $checked = 1;
-            } else {
-                $checked = 0;
             }
 
-            $checkbox = $this->view->formCheckbox('file_' . $child->id, $checked);
-
-            $links[] ='<li class="page">' . $checkbox . $child->name . $submenu . '</li>';
+            $form = new Digitalus_Form();
+            $checkbox = $form->createElement('checkbox', $childName, array(
+                'value'         => $checked,
+                'decorators'    => array('ViewHelper'),
+                'belongsTo'     => $class,
+            ));
+            $links[] ='<li>' . $checkbox . $this->getIcon($icon, $child->name) . $child->name . $submenu . '</li>';
         }
 
+        $strClass = null;
         if (is_array($links)) {
             if ($level == 0) {
-                $strId = "id='{$id}'";
-            } else {
-                $strId = null;
+                $strClass = 'class="' . $class . '"';
             }
-            $fileChecklist = "<ul {$strId}>" . implode(null, $links) . '</ul>';
+            $fileChecklist = '<ul ' . $strClass . 'class="treeview">' . implode(null, $links) . '</ul>';
             return  $fileChecklist;
         }
+    }
+
+    public function addBaseUrl($path)
+    {
+        if (!empty($this->baseUrl)) {
+            if (substr($path, 0, strlen($this->baseUrl) != $this->baseUrl)) {
+                return $this->baseUrl . '/' . $path;
+            }
+        }
+        return $path;
+    }
+
+    public function getIcon($icon, $alt)
+    {
+        $config = Zend_Registry::get('config');
+        $this->iconPath = $config->filepath->icons;
+        $iconPath = $this->iconPath;
+        $iconPath = $this->addBaseUrl($iconPath . '/' . $icon);
+        return '<img src="/' . $iconPath . '" title="' . htmlspecialchars($alt) . '" alt="' . htmlspecialchars($alt) . '" class="icon" />';
     }
 }

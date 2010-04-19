@@ -45,12 +45,22 @@ class Digitalus_View_Helper_Controls_SelectModulePage extends Zend_View_Helper_A
     {
         $pages = Digitalus_Filesystem_File::getFilesByType(APPLICATION_PATH . '/modules/' . $module . '/views/scripts/public', 'phtml');
         if (is_array($pages)) {
-            $data[] = $this->view->getTranslation('Select One');
+            $options[] = $this->view->getTranslation('Select One');
             foreach ($pages as $page) {
                 $page = Digitalus_Toolbox_Regex::stripFileExtension($page);
-                $data[$page] = $page;
+                $options[$page] = $page;
             }
-            return $this->view->formSelect($name, $value, $attribs, $data);
+            $form = new Digitalus_Form();
+            $select = $form->createElement('select', $name, array(
+                'multiOptions'  => $options,
+            ));
+            if (is_array($value)) {
+                $select->setValue($value);
+            }
+            if (is_array($attribs)) {
+                $select->setAttribs($attribs);
+            }
+            return $select;
         } else {
             return $this->view->getTranslation('There are no pages in this module');
         }

@@ -27,7 +27,7 @@ class Digitalus_Auth
     /**
      * auth adapter
      *
-     * @var zend_auth_adapter
+     * @var Zend_Auth_Adapter
      */
     private $_authAdapter;
 
@@ -50,7 +50,7 @@ class Digitalus_Auth
     /**
      * the user session storage
      *
-     * @var zend_session_namespace
+     * @var Zend_Session_Namespace
      */
     private $_storage;
 
@@ -77,7 +77,7 @@ class Digitalus_Auth
 
     const USER_NAMESPACE = 'adminUser';
 
-    protected $_resultRowColumns = array('name', 'first_name', 'last_name', 'email', 'role', 'acl_resources');
+    protected $_resultRowColumns = array('name', 'first_name', 'last_name', 'email', 'role');
 
     /**
      * build the login request
@@ -111,7 +111,7 @@ class Digitalus_Auth
     /**
      * authenticate the request
      *
-     * @return zend_auth_response
+     * @return Zend_Auth_Response
      */
     public function authenticate()
     {
@@ -132,13 +132,18 @@ class Digitalus_Auth
     /**
      * get the current user identity if it exists
      *
-     * @return zend_auth_response
+     * @return Zend_Auth_Response
      */
     public static function getIdentity()
     {
         $storage = new Zend_Session_Namespace(self::USER_NAMESPACE);
         if (isset($storage->user)) {
           return $storage->user;
+        } else {
+            $identity = new stdClass();
+            $identity->name = Model_Group::GUEST_ROLE;
+            $identity->role = Model_Group::GUEST_ROLE;
+            return $identity;
         }
     }
 
@@ -151,5 +156,4 @@ class Digitalus_Auth
         $storage = new Zend_Session_Namespace(self::USER_NAMESPACE);
         $storage->unsetAll();
     }
-
 }

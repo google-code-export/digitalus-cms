@@ -65,8 +65,8 @@ class Digitalus_View_Helper_Admin_RenderBookmarks extends Zend_View_Helper_Abstr
                 }
                 $xhtml .= '        ' . $this->view->link($bookmark->label, '/' . $url);
                 $xhtml .= '    </li>';
-                $xhtml .= '</ul>';
             }
+            $xhtml .= '</ul>';
         } else {
             $xhtml = $this->view->getTranslation('You do not have any bookmarks.');
         }

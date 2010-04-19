@@ -40,7 +40,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 class Digitalus_View_Helper_Admin_RenderAclList extends Zend_View_Helper_Abstract
 {
-    public function renderAclList($usersPermissions = array(), $id = 'aclList')
+    public function renderAclList($zfModule = 'admin', $usersPermissions = array(), $id = 'aclList')
     {
         $this->permissions = $usersPermissions;
 
@@ -50,30 +50,33 @@ class Digitalus_View_Helper_Admin_RenderAclList extends Zend_View_Helper_Abstrac
         $xhtml = '<ul id="' . $id . '">';
 
         foreach ($resources as $module => $resources) {
-            if (!is_array($resources)) {
-                $key = $module;
-                $xhtml .= '<li class="module">' . $this->view->formCheckbox("acl_resources[{$key}]", $this->hasPermision($key, $usersPermissions)) . $module;
-            } else {
-                $xhtml .= '<li class="module">' . $module;
-                $xhtml .= '<ul>';
-                foreach ($resources as $controller => $actions) {
-                    if (!is_array($actions)) {
-                        $key = $module . '_' . $controller;
-                        $xhtml .= '<li class="controller">' . $this->view->formCheckbox("acl_resources[{$key}]", $this->hasPermision($key, $usersPermissions)) . $controller;
-                    } else {
-                        $xhtml .= '<li class="controller">' . $controller;
-                        $xhtml .= '<ul>';
-                        foreach ($actions as $action) {
-                            $key = $module . '_' . $controller . '_' . $action;
-                            $xhtml .= '<li class="action">' . $this->view->formCheckbox("acl_resources[{$key}]", $this->hasPermision($key, $usersPermissions)) . $action . '</li>';
+            if (strtolower($module) == strtolower($zfModule) || (
+                'module' == strtolower($zfModule) && substr($module, 0, 4) == 'mod_')) {
+                if (!is_array($resources)) {
+                    $key = $module;
+                    $xhtml .= '<li class="module">' . $this->view->formCheckbox("acl_resources[{$key}]", $this->hasPermision($key, $usersPermissions)) . $module;
+                } else {
+                    $xhtml .= '<li class="module">' . $module;
+                    $xhtml .= '<ul>';
+                    foreach ($resources as $controller => $actions) {
+                        if (!is_array($actions)) {
+                            $key = $module . '_' . $controller;
+                            $xhtml .= '<li class="controller">' . $this->view->formCheckbox("acl_resources[{$key}]", $this->hasPermision($key, $usersPermissions)) . $controller;
+                        } else {
+                            $xhtml .= '<li class="controller">' . $controller;
+                            $xhtml .= '<ul>';
+                            foreach ($actions as $action) {
+                                $key = $module . '_' . $controller . '_' . $action;
+                                $xhtml .= '<li class="action">' . $this->view->formCheckbox("acl_resources[{$key}]", $this->hasPermision($key, $usersPermissions)) . $action . '</li>';
+                            }
+                            $xhtml .= '</ul>';
                         }
-                        $xhtml .= '</ul>';
+                        $xhtml .= '</li>'; //end of controller
                     }
-                    $xhtml .= '</li>'; //end of controller
+                $xhtml .= '</ul>';
                 }
-               $xhtml .= '</ul>';
+                $xhtml .= '</li>'; //end of module
             }
-            $xhtml .= '</li>'; //end of module
         }
         $xhtml .= '</ul>';
 

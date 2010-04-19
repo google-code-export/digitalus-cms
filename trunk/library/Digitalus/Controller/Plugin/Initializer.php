@@ -103,7 +103,9 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
         if ($page->pageExists($uri) || 'public' == $this->_request->getModuleName()) {
             $this->_request->setModuleName('public');
             $this->_request->setControllerName('index');
-            $this->_request->setActionName('index');
+            if ('login' != $this->_request->getActionName()) {
+                $this->_request->setActionName('index');
+            }
         }
     }
 

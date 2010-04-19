@@ -2,13 +2,15 @@
 require_once './application/modules/slideshow/models/Show.php';
 require_once './application/modules/slideshow/models/Slide.php';
 
-class Mod_Slideshow_PublicController extends Zend_Controller_Action
+class Mod_Slideshow_PublicController extends Digitalus_Controller_Action
 {
     public $moduleData;
     public $properties;
 
     public function init()
     {
+        parent::init();
+
         $module = new Digitalus_Module();
         $this->moduleData = $module->getData();
         $this->properties = Digitalus_Module_Property::load('mod_slideshow');

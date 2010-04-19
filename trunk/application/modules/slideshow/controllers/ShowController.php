@@ -4,15 +4,17 @@ require_once './application/modules/slideshow/forms/Slide.php';
 require_once './application/modules/slideshow/models/Show.php';
 require_once './application/modules/slideshow/models/Slide.php';
 
-class Mod_Slideshow_ShowController extends Zend_Controller_Action
+class Mod_Slideshow_ShowController extends Digitalus_Controller_Action
 {
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Modules') => $this->getFrontController()->getBaseUrl() . '/admin/module',
-           $this->view->getTranslation('Slideshow') => $this->getFrontController()->getBaseUrl() . '/mod_slideshow'
+           $this->view->getTranslation('Modules') => $this->baseUrl . '/admin/module',
+           $this->view->getTranslation('Slideshow') => $this->baseUrl . '/mod_slideshow'
         );
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/mod_slideshow';
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark/url/mod_slideshow';
 
     }
 
@@ -44,7 +46,7 @@ class Mod_Slideshow_ShowController extends Zend_Controller_Action
             $show = $mdlShow->find($id)->current();
             $form->populate($show->toArray());
         }
-        $form->setAction($this->getFrontController()->getBaseUrl() . '/mod_slideshow/show/edit');
+        $form->setAction($this->baseUrl . '/mod_slideshow/show/edit');
         $submit = $form->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Update Slideshow'));
 
@@ -62,14 +64,14 @@ class Mod_Slideshow_ShowController extends Zend_Controller_Action
         $slideForm->removeElement('caption');
         $slideFormValues['show_id'] = $show->id;
         $slideForm->populate($slideFormValues);
-        $slideForm->setAction($this->getFrontController()->getBaseUrl() . '/mod_slideshow/slide/create');
+        $slideForm->setAction($this->baseUrl . '/mod_slideshow/slide/create');
         $submit = $slideForm->getElement('submit');
         $submit->setLabel($this->view->getTranslation('Add New Slide'));
         $this->view->slideForm = $slideForm;
 
-        $this->view->breadcrumbs[$show->name] = $this->getFrontController()->getBaseUrl() . '/mod_slideshow/show/edit/id/' . $show->id;
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->getFrontController()->getBaseUrl() . '/admin/index/bookmark/url/mod_slideshow/show/edit/id/' . $show->id;
-        $this->view->toolbarLinks['Delete'] = $this->getFrontController()->getBaseUrl() . '/mod_slideshow/show/delete/id/' . $show->id;
+        $this->view->breadcrumbs[$show->name] = $this->baseUrl . '/mod_slideshow/show/edit/id/' . $show->id;
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark/url/mod_slideshow/show/edit/id/' . $show->id;
+        $this->view->toolbarLinks['Delete'] = $this->baseUrl . '/mod_slideshow/show/delete/id/' . $show->id;
 
     }
 

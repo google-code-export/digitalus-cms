@@ -214,9 +214,36 @@ class Model_Page extends Digitalus_Db_Table
     {
         if ($this->_fetchPointer($uri->toArray(), 0) || $uri == null) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+    }
+
+    /**
+     * This function checks if a pagename already exists
+     *
+     * @param  string  $pageName  The name to check for
+     * @return boolean
+     */
+    public function pagenameExists($pageName, $exclude = null)
+    {
+        $pageName = strtolower($pageName);
+        if (!is_array($exclude)) {
+            $exclude = array($exclude);
+        }
+
+        $where[] = $this->_db->quoteInto('LOWER(name) = ?', $pageName);
+        foreach ($exclude as $exclusion) {
+            $exclusion = trim($exclusion);
+            if (isset($exclusion) && !empty($exclusion) && '' != $exclusion) {
+                $where[] = $this->_db->quoteInto('LOWER(name) != ?', $exclusion);
+            }
+        }
+
+        $result = $this->fetchAll($where, null, 1);
+        if ($result->count() > 0) {
+            return true;
+        }
+        return false;
     }
 
     public function edit($pageArray)
@@ -384,8 +411,8 @@ class Model_Page extends Digitalus_Db_Table
     public function getPagesByDesign($designId)
     {
         $select = $this->select();
-        $select->where('design = ?', $designId);
-        $select->order('name');
+        $select->where('design = ?', $designId)
+               ->order('name ASC');
         return $this->fetchAll($select);
     }
 
@@ -484,13 +511,20 @@ class Model_Page extends Digitalus_Db_Table
         if (0 == $id) {
             $orNull = ' OR parent_id IS NULL';
         }
-        $where[] = $this->_db->quoteInto('parent_id = ?' . $orNull, $id);
-
+        $select = $this->select();
+        $select->where($this->_db->quoteInto('parent_id = ?' . $orNull, $id));
+        if (is_array($where)) {
+            foreach ($where as $item) {
+                $select->where($item);
+            }
+        }
         if (empty($order) || '' == $order) {
             $order = 'position ASC';
         }
+        $select->order($order);
+        $select->limit($limit, $offset);
 
-        $result = $this->fetchAll($where, $order, $limit, $offset);
+        $result = $this->fetchAll($select);
         if ($result->count() > 0) {
             return $result;
         }
@@ -777,6 +811,32 @@ class Model_Page extends Digitalus_Db_Table
     }
 
     /**
+     * this function returns the parent of the selected page
+     * you can pass it a page id (integer) or a page object
+     *
+     * @param  string $pageName
+     * @return Zend_Db_Table_Rowset
+     */
+    public function getParentIdByName($pageName)
+    {
+        $select = $this->select();
+        $from   = $select->from($this->_name, 'parent_id');
+        $where  = $select->where($this->_db->quoteInto('name = ?', $pageName));
+        return $this->fetchAll($select);
+    }
+
+    public function getPageNamesArray()
+    {
+        $select = $this->select();
+        $select->from($this->_name, 'name');
+        $result = $this->fetchAll($select);
+        foreach ($result as $name) {
+            $pageNames[] = $name['name'];
+        }
+        return $pageNames;
+    }
+
+    /**
      * if page is an object then this returns its id property
      * otherwise it returns its integer value
      *
@@ -848,7 +908,8 @@ class Model_Page extends Digitalus_Db_Table
     private function _getPageByLabel($label, $parent = 0)
     {
         if ($label != 'p') {
-            $where[] = $this->_db->quoteInto('(label = ? OR name = ?)', str_replace('_', ' ' , trim($label)));
+#            $where[] = $this->_db->quoteInto('(label = ? OR name = ?)', str_replace('_', ' ' , trim($label)));
+            $where[] = $this->_db->quoteInto('name = ?', str_replace('_', ' ' , trim($label)));
             $where[] = $this->_db->quoteInto('parent_id = ?', $parent);
             $page = $this->fetchRow($where);
             if ($page) {

@@ -1,19 +1,18 @@
 <?php
 abstract class Digitalus_Model_Abstract extends Digitalus_Abstract implements IteratorAggregate
 {
-    protected $_params = array();
+    protected $_params          = array();
     protected $_protectedParams = array();
 
     public function __get($parameter)
     {
         if (isset($this->_params[$parameter])) {
             return $this->_params[$parameter];
-        } else {
-            return false;
         }
+        return false;
     }
 
-    public function __set($paremeter, $value)
+    public function __set($parameter, $value)
     {
         if (isset($this->_params[$parameter])) {
             $this->_params[$parameter] = $value;
@@ -67,9 +66,8 @@ abstract class Digitalus_Model_Abstract extends Digitalus_Abstract implements It
     {
         if (in_array($key, $this->_protectedParams)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function fromArray(array $array)

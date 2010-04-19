@@ -20,9 +20,9 @@
  */
 
 /**
- * @see Zend_Controller_Action
+ * @see Digitalus_Controller_Action
  */
-require_once 'Zend/Controller/Action.php';
+require_once 'Digitalus/Controller/Action.php';
 
 /**
  * Admin Page Controller of Digitalus CMS
@@ -38,7 +38,7 @@ require_once 'Zend/Controller/Action.php';
  * @uses        Model_MetaData
  * @uses        Model_Properties
  */
-class Admin_PageController extends Zend_Controller_Action
+class Admin_PageController extends Digitalus_Controller_Action
 {
     const META_ACTION     = '/admin/page/update-meta-data';
     const PROPERTY_ACTION = '/admin/page/properties';
@@ -52,8 +52,10 @@ class Admin_PageController extends Zend_Controller_Action
      */
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Pages') => $this->view->getBaseUrl() . '/admin/page'
+           $this->view->getTranslation('Pages') => $this->baseUrl . '/admin/page'
         );
     }
 
@@ -77,7 +79,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function newAction()
     {
         $pageForm = new Admin_Form_Page();
-        $pageForm->setAction($this->view->getBaseUrl() . '/admin/page/new');
+        $pageForm->setAction($this->baseUrl . '/admin/page/new');
         $pageForm->setAttrib('class', $pageForm->getAttrib('class') . ' columnar');
 
         $createPageGroup = $pageForm->getDisplayGroup('createPageGroup');
@@ -135,7 +137,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function editAction()
     {
         $page = new Model_Page();
-        $pageId = $this->_request->getParam('id', 0);
+        $pageId   = $this->_request->getParam('id', 0);
         $language = $this->_request->getParam('language', $page->getDefaultLanguage());
         $currentPage = $page->open($pageId, $language);
 
@@ -143,16 +145,25 @@ class Admin_PageController extends Zend_Controller_Action
         $template = $page->getTemplate($pageId);
 
         // @todo: refactor this into some sort of helper function
-        $templateParts = explode('_', $template);
-        $currentTemplate = $templateParts[0];
+        $templateParts       = explode('_', $template);
+        $currentTemplate     = $templateParts[0];
         $currentTemplatePage = $templateParts[1];
-        $templatePath = BASE_PATH . '/templates/public/' . $currentTemplate;
-        $templateConfig = new Zend_Config_Xml($templatePath . '/pages/' . $currentTemplatePage . '.xml');
-        $pageTemplate = new Digitalus_Interface_Template();
+        $templatePath        = BASE_PATH . '/templates/public/' . $currentTemplate;
+        $templateConfig      = new Zend_Config_Xml($templatePath . '/pages/' . $currentTemplatePage . '.xml');
+        $pageTemplate        = new Digitalus_Interface_Template();
 
         $form = $pageTemplate->getForm($templatePath . '/layouts/' . $templateConfig->layout);
-        $form->setAttrib('class', $form->getAttrib('class') . ' columnar');
-        $form->setAction($this->view->getBaseUrl() . '/admin/page/edit');
+        $form->setAction($this->baseUrl . '/admin/page/edit')
+             ->setDecorators(array(
+                'FormElements',
+                'Form',
+                array('FormErrors', array('placement' => 'prepend'))
+            ));
+
+        $elmPageName = $form->getElement('name');
+        $elmPageName->addValidators(array(
+            array('PagenameExists', true, array('exclude' => $currentPage->page->name)),
+        ));
 
         if (!is_object($currentPage)) {
             $url = 'admin/page';
@@ -201,17 +212,16 @@ class Admin_PageController extends Zend_Controller_Action
         //related pages
 //        $this->view->relatedPages = $page->getRelatedPages($pageId);
 
+        $label = $currentPage->page->name;
         if (isset($currentPage->page->label) && !empty($currentPage->page->label)) {
             $label = $currentPage->page->label;
-        } else {
-            $label = $currentPage->page->name;
         }
-        $this->view->breadcrumbs[$this->view->getTranslation('Open') . ': ' . $label] = $this->view->getBaseUrl() . '/admin/page/edit/id/' . $pageId;
+        $this->view->breadcrumbs[$this->view->getTranslation('Open') . ': ' . $label] = $this->baseUrl . '/admin/page/edit/id/' . $pageId;
         $this->view->toolbarLinks = array();
-        $this->view->toolbarLinks['Add to my bookmarks'] = $this->view->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks['Add to my bookmarks'] = $this->baseUrl . '/admin/index/bookmark'
             . '/url/admin_page_edit_id_' . $pageId
             . '/label/' . $this->view->getTranslation('Page') . ':' . $currentPage->page->name;
-        $this->view->toolbarLinks['Delete'] = $this->view->getBaseUrl() . '/admin/page/delete/id/' . $pageId;
+        $this->view->toolbarLinks['Delete'] = $this->baseUrl . '/admin/page/delete/id/' . $pageId;
     }
 
     /**
@@ -408,7 +418,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function getMetaForm($data)
     {
         $form = new Admin_Form_PageMetaData();
-        $form->setAction($this->view->getBaseUrl() . self::META_ACTION )
+        $form->setAction($this->baseUrl . self::META_ACTION )
              ->setMethod('post');
 
         //set data
@@ -427,7 +437,7 @@ class Admin_PageController extends Zend_Controller_Action
     public function getForm($data)
     {
         $form = new Zend_Form();
-        $form->setAction($this->view->getBaseUrl() . self::PUBLISH_ACTION )
+        $form->setAction($this->baseUrl . self::PUBLISH_ACTION )
              ->setMethod('post');
 
         $pageId = $form->createElement('hidden', 'page_id');

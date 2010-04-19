@@ -28,6 +28,7 @@ require_once 'Digitalus/Form.php';
 /**
  * Admin Page Metadata Form
  *
+ * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
@@ -91,7 +92,7 @@ class Admin_Form_PageMetaData extends Digitalus_Form
              ->addElement($submit);
 
         $this->addDisplayGroup(
-            array('form_instance', 'id', 'page_title', 'filename', 'meta_description', 'keywords', 'search_tags', 'update'),
+            array('form_instance', 'page_id', 'page_title', 'filename', 'meta_description', 'keywords', 'search_tags', 'update'),
             'updatePageMetaDataGroup',
             array('legend' => $view->getTranslation('Edit Meta Data'))
         );

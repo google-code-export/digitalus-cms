@@ -35,7 +35,7 @@ require_once 'Zend/Controller/Action.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
-class Mod_Search_IndexController extends Zend_Controller_Action
+class Mod_Search_IndexController extends Digitalus_Controller_Action
 {
     /**
      * Initialize the action
@@ -44,11 +44,13 @@ class Mod_Search_IndexController extends Zend_Controller_Action
      */
     public function init()
     {
+        parent::init();
+
         $this->view->breadcrumbs = array(
-           $this->view->getTranslation('Modules') => $this->view->getBaseUrl() . '/admin/module',
-           $this->view->getTranslation('Search') => $this->view->getBaseUrl() . '/mod_search'
+           $this->view->getTranslation('Modules') => $this->baseUrl . '/admin/module',
+           $this->view->getTranslation('Search') => $this->baseUrl . '/mod_search'
         );
-        $this->view->toolbarLinks[$this->view->getTranslation('Add to my bookmarks')] = $this->view->getBaseUrl() . '/admin/index/bookmark'
+        $this->view->toolbarLinks[$this->view->getTranslation('Add to my bookmarks')] = $this->baseUrl . '/admin/index/bookmark'
             . '/url/mod_search'
             . '/label/' . $this->view->getTranslation('Module') . ':' . $this->view->getTranslation('Search');
     }

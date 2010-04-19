@@ -101,8 +101,8 @@ class Model_PageNode extends Digitalus_Db_Table
     public function getVersions($pageId)
     {
         $select = $this->select();
-        $select->distinct(true);
-        $select->where('page_id = ?', $pageId);
+        $select->distinct(true)
+               ->where('page_id = ?', $pageId);
         $result = $this->fetchAll($select);
         if ($result) {
             $config = Zend_Registry::get('config');

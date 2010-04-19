@@ -12,11 +12,11 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: Acl.php Tue Dec 25 21:39:35 EST 2007 21:39:35 forrest lyman $
+ * @category    Digitalus CMS
+ * @package     Digitalus_Core_Library
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Acl.php Tue Dec 25 21:39:35 EST 2007 21:39:35 forrest lyman $
  */
 
 class Digitalus_Acl extends Zend_Acl
@@ -30,24 +30,21 @@ class Digitalus_Acl extends Zend_Acl
      */
     public function __construct()
     {
-        $this->addRole(new Zend_Acl_Role('superadmin'));
-        $this->addRole(new Zend_Acl_Role('admin'));
-        $this->addRole(new Zend_Acl_Role('guest'));
+        $this->_addRoles();
 
         $this->loadResources();
         $this->loadCurrentUsersPermissions();
 
-        //load common resources
-        $this->add(new Zend_Acl_Resource('admin_auth'));
-
-        //everybody
-        $this->allow(null, 'admin_auth');
-
         //deny the guests access to everything
-        $this->deny('guest');
+        $this->deny(Model_Group::GUEST_ROLE);
 
         //grant the super admin access to everything
-        $this->allow('superadmin');
+        $this->allow(Model_Group::SUPERUSER_ROLE);
+
+        //load common resources
+        $this->addResource(new Zend_Acl_Resource('admin_auth'));
+        //everybody
+        $this->allow(null, 'admin_auth');
     }
 
     public function loadResources()
@@ -64,7 +61,7 @@ class Digitalus_Acl extends Zend_Acl
                 $path = str_replace('controllers', 'acl.xml', $path);
 
                 //load the module resource
-                $this->add(new Zend_Acl_Resource($module));
+                $this->addResource(new Zend_Acl_Resource($module));
 
                 //attempt to load each acl file
                 if (file_exists($path)) {
@@ -78,7 +75,7 @@ class Digitalus_Acl extends Zend_Acl
                                 //load each action separately
                                 $actionName = (string)$action;
                                 $key = $module . '_' . $controllerName . '_' . $actionName;
-                                $this->add(new Zend_Acl_Resource($key), $module);
+                                $this->addResource(new Zend_Acl_Resource($key), $module);
 
                                 //add the action to the public resource list
                                 $resourceListItems[$controllerName][] = $actionName;
@@ -86,7 +83,7 @@ class Digitalus_Acl extends Zend_Acl
                         } else {
                             //set the resource at the controller level
                             $key = $module . '_' . $controllerName;
-                            $this->add(new Zend_Acl_Resource($key), $module);
+                            $this->addResource(new Zend_Acl_Resource($key), $module);
 
                             //add the controller to the public resource list
                             $resourceListItems[$controllerName] = null;
@@ -95,6 +92,18 @@ class Digitalus_Acl extends Zend_Acl
                 }
 
                 $this->_resourceList[$module] = $resourceListItems;
+            } else {
+                //load the module resource
+                $this->addResource(new Zend_Acl_Resource($module));
+
+                $mdlPage   = new Model_Page();
+                $pageNames = $mdlPage->getPageNamesArray();
+                foreach ($pageNames as $pageName) {
+// TODO: refactor into Toolbox String - replace underscores with empty spaces
+                    $pageName = strtolower(str_replace(' ', '_', $pageName));
+                    $this->_resourceList[$pageName] = $pageName;
+                    $this->addResource(new Zend_Acl_Resource($pageName), $module);
+                }
             }
         }
     }
@@ -106,16 +115,17 @@ class Digitalus_Acl extends Zend_Acl
 
     public function loadCurrentUsersPermissions()
     {
-        $user = new Model_User();
-        $permissions = $user->getCurrentUsersAclResources();
-
-        if ($permissions) {
+        $mdlUser = new Model_User();
+        $user    = $mdlUser->getCurrentUser();
+        $group   = $mdlUser->getGroupByUsername($user->name);
+        $permissions = $mdlUser->getCurrentUsersAclResources();
+        if (Model_Group::SUPERUSER_ROLE != $group && !empty($permissions)) {
             foreach ($permissions as $key => $value) {
                 if ($this->has($key)) {
                     if ($value == 1) {
-                        $this->allow('admin', $key);
+                        $this->allow($group, $key);
                     } else {
-                        $this->deny('admin', $key);
+                        $this->deny($group, $key);
                     }
                 }
             }
@@ -128,6 +138,30 @@ class Digitalus_Acl extends Zend_Acl
             return 'mod_' . $row->controller;
         } else {
             return $row->controller;
+        }
+    }
+
+    /**
+     * adds roles dynamically from database
+     */
+    private function _addRoles()
+    {
+        // add role 'guest' and 'superadmin' explicitly
+        $this->addRole(new Zend_Acl_Role(Model_Group::GUEST_ROLE));
+        $this->addRole(new Zend_Acl_Role(Model_Group::SUPERUSER_ROLE));
+
+        // add roles dynamically from database
+        $mdlGroup = new Model_Group();
+        $groups = $mdlGroup->getGroupNamesParentsArray();
+        foreach ($groups as $group) {
+            switch (strtolower($group['name'])) {
+                case Model_Group::GUEST_ROLE:
+                case Model_Group::SUPERUSER_ROLE:
+                    break;
+                default:
+                    $this->addRole(new Zend_Acl_Role($group['name'], $group['parent']));
+                    break;
+            }
         }
     }
 }

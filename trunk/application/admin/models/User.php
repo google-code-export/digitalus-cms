@@ -45,7 +45,7 @@ class Model_User extends Digitalus_Db_Table
     /**
      * the maximum lenght for user names (must correspond to length in database)
      */
-    const USERNAME_LENGTH = 100;
+    const USERNAME_LENGTH = 30;
     /**
      * the regex that the userName will be checked against
      */
@@ -108,21 +108,27 @@ class Model_User extends Digitalus_Db_Table
 
     public function getAclResources($userRowset)
     {
-        return unserialize($userRowset->acl_resources);
+        $role = Model_Group::GUEST_ROLE;
+        if (isset($userRowset->role) && !empty($userRowset->role)) {
+            $role = $userRowset->role;
+        }
+        $mdlGroup = new Model_Group();
+        return $mdlGroup->getAclResources($role);
     }
 
     /**
      * returns the complete user row for the currently logged in user
-     * @return zend_db_row
+     * @return Zend_Db_Row
      */
     public function getCurrentUser()
     {
         $currentUser = Digitalus_Auth::getIdentity();
-        if (!empty($currentUser) && isset($currentUser->name)) {
+        if (!empty($currentUser) && isset($currentUser->name) && Model_Group::GUEST_ROLE != $currentUser->name) {
             return $this->find($currentUser->name)->current();
+        } else {
+            return $currentUser;
         }
     }
-
 
     public function getCurrentUsersAclResources()
     {
@@ -229,6 +235,18 @@ class Model_User extends Digitalus_Db_Table
         }
     }
 
+    public function getGroupByUsername($userName)
+    {
+        if (Model_Group::GUEST_ROLE == $userName) {
+            return Model_Group::GUEST_ROLE;
+        }
+        $select = $this->select();
+        $select->from($this->_name, array('name', 'role'))
+            ->where($this->_db->quoteInto('name = ?', $userName));
+        $user = $this->fetchRow($select);
+        return $user->role;
+    }
+
     public function getUserByUsername($userName)
     {
         $where[] = $this->_db->quoteInto('name = ?', $userName);
@@ -256,11 +274,28 @@ class Model_User extends Digitalus_Db_Table
      */
     public function getUserNamesArray()
     {
-        $users = $this->fetchAll();
+        $select = $this->select();
+        $select->from($this->_name, array('name', 'first_name', 'last_name'));
+        $users = $this->fetchAll($select);
         foreach ($users as $user) {
             $usersArray[$user->name] = $user->first_name . ' ' . $user->last_name;
         }
         return $usersArray;
+    }
+
+    /**
+     * @since 1.10.0
+     *
+     * returns the current users
+     *
+     */
+    public function getUsers($selectItems = null)
+    {
+        $select = $this->select();
+        $select->from($this->_name, array_map('trim', explode(',', $selectItems)))
+               ->order('name ASC');
+        $users = $this->fetchAll($select);
+        return $users;
     }
 
     public function copyPermissions($from, $to)

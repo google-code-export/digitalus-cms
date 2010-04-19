@@ -77,6 +77,7 @@ class Digitalus_Command_UpdateVersion110 extends Digitalus_Command_Abstract
         } else {
             $this->log($this->view->getTranslation('Config successfully updated!'));
         }
+        $this->_updateAuth();
     }
 
     /**
@@ -368,6 +369,17 @@ class Digitalus_Command_UpdateVersion110 extends Digitalus_Command_Abstract
                 return true;
             }
             return false;
+        } catch (Exception $e) {
+            $this->log($e);
+        }
+    }
+
+    private function _updateAuth()
+    {
+        try {
+//TODO
+            $user = Digitalus_Auth::getIdentity();
+            $user->name = $user->email;
         } catch (Exception $e) {
             $this->log($e);
         }

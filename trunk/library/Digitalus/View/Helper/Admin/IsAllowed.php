@@ -45,13 +45,13 @@ class  Digitalus_View_Helper_Admin_IsAllowed extends Zend_View_Helper_Abstract
      */
     public function isAllowed($module, $controller = null, $action = null)
     {
-        $acl = new Digitalus_Acl();
+        $acl     = new Digitalus_Acl();
         $mdlUser = new model_User();
-        $user = $mdlUser->getCurrentUser();
+        $user    = $mdlUser->getCurrentUser();
         //go from more specific to less specific
-        $moduleLevel = $module;
+        $moduleLevel     = $module;
         $controllerLevel = $moduleLevel . '_' . $controller;
-        $actionLevel = $controllerLevel . '_' . $action;
+        $actionLevel     = $controllerLevel . '_' . $action;
 
         if (null != $action && $acl->has($actionLevel)) {
             $resource = $actionLevel;

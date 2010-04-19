@@ -58,7 +58,7 @@ ALTER TABLE `users`
     CHANGE `openid` `openid` VARCHAR(100) DEFAULT NULL;
 -- set 'guest' as DEFAULT instead of 'admin'
 ALTER TABLE `users`
-    CHANGE `role` `role` ENUM('guest', 'admin', 'superadmin') DEFAULT 'guest';
+    CHANGE `role` `role` VARCHAR(30) NULL DEFAULT 'guest';
 -- -----------------------------------------------------------------------------
 -- INSERTIONS
 -- -----------------------------------------------------------------------------
@@ -68,7 +68,38 @@ ALTER TABLE `users`
     ADD `active` TINYINT(1) NOT NULL DEFAULT 0 AFTER `password`;
 -- set fields `openid` unique -> use Validators 'UsernameExists' and 'OpenIdExists' before updating database
 ALTER TABLE `users`
+    ADD INDEX (`name`),
+    ADD INDEX (`role`),
     ADD UNIQUE (`openid`);
+
+/*
+ *******************************************************************************
+ * changes to table `groups`
+ *******************************************************************************
+ */
+-- -----------------------------------------------------------------------------
+-- CREATE
+-- -----------------------------------------------------------------------------
+-- create table `groups`
+DROP TABLE IF EXISTS `groups`;
+CREATE TABLE IF NOT EXISTS `groups` (
+  `name` VARCHAR(30) NOT NULL PRIMARY KEY,
+  `parent` VARCHAR(30) NULL,
+  `description` VARCHAR(200) NULL,
+  `acl_resources` TEXT NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- -----------------------------------------------------------------------------
+-- INSERTIONS
+-- -----------------------------------------------------------------------------
+ALTER TABLE `groups`
+    ADD INDEX (`parent`),
+    ADD FOREIGN KEY (`parent`) REFERENCES `groups`(`name`) ON DELETE SET NULL ON UPDATE CASCADE;
+-- hardcoded roles
+INSERT INTO `groups`
+    (`name`, `parent`)
+VALUES
+    ('superadmin', NULL),
+    ('guest', NULL);
 
 /*
  *******************************************************************************
@@ -81,10 +112,10 @@ ALTER TABLE `users`
 -- create table `user_bookmarks`
 DROP TABLE IF EXISTS `user_bookmarks`;
 CREATE TABLE IF NOT EXISTS `user_bookmarks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `user_name` varchar(30) NOT NULL,
-  `label` varchar(50) NOT NULL,
-  `url` varchar(100) NOT NULL
+  `id` INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `user_name` VARCHAR(30) NOT NULL,
+  `label` VARCHAR(50) NOT NULL,
+  `url` VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*
@@ -162,20 +193,13 @@ ALTER TABLE `page_nodes`
  *******************************************************************************
  */
 -- -----------------------------------------------------------------------------
--- USERS
--- -----------------------------------------------------------------------------
--- drop and (re-)create primary keys
-ALTER TABLE `users`
-   DROP PRIMARY KEY;
-ALTER TABLE `users`
-   ADD PRIMARY KEY (`name`);
--- -----------------------------------------------------------------------------
 -- PAGES
 -- -----------------------------------------------------------------------------
 -- add indexes on `parent_id` and `user_name`
 ALTER TABLE `pages`
     ADD INDEX `fk_parent_page` (`parent_id` ASC),
     ADD INDEX `fk_page_author` (`user_name` ASC),
+    ADD UNIQUE (`namespace`, `name`),
     ADD CONSTRAINT `fk_page_author` FOREIGN KEY (`user_name`) REFERENCES `users`(`name`) ON DELETE NO ACTION ON UPDATE CASCADE;
 -- -----------------------------------------------------------------------------
 -- PAGE_NODES
@@ -258,6 +282,7 @@ UPDATE `pages`
         (SELECT `id`, `name` FROM `users` GROUP BY `id`) AS `users` ON `pages`.`author_id` = `users`.`id`
     SET
         `pages`.`user_name` = `users`.`name`;
+
 -- -----------------------------------------------------------------------------
 -- PAGE_NODES
 -- -----------------------------------------------------------------------------
@@ -265,6 +290,18 @@ UPDATE `pages`
 DELETE FROM `page_nodes`
     WHERE
         SUBSTRING_INDEX(`parent_id`, '_', 1) = 'user';
+-- drop the rows where `content_type` equals 'bookmark'
+DELETE FROM `page_nodes`
+    WHERE
+        `content_type` = 'bookmark';
+-- drop the rows where `node` equals 'id'
+DELETE FROM `page_nodes`
+    WHERE
+        `node_type` = 'id';
+-- drop the rows where `content` is empty
+DELETE FROM `page_nodes`
+    WHERE
+        `content` = '';
 -- add page ids
 UPDATE `page_nodes`
     SET
@@ -321,6 +358,7 @@ ALTER TABLE `pages`
     DROP `author_id`,
     DROP `related_pages`,
     DROP `is_home_page`,
+    DROP `label`,
     DROP `design`;
 -- drop column `page_nodes`.`content_type` and `parent_id`
 ALTER TABLE `page_nodes`
@@ -329,7 +367,9 @@ ALTER TABLE `page_nodes`
     DROP `parent_id`;
 -- drop column `users`.`id`
 ALTER TABLE `users`
-    DROP `id`;
+    DROP `id`,
+    ADD PRIMARY KEY (`name`),
+    DROP INDEX `name`;
 -- remove entries with `node_type` = 'headline' or 'label'
 DELETE FROM `page_nodes`
     WHERE
@@ -344,6 +384,12 @@ DELETE FROM `page_nodes`
  * INDEXES, FOREIGN KEYS
  *******************************************************************************
  */
+-- -----------------------------------------------------------------------------
+-- USERS
+-- -----------------------------------------------------------------------------
+-- add foreign key
+ALTER TABLE `users`
+    ADD CONSTRAINT `fk_user_roles` FOREIGN KEY (`role`) REFERENCES `groups`(`name`) ON DELETE SET NULL ON UPDATE CASCADE;
 -- -----------------------------------------------------------------------------
 -- USER_BOOKMARKS
 -- -----------------------------------------------------------------------------
@@ -361,9 +407,11 @@ ALTER TABLE `user_notes`
 -- -----------------------------------------------------------------------------
 -- add index to be able to set a foreign key later
 ALTER TABLE `page_nodes`
-    ADD PRIMARY KEY (`page_id`, `node_type`, `language`),
+    ADD PRIMARY KEY (`page_id`, `node_type`, `language`);
+/*
+ALTER TABLE `page_nodes`
     ADD CONSTRAINT `fk_page_nodes` FOREIGN KEY (`page_id`) REFERENCES `pages`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+*/
 /*
  *******************************************************************************
  * OPTIMIZE
