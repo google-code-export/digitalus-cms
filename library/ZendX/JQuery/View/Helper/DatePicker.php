@@ -15,9 +15,9 @@
  * @category    ZendX
  * @package     ZendX_JQuery
  * @subpackage  View
- * @copyright   Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license     http://framework.zend.com/license/new-bsd     New BSD License
- * @version     $Id: DatePicker.php 14483 2009-03-25 17:48:17Z beberlei $
+ * @version     $Id: DatePicker.php 20165 2010-01-09 18:57:56Z bkarwin $
  */
 
 /**
@@ -36,7 +36,7 @@ require_once "ZendX/JQuery/View/Helper/UiWidget.php";
  * @uses 	   Zend_View_Helper_FormText
  * @package    ZendX_JQuery
  * @subpackage View
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class ZendX_JQuery_View_Helper_DatePicker extends ZendX_JQuery_View_Helper_UiWidget
