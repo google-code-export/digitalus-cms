@@ -15,9 +15,9 @@
  * @category    ZendX
  * @package     ZendX_JQuery
  * @subpackage  View
- * @copyright   Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license     http://framework.zend.com/license/new-bsd     New BSD License
- * @version     $Id: AccordionContainer.php 14483 2009-03-25 17:48:17Z beberlei $
+ * @version     $Id: AccordionContainer.php 20165 2010-01-09 18:57:56Z bkarwin $
  */
 
 /**
@@ -31,14 +31,20 @@ require_once "ZendX/JQuery/View/Helper/UiWidget.php";
  * @uses 	   Zend_Json
  * @package    ZendX_JQuery
  * @subpackage View
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
   */
 class ZendX_JQuery_View_Helper_AccordionContainer extends ZendX_JQuery_View_Helper_UiWidget
 {
+    /**
+     * @var array
+     */
     protected $_panes = array();
 
-    protected $_elementHtmlTemplate = '<h3><a href="#">%s</a></h3><div>%s</div>';
+    /**
+     * @var string
+     */
+    protected $_elementHtmlTemplate = null;
 
     /**
      * Add Accordion Pane for the Accordion-Id
@@ -83,10 +89,10 @@ class ZendX_JQuery_View_Helper_AccordionContainer extends ZendX_JQuery_View_Help
             $attribs['id'] = $id;
         }
 
+        $html = "";
         if(isset($this->_panes[$id])) {
-            $html = "";
             foreach($this->_panes[$id] AS $element) {
-                $html .= sprintf($this->_elementHtmlTemplate, $element['name'], $element['content']). PHP_EOL;
+                $html .= sprintf($this->getElementHtmlTemplate(), $element['name'], $element['content']).PHP_EOL;
             }
 
             if(count($params) > 0) {
@@ -102,16 +108,64 @@ class ZendX_JQuery_View_Helper_AccordionContainer extends ZendX_JQuery_View_Help
             );
             $this->jquery->addOnLoad($js);
 
+            $html = $this->getAccordionTemplate($attribs, $html);
+        }
+        return $html;
+    }
+
+    /**
+     * @param  array $attribs
+     * @param  string $html
+     * @return string
+     */
+    protected function getAccordionTemplate($attribs, $html)
+    {
+        if(version_compare($this->jquery->getUiVersion(), "1.7.0") >= 0) {
             $html = '<div'
                   . $this->_htmlAttribs($attribs)
                   . '>'.PHP_EOL
                   . $html
                   . '</div>'.PHP_EOL;
-            return $html;
-            unset($this->_panes[$id]);
+        } else {
+            $html = '<ul'
+                  . $this->_htmlAttribs($attribs)
+                  . '>'.PHP_EOL
+                  . $html
+                  . '</ul>'.PHP_EOL;
         }
-        return '';
+        return $html;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getElementHtmlTemplate()
+    {
+        if($this->_elementHtmlTemplate == null) {
+            if(version_compare($this->jquery->getUiVersion(), "1.7.0") >= 0) {
+                $this->_elementHtmlTemplate = '<h3><a href="#">%s</a></h3><div>%s</div>';
+            } else {
+                $this->_elementHtmlTemplate = '<li class="ui-accordion-group"><a href="#" class="ui-accordion-header">%s</a><div class="ui-accordion-content">%s</div></li>';
+            }
+        }
+        return $this->_elementHtmlTemplate;
+    }
+
+    /**
+     * Set the accordion element template
+     *
+     * @param  string $htmlTemplate
+     * @return ZendX_JQuery_View_Helper_AccordionContainer
+     */
+    public function setElementHtmlTemplate($htmlTemplate)
+    {
+        if(substr_count($htmlTemplate, '%s') != 2) {
+            require_once "ZendX/JQuery/View/Exception.php";
+            throw new ZendX_JQuery_View_Exception(
+                "Accordion Container HTML Template requires two sprintf() string replace markers '%s'."
+            );
+        }
+        $this->_elementHtmlTemplate = $htmlTemplate;
+        return $this;
     }
 }
-
-
