@@ -62,7 +62,8 @@ class Mod_Login_IndexController extends Digitalus_Controller_Action
      */
     public function indexAction()
     {
-        $challenge = new Login_Challenge();
-        $challenge->createTable();
+        if (!Digitalus_Db_Table::tableExists('challenge')) {
+            $this->view->errorMessage = 'For the login module to work properly, the challenge database must be installed first.';
+        }
     }
 }

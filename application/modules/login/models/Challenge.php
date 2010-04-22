@@ -84,7 +84,7 @@ class Login_Challenge extends Digitalus_Db_Table
      */
     public function createTable()
     {
-        if (!Digitalus_Db_Table::tableExists($this->_name)) {
+        if (!$this->isDbInstalled()) {
             $sql = "CREATE TABLE `" . $this->_name . "` (
                     `challenge_id` VARCHAR(50) NOT NULL,
                     `user_name` VARCHAR(30) NOT NULL,

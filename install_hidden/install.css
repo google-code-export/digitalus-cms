@@ -47,15 +47,15 @@ li {
 }
 
 .passed {
-    background: url(../images/icons/flag_green.png) no-repeat;
+    background: url('../images/icons/silk/flag_green.png') no-repeat;
 }
 
 .warning {
-    background: url(../images/icons/flag_yellow.png) no-repeat;
+    background: url('../images/icons/silk/flag_yellow.png') no-repeat;
 }
 
 .error {
-    background: url(../images/icons/flag_red.png) no-repeat;
+    background: url('../images/icons/silk/flag_red.png') no-repeat;
 }
 
 label.error {
