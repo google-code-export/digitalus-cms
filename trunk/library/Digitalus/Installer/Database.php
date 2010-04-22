@@ -87,7 +87,6 @@ class Digitalus_Installer_Database
         $this->_createPages();
         $this->_createPageNodes();
         $this->_createTrafficLog();
-        $this->_createErrorLog();
         $this->_createUsers();
         $this->_createUserBookmarks();
         $this->_createUserNotes();
@@ -97,7 +96,7 @@ class Digitalus_Installer_Database
 
     public function testInstallation()
     {
-        $tables = array('data', 'page_nodes', 'user_bookmarks', 'user_notes', 'error_log', 'pages', 'traffic_log', 'users', 'groups');
+        $tables = array('data', 'page_nodes', 'user_bookmarks', 'user_notes', 'pages', 'traffic_log', 'users', 'groups');
         foreach ($tables as $table) {
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
             if (!$this->tableExists($table)) {
@@ -141,7 +140,6 @@ class Digitalus_Installer_Database
         $table = 'groups';
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
         $sql = "CREATE TABLE `" . $table . "` (
-                    CREATE TABLE IF NOT EXISTS `groups` (
                     `name` varchar(30) NOT NULL,
                     `parent` varchar(30) DEFAULT NULL,
                     `label` varchar(30) DEFAULT NULL,
@@ -252,7 +250,7 @@ class Digitalus_Installer_Database
 
     private function _createUserNotes()
     {
-        $table = 'user_bookmarks';
+        $table = 'user_notes';
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
         $sql = "CREATE TABLE `" . $table . "` (
                     `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -270,16 +268,16 @@ class Digitalus_Installer_Database
         $users          = Digitalus_Db_Table::getTableName('users',           $this->_config['prefix']);
         $userBookmarks  = Digitalus_Db_Table::getTableName('user_bookmarks',  $this->_config['prefix']);
         $userNotes      = Digitalus_Db_Table::getTableName('user_notes',      $this->_config['prefix']);
-        $sql = "ALTER TABLE `" . $pages . "` (
+        $sql = "ALTER TABLE `" . $pages . "`
                     ADD CONSTRAINT `fk_page_author` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE NO ACTION ON UPDATE CASCADE;";
         $this->_db->query($sql);
-        $sql = "ALTER TABLE `" . $users . "` (
+        $sql = "ALTER TABLE `" . $users . "`
                     ADD CONSTRAINT `fk_user_roles` FOREIGN KEY (`role`) REFERENCES `groups` (`name`) ON DELETE SET NULL ON UPDATE CASCADE;";
         $this->_db->query($sql);
-        $sql = "ALTER TABLE `" . $userBookmarks . "` (
+        $sql = "ALTER TABLE `" . $userBookmarks . "`
                     ADD CONSTRAINT `fk_user_bookmarks` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;";
         $this->_db->query($sql);
-        $sql = "ALTER TABLE `" . $userNotes . "` (
+        $sql = "ALTER TABLE `" . $userNotes . "`
                     ADD CONSTRAINT `fk_user_notes` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;";
         $this->_db->query($sql);
     }
@@ -287,22 +285,34 @@ class Digitalus_Installer_Database
     private function _populate()
     {
         $data       = Digitalus_Db_Table::getTableName('data',      $this->_config['prefix']);
-        $groups     = Digitalus_Db_Table::getTableName('users',     $this->_config['prefix']);
+        $groups     = Digitalus_Db_Table::getTableName('groups',    $this->_config['prefix']);
+        $queries = array(
+            'INSERT INTO `' . $data . '` VALUES (?, ?, ?)' => array(
+                array(1, 'site_settings', "<?xml version=\"1.0\"?>\n<settings><name>Digitalus CMS Site</name><online>1</online><addMenuLinks>0</addMenuLinks><default_locale/><admin_language>en</admin_language><default_language>en</default_language><default_charset>utf-8</default_charset><default_timezone>Europe/Berlin</default_timezone><default_date_format/><default_currency_format/><default_email/><default_email_sender/><use_smtp_mail>0</use_smtp_mail><smtp_host/><smtp_username/><smtp_password/><google_tracking/><google_verify/><title_separator> - </title_separator><add_menu_links>1</add_menu_links><publish_pages>11</publish_pages><doc_type>XHTML1_TRANSITIONAL</doc_type><home_page>3</home_page><page_not_found>2</page_not_found><offline_page>1</offline_page><meta_description/><meta_keywords/><xml_declaration/></settings>\n"),
+            ),
+            'INSERT INTO `' . $groups . '` VALUES (?, ?, ?, ?, ?)' => array(
+                array('superadmin', NULL,    'Super Administrator', NULL, NULL),
+                array('admin',      'guest', 'Site Administrator',  NULL, NULL),
+                array('guest',      NULL,    'Guest',               NULL, NULL),
+            ),
+        );
+        foreach ($queries as $sql => $inserts) {
+            $stmt = $this->_db->prepare($sql);
+            foreach ($inserts as $data) {
+                $stmt->execute($data);
+            }
+        }
+    }
+
+    public function insertPages()
+    {
         $pages      = Digitalus_Db_Table::getTableName('pages',     $this->_config['prefix']);
         $pageNodes  = Digitalus_Db_Table::getTableName('pageNodes', $this->_config['prefix']);
         $queries = array(
-            'INSERT INTO `' . $data . '` VALUES (?, ?)' => array(
-                array('site_settings', "<?xml version=\"1.0\"?>\n<settings><name>Digitalus CMS Site</name><online>1</online><addMenuLinks>0</addMenuLinks><default_locale/><admin_language>en</admin_language><default_language>en</default_language><default_charset>utf-8</default_charset><default_timezone>Europe/Berlin</default_timezone><default_date_format/><default_currency_format/><default_email/><default_email_sender/><use_smtp_mail>0</use_smtp_mail><smtp_host/><smtp_username/><smtp_password/><google_tracking/><google_verify/><title_separator> - </title_separator><add_menu_links>1</add_menu_links><publish_pages>11</publish_pages><doc_type>XHTML1_TRANSITIONAL</doc_type><home_page>3</home_page><page_not_found>2</page_not_found><offline_page>1</offline_page><meta_description/><meta_keywords/><xml_declaration/></settings>\n"),
-            ),
-            'INSERT INTO `' . $groups . '` VALUES (?, ?, ?)' => array(
-                array('superadmin', NULL,    'Super Administrator'),
-                array('admin',      'guest', 'Site Administrator'),
-                array('guest',      NULL,    'Guest'),
-            ),
-            'INSERT INTO `' . $pages . '` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)' => array(
-                array(1, 0, 'administrator', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 1, 'Site Offline', 'Site Offline', 'content', 'default_default', 1, 0),
-                array(2, 0, 'administrator', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 1, '404 Page',     '404 Page',     'content', 'default_default', 0, 0),
-                array(3, 0, 'administrator', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 1, 'Home',         'Home',         'content', 'default_default', 2, 1),
+            'INSERT INTO `' . $pages . '` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)' => array(
+                array(1, 0, 'administrator', time(), time(), time(), time(), 1, 'Site Offline', 'Site Offline', 'content', 'default_default', 1, 0),
+                array(2, 0, 'administrator', time(), time(), time(), time(), 1, '404 Page',     '404 Page',     'content', 'default_default', 0, 0),
+                array(3, 0, 'administrator', time(), time(), time(), time(), 1, 'Home',         'Home',         'content', 'default_default', 2, 1),
             ),
             'INSERT INTO `' . $pageNodes . '` VALUES (?, ?, ?, ?, ?, ?)' => array(
                 array(1, 'errorsite',  'en', 'Site Offline', 'Site Offline',           "Sorry, our site is currently offline for maintenance."),
