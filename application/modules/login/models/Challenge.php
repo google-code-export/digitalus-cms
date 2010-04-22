@@ -36,6 +36,8 @@ class Login_Challenge extends Digitalus_Db_Table
 {
     const validTimePeriod = 172800;        // the challenge is valid for 2 days: 2d = 2*24*3600 = 172800s
 
+    const DB_NAME = 'challenge';
+
     /**
      * The table name.
      *
@@ -75,6 +77,14 @@ class Login_Challenge extends Digitalus_Db_Table
         parent::__construct($config);
         $this->_createChallengeId();
         $this->_cleanUpDb();
+    }
+
+    public static function isDbInstalled()
+    {
+        if (Digitalus_Db_Table::tableExists(Digitalus_Db_Table::getTableName(self::DB_NAME))) {
+            return true;
+        }
+        return false;
     }
 
     /**
