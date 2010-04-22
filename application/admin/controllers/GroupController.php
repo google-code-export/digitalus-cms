@@ -77,24 +77,28 @@ class Admin_GroupController extends Digitalus_Controller_Action
     public function openAction()
     {
         $groupName = $this->_request->getParam('groupname');
-        $form     = new Admin_Form_Group();
-        $form->setAction($this->baseUrl . '/admin/group/open/groupname/' . $groupName);
         $mdlGroup = new Model_Group();
         $mdlPage  = new Model_Page();
+        $form     = new Admin_Form_Group();
         $elmGroupName = $form->getElement('name');
         $elmGroupName->addValidators(array(
-            array('GroupnameExists', true, array('exclude' => $groupName)),
+            array('GroupnameExistsNot', true, array('exclude' => $groupName)),
         ));
         $form->setModel($mdlGroup);
         $form->populateFromModel($groupName);
+        $form->setAction($this->baseUrl . '/admin/group/open/groupname/' . $groupName);
 
-        if ($this->_request->isPost() && $form->isValid($_POST)) {
-            $form->setModel($mdlGroup);
-            //update the groups permissions
-            $resources = Digitalus_Filter_Post::raw('acl_resources');
-            $groupName = Digitalus_Filter_Post::get('name');
-            $mdlGroup->updateAclResources($groupName, $resources);
-            $group = $form->update();
+        $aclForm = new Admin_Form_GroupAcl();
+        $aclForm->setGroupName($groupName);
+        $aclForm->setAction($this->baseUrl . '/admin/group/copy-acl');
+
+        if ($this->_request->isPost() && $form->isValid($_POST) && !isset($_POST['update'])) {
+            if ($form->update($groupName)) {
+                //update the groups permissions
+                $groupName = Digitalus_Filter_Post::get('name');
+                $resources = Digitalus_Filter_Post::raw('acl_resources');
+                $mdlGroup->updateAclResources($groupName, $resources);
+            }
         }
 
         if (!empty($groupName) && '' != $groupName) {
@@ -128,7 +132,8 @@ class Admin_GroupController extends Digitalus_Controller_Action
             // remove current group form parents list
             $form->getElement('parent')->removeMultiOption($groupName);
         }
-        $this->view->form = $form;
+        $this->view->form    = $form;
+        $this->view->aclForm = $aclForm;
 
         $breadcrumbLabel = $this->view->getTranslation('Open Group') . ': ' . $groupName;
         $this->view->breadcrumbs[$breadcrumbLabel] = $this->baseUrl . '/admin/group/open/groupname/' . $groupName;
@@ -152,13 +157,10 @@ class Admin_GroupController extends Digitalus_Controller_Action
         $mdlGroup = new Model_Group();
         $form->setModel($mdlGroup);
         $form->setAction($this->baseUrl . '/admin/group/create');
-        $form->removeElement('admin_resources');
-        $form->removeElement('module_resources');
-        $form->removeElement('public_resources');
-        $form->removeElement('update_permissions');
-        $form->removeDisplayGroup('adminAclGroup');
-        $form->removeDisplayGroup('moduleAclGroup');
-        $form->removeDisplayGroup('publicAclGroup');
+        $form->getElement('name')->addValidators(array(
+            array('GroupnameExistsNot', true),
+        ));
+        $form->onlyCreateActionElements();
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
             $values = $form->getValues();

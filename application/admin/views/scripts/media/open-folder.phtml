@@ -43,7 +43,7 @@
     $data = array(
         'filepath'  => $this->filesystemPath,
         'mediapath' => $this->mediaPath,
-        'label'     => $label
+        'label'     => $this->label
     );
     echo $this->partial('media/partials/rename-folder.phtml', $data);?>
 </fieldset><?php

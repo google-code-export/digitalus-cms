@@ -64,7 +64,6 @@ class Admin_Form_User extends Digitalus_Form
             'validators'    => array(
                 array('NotEmpty', true),
                 array('StringLength', true, array(4, Model_User::USERNAME_LENGTH)),
-                array('UsernameExists'),
                 array('Regex', true, array(
                     'pattern'  => Model_User::USERNAME_REGEX,
                     'messages' => array('regexNotMatch' => Model_User::USERNAME_REGEX_NOTMATCH),
@@ -139,6 +138,7 @@ class Admin_Form_User extends Digitalus_Form
         $adminRole = $view->selectGroup('role', null, null, null, 'superadmin', false);
         $adminRole->setOptions(array(
             'label'         => $view->getTranslation('Admin Role'),
+            'required'      => true,
         ));
 
         // create new element
@@ -146,6 +146,9 @@ class Admin_Form_User extends Digitalus_Form
             'label'         => $view->getTranslation('Password'),
             'required'      => true,
             'filters'       => array('StringTrim'),
+            'validators'    => array(
+                array('NotEmpty', true),
+            ),
             'attribs'       => array('size' => 50),
         ));
 
@@ -154,10 +157,11 @@ class Admin_Form_User extends Digitalus_Form
             'label'         => $view->getTranslation('Confirm Password'),
             'required'      => true,
             'filters'       => array('StringTrim'),
-            'attribs'       => array('size' => 50),
             'validators'    => array(
-                array('IdenticalField', true, 'password'),
-            )
+                array('NotEmpty', true),
+                array('IdenticalField', true, array('password', 'Confirm Password')),
+            ),
+            'attribs'       => array('size' => 50),
         ));
 
         $captcha = $this->createElement('captcha', 'captcha', array(
@@ -208,5 +212,28 @@ class Admin_Form_User extends Digitalus_Form
             'FormElements',
             'Fieldset',
         ));
+    }
+
+    public function onlyOpenActionElements()
+    {
+        $this->removeElement('update_password');
+        $this->removeElement('password');
+        $this->removeElement('password_confirm');
+        $this->removeElement('captcha');
+    }
+
+    public function onlyCreateActionElements()
+    {
+        $this->removeElement('update_password');
+        $this->removeElement('captcha');
+    }
+
+    public function onlyIndexIndexActionElements()
+    {
+        $this->removeElement('name');
+        $this->removeElement('openid');
+        $this->removeElement('active');
+        $this->removeElement('role');
+        $this->removeElement('captcha');
     }
 }

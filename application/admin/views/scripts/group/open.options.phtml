@@ -16,23 +16,4 @@ echo $this->htmlList($linksArray, null, array('class'=>'idTabs padding-10'), fal
 <h3><?php echo $this->getTranslation('Copy Permissions');?></h3>
 <p class="padding-10"><?php echo $this->getTranslation("If you have another group that already has the same permissions as this group you can copy that group's role.");?></p><?php
 
-$form = new Digitalus_Form();
-
-$hidden = $form->createElement('hidden', 'name', array(
-    'value'     => $this->group->name,
-));
-
-$groups = $this->selectGroup('from_groupname', null, null, $this->group->name, 'superadmin');
-
-$submit = $form->createElement('submit', 'update', array(
-    'label'     => $this->getTranslation('Copy Permissions'),
-    'attribs'   => array('class' => 'submit'),
-));
-
-$form->setAction($this->getBaseUrl() . '/admin/group/copy-acl')
-     ->setAttribs(array('class' => 'padding-10'))
-     ->addElement($hidden)
-     ->addElement($groups)
-     ->addElement($submit);
-
-echo $form;
+echo $this->aclForm;

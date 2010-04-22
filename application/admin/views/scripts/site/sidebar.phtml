@@ -25,8 +25,10 @@ foreach ($users as $user) {
     if (Model_Group::GUEST_ROLE != $user->name) {
         if ($user->role == 'superadmin') {
             $icon = 'user_suit.png';
+        } elseif ($mdlUser->isActive($user->name)) {
+            $icon = 'user_green.png';
         } else {
-            $icon = 'user.png';
+            $icon = 'user_red.png';
         }
         $usersArray[] = $this->link($user->name . ' (' . $user->first_name . ' ' . $user->last_name . ')', '/admin/user/open/username/' . $user->name, $icon);
     }

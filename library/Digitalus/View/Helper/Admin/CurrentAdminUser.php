@@ -53,10 +53,10 @@ class  Digitalus_View_Helper_Admin_CurrentAdminUser extends Zend_View_Helper_Abs
             $xhtml = '<ul id="' . $id . '">'
                    . '<li title="' . $user->first_name . ' ' . $user->last_name . '">'
                    . '    ' . $this->view->getTranslation('Current User') . ': ' . $user->name
-                   . '</li>
-                    <li>' . $this->view->getTranslation('Role') . ': ' . $user->role . '</li>
-                    <li><a href="' . $this->view->getBaseUrl() . '/admin/auth/logout/">' . $this->view->getTranslation('Log Out') . '</a></li>
-                </ul>';
+                   . '</li>'
+                   . '<li>' . $this->view->getTranslation('Role') . ': ' . $user->role . '</li>'
+                   . '<li><a href="' . $this->view->getBaseUrl() . '/admin/auth/logout/">' . $this->view->getTranslation('Log Out') . '</a></li>'
+                   . '</ul>';
             return $xhtml;
         }
         return false;

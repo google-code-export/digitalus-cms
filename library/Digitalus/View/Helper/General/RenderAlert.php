@@ -38,6 +38,8 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  * @uses        viewHelper Digitalus_View_Helper_GetTranslation
+ * @uses        Digitalus_View_Error
+ * @uses        Digitalus_View_Message
  */
 class Digitalus_View_Helper_General_RenderAlert extends Zend_View_Helper_Abstract
 {
@@ -46,22 +48,22 @@ class Digitalus_View_Helper_General_RenderAlert extends Zend_View_Helper_Abstrac
      */
     public function renderAlert()
     {
-        $m = new Digitalus_View_Message();
-        $ve = new Digitalus_View_Error();
-        $alert = false;
+        $m       = new Digitalus_View_Message();
+        $ve      = new Digitalus_View_Error();
+        $alert   = false;
         $message = null;
-        $verror = null;
+        $verror  = null;
 
         $alert = null;
 
         if ($ve->hasErrors()) {
             $verror = '<p>'. $this->view->getTranslation('The following errors have occurred') . ':</p>' . $this->view->htmlList($ve->get());
-            $alert .= '<fieldset><legend>'. $this->view->getTranslation('Errors') . '</legend>' . $verror . '</fieldset>';
+            $alert .= '<fieldset class="warning"><legend>'. $this->view->getTranslation('Errors') . '</legend>' . $verror . '</fieldset>';
         }
 
         if ($m->hasMessage()) {
             $message .= '<p>' . $m->get() . '</p>';
-            $alert   .= '<fieldset><legend>'. $this->view->getTranslation('Message') . '</legend>' . $message . '</fieldset>';
+            $alert   .= '<fieldset class="note"><legend>'. $this->view->getTranslation('Message') . '</legend>' . $message . '</fieldset>';
         }
 
         //after this renders it clears the errors and messages

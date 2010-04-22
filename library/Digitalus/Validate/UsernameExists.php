@@ -38,10 +38,10 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Digitalus_Validate_UsernameExists extends Zend_Validate_Abstract
 {
-    const EXISTS = 'usernameExists';
+    const NOT_EXISTS = 'notUsernameExists';
 
     protected $_messageTemplates = array(
-        self::EXISTS => "Another user already exists with Your desired username '%value%'! Please choose a different one!",
+        self::NOT_EXISTS => "The given user name %value% doesn't exist in the database",
     );
 
     /**
@@ -101,16 +101,14 @@ class Digitalus_Validate_UsernameExists extends Zend_Validate_Abstract
 
     public function isValid($value)
     {
+        $value = (string)$value;
         $this->_setValue($value);
 
-        $isValid = true;
-
         $mdlUser = new Model_User();
-
         if ($mdlUser->userExists($value, $this->getExclude())) {
-            $this->_error(self::EXISTS);
-            $isValid = false;
+            return true;
         }
-        return $isValid;
+        $this->_error(self::NOT_EXISTS);
+        return false;
     }
 }

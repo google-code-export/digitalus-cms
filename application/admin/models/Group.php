@@ -182,6 +182,12 @@ class Model_Group extends Digitalus_Db_Table
             $exclude = (string)$exclude;
             unset($groupsArray[$exclude]);
         }
+        if (!isset($groupsArray[self::GUEST_ROLE])) {
+            $groupsArray[self::GUEST_ROLE] = array(
+                'name'  => self::GUEST_ROLE,
+                'label' => self::GUEST_ROLE,
+            );
+        }
         return $groupsArray;
     }
 
@@ -217,7 +223,7 @@ class Model_Group extends Digitalus_Db_Table
      * This function checks if a group already exists
      *
      * @param  string  $groupName  The name to check for
-     * @param  string  $exclude   Groupnames to exclude from check
+     * @param  string  $exclude    Groupnames to exclude from check
      * @return boolean
      */
     public function groupExists($groupName, $exclude = null)
@@ -226,10 +232,19 @@ class Model_Group extends Digitalus_Db_Table
         if (!is_array($exclude)) {
             $exclude = array($exclude);
         }
-        $groupNames = $this->getGroupNamesArray();
-        if (in_array($groupName, $groupNames) && !in_array($groupName, $exclude)) {
+
+        $where[] = $this->_db->quoteInto('LOWER(name) = ?', $groupName);
+        foreach ($exclude as $exclusion) {
+            $exclusion = trim($exclusion);
+            if (isset($exclusion) && !empty($exclusion) && '' != $exclusion) {
+                $where[] = $this->_db->quoteInto('LOWER(name) != ?', $exclusion);
+            }
+        }
+        $result = $this->fetchAll($where, null, 1);
+        if ($result->count() > 0) {
             return true;
         }
         return false;
     }
+
 }

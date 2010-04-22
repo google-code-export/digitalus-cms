@@ -1,0 +1,9 @@
+<?php
+// error messages
+if (!empty($this->error)) {
+    echo '<p class="warning">' . $this->error . '</p>';
+}
+// success messages
+if (!empty($this->message)) {
+    echo '<p class="note">' . $this->message . '</p>';
+}

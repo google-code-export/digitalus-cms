@@ -42,7 +42,7 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
 {
     public function renderFileBrowser($parentId, $link, $basePath = null, $level = 0,
                                       $id = 'fileTree', $withRoot = false, $current = null,
-                                      $exclude = null)
+                                      $exclude = null, $translate = true)
     {
         $links = array();
         $tree = new Model_Page();
@@ -77,7 +77,7 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
             if ($child->id == $exclude) {
                 $links[] = $this->_getExcludeElement($label, $submenu, $icon);
             } else {
-                $links[] = '<li class="menuItem">' . $this->view->link($label, $link . $child->id, $icon) . $submenu . '</li>';
+                $links[] = '<li class="menuItem">' . $this->view->link($label, $link . $child->id, $icon, null, null, null, $translate) . $submenu . '</li>';
             }
         }
 

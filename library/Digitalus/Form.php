@@ -139,12 +139,15 @@ class Digitalus_Form extends Zend_Form
      * @param array $values
      * @return mixed
      */
-    public function update($valueOverride = array())
+    public function update($primaryIndex = null, $valueOverride = array())
     {
-       if ($this->isValid($_POST)) {
+        if ($this->isValid($_POST)) {
             $values = $this->getValues();
-            $primaryIndex = $this->_getPrimaryIndex();
-            $row = $this->_model->find($values[$primaryIndex])->current();
+            if (!isset($primaryIndex) || empty($primaryIndex)) {
+                $primaryIndex = $this->_getPrimaryIndex();
+                $primaryIndex = $values[$primaryIndex];
+            }
+            $row = $this->_model->find($primaryIndex)->current();
             if ($row) {
                 foreach ($values as $field => $value) {
                     $this->_setField($field, $value, $row, $valueOverride);

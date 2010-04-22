@@ -15,7 +15,7 @@
  * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: User.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
+ * @version     $Id: Group.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.10.0
  */
@@ -59,7 +59,6 @@ class Admin_Form_Group extends Digitalus_Form
             'validators'    => array(
                 array('NotEmpty', true),
                 array('StringLength', true, array(4, Model_Group::GROUPNAME_LENGTH)),
-                array('GroupnameExists'),
                 array('Regex', true, array(
                     'pattern'  => Model_Group::GROUPNAME_REGEX,
                     'messages' => array('regexNotMatch' => Model_Group::GROUPNAME_REGEX_NOTMATCH),
@@ -147,5 +146,16 @@ class Admin_Form_Group extends Digitalus_Form
                  'publicAclGroup',
                  array('legend' => $view->getTranslation('Public Permissions'), 'id' => 'public_permissions')
              );
+    }
+
+    public function onlyCreateActionElements()
+    {
+        $this->removeElement('admin_resources');
+        $this->removeElement('module_resources');
+        $this->removeElement('public_resources');
+        $this->removeElement('update_permissions');
+        $this->removeDisplayGroup('adminAclGroup');
+        $this->removeDisplayGroup('moduleAclGroup');
+        $this->removeDisplayGroup('publicAclGroup');
     }
 }

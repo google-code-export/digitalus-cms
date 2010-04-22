@@ -11,9 +11,6 @@ require_once 'Zend/Loader/Autoloader.php';
 $loader = Zend_Loader_Autoloader::getInstance();
 $loader->registerNamespace('Digitalus_');
 
-// The Digitalus_Installer class manages the installation resources
-$installer = new Digitalus_Installer();
-
 // Set up view
 $view = new Zend_View();
 $view->setScriptPath('./install/views');
@@ -46,6 +43,9 @@ Zend_Registry::set('Zend_Translate', $adapter);
 
 #$view->translate()->setLocale($validLanguages[$language]);
 $view->translate()->setLocale($locale);
+
+// The Digitalus_Installer class manages the installation resources
+$installer = new Digitalus_Installer();
 
 if (!$installer->isInstalled()) {
     // Fetch the current step

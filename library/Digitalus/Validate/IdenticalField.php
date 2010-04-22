@@ -31,19 +31,16 @@ class Digitalus_Validate_IdenticalField extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::MISSING_FIELD_NAME  =>
-        'DEVELOPMENT ERROR: Field name to match against was not provided.',
-        self::INVALID_FIELD_NAME  =>
-        'DEVELOPMENT ERROR: The field "%fieldName%" was not provided to match against.',
-        self::NOT_MATCH =>
-        'Does not match %fieldTitle%.'
+        self::MISSING_FIELD_NAME => 'DEVELOPMENT ERROR: Field name to match against was not provided.',
+        self::INVALID_FIELD_NAME => 'DEVELOPMENT ERROR: The field "%fieldName%" was not provided to match against.',
+        self::NOT_MATCH          => 'Does not match %fieldTitle%.',
     );
 
     /**
      * @var array
      */
     protected $_messageVariables = array(
-        'fieldName' => '_fieldName',
+        'fieldName'  => '_fieldName',
         'fieldTitle' => '_fieldTitle'
     );
 
@@ -136,17 +133,17 @@ class Digitalus_Validate_IdenticalField extends Zend_Validate_Abstract
         $field = $this->getFieldName();
 
         if (empty($field)) {
-        $this->_error(self::MISSING_FIELD_NAME);
-        return false;
-        } else if (!isset($context[$field])) {
-        $this->_error(self::INVALID_FIELD_NAME);
-        return false;
-        } else if (is_array($context)) {
-        if ($value == $context[$field]) {
+            $this->_error(self::MISSING_FIELD_NAME);
+            return false;
+        } elseif (!isset($context[$field])) {
+            $this->_error(self::INVALID_FIELD_NAME);
+            return false;
+        } elseif (is_array($context)) {
+            if ($value == $context[$field]) {
+                return true;
+            }
+        } elseif (is_string($context) && ($value == $context)) {
             return true;
-        }
-        } else if (is_string($context) && ($value == $context)) {
-        return true;
         }
         $this->_error(self::NOT_MATCH);
         return false;

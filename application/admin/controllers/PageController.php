@@ -82,6 +82,11 @@ class Admin_PageController extends Digitalus_Controller_Action
         $pageForm->setAction($this->baseUrl . '/admin/page/new');
         $pageForm->setAttrib('class', $pageForm->getAttrib('class') . ' columnar');
 
+        $elmPageName = $pageForm->getElement('page_name');
+        $elmPageName->addValidators(array(
+            array('PagenameExistsNot', true),
+        ));
+
         $createPageGroup = $pageForm->getDisplayGroup('createPageGroup');
         $createPageGroup->setLegend($this->view->getTranslation('Create Page'));
 
@@ -162,7 +167,7 @@ class Admin_PageController extends Digitalus_Controller_Action
 
         $elmPageName = $form->getElement('name');
         $elmPageName->addValidators(array(
-            array('PagenameExists', true, array('exclude' => $currentPage->page->name)),
+            array('PagenameExistsNot', true, array('exclude' => $currentPage->page->name)),
         ));
 
         if (!is_object($currentPage)) {
@@ -179,7 +184,7 @@ class Admin_PageController extends Digitalus_Controller_Action
             $values = $form->getValues();
             unset($values['submit']);
             unset($values['form_instance']);
-            $page->edit($values);
+            $currentPage = $page->edit($values);
         } else {
             if ($currentPage->content) {
                 $data = $currentPage->content;

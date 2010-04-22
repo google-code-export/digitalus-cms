@@ -72,11 +72,7 @@ class Admin_IndexController extends Digitalus_Controller_Action
         $identity = $user->getCurrentUser();
 
         $form = new Admin_Form_User();
-        $form->removeElement('name');
-        $form->removeElement('openid');
-        $form->removeElement('active');
-        $form->removeElement('role');
-        $form->removeElement('captcha');
+        $form->onlyIndexIndexActionElements();
         $form->setAction($this->baseUrl . '/admin/user/update-my-account');
         $firstName = $form->getElement('first_name');
         $firstName->setValue($identity->first_name);

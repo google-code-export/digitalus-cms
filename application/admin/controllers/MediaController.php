@@ -107,13 +107,14 @@ class Admin_MediaController extends Digitalus_Controller_Action
         }
         if (isset($folderPathParts) && !empty($folderPathParts)) {
             $this->view->folderPathParts = $folderPathParts;
+            $this->view->label = array_pop($folderPathParts);
         }
 
         $pathToFolder = Digitalus_Toolbox_String::stripUnderscores($folder);
         $this->view->filesystemPath = $pathToFolder;
         $this->view->mediaPath = $folder;
-        $this->view->folders = Digitalus_Filesystem_Dir::getDirectories($this->_pathToMedia . '/' . $pathToFolder);
-        $this->view->files = Digitalus_Filesystem_File::getFilesByType($this->_pathToMedia . '/' . $pathToFolder, false, false, true);
+        $this->view->folders   = Digitalus_Filesystem_Dir::getDirectories($this->_pathToMedia . '/' . $pathToFolder);
+        $this->view->files     = Digitalus_Filesystem_File::getFilesByType($this->_pathToMedia . '/' . $pathToFolder, false, false, true);
         $this->view->breadcrumbs[$this->view->getTranslation('Open Folder') . ': ' . Digitalus_Toolbox_String::stripUnderscores($folder)] = $this->baseUrl . '/admin/media/open-folder/folder/' . $folder;
         $this->view->toolbarLinks = array();
 

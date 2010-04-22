@@ -38,12 +38,10 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Digitalus_Validate_PagenameExists extends Zend_Validate_Abstract
 {
-    const EXISTS  = 'pagenameExists';
-    const ISADMIN = 'isAdmin';
+    const NOT_EXISTS  = 'notPagenameExists';
 
     protected $_messageTemplates = array(
-        self::EXISTS  => "Another page with Your desired name '%value%' already exists! Please choose a different one!",
-        self::ISADMIN => "The page name must not be 'admin'. Please choose a different one!",
+        self::NOT_EXISTS  => "A page with the given page name '%value%' doesn't exist!",
     );
 
     /**
@@ -103,20 +101,14 @@ class Digitalus_Validate_PagenameExists extends Zend_Validate_Abstract
 
     public function isValid($value)
     {
+        $value = (string)$value;
         $this->_setValue($value);
 
-        $isValid = true;
-
         $mdlPage = new Model_Page();
-
         if ($mdlPage->pagenameExists($value, $this->getExclude())) {
-            $this->_error(self::EXISTS);
-            $isValid = false;
+            return true;
         }
-        if ('admin' == strtolower($value)) {
-            $this->_error(self::ISADMIN);
-            $isValid = false;
-        }
-        return $isValid;
+        $this->_error(self::NOT_EXISTS);
+        return false;
     }
 }
