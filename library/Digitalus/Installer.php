@@ -219,6 +219,7 @@ class Digitalus_Installer
             $this->_username,
             $this->_password
         );
+        $this->_db->insertPages();
         if ($userInserted) {
             $this->addMessage('Your admin account was successfully created');
             return true;

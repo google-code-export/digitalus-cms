@@ -830,6 +830,7 @@ class Model_Page extends Digitalus_Db_Table
         $select = $this->select();
         $select->from($this->_name, 'name');
         $result = $this->fetchAll($select);
+        $pageNames = array();
         foreach ($result as $name) {
             $pageNames[] = $name['name'];
         }
