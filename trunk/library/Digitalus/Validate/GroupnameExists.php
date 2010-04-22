@@ -17,7 +17,7 @@
  * @package     Digitalus_Validate
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: UpdateVersion110.php 677 2010-02-24 20:21:48Z lowtower@gmx.de $
+ * @version     $Id: GroupnameExists.php 677 2010-02-24 20:21:48Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.10
  */
@@ -38,10 +38,10 @@ require_once 'Zend/Validate/Abstract.php';
  */
 class Digitalus_Validate_GroupnameExists extends Zend_Validate_Abstract
 {
-    const EXISTS = 'groupnameExists';
+    const NOT_EXISTS = 'notGroupnameExists';
 
     protected $_messageTemplates = array(
-        self::EXISTS => "Another group already exists with Your desired groupname '%value%'! Please choose a different one!",
+        self::NOT_EXISTS => "A group with the given name '%value%' doesn't exist!",
     );
 
     /**
@@ -101,16 +101,14 @@ class Digitalus_Validate_GroupnameExists extends Zend_Validate_Abstract
 
     public function isValid($value)
     {
+        $value = (string)$value;
         $this->_setValue($value);
 
-        $isValid = true;
-
         $mdlGroup = new Model_Group();
-
         if ($mdlGroup->groupExists($value, $this->getExclude())) {
-            $this->_error(self::EXISTS);
-            $isValid = false;
+            return true;
         }
-        return $isValid;
+        $this->_error(self::NOT_EXISTS);
+        return false;
     }
 }

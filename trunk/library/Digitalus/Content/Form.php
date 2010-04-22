@@ -63,7 +63,7 @@ class Digitalus_Content_Form extends Digitalus_Form
             'validators'    => array(
                 array('NotEmpty', true),
                 array('StringLength', true, array(4, Model_Page::PAGE_NAME_LENGTH)),
-                array('PagenameExists'),
+                array('PagenameExistsNot'),
                 array('Regex', true, array(
                     'pattern'  => Model_Page::PAGE_NAME_REGEX,
                     'messages' => array('regexNotMatch' => Model_Page::PAGE_NAME_REGEX_NOTMATCH),

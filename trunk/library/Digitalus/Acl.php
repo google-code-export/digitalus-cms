@@ -65,29 +65,32 @@ class Digitalus_Acl extends Zend_Acl
 
                 //attempt to load each acl file
                 if (file_exists($path)) {
-                    $xml = simplexml_load_file($path);
-                    $controllers = $xml->children();
-                    foreach ($controllers as $controller) {
-                        $controllerName = (string)$controller->attributes()->name;
-                        $controllerActions = $controller->children();
-                        if (count($controllerActions) > 0) {
-                            foreach ($controllerActions as $action) {
-                                //load each action separately
-                                $actionName = (string)$action;
-                                $key = $module . '_' . $controllerName . '_' . $actionName;
+                    if ($xml = @simplexml_load_file($path)) {
+                        $controllers = $xml->children();
+                        foreach ($controllers as $controller) {
+                            $controllerName = (string)$controller->attributes()->name;
+                            $controllerActions = $controller->children();
+                            if (count($controllerActions) > 0) {
+                                foreach ($controllerActions as $action) {
+                                    //load each action separately
+                                    $actionName = (string)$action;
+                                    $key = $module . '_' . $controllerName . '_' . $actionName;
+                                    $this->addResource(new Zend_Acl_Resource($key), $module);
+
+                                    //add the action to the public resource list
+                                    $resourceListItems[$controllerName][] = $actionName;
+                                }
+                            } else {
+                                //set the resource at the controller level
+                                $key = $module . '_' . $controllerName;
                                 $this->addResource(new Zend_Acl_Resource($key), $module);
 
-                                //add the action to the public resource list
-                                $resourceListItems[$controllerName][] = $actionName;
+                                //add the controller to the public resource list
+                                $resourceListItems[$controllerName] = null;
                             }
-                        } else {
-                            //set the resource at the controller level
-                            $key = $module . '_' . $controllerName;
-                            $this->addResource(new Zend_Acl_Resource($key), $module);
-
-                            //add the controller to the public resource list
-                            $resourceListItems[$controllerName] = null;
                         }
+                    } else {
+                        throw new Digitalus_Acl_Exception('xml file is not valid: ' . $path);
                     }
                 }
 

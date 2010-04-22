@@ -117,7 +117,11 @@ class Digitalus_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             }
         } else {
             $resource = Digitalus_Toolbox_Page::getCurrentPageName();
-            // TODO: refactor into Toolbox String - replace underscores with empty spaces
+            // write pageName to registry when coming from a page
+            if ('index' == $controller && 'index' == $action) {
+                Zend_Registry::set('Digitalus_Page_Name', $resource);
+            }
+// TODO: refactor into Toolbox String - replace underscores with empty spaces
             $resource = strtolower(str_replace('_', ' ', $resource));
             // only check Acl if page is NOT homepage
             if (!empty($resource) && '' != $resource &&

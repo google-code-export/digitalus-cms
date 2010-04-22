@@ -79,7 +79,7 @@ class Digitalus_View_Helper_Cms_RenderModule extends Zend_View_Helper_Abstract
         $uriParams = $uri->getParams();
         $name   = strtolower($moduleParts[0]);
         if (isset($uriParams['a']) && !empty($uriParams['a'])) {
-            $action = strtolower($uriParams['a']);
+            $action = $uriParams['a'];
         }
         if (isset($action) && !empty($action) && '' != $action && $this->_actionExists($name, $action)) {
             return $action;
@@ -101,7 +101,7 @@ class Digitalus_View_Helper_Cms_RenderModule extends Zend_View_Helper_Abstract
         // TODO: check if necessary
         require_once APPLICATION_PATH . '/modules/' . $moduleName . '/controllers/' . 'PublicController.php';
         $className  = 'Mod_' . ucfirst($moduleName) . '_PublicController';
-        $actionName = strtolower($action) . 'Action';
+        $actionName = $action . 'Action';
         if (method_exists($className, $actionName)) {
             return true;
         }

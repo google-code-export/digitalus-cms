@@ -274,7 +274,8 @@ form#notes textarea {
 }
 
 
-#form input[type='text'] {
+#form input[type='text'],
+#form input[type='password'] {
     width: 240px;
 }
 
@@ -299,7 +300,8 @@ input[type='submit'] {
     padding-right: 10px;
 }
 
-#centerPane .formColumn input[type='text'], #centerPane .formColumn input[type='password'] {
+#centerPane .formColumn input[type='text'],
+#centerPane .formColumn input[type='password'] {
     width: 150px;
 }
 
@@ -347,7 +349,9 @@ input[type='submit'] {
     margin: 0 10px 0 0;
 }
 
-.column input[type='text'], .column input[type='submit'], .column textarea, .column select {
+.column input[type='text'],
+.column input[type='submit'],
+.column textarea, .column select {
     width: 190px;
     margin: 0 4px 5px 4px;
 }

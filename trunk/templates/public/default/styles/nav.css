@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+#currentUser {
+    list-style: none;
+    float: right;
+    margin: 20px 20px 0 0;
+}
+
 ul.menu, .subnav, .subnav ul {
     list-style: none;
 }

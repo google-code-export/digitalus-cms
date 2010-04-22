@@ -70,7 +70,7 @@ class Admin_AuthController extends Digitalus_Controller_Action
         $form->setAction($this->baseUrl . '/admin/auth/login');
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
-            $uri = Digitalus_Filter_Post::get('uri');
+            $uri      = Digitalus_Filter_Post::get('uri');
             $username = Digitalus_Filter_Post::get('adminUsername');
             $password = Digitalus_Filter_Post::get('adminPassword');
 

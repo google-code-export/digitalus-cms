@@ -44,8 +44,9 @@ class Digitalus_View_Helper_Admin_RenderAdminMenu extends Zend_View_Helper_Abstr
 {
     public $sections = array(
         'index'      => 'index',
-        'site'       => 'site',
+        'group'      => 'site',
         'report'     => 'site',
+        'site'       => 'site',
         'user'       => 'site',
         'page'       => 'page',
         'navigation' => 'navigation',

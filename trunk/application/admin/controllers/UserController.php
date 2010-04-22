@@ -77,15 +77,12 @@ class Admin_UserController extends Digitalus_Controller_Action
     {
         $userName = $this->_request->getParam('username');
         $form = new Admin_Form_User();
-        $u = new Model_User();
+        $u    = new Model_User();
         $elmUserName = $form->getElement('name');
         $elmUserName->addValidators(array(
-            array('UsernameExists', true, array('exclude' => $userName)),
+            array('UsernameExistsNot', true, array('exclude' => $userName)),
         ));
-        $form->removeElement('update_password');
-        $form->removeElement('password');
-        $form->removeElement('password_confirm');
-        $form->removeElement('captcha');
+        $form->onlyOpenActionElements();
         $form->setModel($u);
         $form->populateFromModel($userName);
         $form->setAttrib('id', 'general');
@@ -95,14 +92,12 @@ class Admin_UserController extends Digitalus_Controller_Action
         $form->setAction($this->baseUrl . '/admin/user/open/username/' . $userName);
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
-            $form->setModel($u);
-            if (Digitalus_Filter_Post::has('admin_user_password')) {
-                $userName = Digitalus_Filter_Post::get('username');
-                $password = Digitalus_Filter_Post::get('newPassword');
+            if ($form->update($userName) && Digitalus_Filter_Post::has('admin_user_password')) {
+                $userName        = Digitalus_Filter_Post::get('username');
+                $password        = Digitalus_Filter_Post::get('newPassword');
                 $passwordConfirm = Digitalus_Filter_Post::get('newConfirmPassword');
-                $u->updatePassword($userName, $password, true, $passwordConfirm);
+                $u->updatePassword($newUserName, $password, true, $passwordConfirm);
             }
-            $user = $form->update();
         }
         $this->view->userName = $userName;
         $this->view->form     = $form;
@@ -126,8 +121,11 @@ class Admin_UserController extends Digitalus_Controller_Action
     public function createAction()
     {
         $form = new Admin_Form_User();
-        $form->removeElement('update_password');
-        $form->removeElement('captcha');
+        $elmUserName = $form->getElement('name');
+        $elmUserName->addValidators(array(
+            array('UsernameExistsNot', true),
+        ));
+        $form->onlyCreateActionElements();
         $u = new Model_User();
         $form->setModel($u);
         if ($form->validatePost()) {

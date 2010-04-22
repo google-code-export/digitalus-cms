@@ -29,22 +29,21 @@ class IndexController extends Digitalus_Controller_Action
     public function loginAction()
     {
         $form = new Admin_Form_Login();
-// TODO
         $form->setAction($this->baseUrl . '/public/index/login');
 
         if ($this->_request->isPost() && $form->isValid($_POST)) {
-            $uri = Digitalus_Filter_Post::get('uri');
+            $uri      = Digitalus_Filter_Post::get('uri');
             $username = Digitalus_Filter_Post::get('adminUsername');
             $password = Digitalus_Filter_Post::get('adminPassword');
 
             $auth = new Digitalus_Auth($username, $password);
             $result = $auth->authenticate();
-            if ($result) {
-                $uri = 'Home';
-                $this->_redirect($uri);
-            } else {
+            if (!$result) {
                 $e = new Digitalus_View_Error();
                 $e->add($this->view->getTranslation('The username or password you entered was not correct.'));
+            } else {
+                $uri = Digitalus_Toolbox_Page::getHomePageName();
+                $this->_redirect($uri);
             }
         }
 

@@ -2,8 +2,8 @@
 
 class Digitalus_Installer_Config
 {
-    const PATH_TO_CONFIG     = APPLICATION_PATH . '/admin/data/config.xml';
-    const PATH_TO_CMS_CONFIG = APPLICATION_PATH . '/configs/application.ini';
+    const PATH_TO_CONFIG     = './application/admin/data/config.xml';
+    const PATH_TO_CMS_CONFIG = './application/configs/application.ini';
 
     protected $_innerData;
 

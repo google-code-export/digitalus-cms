@@ -48,7 +48,7 @@ class Digitalus_View_Helper_Interface_Link extends Zend_View_Helper_Abstract
     /**
      *
      */
-    public function link($label, $link, $icon = null, $class = 'link', $target = null, $suppressLabel = false)
+    public function link($label, $link, $icon = null, $class = 'link', $target = null, $suppressLabel = false, $translate = true)
     {
         $this->link = Digitalus_Toolbox_String::stripLeading('/', $link);
         $this->baseUrl = Digitalus_Toolbox_String::stripLeading('/', $this->view->getBaseUrl());
@@ -70,7 +70,11 @@ class Digitalus_View_Helper_Interface_Link extends Zend_View_Helper_Abstract
             $linkParts[] = $this->getIcon($icon, $label);
         }
         if (!empty($label) && true != $suppressLabel) {
-            $linkParts[] = $this->view->getTranslation((string)$label);
+            if (true === (bool)$translate) {
+                $linkParts[] = $this->view->getTranslation((string)$label);
+            } else {
+                $linkParts[] = (string)$label;
+            }
         }
         $linkParts[] = '</a>';
         return implode(null, $linkParts);

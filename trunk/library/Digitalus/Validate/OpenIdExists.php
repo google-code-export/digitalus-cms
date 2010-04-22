@@ -46,16 +46,14 @@ class Digitalus_Validate_OpenIdExists extends Zend_Validate_Abstract
 
     public function isValid($value)
     {
+        $value = (string)$value;
         $this->_setValue($value);
 
-        $isValid = true;
-
         $mdlUser = new Model_User();
-
-        if ($mdlUser->openIdExists($value)) {
-            $this->_error(self::EXISTS);
-            $isValid = false;
+        if (!$mdlUser->openIdExists($value)) {
+            return true;
         }
-        return $isValid;
+        $this->_error(self::EXISTS);
+        return false;
     }
 }

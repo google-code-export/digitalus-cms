@@ -1,0 +1,30 @@
+<?php
+if (isset($this->form) && !empty($this->form)) {
+    echo $this->form;
+}
+
+$registerText = '';
+$cssClass     = '';
+if (isset($this->success)) {
+    if (true === $this->success) {
+        $cssClass = 'important';
+        $registerText  = $this->getTranslation('Your registration was successful.') . '<br />' . PHP_EOL;
+        $registerText .= $this->getTranslation('An email was just sent to Your email address');
+        $registerText .= ' <span style="font-style: italic; font-weight: bold;">' . $this->email . '</span><br />' . PHP_EOL;
+        $registerText .= $this->getTranslation('Your account is being activated as soon as You verify Your email address by clicking the link in that email!') . '<br />' . PHP_EOL;
+        $registerText .= $this->getTranslation('You have to finalize the registration within') . ' ' . Login_Challenge::validTimePeriod/86400 . ' ' . $this->getTranslation('days!') . '<br /><br />' . PHP_EOL;
+        $registerText .= $this->getTranslation('The password for the protected area is as follows:') . '<br /><br />' . PHP_EOL;
+        $registerText .= '<span style="font-size:1.5em; font-family:\'Times New Roman\',Times,serif; font-weight:bold;">' . $this->password . '</span><br /><br />' . PHP_EOL;
+        $registerText .= $this->getTranslation('Please make a note of this password as it is neither repeated nor restorable from the database.') . '<br />' . PHP_EOL;
+        $registerText .= $this->getTranslation('For security reasons, please change Your password as soon as Your registration process is completed.');
+
+        unset($this->password);
+    } else {
+        $cssClass = 'warning';
+        $registerText = $this->getTranslation('Your registration was NOT successful. Something terribly went wrong!');
+    }
+
+    if (!empty($registerText)) {
+        echo '<p class="' . $cssClass . '">' . $registerText . '</p><br />' . PHP_EOL;
+    }
+}

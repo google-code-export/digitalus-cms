@@ -44,8 +44,9 @@ class Digitalus_View_Helper_Admin_RenderSidebar extends Zend_View_Helper_Abstrac
     public $sections = array(
         'index'      => 'index',
         'site'       => 'site',
-        'report'     => 'site',
+        'group'      => 'site',
         'user'       => 'site',
+        'report'     => 'site',
         'page'       => 'page',
         'navigation' => 'navigation',
         'media'      => 'media',
@@ -53,7 +54,7 @@ class Digitalus_View_Helper_Admin_RenderSidebar extends Zend_View_Helper_Abstrac
         'module'     => 'module'
     );
     public $defaultSection = 'index';
-    public $moduleSection = 'module';
+    public $moduleSection  = 'module';
     public $selectedSection;
     public $sidebarPath;
     public $defaultHeadline = 'Home';
@@ -75,7 +76,7 @@ class Digitalus_View_Helper_Admin_RenderSidebar extends Zend_View_Helper_Abstrac
         $this->setSidebarPath();
 
        //load the content first so you can set the headline in the sidebar
-        $xmlContent = $this->renderBody();
+        $xmlContent  = $this->renderBody();
         $xmlHeadline = $this->renderHeadline();
 
         return $xmlHeadline . $xmlContent;
@@ -87,12 +88,12 @@ class Digitalus_View_Helper_Admin_RenderSidebar extends Zend_View_Helper_Abstrac
         if (empty($strHeadline)) {
             $strHeadline = $this->defaultHeadline;
         }
-        return "<h2 class='top'>" . $strHeadline . "</h2>";
+        return '<h2 class="top">' . $strHeadline . '</h2>';
     }
 
     public function renderBody()
     {
-        $xhtml = '<div class="columnBody">';
+        $xhtml  = '<div class="columnBody">';
 
         //you can add content before the body by setting sidebar_before placeholder
         $xhtml .= $this->view->placeholder('sidebar_before');
@@ -102,7 +103,7 @@ class Digitalus_View_Helper_Admin_RenderSidebar extends Zend_View_Helper_Abstrac
         //you can add content after the body by setting sidebar_after placeholder
         $xhtml .= $this->view->placeholder('sidebar_after');
 
-        $xhtml .= "</div>";
+        $xhtml .= '</div>';
         return $xhtml;
     }
 

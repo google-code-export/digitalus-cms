@@ -64,7 +64,7 @@ class Model_User extends Digitalus_Db_Table
 
     public $primaryIndex = 'name';
 
-    public function createUser($userName, $firstName, $lastName, $email, $password, $active = 0, $role = 'guest')
+    public function createUser($userName, $firstName, $lastName, $email, $password, $active = 0, $role = Model_Group::GUEST_ROLE)
     {
         $data = array(
             'active'     => $active,
@@ -94,9 +94,8 @@ class Model_User extends Digitalus_Db_Table
 
             $result = $person->save();
             return $result;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public function updateAclResources($userName, $resourceArray)
@@ -242,7 +241,7 @@ class Model_User extends Digitalus_Db_Table
         }
         $select = $this->select();
         $select->from($this->_name, array('name', 'role'))
-            ->where($this->_db->quoteInto('name = ?', $userName));
+               ->where($this->_db->quoteInto('name = ?', $userName));
         $user = $this->fetchRow($select);
         return $user->role;
     }
@@ -353,6 +352,27 @@ class Model_User extends Digitalus_Db_Table
     }
 
     /**
+     * This function checks if a specified email belongs to a given user name
+     *
+     * @param  string  $userName The user name
+     * @param  string  $email    The email address
+     * @return boolean
+     */
+    public function userEmailExists($userName, $email)
+    {
+        $userName = strtolower($userName);
+        $email    = strtolower($email);
+
+        $where[] = $this->_db->quoteInto('LOWER(name)  = ?', $userName);
+        $where[] = $this->_db->quoteInto('LOWER(email) = ?', $email);
+        $result = $this->fetchAll($where, null, 1);
+        if ($result->count() > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * This function checks if a user has already been activated
      *
      * @param  int $userName The name to check
@@ -379,7 +399,10 @@ class Model_User extends Digitalus_Db_Table
     {
         $data['active'] = 1;
         $where[] = $this->_db->quoteInto('name = ?', $userName);
-        return $this->update($data, $where);
+        if ($this->isActive($userName) || $this->update($data, $where)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -392,6 +415,9 @@ class Model_User extends Digitalus_Db_Table
     {
         $data['active'] = 0;
         $where[] = $this->_db->quoteInto('name = ?', $userName);
-        return $this->update($data, $where);
+        if (!$this->isActive($userName) || $this->update($data, $where)) {
+            return true;
+        }
+        return false;
     }
 }

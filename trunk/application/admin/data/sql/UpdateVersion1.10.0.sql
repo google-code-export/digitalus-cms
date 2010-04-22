@@ -85,6 +85,7 @@ DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `name` VARCHAR(30) NOT NULL PRIMARY KEY,
   `parent` VARCHAR(30) NULL,
+  `label` VARCHAR(30) NULL,
   `description` VARCHAR(200) NULL,
   `acl_resources` TEXT NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -96,10 +97,11 @@ ALTER TABLE `groups`
     ADD FOREIGN KEY (`parent`) REFERENCES `groups`(`name`) ON DELETE SET NULL ON UPDATE CASCADE;
 -- hardcoded roles
 INSERT INTO `groups`
-    (`name`, `parent`)
+    (`name`, `parent`, `label`)
 VALUES
-    ('superadmin', NULL),
-    ('guest', NULL);
+    ('superadmin', NULL, 'Super Administrator'),
+    ('admin',      NULL, 'Site Administrator'),
+    ('guest',      NULL, 'Guest');
 
 /*
  *******************************************************************************
@@ -200,7 +202,7 @@ ALTER TABLE `pages`
     ADD INDEX `fk_parent_page` (`parent_id` ASC),
     ADD INDEX `fk_page_author` (`user_name` ASC),
     ADD UNIQUE (`namespace`, `name`),
-    ADD CONSTRAINT `fk_page_author` FOREIGN KEY (`user_name`) REFERENCES `users`(`name`) ON DELETE NO ACTION ON UPDATE CASCADE;
+    ADD CONSTRAINT `fk_page_author` FOREIGN KEY (`user_name`) REFERENCES `users`(`name`) ON DELETE SET NULL ON UPDATE CASCADE;
 -- -----------------------------------------------------------------------------
 -- PAGE_NODES
 -- -----------------------------------------------------------------------------
@@ -368,6 +370,7 @@ ALTER TABLE `page_nodes`
 -- drop column `users`.`id`
 ALTER TABLE `users`
     DROP `id`,
+    DROP `acl_resources`,
     ADD PRIMARY KEY (`name`),
     DROP INDEX `name`;
 -- remove entries with `node_type` = 'headline' or 'label'
