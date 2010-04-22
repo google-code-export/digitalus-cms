@@ -57,7 +57,7 @@ input.large {
     margin: 0 0 0 5px;
 }
 
-#main form dt {
+#main form dt, dt {
     clear: both;
     float: left;
     width: 125px;
@@ -68,7 +68,7 @@ label.required {
     color: #cc0000;
 }
 
-#main form dd {
+#main form dd, dd {
     float: left;
     margin-bottom: 10px;
 }

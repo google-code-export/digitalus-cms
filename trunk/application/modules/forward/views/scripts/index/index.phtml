@@ -1,8 +1,8 @@
 <?php $this->placeholder('formHeadline')->set($this->getTranslation('Forward'));?>
 
-<p><?php echo $this->getTranslation('The forward module enables you to forward a page to a subcontent page.');?></p>
+<p><?php echo $this->getTranslation('The forward module enables you to forward a page to a subcontent page.');?></p><br />
 
-<p><?php echo $this->getTranslation('You can set the following options for the forwarder:');?></p>
-<ul>
-    <li><strong><?php echo $this->getTranslation('Enter forward path') . ':';?></strong><?php echo ' ' . $this->getTranslation('Forward to page with this path.');?></li>
-</ul>
+<fieldset>
+    <p><?php echo $this->getTranslation('You can set the following options for the forwarder:');?></p>
+    <dt><?php echo $this->getTranslation('Enter forward path') . ':';?></dt><dl><?php echo $this->getTranslation('Forward to page with this path.');?></dl>
+</fieldset>
