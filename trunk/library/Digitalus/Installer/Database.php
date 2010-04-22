@@ -83,18 +83,21 @@ class Digitalus_Installer_Database
     public function installDatabase()
     {
         $this->_createData();
-        $this->_createErrorLog();
-        $this->_createContentPage();
-        $this->_createContentUser();
+        $this->_createGroups();
         $this->_createPages();
+        $this->_createPageNodes();
         $this->_createTrafficLog();
+        $this->_createErrorLog();
         $this->_createUsers();
+        $this->_createUserBookmarks();
+        $this->_createUserNotes();
+        $this->_constraints();
         $this->_populate();
     }
 
     public function testInstallation()
     {
-        $tables = array('data', 'content_page', 'content_user', 'error_log', 'pages', 'traffic_log', 'users');
+        $tables = array('data', 'page_nodes', 'user_bookmarks', 'user_notes', 'error_log', 'pages', 'traffic_log', 'users', 'groups');
         foreach ($tables as $table) {
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
             if (!$this->tableExists($table)) {
@@ -120,65 +123,33 @@ class Digitalus_Installer_Database
         return $this->_db->insert($table, $data);
     }
 
-    private function _createContentPage()
-    {
-        $table = 'content_page';
-        $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
-        $sql = "CREATE TABLE `" . $table . "` (
-                    `id` int(11) NOT NULL auto_increment,
-                    `page_id` int(11) NOT NULL,
-                    `node` varchar(100) default NULL,
-                    `version` varchar(100) default NULL,
-                    `content` mediumtext,
-                    PRIMARY KEY (`id`),
-                    KEY (`page_id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-        ";
-        return $this->_db->query($sql);
-    }
-
-    private function _createContentUser()
-    {
-        $table = 'content_user';
-        $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
-        $sql = "CREATE TABLE `" . $table . "` (
-                    `id` int(11) NOT NULL auto_increment,
-                    `name` varchar(30) DEFAULT NULL,
-                    `content_type` varchar(100) DEFAULT NULL,
-                    `content` text,
-                    PRIMARY KEY (`id`),
-                    KEY (`name`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-        ";
-        return $this->_db->query($sql);
-    }
-
     private function _createData()
     {
         $table = 'data';
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
         $sql = "CREATE TABLE `" . $table . "` (
-                    `id` int(11) NOT NULL auto_increment,
+                    `id` int(11) NOT NULL AUTO_INCREMENT,
                     `tags` varchar(500) DEFAULT NULL,
                     `data` text,
                     PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-        ";
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;";
         return $this->_db->query($sql);
     }
-    private function _createErrorLog()
+
+    private function _createGroups()
     {
-        $table = 'error_log';
+        $table = 'groups';
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
         $sql = "CREATE TABLE `" . $table . "` (
-                    `id` int(11) NOT NULL auto_increment,
-                    `referer` text,
-                    `uri` text,
-                    `date_time` int(11) DEFAULT NULL,
-                    `error_data` text,
-                    PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-        ";
+                    CREATE TABLE IF NOT EXISTS `groups` (
+                    `name` varchar(30) NOT NULL,
+                    `parent` varchar(30) DEFAULT NULL,
+                    `label` varchar(30) DEFAULT NULL,
+                    `description` varchar(200) DEFAULT NULL,
+                    `acl_resources` text,
+                    PRIMARY KEY (`name`),
+                    KEY `parent` (`parent`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         return $this->_db->query($sql);
     }
 
@@ -187,27 +158,41 @@ class Digitalus_Installer_Database
         $table = 'pages';
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
         $sql = "CREATE TABLE `" . $table . "` (
-                    `id` int(11) NOT NULL auto_increment,
+                    `id` int(11) NOT NULL AUTO_INCREMENT,
                     `user_name` varchar(30) DEFAULT NULL,
                     `create_date` int(11) DEFAULT NULL,
-                    `publish_date` int(11) DEFAULT NULL,
-                    `archive_date` int(11) DEFAULT NULL,
+                    `publish_date` int(11) NOT NULL,
+                    `archive_date` int(11) NOT NULL,
+                    `last_update` int(11) NOT NULL,
                     `publish_level` enum('1','11','21') DEFAULT '11',
                     `name` varchar(250) DEFAULT NULL,
                     `label` varchar(250) DEFAULT NULL,
                     `namespace` varchar(100) DEFAULT NULL,
                     `content_template` varchar(100) DEFAULT NULL,
-                    `related_pages` text,
-                    `parent_id` int(11) DEFAULT NULL,
+                    `parent_id` int(11) DEFAULT '0',
                     `position` int(11) DEFAULT NULL,
-                    `is_home_page` tinyint(1) DEFAULT 0,
-                    `show_on_menu` tinyint(1) DEFAULT 0,
-                    `design` int(11) DEFAULT NULL,
+                    `show_on_menu` tinyint(1) DEFAULT '0',
                     PRIMARY KEY (`id`),
-                    KEY `user_name` (`user_name`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-        ";
+                    KEY `fk_parent_page` (`parent_id`),
+                    KEY `fk_page_author` (`user_name`)
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;";
+        return $this->_db->query($sql);
+    }
 
+    private function _createPageNodes()
+    {
+        $table = 'page_nodes';
+        $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
+        $sql = "CREATE TABLE `" . $table . "` (
+                    `page_id` int(11) NOT NULL,
+                    `node_type` varchar(100) NOT NULL DEFAULT 'content',
+                    `language` enum('en','de','es','fr','hu','it','pl','ru','se') NOT NULL DEFAULT 'en',
+                    `label` varchar(100) DEFAULT NULL,
+                    `headline` varchar(100) DEFAULT NULL,
+                    `content` mediumtext NOT NULL,
+                    PRIMARY KEY (`page_id`,`node_type`,`language`),
+                    KEY `fk_page_nodes` (`page_id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         return $this->_db->query($sql);
     }
 
@@ -231,50 +216,98 @@ class Digitalus_Installer_Database
         return $this->_db->query($sql);
     }
 
-
     private function _createUsers()
     {
         $table = 'users';
         $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
         $sql = "CREATE TABLE `" . $table . "` (
                     `name` varchar(30) NOT NULL,
-                    `active` tinyint(1) NOT NULL DEFAULT 0,
-                    `first_name` varchar(45) NOT NULL DEFAULT '',
-                    `last_name` varchar(45) NOT NULL DEFAULT '',
-                    `email` varchar(100) NOT NULL DEFAULT '',
+                    `first_name` varchar(50) DEFAULT '',
+                    `last_name` varchar(50) DEFAULT '',
+                    `email` varchar(100) NOT NULL,
+                    `password` varchar(32) NOT NULL,
+                    `active` tinyint(1) NOT NULL DEFAULT '0',
+                    `role` varchar(30) DEFAULT 'guest',
                     `openid` varchar(100) DEFAULT NULL,
-                    `password` text NOT NULL,
-                    `role` varchar(45) NOT NULL DEFAULT 'guest',
-                    `acl_resources` text,
                     PRIMARY KEY (`name`),
-                    UNIQUE KEY (`openid`)
-                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-        ";
+                    KEY `fk_user_roles` (`role`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         return $this->_db->query($sql);
+    }
+
+    private function _createUserBookmarks()
+    {
+        $table = 'user_bookmarks';
+        $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
+        $sql = "CREATE TABLE `" . $table . "` (
+                    `id` int(11) NOT NULL AUTO_INCREMENT,
+                    `user_name` varchar(30) NOT NULL,
+                    `label` varchar(50) NOT NULL,
+                    `url` varchar(100) NOT NULL,
+                    PRIMARY KEY (`id`),
+                    KEY `fk_user_bookmarks` (`user_name`)
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;";
+        return $this->_db->query($sql);
+    }
+
+    private function _createUserNotes()
+    {
+        $table = 'user_bookmarks';
+        $table = Digitalus_Db_Table::getTableName($table, $this->_config['prefix']);
+        $sql = "CREATE TABLE `" . $table . "` (
+                    `id` int(11) NOT NULL AUTO_INCREMENT,
+                    `user_name` varchar(30) NOT NULL,
+                    `content` text,
+                    PRIMARY KEY (`id`),
+                    KEY `fk_user_notes` (`user_name`)
+                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;";
+        return $this->_db->query($sql);
+    }
+
+    private function _constraints()
+    {
+        $pages          = Digitalus_Db_Table::getTableName('pages',           $this->_config['prefix']);
+        $users          = Digitalus_Db_Table::getTableName('users',           $this->_config['prefix']);
+        $userBookmarks  = Digitalus_Db_Table::getTableName('user_bookmarks',  $this->_config['prefix']);
+        $userNotes      = Digitalus_Db_Table::getTableName('user_notes',      $this->_config['prefix']);
+        $sql = "ALTER TABLE `" . $pages . "` (
+                    ADD CONSTRAINT `fk_page_author` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE NO ACTION ON UPDATE CASCADE;";
+        $this->_db->query($sql);
+        $sql = "ALTER TABLE `" . $users . "` (
+                    ADD CONSTRAINT `fk_user_roles` FOREIGN KEY (`role`) REFERENCES `groups` (`name`) ON DELETE SET NULL ON UPDATE CASCADE;";
+        $this->_db->query($sql);
+        $sql = "ALTER TABLE `" . $userBookmarks . "` (
+                    ADD CONSTRAINT `fk_user_bookmarks` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;";
+        $this->_db->query($sql);
+        $sql = "ALTER TABLE `" . $userNotes . "` (
+                    ADD CONSTRAINT `fk_user_notes` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;";
+        $this->_db->query($sql);
     }
 
     private function _populate()
     {
-        $content_page = Digitalus_Db_Table::getTableName('content_page', $this->_config['prefix']);
-        $data  = Digitalus_Db_Table::getTableName('data',  $this->_config['prefix']);
-        $pages = Digitalus_Db_Table::getTableName('pages', $this->_config['prefix']);
-        $users = Digitalus_Db_Table::getTableName('users', $this->_config['prefix']);
+        $data       = Digitalus_Db_Table::getTableName('data',      $this->_config['prefix']);
+        $groups     = Digitalus_Db_Table::getTableName('users',     $this->_config['prefix']);
+        $pages      = Digitalus_Db_Table::getTableName('pages',     $this->_config['prefix']);
+        $pageNodes  = Digitalus_Db_Table::getTableName('pageNodes', $this->_config['prefix']);
         $queries = array(
-            'INSERT INTO `' . $pages . '` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)' => array(
-                array(1, 'administrator', time(), time(), null, 1, 'Site Offline', '', 'content', 'default_default', null, 0, 1, null, 0, null),
-                array(2, 'administrator', time(), time(), null, 1, '404 Page',     '', 'content', 'default_default', null, 0, 0, null, 0, null),
-                array(3, 'administrator', time(), time(), null, 1, 'Home',         '', 'content', 'default_default', null, 0, 2, 1,    1, null),
+            'INSERT INTO `' . $data . '` VALUES (?, ?)' => array(
+                array('site_settings', "<?xml version=\"1.0\"?>\n<settings><name>Digitalus CMS Site</name><online>1</online><addMenuLinks>0</addMenuLinks><default_locale/><admin_language>en</admin_language><default_language>en</default_language><default_charset>utf-8</default_charset><default_timezone>Europe/Berlin</default_timezone><default_date_format/><default_currency_format/><default_email/><default_email_sender/><use_smtp_mail>0</use_smtp_mail><smtp_host/><smtp_username/><smtp_password/><google_tracking/><google_verify/><title_separator> - </title_separator><add_menu_links>1</add_menu_links><publish_pages>11</publish_pages><doc_type>XHTML1_TRANSITIONAL</doc_type><home_page>3</home_page><page_not_found>2</page_not_found><offline_page>1</offline_page><meta_description/><meta_keywords/><xml_declaration/></settings>\n"),
             ),
-            'INSERT INTO `' . $content_page . '` VALUES (?, ?, ?, ?, ?)' => array(
-                array(1, 1, 'headline', 'en', 'Site Offline'),
-                array(2, 2, 'content',  'en', 'Sorry, our site is currently offline for maintenance.'),
-                array(3, 2, 'headline', 'en', 'HTTP/1.1 404 Not Found'),
-                array(4, 2, 'content',  'en', 'Sorry, the page you are looking for has moved or been renamed.'),
-                array(5, 3, 'content',  'en', "Congratulations! You have successfully installed Digitalus CMS.<br>To get started why don't you log in and change this page:<br><ol><li>Log in to site administration with the username and password you set up in the installer.</li><li>Go to the pages section.</li><li>Click on the Home page on the left sidebar.</li><li>Now update it and click update page!</li></ol>If you have any questions here are some helpful links:<br><ul><li><a href=\"http://forum.digitaluscms.com\">Digitalus Forum</a></li><li><a href=\"http://wiki.digitaluscms.com\">Digitalus Documentation</a><br></li></ul>"),
-                array(6, 3, 'headline', 'en', 'Digitalus CMS'),
+            'INSERT INTO `' . $groups . '` VALUES (?, ?, ?)' => array(
+                array('superadmin', NULL,    'Super Administrator'),
+                array('admin',      'guest', 'Site Administrator'),
+                array('guest',      NULL,    'Guest'),
             ),
-            'INSERT INTO `' . $data . '` VALUES (?, ?, ?)' => array(
-                array(1, 'site_settings', "<?xml version=\"1.0\"?>\n<settings><name>Digitalus CMS Site</name><online>1</online><addMenuLinks>0</addMenuLinks><default_locale/><default_language>en</default_language><default_charset>utf-8</default_charset><default_timezone>America/Los_Angeles</default_timezone><default_date_format/><default_currency_format/><default_email/><default_email_sender/><use_smtp_mail>0</use_smtp_mail><smtp_host/><smtp_username/><smtp_password/><google_tracking/><google_verify/><title_separator> - </title_separator><add_menu_links>1</add_menu_links><publish_pages>11</publish_pages><doc_type>XHTML1_TRANSITIONAL</doc_type><home_page>1</home_page><page_not_found>2</page_not_found><offline_page>3</offline_page><meta_description/><meta_keywords/><xml_declaration/></settings>\n"),
+            'INSERT INTO `' . $pages . '` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)' => array(
+                array(1, 0, 'administrator', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 1, 'Site Offline', 'Site Offline', 'content', 'default_default', 1, 0),
+                array(2, 0, 'administrator', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 1, '404 Page',     '404 Page',     'content', 'default_default', 0, 0),
+                array(3, 0, 'administrator', UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), UNIX_TIMESTAMP(), 1, 'Home',         'Home',         'content', 'default_default', 2, 1),
+            ),
+            'INSERT INTO `' . $pageNodes . '` VALUES (?, ?, ?, ?, ?, ?)' => array(
+                array(1, 'errorsite',  'en', 'Site Offline', 'Site Offline',           "Sorry, our site is currently offline for maintenance."),
+                array(2, 'errorsite',  'en', '404 Page',     'HTTP/1.1 404 Not Found', "Sorry, the page you are looking for has moved or been renamed."),
+                array(3, 'content',    'en', 'Home',         'Digitalus CMS',          "Congratulations! You have successfully installed Digitalus CMS.<br />To get started why don't you log in and change this page:<br /><ol><li>Log in to site administration with the username and password you set up in the installer.</li><li>Go to the pages section.</li><li>Click on the Home page on the left sidebar.</li><li>Now update it and click update page!</li></ol>If you have any questions here are some helpful links:<br /><ul><li><a href=\"http://forum.digitaluscms.com\">Digitalus Forum</a></li><li><a href=\"http://wiki.digitaluscms.com\">Digitalus Documentation</a><br /></li></ul>"),
             ),
         );
         foreach ($queries as $sql => $inserts) {
