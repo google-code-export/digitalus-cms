@@ -1,0 +1,29 @@
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Page'));
+
+echo $this->render('page/edit/content.phtml');
+
+if ($this->isAllowed('admin', 'page', 'update-meta-data')) {
+    echo '<div id="meta">';
+    echo $this->render('page/edit/meta.phtml');
+    echo '</div>';
+}
+if ($this->isAllowed('admin', 'page', 'update-properties')) {
+    echo '<div id="properties">';
+    echo $this->render('page/edit/properties.phtml');
+    echo '</div>';
+}
+if ($this->isAllowed('admin', 'page', 'update-template')) {
+    echo '<div id="template">';
+    echo $this->render('page/edit/template.phtml');
+    echo '</div>';
+}
+if ($this->isAllowed('admin', 'page', 'move')) {
+    echo '<div id="move">';
+    echo $this->render('page/edit/move.phtml');
+    echo '</div>';
+}
+if ($this->isAllowed('admin', 'page', 'publish')) {
+    echo '<div id="publish">';
+    echo $this->render('page/edit/publish.phtml');
+    echo '</div>';
+}

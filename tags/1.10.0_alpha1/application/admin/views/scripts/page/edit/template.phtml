@@ -1,0 +1,28 @@
+<p><?php echo $this->getTranslation('Select the template for this page')?> ...</p><?php
+
+$contentForm = new Admin_Form_Page();
+$templateControl = $contentForm->getElement('content_template');
+$currentTemplate = !empty($this->page->page->content_template) ? $this->page->page->content_template : null;
+$templateControl->setValue($currentTemplate);
+
+$form = new Digitalus_Form();
+
+$hidden = $form->createElement('hidden', 'id', array(
+    'value' => $this->pageId,
+));
+
+$submit = $form->createElement('submit', 'updateContentTemplate', array(
+    'label' => $this->getTranslation('Update Content Template'),
+));
+
+$form->addElement($hidden)
+     ->addElement($templateControl)
+     ->addElement($submit);
+
+$form->setAction($this->getBaseUrl() . '/admin/page/update-template')
+     ->addDisplayGroup(
+         array('form_instance', 'id', 'content_template', 'updateContentTemplate'),
+         'pageTemplateGroup',
+         array('legend' => 'Content Template')
+     );
+echo $form;

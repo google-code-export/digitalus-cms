@@ -1,0 +1,11 @@
+<?php
+$this->placeholder('optionsHeadline')->set($this->getTranslation('Current Shows'));
+if ($this->slideshows != null) {
+    echo '<ul>';
+    foreach ($this->slideshows as $slideshow) {
+        echo '<li>' . $this->link($slideshow->name, '/mod_slideshow/show/edit/id/' . $slideshow->id, 'report.png') . '</li>';
+    }
+    echo '</ul>';
+} else {
+  echo '<p>' . $this->getTranslation('You do not have any slideshows currently') . '</p>';
+}

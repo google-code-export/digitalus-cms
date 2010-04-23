@@ -1,0 +1,19 @@
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Group Options'));?>
+<?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/idTabs.js');
+
+$linksArray = array(
+    $this->link('Account',            '#fieldset-generalGroup',   'vcard_edit.png'),
+    $this->link('Admin permissions',  '#fieldset-adminAclGroup',  'application_cascade.png'),
+    $this->link('Module permissions', '#fieldset-moduleAclGroup', 'application_view_tile.png'),
+    $this->link('Public permissions', '#fieldset-publicAclGroup', 'application_home.png'),
+);
+if ('guest' == $this->group->name) {
+    unset($linksArray[1]);
+}
+
+echo $this->htmlList($linksArray, null, array('class'=>'idTabs padding-10'), false);?>
+
+<h3><?php echo $this->getTranslation('Copy Permissions');?></h3>
+<p class="padding-10"><?php echo $this->getTranslation("If you have another group that already has the same permissions as this group you can copy that group's role.");?></p><?php
+
+echo $this->aclForm;

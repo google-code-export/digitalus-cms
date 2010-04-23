@@ -1,0 +1,8 @@
+<?php
+$select = $this->selectBlog('blog', $this->getData('blog', $this->data->get));
+if ($select instanceof Zend_Form_Element) {
+    $select->setLabel($this->getTranslation('Select a blog'))
+           ->setValue($this->getData('blog', $this->data->get))
+           ->setBelongsTo('module');
+}
+echo $select;

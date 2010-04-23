@@ -1,0 +1,41 @@
+<?php ?>
+<div class="slideshowWrapper">
+    <div class="slideWrapper">
+        <div class="navigator">
+            <span class="leftLinks"><?php
+                if ($this->pageLinks->first == null) {
+                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_first_disabled.png" alt="first slide" /></a>';
+                } else {
+                    echo '<a href="' . $this->pageLinks->first . '"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_first.png" alt="first slide" /></a>';
+                }
+                if ($this->pageLinks->previous == null) {
+                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_previous_disabled.png" alt="previous slide" /></a>';
+                } else {
+                    echo '<a href="' . $this->pageLinks->previous . '"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_previous.png" alt="previous slide" /></a>';
+                }?>
+            </span>
+            <span class="imageTitle"><?php echo $this->slide->title;?></span>
+            <span class="rightLinks"><?php
+                if ($this->pageLinks->next == null) {
+                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_next_disabled.png" alt="next slide" /></a>';
+                } else {
+                    echo '<a href="' . $this->pageLinks->next . '"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_next.png" alt="next slide" /></a>';
+                }
+                if ($this->pageLinks->last == null) {
+                    echo '<a href="#"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_last_disabled.png" alt="last slide" /></a>';
+                } else {
+                    echo '<a href="' . $this->pageLinks->last . '"><img src="' . $this->getBaseUrl() . '/images/icons/silk/resultset_last.png" alt="last slide" /></a>';
+                }?>
+            </span>
+            <br class="clear" />
+        </div>
+        <div class="imageWrapper">
+            <a href="<?php echo $this->getBaseUrl() . '/' . $this->slide->imagePath;?>"><img src="<?php echo $this->getBaseUrl() . '/' . $this->slide->previewPath;?>" alt="<?php echo $this->slide->title . ' ' . $this->getTranslation('image');?>" /></a>
+        </div>
+        <div class="caption"><?php
+            $textile = new Digitalus_Content_Renderer_Textile();
+            echo $textile->textileThis($this->slide->caption);?>
+        </div>
+        <p class="slideIndex"><?php echo $this->getTranslation('Slide') . ' ' . $this->index . ' ' . $this->getTranslation('of') . ' ' . $this->count;?></p>
+    </div>
+</div>

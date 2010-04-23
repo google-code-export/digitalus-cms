@@ -1,0 +1,28 @@
+<p><?php echo $this->getTranslation('Click the new parent page for this page to move it.')?></p><?php
+
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/jquery.treeview.min.js');
+$this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/jquery.cookie.js');
+
+$this->jQuery()->onLoadCaptureStart();?>
+    $("#parentTree").treeview({
+        persist:   'cookie',
+        collapsed: true,
+        unique:    true
+    });<?php
+$this->jQuery()->onLoadCaptureEnd();
+
+$form = new Digitalus_Form();
+
+$html = $this->renderFileBrowser(0, '/admin/page/move/id/' . $this->pageId . '/parent/', null, 0, $id = 'parentTree', true, $this->pageId, $this->pageId, false);
+$movePage = $form->createElement('AnyMarkup', 'move_page', array(
+    'value'         => $html,
+    'decorators'    => array('ViewHelper'),
+));
+
+$form->addElement($movePage)
+     ->addDisplayGroup(
+         array('form_instance', 'move_page'),
+         'movePageGroup',
+         array('legend' => $this->getTranslation('Move Page'))
+     );
+echo $form;

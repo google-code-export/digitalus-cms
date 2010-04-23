@@ -1,0 +1,10 @@
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('My Pages'));
+
+$mdlPage = new Model_Page();
+$list = $this->renderPublishedPagesList(Model_Page::UNPUBLISH_ID);
+if ($list != null) {
+    echo '<p>'
+           . $this->getTranslation('The following pages have not been published yet!')
+           . $list
+       . '</p>';
+}?>

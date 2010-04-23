@@ -1,0 +1,13 @@
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Current Slides'));
+if ($this->slides != null) {
+    echo '<ul>';
+    foreach ($this->slides as $slide) {
+        echo '<li>' . $this->link($slide->title, '/mod_slideshow/slide/edit/id/' . $slide->id, 'picture.png') . '</li>';
+    }
+    echo '</ul>';
+    if (count($this->slides) > 1) {
+        echo '<p>' . $this->link('Reorder Slides', '/mod_slideshow/slide/reorder/show/' . $this->show->id, 'arrow_switch.png') . '</p>';
+    }
+} else {
+  echo '<p>' . $this->getTranslation('This show does not have any slides') . '</p>';
+}

@@ -1,0 +1,19 @@
+/* CSS Document */
+.handle {
+    display: block;
+    float: left;
+    width: 24px;
+    height: 24px;
+    cursor: move;
+}
+
+.ui-sortable li {
+    margin: 0 2px 2px 2px;
+    padding: 0.1em;
+    font-size: 1.2em;
+    min-height: 18px;
+}
+
+.ui-sortable li input[type=text] {
+    font-size: 0.8em;
+}

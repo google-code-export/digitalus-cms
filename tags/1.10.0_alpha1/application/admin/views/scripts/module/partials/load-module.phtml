@@ -1,0 +1,47 @@
+<?php
+$elementName = $this->element->getName();
+$values      = $this->element->getXml();
+
+//load values as url parameters
+$module = null;
+$paramsString = null;
+if (isset($values) && !empty($values->module) && '' != $values->module) {
+    foreach ($values as $k => $v) {
+        $params[$k] = $v;
+#        $params[]   = $k;
+#        $params[]   = $v;
+    }
+    $paramsString = implode('/', $params) . '/';
+    $module = $values->module;
+}
+$attribs = $this->element->getAttribs();
+if (!is_array($attribs)) {
+    $attribs = null;
+}
+$select = $this->selectModule($elementName, $module, $attribs);
+$select->setLabel($this->element->getLabel())
+       ->setAttrib('class', $this->class);
+if (isset($values->module) && !empty($values->module)) {
+    $select->setValue($values->module);
+}
+echo $select;?>
+
+<div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper"><?php
+    if (isset($values->module)) {
+        $params['element']   = $elementName;
+        $params['moduleKey'] = $values->module;
+        echo $this->action('render-form', 'module', 'admin', $params);
+    }?>
+</div><?php
+
+// make sure this only loads once for each element
+if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
+    $this->jQuery()->onLoadCaptureStart();?>
+        $('#<?php echo $select->getAttrib('id');?>').change(function(){
+            var module = $(this).val();
+            $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName();?>/moduleKey/' + module);
+        });<?php
+    $this->jQuery()->onLoadCaptureEnd();
+    Zend_Registry::set($elementName . 'Jquery', true);
+}
+echo $this->formErrors($this->element->getMessages());

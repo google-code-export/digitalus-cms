@@ -1,0 +1,39 @@
+<?php
+
+
+/**
+ * Digitalus CMS
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
+ *
+ * @category   Digitalus CMS
+ * @package    Digitalus_CMS_Models
+ * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version    $Id: Person.php Sun Dec 23 11:24:28 EST 2007 11:24:28 forrest lyman $
+ */
+
+class Model_Person extends Zend_Db_Table_Abstract
+{
+    /**
+     * table name
+     *
+     * @var string
+     */
+    protected $_name = 'people';
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_name = Digitalus_Db_Table::getTableName($this->_name);
+    }
+
+}

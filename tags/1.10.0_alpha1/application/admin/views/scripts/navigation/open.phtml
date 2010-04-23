@@ -1,0 +1,77 @@
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update Menu'));
+
+$iconSource = $this->getBaseUrl() . '/images/icons/silk/';
+
+$this->jQuery()->onLoadCaptureStart();
+    echo $this->JquerySortable('ul.sortable');?>
+    $(".visibility").click(function() {
+        var rowId = $(this).attr('id');
+        var val = $("#" + rowId + "_val").val();
+        if (val == 1) {
+            $(this).attr('src', "<?php echo $iconSource;?>lightbulb_off.png");
+            $("#" + rowId + "_val").val(0);
+        } else {
+            $(this).attr('src', "<?php echo $iconSource;?>lightbulb.png");
+            $("#" + rowId + "_val").val(1);
+        }
+    });<?php
+$this->jQuery()->onLoadCaptureEnd();
+
+$list = '<ul class="sortable">';
+$mdlMenu = new Model_Menu();
+foreach ($this->menu as $item) {
+    $row  = $this->formHidden('id[]', $item->id);
+    $row .= '<span class="default">(' . $item->name . ')</span> ';
+#    $row .= $this->formText('label[]', $item->label) . ' ';
+
+    //visibility
+    if ($item->show_on_menu == 1) {
+        $eyeSource = 'lightbulb.png';
+        $alt = 'on';
+    } else {
+        $eyeSource = 'lightbulb_off.png';
+        $alt = 'off';
+    }
+
+    $row .= $this->formHidden('show_on_menu[]', $item->show_on_menu, array('id' => 'visibility_' . $item->id . '_val'));
+    $row .= ' <img src="' . $iconSource . $eyeSource . '" title="' . $this->getTranslation('click to toggle visibility') . '" class="icon visibility" id="visibility_' . $item->id . '" alt="' . $alt . '" />';
+    $row .= $this->link($this->getTranslation('open page'), '/admin/page/edit/id/' . $item->id, 'page_white_go.png', 'page', null, true);
+    if ($mdlMenu->hasMenu($item->id)) {
+        $row .= $this->link(null, '/admin/navigation/open/id/' . $item->id, 'text_indent.png');
+    }
+    $rows[] = $row;
+    $list .= '<li class="ui-state-default sortableItem"><span class="handle ui-icon ui-icon-arrowthick-2-n-s"></span>' . $row . '</li>';
+    unset($row);
+}
+$list .= '</ul>';
+
+$form = new Digitalus_Form();
+$form->init();
+$form->setAction($this->getBaseUrl() . '/admin/navigation/edit');
+
+$menuId = $form->createElement('hidden', 'menuId', array(
+    'value'         => $this->menuId,
+    'decorators'    => array('ViewHelper'),
+));
+$sortableList = $form->createElement('AnyMarkup', 'sortableList', array(
+    'value'         => $list,
+    'decorators'    => array(
+        'ViewHelper',
+        array('HtmlTag', array('tag' => 'div'))
+    ),
+));
+$navigationSubmit = $form->createElement('submit', 'save', array(
+    'label'         => $this->getTranslation('Save Changes'),
+    'attribs'       => array('class' => 'submit'),
+    'decorators'    => array('ViewHelper'),
+));
+$form->addElement($menuId)
+     ->addElement($sortableList)
+     ->addElement($navigationSubmit);
+$group = $form->addDisplayGroup(
+    array('form_instance', 'menuId', 'sortableList', 'save'),
+    'navigationGroup',
+    array('legend' => $this->getTranslation('Menu Order'))
+);
+
+echo $form;

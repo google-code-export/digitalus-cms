@@ -1,0 +1,38 @@
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('My Dashboard'));
+
+$u = new Model_User();
+$user = $u->getCurrentUser();
+
+if ($this->isAllowed('admin', 'user', 'update-my-account')) {
+    echo $this->form;
+}
+
+echo '<fieldset class="formColumn">';
+echo '    <legend>' . $this->getTranslation('My Bookmarks') . '</legend>';
+echo $this->renderBookmarks();
+echo '</fieldset>';?>
+
+<br />
+<p class="clearBoth"><?php echo $this->getTranslation('The writeboard is a personal spot for you to keep notes about your site.');?></p><?php
+
+$writeBoardForm = new Digitalus_Form();
+$content = $writeBoardForm->createElement('textarea', 'content', array(
+    'value' => $this->notes->content,
+));
+$submit = $writeBoardForm->createElement('submit', 'submit', array(
+    'label' => $this->getTranslation('Save My Writeboard'),
+));
+$writeBoardForm->addElement($content)
+               ->addElement($submit);
+
+$writeBoardForm->setAction($this->getBaseUrl() . '/admin/index/notes')
+               ->addDisplayGroup(
+                    array('form_instance', 'content', 'submit'),
+                    'writeboardGroup',
+                    array(
+                        'legend'  => $this->getTranslation('My Writeboard'),
+                        'class'   => 'clear',
+                    )
+                )
+                ->setAttrib('id', 'notes');
+echo $writeBoardForm;

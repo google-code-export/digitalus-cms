@@ -1,0 +1,46 @@
+# Language File – MOD_SLIDESHOW
+# SWEDISH
+# ----- slideshow module -----
+"Digitalus CMS";"Digitalus CMS"
+"Slideshow";
+# admin section -- Index --
+"Create Slideshow";
+"Current Shows";
+"You do not have any slideshows currently";
+"Slideshow Module";
+"About";
+"The slideshow module enables you to publish slideshows on your site.";
+"These slideshows consist of slides which each contain a picture, a title, and description. You can sort these slides to display in any order.";
+"Create a new slideshow";
+"Select the slideshow";
+"image";
+"Slide";
+"of";
+# admin section -- Show --
+"Update Slideshow";
+"Add New Slide";
+"Current Slides";
+"Reorder Slides";
+"This show does not have any slides";
+"Update Show";
+"Slideshow Name";
+"Description";
+# admin section -- Slide --
+"Update Slide";
+"Slide Options";
+"slideshow";
+"Slides";
+"To change the order a slide is displayed in click the drag icon next to the item and move the item up or down.";
+"Then click Done Reordering Slides to save your changes.";
+"Done Reordering Slides";
+"Current Image";
+"Image Preview (scaled)";
+"Image";
+"Caption";
+"There are no slideshows to view!";
+"Select One";
+"Title";
+"Written by";
+"on";
+"View All";
+# END

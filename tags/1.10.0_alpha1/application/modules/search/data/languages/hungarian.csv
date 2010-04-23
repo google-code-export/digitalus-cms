@@ -1,0 +1,22 @@
+# Language File – MOD_SEARCH
+# HUNGARIAN
+# ----- search module -----
+"Digitalus CMS"
+"Site Search";"Keresés az oldalon"
+# admin section -- Index --
+"Search";"Keresés"
+"The search index was rebuilt successfully!";"A keresőindex sikeresen ujragenerálva"
+"Rebuild search";"Keresés ujragenerálása"
+"Search Module";"Keresőmodul"
+"The search module utilizes the Lucene search engine to build, manage and query search indexes on your site.";
+"Rebuilding the search index is very processor intensive, so Digitalus does not rebuild it each time you update your site. When you update your site open this module, and click the Rebuild Search Index link.";"A kereső indexének ujragenerálása igen forrásigényes, ezért nem történik meg automatikus.Tartalmi frissítés után kattintson a Rebuild Search-el az újraindexelés gombra"
+"The search form does not have any user defined settings.";"A keresőform nem tartalmaz egyéni beállítást"
+"Search Site";"Keresés az oldalon"
+"Keywords";"kifejezés"
+"Your search for";"Az Ön által keresett "
+"returned";"találatok száma"
+"results.";"összesen"
+"did not return any results.";"nincs találat"
+"Please provide a keyword to search for!";"kérem adjon meg 1 keresett szót"
+"For the search module to work properly, the index directory must be writeable! Please check the permissions of this directory:";"Az index mappának írhatónak kell lennia a kereső modul működéséhez, ezt kérem ellenőrizze"
+# END

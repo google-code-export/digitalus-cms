@@ -1,0 +1,46 @@
+# Language File – MOD_SLIDESHOW
+# SPANISH
+# ----- slideshow module -----
+"Digitalus CMS";"Digitalus CMS"
+"Slideshow";"Diapositivas"
+# admin section -- Index --
+"Create Slideshow";"Crear una Diapositiva (conjunto)"
+"Current Shows";"Muestra Actual"
+"You do not have any slideshows currently";"Actualmente, no tenés diapositivas"
+"Slideshow Module";"Modulo de Diapositivas"
+"About";"Sobre"
+"The slideshow module enables you to publish slideshows on your site.";"El modulo de diapositivas te permite publicar diapositivas en tu sitio"
+"These slideshows consist of slides which each contain a picture, a title, and description. You can sort these slides to display in any order.";"Estas diapositivas son un conjunto donde cada una tiene título, imagen y  descripción, puede alterarse el orden de las mismas."
+"Create a new slideshow";"Crear una Diapositiva (conjunto)"
+"Select the slideshow";"Elija una diapositiva"
+"image";"Imagen"
+"Slide";"Diapositivas"
+"of";"de"
+# admin section -- Show --
+"Update Slideshow";"Actualizar Diapositivas (conjunto)"
+"Add New Slide";"Agregar Nueva Diapositiva"
+"Current Slides";"Diapositivas Actuales"
+"Reorder Slides";"Reordenar diapositivas"
+"This show does not have any slides";"Este conjunto de diapositivas no tienen ninguna diapositiva para mostrar"
+"Update Show";"Actualizar Diapositivas (conjunto)"
+"Slideshow Name";"Nombre de Diapositiva"
+"Description";"Descripción"
+# admin section -- Slide --
+"Update Slide";"Actualizar Disapositiva"
+"Slide Options";"Opciones de Diapositivas"
+"slideshow";
+"Slides";
+"To change the order a slide is displayed in click the drag icon next to the item and move the item up or down.";"Para cambiar el orden que tienen las diapositivas haga click en el icono y muevalas hacia arriba o hacia abajo"
+"Then click Done Reordering Slides to save your changes.";"Haga click en hecho Reordenando diapositivas para salvar los cambios"
+"Done Reordering Slides";"Hecho Reordenado de Diapositivas"
+"Current Image";"Imagen Actual"
+"Image Preview (scaled)";"Vista previa de la imagen (en escala)"
+"Image";"Imagen"
+"Caption";"Leyenda"
+"There are no slideshows to view!";"No hay diapositivas (conjunto) para ver"
+"Select One";"Seleccione una"
+"Title";"Título"
+"Written by";"Escrito por"
+"on";"El"
+"View All";"Ver todas"
+# END

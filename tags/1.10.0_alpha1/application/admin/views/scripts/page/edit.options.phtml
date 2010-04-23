@@ -1,0 +1,30 @@
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Page Options'));?>
+<?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/idTabs.js');?>
+
+<ul class="idTabs">
+    <li><?php echo $this->getTranslation('Content Sections');?>
+        <ul><?php
+            foreach ($this->contentPanes as $id => $title) {?>
+            <li><?php echo $this->link($title, '#fieldset-' . $id, 'bullet_black.png');?></li><?php
+            }?>
+        </ul>
+    </li><?php
+if ($this->isAllowed('admin', 'page', 'update-meta-data')) {?>
+    <li><?php echo $this->link('Page Head and Meta Data', '#meta', 'page_white_code.png');?></li><?php
+}
+if ($this->isAllowed('admin', 'page', 'update-properties')) {?>
+    <li><?php echo $this->link('Properties', '#properties', 'textfield_add.png');?></li><?php
+}
+if ($this->isAllowed('admin', 'page', 'update-template')) {?>
+    <li><?php echo $this->link('Content Template', '#template', 'application_form.png');?></li><?php
+}
+if ($this->isAllowed('admin', 'page', 'move')) {?>
+    <li><?php echo $this->link('Move Page', '#move', 'arrow_turn_right.png');?></li><?php
+}
+if ($this->isAllowed('admin', 'page', 'publish')) {?>
+    <li><?php echo $this->link('Publish / Archive', '#publish', 'page_key.png');?></li><?php
+}?>
+</ul>
+
+<h3><?php echo $this->getTranslation('Page Versions');?></h3><?php
+echo $this->render('page/partials/page-versions.phtml', array('pageId' => $this->pageId, 'version' => $this->currentVersion));

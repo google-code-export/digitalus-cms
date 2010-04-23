@@ -1,0 +1,13 @@
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Update User'));
+
+echo $this->form;?>
+
+<form id="password" action="<?php echo $this->getBaseUrl();?>/admin/user/open/username/<?php echo $this->userName;?>" method="post">
+    <fieldset>
+        <legend><?php echo $this->getTranslation('Login Credentials');?></legend><?php
+            echo $this->formHidden('username', $this->userName);
+            echo $this->formRow($this->getTranslation('Password'), $this->formPassword('newPassword'));
+            echo $this->formRow($this->getTranslation('Confirm Password'), $this->formPassword('newConfirmPassword'));
+            echo $this->formRow('&nbsp;', $this->formSubmit('admin_user_password', $this->getTranslation('Update Password')));?>
+    </fieldset>
+</form>

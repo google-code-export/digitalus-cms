@@ -1,0 +1,31 @@
+# Language File – MOD_CONTACT
+# ITALIAN
+# ----- contact module -----
+"Digitalus CMS";"Digitalus CMS"
+"Contact Form";"Modulo di contatto"
+# admin section – Contact --
+"Contact";"Contatto"
+"Module";"Modulo"
+"Options";"Opzioni"
+"The contact module enables you to publish contact forms on your site.";"Il modulo contatti ti  permette di pubblicare moduli di contatto sul tuo sito."
+"You can set the following options on the contact form:";"Puoi impostare le seguenti opzioni nel modulo di contatto:"
+"Recipient";"Recipiente"
+"who you want to receive the messages";"chi vuoi che riceva il tuo messaggio"
+"Recipient's email";"Email del recipiente"
+"the recipient's email address";"indirizzo email del recipiente"
+"Your Name";"Il tuo nome"
+"Your name is required!";"Il tuo nome è obbligatorio!"
+"Your Email";"La tua email"
+"Invalid email address!";"Indirizzo email non valido!"
+"Subject";"Oggetto"
+"The subject is required!";"L'oggetto è obbligatorio!"
+"Message";"Messaggio"
+"The message is required!";"Il messaggio è obbligatorio!"
+"Please verify you're a human";"Dimostrami che sei un umano"
+"Send Message";"Invia messaggio"
+"Enter the recipients email:";"Inseirisci l'email del recipiente:"
+"Thanks for contacting us!";"Grazie per averci contattato!"
+"Your message was successfully sent and we will reply promptly.";"Il tuo messaggio è stato inviato con successo e risponderemo prontamente."
+"New message from";"Nuovo messaggio da"
+"Sent on";"Inviato il"
+# END

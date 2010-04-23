@@ -1,0 +1,64 @@
+<?php
+$this->jQuery()->onLoadCaptureStart();?>
+    $("a.remove").click(function() {
+        $(this).parent().remove();
+        return false;
+    });
+    $("a#addprop").click(function() {
+        $("#propertyList").append("<p class='propRow'><input type='text' name='key[]' /><input type='text' name='value[]' /><a href='#' class='remove'><?php echo $this->getTranslation('Remove');?></a></p>");
+        $("a.remove").click(function() {
+            $(this).parent().remove();
+        });
+        return false;
+    });<?php
+$this->jQuery()->onLoadCaptureEnd();
+
+$form = new Digitalus_Form();
+$hidden = $form->createElement('hidden', 'page_id', array(
+    'value' => $this->page->page->id,
+));
+
+$html = '<p id="propLabels">'
+      . '    <span>' . $this->getTranslation('Property') . '</span>'
+      . '    <span>' . $this->getTranslation('Value') . '</span>'
+      . '</p>';
+$html .= '<div id="propertyList">';
+if (is_array($this->properties)) {
+    foreach ($this->properties as $k => $v) {
+        $html .= '<p class="propRow">'
+            .  $this->formText('key[]', $k)
+            .  $this->formText('value[]', $v)
+            . '<a href="#" class="remove">' . $this->getTranslation('Remove') . '</a>'
+            .  '</p>';
+    }
+}
+$html .= '<p class="propRow">'
+      .  $this->formText('key[]')
+      .  $this->formText('value[]')
+      .  '</p>';
+$html .= '</div>';
+$html .= '<br class="clearBoth" />'
+      .  '<p><a href="#" id="addprop">' . $this->getTranslation('Add a new property') . '</a></p>';
+
+$pageProperties = $form->createElement('AnyMarkup', 'page_properties', array(
+    'value'         => $html,
+    'decorators'    => $form->getStandardDecorator('text'),
+));
+
+$submit = $form->createElement('submit', 'save', array(
+    'label' => $this->getTranslation('Update properties'),
+));
+
+$form->addElement($hidden)
+     ->addElement($pageProperties)
+     ->addElement($submit);
+
+$form->setAction($this->getBaseUrl() . '/admin/page/update-properties')
+     ->setAttrib('id', 'propertiesForm')
+     ->addAttribs(array('class' => 'formBox'))
+     ->addDisplayGroup(
+         array('form_instance', 'page_id', 'page_properties', 'save'),
+         'pagePropertiesGroup',
+         array('legend' => $this->getTranslation('Edit Page Properties'))
+     );
+echo $form;

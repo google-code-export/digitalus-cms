@@ -1,0 +1,9 @@
+# Language File – MOD_FORWARD
+# GERMAN
+# ----- forward module -----
+"Digitalus CMS";"Digitalus CMS"
+"Forward";"Weiterleitung"
+"The forward module enables you to forward a page to a subcontent page.";"Das Forward Modul ermöglicht eine Weiterleitung zu einer Unterseite."
+"You can set the following options for the forwarder:";"Folgende Werte sind im Forward Modul konfigurierbar:"
+"Enter forward path";"Weiterleitungspfad"
+"Forward to page with this path.";"Zur Seite mit diesem Pfad weiterleiten."

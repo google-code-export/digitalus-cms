@@ -1,0 +1,46 @@
+# Language File – MOD_SLIDESHOW
+# ITALIAN
+# ----- slideshow module -----
+"Digitalus CMS";"Digitalus CMS"
+"Slideshow";
+# admin section -- Index --
+"Create Slideshow";
+"Current Shows";
+"You do not have any slideshows currently";
+"Slideshow Module";
+"About";
+"The slideshow module enables you to publish slideshows on your site.";
+"These slideshows consist of slides which each contain a picture, a title, and description. You can sort these slides to display in any order.";
+"Create a new slideshow";
+"Select the slideshow";
+"image";
+"Slide";
+"of";
+# admin section -- Show --
+"Update Slideshow";
+"Add New Slide";"Aggiungi nuova diapositiva"
+"Current Slides";"Diapositive correnti"
+"Reorder Slides";"Riordina diapositive"
+"This show does not have any slides";"Questo slideshow non ha nessuna diapositiva"
+"Update Show";"Aggiorna slideshow"
+"Slideshow Name";"Nome dello slideshow"
+"Description";"Descrizione"
+# admin section -- Slide --
+"Update Slide";"Aggiorna diapositiva"
+"Slide Options";"Opzioni diapositiva"
+"slideshow";"slideshow"
+"Slides";"Diapositive"
+"To change the order a slide is displayed in click the drag icon next to the item and move the item up or down.";
+"Then click Done Reordering Slides to save your changes.";
+"Done Reordering Slides";"Riordinamento completato"
+"Current Image";"Immagine corrente"
+"Image Preview (scaled)";"Anteprima immagine (scalata)"
+"Image";"Immagine"
+"Caption";"Legenda"
+"There are no slideshows to view!";"Non ci sono slideshow da visualizzare!"
+"Select One";"Selziona uno"
+"Title";"Titolo"
+"Written by";"Scritto da"
+"on";"il"
+"View All";"Visualizza tutti"
+# END

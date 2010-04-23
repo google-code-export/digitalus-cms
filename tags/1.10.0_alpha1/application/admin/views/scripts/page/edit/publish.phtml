@@ -1,0 +1,43 @@
+<?php
+$radioOptions = array(
+    Model_Page::PUBLISH_ID       => $this->getTranslation('Publish'),
+    Model_Page::UNPUBLISH_STATUS => $this->getTranslation('Unpublish'),
+    Model_Page::ARCHIVE_STATUS   => $this->getTranslation('Archive'),
+);
+
+$mdlPage = new Model_Page();
+
+echo '<p>' . $this->getTranslation('Change the status of this page.') . '</p>';
+
+if ($mdlPage->isPublished($this->pageId)) {
+    echo '<p>' . $this->getTranslation('This page was published on') . ': ' . $this->renderDate($this->publishDates['publish_date']) . '</p>';
+}
+if ($mdlPage->getPublishLevel($this->pageId) === Model_Page::ARCHIVE_ID) {
+    echo '<p>' . $this->getTranslation('This page was archived on') . ': ' . $this->renderDate($this->publishDates['archive_date']) . '</p>';
+}
+echo '<p>' . $this->getTranslation('The status of this page is') . ': ' . $this->getTranslation($mdlPage->getPublishLevel($this->pageId)) . '</p><br />';
+
+$form = new Digitalus_Form();
+$hidden = $form->createElement('hidden', 'id', array(
+    'value' => $this->pageId,
+));
+$radio = $form->createElement('radio', 'publish', array(
+    'value'        => $mdlPage->getPublishLevel($this->pageId),
+    'multiOptions' => $radioOptions,
+    'listSep'      => PHP_EOL,
+));
+$submit = $form->createElement('submit', 'publishSubmit', array(
+    'label' => $this->getTranslation('Change publishing state'),
+));
+
+$form->addElement($hidden)
+     ->addElement($radio)
+     ->addElement($submit);
+
+$form->setAction($this->getBaseUrl() . '/admin/page/publish')
+     ->addDisplayGroup(
+         array('form_instance', 'id', 'publish', 'publishSubmit'),
+         'pagePublishGroup',
+         array('legend' => $this->getTranslation('Publish / Archive Page'))
+     );
+echo $form;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+    <version>
+        <digitalus>1.10</digitalus>
+        <this>1.0</this>
+    </version>
+    <icon>magnifier.png</icon>
+    <label>Site Search</label>
+    <adapters>
+        <adapter>
+            <classname>Search_Adapter_Content</classname>
+            <filepath>./application/modules/search/adapter/Content.php</filepath>
+        </adapter>
+    </adapters>
+    <pathToIndex>./application/modules/search/data/index</pathToIndex>
+</properties>

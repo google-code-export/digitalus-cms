@@ -1,0 +1,14 @@
+<?php $this->placeholder('optionsHeadline')->set($this->getTranslation('Tools'));?>
+<p class="padding-10"><?php echo $this->link('Preview Design', '/p/preview_design/' . $this->design->getValue('id'), 'monitor_go.png', 'link', '_blank');?></p>
+<h3><?php echo $this->getTranslation('Who Uses This?');?></h3>
+<p class="padding-10"><?php echo $this->getTranslation('These are the pages that use this design:');?></p>
+<?php
+if (is_object($this->pages) && $this->pages->count() != 0) {
+    $links = array();
+    foreach ($this->pages as $page) {
+        $links[] = $this->link($page->name, '/admin/page/edit/id/' . $page->id, 'page_white.png');
+    }
+    echo $this->htmlList($links, null, array('class'=>'padding-10'), false);
+} else { ?>
+<p class="padding-10"><?php echo $this->getTranslation('No pages use this design currently.');?></p><?php
+} ?>

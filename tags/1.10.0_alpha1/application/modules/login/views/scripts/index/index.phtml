@@ -1,0 +1,19 @@
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Login Module'));
+
+if (isset($this->errorMessage) && !empty($this->errorMessage)) {?>
+    <p class="notice"><?php
+        echo $this->getTranslation($this->errorMessage) . '<br />';?>
+    </p><?php
+}?>
+
+<p><?php echo $this->getTranslation('The login module enables Your website visitors to login and self-register for Your services.');?></p>
+<p><?php echo $this->getTranslation('The registration process is split into two parts.');?></p>
+<p><?php echo $this->getTranslation('The website vistor is presented a form containing a field for username and email address. After sending his information he is presented his new password on the screen (it is not sent via email)');?></p>
+<p><?php echo $this->getTranslation('An email is sent to the new member with a request to confirm the email address, which is done with a link to Your website (challenge approach).');?></p>
+<p><?php echo $this->getTranslation('A special database is needed which holds the challenge data. Please verify that this database exists.');?></p><br />
+
+<fieldset>
+    <p><?php echo $this->getTranslation('You can set the following options for the challenge module:');?></p>
+    <dt><?php echo $this->getTranslation('Acl role') . ':';?></dt><dd><?php echo $this->getTranslation('The Acl role for new members.');?></dd>
+    <dt><?php echo $this->getTranslation('Confirmation email content') . ':';?></dt><dd><?php echo $this->getTranslation('The content of the confirmation email sent to the new member.');?></dd>
+</fieldset>

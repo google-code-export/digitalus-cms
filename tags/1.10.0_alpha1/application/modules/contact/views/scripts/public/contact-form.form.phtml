@@ -1,0 +1,13 @@
+<?php
+$form = new Digitalus_Form();
+$element = $form->createElement('text', 'email', array(
+    'label'     => $this->getTranslation("Enter the recipient's email"),
+    'value'     => $this->getData('email', $this->data->get),
+    'belongsTo' => 'module',
+    'required'      => true,
+    'filters'       => array('StringTrim'),
+    'validators'    => array('EmailAddress'),
+    'attribs'       => array('size' => 50),
+    'errorMessages' => array('A valid email address is required'),
+));
+echo $element;

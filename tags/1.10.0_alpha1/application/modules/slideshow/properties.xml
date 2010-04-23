@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+    <version>
+        <digitalus>1.10</digitalus>
+        <this>1.0</this>
+    </version>
+    <icon>pictures.png</icon>
+    <label>Slideshow</label>
+    <mediaFolder>slideshows</mediaFolder>
+</properties>

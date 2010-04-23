@@ -1,0 +1,12 @@
+<?php
+echo $this->form;
+
+if (!empty($this->searchResults)) {?>
+    <p><?php echo $this->getTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->getTranslation('returned') . ' ' . count($this->searchResults) . ' ' . $this->getTranslation('results.');?></p><?php
+    foreach ($this->searchResults as $result) {?>
+        <a href="/<?php echo $result->page_link; ?>"><h3><?php echo $result->page_title; ?></h3></a>
+        <p><?php echo $result->page_teaser; ?></p><?php
+    }
+} else if (isset($this->keywords) && !empty($this->keywords)) {?>
+    <p><?php echo $this->getTranslation('Your search for') . ' <em>' . $this->keywords . '</em> ' . $this->getTranslation('did not return any results.');?></p><?php
+}
