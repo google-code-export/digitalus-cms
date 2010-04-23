@@ -1,9 +1,12 @@
-#labels Phase-Deploy
+#labels Phase-Deploy,Featured,Alpha1-Release
 = Introduction =
-==*_Version 1.10 is currently being developed in SVN_*==
+==*_Version 1.10 is currently being developed and has been released as first alpha version*==
 
 In version 1.10 of the Digitalus CMS have been made some significant changes in the database structure, especially regarding the database _users_ and _pages_.
-This requires an update of the databases. To achieve this, both an SQL file and a Digitalus Command are provided.
+This requires an update of the databases.
+To achieve this, both an SQL file and a Digitalus Command are provided.
+
+*WARNING: Updating existing databases doesn't work yet!*
 
 = Significant changes and new features =
 Update of the Zend Framework to version [http://framework.zend.com/releases/ZendFramework-1.10.3/ZendFramework-1.10.3-minimal.zip 1.10.3]
@@ -16,15 +19,21 @@ The _models_ directory has also been moved into the _admin_ module directory.
 
 The _language_ directory has been renamed to _languages_ with a trailing _s_. This also affects the modules. Modules' translation files have to reside in a directory called _languages_.
 
-In version 1.10 some changes to the model _users_ have been made. It is now possible (and required) to define a username for each user. In a first step, the email address is copied to use as username (by database update).
+In version 1.10 some changes to the model _users_ have been made. It is now possible (and required) to define a username for each user. The superuser's username is _administrator_.
+In the update process, the email address is copied to use as username (by database update).
 Users can now be (de)activated.
-This comes along with a registration module to register new users via the frontend.
+This comes along with a login/registration module to register new users via the frontend.
 
-In modules until v1.10 it was only possible to assign a frontend action (PublicController) to a page. Now it's possible to define the action name via a url parameter. Simply add _/p/a/ACTIONNAME_ to the url and the action _ACTIONNAME_ will be performed instead of the indexAction.
+In modules until v1.10 it was only possible to assign one single frontend action (PublicController) to a page. Now it's possible to define the action name via a url parameter. Simply add _/p/a/ACTIONNAME_ to the url and the action _ACTIONNAME_ will be performed instead of the indexAction.
+
+*NOTE: action names must be lowercase! actions musst not require module data from database to work properly. For more details, have a look at the login module.*
 
 Each page now has form fields for _label_ and _headline_. This makes it possible to add not only different page content for each language, but from now on also page labels. These labels appear in the menu respectively in breadcrumbs. This makes the menu fully translatable (a common user request).
+As a drawback, page names now must be unique (case insensitive).
+
 
 =Upgrading from version 1.9=
+==*WARNING: DOESN'T WORK YET*==
 ==Using Digitalus_Command==
 If You want to upgrade Your installation from version 1.9 to 1.10, please perform the following steps:
   * make a backup copy of both - all Your files and Your databases
