@@ -154,26 +154,30 @@ class Admin_AuthController extends Digitalus_Controller_Action
     public function resetPasswordAction()
     {
         if (strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            $email = Digitalus_Filter_Post::get('email');
-            $user = new Model_User();
-            $match = $user->getUserByUsername($email);
+            $userName = Digitalus_Filter_Post::get('name');
+            $user     = new Model_User();
+            $match    = $user->getUserByUsername($userName);
             if ($match) {
                 //create the password
                 $password = Digitalus_Toolbox_String::random(10); //10 character random string
 
                 //load the email data
+                $data['username']   = $match->name;
                 $data['first_name'] = $match->first_name;
-                $data['last_name'] = $match->last_name;
-                $data['username'] = $match->email;
-                $data['password'] = $password;
+                $data['last_name']  = $match->last_name;
+                $data['email']      = $match->email;
+                $data['password']   = $password;
 
                 //get standard site settings
                 $s = new Model_SiteSettings();
                 $settings = $s->toObject();
 
+                $emailFormat = "Hello %s (<em>%s %s</em>),<br /><br />Your password has been reset to:<br /><br /><strong>%s</strong><br /><br />You can login again with Your new Password.<br /><br />Best wishes,<br />%s";
+                $emailText = sprintf($emailFormat, $data['username'], $data['first_name'], $data['last_name'], $data['password'], $settings->default_email_sender);
+
                 //attempt to send the email
                 $mail = new Digitalus_Mail();
-                if ($mail->send($match->email, array($sender), 'Password Reminder', 'passwordReminder', $data)) {
+                if ($mail->send($match->email, array($settings->default_email, $settings->default_email_sender), 'Password Reminder', $emailText)) {
                     //update the user's password
                     $match->password = md5($password);
                     $match->save();//save the new password
