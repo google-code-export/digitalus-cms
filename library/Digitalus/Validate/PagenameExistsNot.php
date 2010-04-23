@@ -43,7 +43,7 @@ class Digitalus_Validate_PagenameExistsNot extends Zend_Validate_Abstract
     const ISPUBLIC = 'isPublic';
 
     protected $_messageTemplates = array(
-        self::EXISTS   => "Another page with Your desired name '%value%' already exists! Please choose a different one!",
+        self::EXISTS   => "Another page with Your desired name '%s' already exists! Please choose a different one!",
         self::ISADMIN  => "The page name must not be 'admin'! Please choose a different one!",
         self::ISPUBLIC => "The page name must not be 'public'! Please choose a different one!",
     );

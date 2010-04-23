@@ -41,7 +41,7 @@ class Digitalus_Validate_UsernameExists extends Zend_Validate_Abstract
     const NOT_EXISTS = 'notUsernameExists';
 
     protected $_messageTemplates = array(
-        self::NOT_EXISTS => "The given user name %value% doesn't exist in the database",
+        self::NOT_EXISTS => "The given user name %s doesn't exist in the database",
     );
 
     /**

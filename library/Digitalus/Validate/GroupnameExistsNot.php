@@ -41,7 +41,7 @@ class Digitalus_Validate_GroupnameExistsNot extends Zend_Validate_Abstract
     const EXISTS = 'groupnameExists';
 
     protected $_messageTemplates = array(
-        self::EXISTS => "Another group already exists with Your desired groupname '%value%'! Please choose a different one!",
+        self::EXISTS => "Another group already exists with Your desired groupname '%s'! Please choose a different one!",
     );
 
     /**

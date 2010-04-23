@@ -41,7 +41,7 @@ class Digitalus_Validate_OpenIdExists extends Zend_Validate_Abstract
     const EXISTS = 'openIdExists';
 
     protected $_messageTemplates = array(
-        self::EXISTS => "Another user already exists with the openId '%value%'!",
+        self::EXISTS => "Another user already exists with the openId '%s'!",
     );
 
     public function isValid($value)

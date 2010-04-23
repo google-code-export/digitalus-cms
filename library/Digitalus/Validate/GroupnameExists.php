@@ -41,7 +41,7 @@ class Digitalus_Validate_GroupnameExists extends Zend_Validate_Abstract
     const NOT_EXISTS = 'notGroupnameExists';
 
     protected $_messageTemplates = array(
-        self::NOT_EXISTS => "A group with the given name '%value%' doesn't exist!",
+        self::NOT_EXISTS => "A group with the given name '%s' doesn't exist!",
     );
 
     /**
