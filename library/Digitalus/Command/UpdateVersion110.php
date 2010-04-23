@@ -17,7 +17,7 @@
  * @package     Digitalus_Core_Library
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id$
+ * @version     $Id: UpdateVersion110.php 729 2010-04-19 20:11:57Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.10
  */
