@@ -38,17 +38,17 @@ class Contact_Form extends Digitalus_Form
                 ->setAttrib('cols', 35)
                 ->setAttrib('rows', 10);
 
-        $font = BASE_PATH . '/media/tpl/fonts/AceCrikey.ttf';
+        $font = APPLICATION_PATH . 'admin/data/fonts/AceCrikey.ttf';
         $captcha = new Zend_Form_Element_Captcha(
             'captcha', array(
                 'label' => $view->getTranslation("Please verify you're a human") . ':',
                 'captcha' => array(
-#                    'captcha' => 'Figlet',
-                    'captcha' => 'Image',
+                    'captcha' => 'Figlet',
+#                    'captcha' => 'Image',
                     'wordLen' => 6,
                     'timeout' => 300,
-                    'font'    => $font,
-                    'fontsize'=> 42,
+#                    'font'    => $font,
+#                    'fontsize'=> 42,
                     'height'  => 100,
                     'width'   => 260,
                 ),
