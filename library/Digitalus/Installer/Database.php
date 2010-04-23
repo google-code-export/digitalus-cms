@@ -292,8 +292,8 @@ class Digitalus_Installer_Database
             ),
             'INSERT INTO `' . $groups . '` VALUES (?, ?, ?, ?, ?)' => array(
                 array('superadmin', NULL,    'Super Administrator', NULL, NULL),
-                array('admin',      'guest', 'Site Administrator',  NULL, NULL),
-                array('guest',      NULL,    'Guest',               NULL, NULL),
+                array('admin',      'guest', 'Site Administrator',  NULL, 'a:3:{s:8:"404_page";s:1:"1";s:12:"site_offline";s:1:"1";s:4:"home";s:1:"1";}'),
+                array('guest',      NULL,    'Guest',               NULL, 'a:3:{s:8:"404_page";s:1:"1";s:12:"site_offline";s:1:"1";s:4:"home";s:1:"1";}'),
             ),
         );
         foreach ($queries as $sql => $inserts) {
@@ -307,12 +307,12 @@ class Digitalus_Installer_Database
     public function insertPages()
     {
         $pages      = Digitalus_Db_Table::getTableName('pages',     $this->_config['prefix']);
-        $pageNodes  = Digitalus_Db_Table::getTableName('pageNodes', $this->_config['prefix']);
+        $pageNodes  = Digitalus_Db_Table::getTableName('page_nodes', $this->_config['prefix']);
         $queries = array(
             'INSERT INTO `' . $pages . '` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)' => array(
-                array(1, 0, 'administrator', time(), time(), time(), time(), 1, 'Site Offline', 'Site Offline', 'content', 'default_default', 1, 0),
-                array(2, 0, 'administrator', time(), time(), time(), time(), 1, '404 Page',     '404 Page',     'content', 'default_default', 0, 0),
-                array(3, 0, 'administrator', time(), time(), time(), time(), 1, 'Home',         'Home',         'content', 'default_default', 2, 1),
+                array(1, 'administrator', time(), time(), time(), time(), 1, 'Site Offline', 'Site Offline', 'content', 'default_default', 0, 1, 0),
+                array(2, 'administrator', time(), time(), time(), time(), 1, '404 Page',     '404 Page',     'content', 'default_default', 0, 0, 0),
+                array(3, 'administrator', time(), time(), time(), time(), 1, 'Home',         'Home',         'content', 'default_default', 0, 2, 1),
             ),
             'INSERT INTO `' . $pageNodes . '` VALUES (?, ?, ?, ?, ?, ?)' => array(
                 array(1, 'errorsite',  'en', 'Site Offline', 'Site Offline',           "Sorry, our site is currently offline for maintenance."),

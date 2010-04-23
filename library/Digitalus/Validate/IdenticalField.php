@@ -21,7 +21,7 @@ require_once 'Zend/Validate/Abstract.php';
  * @license    http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 */
 
-class Digitalus_Validate_IdenticalField extends Zend_Validate_Abstract
+class ZExt_Validate_IdenticalField extends Zend_Validate_Abstract
 {
     const NOT_MATCH = 'notMatch';
     const MISSING_FIELD_NAME = 'missingFieldName';
