@@ -25,21 +25,21 @@ class Digitalus_Mail
     /**
      * the zend view object (used to render the templates)
      *
-     * @var zend_view
+     * @var Zend_View
      */
     private $_view;
 
     /**
      * the mail transport method
      *
-     * @var zend_mail_transport
+     * @var Zend_Mail_Transport
      */
     private $_transport = null;
 
     /**
      * the zend mail object
      *
-     * @var zend_mail
+     * @var Zend_Mail
      */
     private $_mail;
 
@@ -50,7 +50,7 @@ class Digitalus_Mail
     public function __construct()
     {
         $this->_view = new Zend_View();
-        $settings = new Model_SiteSettings();
+        $settings    = new Model_SiteSettings();
         if ($settings->get('use_smtp_mail') == 1) {
             $config = array('auth' => 'Login',
                             'username' => $settings->get('smtp_username'),
@@ -72,7 +72,7 @@ class Digitalus_Mail
      * @param string $cc
      * @return bool
      */
-    public function send($recipient, $from=array(), $subject, $message, $cc=false)
+    public function send($recipient, $from = array(), $subject, $message, $cc = false)
     {
         $config = Zend_Registry::get('config');
         $this->_view->addScriptPath($config->filepath->emailTemplates);
