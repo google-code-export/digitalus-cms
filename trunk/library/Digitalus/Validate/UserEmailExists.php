@@ -41,7 +41,7 @@ class Digitalus_Validate_UserEmailExists extends Zend_Validate_Abstract
     const NOT_EXISTS = 'notEmailExists';
 
     protected $_messageTemplates = array(
-        self::NOT_EXISTS => "The given email doesn't belong to the given username!",
+        self::NOT_EXISTS => "The given email %s doesn't belong to the given username!",
     );
 
     /**

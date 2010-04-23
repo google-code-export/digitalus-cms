@@ -41,7 +41,7 @@ class Digitalus_Validate_UsernameExistsNot extends Zend_Validate_Abstract
     const EXISTS = 'usernameExists';
 
     protected $_messageTemplates = array(
-        self::EXISTS => "Another user already exists with Your desired username '%value%'! Please choose a different one!",
+        self::EXISTS => "Another user already exists with Your desired username '%s'! Please choose a different one!",
     );
 
     /**

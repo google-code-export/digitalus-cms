@@ -32,8 +32,8 @@ class ZExt_Validate_IdenticalField extends Zend_Validate_Abstract
      */
     protected $_messageTemplates = array(
         self::MISSING_FIELD_NAME => 'DEVELOPMENT ERROR: Field name to match against was not provided.',
-        self::INVALID_FIELD_NAME => 'DEVELOPMENT ERROR: The field "%fieldName%" was not provided to match against.',
-        self::NOT_MATCH          => 'Does not match %fieldTitle%.',
+        self::INVALID_FIELD_NAME => 'DEVELOPMENT ERROR: The field "%s" was not provided to match against.',
+        self::NOT_MATCH          => 'Does not match %s.',
     );
 
     /**

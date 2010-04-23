@@ -41,7 +41,7 @@ class Digitalus_Validate_PagenameExists extends Zend_Validate_Abstract
     const NOT_EXISTS  = 'notPagenameExists';
 
     protected $_messageTemplates = array(
-        self::NOT_EXISTS  => "A page with the given page name '%value%' doesn't exist!",
+        self::NOT_EXISTS  => "A page with the given page name '%s' doesn't exist!",
     );
 
     /**
