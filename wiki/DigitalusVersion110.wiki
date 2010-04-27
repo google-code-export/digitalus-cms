@@ -1,12 +1,13 @@
-#labels Phase-Deploy,Featured,Alpha1-Release
+#labels Phase-Deploy,Featured,Alpha2-Release
 = Introduction =
-==*_Version 1.10 is currently being developed and has been released as first alpha version*==
+==*_Version 1.10 is currently being developed and has been released as [http://digitalus-cms.googlecode.com/files/digitalus_1.10.0_alpha2.zip second alpha version]*==
 
 In version 1.10 of the Digitalus CMS have been made some significant changes in the database structure, especially regarding the database _users_ and _pages_.
-This requires an update of the databases.
-To achieve this, both an SQL file and a Digitalus Command are provided.
 
-*WARNING: Updating existing databases doesn't work yet!*
+This requires an update of the databases.
+To achieve this, both an SQL file and a new updating functionality are provided.
+
+Updating the system is not trivial and might fail because a lot of new validators and constraints have been added to obtain a more robust and consistent database.
 
 = Significant changes and new features =
 Update of the Zend Framework to version [http://framework.zend.com/releases/ZendFramework-1.10.3/ZendFramework-1.10.3-minimal.zip 1.10.3]
@@ -32,26 +33,22 @@ Each page now has form fields for _label_ and _headline_. This makes it possible
 As a drawback, page names now must be unique (case insensitive).
 
 
-=Upgrading from version 1.9=
-==*WARNING: DOESN'T WORK YET*==
-==Using Digitalus_Command==
-If You want to upgrade Your installation from version 1.9 to 1.10, please perform the following steps:
-  * make a backup copy of both - all Your files and Your databases
+=Updating from version 1.9=
+*In both cases: make a backup copy of both - all Your files and Your databases*
+
+==New Updater==
   * download the zip file of Digitalus v1.10
-  * start Your webserver and log in into the admin area
-  * go to *_site_*
-  * go to *_open console_* (on the left side)
-  * unzip the zip file and copy the contents in Your installation path (Your old Digitalus CMS contents will be overwritten, but *not* the configuration file)
-  * type in the *_UpdateVersion110_* command (case-sensitive !!)
-  * push the *_Info_* button to get a note about what's happening
-  * push the *_run command_* button to run the command and update the databases
+  * unzip it in Your webserver's root directory
+  * as known from a fresh installation, simply rename the _install_hidden_ directory to _install_
+  * follow the instructions
   * done
 
 ==Using SQL file==
 When upgrading using the provided SQL file, please perform the following steps:
-  * make a backup copy of both - all Your files and Your databases
   * download the zip file of Digitalus v1.10
-  * run the SQL file (in the directory _application/admin/data/sql/_) on Your server.
+  * unzip it in Your webserver's root directory
+  * run the SQL file _Version19to110.sql_ (in the directory _library/Digitalus/Updater/_) on Your server.
+  * copy Your config.xml file from `application/data/comfig.xml` to `application/admin/data/config.xml`
   * adjust the language path in Your config.xml as follows:
 {{{
 <language>
@@ -69,5 +66,5 @@ When upgrading using the provided SQL file, please perform the following steps:
 }}}
   * done
 
-= Upgrading from older versions =
+= Updating from older versions =
 If You upgrade from a version prior to version 1.9, first update to the version 1.9.
