@@ -21,19 +21,21 @@ require_once 'Zend/Validate/Abstract.php';
  * @license    http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 */
 
-class ZExt_Validate_IdenticalField extends Zend_Validate_Abstract
+class Digitalus_Validate_IdenticalField extends Zend_Validate_Abstract
 {
     const NOT_MATCH = 'notMatch';
     const MISSING_FIELD_NAME = 'missingFieldName';
     const INVALID_FIELD_NAME = 'invalidFieldName';
 
     /**
+     * Validation failure message template definitions
+     *
      * @var array
      */
     protected $_messageTemplates = array(
         self::MISSING_FIELD_NAME => 'DEVELOPMENT ERROR: Field name to match against was not provided.',
-        self::INVALID_FIELD_NAME => 'DEVELOPMENT ERROR: The field "%s" was not provided to match against.',
-        self::NOT_MATCH          => 'Does not match %s.',
+        self::INVALID_FIELD_NAME => "DEVELOPMENT ERROR: The field '%value%' was not provided to match against.",
+        self::NOT_MATCH          => "Does not match '%value%'.",
     );
 
     /**

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -13,11 +12,13 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: Dir.php Tue Dec 25 20:38:14 EST 2007 20:38:14 forrest lyman $
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Filesystem
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Dir.php Tue Dec 25 20:46:07 EST 2007 20:46:07 forrest lyman $
  */
 
 class Digitalus_Filesystem_Dir
@@ -146,35 +147,34 @@ class Digitalus_Filesystem_Dir
      * @param bool $verbose
      * @return bool
      */
-    public static function deleteRecursive($target, $verbose=false)
+    public static function deleteRecursive($target, $verbose = false)
     {
-        $exceptions=array('.','..');
-        if (!$sourcedir=@opendir($target)) {
+        $exceptions = array('.', '..');
+        if (!$sourcedir = @opendir($target)) {
             if ($verbose) {
-                echo '<strong>Couldn&#146;t open '.$target."</strong><br />\n";
+                echo '<strong>Couldn&#146;t open ' . $target . "</strong><br />\n";
             }
             return false;
         }
-        while (false!==($sibling=readdir($sourcedir))) {
+        while (false !== ($sibling = readdir($sourcedir))) {
             if (!in_array($sibling, $exceptions)) {
-                $object=str_replace('//','/', $target . '/' . $sibling);
+                $object = str_replace('//', '/', $target . '/' . $sibling);
                 if ($verbose)
                     echo 'Processing: <strong>' . $object . "</strong><br />\n";
                 if (is_dir($object))
                     Digitalus_Filesystem_Dir::deleteRecursive($object);
                 if (is_file($object)) {
-                    $result=@unlink($object);
-                    if ($verbose&&$result)
+                    $result = @unlink($object);
+                    if ($verbose && $result)
                         echo "File has been removed<br />\n";
-                    if ($verbose&&(!$result))
+                    if ($verbose && (!$result))
                         echo "<strong>Couldn&#146;t remove file</strong>";
                 }
             }
         }
         closedir($sourcedir);
 
-
-        if ($result=@rmdir($target)) {
+        if ($result = @rmdir($target)) {
             if ($verbose) {
                 echo "Target directory has been removed<br />\n";
                 return true;

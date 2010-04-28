@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -13,11 +12,15 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: Storage.php Tue Dec 25 20:33:46 EST 2007 20:33:46 forrest lyman $
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Data
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Storage.php Tue Dec 25 20:33:46 EST 2007 20:33:46 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5.0
  */
 
 class Digitalus_Data_Storage
@@ -25,7 +28,7 @@ class Digitalus_Data_Storage
     /**
      * the storage object for the data
      *
-     * @var zend_session_namespace
+     * @var Zend_Session_Namespace
      */
     protected $_storage;
 

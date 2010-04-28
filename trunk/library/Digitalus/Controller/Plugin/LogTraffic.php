@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -13,17 +12,33 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: LogTraffic.php Tue Dec 25 20:26:40 EST 2007 20:26:40 forrest lyman $
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Controller
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: LogTraffic.php 729 2010-04-19 20:11:57Z lowtower@gmx.de $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.8.0
  */
 
+/** Zend_Controller_Plugin_Abstract */
+require_once 'Zend/Controller/Plugin/Abstract.php';
+
+/**
+ * Traffic Log
+ *
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.8.0
+ */
 class Digitalus_Controller_Plugin_LogTraffic extends Zend_Controller_Plugin_Abstract
 {
     /**
-     * log the current request in the traffic log
+     * Logs the current request in the traffic log
      *
      */
     public function preDispatch (Zend_Controller_Request_Abstract $request)

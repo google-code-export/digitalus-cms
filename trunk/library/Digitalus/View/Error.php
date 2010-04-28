@@ -13,11 +13,12 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: Error.php Tue Dec 25 21:29:34 EST 2007 21:29:34 forrest lyman $
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_View
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Error.php Tue Dec 25 21:29:34 EST 2007 21:29:34 forrest lyman $
  */
 
 class Digitalus_View_Error

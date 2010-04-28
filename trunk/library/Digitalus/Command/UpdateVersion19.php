@@ -14,7 +14,8 @@
  *
  * @author      Lowtower - lowtower@gmx.de
  * @category    Digitalus CMS
- * @package     Digitalus_Core_Library
+ * @package     Digitalus
+ * @subpackage  Digitalus_Command
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id:$

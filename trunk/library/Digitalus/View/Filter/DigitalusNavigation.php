@@ -13,12 +13,12 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      Forrest Lyman
- * @category    Digitalus
+ * @category    Digitalus CMS
  * @package     Digitalus
  * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: DigitalusNavigation.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.8.0
  */
@@ -39,7 +39,7 @@ require_once 'Digitalus/Content/Filter.php';
  * @since       Release 1.8.0
  * @uses        Digitalus_Content_Filter
  */
-class Zend_View_Filter_DigitalusNavigation extends Digitalus_Content_Filter
+class Digitalus_View_Filter_DigitalusNavigation extends Digitalus_Content_Filter
 {
     public $tag = 'digitalusNavigation';
 

@@ -13,12 +13,12 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      Forrest Lyman
- * @category    Digitalus
- * @package     Digitalus_View
- * @subpackage  Helper
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: HighlightText.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
@@ -41,7 +41,7 @@ require_once 'Zend/View/Helper/Abstract.php';
 class Digitalus_View_Helper_General_HighlightText extends Zend_View_Helper_Abstract
 {
     /**
-     * if string is separated into multiple words this will hightlight each indipendently
+     * if string is separated into multiple words this will hightlight each independently
      */
     public function highlightText($content, $string)
     {

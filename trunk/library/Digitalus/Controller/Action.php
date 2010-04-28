@@ -13,6 +13,9 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      LowTower - lowtower@gmx.de
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @ssubpackage Digitalus_Controller
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: Action.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
@@ -31,8 +34,6 @@ require_once 'Zend/Controller/Action.php';
  * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @category    Digitalus CMS
- * @package     Digitalus_CMS_Controllers
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.10.0

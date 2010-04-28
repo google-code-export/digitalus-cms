@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -15,7 +14,7 @@
  *
  * @author      Forrest Lyman
  * @category    Digitalus CMS
- * @package     Digitalus_Core_Library
+ * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id$

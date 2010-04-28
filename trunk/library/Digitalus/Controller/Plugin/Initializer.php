@@ -12,11 +12,15 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Controller
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id$
- * @link       http://www.digitaluscms.com
- * @since      Release 1.8.0
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.8.0
  */
 
 /** Zend_Controller_Plugin_Abstract */
@@ -25,13 +29,11 @@ require_once 'Zend/Controller/Plugin/Abstract.php';
 /**
  * Initializer of Digitalus CMS
  *
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @category   Digitalus CMS
- * @package    Digitalus_Core_Library
- * @version    Release: @package_version@
- * @link       http://www.digitaluscms.com
- * @since      Release 1.8.0
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.8.0
  */
 class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abstract
 {
@@ -122,7 +124,6 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
         // Get site config
         $config = Zend_Registry::get('config');
 
-
         $languageFiles = $config->language->translations->toArray();
 
         // Get cache object
@@ -131,11 +132,11 @@ class Digitalus_Controller_Plugin_Initializer extends Zend_Controller_Plugin_Abs
         $module     = $this->_request->getModuleName();
         $controller = $this->_request->getControllerName();
         // Add translation file depending on current module ('public' or 'admin')
-        $end = 'back';
         if ('public' == $module || 'public' == $controller) {
             $end = 'front';
             $key = Digitalus_Language::getLanguage();
         } else {
+            $end = 'back';
             $key = Digitalus_Language::getAdminLanguage();
         }
         // always load english translation file

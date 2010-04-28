@@ -13,12 +13,12 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      LowTower - lowtower@gmx.de
- * @category    Digitalus
- * @package     Digitalus_View
- * @subpackage  Helper
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: Abstract.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.10.0
  */
@@ -40,7 +40,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @uses        Digitalus_Auth
  * @since       Release 1.10.0
  */
-class Digitalus_View_Helper_Navigation_Abstract extends Zend_View_Helper_Abstract
+abstract class Digitalus_View_Helper_Navigation_Abstract extends Zend_View_Helper_Abstract
 {
     protected $_attribs = array();
 

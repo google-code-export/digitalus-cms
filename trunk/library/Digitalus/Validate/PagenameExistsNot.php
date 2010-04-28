@@ -14,7 +14,8 @@
  *
  * @author      Lowtower - lowtower@gmx.de
  * @category    Digitalus CMS
- * @package     Digitalus_Validate
+ * @package     Digitalus
+ * @subpackage  Digitalus_Validate
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: PagenameExistsNot.php 677 2010-02-24 20:21:48Z lowtower@gmx.de $
@@ -29,8 +30,6 @@ require_once 'Zend/Validate/Abstract.php';
 
 /**
  * @author      Lowtower - lowtower@gmx.de
- * @category    Digitalus CMS
- * @package     Digitalus_Validate
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @link        http://www.digitaluscms.com
@@ -42,8 +41,13 @@ class Digitalus_Validate_PagenameExistsNot extends Zend_Validate_Abstract
     const ISADMIN  = 'isAdmin';
     const ISPUBLIC = 'isPublic';
 
+    /**
+     * Validation failure message template definitions
+     *
+     * @var array
+     */
     protected $_messageTemplates = array(
-        self::EXISTS   => "Another page with Your desired name '%s' already exists! Please choose a different one!",
+        self::EXISTS   => "Another page with Your desired name '%value%' already exists! Please choose a different one!",
         self::ISADMIN  => "The page name must not be 'admin'! Please choose a different one!",
         self::ISPUBLIC => "The page name must not be 'public'! Please choose a different one!",
     );
@@ -103,6 +107,14 @@ class Digitalus_Validate_PagenameExistsNot extends Zend_Validate_Abstract
         }
     }
 
+    /**
+     * Defined by Zend_Validate_Interface
+     *
+     * Returns true if and only if $value doesn't exist already as page name
+     *
+     * @param  string $value
+     * @return boolean
+     */
     public function isValid($value)
     {
         $value = (string)$value;

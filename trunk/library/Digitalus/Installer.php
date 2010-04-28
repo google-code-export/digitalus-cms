@@ -1,11 +1,43 @@
 <?php
-require_once 'Digitalus/Installer/Database.php';
-require_once 'Digitalus/Installer/Config.php';
-require_once 'Digitalus/Installer/Environment.php';
+/**
+ * Digitalus CMS
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
+ *
+ * @author      Lowtower - lowtower@gmx.de
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Installer.php 729 2010-04-19 20:11:57Z lowtower@gmx.de $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5.0
+ */
 
+/**
+ * Installer
+ *
+ * @author      Lowtower - lowtower@gmx.de
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5.0
+ * @uses        Digitalus_Installer_Config
+ * @uses        Digitalus_Installer_Database
+ * @uses        Digitalus_Installer_Environment
+ */
 class Digitalus_Installer
 {
-    protected $_errors = array();
+    protected $_errors   = array();
     protected $_warnings = array();
     protected $_messages = array();
     protected $_config;
@@ -15,48 +47,100 @@ class Digitalus_Installer
     protected $_lastName;
     protected $_username;
     protected $_password;
+    protected $_pathToConfig;
 
-    public function __construct()
+    public function __construct($mode = null)
     {
         // We want the installer to manage its own warnings
         error_reporting(E_ERROR);
         $this->_db = new Digitalus_Installer_Database();
 
         // Load config
-        $this->loadConfig();
-
+        $verbose = true;
+        if ('v19' == $mode) {
+            $verbose = false;
+        }
+        $config = $this->loadConfig(false, $mode, $verbose);
+        $this->_setConfig($config);
     }
 
-    public function isInstalled()
+    public function getConfig()
+    {
+        return $this->_config;
+    }
+
+    public function isInstalled($verbose = false)
     {
         if (intval($this->_config->getInstallDate()) > 0) {
-            $this->addError('Digitalus CMS is already installed');
+            if (true == (bool)$verbose) {
+                $this->addError('Digitalus CMS is already installed');
+            }
             return true;
         }
         return false;
     }
 
-    public function loadConfig()
+    public function isHigherVersionNumber()
+    {
+        $defaultConfig = $this->loadConfig(true, null);
+
+        $version['new'] = (string)$defaultConfig->get()->production->constants->version;
+        $version['old'] = (string)$this->_config->get()->production->constants->version;
+
+
+        if (1 === version_compare($version['new'], $version['old'])) {
+            return $version;
+        }
+        return false;
+    }
+
+    protected function _setConfig(Digitalus_Installer_Config $config)
+    {
+        $this->_config = $config;
+    }
+
+    protected function _setPathToConfig($pathToConfig)
+    {
+        $this->_pathToConfig = $pathToConfig;
+    }
+
+    public function getPathToConfig()
+    {
+        return $this->_pathToConfig;
+    }
+
+    public function loadConfig($default = false, $mode = null, $verbose = false)
     {
         // Load config
-        $this->_config = new Digitalus_Installer_Config();
+        $config = new Digitalus_Installer_Config($default, $mode);
+
+        $this->_setPathToConfig($config->getPathToConfig());
 
         $configError = false;
-        if (!$this->_config->isReadable()) {
-            $this->addError('Could not load config file (' . Digitalus_Installer_Config::PATH_TO_CONFIG . ')');
+        if (!$config->isReadable()) {
+            if (true == (bool)$verbose) {
+                $this->addError('Could not load config file (' . $this->getPathToConfig() . ')');
+            }
             $configError = true;
         }
 
-        if (!$this->_config->isWritable()) {
-            $this->addError('Could not write to config file (' . Digitalus_Installer_Config::PATH_TO_CONFIG . ')');
+        if (!$config->isWritable()) {
+            if (true == (bool)$verbose) {
+                $this->addError('Could not write to config file (' . $this->getPathToConfig() . ')');
+            }
             $configError = true;
         }
 
-        if (!$configError && $this->_config->loadFile()) {
-            $this->addMessage('Successfully loaded and tested site configuration');
+        if (!$configError && $config->loadFile()) {
+            if (true == (bool)$verbose) {
+                $this->addMessage('Successfully loaded and tested site configuration');
+            }
         } else {
-            $this->addError('Site configuration could not be loaded');
+            if (true == (bool)$verbose) {
+                $this->addError('Site configuration could not be loaded');
+            }
         }
+        return $config;
     }
 
     public function testEnvironment()
@@ -273,5 +357,40 @@ class Digitalus_Installer
             return true;
         }
         return false;
+    }
+
+    public function setLanguage($language = null)
+    {
+        // provide translations
+        $validLanguages = array('english' => 'en', 'german' => 'de', 'french' => 'fr', 'russian' => 'ru');
+        Zend_Registry::set('validLanguages', $validLanguages);
+
+        if (!empty($language) && '' != $language) {
+            $language = strtolower($language);
+        } elseif (isset($_GET['language']) && !empty($_GET['language'])) {
+            $language = strtolower($_GET['language']);
+        } else {
+            $locale    = new Zend_Locale();
+            $lang      = $locale->getLanguage();
+            $languages = array_flip($validLanguages);
+            $language  = $languages[$lang];
+        }
+        if (!in_array($language, array_keys($validLanguages))) {
+            $language = 'english';
+        }
+        $locale = new Zend_Locale($validLanguages[$language]);
+        Zend_Registry::set('language', $language);
+
+        $adapter = new Zend_Translate(
+            'csv',
+            './application/admin/data/languages/back/' . $language . '.back.csv',
+            $validLanguages[$language],
+            array('disableNotices' => true)
+            );
+        Zend_Registry::set('Zend_Translate', $adapter);
+
+        $view = new Zend_View();
+        $view->translate()->setLocale($locale);
+        return $language;
     }
 }

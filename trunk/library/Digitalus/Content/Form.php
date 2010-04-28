@@ -12,6 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Content
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: Form.php Tue Dec 25 19:38:20 EST 2007 19:38:20 forrest lyman $
@@ -29,8 +33,6 @@ require_once 'Digitalus/Form.php';
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @category    Digitalus CMS
- * @package     Digitalus_CMS_Admin
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.8.0
@@ -47,8 +49,6 @@ class Digitalus_Content_Form extends Digitalus_Form
         $view = $this->getView();
 
         $front = Zend_Controller_Front::getInstance();
-
-        $this->setAction($front->getBaseUrl() . self::PAGE_ACTION);
 
         $page_id = $this->createElement('hidden', 'id', array(
             'required'      => true,
@@ -93,12 +93,24 @@ class Digitalus_Content_Form extends Digitalus_Form
             'order'         => 1000,            // i would assume this is the end
         ));
 
+        $this->setAction($front->getBaseUrl() . self::PAGE_ACTION);
         $this->addElement($page_id)
              ->addElement($language)
              ->addElement($name)
              ->addElement($label)
              ->addElement($headline)
-             ->addElement($submit);
+             ->addElement($submit)
+             ->setAttrib('enctype', 'multipart/form-data')
+             ->setDecorators(array(
+                 'FormElements',
+                 'Form',
+                 array('FormErrors', array('placement' => 'prepend'))
+             ))
+             ->setDisplayGroupDecorators(array(
+                 'FormElements',
+                 'Fieldset'
+             ));
+
     }
 
     public function loadFromTemplate($template)
@@ -106,4 +118,49 @@ class Digitalus_Content_Form extends Digitalus_Form
         $control = new Digitalus_Content_Control($this);
         $control->registerControlsFromTemplate($template);
     }
+
+    public function modifyEditActionForm()
+    {
+        $view = $this->getView();
+
+        $submitButton = $this->getElement('submit');
+        $this->removeElement('submit');
+
+        $controls = $this->getElements();
+
+        // get all of the controls and load them into groups
+        foreach ($controls as $control) {
+            $rel      = $control->getAttrib('rel');
+            $group    = (!empty($rel) ? $rel : 'main');
+            $groups[$group][] = $control->getName();
+        }
+        // create "main" display group
+        $this->addDisplayGroup(
+            $groups['main'],
+            'main',
+            array('legend' => $view->getTranslation('main items'))
+        );
+        unset($groups['main']);
+
+        // create other display groups
+        if (is_array($groups)) {
+            foreach ($groups as $key => $controls) {
+                $this->addDisplayGroup($controls, $key);
+            }
+        }
+
+        $displayGroups = $this->getDisplayGroups();
+        // loop throgh display groups and add submit button
+        foreach ($displayGroups as $title => $group) {
+            $id = $title . '_content_pane';
+            $title = $view->getTranslation(ucwords($title)) . ' ' . $view->getTranslation('Content');
+            $contentPanes[$id] = $title;
+            $group->setName($id)
+                  ->setAttrib('id', $id)
+                  ->setLegend($title)
+                  ->addElement($submitButton);
+        }
+        return $contentPanes;
+    }
+
 }

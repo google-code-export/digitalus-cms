@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -13,11 +12,13 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: Regex.php Tue Dec 25 21:13:52 EST 2007 21:13:52 forrest lyman $
+ * @author      Forresst Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Toolbox
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Regex.php Tue Dec 25 21:17:02 EST 2007 21:17:02 forrest lyman $
  */
 
 class Digitalus_Toolbox_Regex
@@ -41,15 +42,14 @@ class Digitalus_Toolbox_Regex
      */
     public static function stripFileExtension($string, $asArray = false)
     {
-	$regexp = "|\.\w{1,5}$|";
-	$new = preg_replace($regexp, "", $string);
-	$suf = substr($string, strlen($new)+1);
-	if ($asArray == true) {
-	    return array('location' => $new, 'suffix' => $suf);
- } else {
-	    return $new; // use this return for standard Digitalus setup
-	}
-
+        $regexp = "|\.\w{1,5}$|";
+        $new = preg_replace($regexp, "", $string);
+        $suf = substr($string, strlen($new)+1);
+        if ($asArray == true) {
+            return array('location' => $new, 'suffix' => $suf);
+        } else {
+            return $new; // use this return for standard Digitalus setup
+        }
     }
 
 

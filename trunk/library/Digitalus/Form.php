@@ -12,6 +12,9 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: Form.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
@@ -29,8 +32,6 @@ require_once 'Zend/Form.php';
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @category    Digitalus CMS
- * @package     Digitalus_CMS_Admin
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
