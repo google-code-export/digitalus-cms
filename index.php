@@ -14,21 +14,25 @@ if (file_exists('./install/install.php')) {
     // Start installation if the file "install.php" exists in the directory "install"
     require './install/install.php';
 } else {
-    // Set include path to Zend (and other) libraries
-    set_include_path(BASE_PATH . '/library' .
-        PATH_SEPARATOR . get_include_path() .
-        PATH_SEPARATOR . '.'
-    );
+    try {
+        // Set include path to Zend (and other) libraries
+        set_include_path(BASE_PATH . '/library' .
+            PATH_SEPARATOR . get_include_path() .
+            PATH_SEPARATOR . '.'
+        );
 
-    // Require Zend_Application
-    require_once 'Zend/Application.php';
+        // Require Zend_Application
+        require_once 'Zend/Application.php';
 
-    // Create application
-    $application = new Zend_Application(
-        APPLICATION_ENV,
-        APPLICATION_PATH . '/admin/configs/application.ini'
-    );
-    // Bootstrap, and run application
-    $application->bootstrap()
-                ->run();
+        // Create application
+        $application = new Zend_Application(
+            APPLICATION_ENV,
+            APPLICATION_PATH . '/admin/configs/application.ini'
+        );
+        // Bootstrap, and run application
+        $application->bootstrap()
+                    ->run();
+    } catch (Zend_Config_Exception $e) {
+        echo '<p class="error">ERROR: an error occurred while trying to load the config file! For a fresh installation or update of Digitalus, please rename the directory "install_hidden" to "install"!</p>';
+    }
 }
