@@ -15,39 +15,59 @@ $loader->registerNamespace('Digitalus_');
 $view = new Zend_View();
 $view->setScriptPath('./install/views');
 
-// provide translations
-$validLanguages = array('english' => 'en', 'german' => 'de', 'french' => 'fr', 'polish' => 'pl', 'russian' => 'ru', 'swedish' => 'se');
-Zend_Registry::set('validLanguages', $validLanguages);
-
-if (isset($_GET['language']) && !empty($_GET['language'])) {
-    $language = $_GET['language'];
-    $locale = new Zend_Locale($validLanguages[$language]);
-} else {
-    $locale = new Zend_Locale();
-    $lang = $locale->getLanguage();
-    $languages = array_flip($validLanguages);
-    $language = $languages[$lang];
-}
-if (!in_array($language, array_keys($validLanguages))) {
-    $language = 'english';
-}
-Zend_Registry::set('language', $language);
-
-$adapter = new Zend_Translate(
-    'csv',
-    './application/admin/data/languages/back/' . $language . '.back.csv',
-    $validLanguages[$language],
-    array('disableNotices' => true)
-    );
-Zend_Registry::set('Zend_Translate', $adapter);
-
-#$view->translate()->setLocale($validLanguages[$language]);
-$view->translate()->setLocale($locale);
-
 // The Digitalus_Installer class manages the installation resources
-$installer = new Digitalus_Installer();
+$installer = new Digitalus_Installer('v19');
+// set language and locale for translations
+$installer->setLanguage();
 
-if (!$installer->isInstalled()) {
+/* *****************************************************************************
+ * U P D A T E
+ * ************************************************************************** */
+if ($installer->isInstalled()) {
+    // Fetch the current step
+    $update = $_GET['update'];
+    $update = intval($update);
+    if ($update < 0) {
+        $update = 0;
+    }
+
+    // update to higher version
+    if ($version = $installer->isHigherVersionNumber()) {
+        // instantiate updater object
+        $pathToConfig = Digitalus_Updater_Version19to110::getConfigPath('old');
+        $updater      = new Digitalus_Updater_Version19to110($pathToConfig);
+        if (Digitalus_Updater_Version19to110::checkVersions($version['new'], $version['old'])) {
+            switch ($update) {
+                case 0:
+                default:
+                    $view->installationInformation = $updater->getInstallationInformation();
+                    $view->placeholder('form')->set($view->render('update.phtml'));
+                    break;
+                case 1:
+                    try {
+                        $updater->run();
+                        $view->placeholder('form')->set($view->render('update1.phtml'));
+                    } catch (Digitalus_Updater_Exception $e) {
+                        $updater->addError('A fatal error while updating the databases occurred!');
+                        $updater->addError($e->getMessage());
+                    }
+                    break;
+            }
+        } else {
+            $updater->addError('You can only update from version ' . Digitalus_Updater_Abstract::getOldVersion() . '!<br />Older versions are not supported!');
+        }
+    } else {
+        // The cms is already installed
+        // Remove the install directory
+#        Digitalus_Filesystem_Dir::deleteRecursive('./install');
+        Digitalus_Filesystem_Dir::rename('./install', './install_hidden');
+        // Return to the index file
+        header('location: ./');
+    }
+/* *****************************************************************************
+ * F R E S H   I N S T A L L
+ * ************************************************************************** */
+} else {
     // Fetch the current step
     $step = $_GET['step'];
     $step = intval($step);
@@ -57,6 +77,7 @@ if (!$installer->isInstalled()) {
 
     switch ($step) {
         case 1:
+        default:
             $installer->testEnvironment();
             if (!$installer->hasErrors()) {
                 $view->placeholder('form')->set($view->render('step1.phtml'));
@@ -96,12 +117,6 @@ if (!$installer->isInstalled()) {
             }
             break;
     }
-} else {
-    // The cms is already installed
-    // Remove the install directory
-    Digitalus_Filesystem_Dir::deleteRecursive('./install');
-    // Return to the index file
-    header('location: ./');
 }
 $view->messages = $installer->getMessages();
 echo $view->render('page.phtml');

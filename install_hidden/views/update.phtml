@@ -1,0 +1,23 @@
+<?php
+?>
+<div class="warning"><?php
+    echo $this->translate('It seems that You already have installed an older version of Digitalus CMS! The installer now tries to update to the newer version!') . PHP_EOL;
+    echo '<br /><br />' . PHP_EOL;
+    foreach ($this->installationInformation as $info) {
+        echo '<div>' . $this->translate($info) . '</div>' . PHP_EOL;
+    }?>
+</div>
+<br />
+<div class="error"><?php echo $this->translate('It is recommended that You make a backup of both Your files and Your databases before You continue');?></div>
+<br />
+<hr />
+<br />
+<p><?php echo $this->translate('Are You sure You want to continue with the updating process?');?></p>
+
+<form action="index.php?update=1&amp;language=<?php echo Zend_Registry::get('language');?>" method="post">
+    <h2><?php echo $this->translate('Update of Digitalus');?></h2>
+    <div class="formRow">
+        <?php echo $this->formSubmit('update', $this->translate('Update Now'));?>
+        <br class="clear" />
+    </div>
+</form>

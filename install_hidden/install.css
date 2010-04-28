@@ -46,15 +46,23 @@ li {
     font-size: 16px;
 }
 
-.passed {
+div.message {
+    background: #efe; color: #040; border: 2px #484 solid; padding: 10px; margin-bottom: 1em;
+}
+div.warning {
+    background: #ffe; color: #440; border: 2px #884 solid; padding: 10px; margin-bottom: 1em;
+}
+div.error {
+    background: #fee; color: #400; border: 2px #844 solid; padding: 10px; margin-bottom: 1em;
+}
+
+.message img {
     background: url('../images/icons/silk/flag_green.png') no-repeat;
 }
-
-.warning {
+.warning img {
     background: url('../images/icons/silk/flag_yellow.png') no-repeat;
 }
-
-.error {
+.error img {
     background: url('../images/icons/silk/flag_red.png') no-repeat;
 }
 
@@ -63,7 +71,6 @@ label.error {
     padding: 5px;
     color: #ff0000;
 }
-
 
 input {
     float: left;
