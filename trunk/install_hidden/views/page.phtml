@@ -17,11 +17,9 @@
                 }?>
             </ul>
         </div>
-        <h2><?php echo $this->translate('Results');?></h2>
-        <?php
+        <h2><?php echo $this->translate('Results');?></h2><?php
             echo $this->partial('partials/compositeMessage.phtml', $this->messages);
-            echo $this->placeholder('form');
-        ?>
+            echo $this->placeholder('form');?>
         <div id="footer">
             <p><a href="http://digitaluscms.com"><img src="./images/logo.png" /></a></p>
             <p><?php echo $this->translate('For help installing Digitalus CMS check out our site');?>: <a href="http://digitaluscms.com">http://digitaluscms.com</a></p>
