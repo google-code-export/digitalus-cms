@@ -12,11 +12,14 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id:$
- * @link       http://www.digitaluscms.com
- * @since      Release 1.8.0
+ * @author      LowTower - lowtower@gmx.de
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Bootstrap.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.8.0
  */
 
 /**
@@ -212,12 +215,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
         $viewRenderer->setView($view);
 
-        // Load digitalus helpers
-
         // base helpers
         $view->addHelperPath('Digitalus/View/Helper', 'Digitalus_View_Helper');
         $view->addHelperPath('Digitalus/Content/Control', 'Digitalus_Content_Control');
 
+        // Load digitalus helpers
         $helperDirs = Digitalus_Filesystem_Dir::getDirectories(BASE_PATH . '/library/Digitalus/View/Helper');
         if (is_array($helperDirs)) {
             foreach ($helperDirs as $dir) {
@@ -228,6 +230,27 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Return it, so that it can be stored by the bootstrap
         return $view;
     }
+
+    /**
+     * Initialize the view filters
+     *
+     * @return void
+     */
+/*
+    protected function _initViewFilter()
+    {
+        // get view resource
+        $view = $this->getResource('view');
+        // base filters
+        $view->addFilterPath('Digitalus/View/Filter', 'Digitalus_View_Filter');
+        foreach (Digitalus_Filesystem_File::getFilesByType(BASE_PATH . '/library/Digitalus/View/Filter', 'php', false, false) as $filter) {
+            $filter = ucfirst($filter);
+            if ('Exception' != $filter) {
+                $view->addFilter($filter);
+            }
+        }
+    }
+*/
     /**
      * Initialize the controllers
      *

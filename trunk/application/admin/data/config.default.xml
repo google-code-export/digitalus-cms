@@ -106,7 +106,7 @@
     <development extends="production">
     </development>
     <system>
-        <version>1.9</version>
+        <version>1.10</version>
         <installDate></installDate>
         <requirements>
             <php>5.2.0</php>

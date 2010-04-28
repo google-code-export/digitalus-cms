@@ -75,7 +75,7 @@ class Admin_ModuleController extends Digitalus_Controller_Action
     public function selectModulePageAction()
     {
         $this->view->moduleName = $this->_request->getParam('moduleName');
-        $this->view->val = $this->_request->getParam('val');
+        $this->view->val        = $this->_request->getParam('val');
     }
 
     /**

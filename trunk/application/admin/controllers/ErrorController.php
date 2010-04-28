@@ -45,8 +45,6 @@ class Admin_ErrorController extends Digitalus_Controller_Action
      */
     public function indexAction()
     {
-        $view = $this->view;
-        echo $view->render('admin.tpl.php');
     }
 
     /**
@@ -56,6 +54,5 @@ class Admin_ErrorController extends Digitalus_Controller_Action
      */
     public function noAuthAction()
     {
-
     }
 }
