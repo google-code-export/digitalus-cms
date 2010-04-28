@@ -13,41 +13,47 @@ class Digitalus_Language
     public static function setLanguage($language)
     {
         $session = self::getSession();
-        $key = self::LANGUAGE_KEY;
+        $key     = self::LANGUAGE_KEY;
         return $session->$key = $language;
     }
 
     public static function getLanguage()
     {
-        $session = self::getSession();
-        $key = self::LANGUAGE_KEY;
-        $currentLang = $session->$key;
-        if (empty($currentLang)) {
-            $siteSettings = new Model_SiteSettings;
-            $currentLang = $siteSettings->get('default_language');
+        $uri    = new Digitalus_Uri();
+        $params = $uri->getParams();
+        if (isset($params['language']) && !empty($params['language'])) {
+            $currentLang = $params['language'];
+        } else {
+            $session = self::getSession();
+            $key     = self::LANGUAGE_KEY;
+            $currentLang = $session->$key;
             if (empty($currentLang)) {
-                $config = Zend_Registry::get('config');
-                $currentLang = $config->language->defaultLocale;
+                $siteSettings = new Model_SiteSettings;
+                $currentLang  = $siteSettings->get('default_language');
+                if (empty($currentLang)) {
+                    $config      = Zend_Registry::get('config');
+                    $currentLang = $config->language->defaultLocale;
+                }
+                if (empty($currentLang)) {
+                    $locale      = new Zend_Locale();
+                    $currentLang = $locale->getLanguage();
+                }
             }
-            if (empty($currentLang)) {
-                $locale = new Zend_Locale();
-                $currentLang = $locale->getLanguage();
-            }
-            self::setLanguage($currentLang);
         }
+        self::setLanguage($currentLang);
         return $currentLang;
     }
 
     public static function getAdminLanguage()
     {
         $siteSettings = new Model_SiteSettings;
-        $adminLang = $siteSettings->get('admin_language');
+        $adminLang    = $siteSettings->get('admin_language');
         if (empty($adminLang)) {
-            $config = Zend_Registry::get('config');
+            $config    = Zend_Registry::get('config');
             $adminLang = $config->language->defaultLocale;
         }
         if (empty($adminLang)) {
-            $locale = new Zend_Locale();
+            $locale    = new Zend_Locale();
             $adminLang = $locale->getLanguage();
         }
         if (empty($adminLang)) {
@@ -56,10 +62,16 @@ class Digitalus_Language
         return $adminLang;
     }
 
+    public static function getAvailableLanguages()
+    {
+        // Get site config
+        $config = Zend_Registry::get('config');
+        return $config->language->translations->toArray();
+    }
+
     public static function getFullName($locale)
     {
-        $config = Zend_Registry::get('config');
-        $translations = $config->language->translations->toArray();
+        $translations = self::getAvailableLanguages();
         if (isset($translations[$locale])) {
             return $translations[$locale];
         }
