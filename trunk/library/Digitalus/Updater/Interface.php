@@ -1,6 +1,6 @@
 <?php
 /**
- * Digitalus Installer Exception
+ * Digitalus CMS
  *
  * LICENSE
  *
@@ -12,21 +12,32 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @author      LowTower - lowtower@gmx.de
+ * @author      Lowtower - lowtower@gmx.de
  * @category    Digitalus CMS
  * @package     Digitalus
+ * @subpackage  Digitalus_Updater
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: Exception.php Tue Dec 25 21:46:51 EST 2007 21:46:51 lowtower $
+ * @version     $Id: Interface.php 729 2010-04-19 20:11:57Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
- * @since       Release 1.9.0
+ * @since       Release 1.10
  */
 
 /**
- * Digitalus Installer Exception
+ * Updater Interface
  *
+ * @author      Lowtower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.10
  */
-class Digitalus_Installer_Exception extends Digitalus_Exception
-{}
+interface Digitalus_Updater_Interface
+{
+    public static function getNewVersion();
+
+    public static function getOldVersion();
+
+    public static function checkVersions($newVersion, $oldVersion);
+}

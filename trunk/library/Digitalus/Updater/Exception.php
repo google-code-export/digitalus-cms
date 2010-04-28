@@ -1,6 +1,6 @@
 <?php
 /**
- * Digitalus Installer Exception
+ * Digitalus Updater Exception
  *
  * LICENSE
  *
@@ -19,14 +19,14 @@
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: Exception.php Tue Dec 25 21:46:51 EST 2007 21:46:51 lowtower $
  * @link        http://www.digitaluscms.com
- * @since       Release 1.9.0
+ * @since       Release 1.10.0
  */
 
 /**
- * Digitalus Installer Exception
+ * Digitalus Updater Exception
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  */
-class Digitalus_Installer_Exception extends Digitalus_Exception
+class Digitalus_Updater_Exception extends Digitalus_Exception
 {}
