@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -13,11 +12,13 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: File.php Tue Dec 25 20:46:07 EST 2007 20:46:07 forrest lyman $
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Filesystem
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: File.php Tue Dec 25 20:46:07 EST 2007 20:46:07 forrest lyman $
  */
 
 class Digitalus_Filesystem_File
@@ -27,7 +28,7 @@ class Digitalus_Filesystem_File
      * if type is an array then it will return all files of the types in the array ( $types = array('png', 'jpg', 'gif'); )
      *
      * @param string $path, the filepath to search
-     * @param mixed $type, the file extension to return
+     * @param mixed  $type, the file extension to return
      * @param string $appendPath, the path to append to the returned files
      */
     public static function getFilesByType($path, $type = false, $appendPath = false, $includeExtension = true)
@@ -43,7 +44,7 @@ class Digitalus_Filesystem_File
                             if (is_array($fileParts)) {
                                 $fileType = array_pop($fileParts);
                                 $file = implode('.', $fileParts);
-                             
+
                                 //check whether the filetypes were passed as an array or string
                                 if (is_array($type)) {
                                     if (in_array($fileType, $type)) {

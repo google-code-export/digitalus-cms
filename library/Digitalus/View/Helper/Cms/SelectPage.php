@@ -13,12 +13,12 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      Forrest Lyman
- * @category    Digitalus
- * @package     Digitalus_View
- * @subpackage  Helper
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: SelectPage.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
@@ -40,7 +40,7 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @uses        viewHelper Digitalus_View_Helper_GetTranslation
  * @uses        Digitalus_Form
  */
-class Zend_View_Helper_SelectPage extends Zend_View_Helper_Abstract
+class Digitalus_View_Helper_SelectPage extends Zend_View_Helper_Abstract
 {
     public function selectPage($name, $value = null, $attribs = null)
     {

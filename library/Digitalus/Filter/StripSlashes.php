@@ -16,8 +16,9 @@
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @category    Digitalus CMS
- * @package     Digitalus_Core_Library
- * @version     $Id:$
+ * @package     Digitalus
+ * @subpackage  Digitalus_Filter
+ * @version     $Id: StripSlashes.php Tue Dec 25 21:46:51 EST 2007 21:46:51 lowtower $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  */
@@ -33,9 +34,7 @@ require_once 'Zend/Filter/Interface.php';
  * @author      LowTower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @category    Digitalus CMS
- * @package     Digitalus_Filter
- * @version     $Id:$
+ * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  */

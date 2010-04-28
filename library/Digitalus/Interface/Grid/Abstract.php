@@ -3,11 +3,12 @@ abstract class Digitalus_Interface_Grid_Abstract
 {
     public $view;
     protected $_attribs = array('first', 'last', 'before', 'after', 'clear', 'class');
-    const FIRST = 'first';
-    const LAST = 'last';
+
+    const FIRST  = 'first';
+    const LAST   = 'last';
     const BEFORE = 'before';
-    const AFTER = 'after';
-    const CLEAR = 'clear';
+    const AFTER  = 'after';
+    const CLEAR  = 'clear';
 
     public function init()
     {}

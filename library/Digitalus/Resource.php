@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -13,20 +12,21 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: Resource.php Tue Dec 25 21:52:35 EST 2007 21:52:35 forrest lyman $
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: File.php Tue Dec 25 21:52:35 EST 2007 21:52:35 forrest lyman $
  */
 
-class Digitalus_File
+class Digitalus_Resource
 {
     /**
      * the path to the Files dir
      *
      */
-    const PATH_TO_FileS = './public/Files';
+    const PATH_TO_FILES = './public/Files';
 
     /**
      * you pass this function the key for the $_FILES[key] array
@@ -50,7 +50,7 @@ class Digitalus_File
             $path = Digitalus_Toolbox_String::stripLeading('/', $path);
             if ($createPath) {
                 //attempt to create the new path
-                Digitalus_Filesystem_Dir::makeRecursive(self::PATH_TO_FileS, $path);
+                Digitalus_Filesystem_Dir::makeRecursive(self::PATH_TO_FILES, $path);
             }
 
             //clean the filename

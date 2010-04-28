@@ -13,11 +13,11 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      Forrest Lyman
- * @category    Digitalus
+ * @category    Digitalus CMS
  * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: Abstract.php Tue Dec 25 21:46:51 EST 2007 21:46:51 lowtower $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.8.0
  */
@@ -25,25 +25,48 @@
 /**
  * Digitalus Abstract Class
  *
- * @category    Digitalus
- * @package     Digitalus
+ * @author      Lowtower - lowtower@gmx.de
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.9
  */
 abstract class Digitalus_Abstract
 {
+    /**
+     * The view object
+     *
+     * @var Zend_View
+     */
     public $view;
 
+    /**
+     * Sets the view
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->setView();
     }
 
+    /**
+     * Returns the view object
+     *
+     * @return Zend_View
+     */
     public function getView()
     {
         return $this->view;
     }
 
+    /**
+     * Sets the view
+     *
+     * @param  Zend_View $view
+     * @return void
+     */
     public function setView(Zend_View $view = null)
     {
         if ($view == null) {
@@ -56,5 +79,4 @@ abstract class Digitalus_Abstract
             $this->view = $view;
         }
     }
-
 }

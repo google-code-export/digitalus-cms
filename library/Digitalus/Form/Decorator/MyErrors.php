@@ -12,6 +12,10 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
+ * @author      LowTower - lowtower@gmx.de
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Form
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: MyErrors.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
@@ -20,17 +24,15 @@
  */
 
 /**
- * @see Zend_Form
+ * @see Zend_Form_Decorator_Abstract
  */
-require_once 'Zend/Form.php';
+require_once 'Zend/Form/Decorator/Abstract.php';
 
 /**
  * Digitalus Error Form Decorator
  *
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @category    Digitalus CMS
- * @package     Digitalus_CMS_Form_Decorator
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.10.0
@@ -40,7 +42,7 @@ class Digitalus_Form_Decorator_MyErrors extends Zend_Form_Decorator_Abstract
     const FORMAT = '<div class="message">Field <span style="font-style: italic; font-weight: bold;">&laquo;%s&raquo;</span> not properly filled.<br />%s</div>';
 
     /**
-     * Render errors
+     * Renders errors
      *
      * @param  string $content
      * @return string

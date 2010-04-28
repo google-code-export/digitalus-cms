@@ -13,11 +13,11 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      LowTower - lowtower@gmx.de
- * @category    Digitalus
+ * @category    Digitalus CMS
  * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: Exception.php Tue Dec 25 21:46:51 EST 2007 21:46:51 lowtower $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  */
@@ -25,8 +25,6 @@
 /**
  * Digitalus Uri Exception
  *
- * @category    Digitalus
- * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  */

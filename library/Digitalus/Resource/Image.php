@@ -12,11 +12,12 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: Image.php Tue Dec 25 21:12:41 EST 2007 21:12:41 forrest lyman $
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Resource
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Image.php Tue Dec 25 21:12:41 EST 2007 21:12:41 forrest lyman $
  */
 
 class Digitalus_Resource_Image extends Digitalus_Resource
@@ -161,7 +162,7 @@ class Digitalus_Resource_Image extends Digitalus_Resource
         // Create an Image from it so we can do the resize
         $upload = $this->_openImage($path);
         if ($upload) {
-            // Capture the original size of the imagedie
+            // Capture the original size of the image
             $width = imagesx($this->_image);
             $height = imagesy($this->_image);
 

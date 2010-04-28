@@ -13,12 +13,12 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      Forrest Lyman
- * @category    Digitalus
- * @package     Digitalus_View
- * @subpackage  Helper
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: GetTranslation.php 729 2010-04-19 20:11:57Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
@@ -43,25 +43,22 @@ require_once 'Zend/View/Helper/Abstract.php';
 class Digitalus_View_Helper_Internationalization_GetTranslation extends Zend_View_Helper_Abstract
 {
     /**
-     * This helper returns the translation for the passed key,
-     * it will optionally add the controller and action to the key
+     * Returns the translation for the passed key,
      *
-     * example: controller_action_page_title
-     *
-     * @return  unknown
+     * @return  string
      */
     public function getTranslation($key, $locale = null, $viewInstance = null)
     {
         if ($viewInstance !== null) {
             $this->setview($viewInstance);
         }
-        $adapter = Zend_Registry::get('Zend_Translate');
-        $moduleName = $this->view->getRequest()->getModuleName();
+        $adapter         = Zend_Registry::get('Zend_Translate');
+        $moduleName      = $this->view->getRequest()->getModuleName();
         $currentLanguage = $this->view->getCurrentLanguage();
         if ($locale != null) {
-#            $this->view->translate()->setLocale($locale);
+            $this->view->translate()->setLocale($locale);
         } else if ($moduleName != 'admin' && $adapter->isAvailable($currentLanguage)) {
-#            $this->view->translate()->setLocale($currentLanguage);
+            $this->view->translate()->setLocale($currentLanguage);
         }
         return $this->view->translate($key);
     }

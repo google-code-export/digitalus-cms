@@ -54,10 +54,12 @@ class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
 
     public function setLanguage()
     {
-        $lang = $this->_page->getParam('language');
-        if (!empty($lang)) {
-            Digitalus_Language::setLanguage($lang);
-            $this->_page->setLanguage($lang);
+        $language           = $this->_page->getParam('language');
+        $availableLanguages = Digitalus_Language::getAvailableLanguages();
+
+        if (!empty($language) && key_exists($language, $availableLanguages)) {
+            Digitalus_Language::setLanguage($language);
+            $this->_page->setLanguage($language);
         } else {
             $this->_page->setLanguage(Digitalus_Language::getLanguage());
         }
@@ -65,7 +67,7 @@ class Digitalus_Builder_Action_Page extends Digitalus_Builder_Abstract
 
     public function setAvailableLanguages()
     {
-        $page = new Model_Page();
+        $page             = new Model_Page();
         $availableContent = $page->getVersions($this->_page->getId());
         $this->_page->setAvailableLanguages($availableContent);
     }

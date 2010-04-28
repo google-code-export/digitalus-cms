@@ -14,7 +14,8 @@
  *
  * @author      Lowtower - lowtower@gmx.de
  * @category    Digitalus CMS
- * @package     Digitalus_Validate
+ * @package     Digitalus
+ * @subpackage  Digitalus_Validate
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: UserEmailExists.php 677 2010-02-24 20:21:48Z lowtower@gmx.de $
@@ -29,8 +30,6 @@ require_once 'Zend/Validate/Abstract.php';
 
 /**
  * @author      Lowtower - lowtower@gmx.de
- * @category    Digitalus CMS
- * @package     Digitalus_Validate
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @link        http://www.digitaluscms.com
@@ -40,8 +39,13 @@ class Digitalus_Validate_UserEmailExists extends Zend_Validate_Abstract
 {
     const NOT_EXISTS = 'notEmailExists';
 
+    /**
+     * Validation failure message template definitions
+     *
+     * @var array
+     */
     protected $_messageTemplates = array(
-        self::NOT_EXISTS => "The given email %s doesn't belong to the given username!",
+        self::NOT_EXISTS => "The given email '%value%' doesn't belong to the given username!",
     );
 
     /**
@@ -95,6 +99,14 @@ class Digitalus_Validate_UserEmailExists extends Zend_Validate_Abstract
         $this->_userName = $userName;
     }
 
+    /**
+     * Defined by Zend_Validate_Interface
+     *
+     * Returns true if and only if $value is a valid email for the given user name
+     *
+     * @param  string $value
+     * @return boolean
+     */
     public function isValid($value, $context = null)
     {
         $value = (string)$value;

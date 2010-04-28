@@ -13,11 +13,12 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      LowTower - lowtower@gmx.de
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Validate
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
- * @category    Digitalus core
- * @package     Digitalus_Validate
+ * @version     $Id: UserEmailExists.php 677 2010-02-24 20:21:48Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.8.0
  */

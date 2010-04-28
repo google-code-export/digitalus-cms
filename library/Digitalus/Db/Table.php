@@ -13,7 +13,8 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @category    Digitalus CMS
- * @package     Digitalus_CMS_Models
+ * @package     Digitalus
+ * @subpackage  Digitalus_Db
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id: Page.php Mon Dec 24 20:38:38 EST 2007 20:38:38 forrest lyman $

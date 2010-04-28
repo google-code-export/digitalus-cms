@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Digitalus CMS
  *
@@ -13,11 +12,15 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @category   Digitalus CMS
- * @package   Digitalus_Core_Library
- * @copyright  Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
- * @license    http://digitalus-media.com/license/new-bsd     New BSD License
- * @version    $Id: List.php Tue Dec 25 20:32:04 EST 2007 20:32:04 forrest lyman $
+ * @author      Forrest Lyman
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Data
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: List.php Tue Dec 25 20:32:04 EST 2007 20:32:04 forrest lyman $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5.0
  */
 
 class Digitalus_Data_List

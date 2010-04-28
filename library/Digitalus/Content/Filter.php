@@ -1,14 +1,13 @@
 <?php
-class Digitalus_Content_Filter
+class Digitalus_Content_Filter extends Digitalus_Abstract
 {
     public $tag;
     public $page;
-    public $view;
 
     public function filter($content)
     {
         $this->page = Digitalus_Builder::getPage();
-        $this->view = $this->page->getView();
+
         $pattern = '(\<' . $this->tag . '(/?[^\>]+)\>)';
         $content = preg_replace_callback($pattern, array($this, '_callback'), $content);
         return $content;

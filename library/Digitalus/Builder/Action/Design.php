@@ -38,7 +38,7 @@ class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
                 } elseif (is_object($attr) && isset($attr['media'])) {
                     $view->headLink()->appendStylesheet($templatePath . '/styles/' . (string)$style, (string)$attr['media']);
                 } else {
-                   $view->headLink()->appendStylesheet($templatePath . '/styles/' . (string)$style);
+                    $view->headLink()->appendStylesheet($templatePath . '/styles/' . (string)$style);
                 }
             }
         }
@@ -48,7 +48,7 @@ class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
     {
         //get the view instance
         $view = $this->_page->getView();
-        $view->setFilterPath('Digitalus/View/Filter');
+        $view->addFilterPath('Digitalus/View/Filter', 'Digitalus_View_Filter');
         $view->addFilter('digitalusControl');
         $view->addFilter('digitalusModule');
         $view->addFilter('digitalusPartial');
@@ -57,10 +57,10 @@ class Digitalus_Builder_Action_Design extends Digitalus_Builder_Abstract
 
     public function renderTemplate()
     {
-        $view = $this->_page->getView();
+        $view          = $this->_page->getView();
         $view->content = $this->_page->getContent();
-        $view->page = $this->_page;
-        $xhtml = $view->render($this->_page->getParam('template_data')->layout);
+        $view->page    = $this->_page;
+        $xhtml         = $view->render($this->_page->getParam('template_data')->layout);
         $this->_page->setParam('xhtml', $xhtml);
     }
 }

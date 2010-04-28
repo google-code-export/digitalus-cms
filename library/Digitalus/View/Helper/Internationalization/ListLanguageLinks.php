@@ -13,12 +13,12 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      Forrest Lyman
- * @category    Digitalus
- * @package     Digitalus_View
- * @subpackage  Helper
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id: ListLanguageLinks.php 729 2010-04-19 20:11:57Z lowtower@gmx.de $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
@@ -42,7 +42,7 @@ require_once 'Zend/View/Helper/Abstract.php';
 class Digitalus_View_Helper_Internationalization_ListLanguageLinks extends Zend_View_Helper_Abstract
 {
     /**
-     *
+     * Returns a list with available languages
      */
     public function listLanguageLinks()
     {
@@ -53,8 +53,8 @@ class Digitalus_View_Helper_Internationalization_ListLanguageLinks extends Zend_
 
             if (is_array($availableLanguages)) {
                 $languageLinks = array();
-                $uri = new Digitalus_Uri();
-                $base = $uri->toString();
+                $uri           = new Digitalus_Uri();
+                $base          = $uri->toString();
                 foreach ($availableLanguages as $locale => $name) {
                     if (!empty($locale) && $locale != $currentLanguage) {
                         $url = $base . '/p/language/' . $locale;

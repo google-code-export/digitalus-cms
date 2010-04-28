@@ -13,9 +13,9 @@
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
  * @author      Forrest Lyman
- * @category    Digitalus
- * @package     Digitalus_View
- * @subpackage  Helper
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id:$
@@ -41,9 +41,9 @@ require_once 'Zend/View/Helper/Abstract.php';
 class Digitalus_View_Helper_Internationalization_GetCurrentLanguage extends Zend_View_Helper_Abstract
 {
     /**
-     * this helper returns the current language
+     * Returns the current language
      *
-     * @return unknown
+     * @return string
      */
     public function getCurrentLanguage()
     {
