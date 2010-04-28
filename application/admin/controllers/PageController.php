@@ -158,12 +158,8 @@ class Admin_PageController extends Digitalus_Controller_Action
         $pageTemplate        = new Digitalus_Interface_Template();
 
         $form = $pageTemplate->getForm($templatePath . '/layouts/' . $templateConfig->layout);
-        $form->setAction($this->baseUrl . '/admin/page/edit')
-             ->setDecorators(array(
-                'FormElements',
-                'Form',
-                array('FormErrors', array('placement' => 'prepend'))
-            ));
+        $form->setAction($this->baseUrl . '/admin/page/edit');
+        $this->view->contentPanes = $form->modifyEditActionForm();
 
         $elmPageName = $form->getElement('name');
         $elmPageName->addValidators(array(
@@ -491,5 +487,4 @@ class Admin_PageController extends Digitalus_Controller_Action
     {
         return new Zend_Session_Namespace('createPageOptions');
     }
-
 }
