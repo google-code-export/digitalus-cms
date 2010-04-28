@@ -1,4 +1,38 @@
 <?php
+/**
+ * Digitalus CMS
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://digitalus-media.com/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to info@digitalus-media.com so we can send you a copy immediately.
+ *
+ * @author      Lowtower - lowtower@gmx.de
+ * @category    Digitalus CMS
+ * @package     Digitalus
+ * @subpackage  Digitalus_Installer
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     $Id: Database.php 729 2010-04-19 20:11:57Z lowtower@gmx.de $
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5.0
+ */
+
+/**
+ * Installer Database
+ *
+ * @author      Lowtower - lowtower@gmx.de
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.5.0
+ */
 class Digitalus_Installer_Database
 {
     const DB_PREFIX_REGEX = '#^[a-zA-Z0-9_]{0,12}$#';
@@ -25,6 +59,7 @@ class Digitalus_Installer_Database
             $this->_db->getConnection();
             $this->_db->query("SET NAMES 'utf8'");
             $this->_db->query("SET CHARACTER SET 'utf8'");
+            Zend_Db_Table::setDefaultAdapter($this->_db);
         } catch (Zend_Db_Adapter_Exception $e) {
             echo 'Connection could not be established! Please check Your database credentials!' . PHP_EOL;
             if ('production' != APPLICATION_ENV) {
@@ -90,8 +125,12 @@ class Digitalus_Installer_Database
         $this->_createUsers();
         $this->_createUserBookmarks();
         $this->_createUserNotes();
-        $this->_constraints();
-        $this->_populate();
+        try {
+            $test = $this->_addConstraints();
+            $this->_populate();
+        } catch (Zend_Db_Statement_Exception $e) {
+            echo 'Exception abgefangen: ',  $e->getMessage(), "\n";
+        }
     }
 
     public function testInstallation()
@@ -131,7 +170,7 @@ class Digitalus_Installer_Database
                     `tags` varchar(500) DEFAULT NULL,
                     `data` text,
                     PRIMARY KEY (`id`)
-                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;";
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         return $this->_db->query($sql);
     }
 
@@ -173,7 +212,7 @@ class Digitalus_Installer_Database
                     PRIMARY KEY (`id`),
                     KEY `fk_parent_page` (`parent_id`),
                     KEY `fk_page_author` (`user_name`)
-                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;";
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         return $this->_db->query($sql);
     }
 
@@ -244,7 +283,7 @@ class Digitalus_Installer_Database
                     `url` varchar(100) NOT NULL,
                     PRIMARY KEY (`id`),
                     KEY `fk_user_bookmarks` (`user_name`)
-                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;";
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;";
         return $this->_db->query($sql);
     }
 
@@ -258,11 +297,11 @@ class Digitalus_Installer_Database
                     `content` text,
                     PRIMARY KEY (`id`),
                     KEY `fk_user_notes` (`user_name`)
-                ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;";
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         return $this->_db->query($sql);
     }
 
-    private function _constraints()
+    private function _addConstraints()
     {
         $pages          = Digitalus_Db_Table::getTableName('pages',           $this->_config['prefix']);
         $users          = Digitalus_Db_Table::getTableName('users',           $this->_config['prefix']);
@@ -271,15 +310,19 @@ class Digitalus_Installer_Database
         $sql = "ALTER TABLE `" . $pages . "`
                     ADD CONSTRAINT `fk_page_author` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE NO ACTION ON UPDATE CASCADE;";
         $this->_db->query($sql);
+$sqlTest  = $sql;
         $sql = "ALTER TABLE `" . $users . "`
                     ADD CONSTRAINT `fk_user_roles` FOREIGN KEY (`role`) REFERENCES `groups` (`name`) ON DELETE SET NULL ON UPDATE CASCADE;";
         $this->_db->query($sql);
+$sqlTest .= $sql;
         $sql = "ALTER TABLE `" . $userBookmarks . "`
                     ADD CONSTRAINT `fk_user_bookmarks` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;";
         $this->_db->query($sql);
+$sqlTest .= $sql;
         $sql = "ALTER TABLE `" . $userNotes . "`
                     ADD CONSTRAINT `fk_user_notes` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;";
         $this->_db->query($sql);
+return $sqlTest;
     }
 
     private function _populate()
