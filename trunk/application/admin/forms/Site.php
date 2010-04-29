@@ -77,7 +77,8 @@ class Admin_Form_Site extends Digitalus_Form
             'description'   => $view->getTranslation('Status'),
         ));
         $siteSubmit = $this->createElement('submit', 'site', array(
-            'label'     => $view->getTranslation('Update General Site Settings'),
+            'label'         => $view->getTranslation('Update General Site Settings'),
+            'attribs'       => array('class' => 'submit'),
         ));
         $this->addElement($siteName);
         $this->addElement($siteTitle);
@@ -123,7 +124,8 @@ class Admin_Form_Site extends Digitalus_Form
             'description'   => $view->getTranslation('Publish Pages'),
         ));
         $contentSubmit = $this->createElement('submit', 'content', array(
-            'label'     => $view->getTranslation('Update Content Settings'),
+            'label'         => $view->getTranslation('Update Content Settings'),
+            'attribs'       => array('class' => 'submit'),
         ));
         $this->addElement($homePage);
         $this->addElement($pageNotFound);
@@ -149,7 +151,8 @@ class Admin_Form_Site extends Digitalus_Form
             'belongsTo'     => 'setting',
         ));
         $designSubmit = $this->createElement('submit', 'design', array(
-            'label'     => $view->getTranslation('Update Design Settings'),
+            'label'         => $view->getTranslation('Update Design Settings'),
+            'attribs'       => array('class' => 'submit'),
         ));
         $this->addElement($defaultDesign);
         $this->addElement($designSubmit);
@@ -190,6 +193,7 @@ class Admin_Form_Site extends Digitalus_Form
         ));
         $metaSubmit = $this->createElement('submit', 'meta', array(
             'label'         => $view->getTranslation('Update Page Meta Data'),
+            'attribs'       => array('class' => 'submit'),
         ));
         $this->addElement($xmlDeclaration);
         $this->addElement($docType);
@@ -220,6 +224,7 @@ class Admin_Form_Site extends Digitalus_Form
         ));
         $internationalSubmit = $this->createElement('submit', 'language', array(
             'label'         => $view->getTranslation('Update Internationalization Settings'),
+            'attribs'       => array('class' => 'submit'),
         ));
         $this->addElement($defaultLanguage);
         $this->addElement($adminLanguage);
@@ -278,6 +283,7 @@ class Admin_Form_Site extends Digitalus_Form
         ));
         $mailSubmit = $this->createElement('submit', 'mail', array(
             'label'         => $view->getTranslation('Update Mail Settings'),
+            'attribs'       => array('class' => 'submit'),
         ));
         $this->addElement($defaultEmail)
              ->addElement($defaultEmailSender)
@@ -312,6 +318,7 @@ class Admin_Form_Site extends Digitalus_Form
         ));
         $googleSubmit = $this->createElement('submit', 'google', array(
             'label'         => $view->getTranslation('Update Google Settings'),
+            'attribs'       => array('class' => 'submit'),
         ));
         $this->addElement($googleVerify);
         $this->addElement($googleTracking);
