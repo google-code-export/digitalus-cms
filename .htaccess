@@ -3,7 +3,8 @@ AddDefaultCharset utf-8
 AddType 'text/css;  charset=utf-8' .css
 AddType 'text/html; charset=utf-8' .html
 
-SetEnv APPLICATION_ENV development
+# set this to development to allow exceptions to be thrown
+SetEnv APPLICATION_ENV production
 
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
