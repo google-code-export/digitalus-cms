@@ -17,7 +17,7 @@
  * @subpackage  View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license     http://framework.zend.com/license/new-bsd     New BSD License
- * @version     $Id: JQuery.php 20165 2010-01-09 18:57:56Z bkarwin $
+ * @version     $Id: JQuery.php 21869 2010-04-16 07:49:18Z beberlei $
  */
 
 /**
@@ -142,6 +142,10 @@ class ZendX_JQuery
      */
     public static function encodeJson($value)
     {
+        if (is_array($value) && count($value) == 0) {
+            return '{}';
+        }
+
         if(!class_exists('Zend_Json')) {
             /**
              * @see Zend_Json
