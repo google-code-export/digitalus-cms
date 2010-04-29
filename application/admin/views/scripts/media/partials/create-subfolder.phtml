@@ -1,8 +1,0 @@
-<?php ?>
-<form action="<?php echo $this->getBaseUrl();?>/admin/media/create-folder" method="post">
-    <dl><?php
-        echo $this->formRow($this->getTranslation('Folder Name'), $this->formText('folder_name'));
-        echo '<dt>' . $this->formHidden('path', $this->path) . '</dt>';
-        echo $this->formRow('&nbsp;', $this->formSubmit('createFolder', $this->getTranslation('Create Folder'))); ?>
-    </dl>
-</form>
