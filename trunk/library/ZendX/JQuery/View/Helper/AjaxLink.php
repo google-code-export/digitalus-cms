@@ -17,7 +17,7 @@
  * @subpackage  View
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license     http://framework.zend.com/license/new-bsd     New BSD License
- * @version     $Id: AjaxLink.php 20165 2010-01-09 18:57:56Z bkarwin $
+ * @version     $Id: AjaxLink.php 21866 2010-04-16 07:28:56Z beberlei $
  */
 
 /**
@@ -254,7 +254,7 @@ class ZendX_JQuery_View_Helper_AjaxLink extends Zend_View_Helper_HtmlElement
         $js = implode($js);
 
         if($inline == true) {
-            $attribs['onClick'] = $js;
+            $attribs['onclick'] = $js;
         } else {
             if(!isset($attribs['id'])) {
                 $clickClass = sprintf("ajaxLink%d", ZendX_JQuery_View_Helper_AjaxLink::$currentLinkCallbackId);
