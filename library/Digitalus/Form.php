@@ -40,7 +40,7 @@ class Digitalus_Form extends Zend_Form
 {
     const REQ_SUFFIX = '<sup title="This field is mandatory.">*</sup>';
 
-    const CSS_FRAMEWORK = '';       // either empty, yaml or blueprint --> respect their licenses!!
+    const CSS_FRAMEWORK = 'yaml';       // either empty, yaml or blueprint --> respect their licenses!!
 
     protected $_model;
     protected $_columns;
@@ -59,6 +59,9 @@ class Digitalus_Form extends Zend_Form
             'ViewHelper',
             'Errors',
             'Label',
+        ),
+        'none' => array(
+            'ViewHelper',
         ),
     );
 
@@ -215,7 +218,7 @@ class Digitalus_Form extends Zend_Form
     protected function _addInstance()
     {
         $instance = $this->_getInstance();
-        $session = $this->_getSession();
+        $session  = $this->_getSession();
         $session->validInstances = array($instance => true);
         return $instance;
     }
@@ -231,9 +234,8 @@ class Digitalus_Form extends Zend_Form
         $session = $this->_getSession();
         if (isset($session->validInstances[$instance]) && $session->validInstances[$instance] === true) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     protected function _removeInstance($instance)

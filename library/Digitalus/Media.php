@@ -2,6 +2,16 @@
 
 class Digitalus_Media
 {
+    /**
+     * the regex that the userName will be checked against
+     */
+    const MEDIALABEL_REGEX = '/^[0-9a-zA-Z-_]*$/u';
+    /**
+     * this is the error message that will be displayed if the userName doesn't match the regex
+     */
+    const MEDIALABEL_REGEX_NOTMATCH = 'Please only use alphanumeric characters, hyphen and underscore!';
+
+
     public static function isAllowed($mimeType)
     {
         $filetypes = self::getFiletypes();
@@ -28,7 +38,7 @@ class Digitalus_Media
         return null;
     }
 
-    public static function upload($file, $path, $filename, $createPath = true, $base = '.')
+    public static function upload($file, $path, $filename = null, $createPath = true, $base = '.')
     {
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
         $e = new Digitalus_View_Error();
@@ -41,7 +51,9 @@ class Digitalus_Media
             $path = self::getMediaPath($path);
 
             //default to the name on the client machine
-            if ($filename == null) {$filename = $file['name'];}
+            if (is_null($filename)) {
+                $filename = $file['name'];
+            }
             $filename = str_replace('_', '-', $filename);
             $filename = str_replace(' ', '-', $filename);
 
@@ -123,16 +135,15 @@ class Digitalus_Media
         $newpath = $parent . '/' . $newName;
         if (Digitalus_Filesystem_Dir::rename($path, $newpath)) {
             return $newpath;
-        } else {
-            return false;
         }
+        return false;
     }
 
     public static function deleteFolder($folder)
     {
         $config = Zend_Registry::get('config');
         if (self::testFilepath($folder)) {
-            $folder = Digitalus_Toolbox_String::stripUnderscores($folder);
+            $folder   = Digitalus_Toolbox_String::stripUnderscores($folder);
             $fullPath = self::rootDirectory() . '/' . $folder;
 
             //move the folder to the trash

@@ -1,52 +1,6 @@
-<?php $this->placeholder('formHeadline')->set($this->getTranslation('Open Folder'));?>
+<?php $this->placeholder('formHeadline')->set($this->getTranslation('Open Folder'));
 
-<fieldset><?php
-    $pathParts[] = $this->pathToMedia;
-    if (is_array($this->folderPathParts)) {
-        foreach ($this->folderPathParts as $path => $label) {
-            $pathParts[] = '<a href="' . $this->getBaseUrl() . '/admin/media/open-folder/folder/' . $path . '">' . $label . '</a>';
-        }
-    }?>
-    <legend><?php echo $this->getTranslation('Current Folder');?></legend>
-    <p><?php echo $this->getTranslation('Media Root');?><?php echo implode('/', $pathParts);?></p>
-</fieldset>
-
-<fieldset id="browse">
-    <legend><?php echo $this->getTranslation('Current folder contents');?></legend><?php
-    $data = array(
-        'filepath'    => $this->filesystemPath,
-        'mediapath'   => $this->mediaPath,
-        'mediaFolder' => $this->mediaFolder,
-        'files'       => $this->files,
-        'folders'     => $this->folders
-    );
-    echo $this->partial('media/partials/file-list.phtml', $data);?>
-</fieldset>
-
-<fieldset id="upload">
-    <legend><?php echo $this->getTranslation('Upload Files');?></legend><?php
-    $data = array(
-        'action'    => 'upload',
-        'filepath'  => $this->filesystemPath,
-        'mediapath' => $this->mediaPath,
-    );
-    echo $this->partial('media/partials/upload-files.phtml', $data);?>
-</fieldset>
-
-<fieldset id="subfolder">
-    <legend><?php echo $this->getTranslation('Create Subfolder');?></legend><?php
-    echo $this->render('media/partials/create-subfolder.phtml');?>
-</fieldset>
-
-<fieldset id="rename">
-    <legend><?php echo $this->getTranslation('Rename folder');?></legend><?php
-    $data = array(
-        'filepath'  => $this->filesystemPath,
-        'mediapath' => $this->mediaPath,
-        'label'     => $this->label
-    );
-    echo $this->partial('media/partials/rename-folder.phtml', $data);?>
-</fieldset><?php
+echo $this->form;
 
 $this->placeholder('jquery')->captureStart();?>
 $('#multi_upload').MultiFile();<?php

@@ -114,29 +114,28 @@ class Digitalus_Filesystem_Dir
      * @param string $source
      * @param string $target
      */
-    public static function copyRecursive( $source, $target )
+    public static function copyRecursive($source, $target)
     {
         if (is_dir($source)) {
-            @mkdir( $target );
+            @mkdir($target);
 
-            $d = dir( $source );
+            $d = dir($source);
 
             while (false !== ($entry = $d->read())) {
-                if ( $entry == '.' || $entry == '..' ) {
+                if ($entry == '.' || $entry == '..') {
                     continue;
                 }
 
                 $Entry = $source . '/' . $entry;
                 if (is_dir($Entry)) {
-                    Digitalus_Filesystem_Directory_Writer::copyRecursive( $Entry, $target . '/' . $entry );
+                    self::copyRecursive($Entry, $target . '/' . $entry);
                     continue;
                 }
-                copy( $Entry, $target . '/' . $entry );
+                copy($Entry, $target . '/' . $entry);
             }
-
             $d->close();
         } else {
-            copy( $source, $target );
+            copy($source, $target);
         }
     }
 
@@ -152,7 +151,7 @@ class Digitalus_Filesystem_Dir
         $exceptions = array('.', '..');
         if (!$sourcedir = @opendir($target)) {
             if ($verbose) {
-                echo '<strong>Couldn&#146;t open ' . $target . "</strong><br />\n";
+                echo "<strong>Could't open $target </strong><br />\n";
             }
             return false;
         }
@@ -168,7 +167,7 @@ class Digitalus_Filesystem_Dir
                     if ($verbose && $result)
                         echo "File has been removed<br />\n";
                     if ($verbose && (!$result))
-                        echo "<strong>Couldn&#146;t remove file</strong>";
+                        echo "<strong>Couldn't remove file</strong>";
                 }
             }
         }
@@ -181,7 +180,7 @@ class Digitalus_Filesystem_Dir
             }
         } else {
             if ($verbose) {
-                echo "<strong>Couldn&#146;t remove target directory</strong>";
+                echo "<strong>Couldn't remove target directory</strong>";
                 return false;
             }
         }
