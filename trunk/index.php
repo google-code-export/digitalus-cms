@@ -5,7 +5,13 @@ defined('BASE_PATH')
 // Define path to application directory
 defined('APPLICATION_PATH')
     || define('APPLICATION_PATH', BASE_PATH . '/application');
-// Define application environment
+/*
+ * Define application environment
+ *
+ * Set this to 'development'
+ * in the webserver's .htaccess file (or here)
+ * to allow exceptions to be thrown
+ */
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
@@ -33,6 +39,11 @@ if (file_exists('./install/install.php')) {
         $application->bootstrap()
                     ->run();
     } catch (Zend_Config_Exception $e) {
-        echo '<p class="error">ERROR: an error occurred while trying to load the config file! For a fresh installation or update of Digitalus, please rename the directory "install_hidden" to "install"!</p>';
+        if (file_exists('./install_hidden/install.php')) {
+            $warning = '<p class="error">ERROR: an error occurred while trying to load the config file! For a fresh installation or update of Digitalus, please rename the directory "install_hidden" to "install"!</p>';
+        } else {
+            $warning = '<p class="error">ERROR: an error occurred while trying to load the config file! For a fresh installation You need the installation directory which must be named "install"!</p>';
+        }
+        echo $warning;
     }
 }
