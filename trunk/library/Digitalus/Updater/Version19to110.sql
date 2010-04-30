@@ -102,7 +102,7 @@ ALTER TABLE `users`
  */
 -- insert `last_update`
 ALTER TABLE `pages`
-    ADD `last_update` INT(11) DEFAULT NULL AFTER `archive_date`;
+    ADD `last_update` TIMESTAMP NULL DEFAULT NULL AFTER `archive_date`;
 -- change type of pages.publish_level, pages.is_home_page and pages.show_on_menu to ENUM/TINYINT
 ALTER TABLE `pages`
     CHANGE `publish_level` `publish_level` ENUM('1', '11', '21') NULL DEFAULT '11',

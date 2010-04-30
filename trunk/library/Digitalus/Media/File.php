@@ -16,7 +16,7 @@ class Digitalus_Media_File
         $mediaFolder = Digitalus_Media::rootDirectory();
 
         $this->fullPath = $basePath . $mediaFolder . '/' . $path;
-        $this->fullUrl = $baseUrl . $mediaFolder . '/' . $path;
+        $this->fullUrl  = $baseUrl  . $mediaFolder . '/' . $path;
 
         $this->type = Digitalus_Media_Filetype::load($path);
 

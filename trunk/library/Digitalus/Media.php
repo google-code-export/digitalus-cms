@@ -11,7 +11,6 @@ class Digitalus_Media
      */
     const MEDIALABEL_REGEX_NOTMATCH = 'Please only use alphanumeric characters, hyphen and underscore!';
 
-
     public static function isAllowed($mimeType)
     {
         $filetypes = self::getFiletypes();
@@ -25,7 +24,7 @@ class Digitalus_Media
 
     public static function getFiletypes()
     {
-        $config = Zend_Registry::get('config');
+        $config    = Zend_Registry::get('config');
         $filetypes = $config->filetypes;
         if ($filetypes) {
             foreach ($filetypes as $key => $filetype) {
@@ -38,15 +37,27 @@ class Digitalus_Media
         return null;
     }
 
+    public static function getFileExtensions()
+    {
+        $config    = Zend_Registry::get('config');
+        $filetypes = $config->filetypes;
+        if ($filetypes) {
+            foreach ($filetypes as $key => $filetype) {
+                $fileExtensions[] = $key;
+            }
+            return $fileExtensions;
+        }
+        return null;
+    }
+
     public static function upload($file, $path, $filename = null, $createPath = true, $base = '.')
     {
         $view = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer')->view;
-        $e = new Digitalus_View_Error();
+        $e    = new Digitalus_View_Error();
 
         if ($file['error'] == 4 || empty($file['name'])) {
             return;
         }
-
         if (self::isAllowed($file['type'])) {
             $path = self::getMediaPath($path);
 
@@ -68,7 +79,7 @@ class Digitalus_Media
              * to do before).
              */
             $config = Zend_Registry::get('config');
-            $path = $config->filepath->media . '/' . $path;
+            $path   = $config->filepath->media . '/' . $path;
 
             if ($createPath) {
                 //attempt to create the new path
@@ -77,7 +88,7 @@ class Digitalus_Media
             //clean the filename
             $filename = Digitalus_Filesystem_File::cleanFilename($filename);
             $filename = basename($filename);
-            $path .= '/' . $filename;
+            $path    .= '/' . $filename;
 
             if (move_uploaded_file($file['tmp_name'], $path)) {
                 //return the filepath if things worked out

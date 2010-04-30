@@ -40,7 +40,7 @@ class Digitalus_Form extends Zend_Form
 {
     const REQ_SUFFIX = '<sup title="This field is mandatory.">*</sup>';
 
-    const CSS_FRAMEWORK = 'yaml';       // either empty, yaml or blueprint --> respect their licenses!!
+    const CSS_FRAMEWORK = '';       // either empty, yaml or blueprint --> respect their licenses!!
 
     protected $_model;
     protected $_columns;

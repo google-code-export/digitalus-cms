@@ -259,7 +259,7 @@ class Digitalus_Updater_Version19to110 extends Digitalus_Updater_Abstract
         */
         // insert `last_update`
         $this->_db->query("ALTER TABLE `$db_pages`
-            ADD `last_update` INT(11) DEFAULT NULL AFTER `archive_date`");
+            ADD `last_update` TIMESTAMP NULL DEFAULT NULL AFTER `archive_date`");
         // change type of pages.publish_level, pages.is_home_page and pages.show_on_menu to ENUM/TINYINT
         $this->_db->query("ALTER TABLE `$db_pages`
             CHANGE `publish_level` `publish_level` ENUM('1', '11', '21') NULL DEFAULT '11',
@@ -492,7 +492,7 @@ class Digitalus_Updater_Version19to110 extends Digitalus_Updater_Abstract
             ADD CONSTRAINT `fk_page_author` FOREIGN KEY (`user_name`) REFERENCES `$db_users`(`name`) ON DELETE NO ACTION ON UPDATE CASCADE");
         // add foreign key 'page_id' referencing column 'id' of db 'pages'
         $this->_db->query("ALTER TABLE `$db_page_nodes`
-            ADD PRIMARY KEY (`page_id`, `node_type`, `language`)");
+            ADD PRIMARY KEY (`page_id`, `language`)");
     }
 
     /**
