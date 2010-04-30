@@ -37,7 +37,7 @@
             <adminLayout>index</adminLayout>
             <adminTemplate>digitalus-1-5</adminTemplate>
         </design>
-         <filepath>
+        <filepath>
             <media>media</media>
             <trash>./trash</trash>
             <emailTemplates>./application/public/views/scripts/email</emailTemplates>
@@ -48,25 +48,41 @@
             <icons>images/icons/silk</icons>
             <adminViews>./application/admin/views/scripts</adminViews>
         </filepath>
-         <filetypes>
+        <filetypes>
             <wav type="audio" icon="cd.png" mime="#"/>
-            <mp3 type="audio" icon="cd.png" mime="#"/>
-            <mp4 type="audio" icon="cd.png" mime="#"/>
-            <flv type="flash" icon="page_white_flash.png" mime="#"/>
-            <swf type="flash" icon="page_white_flash.png" mime="#"/>
-            <pdf type="pdf" icon="page_white_acrobat.png" mime="#"/>
+            <mp3 type="audio" icon="cd.png">
+                <mime>
+                    <type>audio/mpeg3</type>
+                    <type>audio/x-mpeg3</type>
+                </mime>
+            </mp3>
+            <mp4 type="audio" icon="cd.png">
+                <mime>
+                    <type>audio/mpeg4</type>
+                    <type>audio/x-mpeg4</type>
+                </mime>
+            </mp4>
+            <flv type="flash" icon="page_white_flash.png" mime="video/x-flv"/>
+            <swf type="flash" icon="page_white_flash.png" mime="application/x-shockwave-flash"/>
+            <pdf type="pdf" icon="page_white_acrobat.png" mime="application/pdf"/>
             <wmv type="movie" icon="film.png" mime="#"/>
-            <pptx type="movie" icon="page_white_powerpoint.png" mime="#"/>
-            <ppt type="powerpoint" icon="page_white_powerpoint.png" mime="#"/>
+            <ppt type="powerpoint" icon="page_white_powerpoint.png">
+                <mime>
+                    <type>application/mspowerpoint</type>
+                    <type>application/vnd.ms-powerpoint</type>
+                </mime>
+            </ppt>
+            <pptx type="powerpoint" icon="page_white_powerpoint.png" mime="#"/>
             <xls type="excel" icon="page_white_excel.png" mime="#"/>
             <xlsx type="excel" icon="page_white_excel.png" mime="#"/>
             <docx type="document" icon="page_white_word.png" mime="#"/>
             <doc type="document" icon="page_white_word.png" mime="application/msword"/>
             <jpg type="image" icon="picture.png">
-                 <mime>
-                     <type>image/jpeg</type>
-                     <type>image/pjpeg</type>
-                 </mime>
+                <mime>
+                    <type>image/jpeg</type>
+                    <type>image/pjpeg</type>
+                    <type>application/octet-stream</type>
+                </mime>
             </jpg>
             <gif type="image" icon="picture.png" mime="image/gif"/>
             <png type="image" icon="picture.png" mime="image/png"/>

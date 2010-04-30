@@ -5,7 +5,7 @@
     <li><?php echo $this->getTranslation('Content Sections');?>
         <ul><?php
             foreach ($this->contentPanes as $id => $title) {?>
-            <li><?php echo $this->link($title, '#fieldset-' . $id, 'bullet_black.png');?></li><?php
+            <li><?php echo $this->link($title, '#' . $id, 'bullet_black.png');?></li><?php
             }?>
         </ul>
     </li><?php

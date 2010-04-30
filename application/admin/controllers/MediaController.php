@@ -134,16 +134,24 @@ class Admin_MediaController extends Digitalus_Controller_Action
 
             // indicator if it is a return of one of the other actions
             if (false == $this->_request->getParam('return')) {
-                //createFolderAction
-                if ($form->isValidPartial(array($path, $folderName)) && isset($_POST['createFolderSubmit']) && !empty($_POST['createFolderSubmit'])) {
+                // createFolderAction
+                if ($form->isValidPartial(array('path' => $path, 'folder_name' => $folderName))
+                    && isset($_POST['createFolderSubmit']) && !empty($_POST['createFolderSubmit']))
+                {
                     $this->_request->setParam('path',        $path);
                     $this->_request->setParam('folder_name', $folderName);
                     $this->_forward('create-folder');
-                } else if ($form->isValidPartial(array($filePath, $folderName)) && isset($_POST['renameFolderSubmit']) && !empty($_POST['renameFolderSubmit'])) {
+                // renameFolderAction
+                } else if ($form->isValidPartial(array('filepath' => $filePath, 'new_folder_name' => $newFolderName))
+                    && isset($_POST['renameFolderSubmit']) && !empty($_POST['renameFolderSubmit']))
+                {
                     $this->_request->setParam('filepath',    $filePath);
                     $this->_request->setParam('new_folder_name', $newFolderName);
                     $this->_forward('rename-folder');
-                } else if ($form->isValidPartial(array($filePath, $mediaPath)) && isset($_POST['uploadSubmit']) && !empty($_POST['uploadSubmit'])) {
+                // uploadAction
+                } else if ($form->isValidPartial(array('filepath' => $filePath, 'mediapath' => $mediaPath))
+                    && isset($_POST['uploadSubmit']) && !empty($_POST['uploadSubmit']))
+                {
                     $this->_request->setParam('filepath',  $filePath);
                     $this->_request->setParam('mediapath', $mediaPath);
                     $this->_forward('upload');

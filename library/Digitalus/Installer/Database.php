@@ -197,10 +197,10 @@ class Digitalus_Installer_Database
         $sql = "CREATE TABLE `" . $table . "` (
                     `id` int(11) NOT NULL AUTO_INCREMENT,
                     `user_name` varchar(30) DEFAULT NULL,
-                    `create_date` int(11) DEFAULT NULL,
+                    `create_date` int(11) NOT NULL,
                     `publish_date` int(11) NOT NULL,
-                    `archive_date` int(11) NOT NULL,
-                    `last_update` int(11) NOT NULL,
+                    `archive_date` int(11) NULL DEFAULT NULL,
+                    `last_update` TIMESTAMP NULL DEFAULT NULL,
                     `publish_level` enum('1','11','21') DEFAULT '11',
                     `name` varchar(250) DEFAULT NULL,
                     `label` varchar(250) DEFAULT NULL,
@@ -227,7 +227,7 @@ class Digitalus_Installer_Database
                     `label` varchar(100) DEFAULT NULL,
                     `headline` varchar(100) DEFAULT NULL,
                     `content` mediumtext NOT NULL,
-                    PRIMARY KEY (`page_id`,`node_type`,`language`),
+                    PRIMARY KEY (`page_id`, `language`),
                     KEY `fk_page_nodes` (`page_id`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
         return $this->_db->query($sql);
@@ -310,19 +310,15 @@ class Digitalus_Installer_Database
         $sql = "ALTER TABLE `" . $pages . "`
                     ADD CONSTRAINT `fk_page_author` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE NO ACTION ON UPDATE CASCADE;";
         $this->_db->query($sql);
-$sqlTest  = $sql;
         $sql = "ALTER TABLE `" . $users . "`
                     ADD CONSTRAINT `fk_user_roles` FOREIGN KEY (`role`) REFERENCES `groups` (`name`) ON DELETE SET NULL ON UPDATE CASCADE;";
         $this->_db->query($sql);
-$sqlTest .= $sql;
         $sql = "ALTER TABLE `" . $userBookmarks . "`
                     ADD CONSTRAINT `fk_user_bookmarks` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;";
         $this->_db->query($sql);
-$sqlTest .= $sql;
         $sql = "ALTER TABLE `" . $userNotes . "`
                     ADD CONSTRAINT `fk_user_notes` FOREIGN KEY (`user_name`) REFERENCES `users` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;";
         $this->_db->query($sql);
-return $sqlTest;
     }
 
     private function _populate()
