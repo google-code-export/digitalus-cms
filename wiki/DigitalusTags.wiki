@@ -41,20 +41,23 @@ A DigitalusControl provides a form element in the admin area. The controls can b
 ==Digitalus Navigation==
 
 ===Description===
-The DigitalusNavigation tag provides the possibilty to simply add navigational structure to the template. Three different types are supported currently, i.e. _menu_, _submenu_ and _breadcrumbs_
+The DigitalusNavigation tag provides the possibilty to simply add navigational structure to the template. Three different types are supported currently, i.e. _menu_, _submenu_ and _breadcrumbs_.
+
+From Version 1.10 on, the navigation is based on Zend_Navigation with all added features (and drawbacks).
 
 ===Example===
-`<digitalusNavigation type='menu' parentId='0' levels='1' currentLevel='1' id='menu' />`
+`<digitalusNavigation type='menu' indent="1" maxDepth="2" ulClass="menu" id='menu' />`
 
-`<digitalusNavigation type='submenu' id='submenu' levels='2' />`
+`<digitalusNavigation type='submenu' id="submenu" maxDepth="2" />`
 
-`<digitalusNavigation type='breadcrumbs' id='breadcrumb' />`
+`<digitalusNavigation type='breadcrumbs' id="breadcrumbs" />`
 
 ===Attributes===
+The attributes are *case-sensitive*!
 ||*attribute*||*supported values*||*description*||*supported attributes*||
-||type||menu||creates a menu using the view helper _Digitalus_View_Helper_Navigation_RenderMenu_||*parentId*, *levels*, *currentLevel*, *id*||
-|| ||submenu||creates a submenu using the view helper _Digitalus_View_Helper_Navigation_RenderSubmenu_||*levels*, *id*||
-|| ||breadcrumbs||creates a submenu using the view helper _Digitalus_View_Helper_Navigation_RenderBreadcrumbs_||*separator*, *siteRoot*||
+||type||menu||creates a menu using the view helper _Digitalus_View_Helper_Navigation_RenderMenu_||*indent*, *maxDepth*, *minDepth*, *onlyActiveBranch*, *renderParents*, *ulClass*||
+|| ||submenu||creates a submenu using the view helper _Digitalus_View_Helper_Navigation_RenderSubmenu_||*indent*, *ulClass*||
+|| ||breadcrumbs||creates a breadcrumb using the view helper _Digitalus_View_Helper_Navigation_RenderBreadcrumbs_||*linkLast*, *maxDepth*, *minDepth*, *separator*||
 
 ==Digitalus Partial==
 
