@@ -190,7 +190,6 @@ class Digitalus_Media
     public static function getMediaPath($path, $relative = true)
     {
         $path = Digitalus_Toolbox_String::stripUnderscores($path);
-
         //make it impossible to get out of the media library
         $path = str_replace('./', '', $path);
         $path = str_replace('../', '', $path);

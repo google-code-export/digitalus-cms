@@ -88,13 +88,13 @@ class Admin_MediaController extends Digitalus_Controller_Action
     public function openFolderAction()
     {
         $folder = $this->_request->getParam('folder');
+#Zend_Debug::dump($folder);
         $folder = str_replace('media_', '', $folder);
+        $folder = Digitalus_Toolbox_String::stripLeading('_', $folder);
+#Zend_Debug::dump($folder);
 
         $data = array();
         $data['path'] = $folder;
-
-        $folder = Digitalus_Toolbox_String::stripHyphens($folder);
-        $folder = Digitalus_Toolbox_String::stripLeading('_', $folder);
 
         $folderArray = explode('_', $folder);
         if (is_array($folderArray)) {
@@ -187,10 +187,10 @@ class Admin_MediaController extends Digitalus_Controller_Action
         $forwardPath = $baseFolder;
         if (!empty($newFolder)) {
             $fullPath = $this->_pathToMedia;
-            $base = str_replace('media_', '', $baseFolder);
+            $base     = str_replace('media_', '', $baseFolder);
 
             if (!empty($base)) {
-                $base = Digitalus_Toolbox_String::stripUnderscores($base);
+                $base      = Digitalus_Toolbox_String::stripUnderscores($base);
                 $fullPath .= '/' . $base;
             }
             $fullPath .= '/' . $newFolder;

@@ -87,7 +87,9 @@ class Admin_Form_Media extends Digitalus_Form
         $pathParts[] = $pathToMedia;
         if (is_array($folderPathParts)) {
             foreach ($folderPathParts as $path2 => $label2) {
-                $pathParts[] = '<a href="' . $view->getBaseUrl() . '/admin/media/open-folder/folder/' . $path2 . '">' . $label2 . '</a>';
+                $pathParts[] = '<a href="' . $view->getBaseUrl() . '/admin/media/open-folder/folder/' . $path2 . '">'
+                             . Digitalus_Toolbox_String::stripUnderscores($label2)
+                             . '</a>';
             }
         }
         $xhtml = '<p>' . $view->getTranslation('Media Root') . implode('/', $pathParts) . '</p>';
@@ -111,13 +113,15 @@ class Admin_Form_Media extends Digitalus_Form
         if (is_array($folders) && count($folders) > 0) {
             $xhtml = '<h3>' . $view->getTranslation('Subfolders') . '</h3>';
             foreach ($folders as $folder) {
+                $folder = Digitalus_Toolbox_String::addUnderscores($folder);
+
                 $cleanPath  = Digitalus_Toolbox_String::stripHyphens($folder);
                 $cleanPath  = Digitalus_Toolbox_String::stripUnderscores($folder);
                 $deleteLink = '/admin/media/delete-folder/folder/' . $mediapath . '_' . $folder;
                 $path2      = '/admin/media/open-folder/folder/'   . $mediapath . '_' . $folder;
                 $xhtml     .= '<div class="folderWrapper">'
                            .  '    '     . $view->link('Delete', $deleteLink, 'delete.png', 'rightLink delete')
-                           .  '    <h4>' . $view->link($folder, $path2, 'folder.png') . '</h4>'
+                           .  '    <h4>' . $view->link($cleanPath, $path2, 'folder.png') . '</h4>'
                            .  '    <p>'  . $view->getTranslation('Full path') . ': <code>' . $basePath . '/' . $cleanPath . '</code></p>'
                            .  '</div>';
             }
@@ -163,7 +167,6 @@ class Admin_Form_Media extends Digitalus_Form
             'belongsTo'     => 'uploads',
             'attribs'       => array('id' => 'multi_upload'),
             'filters'       => array('StringTrim', 'StripTags'),
-            'destination'   => Digitalus_Media::getMediaPath($filepath),
             'validators'    => array(
                 array('File_NotExists', true, array()),
             ),

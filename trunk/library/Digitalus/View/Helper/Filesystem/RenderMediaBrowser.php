@@ -45,15 +45,15 @@ class Digitalus_View_Helper_Filesystem_RenderMediaBrowser extends Zend_View_Help
     public function renderMediaBrowser($path, $folderLink, $fileLink)
     {
         $folders = Digitalus_Filesystem_Dir::getDirectories($path);
-        $files = Digitalus_Filesystem_File::getFilesByType($path, false, false, true);
-        $links = null;
+        $files   = Digitalus_Filesystem_File::getFilesByType($path, false, false, true);
+        $links   = null;
 
         if (is_array($folders) && count($folders) > 0) {
             foreach ($folders as $folder) {
                 $folderPath = $path . '/' . $folder;
                 $link = Digitalus_Toolbox_String::addUnderscores($folderPath);
                 //remove reference to media
-                $link = str_replace('media_', '', $link);
+                $link    = str_replace('media_', '', $link);
                 $submenu = $this->view->renderMediaBrowser($folderPath, $folderLink, $fileLink);
                 $links[] = '<li class="menuItem">' . $this->view->link($folder, '/' . $folderLink . '/' . $link, 'folder.png') . $submenu . '</li>';
             }

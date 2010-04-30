@@ -11,13 +11,12 @@ $this->jQuery()->onLoadCaptureStart();?>
 <?php $this->jQuery()->onLoadCaptureEnd();?>
 
 <div class="contentBrowser padding-10">
-<p><?php echo $this->link('Media Root', '/admin/media', 'folder.png');?></p>
-<?php
-$browser = $this->renderMediaBrowser($this->mediaFolder, 'admin/media/open-folder/folder', null);
-if (empty($browser)) {
-    echo '<p>' . $this->getTranslation('You do not have any media files on the server') . '</p>';
-} else {
-    echo $browser;
-}
-?>
+    <p><?php echo $this->link('Media Root', '/admin/media', 'folder.png');?></p><?php
+
+    $browser = $this->renderMediaBrowser($this->mediaFolder, 'admin/media/open-folder/folder', null);
+    if (empty($browser)) {
+        echo '<p>' . $this->getTranslation('You do not have any media files on the server') . '</p>';
+    } else {
+        echo $browser;
+    }?>
 </div>
