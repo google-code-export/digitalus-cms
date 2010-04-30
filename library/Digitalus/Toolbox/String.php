@@ -23,6 +23,8 @@
 
 class Digitalus_Toolbox_String
 {
+    const UNDERSCORE = '[US]';
+
     /**
      * returns a randomly generated string
      * commonly used for password generation
@@ -89,7 +91,7 @@ class Digitalus_Toolbox_String
      */
     public static function addUnderscores($string, $relative = false)
     {
-        $string = str_replace('_', '[UNDERSCORE]', $string);
+        $string = str_replace('_', self::UNDERSCORE, $string);
         return str_replace('/', '_', trim($string));
     }
 
@@ -107,7 +109,7 @@ class Digitalus_Toolbox_String
         if ($relative) {
             $string = Digitalus_Toolbox_String::stripLeading('/', $string);
         }
-        $string = str_replace('[UNDERSCORE]', '_', $string);
+        $string = str_replace(self::UNDERSCORE, '_', $string);
         return $string;
     }
 
