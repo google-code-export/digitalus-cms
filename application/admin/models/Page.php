@@ -202,7 +202,7 @@ class Model_Page extends Digitalus_Db_Table
 
             $pageNode = new Model_PageNode();
             //fetch the content nodes
-            $page->content = $pageNode->fetchContentArray($pageId, null, $language);
+            $page->content        = $pageNode->fetchContentArray($pageId, null, $language);
             $page->defaultContent = $pageNode->fetchContentArray($pageId, null, $this->getDefaultLanguage());
 
             return $page;
