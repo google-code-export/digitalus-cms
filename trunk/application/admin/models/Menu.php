@@ -1,7 +1,7 @@
 <?php
 class Model_Menu extends Model_Page
 {
-    protected $_menuColumns = array('id', 'parent_id', 'publish_level', 'name', 'position', 'show_on_menu');
+    protected $_menuColumns = array('id', 'last_update', 'name', 'parent_id', 'position', 'publish_level', 'show_on_menu');
 
     public function getMenus()
     {
