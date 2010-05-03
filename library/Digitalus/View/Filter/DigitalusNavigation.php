@@ -49,16 +49,20 @@ class Digitalus_View_Filter_DigitalusNavigation extends Digitalus_Content_Filter
         if (is_array($attribs)) {
             $parentId  = isset($attribs['parent_id']) ? $attribs['parent_id'] : null;
             $root      = isset($attribs['root'])      ? $attribs['root']      : null;
+
             switch ($attribs['type']) {
                 case 'menu':
                 default:
-                    return $this->view->renderMenu($parentId, $attribs);
+                    return $this->view->menuRenderer($parentId, $attribs);
                     break;
                 case 'submenu':
-                    return $this->view->renderSubmenu($attribs);
+                    return $this->view->submenuRenderer($attribs);
                     break;
                 case 'breadcrumbs':
-                    return $this->view->renderBreadcrumbs($root, $attribs);
+                    return $this->view->breadcrumbsRenderer($root, $attribs);
+                    break;
+                case 'sitemap':
+                    return $this->view->sitemapRenderer($attribs);
                     break;
             }
         }

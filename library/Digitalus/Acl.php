@@ -102,8 +102,7 @@ class Digitalus_Acl extends Zend_Acl
                 $mdlPage   = new Model_Page();
                 $pageNames = $mdlPage->getPageNamesArray();
                 foreach ($pageNames as $pageName) {
-// TODO: refactor into Toolbox String - replace underscores with empty spaces
-                    $pageName = strtolower(str_replace(' ', '_', $pageName));
+                    $pageName = strtolower(Digitalus_Toolbox_String::replaceEmptySpace($pageName));
                     $this->_resourceList[$pageName] = $pageName;
                     $this->addResource(new Zend_Acl_Resource($pageName), $module);
                 }

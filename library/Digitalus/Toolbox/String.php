@@ -84,12 +84,34 @@ class Digitalus_Toolbox_String
     }
 
     /**
+     * replace empty spaces with underscores
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function replaceEmptySpace($string)
+    {
+        return str_replace(' ', '_', trim($string));
+    }
+
+    /**
+     * replace underscores with empty spaces
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function replaceUnderscore($string)
+    {
+        return str_replace('_', ' ', trim($string));
+    }
+
+    /**
      * replace slashes with underscores
      *
      * @param string $string
      * @return string
      */
-    public static function addUnderscores($string, $relative = false)
+    public static function addUnderscores($string)
     {
         $string = str_replace('_', self::UNDERSCORE, $string);
         return str_replace('/', '_', trim($string));
@@ -166,5 +188,30 @@ class Digitalus_Toolbox_String
         $words = split(' ', $text);
         $text  = (string)join(' ', array_slice($words, 0, $count));
         return $text;
+    }
+
+    public static function booleanise($string)
+    {
+        $string = strtolower($string);
+        switch ($string) {
+            case 'true':
+                return true;
+                break;
+            case 'false':
+                return false;
+                break;
+            default:
+                $int = (int)$string;
+                switch ($int) {
+                    case 1:
+                        return true;
+                        break;
+                    case 0:
+                        return false;
+                        break;
+                    default:
+                        return false;
+                }
+        }
     }
 }

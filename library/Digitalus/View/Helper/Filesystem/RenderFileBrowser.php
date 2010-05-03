@@ -69,11 +69,7 @@ class Digitalus_View_Helper_Filesystem_RenderFileBrowser extends Zend_View_Helpe
                 }
                 $submenu = false;
             }
-            if (isset($child->label) && !empty($child->label)) {
-                $label = $child->label;
-            } else {
-                $label = $child->name;
-            }
+            $label = $child->name;
             if ($child->id == $exclude) {
                 $links[] = $this->_getExcludeElement($label, $submenu, $icon);
             } else {

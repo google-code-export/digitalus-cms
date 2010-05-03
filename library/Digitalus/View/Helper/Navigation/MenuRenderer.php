@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderMenu helper
+ * MenuRenderer helper
  *
  * LICENSE
  *
@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: RenderMenu.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
+ * @version     $Id: MenuRenderer.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
@@ -29,36 +29,40 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderMenu helper
+ * MenuRenderer helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
- * @since       Release 1.5.0
  * @uses        Digitalus_Menu
- * @uses        View_Helper_Navigation
- * @uses        View_Helper_Navigation_Menu
+ * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Navigation_RenderMenu extends Digitalus_View_Helper_Navigation_Abstract
+class Digitalus_View_Helper_Navigation_MenuRenderer extends Digitalus_View_Helper_Navigation_Abstract
 {
     protected $_attribs = array(
         'indent'            => 4,
-        'maxDepth'          => 0,
-        'minDepth'          => 0,
+        'maxDepth'          => null,
+        'minDepth'          => null,
         'onlyActiveBranch'  => false,
         'renderParents'     => true,
         'ulClass'           => 'vlist',
     );
+    protected $_booleanValues = array('onlyActiveBranch', 'renderParents');
 
-    public function renderMenu($parentId = 0, $attribs = array())
+    public function menuRenderer($parentId = 0, $attribs = array())
     {
         // needed to register Navigation into Zend_Registry
         $menu = new Digitalus_Menu($parentId);
 
         $this->_setAttribs($attribs);
 
+        // render partial
+        if ($this->_issetPartial($attribs)) {
+            return $this->view->navigation()->menu()->renderPartial(null, $attribs['partial']);
+        }
+        // render menu
         return $this->view->navigation()->menu()->renderMenu(null, $this->_getAttribs());
     }
 }
