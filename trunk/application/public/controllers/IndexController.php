@@ -51,7 +51,7 @@ class IndexController extends Digitalus_Controller_Action
 
         $this->page->content = array(
             'label'    => 'Auth',
-            'headline' => 'Header: no-login-Test',
+            'headline' => $this->view->getTranslation('Authorisation required'),
             'content'  => $this->view->partial('partials/login.phtml', array('form' => $form)),
         );
         $this->page->defaultContent = $this->page->content;
