@@ -113,10 +113,9 @@ class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
             'id'        => $item->id,
             'label'     => Digitalus_Toolbox_Page::getLabel($item),
             'name'      => $item->name,
-// TODO: refactor into Toolbox String - replace underscores with empty spaces
-            'resource'  => strtolower(str_replace(' ', '_', $item->name)),
+            'resource'  => strtolower(Digitalus_Toolbox_String::replaceEmptySpace($item->name)),
             'title'     => Digitalus_Toolbox_Page::getLabel($item),
-            'uri'       => $baseUrl . '/' .Digitalus_Toolbox_Page::getUrl($item),
+            'uri'       => $baseUrl . '/' . Digitalus_Toolbox_String::replaceEmptySpace(Digitalus_Toolbox_Page::getUrl($item)),
             'visible'   => $this->isVisible($item),
         );
         return $page;

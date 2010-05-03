@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderBreadcrumbs helper
+ * BreadcrumbsRenderer helper
  *
  * LICENSE
  *
@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: RenderBreadcrumbs.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
+ * @version     $Id: BreadcrumbsRenderer.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderBreadcrumbs helper
+ * BreadcrumbsRenderer helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
@@ -37,11 +37,9 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @uses        Digitalus_Menu
- * @uses        View_Helper_Navigation
- * @uses        View_Helper_Navigation_Breadcrumbs
  * @since       Release 1.5.0
  */
-class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Digitalus_View_Helper_Navigation_Abstract
+class Digitalus_View_Helper_Navigation_BreadcrumbsRenderer extends Digitalus_View_Helper_Navigation_Abstract
 {
     protected $_attribs = array(
         'linkLast'          => false,
@@ -49,14 +47,20 @@ class Digitalus_View_Helper_Navigation_RenderBreadcrumbs extends Digitalus_View_
         'minDepth'          => 1,
         'separator'         => ' &gt; ',
     );
+    protected $_booleanValues = array('linkLast');
 
-    public function renderBreadcrumbs($siteRoot = 'Home', $attribs = array())
+    public function breadcrumbsRenderer($parentId = 0, $attribs = array())
     {
+        // needed to register Navigation into Zend_Registry
+        $menu = new Digitalus_Menu($parentId);
+
         $this->_setAttribs($attribs);
 
-        // needed to register Navigation into Zend_Registry
-        $menu = new Digitalus_Menu();
-
+        // render partial
+        if ($this->_issetPartial($attribs)) {
+            return $this->view->navigation()->breadcrumbs()->renderPartial(null, $attribs['partial']);
+        }
+        // render breadcrumbs
         return $this->view->navigation()->breadcrumbs()
             ->setLinkLast($this->_getAttrib('linkLast'))
             ->setMaxDepth($this->_getAttrib('maxDepth'))

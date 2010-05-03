@@ -1,6 +1,6 @@
 <?php
 /**
- * RenderSubMenu helper
+ * SubMenuRenderer helper
  *
  * LICENSE
  *
@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: RenderSubMenu.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
+ * @version     $Id: SubMenuRenderer.php Tue Dec 25 19:48:48 EST 2007 19:48:48 forrest lyman $
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
@@ -29,7 +29,7 @@
 require_once 'Zend/View/Helper/Abstract.php';
 
 /**
- * RenderSubMenu helper
+ * SubMenuRenderer helper
  *
  * @author      Forrest Lyman
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
@@ -37,19 +37,23 @@ require_once 'Zend/View/Helper/Abstract.php';
  * @version     Release: @package_version@
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
- * @uses        viewHelper  Digitalus_View_Helper_RenderMenu
  */
-class Digitalus_View_Helper_Navigation_RenderSubMenu extends Digitalus_View_Helper_Navigation_Abstract
+class Digitalus_View_Helper_Navigation_subMenuRenderer extends Digitalus_View_Helper_Navigation_Abstract
 {
     protected $_attribs = array(
         'indent'    => 4,
         'ulClass'   => 'vlist'
     );
 
-    public function renderSubMenu($attribs = array())
+    public function subMenuRenderer($attribs = array())
     {
         $this->_setAttribs($attribs);
 
+        // render partial
+        if ($this->_issetPartial($attribs)) {
+            return $this->view->navigation()->menu()->renderPartial(null, $attribs['partial']);
+        }
+        // render submenu
         return $this->view->navigation()->menu()->renderSubMenu(null, $this->_getAttrib('ulClass'), $this->_getAttrib('indent'));
     }
 }

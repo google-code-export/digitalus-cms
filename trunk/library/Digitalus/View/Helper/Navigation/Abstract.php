@@ -42,8 +42,24 @@ require_once 'Zend/View/Helper/Abstract.php';
  */
 abstract class Digitalus_View_Helper_Navigation_Abstract extends Zend_View_Helper_Abstract
 {
+    /**
+     * Attributes for the specific navigation helper
+     * @var array
+     */
     protected $_attribs = array();
 
+    /**
+     * Attributes that must be booleanised before processing them
+     * @var array
+     */
+    protected $_booleanValues = array();
+
+    /**
+     * Sets multiple attributes at a time
+     *
+     * @param  array $attribs
+     * @return void
+     */
     protected function _setAttribs($attribs)
     {
         if (is_array($attribs)) {
@@ -53,22 +69,59 @@ abstract class Digitalus_View_Helper_Navigation_Abstract extends Zend_View_Helpe
         }
     }
 
+    /**
+     * Sets one attribute
+     *
+     * @param  string $key
+     * @param  string $value
+     * @return void
+     */
     protected function _setAttrib($key, $value)
     {
         if (key_exists($key, $this->_attribs)) {
-            $this->_attribs[$key] = (string)$value;
+            if (in_array($key, $this->_booleanValues)) {
+                // needed to convert "true" or "false" strings into boolean values
+                $this->_attribs[$key] = Digitalus_Toolbox_String::booleanise($key);
+            } else {
+                $this->_attribs[$key] = (string)$value;
+            }
         }
     }
 
+    /**
+     * Returns all attributes
+     *
+     * @return array
+     */
     protected function _getAttribs()
     {
         return $this->_attribs;
     }
 
+    /**
+     * Returns the value for one specific attribute or false if it doesn't exist
+     *
+     * @param  string $key
+     * @return string|false
+     */
     protected function _getAttrib($key)
     {
         if (key_exists($key, $this->_attribs)) {
             return $this->_attribs[$key];
+        }
+        return null;
+    }
+
+    /**
+     * Returns true if a partial was set, otherwise false
+     *
+     * @param  array   $attribs
+     * @return boolean
+     */
+    protected function _issetPartial(array $attribs)
+    {
+        if (isset($attribs['partial']) && !empty($attribs['partial']) && '' != $attribs['partial']) {
+            return true;
         }
         return false;
     }

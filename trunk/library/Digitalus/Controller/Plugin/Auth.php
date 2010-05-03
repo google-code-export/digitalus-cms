@@ -136,8 +136,7 @@ class Digitalus_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             if ('index' == $controller && 'index' == $action) {
                 Zend_Registry::set('Digitalus_Page_Name', $resource);
             }
-// TODO: refactor into Toolbox String - replace underscores with empty spaces
-            $resource = strtolower(str_replace('_', ' ', $resource));
+            $resource = strtolower(Digitalus_Toolbox_String::replaceUnderscore($resource));
             // only check Acl if page is NOT homepage
             if (!empty($resource) && '' != $resource &&
                     Digitalus_Toolbox_Page::getHomePageName() != $resource) {
