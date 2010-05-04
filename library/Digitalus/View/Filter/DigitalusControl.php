@@ -41,14 +41,42 @@ require_once 'Digitalus/Content/Filter.php';
  */
 class Digitalus_View_Filter_DigitalusControl extends Digitalus_Content_Filter
 {
+    /**
+     * Attributes for the specific navigation helper
+     * @var array
+     */
+    protected $_attribs = array(
+        'type'     => null,
+        'id'       => null,
+        'required' => null,
+        'group'    => null,
+        'cols'     => null,
+        'rows'     => null,
+    );
+
+    /**
+     * Attributes that must be booleanised before processing them
+     * @var array
+     */
+    protected $_booleanValues = array('required');
+
+    /**
+     * The "Html" tag
+     * @var string
+     */
     public $tag = 'digitalusControl';
 
     protected function _callback($matches)
     {
         $attribs = $this->getAttributes($matches[0]);
+
+        // make use of booleanise function
+        $this->_setAttribs($attribs);
+        $attribs = $this->_getAttribs();
+
         if (is_array($attribs) && is_object($this->page)) {
             $content = $this->page->getContent();
-            if (isset($content[$attribs['id']])) {
+            if (isset($attribs['id']) && !is_null($attribs['id']) && isset($content[$attribs['id']])) {
                 $controlContent = $content[$attribs['id']];
                 switch ($attribs['type']) {
                     case 'fckeditor':
