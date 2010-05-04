@@ -16,7 +16,7 @@
  * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: Acl.php Tue Dec 25 21:39:35 EST 2007 21:39:35 forrest lyman $
+ * @version     $Id$
  */
 
 class Digitalus_Acl extends Zend_Acl

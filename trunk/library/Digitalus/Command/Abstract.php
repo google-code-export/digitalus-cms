@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_Command
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: Abstract.php Tue Dec 25 19:55:23 EST 2007 19:55:23 forrest lyman $
+ * @version     $Id$
  */
 
 abstract class Digitalus_Command_Abstract extends Digitalus_Abstract

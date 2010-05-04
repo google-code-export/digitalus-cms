@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_Data
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: List.php Tue Dec 25 20:32:04 EST 2007 20:32:04 forrest lyman $
+ * @version     $Id$
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */

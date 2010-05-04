@@ -18,7 +18,7 @@
  * @ssubpackage Digitalus_Validate
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: GroupnameExistsNot.php 677 2010-02-24 20:21:48Z lowtower@gmx.de $
+ * @version     $Id$
  * @link        http://www.digitaluscms.com
  * @since       Release 1.10
  */

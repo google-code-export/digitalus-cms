@@ -17,7 +17,7 @@
  * @subpackage  Digitalus_Resource
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: Image.php Tue Dec 25 21:12:41 EST 2007 21:12:41 forrest lyman $
+ * @version     $Id$
  */
 
 class Digitalus_Resource_Image extends Digitalus_Resource

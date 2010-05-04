@@ -17,7 +17,7 @@
  * @subpackage  Digitalus_Filter
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: Post.php Tue Dec 25 20:51:45 EST 2007 20:51:45 forrest lyman $
+ * @version     $Id$
  */
 
 class Digitalus_Filter_Post

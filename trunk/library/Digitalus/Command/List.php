@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_Command
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: List.php Tue Dec 25 20:01:46 EST 2007 20:01:46 forrest lyman $
+ * @version     $Id$
  */
 
 class Digitalus_Command_List extends Digitalus_Command_Abstract
