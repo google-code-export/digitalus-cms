@@ -42,7 +42,7 @@ class Digitalus_Toolbox_Page
     public static function getLabel(Zend_Db_Table_Row $page)
     {
         $mdlPage = new Model_Page();
-        $label = $mdlPage->getLabelById($page->id);
+        $label   = $mdlPage->getLabelById($page->id);
         if (empty($label)) {
             return $page->name;
         }
