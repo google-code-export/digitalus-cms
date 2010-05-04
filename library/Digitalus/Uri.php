@@ -89,6 +89,20 @@ class Digitalus_Uri
         return $this->_uri;
     }
 
+    /**
+     * returns the last part of the uri
+     *
+     * @return string
+     */
+    public function lastPart()
+    {
+        $uriString = $this->toString();
+        $uriArray  = explode('/', $uriString);
+        if (is_array($uriArray)) {
+            return array_pop($uriArray);
+        }
+        return null;
+    }
 
     /**
      * cleans the uri
