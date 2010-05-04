@@ -100,7 +100,7 @@ class Mod_Login_PublicController extends Digitalus_Controller_Action
     public function indexAction()
     {
         $loginForm = new Admin_Form_Login();
-        $loginForm->setAction($this->baseUrl . '/' . Digitalus_Toolbox_Page::getCurrentPageName());
+        $loginForm->setAction($this->baseUrl . '/' . Digitalus_Toolbox_Page::getCurrentPageName(false));
 
         if ($this->_request->isPost() && $loginForm->isValid($_POST)) {
             $username = Digitalus_Filter_Post::get('adminUsername');

@@ -49,11 +49,14 @@ class Digitalus_Toolbox_Page
         return $label;
     }
 
-    public static function getCurrentPageName()
+    public static function getCurrentPageName($onlyLast = true)
     {
         $uri       = new Digitalus_Uri();
         $uriString = $uri->toString();
-        return Digitalus_Toolbox_String::getSelfFromPath($uriString);
+        if (true === $onlyLast) {
+            return Digitalus_Toolbox_String::getSelfFromPath($uriString);
+        }
+        return Digitalus_Toolbox_String::stripLeading('/', $uriString);
     }
 
     public static function getHomePageName()
