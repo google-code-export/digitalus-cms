@@ -117,6 +117,7 @@ class Admin_GroupController extends Digitalus_Controller_Action
             }
             $moduleResources = $form->getElement('module_resources');
             $moduleResources->setValue($this->view->renderAclList('module', $mdlGroup->getAclResources($row->name)));
+
             $publicResources = $form->getElement('public_resources');
 // TODO: refactor
             $values = array();

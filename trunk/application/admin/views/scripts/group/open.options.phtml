@@ -2,10 +2,10 @@
 <?php $this->jQuery()->addJavascriptFile($this->getBaseUrl() . '/scripts/jquery/idTabs.js');
 
 $linksArray = array(
-    $this->link('Account',            '#fieldset-generalGroup',   'vcard_edit.png'),
-    $this->link('Admin permissions',  '#fieldset-adminAclGroup',  'application_cascade.png'),
-    $this->link('Module permissions', '#fieldset-moduleAclGroup', 'application_view_tile.png'),
-    $this->link('Public permissions', '#fieldset-publicAclGroup', 'application_home.png'),
+    $this->link('Account',            '#general',            'vcard_edit.png'),
+    $this->link('Admin permissions',  '#admin_permissions',  'application_cascade.png'),
+    $this->link('Module permissions', '#module_permissions', 'application_view_tile.png'),
+    $this->link('Public permissions', '#public_permissions', 'application_home.png'),
 );
 if ('guest' == $this->group->name) {
     unset($linksArray[1]);
