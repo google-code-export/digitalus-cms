@@ -16,7 +16,7 @@
  * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: Uri.php Tue Dec 25 21:53:29 EST 2007 21:53:29 forrest lyman $
+ * @version     $Id$
  */
 
 /**

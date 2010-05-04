@@ -17,7 +17,7 @@
  * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: Form.php 701 2010-03-05 16:23:59Z lowtower@gmx.de $
+ * @version     $Id$
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */

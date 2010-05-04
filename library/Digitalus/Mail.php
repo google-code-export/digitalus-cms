@@ -17,7 +17,7 @@
  * @package     Digitalus
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: Mail.php Tue Dec 25 21:49:11 EST 2007 21:49:11 forrest lyman $
+ * @version     $Id$
  */
 
 class Digitalus_Mail

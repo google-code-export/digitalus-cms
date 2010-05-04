@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_Command
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: ImportSitemap.php Tue Dec 25 19:57:20 EST 2007 19:57:20 forrest lyman $
+ * @version     $Id$
  */
 
 class Digitalus_Command_CacheClear extends Digitalus_Command_Abstract

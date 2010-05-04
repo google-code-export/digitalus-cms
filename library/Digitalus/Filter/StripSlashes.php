@@ -18,7 +18,7 @@
  * @category    Digitalus CMS
  * @package     Digitalus
  * @subpackage  Digitalus_Filter
- * @version     $Id: StripSlashes.php Tue Dec 25 21:46:51 EST 2007 21:46:51 lowtower $
+ * @version     $Id$
  * @link        http://www.digitaluscms.com
  * @since       Release 1.9.0
  */

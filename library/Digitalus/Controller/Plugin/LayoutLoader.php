@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_Controller
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: LayoutLoader.php Tue Dec 25 20:30:05 EST 2007 20:30:05 forrest lyman $
+ * @version     $Id$
  */
 
 class Digitalus_Controller_Plugin_LayoutLoader extends Zend_Controller_Plugin_Abstract

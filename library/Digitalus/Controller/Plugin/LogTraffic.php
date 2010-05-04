@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_Controller
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id: LogTraffic.php 729 2010-04-19 20:11:57Z lowtower@gmx.de $
+ * @version     $Id$
  * @link        http://www.digitaluscms.com
  * @since       Release 1.8.0
  */

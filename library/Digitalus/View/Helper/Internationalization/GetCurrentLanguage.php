@@ -18,7 +18,7 @@
  * @subpackage  Digitalus_View
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
- * @version     $Id:$
+ * @version     $Id$
  * @link        http://www.digitaluscms.com
  * @since       Release 1.5.0
  */
