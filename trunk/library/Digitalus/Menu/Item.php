@@ -41,7 +41,7 @@ class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
         $this->setView();
         $this->_item = $item;
         $this->id    = $this->_item->id;
-        $pageOptions = $this->_getPageAsArray();
+        $pageOptions          = $this->_getPageAsArray();
         $pageOptions['pages'] = $this->_getChildrenAsArray();
         $this->setOptions($pageOptions);
         $this->_setActive();
@@ -56,9 +56,9 @@ class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
             $item = $this->getItem();
         }
 
-        $uri = new Digitalus_Uri();
-        $uriString = $uri->toString();
-        if ('/' . strtolower(Digitalus_Toolbox_Page::getUrl($item)) == strtolower($uriString) ||
+        $uri       = new Digitalus_Uri();
+        $uriString = strtolower($uri->toString());
+        if (strtolower(Digitalus_Toolbox_Page::getCurrentPageName()) == strtolower($item->name) ||
             (empty($uriString) && strtolower(Digitalus_Toolbox_Page::getHomePageName($item)) == strtolower(Digitalus_Toolbox_Page::getUrl($item)))
         ) {
             $active = true;
@@ -108,7 +108,7 @@ class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
         $this->setView();
         $baseUrl = $this->view->baseUrl();
         $page = array(
-            'active'    => $this->isActive($item),
+            'active'    => $this->isActive(false),
             'class'     => 'menuItem',
             'id'        => $item->id,
             'label'     => Digitalus_Toolbox_Page::getLabel($item),
@@ -130,11 +130,14 @@ class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
     {
         $subPages = array();
         if ($this->_hasChildren()) {
-            $mdlMenu = new Model_Menu();
+            $mdlMenu  = new Model_Menu();
             $children = $mdlMenu->getChildren($this->id);
             foreach ($children as $child) {
                 $page = new Digitalus_Menu_Item(null, $child);
-                $subPages[] = $page->_getPageAsArray();
+                $pageOptions          = $page->_getPageAsArray();
+                $pageOptions['pages'] = $page->_getChildrenAsArray();
+                $page->setOptions($pageOptions);
+                $subPages[] = $page;
             }
         }
         return $subPages;
