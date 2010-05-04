@@ -1310,11 +1310,11 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
     {
         $values = array();
         $eBelongTo = null;
-        
+
         if ($this->isArray()) {
             $eBelongTo = $this->getElementsBelongTo();
         }
-        
+
         foreach ($this->getElements() as $key => $element) {
             if (!$element->getIgnore()) {
                 $merge = array();
@@ -2050,8 +2050,8 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      * Given an array, an optional arrayPath and a key this method
      * dissolves the arrayPath and unsets the key within the array
      * if it exists.
-     * 
-     * @param array $array 
+     *
+     * @param array $array
      * @param string|null $arrayPath
      * @param string $key
      * @return array
@@ -2061,7 +2061,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
         $unset =& $array;
         $path  = trim(strtr((string)$arrayPath, array('[' => '/', ']' => '')), '/');
         $segs  = ('' !== $path) ? explode('/', $path) : array();
-        
+
         foreach ($segs as $seg) {
             if (!array_key_exists($seg, (array)$unset)) {
                 return $array;
@@ -2367,7 +2367,7 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                 return $this->getSubForm($name)->getErrors(null, true);
             }
         }
-        
+
         foreach ($this->_elements as $key => $element) {
             $errors[$key] = $element->getErrors();
         }
@@ -2853,16 +2853,16 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
         return $this->_translator;
     }
-    
+
     /**
      * Does this form have its own specific translator?
-     * 
+     *
      * @return bool
      */
     public function hasTranslator()
     {
         return (bool)$this->_translator;
-    }    
+    }
 
     /**
      * Get global default translator object
@@ -2887,14 +2887,14 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
 
     /**
      * Is there a default translation object set?
-     * 
+     *
      * @return boolean
      */
     public static function hasDefaultTranslator()
-    { 
+    {
         return (bool)self::$_translatorDefault;
     }
-    
+
     /**
      * Indicate whether or not translation should be disabled
      *

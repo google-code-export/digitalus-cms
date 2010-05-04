@@ -146,9 +146,8 @@ class Digitalus_Toolbox_String
     {
         if (substr($string, 0, strlen($replace)) == $replace) {
             return substr($string, strlen($replace));
-        } else {
-            return $string;
         }
+        return $string;
     }
 
     /**
