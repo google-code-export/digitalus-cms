@@ -40,6 +40,12 @@ require_once 'Zend/Validate/Abstract.php';
 class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
 {
     /**
+     * Key for deprectaed timezones
+     * @const string
+     */
+    const TIMEZONE_DEPRECATED = 'Deprecated';
+
+    /**
      * Error constants
      * @const string
      */
@@ -114,7 +120,7 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
      * @param  boolean $strict If validation is done in strict mode
      * @return boolean
      */
-    public function isValid($value, $region = null, $strict = true)
+    public function isValid($value, $context = null, $region = null, $strict = true)
     {
         if (in_array($value, self::getValidTimezones($region, $strict))) {
             return true;
@@ -131,7 +137,7 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
      */
     public static function getValidTimezones($region = null, $strict = true)
     {
-        $timezones = self::getTimezones($region, $strict);
+        $timezones      = self::getTimezones($region, $strict);
         $validTimezones = array();
         if ($region === null) {
             foreach (self::getRegions($strict) as $region) {
@@ -140,7 +146,7 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
                 }
             }
         } else {
-            if ('Deprecated' == $region && true == $strict) {
+            if (self::TIMEZONE_DEPRECATED == $region && true == $strict) {
                 require_once 'Digitalus/Validate/Exception.php';
                 throw new Digitalus_Validate_Exception('The deprecated timezones are not valid in strict mode!');
             } else {
@@ -163,7 +169,7 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
     {
         if (isset($region)) {
             if (self::isValidRegion($region, $strict)) {
-                if ('Deprecated' == $region && true == $strict) {
+                if (self::TIMEZONE_DEPRECATED == $region && true == $strict) {
                     require_once 'Digitalus/Validate/Exception.php';
                     throw new Digitalus_Validate_Exception('The deprecated timezones are not valid in strict mode!');
                 }
@@ -641,7 +647,7 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
                     'Pacific/Wallis',
                     'Pacific/Yap',
                 ),
-                'Deprecated' => array(
+                self::TIMEZONE_DEPRECATED => array(
                     'Brazil/Acre',
                     'Brazil/DeNoronha',
                     'Brazil/East',
@@ -755,7 +761,7 @@ class Digitalus_Validate_Timezone extends Zend_Validate_Abstract
                 )
             );
             if (isset($strict) && true == $strict) {
-                unset($timezones['Deprecated']);
+                unset($timezones[self::TIMEZONE_DEPRECATED]);
             }
             return $timezones;
         }
