@@ -364,15 +364,11 @@ class Model_Page extends Digitalus_Db_Table
         $where[] = $this->_db->quoteInto('id = ? OR parent_id = ?', $pageId, 'INTEGER');
         $this->delete($where);
 
-        //delete content nodes
-#        unset($where);
-#        $mdlNodes = new Model_PageNode();
-#        $where[] = $this->_db->quoteInto('parent_id = ?', $pageId, 'INTEGER');
-#        $mdlNodes->delete($where);
-
         //delete meta data
         $mdlMeta = new Model_MetaData();
         $mdlMeta->deleteByPageId($pageId);
+
+        $this->_flushCache();
     }
 
     public function setDesign($pageId, $designId)
@@ -708,6 +704,8 @@ class Model_Page extends Digitalus_Db_Table
             $row->parent_id = $parentId;
             $row->save();
         }
+
+        $this->_flushCache();
     }
 
     /**
@@ -727,6 +725,7 @@ class Model_Page extends Digitalus_Db_Table
            $where[] = $this->_db->quoteInto('parent_id = ?', $this->_getPageId($page));
            $this->delete($where);
         }
+        $this->_flushCache();
     }
 
     /**
@@ -740,6 +739,8 @@ class Model_Page extends Digitalus_Db_Table
         $where[] = $this->_db->quoteInto('id = ?', $id);
         $this->delete($where);
         $this->removeChildren($page);
+
+        $this->_flushCache();
     }
 
     public function select($withFromPart = self::SELECT_WITHOUT_FROM_PART)
@@ -884,6 +885,7 @@ class Model_Page extends Digitalus_Db_Table
         $cache = Zend_Registry::get('cache');
         $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('filetree'));
         $cache->clean(Zend_Cache::CLEANING_MODE_MATCHING_TAG, array('tree'));
+        Digitalus_Menu::cleanCacheByTag();
     }
 
     private function _fetchPointer($uri, $parent = 0)

@@ -3,11 +3,17 @@ class Model_Menu extends Model_Page
 {
     protected $_menuColumns = array('id', 'last_update', 'name', 'parent_id', 'position', 'publish_level', 'show_on_menu');
 
+    public function __construct($config = array())
+    {
+        parent::__construct($config);
+    }
+
     public function getMenus()
     {
         $select = $this->select()
-            ->from($this->_name, array('parent_id'))
-            ->distinct();
+                       ->from($this->_name, array('parent_id'))
+                       ->distinct();
+
         $result = $this->fetchAll($select);
         if ($result) {
             foreach ($result as $row) {
@@ -15,6 +21,7 @@ class Model_Menu extends Model_Page
             }
             return $this->find($ids);
         }
+        return null;
     }
 
     public function openMenu($menuId = 0, $asRowset = false)
@@ -102,10 +109,10 @@ class Model_Menu extends Model_Page
         }
 
         $select = $this->select()
-            ->from($this->_name, $this->_menuColumns)
-            ->where($where)
-            ->order($order)
-            ->limit($limit, $offset);
+                       ->from($this->_name, $this->_menuColumns)
+                       ->where($where)
+                       ->order($order)
+                       ->limit($limit, $offset);
 
         $result = $this->fetchAll($select);
         if ($result->count() > 0) {

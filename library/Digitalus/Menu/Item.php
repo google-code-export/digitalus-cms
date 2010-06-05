@@ -12,17 +12,35 @@
  * obtain it through the world-wide-web, please send an email
  * to info@digitalus-media.com so we can send you a copy immediately.
  *
- * @author      Forresst Lyman
+ * @author      Forrest Lyman
  * @category    Digitalus CMS
  * @package     Digitalus
  * @subpackage  Digitalus_Menu
  * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
  * @license     http://digitalus-media.com/license/new-bsd     New BSD License
  * @version     $Id$
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.8.0
  */
 
+/**
+ * @see Zend_Navigation_Page_Uri
+ */
 require_once 'Zend/Navigation/Page/Uri.php';
 
+/**
+ * Digitalus Menu Item Class
+ *
+ * @author      Lowtower - lowtower@gmx.de
+ * @copyright   Copyright (c) 2007 - 2010,  Digitalus Media USA (digitalus-media.com)
+ * @license     http://digitalus-media.com/license/new-bsd     New BSD License
+ * @version     Release: @package_version@
+ * @link        http://www.digitaluscms.com
+ * @since       Release 1.8
+ * @uses        Digitalus_Toolbox_Page
+ * @uses        Digitalus_Uri
+ * @uses        Model_Menu
+ */
 class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
 {
     public $view;
@@ -41,8 +59,7 @@ class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
         $this->setView();
         $this->_item = $item;
         $this->id    = $this->_item->id;
-        $pageOptions          = $this->_getPageAsArray();
-        $pageOptions['pages'] = $this->_getChildrenAsArray();
+        $pageOptions = $this->_getPageAsArray();
         $this->setOptions($pageOptions);
         $this->_setActive();
         $this->_setVisible();
@@ -82,20 +99,6 @@ class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
     }
 
     /**
-     * Check whether current item has children
-     *
-     * @return  bool  Returns true if the current item has children, otherwise false
-     */
-    protected function _hasChildren()
-    {
-        $mdlMenu = new Model_Menu();
-        if ($mdlMenu->hasChildren($this->id)) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Get Page data as array
      *
      * @return  array  Returns an array of the page data, otherwise an empty array
@@ -105,8 +108,11 @@ class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
         if (empty($item)) {
             $item = $this->getItem();
         }
-        $this->setView();
+
         $baseUrl = $this->view->baseUrl();
+
+        $mdlMenu  = new Model_Menu();
+
         $page = array(
             'active'    => $this->isActive(false),
             'class'     => 'menuItem',
@@ -118,29 +124,17 @@ class Digitalus_Menu_Item extends Zend_Navigation_Page_Uri
             'uri'       => $baseUrl . '/' . Digitalus_Toolbox_String::replaceEmptySpace(Digitalus_Toolbox_Page::getUrl($item)),
             'visible'   => $this->isVisible($item),
         );
-        return $page;
-    }
 
-    /**
-     * Add children if they exist
-     *
-     * @return  array  Returns an array of all children, otherwise an empty array
-     */
-    protected function _getChildrenAsArray()
-    {
         $subPages = array();
-        if ($this->_hasChildren()) {
-            $mdlMenu  = new Model_Menu();
+        if ($mdlMenu->hasChildren($this->id)) {
             $children = $mdlMenu->getChildren($this->id);
+
             foreach ($children as $child) {
-                $page = new Digitalus_Menu_Item(null, $child);
-                $pageOptions          = $page->_getPageAsArray();
-                $pageOptions['pages'] = $page->_getChildrenAsArray();
-                $page->setOptions($pageOptions);
-                $subPages[] = $page;
+                $subPages[] = new Digitalus_Menu_Item(null, $child);
             }
+            $page['pages'] = $subPages;
         }
-        return $subPages;
+        return $page;
     }
 
     /**
