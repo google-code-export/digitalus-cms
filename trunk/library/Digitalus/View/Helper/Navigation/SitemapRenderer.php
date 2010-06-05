@@ -54,9 +54,10 @@ class Digitalus_View_Helper_Navigation_SitemapRenderer extends Digitalus_View_He
 
     public function sitemapRenderer($parentId = 0, $attribs = array())
     {
-        // needed to register Navigation into Zend_Registry
-        $menu = new Digitalus_Menu($parentId);
-
+        if (!Zend_Registry::isRegistered('Zend_Navigation')) {
+            // needed to register Navigation into Zend_Registry
+            $menu = new Digitalus_Menu($parentId);
+        }
         $this->_setAttribs($attribs);
 
         // render sitemap
