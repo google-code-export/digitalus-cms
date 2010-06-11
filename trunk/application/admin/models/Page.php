@@ -48,7 +48,7 @@ class Model_Page extends Digitalus_Db_Table
     protected $_defaultTemplate = 'default';
     protected $_defaultPageName = 'New Page';
     protected $_ignoredFields   = array('id', 'language', 'label', 'headline');   // these are the fields that are not saved as nodes
-    public    $primaryIndex     = 'id';
+    protected $_primary         = 'id';
 
     /**
      * the maximum lenght for page names (must correspond to length in database)
