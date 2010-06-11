@@ -44,8 +44,8 @@ class Digitalus_Form extends Zend_Form
 
     protected $_model;
     protected $_columns;
-    protected $_session = null;
-    protected $_primaryIndex = '';
+    protected $_session            = null;
+    protected $_primaryIndex       = '';
     protected $_standardDecorators = array(
         'form' => array(
             'FormElements',
@@ -98,7 +98,7 @@ class Digitalus_Form extends Zend_Form
     public function setModel(Zend_Db_Table_Abstract $model)
     {
         $this->_model = $model;
-        $this->_setPrimaryIndex($this->_model->primaryIndex);
+        $this->_setPrimaryIndex($this->_model->getPrimaryIndex());
         $info = $model->info();
         $this->_columns = $info['cols'];
     }
