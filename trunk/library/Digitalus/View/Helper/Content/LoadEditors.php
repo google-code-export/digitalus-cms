@@ -95,7 +95,7 @@ class Digitalus_View_Helper_Content_LoadEditors extends Zend_View_Helper_Abstrac
                         // integrates TinyMce
                         $this->view->jQuery()->addJavascriptFile($this->_scriptsPath . '/tiny_mce/jquery.tinymce.js');
                         $this->view->jQuery()->onLoadCaptureStart();?>
-                            jQuery('.tinymce').tinymce({
+                            jQuery('textarea.tinymce').tinymce({
                                 lang: '<?php echo $adminLanguage;?>',
                                 theme: 'advanced',
                                 script_url: '<?php echo $this->_scriptsPath . '/tiny_mce/tiny_mce.js';?>',

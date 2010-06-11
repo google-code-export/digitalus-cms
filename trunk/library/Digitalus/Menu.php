@@ -71,7 +71,7 @@ class Digitalus_Menu extends Digitalus_Abstract
         $mdlMenu  = new Model_Menu();
         if ($children === false) {
             $children = $mdlMenu->getChildren($this->_parentId);
-            $cache->save($children, $cacheId);
+            $cache->save($children, self::CACHE_ID);
         }
         if ($children != null && $children->count() > 0) {
             foreach ($children as $child) {
