@@ -69,7 +69,7 @@ class Model_Group extends Digitalus_Db_Table
      */
     protected $_name = 'groups';
 
-    public $primaryIndex = 'name';
+    protected $_primary = 'name';
 
     public function createGroup($groupName, $parent = null, $description = null, $aclResources = null)
     {

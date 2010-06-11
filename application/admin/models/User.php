@@ -62,7 +62,7 @@ class Model_User extends Digitalus_Db_Table
      */
     protected $_name = 'users';
 
-    public $primaryIndex = 'name';
+    protected $_primary = 'name';
 
     public function createUser($userName, $firstName, $lastName, $email, $password, $active = 0, $role = Model_Group::GUEST_ROLE)
     {
