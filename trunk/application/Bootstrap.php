@@ -209,6 +209,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->doctype($settings->get('doc_type'));
         $view->placeholder('charset')->set($settings->get('default_charset'));
 
+        $view->addFilterPath('Digitalus/View/Filter', 'Digitalus_View_Filter');
+        $view->setFilter('Translate');
+
         // Add the view to the ViewRenderer
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper(
             'ViewRenderer'
@@ -216,7 +219,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $viewRenderer->setView($view);
 
         // base helpers
-        $view->addHelperPath('Digitalus/View/Helper', 'Digitalus_View_Helper');
+        $view->addHelperPath('Digitalus/View/Helper',     'Digitalus_View_Helper');
         $view->addHelperPath('Digitalus/Content/Control', 'Digitalus_Content_Control');
 
         // Load digitalus helpers
@@ -259,7 +262,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initControllers()
     {
         // Setup core cms modules
-        $this->_front->addControllerDirectory(APPLICATION_PATH . '/admin/controllers', 'admin');
+        $this->_front->addControllerDirectory(APPLICATION_PATH . '/admin/controllers',  'admin');
         $this->_front->addControllerDirectory(APPLICATION_PATH . '/public/controllers', 'public');
 
         // Setup extension modules
