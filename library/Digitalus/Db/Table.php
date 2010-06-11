@@ -409,4 +409,13 @@ class Digitalus_Db_Table extends Zend_Db_Table_Abstract
         return true;
     }
 
+    /**
+     * returns the primary index
+     *
+     * @return string
+     */
+    public function getPrimaryIndex()
+    {
+        return $this->_primary;
+    }
 }
