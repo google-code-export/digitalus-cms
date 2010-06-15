@@ -104,7 +104,6 @@ class Mod_Login_IndexController extends Digitalus_Controller_Action
             try {
                 $stmt->execute(array(Digitalus_Db_Table::getTableName(Login_Challenge::DB_NAME), Digitalus_Db_Table::getTableName('users')));
             } catch (Exception $e) {
-Zend_Debug::dump($e);
                 return false;
             }
             return true;
