@@ -62,8 +62,53 @@ class Mod_Login_IndexController extends Digitalus_Controller_Action
      */
     public function indexAction()
     {
-        if (!Login_Challenge::isDbInstalled()) {
-            $this->view->errorMessage = 'For the login module to work properly, the challenge database must be installed first.';
+        if (!Login_Challenge::isDbInstalled() && !$this->createChallengeTable()) {
+            $sql = "CREATE TABLE `" . Digitalus_Db_Table::getTableName(Login_Challenge::DB_NAME) . "` (" . PHP_EOL
+                 . "    `challenge_id` VARCHAR(50) NOT NULL," . PHP_EOL
+                 . "    `user_name` VARCHAR(30) NOT NULL," . PHP_EOL
+                 . "    `valid` TINYINT(1) NOT NULL DEFAULT 1," . PHP_EOL
+                 . "    `timestamp` INT(11) NOT NULL," . PHP_EOL
+                 . "    PRIMARY KEY (`challenge_id`)," . PHP_EOL
+                 . "    INDEX (`user_name`)," . PHP_EOL
+                 . "    FOREIGN KEY (`user_name`) REFERENCES `" . Digitalus_Db_Table::getTableName('users') . "`(`name`) ON DELETE CASCADE ON UPDATE CASCADE" . PHP_EOL
+                 . ") ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+            $errorMessage   = array();
+            $errorMessage[] = 'For the login module to work properly, the challenge database must be installed first.';
+            $errorMessage[] = 'An attempt to create the database automatically failed (probably because of missing rights).';
+            $errorMessage[] = 'Please create it manually with the following SQL statement (mind Your table prefix):';
+            $errorMessage[] = '<br /><code>' . nl2br($sql) . '</code>';
+            $this->view->errorMessage = $errorMessage;
         }
+    }
+
+    /**
+     * Creates the challenge table
+     *
+     * @return bool True for success, false if table already exists
+     */
+    public function createChallengeTable()
+    {
+        if (!Login_Challenge::isDbInstalled()) {
+            $db = Zend_Registry::get('database');
+            $sql = "CREATE TABLE `?` (
+                        `challenge_id` VARCHAR(50) NOT NULL,
+                        `user_name` VARCHAR(30) NOT NULL,
+                        `valid` TINYINT(1) NOT NULL DEFAULT 1,
+                        `timestamp` INT(11) NOT NULL,
+                        PRIMARY KEY (`challenge_id`),
+                        INDEX (`user_name`),
+                        FOREIGN KEY (`user_name`) REFERENCES `?`(`name`) ON DELETE CASCADE ON UPDATE CASCADE
+                    ) ENGINE = InnoDB DEFAULT CHARSET=utf8";
+            $stmtClass = $db->getStatementClass();
+            $stmt      = new $stmtClass($db, $sql);
+            try {
+                $stmt->execute(array(Digitalus_Db_Table::getTableName(Login_Challenge::DB_NAME), Digitalus_Db_Table::getTableName('users')));
+            } catch (Exception $e) {
+Zend_Debug::dump($e);
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -88,28 +88,6 @@ class Login_Challenge extends Digitalus_Db_Table
     }
 
     /**
-     * Creates the challenge table
-     *
-     * @return bool True for success, false if table already exists
-     */
-    public function createTable()
-    {
-        if (!$this->isDbInstalled()) {
-            $sql = "CREATE TABLE `" . $this->_name . "` (
-                    `challenge_id` VARCHAR(50) NOT NULL,
-                    `user_name` VARCHAR(30) NOT NULL,
-                    `valid` TINYINT(1) NOT NULL DEFAULT 1,
-                    `timestamp` INT(11) NOT NULL,
-                    PRIMARY KEY (`challenge_id`),
-                    INDEX (`user_name`),
-                    FOREIGN KEY (`user_name`) REFERENCES `" . Digitalus_Db_Table::getTableName('users') . "`(`name`) ON DELETE CASCADE ON UPDATE CASCADE
-                ) ENGINE = InnoDB DEFAULT CHARSET=utf8";
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * Returns a challenge Url
      *
      * @param  bool   $html  Return a html or a plain text Challenge Url
