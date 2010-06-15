@@ -2,8 +2,10 @@
 
 if (isset($this->errorMessage) && !empty($this->errorMessage)) {?>
     <p class="notice"><?php
-        echo $this->getTranslation($this->errorMessage) . '<br />';?>
-    </p><?php
+        foreach ($this->errorMessage as $message) {
+            echo $this->getTranslation($message) . '<br />';
+        }?>
+    </p><br /><?php
 }?>
 
 <p><?php echo $this->getTranslation('The login module enables Your website visitors to login and self-register for Your services.');?></p>
