@@ -17,7 +17,7 @@ class Search_Adapter_Content extends Search_Adapter_Abstract
                     //if the page does not have content it doesnt belong in the index (eg blocks)
                     $title = $mdlPage->getPageTitle($page->id);
                     $link = Digitalus_Toolbox_Page::getUrl($page);
-                    $link = strtolower(Digitalus_Toolbox_String::addHyphens($link));
+                    $link = strtolower($link);
 
                     $contentNodes = $mdlContentNode->fetchContentObject($page->id);
                     if (isset($contentNodes->teaser)) {
@@ -32,4 +32,3 @@ class Search_Adapter_Content extends Search_Adapter_Abstract
         }
     }
 }
-?>
