@@ -6,6 +6,6 @@ $formText = $form->createElement('text', 'pagePath', array(
     'label'     => $this->getTranslation('Enter forward path'),
     'required'  => true,
     'value'     => $this->getData('pagePath', $this->data->get),
-    'belongsTo' => 'module',
+    'belongsTo' => $this->getData('element',  $this->data->get),
 ));
 echo $formText;

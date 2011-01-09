@@ -45,14 +45,14 @@ class Digitalus_View_Helper_Cms_RenderModule extends Zend_View_Helper_Abstract
     /**
      * render a module page like news_showNewPosts
      */
-    public function renderModule($moduleData, $defaultModule = null, $params = array())
+    public function renderModule($moduleId, $moduleData, $defaultModule = null, $params = array())
     {
         if (!empty($moduleData) || $defaultModule != null) {
             if (!empty($moduleData)) {
                 $xml = simplexml_load_string($moduleData);
             }
 
-            if ($xml->module == 0 && $defaultModule != null) {
+            if ($moduleId == 0 && $defaultModule != null) {
                 $xml = simplexml_load_string($defaultModule);
             }
             if (is_object($xml)) {
@@ -60,7 +60,7 @@ class Digitalus_View_Helper_Cms_RenderModule extends Zend_View_Helper_Abstract
                 foreach ($xml as $k => $v) {
                     $params[$k] = (string)$v;
                 }
-                $moduleParts = explode('_', $xml->module);
+                $moduleParts = explode('_', $xml->$moduleId);
 
                 if (is_array($moduleParts) && count($moduleParts) == 2) {
                     $name = $moduleParts[0];

@@ -1,9 +1,9 @@
 <?php
 $form = new Digitalus_Form();
 $element = $form->createElement('text', 'email', array(
-    'label'     => $this->getTranslation("Enter the recipient's email"),
-    'value'     => $this->getData('email', $this->data->get),
-    'belongsTo' => 'module',
+    'label'         => $this->getTranslation("Enter the recipient's email"),
+    'value'         => $this->getData('email',   $this->data->get),
+    'belongsTo'     => $this->getData('element', $this->data->get),
     'required'      => true,
     'filters'       => array('StringTrim'),
     'validators'    => array('EmailAddress'),

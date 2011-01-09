@@ -54,7 +54,7 @@ class Digitalus_View_Helper_Controls_SelectModule extends Zend_View_Helper_Abstr
             $select = $form->createElement('select', $name, array(
                 'multiOptions'  => $options,
                 'value'         => $value,
-                'belongsTo'     => 'module',
+                'belongsTo'     => $name,
             ));
             if (is_array($attribs)) {
                 $select->setAttribs($attribs);

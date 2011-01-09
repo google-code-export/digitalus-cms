@@ -7,7 +7,7 @@ if ($select instanceof Zend_Form_Element) {
         'label'     => $this->getTranslation('Select Acl role'),
         'required'  => true,
         'value'     => $this->getData('aclRole', $this->data->get),
-        'belongsTo' => 'module'
+        'belongsTo' => $this->getData('element', $this->data->get),
     ));
 }
 echo $select;
@@ -18,6 +18,6 @@ $formTextarea = $form->createElement('textarea', 'email', array(
     'required'  => true,
     'value'     => $this->getData('email', $this->data->get),
     'attribs'   => array('cols' => 60, 'rows' => 10, 'class' => 'ckeditor'),
-    'belongsTo' => 'module',
+    'belongsTo' => $this->getData('element', $this->data->get),
 ));
 echo $formTextarea;

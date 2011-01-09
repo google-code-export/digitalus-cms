@@ -92,12 +92,7 @@ class Digitalus_View_Filter_DigitalusControl extends Digitalus_Content_Filter
                         $xhtml = $controlContent;
                         break;
                     case 'moduleSelector':
-                        $xhtml = $this->view->renderModule($controlContent);
-                        break;
-                    case 'image':
-                        $config      = Zend_Registry::get('config');
-                        $mediaFolder = $config->filepath->media;
-                        $xhtml       = $this->view->renderImage($controlContent);
+                        $xhtml = $this->view->renderModule($attribs['id'], $controlContent);
                         break;
                 }
                 if (isset($attribs['tag']) && !empty($xhtml)) {
