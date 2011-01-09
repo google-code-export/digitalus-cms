@@ -131,9 +131,9 @@ class Model_PageNode extends Digitalus_Db_Table
      */
     public function set($pageId, $nodeType, $content, $language = 'en', $label = null, $headline = null)
     {
-        $nodeType = strtolower($nodeType);
+#        $nodeType = strtolower($nodeType);
 
-        $where[] = $this->_db->quoteInto('page_id = ?', $pageId);
+        $where[] = $this->_db->quoteInto('page_id = ?',   $pageId);
         $where[] = $this->_db->quoteInto('node_type = ?', $nodeType);
         if ($language != null) {
            $where[] = $this->_db->quoteInto('language = ?', $language);

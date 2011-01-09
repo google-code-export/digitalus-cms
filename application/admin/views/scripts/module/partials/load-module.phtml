@@ -5,14 +5,14 @@ $values      = $this->element->getXml();
 //load values as url parameters
 $module = null;
 $paramsString = null;
-if (isset($values) && !empty($values->module) && '' != $values->module) {
+if (isset($values) && !empty($values->$elementName) && '' != $values->$elementName) {
     foreach ($values as $k => $v) {
         $params[$k] = $v;
 #        $params[]   = $k;
 #        $params[]   = $v;
     }
     $paramsString = implode('/', $params) . '/';
-    $module = $values->module;
+    $module = $values->$elementName;
 }
 $attribs = $this->element->getAttribs();
 if (!is_array($attribs)) {
@@ -21,15 +21,15 @@ if (!is_array($attribs)) {
 $select = $this->selectModule($elementName, $module, $attribs);
 $select->setLabel($this->element->getLabel())
        ->setAttrib('class', $this->class);
-if (isset($values->module) && !empty($values->module)) {
-    $select->setValue($values->module);
+if (isset($values->$elementName) && !empty($values->$elementName)) {
+    $select->setValue($values->$elementName);
 }
 echo $select;?>
 
 <div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper"><?php
-    if (isset($values->module)) {
+    if (isset($values->$elementName)) {
         $params['element']   = $elementName;
-        $params['moduleKey'] = $values->module;
+        $params['moduleKey'] = $values->$elementName;
         echo $this->action('render-form', 'module', 'admin', $params);
     }?>
 </div><?php
@@ -39,7 +39,7 @@ if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
     $this->jQuery()->onLoadCaptureStart();?>
         $('#<?php echo $select->getAttrib('id');?>').change(function(){
             var module = $(this).val();
-            $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $this->element->getName();?>/moduleKey/' + module);
+            $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $elementName;?>/moduleKey/' + module);
         });<?php
     $this->jQuery()->onLoadCaptureEnd();
     Zend_Registry::set($elementName . 'Jquery', true);
