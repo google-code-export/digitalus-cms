@@ -8,6 +8,9 @@ class Mod_Contact_PublicController extends Digitalus_Controller_Action
         //create the form
         $form = new Contact_Form();
 
+        // retrieve the id that is set in the <DigitalusControl>-tag
+        $digControlId = $this->view->getFilter('DigitalusControl')->getId();
+
         $this->view->form = $form;
 
         if ($this->_request->isPost() && Digitalus_Filter_Post::has('submitContactForm')) {
@@ -16,9 +19,8 @@ class Mod_Contact_PublicController extends Digitalus_Controller_Action
                 $data = $form->getValues();
 
                 //get the module data
-                $module = new Digitalus_Module();
+                $module = new Digitalus_Module($digControlId);
                 $moduleData = $module->getData();
-
                 //render the message
                 $this->view->data = $data;
                 $htmlMessage = $this->view->render('public/message.phtml');

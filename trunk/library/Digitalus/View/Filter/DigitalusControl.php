@@ -65,6 +65,7 @@ class Digitalus_View_Filter_DigitalusControl extends Digitalus_Content_Filter
      * @var string
      */
     public $tag = 'digitalusControl';
+    protected $_id = '';
 
     protected function _callback($matches)
     {
@@ -77,14 +78,16 @@ class Digitalus_View_Filter_DigitalusControl extends Digitalus_Content_Filter
         if (is_array($attribs) && is_object($this->page)) {
             $content = $this->page->getContent();
             if (isset($attribs['id']) && !is_null($attribs['id']) && isset($content[$attribs['id']])) {
-                $controlContent = $content[$attribs['id']];
+                // set id to protected variable
+                $this->_setId($attribs['id']);
+                $controlContent = $content[$this->getId()];
                 switch ($attribs['type']) {
                     case 'fckeditor':
                     case 'markitup':
                     case 'tinymce':
                     case 'wymeditor':
                     case 'wysiwyg':
-                        $xhtml = '<div id="' . $attribs['id'] . '_wrapper">' . $controlContent . '</div>';
+                        $xhtml = '<div id="' . $this->getId() . '_wrapper">' . $controlContent . '</div>';
                         break;
                     case 'text':
                     case 'textarea':
@@ -92,7 +95,7 @@ class Digitalus_View_Filter_DigitalusControl extends Digitalus_Content_Filter
                         $xhtml = $controlContent;
                         break;
                     case 'moduleSelector':
-                        $xhtml = $this->view->renderModule($attribs['id'], $controlContent);
+                        $xhtml = $this->view->renderModule($this->getId(), $controlContent);
                         break;
                 }
                 if (isset($attribs['tag']) && !empty($xhtml)) {
@@ -103,5 +106,18 @@ class Digitalus_View_Filter_DigitalusControl extends Digitalus_Content_Filter
             }
         }
         return null;
+    }
+
+    public function getId()
+    {
+        return $this->_id;
+    }
+
+    protected function _setId($id)
+    {
+        if (isset($id) && !empty($id) && $id != '') {
+            $this->_id = $id;
+        }
+        return $this->_id;
     }
 }
