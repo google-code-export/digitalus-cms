@@ -25,15 +25,18 @@ require_once 'Digitalus/Module/Service.php';
 class Digitalus_Module
 {
     const MODULE_KEY = 'module';
+
     protected $_page;
+    protected $_moduleKey = '';
 
     /**
      * Constructor
      *
      * @return void
      */
-    public function __construct ()
+    public function __construct ($moduleKey = null)
     {
+        $this->_setModuleKey($moduleKey);
         $this->_page = Digitalus_Builder::getPage();
     }
 
@@ -48,8 +51,8 @@ class Digitalus_Module
         if ($content == null && isset($this->_page)) {
             $content = $this->_page->getContent();
         }
-        if (is_array($content) && isset($content[self::MODULE_KEY])) {
-            return simplexml_load_string($content[self::MODULE_KEY]);
+        if (is_array($content) && isset($content[$this->_getModuleKey()])) {
+            return simplexml_load_string($content[$this->_getModuleKey()]);
         }
         return null;
     }
@@ -90,5 +93,20 @@ class Digitalus_Module
             }
         }
         return true;
+    }
+
+    protected function _getModuleKey()
+    {
+        return $this->_moduleKey;
+    }
+
+    protected function _setModuleKey($moduleKey = null)
+    {
+        if (isset($moduleKey) && !empty($moduleKey) && $moduleKey != '') {
+            $this->_moduleKey = $moduleKey;
+        } else {
+            $this->_moduleKey = self::MODULE_KEY;
+        }
+        return $this->_moduleKey;
     }
 }
