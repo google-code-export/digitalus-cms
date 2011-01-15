@@ -5,15 +5,21 @@ $values      = $this->element->getXml();
 //load values as url parameters
 $module = null;
 $paramsString = null;
+$array = array();
 if (isset($values) && !empty($values->$elementName) && '' != $values->$elementName) {
+    // add controller_action
+    $paramsString = (string)$values->$elementName;
     foreach ($values as $k => $v) {
-        $params[$k] = $v;
-#        $params[]   = $k;
-#        $params[]   = $v;
+        if ($k != $elementName) {
+            $params[$k] = (string)$values->$k;
+            $array[$k]  = $k . '/' . (string)$values->$k;
+        }
     }
-    $paramsString = implode('/', $params) . '/';
+    // add all parameters as key/value pair
+    $paramsString .= '/' . implode('/', $array);
     $module = $values->$elementName;
 }
+
 $attribs = $this->element->getAttribs();
 if (!is_array($attribs)) {
     $attribs = null;
@@ -29,19 +35,23 @@ echo $select;?>
 <div class="moduleFormWrapper" id="<?php echo $elementName;?>_wrapper"><?php
     if (isset($values->$elementName)) {
         $params['element']   = $elementName;
-        $params['moduleKey'] = $values->$elementName;
+        $params['moduleKey'] = (string)$values->$elementName;
         echo $this->action('render-form', 'module', 'admin', $params);
     }?>
 </div><?php
 
+$uriString = '/admin/module/render-form/' . $paramsString . '/element/' . $elementName . '/moduleKey/';
+
 // make sure this only loads once for each element
 if (!Zend_Registry::isRegistered($elementName . 'Jquery')) {
+
     $this->jQuery()->onLoadCaptureStart();?>
         $('#<?php echo $select->getAttrib('id');?>').change(function(){
             var module = $(this).val();
-            $('#<?php echo $elementName;?>_wrapper').load('/admin/module/render-form/<?php echo $paramsString;?>element/<?php echo $elementName;?>/moduleKey/' + module);
+            $('#<?php echo $elementName;?>_wrapper').load('<?php echo $uriString;?>' + module);
         });<?php
     $this->jQuery()->onLoadCaptureEnd();
+
     Zend_Registry::set($elementName . 'Jquery', true);
 }
 echo $this->formErrors($this->element->getMessages());
